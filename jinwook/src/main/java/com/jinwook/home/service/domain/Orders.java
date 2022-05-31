@@ -33,8 +33,6 @@ public class Orders {
 	private String reviewImg2;
 	private String reviewImg3;
 	
-	
-	
 	public Orders() {
 		// TODO Auto-generated constructor stub
 	}
