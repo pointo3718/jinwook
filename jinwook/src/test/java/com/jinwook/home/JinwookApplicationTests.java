@@ -15,7 +15,7 @@ class JinwookApplicationTests {
 	@Autowired
 	private SqlSessionFactory sessionFactory;
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 
@@ -31,7 +31,7 @@ class JinwookApplicationTests {
 		}
 	}
 
-	@Test
+	//@Test
 	public void testBySqlSessionFactory() {
 		try {
 			System.out.println("=========================");
