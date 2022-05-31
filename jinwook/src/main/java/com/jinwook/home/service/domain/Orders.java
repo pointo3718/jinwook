@@ -14,7 +14,7 @@ public class Orders {
 
 	private String userId;
 	private int orderNo;
-	private String storeNo;
+	private int storeNo;
 	private String prodName;
 	private int prodCount;
 	private String prodInfo;
