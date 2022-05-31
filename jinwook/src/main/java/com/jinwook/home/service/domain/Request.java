@@ -13,6 +13,7 @@ public class Request {
 
    int reqNo;
    String userId;
+   int storeNo;
    String reqCode;
    Date reqDate;
    Date resDate;
