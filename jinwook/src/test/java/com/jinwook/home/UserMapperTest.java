@@ -7,27 +7,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.jinwook.home.mapper.ProductMapper;
-import com.jinwook.home.service.domain.Product;
+import com.jinwook.home.mapper.UserMapper;
+import com.jinwook.home.service.domain.User;
 
 
 
 @SpringBootTest
-class ProductMapperTest {
+class UserMapperTest {
 
 	@Autowired
-	private ProductMapper productMapper;
+	private UserMapper userMapper;
 
 	@Test
 	public void testOfSelectDetail() {
-		Product product = productMapper.selectProductDetail(10000);
-//		System.out.println(product.toString());
+		User user = userMapper.getUser("test01");
+		System.out.println(user.toString());
 		try {
 			//String boardJson = new ObjectMapper().writeValueAsString(board);
-            String productJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(product);
+            String userJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(user);
 
 			System.out.println("=========================");
-			System.out.println(productJson);
+			System.out.println(userJson);
 			System.out.println("=========================");
 
 		} catch (JsonProcessingException e) {

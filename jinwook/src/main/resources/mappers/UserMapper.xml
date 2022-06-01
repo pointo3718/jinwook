@@ -1,3 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mappers.UserMapper"></mapper>
+<mapper namespace="com.jinwook.home.mapper.UserMapper">
+
+	
+	<sql id="userColumns">
+		  user_id
+		, user_name
+		, password
+		, birth
+		, gender
+		, email
+		, role
+		, phone
+		, rp_id
+		, notice_status
+		, business_no
+		, grade
+		, reg_date
+		, jp_balance
+		, jp_password
+		, blacklist_reg_date
+		, blacklist_end_date
+		, blacklist_status
+		, user_by_status
+	</sql>
+	
+	<select 	id="getUser"	parameterType="string"	resultMap="userColumns">
+		SELECT
+		user_id, user_name, password, birth, gender, email, role, phone, rp_id, notice_status, business_no, grade
+		, reg_date, jp_balance, jp_password, blacklist_reg_date, blacklist_end_date, blacklist_status, user_by_status	
+		FROM users 
+		WHERE user_id = #{value}
+	 </select>
+
+</mapper>
