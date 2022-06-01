@@ -20,13 +20,13 @@ class ProductMapperTest {
 
 	@Test
 	public void testOfSelectDetail() {
-		Product board = productMapper.selectProductDetail(10000);
+		Product product = productMapper.selectProductDetail(10000);
 		try {
 			//String boardJson = new ObjectMapper().writeValueAsString(board);
-            String boardJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(board);
+            String productJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(product);
 
 			System.out.println("=========================");
-			System.out.println(boardJson);
+			System.out.println(productJson);
 			System.out.println("=========================");
 
 		} catch (JsonProcessingException e) {
