@@ -19,7 +19,7 @@ class JinwookApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
+	//@Test
 	public void testByApplicationContext() {
 		try {
 			System.out.println("=========================");
@@ -31,7 +31,7 @@ class JinwookApplicationTests {
 		}
 	}
 
-	//@Test
+	@Test
 	public void testBySqlSessionFactory() {
 		try {
 			System.out.println("=========================");
