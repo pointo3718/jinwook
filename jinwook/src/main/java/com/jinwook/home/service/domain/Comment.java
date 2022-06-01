@@ -13,11 +13,12 @@ public class Comment {
 
 	private int boardNo;
 	private int commentNo;
+	private int rcpNo;
 	private String userId;
-	private String commentWriter;
 	private String commentContent;
-	private int recommendCount;
 	private Date commentDate;
+	private String commentWriter;
+	private int recommendCount;
 	
 	public Comment() {
 	}

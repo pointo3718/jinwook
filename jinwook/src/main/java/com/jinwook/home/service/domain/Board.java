@@ -19,9 +19,10 @@ public class Board {
 	private int boardHits;
 	private String boardCode;
 	private Date writeDate;
-	private String image;
-	private String status;
-	private int reviewStar;
+	private String board_image1;
+	private String board_image2;
+	private String board_image3;
+	private String board_inq_status;
 	
 	public Board() {
 	}
