@@ -11,8 +11,10 @@ public class Jjim {
 
 	private int jjimNo;
 	private String userId;
+	private int rcpNo;
 	private int boardNo;
 	private int storeNo;
+	private String jjim_status;
 	
 	public Jjim() {
 	}
