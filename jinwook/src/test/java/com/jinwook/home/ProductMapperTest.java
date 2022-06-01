@@ -18,6 +18,7 @@ class ProductMapperTest {
 	@Autowired
 	private ProductMapper productMapper;
 
+	
 	@Test
 	public void testOfSelectDetail() {
 		Product product = productMapper.selectProductDetail(10000);

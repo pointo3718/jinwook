@@ -26,10 +26,10 @@ public class User {
 	private String jpPassword;
 	private Date regDate;
 	private Date blacklistRegDate;
-	private Date blakclistEndDate;
+	private Date blacklistEndDate;
 	private boolean noticeStatus;
 	private boolean blacklistStatus;
 	private boolean userByeStatus;
-	private boolean gender;
+	private String gender;
 	
 }

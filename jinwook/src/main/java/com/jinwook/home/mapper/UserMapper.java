@@ -7,8 +7,20 @@ import com.jinwook.home.service.domain.User;
 @Mapper
 public interface UserMapper {
 	
+	// INSERT
+	public void addUser(User user);
+		
+	// SELECT ONE
 	public User getUser(String userId);
+
+	// UPDATE
+	public void updateUser(User user);
 	
+	//DELETE
+	public void deleteUser(User user);
+	
+	// �Խ��� Page ó���� ���� ��üRow(totalCount)  return
+//	public int getTotalCount(Search search) throws Exception ;
 	
 
 	
