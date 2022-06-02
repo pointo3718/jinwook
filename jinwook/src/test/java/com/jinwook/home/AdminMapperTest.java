@@ -24,13 +24,9 @@ public class AdminMapperTest {
 	
 	
 	///////////////// 유저 상세 //////////////////
-<<<<<<< HEAD
-	//@Test
-	public void testOfSelectDetail() {
-=======
+
 	@Test
 	public void testOfSelectUserDetail() {
->>>>>>> refs/remotes/origin/master
 		User user = adminMapper.getUserAdmin("test01");
 		try {
 			//String boardJson = new ObjectMapper().writeValueAsString(board);
