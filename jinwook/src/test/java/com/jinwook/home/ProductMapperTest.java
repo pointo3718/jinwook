@@ -18,9 +18,11 @@ class ProductMapperTest {
 	@Autowired
 	private ProductMapper productMapper;
 
+	
 	@Test
 	public void testOfSelectDetail() {
 		Product product = productMapper.selectProductDetail(10000);
+//		System.out.println(product.toString());
 		try {
 			//String boardJson = new ObjectMapper().writeValueAsString(board);
             String productJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(product);
