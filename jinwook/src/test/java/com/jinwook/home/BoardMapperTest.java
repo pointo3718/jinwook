@@ -122,14 +122,8 @@ public class BoardMapperTest {
 		
 		recipe.setUser(user);
 		recipe.setRcpNo(1);
-<<<<<<< HEAD
-		recipe.setRcpTitle("1¹ø °Ô½Ã±Û");
-		recipe.setRcpContent("1¹ø °Ô½Ã±Û ³»¿ë");
-=======
-		recipe.setRcpSeqNo(1);
 		recipe.setRcpTitle("1ë²ˆ ê²Œì‹œê¸€");
 		recipe.setRcpContent("1ë²ˆ ê²Œì‹œê¸€ ë‚´ìš©");
->>>>>>> refs/remotes/origin/master
 		recipe.setRcpDate(LocalDate.now());
 		recipe.setRcpThumb("ì¸ë„¬1");
 		recipe.setRcpInfo("ì†Œê°œ1");
