@@ -33,8 +33,8 @@ public class BoardMapperTest {
 		
 		board.setUser(user);
 		board.setBoardNo(2);
-		board.setBoardTitle("1¹ø °Ô½Ã±Û");
-		board.setBoardContent("1¹ø °Ô½Ã±Û ³»¿ë");
+		board.setBoardTitle("1ë²ˆ ê²Œì‹œê¸€");
+		board.setBoardContent("1ë²ˆ ê²Œì‹œê¸€ ë‚´ìš©");
 		board.setBoardHits(2);
 		board.setBoardCode("2");
 		board.setWriteDate(LocalDate.now());
@@ -44,7 +44,7 @@ public class BoardMapperTest {
 		board.setBoardInqStatus(null);
 		
 		int result = boardMapper.addBoard(board);
-		System.out.println(" °á°ú´Â "+result+"ÀÔ´Ï´Ù.");
+		System.out.println(" ê²°ê³¼ëŠ” "+result+"ì…ë‹ˆë‹¤.");
 	}
 	
 	@Test
@@ -54,8 +54,8 @@ public class BoardMapperTest {
 		User user = new User();
 		
 		board.setBoardNo(2);
-		board.setBoardTitle("2¹ø °Ô½Ã±Û");
-		board.setBoardContent("2¹ø °Ô½Ã±Û ³»¿ë");
+		board.setBoardTitle("2ë²ˆ ê²Œì‹œê¸€");
+		board.setBoardContent("2ë²ˆ ê²Œì‹œê¸€ ë‚´ìš©");
 		board.setBoardCode("2");
 		board.setWriteDate(LocalDate.now());
 		board.setBoardImg1(null);
@@ -64,7 +64,7 @@ public class BoardMapperTest {
 		board.setBoardInqStatus(null);
 		
 		int result = boardMapper.updateBoard(board);
-		System.out.println(" °á°ú´Â "+result+"ÀÔ´Ï´Ù.");
+		System.out.println(" ê²°ê³¼ëŠ” "+result+"ì…ë‹ˆë‹¤.");
 	}
 	
 	@Test
@@ -98,8 +98,8 @@ public class BoardMapperTest {
 		
 		board.setUser(user);
 		board.setBoardNo(2);
-		board.setBoardTitle("2¹ø °Ô½Ã±Û");
-		board.setBoardContent("2¹ø °Ô½Ã±Û ³»¿ë");
+		board.setBoardTitle("2ë²ˆ ê²Œì‹œê¸€");
+		board.setBoardContent("2ë²ˆ ê²Œì‹œê¸€ ë‚´ìš©");
 		board.setBoardHits(2);
 		board.setBoardCode("2");
 		board.setWriteDate(LocalDate.now());
@@ -109,7 +109,7 @@ public class BoardMapperTest {
 		board.setBoardInqStatus(null);
 		
 		int result = boardMapper.deleteBoard(2);
-		System.out.println(" °á°ú´Â "+result+"ÀÔ´Ï´Ù.");
+		System.out.println(" ê²°ê³¼ëŠ” "+result+"ì…ë‹ˆë‹¤.");
 	}
 	
 	@Test
@@ -122,18 +122,24 @@ public class BoardMapperTest {
 		
 		recipe.setUser(user);
 		recipe.setRcpNo(1);
+<<<<<<< HEAD
 		recipe.setRcpTitle("1¹ø °Ô½Ã±Û");
 		recipe.setRcpContent("1¹ø °Ô½Ã±Û ³»¿ë");
+=======
+		recipe.setRcpSeqNo(1);
+		recipe.setRcpTitle("1ë²ˆ ê²Œì‹œê¸€");
+		recipe.setRcpContent("1ë²ˆ ê²Œì‹œê¸€ ë‚´ìš©");
+>>>>>>> refs/remotes/origin/master
 		recipe.setRcpDate(LocalDate.now());
-		recipe.setRcpThumb("½æ³Ú1");
-		recipe.setRcpInfo("¼Ò°³1");
-		recipe.setRcpIngredient("È£¹Ú,¼ö¹Ú,Âü¿Ü");
+		recipe.setRcpThumb("ì¸ë„¬1");
+		recipe.setRcpInfo("ì†Œê°œ1");
+		recipe.setRcpIngredient("í˜¸ë°•,ìˆ˜ë°•,ì°¸ì™¸");
 		recipe.setRcpHits(1);
 		recipe.setCommentCount(1);
 	
 		
 		int result = boardMapper.addRecipe(recipe);
-		System.out.println(" °á°ú´Â "+result+"ÀÔ´Ï´Ù.");
+		System.out.println(" ê²°ê³¼ëŠ” "+result+"ì…ë‹ˆë‹¤.");
 	}
 	
 	@Test
@@ -143,8 +149,8 @@ public class BoardMapperTest {
 		User user = new User();
 		
 		board.setBoardNo(2);
-		board.setBoardTitle("2¹ø °Ô½Ã±Û");
-		board.setBoardContent("2¹ø °Ô½Ã±Û ³»¿ë");
+		board.setBoardTitle("2ë²ˆ ê²Œì‹œê¸€");
+		board.setBoardContent("2ë²ˆ ê²Œì‹œê¸€ ë‚´ìš©");
 		board.setBoardCode("2");
 		board.setWriteDate(LocalDate.now());
 		board.setBoardImg1(null);
@@ -153,7 +159,7 @@ public class BoardMapperTest {
 		board.setBoardInqStatus(null);
 		
 		int result = boardMapper.updateBoard(board);
-		System.out.println(" °á°ú´Â "+result+"ÀÔ´Ï´Ù.");
+		System.out.println(" ê²°ê³¼ëŠ” "+result+"ì…ë‹ˆë‹¤.");
 	}
 	
 	@Test
@@ -187,8 +193,8 @@ public class BoardMapperTest {
 		
 		board.setUser(user);
 		board.setBoardNo(2);
-		board.setBoardTitle("2¹ø °Ô½Ã±Û");
-		board.setBoardContent("2¹ø °Ô½Ã±Û ³»¿ë");
+		board.setBoardTitle("2ë²ˆ ê²Œì‹œê¸€");
+		board.setBoardContent("2ë²ˆ ê²Œì‹œê¸€ ë‚´ìš©");
 		board.setBoardHits(2);
 		board.setBoardCode("2");
 		board.setWriteDate(LocalDate.now());
@@ -198,7 +204,7 @@ public class BoardMapperTest {
 		board.setBoardInqStatus(null);
 		
 		int result = boardMapper.deleteBoard(2);
-		System.out.println(" °á°ú´Â "+result+"ÀÔ´Ï´Ù.");
+		System.out.println(" ê²°ê³¼ëŠ” "+result+"ì…ë‹ˆë‹¤.");
 	}
 	
 	

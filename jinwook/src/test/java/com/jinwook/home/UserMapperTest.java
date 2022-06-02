@@ -13,9 +13,6 @@ import com.jinwook.home.service.domain.User;
 import groovy.transform.builder.Builder;
 import lombok.Data;
 
-
-@Builder
-@Data
 @SpringBootTest
 class UserMapperTest {
 

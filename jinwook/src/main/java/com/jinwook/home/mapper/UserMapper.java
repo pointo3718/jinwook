@@ -19,7 +19,6 @@ public interface UserMapper {
 	//DELETE
 	public void deleteUser(User user);
 	
-	// �Խ��� Page ó���� ���� ��üRow(totalCount)  return
 //	public int getTotalCount(Search search) throws Exception ;
 	
 
