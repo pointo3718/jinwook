@@ -15,9 +15,9 @@ public interface OrdersMapper {
 	
 	public Orders getOrders(int orderNo);	//주문내역상세
 	
-	public int deleteOrders(int orderNo);	//주문내역삭제
+	public int deleteOrders(Orders orders);	//주문내역삭제
 	
-	public int updateOrders(int orderNo);	//주문내역(수락,거절,픽업완료)
+	public int updateOrders(Orders orders);	//주문내역(수락,거절,픽업완료)
 	
 	
 	

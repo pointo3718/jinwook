@@ -10,7 +10,24 @@
 			, #{orderPrice:INTEGER} , #{prodCount} , SYSDATE() , #{orderStatus} )
 	</insert>
 	
+	<update id="updateOrders">
+		UPDATE orders
+		<set>
+			order_status = #{orderStatus:VARCHAR}
+		</set>
+		WHERE order_no = #{orderNo}
+	</update>
 	
+	<delete id="deleteOrders">
+		DELETE FROM 
+		orders
+		WHERE
+			 order_no = #{orderNo}
+	</delete>
+	
+	<select id="">
+	
+	</select>
 	
 	
 </mapper>

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jinwook.home.mapper.OrdersMapper;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Orders;
@@ -18,8 +19,8 @@ public class OrdersMapperTest {
 	@Autowired
 	private OrdersMapper ordersMapper;
 	
-	@Test
-	public void testOfadd() {
+	//@Test
+	public void testOfaddOrders() {
 		Product product = new Product();
 		product.setProdNo(10000);
 		product.setPrice(500);
@@ -39,7 +40,7 @@ public class OrdersMapperTest {
 		orders.setBuyerName("강진욱");
 		orders.setBuyerPhone("010-1234-9876");
 		orders.setPickupTime(LocalDateTime.now());
-		orders.setOrderReq("빨리좀주세요");
+		orders.setOrderReq(null);
 		orders.setProdCount(3);
 		orders.setOrderStatus("0");
 		orders.setProduct(product);
@@ -50,4 +51,32 @@ public class OrdersMapperTest {
 		int result = ordersMapper.addOrders(orders);
 		System.out.println("결과는"+result+"입니다.");
 	}
+	
+	//@Test
+	public void testOfupdateOrders() {
+		Orders orders = new Orders();
+		orders.setOrderNo(10003);
+		orders.setOrderStatus("1");
+		int result = ordersMapper.updateOrders(orders);
+		System.out.println("결과는"+result+"입니다.");
+	}
+	
+	//@Test
+	public void testOfdeleteOrders() {	
+		Orders orders = new Orders();
+		orders.setOrderNo(10005);
+		int result = ordersMapper.deleteOrders(orders);
+	    System.out.println("결과는" + result + "입니다.");
+	     
+	}
+	
+	@Test
+	public void testSelectListOrders() {
+		Orders orders = new Orders();
+		orders.getUser().getUserId();
+//		Map<String> map = orders
+		
+//		List<Object> list = (List<Object>)map.get("list")
+	}
+	
 }
