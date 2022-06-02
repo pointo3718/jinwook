@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinwook.home.mapper.AdminMapper">
+
+	<sql id="usersColumns">
+		  user_id
+		, user_name
+		, email
+		, birth
+		, gender
+		, nick_name
+		, phone
+		, role
+		, grade	
+		, blacklist_reg_date
+		, blacklist_end_date
+		, reg_date
+		, user_bye_status
+	</sql>
+	
+
+	<!-- 유저 상세 -->
+	<select id="getUserAdmin" parameterType="String" resultType="User">
+		SELECT
+			<include refid="usersColumns"/>
+		FROM
+			users
+		WHERE
+			user_id = #{userId}
+	</select>
+	
+	
+	<!-- 유저 목록 -->
+	<select id="getUserListAdmin" parameterType="User" resultType="User">
+		SELECT
+			user_id, user_name, phone, role
+		FROM
+			users
+		WHERE
+			user_bye_status = 0
+	</select>
+	
+	
+	<!-- 상점 목록 -->
+	<select id="getStoreListAdmin" parameterType="Store" resultType="Store">
+		SELECT
+			 store_no, store_name, u.user_id, u.user_name, store_addr, phone, business_no
+		FROM
+			store s, users u
+		WHERE
+			s.user_id = u.user_id
+		ORDER BY store_no
+	</select>
+	
+	
+	<!-- 유저 목록 개수 -->
+	<select id="getUserTotalCount" parameterType="User" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			users
+		WHERE
+			user_bye_status = 0
+	</select>
+	
+	
+	<!-- 상점 목록 개수 -->
+	<select id="getStoreTotalCount" parameterType="Store" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			store
+	</select>
+
+
+	<!-- 신고 목록 -->
+	<select id="getComplainListAdmin" parameterType="Complain" resultType="Complain">
+		SELECT
+			 *
+		FROM
+			complain
+		ORDER BY complain_no
+	</select>
+	
+	
+	<!-- 신고 목록 개수 -->
+	<select id="getComplainTotalCount" parameterType="Complain" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			complain
+	</select>
+	
+	
+	<!-- 블랙리스트 등록 -->
+	<update id="updateBlacklist" parameterType="User">
+		UPDATE users
+		SET
+			blacklist_status = true,
+			blacklist_reg_date = SYSDATE(),
+			<if test= "blacklistPeriod = '7days'">
+			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +7 DAY)
+			</if>
+			<if test= "blacklistPeriod = '1month'">
+			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +1 MONTH)
+			</if>
+			<if test= "blacklistPeriod = '6month'">
+			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +6 MONTH)
+			</if>
+			<if test= "blacklistPeriod = '1year'">
+			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +1 YEAR)
+			</if>
+		WHERE
+			user_id = #{userId}
+	</update>
+	
+	
+	<!-- 블랙리스트 목록 -->
+	<select id="getBlacklistAdmin" parameterType="User" resultType="User">
+		SELECT
+			u.user_id, u.user_name, u.nick_name, u.birth, u.gender, u.email, u.phone, u.blacklist_reg_date, u.blacklist_end_date, c.complain_code 
+		FROM
+			users u, complain c
+		WHERE
+			u.user_id = c.complain_id
+			and 
+			u.blacklist_status = true
+	</select>
+	
+	
+	<!-- 블랙리스트 목록 개수 -->
+	<select id="getBlacklistTotalCount" parameterType="User" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			users
+		WHERE
+			blacklist_status = true
+	</select>
+	
+	
+	
+
+</mapper>

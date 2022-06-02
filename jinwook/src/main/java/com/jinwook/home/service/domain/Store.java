@@ -2,6 +2,7 @@ package com.jinwook.home.service.domain;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import lombok.ToString;
 public class Store {
 
    private int storeNo;
-   private String userId;
+   private User userId;
    private String storeName;
    private String storeAddr;
    private String storeType;
@@ -21,9 +22,9 @@ public class Store {
    private String storePhone;
    private String storeIntro;
    private Date storeStart;
-   private Time startTime;
-   private Time endTime;
-   private Date holiday;
+   private LocalDateTime startTime;
+   private LocalDateTime endTime;
+   private String holiday;
    private String bussinessCard;
    private String storeImage;
    private String accNo;

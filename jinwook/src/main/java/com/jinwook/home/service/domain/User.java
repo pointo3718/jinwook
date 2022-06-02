@@ -31,5 +31,6 @@ public class User {
 	private boolean blacklistStatus;
 	private boolean userByeStatus;
 	private String gender;
+	private String blackPeriod;
 	
 }

@@ -10,9 +10,9 @@ import lombok.ToString;
 public class Recommend {
 
 	private int recommendNo;
-	private int commentNo;
+	private Comment commentNo;
 	private int rcpNo;
-	private String userId;
+	private User userId;
 	
 	public Recommend() {
 	}

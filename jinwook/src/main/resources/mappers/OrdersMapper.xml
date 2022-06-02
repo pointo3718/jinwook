@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jinwook.home.mapper.OrdersMapper">
+	
+	<insert id="addOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderNo">
+		INSERT
+		INTO orders(user_id,store_no,buyer_name,buyer_phone,pickup_time,order_req,order_price,prod_count,order_date,order_status)
+		VALUES(#{user.userId:VARCHAR} , #{storeNo:INTEGER} , #{buyerName:VARCHAR} , #{buyerPhone:VARCHAR} , #{pickupTime:TIME} , #{orderReq:VARCHAR}
+			, #{orderPrice:INTEGER} , #{prodCount} , SYSDATE() , #{orderStatus} )
+	</insert>
+	
+	<update id="updateOrders">
+		UPDATE orders
+		<set>
+			order_status = #{orderStatus:VARCHAR}
+		</set>
+		WHERE order_no = #{orderNo}
+	</update>
+	
+	<delete id="deleteOrders">
+		DELETE FROM 
+		orders
+		WHERE
+			 order_no = #{orderNo}
+	</delete>
+	
+	<select id="">
+	
+	</select>
+	
+	
+</mapper>
+	
+	
+	

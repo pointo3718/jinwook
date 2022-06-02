@@ -1,6 +1,7 @@
 package com.jinwook.home.service.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,18 +12,18 @@ import lombok.ToString;
 @ToString
 public class Board {
 
-	private String userId;
 	private int boardNo;
-	private String boardWriter;
+	//private String userId;
+	private User user;
 	private String boardTitle;
 	private String boardContent;
 	private int boardHits;
 	private String boardCode;
-	private Date writeDate;
-	private String board_image1;
-	private String board_image2;
-	private String board_image3;
-	private String board_inq_status;
+	private LocalDate writeDate;
+	private String boardImg1;
+	private String boardImg2;
+	private String boardImg3;
+	private String boardInqStatus;
 	
 	public Board() {
 	}

@@ -1,6 +1,7 @@
 package com.jinwook.home.service.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,16 +13,16 @@ import lombok.ToString;
 public class Recipe {
 	
 	private int rcpNo;
-	private String userId;
-	private Date rcpDate;
-	private String nickName;
+//	private String userId;
+	private User user;
+	private int rcpSeqNo;
 	private String rcpTitle;
 	private String rcpContent;
+	private LocalDate rcpDate;
 	private String rcpThumb;
 	private String rcpInfo;
 	private String rcpIngredient;
 	private int rcpHits;
-	private String rcpWriter;
 	private int commentCount;
 	
 	public Recipe() {
