@@ -86,13 +86,13 @@ public class AdminServiceImpl implements AdminService{
 	
 	///////////////// 블랙리스트 등록 //////////////////	
 	@Override
-	public boolean updateBlacklist(Long idx) {
+	public boolean updateBlacklist(User user) {
 		int queryResult = 0;
 
-		BoardDTO board = boardMapper.selectBoardDetail(idx);
+		user = adminMapper.getUserAdmin("test01");
 
-		if (board != null && "N".equals(board.getDeleteYn())) {
-			queryResult = boardMapper.deleteBoard(idx);
+		if (user != null && user.isBlacklistStatus() == true) {
+			queryResult = adminMapper.updateBlacklist(user);
 		}
 
 		return (queryResult == 1) ? true : false;
