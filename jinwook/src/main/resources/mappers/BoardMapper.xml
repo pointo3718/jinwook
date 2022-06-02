@@ -178,7 +178,7 @@
 	, review_img1 = #{reviewImg1:VARCHAR}
 	, review_img2 = #{reviewImg2:VARCHAR}
 	, review_img3 = #{reviewImg3:VARCHAR}
-	WHERE store_no = #{storeNo}
+	WHERE order_no = #{orderNo}
 	</update>
 	
 	<!--  Review delete -->
