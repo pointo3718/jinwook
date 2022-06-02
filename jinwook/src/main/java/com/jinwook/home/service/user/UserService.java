@@ -5,22 +5,29 @@ import com.jinwook.home.service.domain.User;
 
 public interface UserService {
 
-		public void addUser(User user);
+		public void addUser(User user) throws Exception;
 		
-		public User getUser(String userId);
+		public User getUser(String userId) throws Exception;
 		
-		public void updateUser(User user);
+		public void updateUser(User user) throws Exception;
 		
-		public void deleteUser(User user);
+		public void deleteUser(User user) throws Exception;
 		
-		public boolean checkId(String userId);
+		public boolean checkId(String userId) throws Exception;
 		
-		public boolean checkPassword(String password);
+		public boolean checkNickName(String nickName) throws Exception;
 		
-		public boolean checkNickName(String nickName);
+		public boolean checkPhone(String phone) throws Exception;
 		
-		public boolean checkEmail(String email);
+		public boolean checkEmail(String email) throws Exception;
 		
-		
+		public User findIdPhone(User user) throws Exception;
 	
+		public User findIdEmail(User user) throws Exception;
+		
+		public User findPasswordPhone(User user) throws Exception;
+		
+		public User findPasswordEmail(User user) throws Exception;
+		
+		public void updatePassword(User user) throws Exception; 
 }

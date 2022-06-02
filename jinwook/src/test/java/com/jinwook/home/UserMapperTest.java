@@ -4,18 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jinwook.home.mapper.UserMapper;
 import com.jinwook.home.service.domain.User;
+import com.jinwook.home.service.user.UserService;
+import com.jinwook.home.service.user.UserServiceImpl;
 
-import groovy.transform.builder.Builder;
-import lombok.Data;
 
 
-@Builder
-@Data
 @SpringBootTest
 class UserMapperTest {
 
@@ -23,7 +18,7 @@ class UserMapperTest {
 	private UserMapper userMapper;
 
 	//@Test
-	public void getUserTest() {
+	public void getUserTest() throws Exception{
 		User user = userMapper.getUser("test01");
 		System.out.println("-------------------------------------------");
 		System.out.println(user.toString());
@@ -42,7 +37,7 @@ class UserMapperTest {
 	}
 	
 	//@Test
-	public void addUserTest() {
+	public void addUserTest()  throws Exception{
 		User user = new User();
 		user.setUserId("dk1dk");
 		user.setPassword("dkdk");
@@ -65,7 +60,7 @@ class UserMapperTest {
 	}
 	
 	//@Test
-	public void updateUserTest() {
+	public void updateUserTest() throws Exception {
 		User user = userMapper.getUser("test01");
 		
 		user.setPassword("1111");
@@ -79,15 +74,30 @@ class UserMapperTest {
 	}
 	
 	@Test
-	public void deleteUserTest() {
-		User user = userMapper.getUser("dk1dk");
+	public void deleteUserTest() throws Exception {
+		User user = userMapper.getUser("test02");
 		user.setUserByeStatus(true);
-		
-		
 		
 		userMapper.deleteUser(user);
 	}
 	
+	//@Test
+	public void checkIdTest() throws Exception{
+		User user = new User();
+		UserServiceImpl userServiceImpl=null;
+		UserService userService = null;
+		System.out.println("----------------------------------");
+		System.out.println(userService.checkId("dk1dk"));
+		System.out.println("----------------------------------");
+//	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
+	}
 	
-
+	//@Test
+	public void checkNickNameTest() throws Exception{
+		User user = new User();
+		System.out.println("----------------------------------");
+		System.out.println(userMapper.checkNickName("ㅁ"));
+		System.out.println("----------------------------------");
+//	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
+	}
 }
