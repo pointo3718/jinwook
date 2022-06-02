@@ -122,7 +122,6 @@ public class BoardMapperTest {
 		
 		recipe.setUser(user);
 		recipe.setRcpNo(1);
-		recipe.setRcpSeqNo(1);
 		recipe.setRcpTitle("1번 게시글");
 		recipe.setRcpContent("1번 게시글 내용");
 		recipe.setRcpDate(LocalDate.now());

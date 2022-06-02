@@ -21,49 +21,46 @@ public interface BoardService {
 	//레시피 목록 조회
 	public List<Recipe> getRecipeList(int rcpNo);
 	
-	//상점 후기 등록
-	public void addReview(Recipe rcp);
+	//게시판 등록
+	public void addBoard(Board board);
 	
-	//상점 후기 목록 조회
-	public List<Board> getListReview(int boardNo);
+	//게시판 수정
+	public void updateBoard(Board  board);
+	
+	//게시판 삭제
+	public int deleteBoard(int boardNo);
+	
+	//게시판 상세 조회
+	public Board getBoard(int boardNo);
+	
+	//게시판 목록 조회
+	public List<Board> getBoardList(int boardNo);
 	
 	//상점, 레시피, 댓글 랭킹 목록 조회
 	public List<Board> getRankList(int boardNo);
-	
-	//1:1문의 등록
-	public void addInquiry(Board board);
-	
-	//1:1문의 수정
-	public void updateInquiry(Board board);
-	
-	//1:1문의 삭제
-	public int deleteInquiry(int boardNo);
-	
-	//1:1문의 목록 조회
-	public List<Board> getInquiryList(int boardNo);
-	
-	//1:1문의 상세 조회
-	public Board getInquiry(int rcpNo);
-	
-	//공지사항 등록
-	public void addAnouncement(Board board);
-	
-	//공지사항 수정
-	public void updateAnouncement(Board board);
-	
-	//공지사항 삭제
-	public int deleteAnouncement(int boardNo);
-	
-	//공지사항 목록 조회
-	public List<Board> getAnnouncementList(int boardNo);
-	
-	//공지사항 상세 조회
-	public Board getAnnouncement(int rcpNo);
 	
 	//댓글, 답변 등록
 	public void addComment(Board board);
 	
 	//댓글 수정
 	public void updateComment(Board board);
+	
+	//찜 등록
+	public void addJjim(Board board);
+	
+	//찜 수정
+	public void deleteJjim(Board board);
+	
+	//추천 등록
+	public void addRecommemnd(Board board);
+	
+	//추천 수정
+	public void deleteRecommemnd(Board board);
+	
+	//상점 후기 등록?????
+	public void addReview(Recipe rcp);
+	
+	//상점 후기 목록 조회?????
+	public List<Board> getListReview(int boardNo);
 	
 }

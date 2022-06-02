@@ -81,7 +81,6 @@
 	<sql id="recipeColumns">
 	rcp_no
 	,user_id
-	,rcp_seq_no
 	,rcp_title
 	,rcp_content
 	,rcp_date
@@ -99,7 +98,6 @@
 		) VALUES (
 			  #{rcpNo:INTEGER}
 			, #{user.userId:VARCHAR}
-			, #{rcpSeqNo:INTEGER}
 			, #{rcpTitle:VARCHAR}
 			, #{rcpContent:VARCHAR}
 			, SYSDATE()
