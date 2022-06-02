@@ -13,37 +13,38 @@ import lombok.ToString;
 @ToString
 public class Orders {
 
-	private int storeNo;			//»óÁ¡¹øÈ£		|»óÁ¡(µÑ´Ù ¿ëµµ °°À½)
-	private String storeName;		//»óÁ¡ÀÌ¸§		|»óÁ¡
-//	private String userId;			//À¯Àú¾ÆÀÌµğ	|À¯Àú
-//	private String grade;			//À¯Àúµî±Ş		|À¯Àú
-	private User user;				//À¯Àú		|À¯Àú(¼¼Æ®·Î À§ ÁÖ¼® ¹Ş¾Æ»ç¿ë ¿¹Á¤)
-	private String buyerName;		//±¸¸ÅÀÚÀÌ¸§	|ÁÖ¹®(±âº»À¸·Î È¸¿ø¾ÆÀÌµğ¿¡ ÇØ´çÇÏ´Â Á¤º¸´ã¾ÆÁ®ÀÖÀ½)
-	private String buyerPhone;		//±¸¸ÅÀÚÀüÈ­¹øÈ£	|ÁÖ¹®(±âº»À¸·Î È¸¿ø¾ÆÀÌµğ¿¡ ÇØ´çÇÏ´Â Á¤º¸´ã¾ÆÁ®ÀÖÀ½)
-	private int orderNo;			//ÁÖ¹®¹øÈ£		|ÁÖ¹®
-	private Date orderDate;			//ÁÖ¹®³¯Â¥		|ÁÖ¹®
-	private LocalDateTime pickupTime;		//ÇÈ¾÷½Ã°£		|ÁÖ¹®
-	private String orderReq;		//ÁÖ¹®¿äÃ»		|ÁÖ¹®
- 	private String orderStatus;		//ÁÖ¹®»óÅÂ		|ÁÖ¹®
- 	private int finalPrice;			//½Ç°áÁ¦±İ¾×	|ÁÖ¹®(È¸¿øÁÖ¹®½Ã ÄíÆùdc,µî±Şdc Â÷°¨¾×)
-//	private String prodName;		//»óÇ°ÀÌ¸§		|»óÇ°
-//	private String prodInfo;		//»óÇ°¼³¸í		|»óÇ°
-//	private int price;				//»óÇ°±İ¾×		|»óÇ°
-//	private String prodImg;			//»óÇ°»çÁø		|»óÇ°
- 	private Product product;		//»óÇ°		|»óÇ°(¼¼Æ®·Î À§ ÁÖ¼® ¹Ş¾Æ»ç¿ë ¿¹Á¤)
-	private int prodCount;			//»óÇ°¼ö·®		|Àå¹Ù±¸´Ï
-	private int orderPrice;			//ÁÖ¹®±İ¾×		|Àå¹Ù±¸´Ï
-//	private int couponNo;			//ÄíÆù¹øÈ£		|ÄíÆù
-//	private String couponType;		//ÄíÆùÅ¸ÀÔ		|ÄíÆù
-//	private int couponDc;			//ÄíÆùÇÒÀÎ±İ¾×	|ÄíÆù
+//	private int storeNo;			//ìƒì ë²ˆí˜¸		|ìƒì (ë‘˜ë‹¤ ìš©ë„ ê°™ìŒ)
+//	private String storeName;		//ìƒì ì´ë¦„		|ìƒì 
+	private Store store;			//ìƒì 
+//	private String userId;			//ìœ ì €ì•„ì´ë””	|ìœ ì €
+//	private String grade;			//ìœ ì €ë“±ê¸‰		|ìœ ì €
+	private User user;				//ìœ ì €		|ìœ ì €(ì„¸íŠ¸ë¡œ ìœ„ ì£¼ì„ ë°›ì•„ì‚¬ìš© ì˜ˆì •)
+	private String buyerName;		//êµ¬ë§¤ìì´ë¦„	|ì£¼ë¬¸(ê¸°ë³¸ìœ¼ë¡œ íšŒì›ì•„ì´ë””ì— í•´ë‹¹í•˜ëŠ” ì •ë³´ë‹´ì•„ì ¸ìˆìŒ)
+	private String buyerPhone;		//êµ¬ë§¤ìì „í™”ë²ˆí˜¸	|ì£¼ë¬¸(ê¸°ë³¸ìœ¼ë¡œ íšŒì›ì•„ì´ë””ì— í•´ë‹¹í•˜ëŠ” ì •ë³´ë‹´ì•„ì ¸ìˆìŒ)
+	private int orderNo;			//ì£¼ë¬¸ë²ˆí˜¸		|ì£¼ë¬¸
+	private Date orderDate;			//ì£¼ë¬¸ë‚ ì§œ		|ì£¼ë¬¸
+	private LocalDateTime pickupTime;		//í”½ì—…ì‹œê°„		|ì£¼ë¬¸
+	private String orderReq;		//ì£¼ë¬¸ìš”ì²­		|ì£¼ë¬¸
+ 	private String orderStatus;		//ì£¼ë¬¸ìƒíƒœ		|ì£¼ë¬¸
+ 	private int finalPrice;			//ì‹¤ê²°ì œê¸ˆì•¡	|ì£¼ë¬¸(íšŒì›ì£¼ë¬¸ì‹œ ì¿ í°dc,ë“±ê¸‰dc ì°¨ê°ì•¡)
+//	private String prodName;		//ìƒí’ˆì´ë¦„		|ìƒí’ˆ
+//	private String prodInfo;		//ìƒí’ˆì„¤ëª…		|ìƒí’ˆ
+//	private int price;				//ìƒí’ˆê¸ˆì•¡		|ìƒí’ˆ
+//	private String prodImg;			//ìƒí’ˆì‚¬ì§„		|ìƒí’ˆ
+ 	private Product product;		//ìƒí’ˆ		|ìƒí’ˆ(ì„¸íŠ¸ë¡œ ìœ„ ì£¼ì„ ë°›ì•„ì‚¬ìš© ì˜ˆì •)
+	private int prodCount;			//ìƒí’ˆìˆ˜ëŸ‰		|ì¥ë°”êµ¬ë‹ˆ
+	private int orderPrice;			//ì£¼ë¬¸ê¸ˆì•¡		|ì¥ë°”êµ¬ë‹ˆ
+//	private int couponNo;			//ì¿ í°ë²ˆí˜¸		|ì¿ í°
+//	private String couponType;		//ì¿ í°íƒ€ì…		|ì¿ í°
+//	private int couponDc;			//ì¿ í°í• ì¸ê¸ˆì•¡	|ì¿ í°
 	private Coupon coupon;
-	private String reviewTitle;		//¸®ºäÁ¦¸ñ		|ÁÖ¹®¸®ºä
-	private String reviewContent;	//¸®ºä³»¿ë		|ÁÖ¹®¸®ºä
-	private Date reviewDate;		//¸®ºä³¯Â¥		|ÁÖ¹®¸®ºä
-	private int reviewStar;			//º°Á¡		|ÁÖ¹®¸®ºä
-	private String reviewImg1;		//¸®ºä»çÁø 1	|ÁÖ¹®¸®ºä
-	private String reviewImg2;		//¸®ºä»çÁø 2	|ÁÖ¹®¸®ºä
-	private String reviewImg3;		//¸®ºä»çÁø 3	|ÁÖ¹®¸®ºä
+	private String reviewTitle;		//ë¦¬ë·°ì œëª©		|ì£¼ë¬¸ë¦¬ë·°
+	private String reviewContent;	//ë¦¬ë·°ë‚´ìš©		|ì£¼ë¬¸ë¦¬ë·°
+	private Date reviewDate;		//ë¦¬ë·°ë‚ ì§œ		|ì£¼ë¬¸ë¦¬ë·°
+	private int reviewStar;			//ë³„ì 		|ì£¼ë¬¸ë¦¬ë·°
+	private String reviewImg1;		//ë¦¬ë·°ì‚¬ì§„ 1	|ì£¼ë¬¸ë¦¬ë·°
+	private String reviewImg2;		//ë¦¬ë·°ì‚¬ì§„ 2	|ì£¼ë¬¸ë¦¬ë·°
+	private String reviewImg3;		//ë¦¬ë·°ì‚¬ì§„ 3	|ì£¼ë¬¸ë¦¬ë·°
 	
 	public Orders() {
 		// TODO Auto-generated constructor stub

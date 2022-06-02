@@ -1,16 +1,19 @@
 package com.jinwook.home;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.CollectionUtils;
 
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jinwook.home.mapper.OrdersMapper;
+import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
+import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 
 @SpringBootTest
@@ -27,17 +30,20 @@ public class OrdersMapperTest {
 		
 		User user = new User();
 		user.setUserId("test01");
-		user.setGrade("ÀÏ¹İÈ¸¿ø");
+		user.setGrade("ì¼ë°˜íšŒì›");
 		
 		Coupon coupon = new Coupon();
 		coupon.setCouponNo(10000);
 		coupon.setCouponType("0");
 		coupon.setCouponDc(30);
 		
+		Store store = new Store();
+		store.setStoreNo(10000);
+		
 		Orders orders = new Orders();
 		orders.setUser(user);
-		orders.setStoreNo(10000);
-		orders.setBuyerName("°­Áø¿í");
+		orders.setStore(store);
+		orders.setBuyerName("ê°•ì§„ìš±");
 		orders.setBuyerPhone("010-1234-9876");
 		orders.setPickupTime(LocalDateTime.now());
 		orders.setOrderReq(null);
@@ -49,7 +55,7 @@ public class OrdersMapperTest {
 		orders.setCoupon(coupon);
 			
 		int result = ordersMapper.addOrders(orders);
-		System.out.println("°á°ú´Â"+result+"ÀÔ´Ï´Ù.");
+		System.out.println("ê²°ê³¼ëŠ”"+result+"ì…ë‹ˆë‹¤.");
 	}
 	
 	//@Test
@@ -58,7 +64,7 @@ public class OrdersMapperTest {
 		orders.setOrderNo(10003);
 		orders.setOrderStatus("1");
 		int result = ordersMapper.updateOrders(orders);
-		System.out.println("°á°ú´Â"+result+"ÀÔ´Ï´Ù.");
+		System.out.println("ê²°ê³¼ëŠ”"+result+"ì…ë‹ˆë‹¤.");
 	}
 	
 	//@Test
@@ -66,17 +72,71 @@ public class OrdersMapperTest {
 		Orders orders = new Orders();
 		orders.setOrderNo(10005);
 		int result = ordersMapper.deleteOrders(orders);
-	    System.out.println("°á°ú´Â" + result + "ÀÔ´Ï´Ù.");
+	    System.out.println("ê²°ê³¼ëŠ”" + result + "ì…ë‹ˆë‹¤.");
 	     
 	}
 	
-	@Test
+	//@Test
 	public void testSelectListOrders() {
-		Orders orders = new Orders();
-		orders.getUser().getUserId();
-//		Map<String> map = orders
+		User user = new User();
+		user.setUserId("test01");
 		
-//		List<Object> list = (List<Object>)map.get("list")
+		Store store = new Store();
+		store.setStoreNo(10000);
+		store.setStoreName("ì§„ìš±ì´ë„¤");
+		
+//		Product product = new Product();
+//		product.setStoreNo(10000);
+//		product.setProdName("ê°ì");
+//		product.setProdImg("ê°€ì•”ì");
+		
+//		Orders order = new Orders();
+//		order.setUser(user);
+		
+		int ordersTotalCount = ordersMapper.getOrdersTotalCount();
+		if(ordersTotalCount > 0) {
+			List<Orders> ordersList = ordersMapper.getOrdersList();
+			
+			if(CollectionUtils.isEmpty(ordersList) == false) { 
+				for(Orders orders : ordersList) {
+					orders.setUser(user);
+					orders.setStore(store);
+//					orders.setProduct(product);
+					System.out.println("=========================");
+					System.out.println(orders.getUser().getUserId());
+					System.out.println(orders.getOrderNo());
+					System.out.println(orders.getOrderStatus());
+					System.out.println(orders.getPickupTime());
+					System.out.println(orders.getOrderDate());
+					System.out.println(orders.getOrderPrice());
+					
+//					Product product = ordersMapper.get
+					System.out.println(orders.getProduct().getProdName());
+					System.out.println(orders.getProduct().getProdImg());
+					System.out.println("=========================");
+				}
+			}
+		}
+	}
+	
+	//@Test
+	public void testgetOrders() {
+		
+	}
+	
+	@Test
+	public void testaddOrdersCart() {
+		
+		Product product = new Product();
+		product.setProdNo(10003);
+		
+		Cart cart = new Cart();
+		cart.setUserId("test09");
+		cart.setProduct(product);
+		cart.setOrderNo(0);
+		cart.setProdCount(4);
+		cart.setStoreName("ì§„ìš±ì´ë„¤");
+		cart.setCartStatus(0);
 	}
 	
 }

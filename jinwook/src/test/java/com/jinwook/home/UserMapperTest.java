@@ -9,8 +9,11 @@ import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
 import com.jinwook.home.service.user.UserServiceImpl;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> refs/remotes/origin/master
 @SpringBootTest
 class UserMapperTest {
 

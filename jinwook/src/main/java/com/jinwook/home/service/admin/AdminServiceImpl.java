@@ -18,14 +18,14 @@ public class AdminServiceImpl implements AdminService{
 	private AdminMapper adminMapper;
 	
 		
-	///////////////// À¯Àú »ó¼¼ //////////////////	
+	///////////////// ìœ ì € ìƒì„¸ //////////////////	
 	@Override
 	public User getUserAdmin(String userId) {
 		return adminMapper.getUserAdmin(userId);
 	}
 	
 	
-	///////////////// À¯Àú ¸ñ·Ï //////////////////
+	///////////////// ìœ ì € ëª©ë¡ //////////////////
 	@Override
 	public List<User> getUserListAdmin() {
 		List<User> userList = Collections.emptyList();
@@ -40,7 +40,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	
-	///////////////// »óÁ¡ ¸ñ·Ï //////////////////
+	///////////////// ìƒì  ëª©ë¡ //////////////////
 	@Override
 	public List<Store> getStoreListAdmin() {
 		List<Store> storeList = Collections.emptyList();
@@ -54,7 +54,7 @@ public class AdminServiceImpl implements AdminService{
 		return storeList;
 	}
 	
-	///////////////// ½Å°í ¸ñ·Ï //////////////////
+	///////////////// ì‹ ê³  ëª©ë¡ //////////////////
 	@Override
 	public List<Complain> getComplainListAdmin() {
 		List<Complain> complainList = Collections.emptyList();
@@ -68,7 +68,35 @@ public class AdminServiceImpl implements AdminService{
 		return complainList;
 	}
 	
+
+	///////////////// ë¸”ë™ë¦¬ìŠ¤íŠ¸ ëª©ë¡ //////////////////
+	@Override
+	public List<User> getBlacklistAdmin() {
+		List<User> blacklist = Collections.emptyList();
+
+		int blacklistTotalCount = adminMapper.getBlacklistTotalCount();
+
+		if (blacklistTotalCount > 0) {
+			blacklist = adminMapper.getBlacklistAdmin();
+		}
+
+		return blacklist;
+	}
 	
+	
+	///////////////// ë¸”ë™ë¦¬ìŠ¤íŠ¸ ë“±ë¡ //////////////////	
+	@Override
+	public boolean updateBlacklist(User user) {
+		int queryResult = 0;
+
+		user = adminMapper.getUserAdmin("test01");
+
+		if (user != null && user.isBlacklistStatus() == true) {
+			queryResult = adminMapper.updateBlacklist(user);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
 	
 }
 

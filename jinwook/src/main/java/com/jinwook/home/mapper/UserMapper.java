@@ -44,7 +44,6 @@ public interface UserMapper {
 //	public void updatePassword(User user) throws Exception; 
 
 	
-	// �Խ��� Page ó���� ���� ��üRow(totalCount)  return
 //	public int getTotalCount(Search search) throws Exception ;
 	
 
