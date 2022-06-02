@@ -2,6 +2,7 @@ package com.jinwook.home.service.domain;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -39,7 +40,7 @@ public class Orders {
 	private Coupon coupon;
 	private String reviewTitle;		//리뷰제목		|주문리뷰
 	private String reviewContent;	//리뷰내용		|주문리뷰
-	private Date reviewDate;		//리뷰날짜		|주문리뷰
+	private LocalDate reviewDate;		//리뷰날짜		|주문리뷰
 	private int reviewStar;			//별점		|주문리뷰
 	private String reviewImg1;		//리뷰사진 1	|주문리뷰
 	private String reviewImg2;		//리뷰사진 2	|주문리뷰

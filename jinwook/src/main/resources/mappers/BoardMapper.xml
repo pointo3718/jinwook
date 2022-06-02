@@ -18,7 +18,7 @@
 	</sql>
 	
 	<!-- Board insert -->
-	<insert id="addBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="boardNo">
+	<insert id="addBoard" parameterType="com.jinwook.home.service.domain.Board" useGeneratedKeys="true" keyProperty="boardNo">
 		INSERT INTO board (
 			<include refid="boardColumns" />
 		) VALUES (
@@ -37,7 +37,7 @@
 	</insert>
 
 	<!-- Board update -->
-	<update id="updateBoard" parameterType="Board">
+	<update id="updateBoard" parameterType="com.jinwook.home.service.domain.Board">
 		UPDATE board
 		SET
 			  board_title = #{boardTitle:VARCHAR}
@@ -49,7 +49,7 @@
 	</update>
 	
 	<!-- Board selectDetail -->
-	<select id="getBoard" parameterType="int" resultType="Board">
+	<select id="getBoard" parameterType="int" resultType="com.jinwook.home.service.domain.Board">
 		SELECT
 			<include refid="boardColumns" />
 		FROM
@@ -59,7 +59,7 @@
 	</select>
 
 	<!-- ?Board selectList? -->
-	<select id="getBoardList" parameterType="Board" resultType="Board">
+	<select id="getBoardList" parameterType="com.jinwook.home.service.domain.Board" resultType="com.jinwook.home.service.domain.Board">
 		SELECT
 			<include refid="boardColumns" />
 		FROM
@@ -68,7 +68,6 @@
 			board_no = #{boardNo}
 	</select>
 
-
 	<!--  Board delete -->
 	<delete id="deleteBoard" parameterType="int">
 		DELETE 
@@ -76,6 +75,15 @@
 		WHERE
 			board_no = #{boardNo}
 	</delete>
+	
+	<!-- 게시판 목록 개수 -->
+	<select id="getBoardTotalCount" parameterType="com.jinwook.home.service.domain.Board" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			board
+		ORDER BY board_no	
+	</select>
 	
 	<!-- Recipe -->
 	<sql id="recipeColumns">
@@ -92,7 +100,7 @@
 	</sql>
 	
 	<!-- Recipe insert -->
-	<insert id="addRecipe" parameterType="Recipe" useGeneratedKeys="true" keyProperty="rcpNo">
+	<insert id="addRecipe" parameterType="com.jinwook.home.service.domain.Recipe" useGeneratedKeys="true" keyProperty="rcpNo">
 		INSERT INTO recipe (
 			<include refid="recipeColumns" />
 		) VALUES (
@@ -110,7 +118,7 @@
 	</insert>
 	
 	<!-- Recipe getRecipe -->
-	<select id="getRecipe" parameterType="int" resultType="Recipe">
+	<select id="getRecipe" parameterType="int" resultType="com.jinwook.home.service.domain.Recipe">
 		SELECT
 			<include refid="recipeColumns" />
 		FROM
@@ -120,7 +128,7 @@
 	</select>
 
 	<!-- ?Recipe selectList? -->
-	<select id="getRecipeList" parameterType="Recipe" resultType="Recipe">
+	<select id="getRecipeList" parameterType="com.jinwook.home.service.domain.Recipe" resultType="com.jinwook.home.service.domain.Recipe">
 		SELECT
 			<include refid="recipeColumns" />
 		FROM
@@ -130,17 +138,26 @@
 	</select>
 
 	<!-- Recipe update -->
-	<update id="updateRecipe" parameterType="Recipe">
+	<update id="updateRecipe" parameterType="com.jinwook.home.service.domain.Recipe">
 		UPDATE recipe
 		SET
-			, rcp_title = #{rcpTitle}
-			, rcp_content = #{rcpContent}
-			, rcp_ingredient = #{rcpIngredient}
-			, rcp_thumb = #{rcpThumb}
-			, rcp_info = #{rcpInfo}
+			rcp_title = #{rcpTitle:VARCHAR}
+			, rcp_content = #{rcpContent:VARCHAR}
+			, rcp_ingredient = #{rcpIngredient:VARCHAR}
+			, rcp_thumb = #{rcpThumb:VARCHAR}
+			, rcp_info = #{rcpInfo:VARCHAR}
 		WHERE
 			rcp_no = #{rcpNo}
 	</update>
+
+	<!-- 레시피 목록 개수 -->
+	<select id="getRecipeTotalCount" parameterType="com.jinwook.home.service.domain.Recipe" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			recipe
+		ORDER BY rcp_no	
+	</select>
 
 	<!--  Recipe delete -->
 	<delete id="deleteRecipe" parameterType="int">
@@ -150,8 +167,48 @@
 			rcp_no = #{rcpNo}
 	</delete>
 	
-	<!-- Comment -->
-	<!-- <sql id="commentColumns">
+	<!-- Review insert -->
+	<update id="addReview" parameterType="com.jinwook.home.service.domain.Orders">
+	UPDATE orders
+	SET
+		review_title = #{reviewTitle:VARCHAR}
+	, review_content = #{reviewContent:VARCHAR}
+	, review_date = SYSDATE()
+	, review_star = #{reviewStar:INTEGER}
+	, review_img1 = #{reviewImg1:VARCHAR}
+	, review_img2 = #{reviewImg2:VARCHAR}
+	, review_img3 = #{reviewImg3:VARCHAR}
+	WHERE store_no = #{storeNo}
+	</update>
+	
+	<!--  Review delete -->
+	<delete id="deleteReview" parameterType="int">
+		DELETE 
+		FROM orders
+		WHERE
+			order_no = #{orderNo}
+	</delete>
+	
+		<!-- 상점후기 목록 개수 -->
+	<select id="getReviewTotalCount" parameterType="com.jinwook.home.service.domain.Recipe" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			orders
+		ORDER BY order_no	
+	</select>
+	
+		<!--   -->
+	<select id="getReviewList" parameterType="com.jinwook.home.service.domain.Orders" resultType="com.jinwook.home.service.domain.Orders">
+		SELECT
+			*
+		FROM
+			orders
+		WHERE
+			order_no = #{orderNo}
+	</select>
+	
+	 <sql id="commentColumns">
 	comment_no
 	,user_id
 	,rcp_no
@@ -159,10 +216,9 @@
 	,comment_content
 	,comment_date
 	,recommend_count	
-	</sql> -->
+	</sql> 
 	
-	<!-- Comment insert -->
-	<!-- <insert id="addComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="commentNo">
+	 <insert id="addComment" parameterType="com.jinwook.home.service.domain.Comment" useGeneratedKeys="true" keyProperty="commentNo">
 		INSERT INTO comment (
 			<include refid="commentColumns" />
 		) VALUES (
@@ -174,38 +230,27 @@
 			, SYSDATE()
 			, #{recommendCount:INTEGER}
 		)
-	</insert> -->
-
-	<!-- Comment update -->
-	<!-- <update id="updateComment" parameterType="Comment">
-		UPDATE board
-		SET
-			, comment_content = #{boardContent:VARCHAR}
-		WHERE
-			comment_no = #{commentNo}
-	</update> -->
+	</insert> 
 	
-	<!-- ?Comment selectList? -->
-	<!-- <select id="getCommmentList" parameterType="Commment" resultType="Commment">
-		SELECT
-			<include refid="boardColumns" />
-		FROM
-			board
-		WHERE
-			comment_no = #{commentNo}
-	</select> -->
-
-
-	<!--  Comment delete -->
-	<!-- <delete id="deleteCommment" parameterType="int">
+		<!--  Comment delete -->
+	<delete id="deleteComment" parameterType="int">
 		DELETE 
 		FROM comment
 		WHERE
 			comment_no = #{commentNo}
-	</delete> -->
-	
-		<!-- JJim -->
-	<!-- <sql id="JJimColumns">
+	</delete>
+
+	<!-- Comment update -->
+	<update id="updateComment" parameterType="com.jinwook.home.service.domain.Comment">
+		UPDATE comment
+		SET
+			comment_content = #{commentContent:VARCHAR}
+			, comment_date = SYSDATE()
+		WHERE
+			comment_no = #{commentNo}
+	</update>
+
+	 <sql id="JJimColumns">
 	JJim_no
 	,user_id
 	,rcp_no
@@ -213,7 +258,9 @@
 	,comment_content
 	,comment_date
 	,recommend_count	
-	</sql> -->
+	</sql>
+	
+	
 	
 
 </mapper>
