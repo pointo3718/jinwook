@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jinwook.home.mapper.OrdersMapper;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Orders;
@@ -27,7 +26,7 @@ public class OrdersMapperTest {
 		
 		User user = new User();
 		user.setUserId("test01");
-		user.setGrade("ÀÏ¹İÈ¸¿ø");
+		user.setGrade("ì¼ë°˜íšŒì›");
 		
 		Coupon coupon = new Coupon();
 		coupon.setCouponNo(10000);
@@ -37,7 +36,7 @@ public class OrdersMapperTest {
 		Orders orders = new Orders();
 		orders.setUser(user);
 		orders.setStoreNo(10000);
-		orders.setBuyerName("°­Áø¿í");
+		orders.setBuyerName("ê°•ì§„ìš±");
 		orders.setBuyerPhone("010-1234-9876");
 		orders.setPickupTime(LocalDateTime.now());
 		orders.setOrderReq(null);
@@ -49,7 +48,7 @@ public class OrdersMapperTest {
 		orders.setCoupon(coupon);
 			
 		int result = ordersMapper.addOrders(orders);
-		System.out.println("°á°ú´Â"+result+"ÀÔ´Ï´Ù.");
+		System.out.println("ê²°ê³¼ëŠ”"+result+"ì…ë‹ˆë‹¤.");
 	}
 	
 	//@Test
@@ -58,7 +57,7 @@ public class OrdersMapperTest {
 		orders.setOrderNo(10003);
 		orders.setOrderStatus("1");
 		int result = ordersMapper.updateOrders(orders);
-		System.out.println("°á°ú´Â"+result+"ÀÔ´Ï´Ù.");
+		System.out.println("ê²°ê³¼ëŠ”"+result+"ì…ë‹ˆë‹¤.");
 	}
 	
 	//@Test
@@ -66,7 +65,7 @@ public class OrdersMapperTest {
 		Orders orders = new Orders();
 		orders.setOrderNo(10005);
 		int result = ordersMapper.deleteOrders(orders);
-	    System.out.println("°á°ú´Â" + result + "ÀÔ´Ï´Ù.");
+	    System.out.println("ê²°ê³¼ëŠ”" + result + "ì…ë‹ˆë‹¤.");
 	     
 	}
 	

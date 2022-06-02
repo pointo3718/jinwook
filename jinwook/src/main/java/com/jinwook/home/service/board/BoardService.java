@@ -6,64 +6,64 @@ import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Recipe;
 
 public interface BoardService {
-	//·¹½ÃÇÇ µî·Ï
+	//ë ˆì‹œí”¼ ë“±ë¡
 	public void addRecipe(Recipe rcp);
 
-	//·¹½ÃÇÇ ¼öÁ¤
+	//ë ˆì‹œí”¼ ìˆ˜ì •
 	public void updateRecipe(Recipe rcp);
 
-	//·¹½ÃÇÇ »èÁ¦
+	//ë ˆì‹œí”¼ ì‚­ì œ
 	public int deleteRecipe(int rcpNo);
 	
-	//·¹½ÃÇÇ »ó¼¼ Á¶È¸
+	//ë ˆì‹œí”¼ ìƒì„¸ ì¡°íšŒ
 	public Recipe getRecipe(int rcpNo);
 	
-	//·¹½ÃÇÇ ¸ñ·Ï Á¶È¸
+	//ë ˆì‹œí”¼ ëª©ë¡ ì¡°íšŒ
 	public List<Recipe> getRecipeList(int rcpNo);
 	
-	//»óÁ¡ ÈÄ±â µî·Ï
+	//ìƒì  í›„ê¸° ë“±ë¡
 	public void addReview(Recipe rcp);
 	
-	//»óÁ¡ ÈÄ±â ¸ñ·Ï Á¶È¸
+	//ìƒì  í›„ê¸° ëª©ë¡ ì¡°íšŒ
 	public List<Board> getListReview(int boardNo);
 	
-	//»óÁ¡, ·¹½ÃÇÇ, ´ñ±Û ·©Å· ¸ñ·Ï Á¶È¸
+	//ìƒì , ë ˆì‹œí”¼, ëŒ“ê¸€ ë­í‚¹ ëª©ë¡ ì¡°íšŒ
 	public List<Board> getRankList(int boardNo);
 	
-	//1:1¹®ÀÇ µî·Ï
+	//1:1ë¬¸ì˜ ë“±ë¡
 	public void addInquiry(Board board);
 	
-	//1:1¹®ÀÇ ¼öÁ¤
+	//1:1ë¬¸ì˜ ìˆ˜ì •
 	public void updateInquiry(Board board);
 	
-	//1:1¹®ÀÇ »èÁ¦
+	//1:1ë¬¸ì˜ ì‚­ì œ
 	public int deleteInquiry(int boardNo);
 	
-	//1:1¹®ÀÇ ¸ñ·Ï Á¶È¸
+	//1:1ë¬¸ì˜ ëª©ë¡ ì¡°íšŒ
 	public List<Board> getInquiryList(int boardNo);
 	
-	//1:1¹®ÀÇ »ó¼¼ Á¶È¸
+	//1:1ë¬¸ì˜ ìƒì„¸ ì¡°íšŒ
 	public Board getInquiry(int rcpNo);
 	
-	//°øÁö»çÇ× µî·Ï
+	//ê³µì§€ì‚¬í•­ ë“±ë¡
 	public void addAnouncement(Board board);
 	
-	//°øÁö»çÇ× ¼öÁ¤
+	//ê³µì§€ì‚¬í•­ ìˆ˜ì •
 	public void updateAnouncement(Board board);
 	
-	//°øÁö»çÇ× »èÁ¦
+	//ê³µì§€ì‚¬í•­ ì‚­ì œ
 	public int deleteAnouncement(int boardNo);
 	
-	//°øÁö»çÇ× ¸ñ·Ï Á¶È¸
+	//ê³µì§€ì‚¬í•­ ëª©ë¡ ì¡°íšŒ
 	public List<Board> getAnnouncementList(int boardNo);
 	
-	//°øÁö»çÇ× »ó¼¼ Á¶È¸
+	//ê³µì§€ì‚¬í•­ ìƒì„¸ ì¡°íšŒ
 	public Board getAnnouncement(int rcpNo);
 	
-	//´ñ±Û, ´äº¯ µî·Ï
+	//ëŒ“ê¸€, ë‹µë³€ ë“±ë¡
 	public void addComment(Board board);
 	
-	//´ñ±Û ¼öÁ¤
+	//ëŒ“ê¸€ ìˆ˜ì •
 	public void updateComment(Board board);
 	
 }

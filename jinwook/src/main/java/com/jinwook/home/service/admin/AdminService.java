@@ -14,7 +14,6 @@ public interface AdminService {
 		
 		public List<Store> getStoreListAdmin();	// 상점 목록
 		
-		public List<Complain> getComplainListAdmin();	// 상점 목록
 		
 		public List<User> getBlacklistAdmin();	// 상점 목록
 		

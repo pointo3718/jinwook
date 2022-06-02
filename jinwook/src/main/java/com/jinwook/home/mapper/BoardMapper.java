@@ -9,42 +9,42 @@ import com.jinwook.home.service.domain.Recipe;
 
 @Mapper
 public interface BoardMapper {
-	//°Ô½Ã±Û µî·Ï
+	//ê²Œì‹œê¸€ ë“±ë¡
 	public int addBoard(Board board);
 
-	//°Ô½Ã±Û ¼öÁ¤
+	//ê²Œì‹œê¸€ ìˆ˜ì •
 	public int updateBoard(Board board);
 
-	//°Ô½Ã±Û »èÁ¦
+	//ê²Œì‹œê¸€ ì‚­ì œ
 	public int deleteBoard(int boardNo);
 	
-	//°Ô½Ã±Û »ó¼¼ Á¶È¸
+	//ê²Œì‹œê¸€ ìƒì„¸ ì¡°íšŒ
 	public Board getBoard(int boardNo);
 
-	//°Ô½Ã±Û ¸ñ·Ï Á¶È¸???
+	//ê²Œì‹œê¸€ ëª©ë¡ ì¡°íšŒ???
 	public List<Board> getBoardList(Board board);
 
-	// ·¹½ÃÇÇ µî·Ï
+	// ë ˆì‹œí”¼ ë“±ë¡
 	public int addRecipe(Recipe rcp);
 
-	// ·¹½ÃÇÇ ¼öÁ¤
+	// ë ˆì‹œí”¼ ìˆ˜ì •
 	public int updateRecipe(Recipe rcp);
 
-	// ·¹½ÃÇÇ »èÁ¦
+	// ë ˆì‹œí”¼ ì‚­ì œ
 	public int deleteRecipe(int rcpNo);
 
-	// ·¹½ÃÇÇ »ó¼¼ Á¶È¸
+	// ë ˆì‹œí”¼ ìƒì„¸ ì¡°íšŒ
 	public Recipe getRecipe(int rcpNo);
 
-	// ·¹½ÃÇÇ ¸ñ·Ï Á¶È¸???
+	// ë ˆì‹œí”¼ ëª©ë¡ ì¡°íšŒ???
 	public List<Recipe> getRecipeList(int rcpNo);
 	
-	//´ñ±Û, ´äº¯ µî·Ï
+	//ëŒ“ê¸€, ë‹µë³€ ë“±ë¡
 	public void addComment(Board board);
 	
-	//´ñ±Û ¼öÁ¤
+	//ëŒ“ê¸€ ìˆ˜ì •
 	public void updateComment(Board board);
 	
-	// °Ô½Ã±Û ÆäÀÌÂ¡ Ã³¸®
+	// ê²Œì‹œê¸€ í˜ì´ì§• ì²˜ë¦¬
 	public int selectBoardTotalCount(Board board);
 }

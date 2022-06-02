@@ -16,11 +16,11 @@ class JinwookApplicationTests {
 	@Autowired
 	private SqlSessionFactory sessionFactory;
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 
-	@Test
+	//@Test
 	public void testByApplicationContext() {
 		try {
 			System.out.println("=========================");

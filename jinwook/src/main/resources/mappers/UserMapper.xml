@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinwook.home.mapper.UserMapper">
+
+	
+	<insert 	id="addUser"		parameterType="user" >
+	 	INSERT
+		INTO users( user_id, user_name, password, birth, gender, email, role, phone, rp_id, notice_status
+					, business_no, grade, reg_date, jp_balance, jp_password, blacklist_reg_date
+					, blacklist_end_date, blacklist_status, user_bye_status, nick_name) 
+		VALUES	 (	#{userId} , #{userName} , #{password} , #{birth}, #{gender}, #{email}, #{role}, #{phone}
+				, #{rpId:VARCHAR}, #{noticeStatus}, #{businessNo:VARCHAR}, #{grade:VARCHAR}, SYSDATE(), #{jpBalance}, #{jpPassword:VARCHAR}
+				, null, null, #{blacklistStatus}, #{userByeStatus}, #{nickName})
+	 </insert>
+	
+	<select 	id="getUser"	parameterType="string"	resultType="user">
+		SELECT
+		*	
+		FROM users 
+		WHERE user_id = #{value}
+	 </select>
+	 
+	 <update	id="updateUser"	parameterType="user" >
+	   	UPDATE users
+	   	<set>
+	   		nick_name 	= #{nickName} ,
+			phone	= #{phone},
+			business_no 	= #{businessNo} ,
+			email				=	#{email},
+			password			= #{password}
+	   	</set>
+	   	WHERE user_id = #{userId}
+	 </update>
+
+	<update		id="deleteUser"	>
+		UPDATE users 
+		<set>
+			user_bye_status = #{userByeStatus}
+		</set>
+		WHERE user_id = #{userId}
+	 </update>
+	
+</mapper>
