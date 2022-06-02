@@ -1,9 +1,14 @@
 package com.jinwook.home.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.jinwook.home.service.domain.Product;
 
+@Mapper
 public interface ProductMapper {
 
-	public Product selectProductDetail(int prodNo);  // »óÇ° »ó¼¼
+	public Product selectProductDetail(int prodNo);  // ï¿½ï¿½Ç° ï¿½ï¿½
+	
 }
+
 
