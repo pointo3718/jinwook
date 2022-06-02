@@ -13,8 +13,9 @@ import lombok.ToString;
 @ToString
 public class Orders {
 
-	private int storeNo;			//상점번호		|상점(둘다 용도 같음)
-	private String storeName;		//상점이름		|상점
+//	private int storeNo;			//상점번호		|상점(둘다 용도 같음)
+//	private String storeName;		//상점이름		|상점
+	private Store store;			//상점
 //	private String userId;			//유저아이디	|유저
 //	private String grade;			//유저등급		|유저
 	private User user;				//유저		|유저(세트로 위 주석 받아사용 예정)
