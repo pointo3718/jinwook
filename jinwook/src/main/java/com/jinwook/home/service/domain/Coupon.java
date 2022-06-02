@@ -12,7 +12,7 @@ import lombok.ToString;
 public class Coupon {
    
    private int couponNo;
-   private String userId;
+   private User userId;
    private String couponType;
    private boolean couponStatus; 
    private Date couponValidDate; 

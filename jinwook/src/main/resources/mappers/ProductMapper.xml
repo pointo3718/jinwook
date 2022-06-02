@@ -3,24 +3,27 @@
 <mapper namespace="com.jinwook.home.mapper.ProductMapper">
 
 	<sql id="productColumns">
-		  prod_no
+		prod_no
 		, store_no
 		, prod_name
 		, prod_img
 		, price
 		, prod_orign
 		, prod_info
-		, is_soldout
+		,
+		is_soldout
 	</sql>
-	
-	<select id="selectProductDetail" parameterType="int" resultType="Product">
+
+	<select id="selectProductDetail" parameterType="int"
+		resultType="Product">
 		SELECT
-			<include refid="productColumns" />
+		<include refid="productColumns" />
 		FROM
-			product
+		product
 		WHERE
-			prod_no = #{prodNo}
-		
+		prod_no = #{prodNo}
+
 	</select>
+
 
 </mapper>
