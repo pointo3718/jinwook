@@ -32,10 +32,12 @@
 	   	WHERE user_id = #{userId}
 	 </update>
 
-	<delete		id="deleteUser"	>
-		DELETE
-		FROM users 
+	<update		id="deleteUser"	>
+		UPDATE users 
+		<set>
+			user_bye_status = #{userByeStatus}
+		</set>
 		WHERE user_id = #{userId}
-	 </delete>
+	 </update>
 	
 </mapper>

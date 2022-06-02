@@ -23,7 +23,7 @@ class UserMapperTest {
 	private UserMapper userMapper;
 
 	//@Test
-	public void testOfSelectUser() {
+	public void testOfgetUser() {
 		User user = userMapper.getUser("test01");
 		System.out.println("-------------------------------------------");
 		System.out.println(user.toString());
@@ -42,7 +42,7 @@ class UserMapperTest {
 	}
 	
 	//@Test
-	public void addUserTest123() {
+	public void testOfaddUserTest() {
 		User user = new User();
 		user.setUserId("dk1dk");
 		user.setPassword("dkdk");
@@ -65,7 +65,7 @@ class UserMapperTest {
 	}
 	
 	//@Test
-	public void updateUsetTest123123() {
+	public void testOfupdateUsetTes() {
 		User user = userMapper.getUser("test01");
 		
 		user.setPassword("1111");
@@ -79,10 +79,15 @@ class UserMapperTest {
 	}
 	
 	@Test
-	public void deleteUserTest1111() {
-		User user = userMapper.getUser("dkdk");
+	public void testOfdeleteUserTest() {
+		User user = userMapper.getUser("dk1dk");
+		user.setUserByeStatus(true);
+		
+		
 		
 		userMapper.deleteUser(user);
 	}
+	
+	
 
 }
