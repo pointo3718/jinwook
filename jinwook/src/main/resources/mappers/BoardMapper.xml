@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jinwook.home.mapper.BoardMapper">
+
+	<sql id="boardColumns">
+	board_no
+	,user_id
+	,board_title
+	,board_content
+	,board_hits
+	,board_code
+	,write_date
+	,board_img1
+	,board_img2
+	,board_img3
+	,board_inq_status	
+	</sql>
+	
+	<!-- Board insert -->
+	<insert id="addBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="boardNo">
+		INSERT INTO board (
+			<include refid="boardColumns" />
+		) VALUES (
+			  #{boardNo:INTEGER}
+			, #{user.userId:VARCHAR}
+			, #{boardTitle:VARCHAR}
+			, #{boardContent:VARCHAR}
+			, #{boardHits:INTEGER}
+			, #{boardCode}
+			, SYSDATE()
+			, #{boardImg1:VARCHAR}
+			, #{boardImg2:VARCHAR}
+			, #{boardImg3:VARCHAR}
+			, #{boardInqStatus}
+		)
+	</insert>
+
+	<!-- Board update -->
+	<update id="updateBoard" parameterType="Board">
+		UPDATE board
+		SET
+			  board_title = #{boardTitle:VARCHAR}
+			, board_content = #{boardContent:VARCHAR}
+			, board_code = #{boardCode}
+			, board_inq_status = #{boardInqStatus}
+		WHERE
+			board_no = #{boardNo}
+	</update>
+	
+	<!-- Board selectDetail -->
+	<select id="getBoard" parameterType="int" resultType="Board">
+		SELECT
+			<include refid="boardColumns" />
+		FROM
+			board
+		WHERE
+			board_no = #{boardNo}
+	</select>
+
+	<!-- ?Board selectList? -->
+	<select id="getBoardList" parameterType="Board" resultType="Board">
+		SELECT
+			<include refid="boardColumns" />
+		FROM
+			board
+		WHERE
+			board_no = #{boardNo}
+	</select>
+
+
+	<!--  Board delete -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE 
+		FROM board
+		WHERE
+			board_no = #{boardNo}
+	</delete>
+	
+	<!-- Recipe -->
+	<sql id="recipeColumns">
+	rcp_no
+	,user_id
+	,rcp_seq_no
+	,rcp_title
+	,rcp_content
+	,rcp_date
+	,rcp_ingredient
+	,rcp_thumb
+	,rcp_info
+	,rcp_hits
+	,comment_count	
+	</sql>
+	
+	<!-- Recipe insert -->
+	<insert id="addRecipe" parameterType="Recipe" useGeneratedKeys="true" keyProperty="rcpNo">
+		INSERT INTO recipe (
+			<include refid="recipeColumns" />
+		) VALUES (
+			  #{rcpNo:INTEGER}
+			, #{user.userId:VARCHAR}
+			, #{rcpSeqNo:INTEGER}
+			, #{rcpTitle:VARCHAR}
+			, #{rcpContent:VARCHAR}
+			, SYSDATE()
+			, #{rcpIngredient:VARCHAR}
+			, #{rcpThumb:VARCHAR}
+			, #{rcpInfo:VARCHAR}
+			, #{rcpHits:INTEGER}
+			, #{commentCount:INTEGER}
+		)
+	</insert>
+	
+	<!-- Recipe getRecipe -->
+	<select id="getRecipe" parameterType="int" resultType="Recipe">
+		SELECT
+			<include refid="recipeColumns" />
+		FROM
+			recipe
+		WHERE
+			rcp_no = #{rcpNo}
+	</select>
+
+	<!-- ?Recipe selectList? -->
+	<select id="getRecipeList" parameterType="Recipe" resultType="Recipe">
+		SELECT
+			<include refid="recipeColumns" />
+		FROM
+			recipe
+		WHERE
+			rcp_no = #{rcpNo}
+	</select>
+
+	<!-- Recipe update -->
+	<update id="updateRecipe" parameterType="Recipe">
+		UPDATE recipe
+		SET
+			, rcp_title = #{rcpTitle}
+			, rcp_content = #{rcpContent}
+			, rcp_ingredient = #{rcpIngredient}
+			, rcp_thumb = #{rcpThumb}
+			, rcp_info = #{rcpInfo}
+		WHERE
+			rcp_no = #{rcpNo}
+	</update>
+
+	<!--  Recipe delete -->
+	<delete id="deleteRecipe" parameterType="int">
+		DELETE 
+		FROM recipe
+		WHERE
+			rcp_no = #{rcpNo}
+	</delete>
+	
+	<!-- Comment -->
+	<!-- <sql id="commentColumns">
+	comment_no
+	,user_id
+	,rcp_no
+	,board_no
+	,comment_content
+	,comment_date
+	,recommend_count	
+	</sql> -->
+	
+	<!-- Comment insert -->
+	<!-- <insert id="addComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="commentNo">
+		INSERT INTO comment (
+			<include refid="commentColumns" />
+		) VALUES (
+			  #{commentNo:INTEGER}
+			, #{user.userId:VARCHAR}
+			, #{rcpNo:INTEGER}
+			, #{boardNo:INTEGER}
+			, #{commentContent:VARCHAR}
+			, SYSDATE()
+			, #{recommendCount:INTEGER}
+		)
+	</insert> -->
+
+	<!-- Comment update -->
+	<!-- <update id="updateComment" parameterType="Comment">
+		UPDATE board
+		SET
+			, comment_content = #{boardContent:VARCHAR}
+		WHERE
+			comment_no = #{commentNo}
+	</update> -->
+	
+	<!-- ?Comment selectList? -->
+	<!-- <select id="getCommmentList" parameterType="Commment" resultType="Commment">
+		SELECT
+			<include refid="boardColumns" />
+		FROM
+			board
+		WHERE
+			comment_no = #{commentNo}
+	</select> -->
+
+
+	<!--  Comment delete -->
+	<!-- <delete id="deleteCommment" parameterType="int">
+		DELETE 
+		FROM comment
+		WHERE
+			comment_no = #{commentNo}
+	</delete> -->
+	
+		<!-- JJim -->
+	<!-- <sql id="JJimColumns">
+	JJim_no
+	,user_id
+	,rcp_no
+	,board_no
+	,comment_content
+	,comment_date
+	,recommend_count	
+	</sql> -->
+	
+
+</mapper>

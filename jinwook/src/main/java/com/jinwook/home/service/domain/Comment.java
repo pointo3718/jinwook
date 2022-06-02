@@ -11,13 +11,13 @@ import lombok.ToString;
 @ToString
 public class Comment {
 
-	private int boardNo;
 	private int commentNo;
+//	private String userId;
+	private User userId;
 	private int rcpNo;
-	private String userId;
+	private int boardNo;
 	private String commentContent;
 	private Date commentDate;
-	private String commentWriter;
 	private int recommendCount;
 	
 	public Comment() {

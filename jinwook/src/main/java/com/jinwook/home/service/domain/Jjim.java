@@ -14,7 +14,7 @@ public class Jjim {
 	private int rcpNo;
 	private int boardNo;
 	private int storeNo;
-	private String jjim_status;
+	private String jjimStatus;
 	
 	public Jjim() {
 	}
