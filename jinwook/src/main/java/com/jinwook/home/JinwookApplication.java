@@ -2,13 +2,19 @@ package com.jinwook.home;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-public class JinwookApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(JinwookApplication.class, args);
-	}
-
+public class JinwookApplication extends SpringBootServletInitializer {
+ 
+    public static void main(String[] args) {
+        SpringApplication.run(JinwookApplication.class, args);
+    }
+    
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(JinwookApplication.class);
+    }
 }

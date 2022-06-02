@@ -1,15 +1,19 @@
 package com.jinwook.home;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.CollectionUtils;
 
 import com.jinwook.home.mapper.OrdersMapper;
+import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
+import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 
 @SpringBootTest
@@ -33,9 +37,12 @@ public class OrdersMapperTest {
 		coupon.setCouponType("0");
 		coupon.setCouponDc(30);
 		
+		Store store = new Store();
+		store.setStoreNo(10000);
+		
 		Orders orders = new Orders();
 		orders.setUser(user);
-		orders.setStoreNo(10000);
+		orders.setStore(store);
 		orders.setBuyerName("강진욱");
 		orders.setBuyerPhone("010-1234-9876");
 		orders.setPickupTime(LocalDateTime.now());
@@ -69,13 +76,67 @@ public class OrdersMapperTest {
 	     
 	}
 	
-	@Test
+	//@Test
 	public void testSelectListOrders() {
-		Orders orders = new Orders();
-		orders.getUser().getUserId();
-//		Map<String> map = orders
+		User user = new User();
+		user.setUserId("test01");
 		
-//		List<Object> list = (List<Object>)map.get("list")
+		Store store = new Store();
+		store.setStoreNo(10000);
+		store.setStoreName("진욱이네");
+		
+//		Product product = new Product();
+//		product.setStoreNo(10000);
+//		product.setProdName("감자");
+//		product.setProdImg("가암자");
+		
+//		Orders order = new Orders();
+//		order.setUser(user);
+		
+		int ordersTotalCount = ordersMapper.getOrdersTotalCount();
+		if(ordersTotalCount > 0) {
+			List<Orders> ordersList = ordersMapper.getOrdersList();
+			
+			if(CollectionUtils.isEmpty(ordersList) == false) { 
+				for(Orders orders : ordersList) {
+					orders.setUser(user);
+					orders.setStore(store);
+//					orders.setProduct(product);
+					System.out.println("=========================");
+					System.out.println(orders.getUser().getUserId());
+					System.out.println(orders.getOrderNo());
+					System.out.println(orders.getOrderStatus());
+					System.out.println(orders.getPickupTime());
+					System.out.println(orders.getOrderDate());
+					System.out.println(orders.getOrderPrice());
+					
+//					Product product = ordersMapper.get
+					System.out.println(orders.getProduct().getProdName());
+					System.out.println(orders.getProduct().getProdImg());
+					System.out.println("=========================");
+				}
+			}
+		}
+	}
+	
+	//@Test
+	public void testgetOrders() {
+		
+	}
+	
+	@Test
+	public void testaddOrdersCart() {
+		
+		Product product = new Product();
+		product.setProdNo(10003);
+		
+		Cart cart = new Cart();
+		cart.setUserId("test09");
+		cart.setProduct(product);
+		cart.setOrderNo(0);
+		cart.setProdCount(4);
+		cart.setStoreName("진욱이네");
+		cart.setCartStatus(0);
 	}
 	
 }
