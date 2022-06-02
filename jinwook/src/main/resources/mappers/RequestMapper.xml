@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinwook.home.mapper.RequestMapper">
+
+
+	<!-- 상점 등록 신청 -->
+	<insert id="addRequestAddStore" parameterType="Store">
+			INSERT INTO store 
+			VALUES (
+				  NULL
+				, #{userId}
+				, #{storeName}
+				, #{storeAddr}
+				, #{storeType}
+				, 0
+				, #{storePhone}
+				, #{storeIntro}
+				, SYSDATE()
+				, NULL
+				, NULL
+				, NULL
+				, #{bussinessCard}
+				, #{storeImage}
+				, #{accNo}
+				, #{bank}
+				, 0
+				, 0
+			)
+	</insert>
+
+
+	<!-- 상점 등록 수락 -->
+	<update id="updateRequestAddStore" parameterType="Store">
+		UPDATE store
+		SET
+			  store_status = true
+			
+		WHERE
+			store_no = #{storeNo}
+	</update>
+	
+	<!-- 상점 등록 확인을 위한 sql  -->
+	<select id="checkStoreStatus" parameterType="int" resultType="Store">
+		SELECT
+			store_no, store_name, store_status
+		FROM
+			store
+		WHERE
+			store_no = #{storeNo}
+	</select>
+	
+	
+<!-- 환급 신청 -->
+<!-- 환급 수락 (진욱페이 잔액 변경) -->
+
+<!-- 상점 삭제 신청 -->
+<!-- 상점 삭제 수락 -->
+
+
+
+</mapper>

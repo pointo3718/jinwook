@@ -11,16 +11,32 @@
 		, nick_name
 		, phone
 		, role
-		, grade	
+		, grade
+		, business_no
+		, blacklist_status
 		, blacklist_reg_date
 		, blacklist_end_date
 		, reg_date
 		, user_bye_status
 	</sql>
 	
+	<!-- <resultMap type="User" id="User">
+		<result column="USER_ID" property="userId" />
+		<result column="USER_NAME" property="userName" />
+		<result column="BUSINESS_NO" property="businessNo" />
+	</resultMap>
+
+	<resultMap type="Store" id="Store">
+		<result column="STORE_NO" property="storeNo" />
+		<result column="STORE_NAME" property="storeName" />
+		<result column="STORE_ADDR" property="storeAddr" />
+		<result column="STORE_PHONE" property="storePhone" />
+		<collection property="user" resultMap="User" />
+	</resultMap> -->
+	
 
 	<!-- 유저 상세 -->
-	<select id="getUserAdmin" parameterType="String" resultType="User">
+	<select id="getUserAdmin" parameterType="String" resultType="user">
 		SELECT
 			<include refid="usersColumns"/>
 		FROM
@@ -41,18 +57,6 @@
 	</select>
 	
 	
-	<!-- 상점 목록 -->
-	<select id="getStoreListAdmin" parameterType="Store" resultType="Store">
-		SELECT
-			 store_no, store_name, u.user_id, u.user_name, store_addr, phone, business_no
-		FROM
-			store s, users u
-		WHERE
-			s.user_id = u.user_id
-		ORDER BY store_no
-	</select>
-	
-	
 	<!-- 유저 목록 개수 -->
 	<select id="getUserTotalCount" parameterType="User" resultType="int">
 		SELECT
@@ -61,6 +65,16 @@
 			users
 		WHERE
 			user_bye_status = 0
+	</select>
+	
+	
+	<!-- 상점 목록 -->
+	<select id="getStoreListAdmin" parameterType="store" resultType="Store">
+		SELECT
+			 store_no, store_name, user_id, store_addr, store_phone
+		FROM
+			store s
+		ORDER BY store_no
 	</select>
 	
 	
@@ -98,16 +112,16 @@
 		SET
 			blacklist_status = true,
 			blacklist_reg_date = SYSDATE(),
-			<if test= "blacklistPeriod = '7days'">
+			<if test= 'blackPeriod == "7days"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +7 DAY)
 			</if>
-			<if test= "blacklistPeriod = '1month'">
+			<if test= 'blackPeriod == "1month"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +1 MONTH)
 			</if>
-			<if test= "blacklistPeriod = '6month'">
+			<if test= 'blackPeriod == "6month"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +6 MONTH)
 			</if>
-			<if test= "blacklistPeriod = '1year'">
+			<if test= 'blackPeriod == "1year"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +1 YEAR)
 			</if>
 		WHERE

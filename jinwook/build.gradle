@@ -2,11 +2,16 @@ plugins {
    id 'org.springframework.boot' version '2.7.0'
    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
    id 'java'
+   id 'war'
+   id 'application'  
 }
 
 group = 'com.jinwook.home'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+mainClassName="com.jinwook.home.JinwookApplication"
+
 
 configurations {
    compileOnly {
@@ -27,7 +32,7 @@ dependencies {
    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16' /* Log4JDBC */
    implementation 'com.google.code.gson:gson:2.8.5' /* Gson */
    implementation 'commons-io:commons-io:2.6' /* Apache Commons IO */
-   implementation 'commons-fileupload:commons-fileupload:1.3.3' /* Apache Commons File Upload */
+   implementation 'commo.,....ns-fileupload:commons-fileupload:1.3.3' /* Apache Commons File Upload */
    compileOnly 'org.projectlombok:lombok'
    developmentOnly 'org.springframework.boot:spring-boot-devtools'
    runtimeOnly 'mysql:mysql-connector-java'

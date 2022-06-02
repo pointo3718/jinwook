@@ -15,6 +15,7 @@ import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 
+
 @SpringBootTest
 public class AdminMapperTest {
 
@@ -23,8 +24,13 @@ public class AdminMapperTest {
 	
 	
 	///////////////// 유저 상세 //////////////////
+<<<<<<< HEAD
 	//@Test
 	public void testOfSelectDetail() {
+=======
+	@Test
+	public void testOfSelectUserDetail() {
+>>>>>>> refs/remotes/origin/master
 		User user = adminMapper.getUserAdmin("test01");
 		try {
 			//String boardJson = new ObjectMapper().writeValueAsString(board);
@@ -65,7 +71,7 @@ public class AdminMapperTest {
 	///////////////// 상점 목록 //////////////////
 	@Test
 	public void testSelectStoreList() {
-		int storeTotalCount = adminMapper.getStoreTotalCount();
+		int storeTotalCount = adminMapper.getStoreTotalCount(); // 목록 개수
 		if (storeTotalCount > 0) {
 			List<Store> storeList = adminMapper.getStoreListAdmin();
 			
@@ -75,17 +81,19 @@ public class AdminMapperTest {
 					System.out.println("=========================");
 					System.out.println(store.getStoreNo());
 					System.out.println(store.getStoreName());
-					System.out.println(store.getUserId());
 					System.out.println(store.getStoreAddr());
-					/////////////////////////////////////////
-					//////// userVO를 통한 값 추출 필요//////////
-					///////userName, phone, businessNo//////
+					System.out.println(store.getUserId());
+					
+					User user = adminMapper.getUserAdmin(store.getUserId()); 
+					System.out.println(user.getUserName());
+					System.out.println(user.getBusinessNo());
 					System.out.println("=========================");
 				}
 			}
 		}
 	}
 
+	
 	///////////////// 신고 목록 //////////////////
 	@Test
 	public void testSelectComplainList() {

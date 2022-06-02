@@ -68,7 +68,35 @@ public class AdminServiceImpl implements AdminService{
 		return complainList;
 	}
 	
+
+	///////////////// 블랙리스트 목록 //////////////////
+	@Override
+	public List<User> getBlacklistAdmin() {
+		List<User> blacklist = Collections.emptyList();
+
+		int blacklistTotalCount = adminMapper.getBlacklistTotalCount();
+
+		if (blacklistTotalCount > 0) {
+			blacklist = adminMapper.getBlacklistAdmin();
+		}
+
+		return blacklist;
+	}
 	
+	
+	///////////////// 블랙리스트 등록 //////////////////	
+	@Override
+	public boolean updateBlacklist(User user) {
+		int queryResult = 0;
+
+		user = adminMapper.getUserAdmin("test01");
+
+		if (user != null && user.isBlacklistStatus() == true) {
+			queryResult = adminMapper.updateBlacklist(user);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
 	
 }
 
