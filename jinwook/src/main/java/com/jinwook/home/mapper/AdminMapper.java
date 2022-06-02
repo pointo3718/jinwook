@@ -12,26 +12,26 @@ import com.jinwook.home.service.domain.User;
 @Mapper
 public interface AdminMapper {
 
-	public User getUserAdmin(String userId);  		// À¯Àú »ó¼¼Á¤º¸
+	public User getUserAdmin(String userId);  		// ìœ ì € ìƒì„¸ì •ë³´
 	
-	public List<User> getUserListAdmin();			// À¯Àú ¸ñ·Ï
+	public List<User> getUserListAdmin();			// ìœ ì € ëª©ë¡
 	
-	public List<Store> getStoreListAdmin();			// »óÁ¡ ¸ñ·Ï
+	public List<Store> getStoreListAdmin();			// ìƒì  ëª©ë¡
 	
-	public List<Complain> getComplainListAdmin();	// ½Å°í ¸ñ·Ï
+	public List<Complain> getComplainListAdmin();	// ì‹ ê³  ëª©ë¡
 	
-	public List<User> getBlacklistAdmin();			// ºí·¢¸®½ºÆ® ¸ñ·Ï
+	public List<User> getBlacklistAdmin();			// ë¸”ë™ë¦¬ìŠ¤íŠ¸ ëª©ë¡
 
-	public int updateBlacklist(User user);	// ºí·¢¸®½ºÆ® µî·Ï
+	public int updateBlacklist(User user);	// ë¸”ë™ë¦¬ìŠ¤íŠ¸ ë“±ë¡
 	
 	
-	public int getUserTotalCount();				// À¯Àú ¸ñ·Ï °³¼ö
+	public int getUserTotalCount();				// ìœ ì € ëª©ë¡ ê°œìˆ˜
 	
-	public int getStoreTotalCount();			// »óÁ¡ ¸ñ·Ï °³¼ö
+	public int getStoreTotalCount();			// ìƒì  ëª©ë¡ ê°œìˆ˜
 	
-	public int getComplainTotalCount();			// ½Å°í ¸ñ·Ï °³¼ö
+	public int getComplainTotalCount();			// ì‹ ê³  ëª©ë¡ ê°œìˆ˜
 	
-	public int getBlacklistTotalCount();		// ºí·¢¸®½ºÆ® ¸ñ·Ï °³¼ö
+	public int getBlacklistTotalCount();		// ë¸”ë™ë¦¬ìŠ¤íŠ¸ ëª©ë¡ ê°œìˆ˜
 
 
 }

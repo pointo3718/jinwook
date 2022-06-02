@@ -8,12 +8,12 @@ import com.jinwook.home.service.domain.User;
 
 public interface AdminService {
 
-		public User getUserAdmin(String userId); // À¯Àú »ó¼¼
+		public User getUserAdmin(String userId); // ìœ ì € ìƒì„¸
 
-		public List<User> getUserListAdmin();	// À¯Àú ¸ñ·Ï
+		public List<User> getUserListAdmin();	// ìœ ì € ëª©ë¡
 		
-		public List<Store> getStoreListAdmin();	// »óÁ¡ ¸ñ·Ï
+		public List<Store> getStoreListAdmin();	// ìƒì  ëª©ë¡
 		
-		public List<Complain> getComplainListAdmin();	// »óÁ¡ ¸ñ·Ï
+		public List<Complain> getComplainListAdmin();	// ìƒì  ëª©ë¡
 
 }

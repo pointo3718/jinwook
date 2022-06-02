@@ -9,15 +9,15 @@ import com.jinwook.home.service.domain.Orders;
 @Mapper
 public interface OrdersMapper {
 
-	public int addOrders(Orders orders); //ÁÖ¹®
+	public int addOrders(Orders orders); //ì£¼ë¬¸
 	
-	public List<Orders> selectOrdersList(); //ÁÖ¹®³»¿ª
+	public List<Orders> selectOrdersList(); //ì£¼ë¬¸ë‚´ì—­
 	
-	public Orders getOrders(int orderNo);	//ÁÖ¹®³»¿ª»ó¼¼
+	public Orders getOrders(int orderNo);	//ì£¼ë¬¸ë‚´ì—­ìƒì„¸
 	
-	public int deleteOrders(Orders orders);	//ÁÖ¹®³»¿ª»èÁ¦
+	public int deleteOrders(Orders orders);	//ì£¼ë¬¸ë‚´ì—­ì‚­ì œ
 	
-	public int updateOrders(Orders orders);	//ÁÖ¹®³»¿ª(¼ö¶ô,°ÅÀı,ÇÈ¾÷¿Ï·á)
+	public int updateOrders(Orders orders);	//ì£¼ë¬¸ë‚´ì—­(ìˆ˜ë½,ê±°ì ˆ,í”½ì—…ì™„ë£Œ)
 	
 	
 	

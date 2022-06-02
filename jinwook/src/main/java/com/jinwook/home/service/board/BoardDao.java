@@ -7,39 +7,39 @@ import com.jinwook.home.service.domain.Recipe;
 
 public interface BoardDao {
 
-		// °Ô½ÃÆÇ µî·Ï(1:1¹®ÀÇ, °øÁö»çÇ×, »óÁ¡ÈÄ±â)
+		// ê²Œì‹œíŒ ë“±ë¡(1:1ë¬¸ì˜, ê³µì§€ì‚¬í•­, ìƒì í›„ê¸°)
 		public int addBoard(Board board) throws Exception;
 		
-		// °Ô½ÃÆÇ ¼öÁ¤(1:1¹®ÀÇ, °øÁö»çÇ×)
+		// ê²Œì‹œíŒ ìˆ˜ì •(1:1ë¬¸ì˜, ê³µì§€ì‚¬í•­)
 		public int updateBoard(Board board) throws Exception;
 		
-		// °Ô½ÃÆÇ »èÁ¦(1:1¹®ÀÇ, °øÁö»çÇ×)
+		// ê²Œì‹œíŒ ì‚­ì œ(1:1ë¬¸ì˜, ê³µì§€ì‚¬í•­)
 		public int deleteBoard(int boardNo) throws Exception;
 		
-		//°Ô½ÃÆÇ »ó¼¼ Á¶È¸
+		//ê²Œì‹œíŒ ìƒì„¸ ì¡°íšŒ
 		public Recipe getBoard(int boardNo) throws Exception;
 				
-		//°Ô½ÃÆÇ ¸ñ·Ï Á¶È¸ //ÀÎÀÚ·Î ¹«¾ùÀÌ µé¾î°¡¾ßÇÏ³ª?
+		//ê²Œì‹œíŒ ëª©ë¡ ì¡°íšŒ //ì¸ìë¡œ ë¬´ì—‡ì´ ë“¤ì–´ê°€ì•¼í•˜ë‚˜?
 		public List<Board> getBoardList(int boardNo) throws Exception;
 	
-		//·¹½ÃÇÇ µî·Ï
+		//ë ˆì‹œí”¼ ë“±ë¡
 		public int addRecipe(Recipe rcp) throws Exception;
 
-		//·¹½ÃÇÇ ¼öÁ¤
+		//ë ˆì‹œí”¼ ìˆ˜ì •
 		public int updateRecipe(Recipe rcp) throws Exception;
 
-		//·¹½ÃÇÇ »èÁ¦
+		//ë ˆì‹œí”¼ ì‚­ì œ
 		public int deleteRecipe(int rcpNo) throws Exception;
 		
-		//·¹½ÃÇÇ »ó¼¼ Á¶È¸
+		//ë ˆì‹œí”¼ ìƒì„¸ ì¡°íšŒ
 		public Recipe getRecipe(int rcpNo) throws Exception;
 		
-		//·¹½ÃÇÇ ¸ñ·Ï Á¶È¸ //ÀÎÀÚ·Î ¹«¾ùÀÌ µé¾î°¡¾ßÇÏ³ª?
+		//ë ˆì‹œí”¼ ëª©ë¡ ì¡°íšŒ //ì¸ìë¡œ ë¬´ì—‡ì´ ë“¤ì–´ê°€ì•¼í•˜ë‚˜?
 		public List<Recipe> getRecipeList(int rcpNo) throws Exception;
 		
-		//´ñ±Û, ´äº¯ µî·Ï
+		//ëŒ“ê¸€, ë‹µë³€ ë“±ë¡
 		public void addComment(Board board) throws Exception;
 		
-		//´ñ±Û ¼öÁ¤
+		//ëŒ“ê¸€ ìˆ˜ì •
 		public void updateComment(Board board) throws Exception;
 }
