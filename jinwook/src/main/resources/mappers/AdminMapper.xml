@@ -98,16 +98,16 @@
 		SET
 			blacklist_status = true,
 			blacklist_reg_date = SYSDATE(),
-			<if test= "blacklistPeriod = '7days'">
+			<if test= 'blackPeriod == "7days"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +7 DAY)
 			</if>
-			<if test= "blacklistPeriod = '1month'">
+			<if test= 'blackPeriod == "1month"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +1 MONTH)
 			</if>
-			<if test= "blacklistPeriod = '6month'">
+			<if test= 'blackPeriod == "6month"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +6 MONTH)
 			</if>
-			<if test= "blacklistPeriod = '1year'">
+			<if test= 'blackPeriod == "1year"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +1 YEAR)
 			</if>
 		WHERE

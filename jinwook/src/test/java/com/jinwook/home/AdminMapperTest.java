@@ -15,6 +15,7 @@ import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 
+
 @SpringBootTest
 public class AdminMapperTest {
 
