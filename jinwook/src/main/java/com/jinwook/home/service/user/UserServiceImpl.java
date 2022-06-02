@@ -52,9 +52,36 @@ public class UserServiceImpl implements UserService{
 		userMapper.deleteUser(user);
 		
 	}
-	public boolean checkDuplication(String userId) {
+	public boolean checkId(String userId) {
 		boolean result=true;
 		User user=userMapper.getUser(userId);
+		if(user != null) {
+			result=false;
+		}
+		return result;
+	}
+	
+	public boolean checkPassword(String password) {
+		boolean result=true;
+		User user=userMapper.getUser(password);
+		if(user != null) {
+			result=false;
+		}
+		return result;
+	}
+	
+	public boolean checkNickName(String nickName) {
+		boolean result=true;
+		User user=userMapper.getUser(nickName);
+		if(user != null) {
+			result=false;
+		}
+		return result;
+	}
+	
+	public boolean checkEmail(String email) {
+		boolean result=true;
+		User user=userMapper.getUser(email);
 		if(user != null) {
 			result=false;
 		}

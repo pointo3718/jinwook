@@ -13,6 +13,14 @@ public interface UserService {
 		
 		public void deleteUser(User user);
 		
-		public boolean checkDuplication(String userId);
+		public boolean checkId(String userId);
+		
+		public boolean checkPassword(String password);
+		
+		public boolean checkNickName(String nickName);
+		
+		public boolean checkEmail(String email);
+		
+		
 	
 }
