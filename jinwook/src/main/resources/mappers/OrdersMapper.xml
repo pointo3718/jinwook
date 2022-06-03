@@ -6,7 +6,7 @@
 	<insert id="addOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderNo">
 		INSERT
 		INTO orders(user_id,store_no,buyer_name,buyer_phone,pickup_time,order_req,order_price,prod_count,order_date,order_status)
-		VALUES(#{user.userId:VARCHAR} , #{storeNo:INTEGER} , #{buyerName:VARCHAR} , #{buyerPhone:VARCHAR} , #{pickupTime:TIME} , #{orderReq:VARCHAR}
+		VALUES(#{user.userId:VARCHAR} , #{store.storeNo:INTEGER} , #{buyerName:VARCHAR} , #{buyerPhone:VARCHAR} , #{pickupTime:TIME} , #{orderReq:VARCHAR}
 			, #{orderPrice:INTEGER} , #{prodCount} , SYSDATE() , #{orderStatus} )
 	</insert>
 	
@@ -24,12 +24,53 @@
 		WHERE
 			 order_no = #{orderNo}
 	</delete>
-	
-	<select id="">
-	
+		
+	<select id="getOrdersList" parameterType="Orders" resultType="Orders">
+		SELECT
+			user_id,order_no,order_price,order_status,pickup_time,order_date
+		FROM
+			orders
+		WHERE
+			user_id = "test01";
 	</select>
 	
+	<select id="getOrdersTotalCount" parameterType="Orders" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			orders
+	</select>
 	
+	<insert id="addOrdersCart" useGeneratedKeys="true" keyProperty="cartNo">
+		INSERT
+		INTO cart(user_id,prod_no,prod_count,store_name,cart_status)
+		VALUES(#{userId},#{product.prodNo},#{prodCount:VARCHAR},#{storeName},#{cartStatus})
+	</insert>
+	
+	<update id="updateOrdersCart">
+		UPDATE cart
+		<set>
+			prod_count = #{prodCount}
+		</set>
+		WHERE user_id = #{userId}
+		AND cart_no	= #{cartNo}
+	</update>
+	
+	<update id="deleteOrdersCart">
+		UPDATE cart
+		<set>
+			cart_status = #{cartStatus}
+		</set>
+		WHERE user_id = #{userId}
+		AND order_no = #{orderNo}
+	</update>
+	
+	<select id="getOrdersCartList">
+		SELECT store_name ,prod_img ,prod_name ,prod_info ,prod_count ,price  ,order_price
+		FROM
+		WHERE
+	</select>
+
 </mapper>
 	
 	

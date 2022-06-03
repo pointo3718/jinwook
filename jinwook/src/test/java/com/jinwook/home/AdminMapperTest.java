@@ -15,6 +15,7 @@ import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 
+
 @SpringBootTest
 public class AdminMapperTest {
 
@@ -22,9 +23,10 @@ public class AdminMapperTest {
 	private AdminMapper adminMapper;
 	
 	
-	///////////////// À¯Àú »ó¼¼ //////////////////
+	///////////////// ìœ ì € ìƒì„¸ //////////////////
+
 	@Test
-	public void testOfSelectDetail() {
+	public void testOfSelectUserDetail() {
 		User user = adminMapper.getUserAdmin("test01");
 		try {
 			//String boardJson = new ObjectMapper().writeValueAsString(board);
@@ -40,14 +42,14 @@ public class AdminMapperTest {
 	}
 	
 	
-	///////////////// À¯Àú ¸ñ·Ï //////////////////
+	///////////////// ìœ ì € ëª©ë¡ //////////////////
 	@Test
 	public void testSelectUserList() {
 		int userTotalCount = adminMapper.getUserTotalCount();
 		if (userTotalCount > 0) {
 			List<User> userList = adminMapper.getUserListAdmin();
 			
-			// ¸®½ºÆ®°¡ ºñ¾îÀÖ´ÂÁö Ã¼Å©
+			// ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ìˆëŠ”ì§€ ì²´í¬
 			if (CollectionUtils.isEmpty(userList) == false) { 		
 				for (User user : userList) {
 					System.out.println("=========================");
@@ -61,39 +63,41 @@ public class AdminMapperTest {
 		}
 	}
 	
-	
-	///////////////// »óÁ¡ ¸ñ·Ï //////////////////
+
+	///////////////// ìƒì  ëª©ë¡ //////////////////
 	@Test
 	public void testSelectStoreList() {
-		int storeTotalCount = adminMapper.getStoreTotalCount();
+		int storeTotalCount = adminMapper.getStoreTotalCount(); // ëª©ë¡ ê°œìˆ˜
 		if (storeTotalCount > 0) {
 			List<Store> storeList = adminMapper.getStoreListAdmin();
 			
-			// ¸®½ºÆ®°¡ ºñ¾îÀÖ´ÂÁö Ã¼Å©
+			// ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ìˆëŠ”ì§€ ì²´í¬
 			if (CollectionUtils.isEmpty(storeList) == false) { 	
 				for (Store store : storeList) {
 					System.out.println("=========================");
 					System.out.println(store.getStoreNo());
 					System.out.println(store.getStoreName());
-					System.out.println(store.getUserId());
 					System.out.println(store.getStoreAddr());
-					/////////////////////////////////////////
-					//////// userVO¸¦ ÅëÇÑ °ª ÃßÃâ ÇÊ¿ä//////////
-					///////userName, phone, businessNo//////
+					System.out.println(store.getUserId());
+					
+					User user = adminMapper.getUserAdmin(store.getUserId()); 
+					System.out.println(user.getUserName());
+					System.out.println(user.getBusinessNo());
 					System.out.println("=========================");
 				}
 			}
 		}
 	}
 
-	///////////////// ½Å°í ¸ñ·Ï //////////////////
+	
+	///////////////// ì‹ ê³  ëª©ë¡ //////////////////
 	@Test
 	public void testSelectComplainList() {
 		int complainTotalCount = adminMapper.getComplainTotalCount();
 		if (complainTotalCount > 0) {
 			List<Complain> complainList = adminMapper.getComplainListAdmin();
 			
-			// ¸®½ºÆ®°¡ ºñ¾îÀÖ´ÂÁö Ã¼Å©
+			// ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ìˆëŠ”ì§€ ì²´í¬
 			if (CollectionUtils.isEmpty(complainList) == false) { 		
 				for (Complain complain : complainList) {
 					System.out.println("=========================");
@@ -111,14 +115,14 @@ public class AdminMapperTest {
 	}
 	
 	
-	///////////////// ºí·¢¸®½ºÆ® ¸ñ·Ï //////////////////
+	///////////////// ë¸”ë™ë¦¬ìŠ¤íŠ¸ ëª©ë¡ //////////////////
 	@Test
 	public void testSelectBliacklist() {
 		int blacklistTotalCount = adminMapper.getBlacklistTotalCount();
 		if (blacklistTotalCount > 0) {
 			List<User> blacklist = adminMapper.getBlacklistAdmin();
 	
-			// ¸®½ºÆ®°¡ ºñ¾îÀÖ´ÂÁö Ã¼Å©
+			// ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ìˆëŠ”ì§€ ì²´í¬
 			if (CollectionUtils.isEmpty(blacklist) == false) { 		
 				for (User user : blacklist) {
 				System.out.println("=========================");
@@ -138,7 +142,7 @@ public class AdminMapperTest {
 	}
 	
 	
-	///////////////// ºí·¢¸®½ºÆ® µî·Ï //////////////////
+	///////////////// ë¸”ë™ë¦¬ìŠ¤íŠ¸ ë“±ë¡ //////////////////
 	@Test
 	public void testOfUpdateBlacklist() {
 		User user = new User();

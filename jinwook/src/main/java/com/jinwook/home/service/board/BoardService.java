@@ -3,67 +3,52 @@ package com.jinwook.home.service.board;
 import java.util.List;
 
 import com.jinwook.home.service.domain.Board;
+import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
 
 public interface BoardService {
-	//레시피 등록
-	public void addRecipe(Recipe rcp);
-
-	//레시피 수정
-	public void updateRecipe(Recipe rcp);
-
-	//레시피 삭제
+	
+	public int addBoard(Board board);
+	
+	public int updateBoard(Board board);
+	
+	public int deleteBoard(int boardNo);
+	
+	public Board getBoard(int boardNo);
+	
+	public List<Board> getBoardList();
+	
+	public List<Board> getRankList();
+	
+	public int addReview(Orders orders);
+	
+	public int deleteReview(int ordersNo);
+	
+	public List<Orders> getReviewList();
+	
+	public int addRecipe(Recipe rcp);
+	
+	public int updateRecipe(Recipe rcp);
+	
 	public int deleteRecipe(int rcpNo);
 	
-	//레시피 상세 조회
 	public Recipe getRecipe(int rcpNo);
 	
-	//레시피 목록 조회
-	public List<Recipe> getRecipeList(int rcpNo);
+	public List<Recipe> getRecipeList();
 	
-	//상점 후기 등록
-	public void addReview(Recipe rcp);
+	public int addComment(Comment comment);
 	
-	//상점 후기 목록 조회
-	public List<Board> getListReview(int boardNo);
+	public int updateComment(Comment comment);
 	
-	//상점, 레시피, 댓글 랭킹 목록 조회
-	public List<Board> getRankList(int boardNo);
+	public int deleteComment(int commentNo);
 	
-	//1:1문의 등록
-	public void addInquiry(Board board);
+	public int addJjim(int jjimNo);
 	
-	//1:1문의 수정
-	public void updateInquiry(Board board);
+	public int deleteJjim(int jjimNo);
 	
-	//1:1문의 삭제
-	public int deleteInquiry(int boardNo);
+	public int addRecommend(int recommendNo);
 	
-	//1:1문의 목록 조회
-	public List<Board> getInquiryList(int boardNo);
-	
-	//1:1문의 상세 조회
-	public Board getInquiry(int rcpNo);
-	
-	//공지사항 등록
-	public void addAnouncement(Board board);
-	
-	//공지사항 수정
-	public void updateAnouncement(Board board);
-	
-	//공지사항 삭제
-	public int deleteAnouncement(int boardNo);
-	
-	//공지사항 목록 조회
-	public List<Board> getAnnouncementList(int boardNo);
-	
-	//공지사항 상세 조회
-	public Board getAnnouncement(int rcpNo);
-	
-	//댓글, 답변 등록
-	public void addComment(Board board);
-	
-	//댓글 수정
-	public void updateComment(Board board);
+	public int deleteRecommend(int recommendNo);
 	
 }

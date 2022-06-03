@@ -5,46 +5,61 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.jinwook.home.service.domain.Board;
+import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
 
 @Mapper
 public interface BoardMapper {
-	//게시글 등록
+
 	public int addBoard(Board board);
-
-	//게시글 수정
+	
 	public int updateBoard(Board board);
-
-	//게시글 삭제
+	
 	public int deleteBoard(int boardNo);
 	
-	//게시글 상세 조회
 	public Board getBoard(int boardNo);
-
-	//게시글 목록 조회???
-	public List<Board> getBoardList(Board board);
-
-	// 레시피 등록
+	
+	public List<Board> getBoardList();
+	
+	public List<Board> getRankList();
+	
+	public int addReview(Orders orders);
+	
+	public int deleteReview(int ordersNo);
+	
+	public List<Orders> getReviewList();
+	
 	public int addRecipe(Recipe rcp);
-
-	// 레시피 수정
+	
 	public int updateRecipe(Recipe rcp);
-
-	// 레시피 삭제
+	
 	public int deleteRecipe(int rcpNo);
-
-	// 레시피 상세 조회
+	
 	public Recipe getRecipe(int rcpNo);
+	
+	public List<Recipe> getRecipeList();
+	
+	public int addComment(Comment comment);
+	
+	public int updateComment(Comment comment);
+	
+	public int deleteComment(int commentNo);
+	
+	public int addJjim(int jjimNo);
+	
+	public int deleteJjim(int jjimNo);
+	
+	public int addRecommend(int recoomendNo);
+	
+	public int deleteRecommend(int recoomendNo);
 
-	// 레시피 목록 조회???
-	public List<Recipe> getRecipeList(int rcpNo);
+	public int getBoardTotalCount();
+
+	public int getRecipeTotalCount();
 	
-	//댓글, 답변 등록
-	public void addComment(Board board);
+	public int getReviewTotalCount();
 	
-	//댓글 수정
-	public void updateComment(Board board);
+	public int getRankTotalCount();
 	
-	// 게시글 페이징 처리
-	public int selectBoardTotalCount(Board board);
 }

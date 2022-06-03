@@ -4,20 +4,35 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Orders;
 
 @Mapper
 public interface OrdersMapper {
 
-	public int addOrders(Orders orders); //ÁÖ¹®
+	public int addOrders(Orders orders); 	//ì£¼ë¬¸
 	
-	public List<Orders> selectOrdersList(); //ÁÖ¹®³»¿ª
+	public List<Orders> getOrdersList(); 	//ì£¼ë¬¸ë‚´ì—­
 	
-	public Orders getOrders(int orderNo);	//ÁÖ¹®³»¿ª»ó¼¼
+	public Orders getOrders(int orderNo);	//ì£¼ë¬¸ë‚´ì—­ìƒì„¸
 	
-	public int deleteOrders(Orders orders);	//ÁÖ¹®³»¿ª»èÁ¦
+	public int deleteOrders(Orders orders);	//ì£¼ë¬¸ë‚´ì—­ì‚­ì œ
 	
-	public int updateOrders(Orders orders);	//ÁÖ¹®³»¿ª(¼ö¶ô,°ÅÀı,ÇÈ¾÷¿Ï·á)
+	public int updateOrders(Orders orders);	//ì£¼ë¬¸ë‚´ì—­(ìˆ˜ë½,ê±°ì ˆ,í”½ì—…ì™„ë£Œ)
+	
+	public int getOrdersTotalCount();		// ì£¼ë¬¸ ëª©ë¡ ê°œìˆ˜
+	
+	public int addOrdersCart(Cart cart);	// ì¥ë°”êµ¬ë‹ˆ ë‹´ê¸°
+		
+	public int updateOrdersCart(Cart cart);	// ì¥ë°”êµ¬ë‹ˆ ìˆ˜ì •
+	
+	public int deleteOrdersCart(Cart cart);	// ì¥ë°”êµ¬ë‹ˆ ì‚­ì œ
+	
+	public List<Cart> getOrdersCartList();	// ì¥ë°”êµ¬ë‹ˆ ëª©ë¡
+	
+	
+	
+	
 	
 	
 	
