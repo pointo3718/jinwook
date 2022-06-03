@@ -85,9 +85,4 @@ public class PaginationInfo {
 		/* 다음 페이지 존재 여부 */
 		hasNextPage = (lastPage * criteria.getRecordsPerPage()) < totalRecordCount;
 	}
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> refs/heads/master

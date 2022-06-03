@@ -91,14 +91,14 @@ public class RequestMapperTest {
 	
 	
 	//////////// 요청 상태 수락으로 변경 /////////////
-	@Test
-	public void testOfUpdateRequestStatus() {	
-		Request request = new Request();
-		request.setReqCode("1");
-		request.setUserId("test12");
-		int result = requestMapper.updateRequestStatusToAccept(request);
-		System.out.println("결과는 " + result + "입니다.");
-	}
+//	@Test
+//	public void testOfUpdateRequestStatus() {	
+//		Request request = new Request();
+//		request.setReqCode("1");
+//		request.setUserId("test12");
+//		int result = requestMapper.updateRequestStatusToAccept(request);
+//		System.out.println("결과는 " + result + "입니다.");
+//	}
 	
 	
 	///////////////// 환급 신청 //////////////////
