@@ -16,14 +16,6 @@ public interface StoreMapper {
 	
 	public int updateStore(Store store);
 	
-	public List<Product> getStoreProductList(int StoreNo);
-	
-	public List<Coupon> getCouponList(String userId);
-	
-	public Store getStore(int storeNo);
-	
-	public Orders getStoreReviewStar(int storeNo);
-	
 	public int addStoreProduct(Product Product);
 
 	public int updateStoreProduct(Product product);
@@ -34,6 +26,18 @@ public interface StoreMapper {
 	
 	public int isOpen(Store store);
 	
+	public int addOrderCoupon(Coupon coupon);
+	
+	public List<Coupon> getCouponList(String userId);
+	
+	public List<Store> getStore(int storeNo);
+	
+//	public Orders getStoreReviewStar(int storeNo);
+	
+//	public List<Product> getStoreProductList(int StoreNo);
+	
+	public List<Store> getStoreWallet(int storeNo);
+	
 	public int getStoreTotalCount();
 	
 	public int getCouponTotalCount();
@@ -41,11 +45,5 @@ public interface StoreMapper {
 	public int getProductTotalCount();
 	
 	public int getRequestTotalCount();
-	
-	public int addOrderCoupon(Coupon coupon);
-	
-	public Store getStoreWallet(String userId);
-	
-	public List<Request> getStoreWalletRefund(String userId);
 
 }

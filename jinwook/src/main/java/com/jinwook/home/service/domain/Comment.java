@@ -11,16 +11,22 @@ import lombok.ToString;
 @ToString
 public class Comment {
 
-	private int commentNo;//댓글번호
+//	private int commentNo;//댓글번호
 //	private String userId;
-	private User user;
-	private int rcpNo;
-	private int boardNo;
-	private String commentContent;//댓글 내용
-	private LocalDate commentDate;//등록날짜
-	private int recommendCount; //추천수
+//	private User user;
+//	private int rcpNo;
+//	private int boardNo;
+//	private String commentContent;//댓글 내용
+//	private LocalDate commentDate;//등록날짜
+//	private int recommendCount; //추천수
 	
-	public Comment() {
-	}
+	private int commentNo;
+	private User user;
+	private int boardNo;
+	private int rcpNo;
+	private String commentContent;
+	private String commentWriter;
+	private LocalDate commentDate;
+	
 	
 }

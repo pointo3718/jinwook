@@ -19,6 +19,9 @@ public interface UserMapper {
 	//DELETE
 	public void deleteUser(User user) throws Exception;
 	
+	//CHECK DUPLICATION ID
+	public int checkId(String userId) throws Exception;
+	
 	//CHECK DUPLICATION NICKNAME
 	public User checkNickName(String nickName) throws Exception;
 

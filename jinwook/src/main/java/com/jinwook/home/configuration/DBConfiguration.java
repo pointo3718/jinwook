@@ -39,7 +39,7 @@ public class DBConfiguration {
       factoryBean.setDataSource(dataSource());
       factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/**/*Mapper.xml"));
       factoryBean.setConfigLocation(applicationContext.getResource("classpath:mappers/mybatis-config.xml"));
-      //factoryBean.setTypeAliasesPackage("com.jinwook.home.service.domain");
+      factoryBean.setTypeAliasesPackage("com.jinwook.*");
       //factoryBean.setConfiguration(mybatisConfg());
       return factoryBean.getObject();
    }

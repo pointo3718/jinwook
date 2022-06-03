@@ -15,14 +15,15 @@ import com.jinwook.home.service.user.UserServiceImpl;
 
 
 @SpringBootTest
-class UserMapperTest {
+class UserServiceTest {
 
 	@Autowired
-	private UserMapper userMapper;
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 
-	@Test
+	//@Test
 	public void getUserTest() throws Exception{
-		User user = userMapper.getUser("test02");
+		User user = userService.getUser("test02");
 		System.out.println("-------------------------------------------");
 		System.out.println(user.toString());
 		System.out.println("-------------------------------------------");
@@ -58,13 +59,13 @@ class UserMapperTest {
 		user.setNickName("아1아1아1");
 		user.setBlacklistStatus(false);
 		
-		userMapper.addUser(user);
+		userService.addUser(user);
 		
 	}
 	
 	//@Test
 	public void updateUserTest() throws Exception {
-		User user = userMapper.getUser("test01");
+		User user = userService.getUser("test01");
 		
 		user.setPassword("1111");
 		user.setRpId("nini");
@@ -72,22 +73,20 @@ class UserMapperTest {
 		user.setNickName("nini2ni");
 		user.setEmail("qq@qq");
 		
-		userMapper.updateUser(user);
+		userService.updateUser(user);
 		
 	}
 	
 	//@Test
 	public void deleteUserTest() throws Exception {
-		User user = userMapper.getUser("test02");
+		User user = userService.getUser("test02");
 		user.setUserByeStatus(true);
 		
-		userMapper.deleteUser(user);
+		userService.deleteUser(user);
 	}
 	
-	//@Test
+	@Test
 	public void checkIdTest() throws Exception{
-		UserServiceImpl userServiceImpl=null;
-		UserService userService = null;
 		System.out.println("----------------------------------");
 		System.out.println(userService.checkId("dk1dk"));
 		System.out.println("----------------------------------");
@@ -97,7 +96,7 @@ class UserMapperTest {
 	//@Test
 	public void checkNickNameTest() throws Exception{
 		System.out.println("----------------------------------");
-		System.out.println(userMapper.checkNickName("ㅁ"));
+		System.out.println(userService.checkNickName("ㅁ"));
 		System.out.println("----------------------------------");
 //	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
 	}

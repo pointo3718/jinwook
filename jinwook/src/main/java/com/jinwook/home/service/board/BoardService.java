@@ -21,15 +21,15 @@ public interface BoardService {
 	
 	public Board getBoard(int boardNo);
 	
-	public List<Board> getBoardList(Criteria criteria);
+	public List<Board> getBoardList(Board board);
 	
-	public List<Board> getRankList(Criteria criteria);
+	public List<Board> getRankList(Board board);
 	
 	public int addReview(Orders orders);
 	
 	public int deleteReview(int ordersNo);
 	
-	public List<Orders> getReviewList(Criteria criteria);
+	public List<Orders> getReviewList(Board board);
 	
 	public int addRecipe(Recipe rcp);
 	
@@ -39,19 +39,31 @@ public interface BoardService {
 	
 	public Recipe getRecipe(int rcpNo);
 	
-	public List<Recipe> getRecipeList(Criteria criteria);
+	public List<Recipe> getRecipeList(Board board);
 	
-	public int addComment(Comment comment);
+	//댓글 등록이면서 수정, 삭제, 목록조회
+	public boolean addComment(Comment comment);
+
+	public void deleteComment(Comment comment);
 	
-	public int updateComment(Comment comment);
+	public List<Comment> getCommentList(int boardNo);
 	
-	public int deleteComment(int commentNo);
-	
-	public Jjim addJjim(int rcpNo, int storeNo);
-	
-	//public int addJjim(int jjimNo);
-	
-	//public int deleteJjim(int jjimNo);
+	// 찜
+	public void addStoreJjim(Jjim jjim);
+
+	public void addRecipeJjim(Jjim jjim);
+
+	public void deleteStoreJjim(Jjim jjim);
+
+	public void deleteRecipeJjim(Jjim jjim);
+
+	public void updateStoreJjim(int storeNo);
+
+	public void updateRecipeJjim(int rcpNo);
+
+	public int getRecipeJjim(Jjim jjim);
+
+	public int getStoreJjim(Jjim jjim);
 	
 	public int addRecommend(int recommendNo);
 	
