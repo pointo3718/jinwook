@@ -22,11 +22,11 @@ public interface OrdersMapper {
 	
 	public int getOrdersTotalCount();		// 주문 목록 개수
 	
-	public int addOrdersCart();				// 장바구니 담기
+	public int addOrdersCart(Cart cart);	// 장바구니 담기
 		
-	public int updateOrdersCart();				// 장바구니 수정
+	public int updateOrdersCart(Cart cart);	// 장바구니 수정
 	
-	public int deleteOrdersCart();				// 장바구니 삭제
+	public int deleteOrdersCart(Cart cart);	// 장바구니 삭제
 	
 	public List<Cart> getOrdersCartList();	// 장바구니 목록
 	

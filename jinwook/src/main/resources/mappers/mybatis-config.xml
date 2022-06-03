@@ -21,6 +21,7 @@
 		<typeAlias type="com.jinwook.home.service.domain.Recipe" alias="recipe"/>
 		<typeAlias type="com.jinwook.home.service.domain.Recommend" alias="recommend"/>
 		<typeAlias type="com.jinwook.home.service.domain.Request" alias="request"/>
+		<typeAlias type="com.jinwook.home.service.domain.Coupon" alias="coupon"/>
 	</typeAliases>
 
 </configuration>
