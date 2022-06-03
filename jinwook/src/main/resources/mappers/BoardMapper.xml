@@ -250,17 +250,38 @@
 			comment_no = #{commentNo}
 	</update>
 
-	 <sql id="JJimColumns">
-	JJim_no
+	<sql id="jjimColumns">
+	jjim_no
 	,user_id
 	,rcp_no
-	,board_no
-	,comment_content
-	,comment_date
-	,recommend_count	
+	,store_no
 	</sql>
+
+	<insert id="addJjim" parameterType="Jjim" useGeneratedKeys="true" keyProperty="jjimNo">
+		insert into Jjim (
+			<include refid="jjimColumns" />
+		) values(#{jjimNo:INTEGER} #{storeNo:INTEGER}, #{rcpNo:INTEGER}, #{user.userId:VARCHAR})
+	</insert>
 	
-	
+	<delete id="deleteBoardLike">
+	DELETE FROM tbl_board_like
+	WHERE board_id = #{boardId} AND user_id = #{userId}
+</delete>
+
+	<select id="updateBoardLike">
+		UPDATE tbl_board
+		SET
+		board_likecnt = (SELECT COUNT(*)
+		FROM tbl_board_like
+		WHERE board_id = #{boardId})
+		WHERE board_id = #{boardId}
+	</select>
+
+	<select id="getBoardLike" resultType="int">
+		SELECT COUNT(board_like_id) FROM tbl_board_like WHERE board_id = #{boardId}
+		AND user_id = #{userId}
+	</select>
+
 	
 
 </mapper>

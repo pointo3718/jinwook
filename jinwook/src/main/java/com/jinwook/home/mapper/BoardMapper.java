@@ -46,9 +46,12 @@ public interface BoardMapper {
 	
 	public int deleteComment(int commentNo);
 	
-	public int addJjim(int jjimNo);
+	// 찜
+	public void addJjim(int storeNo, int rcpNo, int boardNo, String userId, String jjimStatus);
+
+	//public int addJjim(int jjimNo);
 	
-	public int deleteJjim(int jjimNo);
+	//public int deleteJjim(int jjimNo);
 	
 	public int addRecommend(int recoomendNo);
 	
