@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //package com.jinwook.home;
 //
 //import java.time.LocalDate;
@@ -343,7 +342,6 @@
 //	}
 //	
 //}//test
-=======
 package com.jinwook.home;
 
 import java.time.LocalDate;
@@ -714,4 +712,3 @@ public class BoardMapperTest {
 	}
 	
 }//test
->>>>>>> refs/remotes/origin/master

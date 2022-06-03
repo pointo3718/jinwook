@@ -46,7 +46,6 @@ public class RequestMapperTest {
 		request.setUserId("test12");
 		request.setStoreNo(10014);  // 서비스에서 어떻게 가져올지 ?
 		
-<<<<<<< HEAD
 		Store store = requestMapper.checkStoreStatus(10014);
 		
 		
@@ -60,10 +59,7 @@ public class RequestMapperTest {
 		store.setAccNo("123123-12-123123");
 		store.setBank("농협");
 
-		int result = requestMapper.addRequestAddStore(store);
-=======
 		int result = requestMapper.addRequestAddStoreForAdmin(request);
->>>>>>> refs/remotes/origin/master
 		System.out.println("결과는 " + result + "입니다.");
 	}
 	
