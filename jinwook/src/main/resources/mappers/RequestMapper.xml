@@ -37,10 +37,25 @@
 				, #{storeNo}
 				, 1 <!-- 상점등록요청 -->
 				, 0 <!-- 답변전 -->
-				, null
+				, NULL
 				, SYSDATE()  
+				, NULL
+				, NULL
+				, NULL
+				, NULL
 			)
 	</insert>
+	
+	
+	<!-- 상점 등록 요청 보기 -->
+	<select id="getRequestStore" parameterType="String" resultType="Store">
+		SELECT
+			*
+		FROM
+			store
+		WHERE
+			user_id = #{userId}
+	</select>
 
 
 	<!-- 상점 등록 수락 -->
@@ -52,7 +67,34 @@
 			store_no = #{storeNo}
 	</update>
 	
-	<!-- 상점 등록 확인을 위한 sql  -->
+	
+	<!-- ////// 공통 ////// -->
+	<!-- 요청 상태 수락으로 변경 -->
+	<update id="updateRequestStatusToAccept" parameterType="Request">
+		UPDATE 
+			  request
+		SET
+			  req_status = true,
+			  res_date = SYSDATE()
+		WHERE
+			<if test="reqCode == 1">
+			  req_code = 1 
+			</if>
+			<if test="reqCode == 2">
+			  req_code = 2 
+			</if>
+			<if test="reqCode == 3">
+			  req_code = 3 
+			</if>
+			<if test="reqCode == 4">
+			  req_code = 4 
+			</if>
+			  and
+			  user_id = #{userId}
+	</update>
+	
+
+	<!-- 상점 등록 확인을 위한 sql ***삭제예정*** -->
 	<select id="checkStoreStatus" parameterType="int" resultType="Store">
 		SELECT
 			store_no, store_name, store_status
@@ -63,15 +105,52 @@
 	</select>
 	
 	
-<!-- 환급 신청 -->
+	<!-- 환급 신청 -->
+	<insert id="addRequestRefund" parameterType="Request">
+			INSERT INTO request 
+			VALUES (
+				  NULL
+				, #{userId}
+				, NULL
+				, 4 <!-- 상점등록요청 -->
+				, 0 <!-- 수락전 -->
+				, NULL
+				, SYSDATE()  
+				, #{refundMoney}
+				, NULL
+				, NULL
+				, NULL
+			)
+	</insert>
 
 
 
+	<!-- 환급 수락 (진욱페이 잔액 변경) -->
+	<update id="updateRequestRefund" parameterType="Request">
+		UPDATE 
+			  users
+		SET
+			  jp_balance = (SELECT u.jp_balance - r.refund_money
+			  				FROM users u, request r
+			  				WHERE u.user_id = r.user_id and u.user_id = #{userId}) vt
+		WHERE
+			  user_id = #{userId}	
+	</update>
 
-<!-- 환급 수락 (진욱페이 잔액 변경) -->
+
 
 <!-- 상점 삭제 신청 -->
 <!-- 상점 삭제 수락 -->
+<!-- 광고 등록 신청 -->
+<!-- 광고 등록 요청 보기 -->
+<!-- 광고 등록 수락 -->
+
+
+<!-- 요청 목록 4개-->
+<!-- 요청 목록 삭제 -->
+<!-- ??? 신고하기 ??? -->
+
+
 
 
 

@@ -54,6 +54,9 @@
 			users
 		WHERE
 			user_bye_status = 0
+		order by 
+			reg_date
+		
 	</select>
 	
 	
