@@ -23,11 +23,11 @@
 	 <update	id="updateUser"	parameterType="user" >
 	   	UPDATE users
 	   	<set>
-	   		nick_name 	= #{nickName} ,
-			phone	= #{phone},
+	   		nick_name 		= #{nickName} ,
+			phone			= #{phone},
 			business_no 	= #{businessNo} ,
-			email				=	#{email},
-			password			= #{password}
+			email			=	#{email},
+			password		= #{password}
 	   	</set>
 	   	WHERE user_id = #{userId}
 	 </update>

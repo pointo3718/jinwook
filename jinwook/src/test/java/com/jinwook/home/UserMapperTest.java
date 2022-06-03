@@ -9,11 +9,6 @@ import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
 import com.jinwook.home.service.user.UserServiceImpl;
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> refs/remotes/origin/master
 @SpringBootTest
 class UserMapperTest {
 
@@ -39,23 +34,23 @@ class UserMapperTest {
 //		}
 	}
 	
-	//@Test
+	@Test
 	public void addUserTest()  throws Exception{
 		User user = new User();
-		user.setUserId("dk1dk");
-		user.setPassword("dkdk");
-		user.setBirth("19990000");
-		user.setEmail("asda@1asd");
+		user.setUserId("dk111dk");
+		user.setPassword("dk1dk");
+		user.setBirth("19991000");
+		user.setEmail("asd1a@1asd");
 		user.setGrade("일반");
 		user.setRole("사장");
 		user.setUserName("ㅁ");
 		user.setGender("남");
-		user.setPhone("010-1231-5678");
-		user.setBusinessNo("12312323");
+		user.setPhone("010-1221-5678");
+		user.setBusinessNo("123122323");
 		user.setUserByeStatus(false);
 		user.setJpBalance(0);
 		user.setJpPassword("123456");
-		user.setNickName("아아아1");
+		user.setNickName("아아1아1");
 		user.setBlacklistStatus(false);
 		
 		userMapper.addUser(user);
@@ -76,7 +71,7 @@ class UserMapperTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void deleteUserTest() throws Exception {
 		User user = userMapper.getUser("test02");
 		user.setUserByeStatus(true);
