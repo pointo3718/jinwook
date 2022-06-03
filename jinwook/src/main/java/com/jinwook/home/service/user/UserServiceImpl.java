@@ -15,21 +15,23 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	@Qualifier("userMapper")
 	private UserMapper userMapper;
-	public void setuserMapper(UserMapper userMapper) {
+	public void setuserMapper(UserMapper userMapper) throws Exception{
 		this.userMapper = userMapper;
 	}
 	
+	/*
 	///Constructor
-	public UserServiceImpl() {
+	public UserServiceImpl() throws Exception {
 		System.out.println(this.getClass());
 	}
+	*/
 
 	///Method
-	public void addUser(User user) {
+	public void addUser(User user) throws Exception {
 		userMapper.addUser(user);
 	}
 
-	public User getUser(String userId) {
+	public User getUser(String userId) throws Exception {
 		return userMapper.getUser(userId);
 	}
 
@@ -44,15 +46,18 @@ public class UserServiceImpl implements UserService{
 //		return map;
 //	}
 
-	public void updateUser(User user)  {
+	public void updateUser(User user) throws Exception{
 		userMapper.updateUser(user);
-	}
-
-	public void deleteUser(User user) {
-		userMapper.deleteUser(user);
 		
 	}
-	public boolean checkId(String userId) {
+
+	public void deleteUser(User user) throws Exception{
+		userMapper.deleteUser(user);
+		
+		
+		
+	}
+	public boolean checkId(String userId) throws Exception {
 		boolean result=true;
 		User user=userMapper.getUser(userId);
 		if(user != null) {
@@ -61,31 +66,51 @@ public class UserServiceImpl implements UserService{
 		return result;
 	}
 	
-	public boolean checkPassword(String password) {
+	public boolean checkNickName(String nickName) throws Exception {
 		boolean result=true;
-		User user=userMapper.getUser(password);
+		User user=userMapper.checkNickName(nickName);
 		if(user != null) {
 			result=false;
 		}
 		return result;
 	}
 	
-	public boolean checkNickName(String nickName) {
+	public boolean checkPhone(String phone) throws Exception{
 		boolean result=true;
-		User user=userMapper.getUser(nickName);
+		User user=userMapper.checkPhone(phone);
 		if(user != null) {
 			result=false;
 		}
 		return result;
 	}
 	
-	public boolean checkEmail(String email) {
+	public boolean checkEmail(String email) throws Exception {
 		boolean result=true;
-		User user=userMapper.getUser(email);
+		User user=userMapper.checkEmail(email);
 		if(user != null) {
 			result=false;
 		}
 		return result;
+	}
+	
+	public User findIdPhone(User user) throws Exception {
+		return userMapper.findIdPhone(user);
+	}
+	
+	public User findIdEmail(User user) throws Exception {
+		return userMapper.findIdEmail(user);
+	}
+	public User findPasswordPhone(User user) throws Exception {
+		return userMapper.findPasswordPhone(user);
+	}
+	
+	public User findPasswordEmail(User user) throws Exception {
+		return userMapper.findPasswordEmail(user);
+	}
+	
+	public void updatePassword(User user) throws Exception {
+		userMapper.updateUser(user);
+//		userMapper.updatePassword(user);
 	}
 
 }

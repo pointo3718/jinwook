@@ -23,11 +23,11 @@
 	 <update	id="updateUser"	parameterType="user" >
 	   	UPDATE users
 	   	<set>
-	   		nick_name 	= #{nickName} ,
-			phone	= #{phone},
+	   		nick_name 		= #{nickName} ,
+			phone			= #{phone},
 			business_no 	= #{businessNo} ,
-			email				=	#{email},
-			password			= #{password}
+			email			=	#{email},
+			password		= #{password}
 	   	</set>
 	   	WHERE user_id = #{userId}
 	 </update>
@@ -39,5 +39,62 @@
 		</set>
 		WHERE user_id = #{userId}
 	 </update>
+	 
+	 <select 	id="checkNickName"	parameterType="string"	resultType="user">
+		SELECT
+		*	
+		FROM users 
+		WHERE nick_name = #{nickName}
+	 </select>
+	 
+	<select 	id="checkEmail"	parameterType="string"	resultType="user">	
+		SELECT
+		*	
+		FROM users 
+		WHERE email = #{email}
+	 </select>
 	
+	<select 	id="checkPhone"	parameterType="string"	resultType="user">
+		SELECT
+		*	
+		FROM users 
+		WHERE phone = #{phone}
+	 </select>
+	 
+	 <select 	id="findIdPhone"	parameterType="string"	resultType="user">
+		SELECT
+		*	
+		FROM users 
+		WHERE user_name = #{userName} AND phone = #{phone}
+	 </select>
+	 
+	 <select 	id="findIdEmail"	parameterType="string"	resultType="user">
+		SELECT
+		*	
+		FROM users 
+		WHERE user_name = #{userName} AND email = #{email}
+	 </select>
+	 
+	 <select 	id="findPasswordPhone"	parameterType="string"	resultType="user">
+		SELECT
+		*	
+		FROM users 
+		WHERE user_id = #{userId} AND phone = #{phone}
+	 </select>
+	 
+	 <select 	id="findPasswordEmail"	parameterType="string"	resultType="user">
+		SELECT
+		*	
+		FROM users 
+		WHERE user_id = #{userId} AND email = #{email}
+	 </select>
+	 
+	<!--  <update		id="updatePassword"	>
+		UPDATE users 
+		<set>
+			password = #{password}
+		</set>
+		WHERE user_id = #{userId}
+	 </update> -->
+	 
 </mapper>
