@@ -23,21 +23,7 @@ class StoreMapperTest {
 
 	@Autowired
 	private StoreMapper storeMapper;
-
-	@Test
-	public void testOfUpdateStoreProduct() {
-		Product product = new Product();
-		product.setProdNo(10000);
-		product.setPrice(100);
-		product.setProdInfo("상품정보수정");
-		product.setProdImg("홍길동.jpg");
-		product.setProdOrign("충청도");
-
-		int result = storeMapper.updateStoreProduct(product);
-		System.out.println("결과는" + result + "입니다.");
-
-	}
-
+	
 	@Test
 	public void testOfUpdateStore() {
 		Store store = new Store();
@@ -54,26 +40,6 @@ class StoreMapperTest {
 		int result = storeMapper.updateStore(store);
 		System.out.println("결과는" + result + "입니다.");
 	}
-
-	@Test
-	public void testOfIsSoldOut() {
-		Product product = new Product();
-		product.setProdNo(10000);
-		product.setSoldout(true);
-
-		int result = storeMapper.isSoldout(product);
-		System.out.println("결과는" + result + "입니다.");		
-	}
-	
-	@Test
-	public void testOfDeleteStoreProduct() {
-		Product product = new Product();
-		product.setProdNo(10018);
-
-		int result = storeMapper.deleteStoreProduct(product);
-		System.out.println("결과는" + result + "입니다.");
-		
-	}
 	
 	@Test
 	public void testOfAddStoreProduct() {
@@ -87,11 +53,44 @@ class StoreMapperTest {
 		product.setProdOrign("강원도");
 
 		int result = storeMapper.addStoreProduct(product);
+		System.out.println("결과는" + result + "입니다.");				
+	}
+
+	@Test
+	public void testOfUpdateStoreProduct() {
+		Product product = new Product();
+		product.setProdNo(10000);
+		product.setPrice(100);
+		product.setProdInfo("상품정보수정");
+		product.setProdImg("홍길동.jpg");
+		product.setProdOrign("충청도");
+
+		int result = storeMapper.updateStoreProduct(product);
 		System.out.println("결과는" + result + "입니다.");
-		
-		
+
 	}
 	
+	@Test
+	public void testOfDeleteStoreProduct() {
+		Product product = new Product();
+		product.setProdNo(10018);
+
+		int result = storeMapper.deleteStoreProduct(product);
+		System.out.println("결과는" + result + "입니다.");
+		
+	}
+
+
+	@Test
+	public void testOfIsSoldOut() {
+		Product product = new Product();
+		product.setProdNo(10000);
+		product.setSoldout(true);
+
+		int result = storeMapper.isSoldout(product);
+		System.out.println("결과는" + result + "입니다.");		
+	}
+		
 	@Test
 	public void testOfIsOpen() {
 		Store store = new Store();
@@ -100,6 +99,40 @@ class StoreMapperTest {
 
 		int result = storeMapper.isOpen(store);
 		System.out.println("결과는" + result + "입니다.");		
+	}
+	
+	@Test
+	public void testOfAddOrderCoupon() {
+		Coupon coupon = new Coupon();
+		coupon.setCouponStatus(true);
+		coupon.setCouponNo(10015);
+
+		int result = storeMapper.addOrderCoupon(coupon);
+		System.out.println("결과는" + result + "입니다.");
+	}
+	
+	@Test
+	public void testOfGetCouponList() {
+		
+		
+		int getCouponTotalCount = storeMapper.getCouponTotalCount();
+		if (getCouponTotalCount > 0) {
+			List<Coupon> couponList = storeMapper.getCouponList("test13");
+			
+			if (CollectionUtils.isEmpty(couponList) == false) { 		
+				for (Coupon coupon : couponList) {
+					System.out.println("=========================");
+	
+					System.out.println(coupon.getCouponNo());
+					System.out.println(coupon.getCouponType());					
+					System.out.println(coupon.getCouponDc());
+					System.out.println(coupon.getCouponValidDate());
+
+					
+					System.out.println("=========================");
+				}
+			}
+		}
 	}
 	
 	
@@ -141,15 +174,13 @@ class StoreMapperTest {
 	}
 	
 	
-	
-	
 	@Test
 	public void testOfGetStoreProductList() {
 		
 		
 		int getProductTotalCount = storeMapper.getProductTotalCount();
 		if (getProductTotalCount > 0) {
-			List<Product> productList = storeMapper.getStoreProductList(10010);
+			List<Product> productList = storeMapper.getStoreProductList(10011);
 			
 			if (CollectionUtils.isEmpty(productList) == false) { 		
 				for (Product product : productList) {
@@ -168,42 +199,6 @@ class StoreMapperTest {
 		}
 	}
 	
-			
-	
-	
-	@Test
-	public void testOfGetCouponList() {
-		
-		
-		int getCouponTotalCount = storeMapper.getCouponTotalCount();
-		if (getCouponTotalCount > 0) {
-			List<Coupon> couponList = storeMapper.getCouponList("test13");
-			
-			if (CollectionUtils.isEmpty(couponList) == false) { 		
-				for (Coupon coupon : couponList) {
-					System.out.println("=========================");
-	
-					System.out.println(coupon.getCouponNo());
-					System.out.println(coupon.getCouponType());					
-					System.out.println(coupon.getCouponDc());
-					System.out.println(coupon.getCouponValidDate());
-
-					
-					System.out.println("=========================");
-				}
-			}
-		}
-	}
-	
-	@Test
-	public void testOfAddOrderCoupon() {
-		Coupon coupon = new Coupon();
-		coupon.setCouponStatus(true);
-		coupon.setCouponNo(10015);
-
-		int result = storeMapper.addOrderCoupon(coupon);
-		System.out.println("결과는" + result + "입니다.");
-	}
 	
 	@Test
 	public void testOfGetStoreWallet() {
@@ -227,8 +222,9 @@ class StoreMapperTest {
 		
 		int getRequestTotalCount = storeMapper.getRequestTotalCount();
 		if (getRequestTotalCount > 0) {
+			System.out.println(getRequestTotalCount);
 			List<Request> requestList = storeMapper.getStoreWalletRefund("test01");
-			
+			System.out.println(requestList.get(1));
 			if (CollectionUtils.isEmpty(requestList) == false) { 		
 				for (Request request : requestList) {
 					System.out.println("=========================");
