@@ -12,7 +12,7 @@ public interface OrdersMapper {
 
 	public int addOrders(Orders orders); 	//주문
 	
-	public List<Orders> getOrdersList(); 	//주문내역
+	public List<Orders> getOrdersList(String userId); 	//주문내역
 	
 	public Orders getOrders(int orderNo);	//주문내역상세
 	

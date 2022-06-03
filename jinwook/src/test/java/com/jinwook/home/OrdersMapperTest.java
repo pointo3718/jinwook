@@ -76,7 +76,7 @@ public class OrdersMapperTest {
 	     
 	}
 	
-	//@Test
+	@Test
 	public void testSelectListOrders() {
 		User user = new User();
 		user.setUserId("test01");
@@ -97,7 +97,7 @@ public class OrdersMapperTest {
 		
 		int ordersTotalCount = ordersMapper.getOrdersTotalCount();
 		if(ordersTotalCount > 0) {
-			List<Orders> ordersList = ordersMapper.getOrdersList();
+			List<Orders> ordersList = ordersMapper.getOrdersList("test01");
 			System.out.println(ordersList.get(1)); 
 			System.out.println(ordersTotalCount);
 			if(CollectionUtils.isEmpty(ordersList) == false) {
@@ -168,7 +168,7 @@ public class OrdersMapperTest {
 			System.out.println("결과는"+result+"입니다.");
 		}
 		
-	@Test
+//	@Test
 	public void testgetOrdersCartList() {
 		
 	}

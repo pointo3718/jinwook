@@ -25,13 +25,13 @@
 			 order_no = #{orderNo}
 	</delete>
 		
-	<select id="getOrdersList" parameterType="Orders" resultType="Orders">
+	<select id="getOrdersList" parameterType="String" resultType="Orders">
 		SELECT
 			user_id,order_no,order_price,order_status,pickup_time,order_date
 		FROM
 			orders
 		WHERE
-			user_id = "test01";
+			user_id = #{user.userId}
 	</select>
 	
 	<select id="getOrdersTotalCount" parameterType="Orders" resultType="int">
@@ -66,9 +66,11 @@
 	</update>
 	
 	<select id="getOrdersCartList">
-		SELECT store_name ,prod_img ,prod_name ,prod_info ,prod_count ,price  ,order_price
-		FROM
-		WHERE
+		SELECT c.store_name ,p.prod_img ,p.prod_name ,p.prod_info ,c.prod_count ,p.price  ,c.order_price
+		FROM Cart c , Product p
+		WHERE c.prod_no = p.prod_no
+		AND	  c.user_id = #{userId}
+		AND   c.cart_status = #{cartStatus}
 	</select>
 
 </mapper>
