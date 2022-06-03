@@ -11,16 +11,18 @@ import lombok.ToString;
 @ToString
 public class Request {
 
-   int reqNo;
-   String userId;
-   int storeNo;
-   String reqCode;
-   Date reqDate;
-   Date resDate;
-   String reqStatus;
-   int refundMoney;
-   String adTitle;
-   String adContent;
-   String adImg;
+	private int reqNo;
+	private String userId;
+	private int storeNo;
+	private String reqCode;
+	private Date reqDate;
+	private Date resDate;
+	private String reqStatus;
+	private int refundMoney;
+	private String adTitle;
+	private String adContent;
+	private String adImg;
+	
+	public Request() {}
    
 }
