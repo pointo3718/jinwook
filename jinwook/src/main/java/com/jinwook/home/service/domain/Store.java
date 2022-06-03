@@ -14,7 +14,9 @@ import lombok.ToString;
 public class Store {
 
    private int storeNo;
-   private User userId;
+   private User user;
+   private Orders orders;
+   private Product product;
    private String storeName;
    private String storeAddr;
    private String storeType;

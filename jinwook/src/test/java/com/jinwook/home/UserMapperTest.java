@@ -10,11 +10,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jinwook.home.mapper.UserMapper;
 import com.jinwook.home.service.domain.User;
 
-import groovy.transform.builder.Builder;
 import lombok.Data;
 
 
-@Builder
 @Data
 @SpringBootTest
 class UserMapperTest {
