@@ -9,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.mapper.BoardMapper;
-import com.jinwook.home.mapper.OrdersMapper;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
-import com.jinwook.home.service.domain.User;
 
 public class BoardServiceImpl implements BoardService {
 

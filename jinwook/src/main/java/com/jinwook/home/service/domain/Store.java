@@ -1,7 +1,6 @@
 package com.jinwook.home.service.domain;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
