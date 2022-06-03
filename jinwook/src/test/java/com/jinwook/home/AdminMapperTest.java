@@ -24,10 +24,9 @@ public class AdminMapperTest {
 	
 	
 	///////////////// 유저 상세 //////////////////
-
 	@Test
 	public void testOfSelectUserDetail() {
-		User user = adminMapper.getUserAdmin("test01");
+		User user = adminMapper.getUserAdmin("test02");
 		try {
 			//String boardJson = new ObjectMapper().writeValueAsString(board);
             String userJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(user);

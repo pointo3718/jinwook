@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jinwook.home.common.Page;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
 

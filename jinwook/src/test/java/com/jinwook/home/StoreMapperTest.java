@@ -23,21 +23,7 @@ class StoreMapperTest {
 
 	@Autowired
 	private StoreMapper storeMapper;
-
-	@Test
-	public void testOfUpdateStoreProduct() {
-		Product product = new Product();
-		product.setProdNo(10000);
-		product.setPrice(100);
-		product.setProdInfo("상품정보수정");
-		product.setProdImg("홍길동.jpg");
-		product.setProdOrign("충청도");
-
-		int result = storeMapper.updateStoreProduct(product);
-		System.out.println("결과는" + result + "입니다.");
-
-	}
-
+	
 	@Test
 	public void testOfUpdateStore() {
 		Store store = new Store();
@@ -54,26 +40,6 @@ class StoreMapperTest {
 		int result = storeMapper.updateStore(store);
 		System.out.println("결과는" + result + "입니다.");
 	}
-
-	@Test
-	public void testOfIsSoldOut() {
-		Product product = new Product();
-		product.setProdNo(10000);
-		product.setSoldout(true);
-
-		int result = storeMapper.isSoldout(product);
-		System.out.println("결과는" + result + "입니다.");		
-	}
-	
-	@Test
-	public void testOfDeleteStoreProduct() {
-		Product product = new Product();
-		product.setProdNo(10018);
-
-		int result = storeMapper.deleteStoreProduct(product);
-		System.out.println("결과는" + result + "입니다.");
-		
-	}
 	
 	@Test
 	public void testOfAddStoreProduct() {
@@ -87,11 +53,44 @@ class StoreMapperTest {
 		product.setProdOrign("강원도");
 
 		int result = storeMapper.addStoreProduct(product);
+		System.out.println("결과는" + result + "입니다.");				
+	}
+
+	@Test
+	public void testOfUpdateStoreProduct() {
+		Product product = new Product();
+		product.setProdNo(10000);
+		product.setPrice(100);
+		product.setProdInfo("상품정보수정");
+		product.setProdImg("홍길동.jpg");
+		product.setProdOrign("충청도");
+
+		int result = storeMapper.updateStoreProduct(product);
 		System.out.println("결과는" + result + "입니다.");
-		
-		
+
 	}
 	
+	@Test
+	public void testOfDeleteStoreProduct() {
+		Product product = new Product();
+		product.setProdNo(10018);
+
+		int result = storeMapper.deleteStoreProduct(product);
+		System.out.println("결과는" + result + "입니다.");
+		
+	}
+
+
+	@Test
+	public void testOfIsSoldOut() {
+		Product product = new Product();
+		product.setProdNo(10000);
+		product.setSoldout(true);
+
+		int result = storeMapper.isSoldout(product);
+		System.out.println("결과는" + result + "입니다.");		
+	}
+		
 	@Test
 	public void testOfIsOpen() {
 		Store store = new Store();
@@ -102,74 +101,15 @@ class StoreMapperTest {
 		System.out.println("결과는" + result + "입니다.");		
 	}
 	
-	
-	
 	@Test
-	public void testOfGetStore() {
-		Store store = storeMapper.getStore(10011);
-//		System.out.println(product.toString());
-		try {
-			//String boardJson = new ObjectMapper().writeValueAsString(board);
-            String storeJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(store);
+	public void testOfAddOrderCoupon() {
+		Coupon coupon = new Coupon();
+		coupon.setCouponStatus(true);
+		coupon.setCouponNo(10015);
 
-			System.out.println("=========================");
-			System.out.println(storeJson);
-			System.out.println("=========================");
-
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+		int result = storeMapper.addOrderCoupon(coupon);
+		System.out.println("결과는" + result + "입니다.");
 	}
-	
-	@Test
-	public void testOfGetStoreReviewStar() {
-		
-		Orders orders = new Orders();
-		orders=storeMapper.getStoreReviewStar(10013);
-//		System.out.println(product.toString());
-		try {
-			//String boardJson = new ObjectMapper().writeValueAsString(board);
-            String ordersJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(orders);
-
-			System.out.println("=========================");
-			System.out.println(ordersJson);
-			System.out.println("=========================");
-
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	
-	
-	@Test
-	public void testOfGetStoreProductList() {
-		
-		
-		int getProductTotalCount = storeMapper.getProductTotalCount();
-		if (getProductTotalCount > 0) {
-			List<Product> productList = storeMapper.getStoreProductList(10010);
-			
-			if (CollectionUtils.isEmpty(productList) == false) { 		
-				for (Product product : productList) {
-					System.out.println("=========================");
-	
-					System.out.println(product.getProdNo());
-					System.out.println(product.getProdName());					
-					System.out.println(product.getPrice());
-					System.out.println(product.getProdOrign());
-					System.out.println(product.getProdInfo());
-
-					
-					System.out.println("=========================");
-				}
-			}
-		}
-	}
-	
-			
-	
 	
 	@Test
 	public void testOfGetCouponList() {
@@ -196,18 +136,45 @@ class StoreMapperTest {
 	}
 	
 	@Test
-	public void testOfAddOrderCoupon() {
-		Coupon coupon = new Coupon();
-		coupon.setCouponStatus(true);
-		coupon.setCouponNo(10015);
+	public void testOfGetStore() {
+		
+		
+		int getStoreTotalCount = storeMapper.getStoreTotalCount();
+		if (getStoreTotalCount > 0) {
+			List<Store> getStore = storeMapper.getStore(10010);
+			
+			if (CollectionUtils.isEmpty(getStore) == false) { 		
+				for (Store store : getStore) {
+					System.out.println("=========================");
+	
+					System.out.println(store.getStoreNo());
+					System.out.println(store.getStoreName());	
+					System.out.println(store.getStoreType());
+					System.out.println(store.getStoreAddr());
+					System.out.println(store.getStartTime());
+					System.out.println(store.getEndTime());
+					System.out.println(store.getHoliday());
+					System.out.println(store.getStoreIntro());					
+		//		    System.out.println(store.getOrders().getReviewStar());
+					System.out.println(store.getProduct().getProdNo());
+					System.out.println(store.getProduct().getProdName());
+					System.out.println(store.getProduct().getPrice());
+					System.out.println(store.getProduct().getProdOrign());
+					System.out.println(store.getProduct().getProdInfo());
+					
 
-		int result = storeMapper.addOrderCoupon(coupon);
-		System.out.println("결과는" + result + "입니다.");
+					
+					System.out.println("=========================");
+				}
+			}
+		}
 	}
 	
+	
+	/*
 	@Test
-	public void testOfGetStoreWallet() {
-		Store store = storeMapper.getStoreWallet("test01");
+	public void testOfGetStore() {
+		Store store = storeMapper.getStore(10011);
 //		System.out.println(product.toString());
 		try {
 			//String boardJson = new ObjectMapper().writeValueAsString(board);
@@ -222,21 +189,72 @@ class StoreMapperTest {
 		}
 	}
 	
+	
 	@Test
-	public void testOfGetStoreWalletRefund() {
+	public void testOfGetStoreReviewStar() {
 		
-		int getRequestTotalCount = storeMapper.getRequestTotalCount();
-		if (getRequestTotalCount > 0) {
-			List<Request> requestList = storeMapper.getStoreWalletRefund("test01");
+		Orders orders = new Orders();
+		orders=storeMapper.getStoreReviewStar(10013);
+//		System.out.println(product.toString());
+		try {
+			//String boardJson = new ObjectMapper().writeValueAsString(board);
+            String ordersJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(orders);
+
+			System.out.println("=========================");
+			System.out.println(ordersJson);
+			System.out.println("=========================");
+
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Test
+	public void testOfGetStoreProductList() {
+		
+		
+		int getProductTotalCount = storeMapper.getProductTotalCount();
+		if (getProductTotalCount > 0) {
+			List<Product> productList = storeMapper.getStoreProductList(10011);
 			
-			if (CollectionUtils.isEmpty(requestList) == false) { 		
-				for (Request request : requestList) {
+			if (CollectionUtils.isEmpty(productList) == false) { 		
+				for (Product product : productList) {
 					System.out.println("=========================");
 	
-					System.out.println(request.getResDate());
-					System.out.println(request.getReqDate());					
-					System.out.println(request.getRefundMoney());
-					System.out.println(request.getReqStatus());
+					System.out.println(product.getProdNo());
+					System.out.println(product.getProdName());					
+					System.out.println(product.getPrice());
+					System.out.println(product.getProdOrign());
+					System.out.println(product.getProdInfo());
+
+					
+					System.out.println("=========================");
+				}
+			}
+		}
+	}
+	
+	
+	*/
+	
+	@Test
+	public void testOfGetStoreWallet() {
+		
+		int getStoreTotalCount = storeMapper.getStoreTotalCount();
+		if (getStoreTotalCount > 0) {
+			System.out.println(getStoreTotalCount);
+			List<Store> walletList = storeMapper.getStoreWallet(10000);
+			if (CollectionUtils.isEmpty(walletList) == false) { 		
+				for (Store store : walletList) {
+					System.out.println("=========================");
+					
+					System.out.println(store.getTotalEarn());					
+					System.out.println(store.getUser().getJpBalance());
+					System.out.println(store.getRequest().getResDate());
+					System.out.println(store.getRequest().getReqDate());					
+					System.out.println(store.getRequest().getRefundMoney());
+					System.out.println(store.getRequest().getReqStatus());
 
 					
 					System.out.println("=========================");
