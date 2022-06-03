@@ -19,6 +19,7 @@ import com.jinwook.home.mapper.BoardMapper;
 import com.jinwook.home.mapper.OrdersMapper;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Recipe;
@@ -94,25 +95,25 @@ public class BoardMapperTest {
 		}
 	}
 	
-	@Test
-	public void testOfGetBoardList(Criteria criteria) {
-		int boardTotalCount = boardMapper.getBoardTotalCount(criteria);
-		if (boardTotalCount > 0) {
-			List<Board> boardList = boardMapper.getBoardList(criteria);
-			
-			// 리스트가 비어있는지 체크
-			if (CollectionUtils.isEmpty(boardList) == false) { 		
-				for (Board board : boardList) {
-					System.out.println("=========================");
-					System.out.println(board.getUser().getUserId());
-					System.out.println(board.getBoardNo());
-					System.out.println(board.getBoardTitle());
-					System.out.println(board.getWriteDate());
-					System.out.println("=========================");
-				}
-			}
-		}
-	}
+//	@Test
+//	public void testOfGetBoardList(Board board) {
+//		int boardTotalCount = boardMapper.getBoardTotalCount(board);
+//		if (boardTotalCount > 0) {
+//			List<Board> boardList = boardMapper.getBoardList(board);
+//			
+//			// 리스트가 비어있는지 체크
+//			if (CollectionUtils.isEmpty(boardList) == false) { 		
+//				for (Board board : boardList) {
+//					System.out.println("=========================");
+//					System.out.println(board.getUser().getUserId());
+//					System.out.println(board.getBoardNo());
+//					System.out.println(board.getBoardTitle());
+//					System.out.println(board.getWriteDate());
+//					System.out.println("=========================");
+//				}
+//			}
+//		}
+//	}
 	
 	@Test
 	public void testOfDeleteBoard() {
@@ -195,10 +196,10 @@ public class BoardMapperTest {
 	}
 	
 	@Test
-	public void testOfGetRecipeList(Criteria criteria) {
-		int boardTotalCount = boardMapper.getRecipeTotalCount(criteria);
+	public void testOfGetRecipeList(Board board) {
+		int boardTotalCount = boardMapper.getRecipeTotalCount(board);
 		if (boardTotalCount > 0) {
-			List<Recipe> rcpList = boardMapper.getRecipeList(criteria);
+			List<Recipe> rcpList = boardMapper.getRecipeList(board);
 			
 			// 리스트가 비어있는지 체크
 			if (CollectionUtils.isEmpty(rcpList) == false) { 		
@@ -274,13 +275,12 @@ public class BoardMapperTest {
 	}
 	
 	@Test
-	public void testOfGetReviewList(Criteria criteria) {
-		int boardTotalCount = boardMapper.getReviewTotalCount(criteria);
+	public void testOfGetReviewList(Board board) {
+		int boardTotalCount = boardMapper.getReviewTotalCount(board);
 		if (boardTotalCount > 0) {
-			List<Orders> reviewList = boardMapper.getReviewList(criteria);
+			List<Orders> reviewList = boardMapper.getReviewList(board);
 			
 			// 리스트가 비어있는지 체크
-			if (CollectionUtils.isEmpty(reviewList) == false) { 		
 				for (Orders orders : reviewList) {
 					System.out.println("=========================");
 					System.out.println(orders.getUser().getUserId());
@@ -295,48 +295,75 @@ public class BoardMapperTest {
 				}
 			}
 		}
-	}
 	
-	@Test
+	@Test//완료
 	public void testOfAddComment() {
 		Board board = new Board();
 		Comment comment = new Comment();
 		User user = new User();
 		Recipe rcp = new Recipe();
 		
-		comment.setCommentNo(2);
-		user.setUserId("test02");
+		user.setUserId("test01");
 		comment.setUser(user);
-		rcp.setRcpNo(2);
-		board.setBoardNo(2);
-		comment.setCommentContent("2번 댓글내용");
+		rcp.setRcpNo(1);
+		board.setBoardNo(1);
+		comment.setCommentContent("1번 댓글내용");
+		comment.setCommentWriter("1번 작성자");
 		comment.setCommentDate(LocalDate.now());
-		comment.setRecommendCount(2);
 		
 		int result = boardMapper.addComment(comment);
 		System.out.println(" 결과는 "+result+"입니다.");
 	}
 	
-	@Test
+	@Test//완료
 	public void testOfDeleteComment() {
 		Comment comment = new Comment();
 		
 		comment.setCommentNo(1);
 		
-		int result = boardMapper.deleteComment(1);
-		System.out.println(" 결과는 "+result+"입니다.");
+		boardMapper.deleteComment(comment);
 		
 	}
 	
-	@Test
+	@Test//완료
 	public void testOfUpdateComment() {
 		Comment comment = new Comment();
 		
 		comment.setCommentNo(2);
-		comment.setCommentContent("댓글내용3");
+		comment.setCommentContent("수정한 댓글2번");
+		comment.setCommentWriter("2번 회원2");
 		comment.setCommentDate(LocalDate.now());
 		
 		int result = boardMapper.updateComment(comment);
+		System.out.println(" 결과는 "+result+"입니다.");
+	}
+	
+	@Test
+	public void testOfaddStoreJjim() {
+		Jjim jjim = new Jjim();
+		User user = new User();
+		
+		user.setUserId("test01");
+		jjim.setUser(user);
+		jjim.setStoreNo(10000);
+		jjim.setJjimNo(1);
+		jjim.setRcpNo(1);
+		
+		int result = boardMapper.addStoreJjim(jjim);
+		System.out.println(" 결과는 "+result+"입니다.");
+	}
+	@Test
+	public void testOfaddRecipeJjim() {
+		Jjim jjim = new Jjim();
+		User user = new User();
+		
+		user.setUserId("test01");
+		jjim.setUser(user);
+		jjim.setStoreNo(10000);
+		jjim.setJjimNo(1);
+		jjim.setRcpNo(1);
+		
+		int result = boardMapper.addRecipeJjim(jjim);
 		System.out.println(" 결과는 "+result+"입니다.");
 	}
 	

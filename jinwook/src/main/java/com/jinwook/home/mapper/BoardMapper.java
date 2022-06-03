@@ -7,8 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
+import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 
 @Mapper
@@ -22,15 +24,15 @@ public interface BoardMapper {
 	
 	public Board getBoard(int boardNo);
 	
-	public List<Board> getBoardList(Criteria criteria);
+	public List<Board> getBoardList(Board board);
 	
-	public List<Board> getRankList(Criteria criteria);
+	public List<Board> getRankList(Board board);
 	
 	public int addReview(Orders orders);
 	
 	public int deleteReview(int ordersNo);
 	
-	public List<Orders> getReviewList(Criteria criteria);
+	public List<Orders> getReviewList(Board board);
 	
 	public int addRecipe(Recipe rcp);
 	
@@ -40,41 +42,47 @@ public interface BoardMapper {
 	
 	public Recipe getRecipe(int rcpNo);
 	
-	public List<Recipe> getRecipeList(Criteria criteria);
+	public List<Recipe> getRecipeList(Board board);
 	
+	//댓글 등록
 	public int addComment(Comment comment);
-	
+	//댓글 수정
 	public int updateComment(Comment comment);
-	
-	public int deleteComment(int commentNo);
+	//댓글 삭제
+	public void deleteComment(Comment comment);
+	//특정 게시글에 포함된 댓글 목록을 조회하는 SELECT 쿼리를 호출
+	//public List<Comment> getCommentList(Comment comment);
+	//특정 게시글에 포함된 댓글 개수를 조회하는 select 쿼리를 호출
+	public int getCommentTotalCount(int boardNo);
 	
 	// 찜
-	public int addStoreJjim(int storeNo, User user);
+	public int addStoreJjim(Jjim jjim);
 
-	public int addRecipeJjim(int rcpNo, User user);
+	public int addRecipeJjim(Jjim jjim);
 
-	public int deleteStoreJjim(int storeNo, User user);
+	public int deleteStoreJjim(Jjim jjim);
 
-	public int deleteRecipeJjim(int rcpNo, User user);
+	public int deleteRecipeJjim(Jjim jjim);
 	
-	public int updateStoreJjim(int rcpNo, User user);
+	public int updateStoreJjim(int storeNo);
 	
-	public void updateRecipeJjim();
+	public int updateRecipeJjim(int rcpNo);
 	
-	//public int addJjim(int jjimNo);
-	
-	//public int deleteJjim(int jjimNo);
-	
-	public int addRecommend(int recoomendNo);
-	
-	public int deleteRecommend(int recoomendNo);
+	public int getRecipeJjim(Jjim jjim);
 
-	public int getBoardTotalCount(Criteria criteria);
+	public int getStoreJjim(Jjim jjim);
+	
+	//추천
+	public int addRecommend(int recommendNo);
+	
+	public int deleteRecommend(int recommendNo);
 
-	public int getRecipeTotalCount(Criteria criteria);
+	public int getBoardTotalCount(Board board);
+
+	public int getRecipeTotalCount(Board board);
 	
-	public int getReviewTotalCount(Criteria criteria);
+	public int getReviewTotalCount(Board board);
 	
-	public int getRankTotalCount(Criteria criteria);
+	public int getRankTotalCount(Board board);
 	
 }
