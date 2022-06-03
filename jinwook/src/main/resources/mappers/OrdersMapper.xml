@@ -3,6 +3,29 @@
 
 <mapper namespace="com.jinwook.home.mapper.OrdersMapper">
 	
+	<resultMap type="orders" id="ordersSelectMap">
+			<result property="orderNo"				column="order_no"		jdbcType="INTEGER"/>
+			<result property="buyerName"			column="buyer_name"		jdbcType="VARCHAR"/>
+			<result property="buyerPhone"			column="buyer_phone"	jdbcType="VARCHAR"/>
+			<result property="orderDate"			column="order_date"		jdbcType="DATE"/>
+			<result property="pickupTime"			column="pickup_time"	jdbcType="DATE"/>
+			<result property="orderReq"				column="order_req"		jdbcType="VARCHAR"/>
+			<result property="orderStatus"			column="order_status"	jdbcType="VARCHAR"/>
+			<result property="finalPrice"			column="final_price"	jdbcType="INTEGER"/>
+			<result property="prodCount"			column="prod_count"		jdbcType="INTEGER"/>
+			<result property="orderPrice"			column="order_price"	jdbcType="INTEGER"/>
+			<result property="store.storeName"		column="store_name"		jdbcType="VARCHAR"/>
+			<result property="user.userId"			column="user_id"		jdbcType="VARCHAR"/>
+			<result property="user.grade"			column="grade"			jdbcType="VARCHAR"/>
+			<result property="product.prodName"		column="prod_name"		jdbcType="VARCHAR"/>
+			<result property="product.prodInfo"		column="prod_info"		jdbcType="VARCHAR"/>
+			<result property="product.price"		column="price"			jdbcType="INTEGER"/>
+			<result property="product.prodImg"		column="prod_img"		jdbcType="VARCHAR"/>
+			<result property="coupon.couponNo"		column="coupon_no"		jdbcType="INTEGER"/>
+			<result property="coupon.couponType"	column="coupon_type"	jdbcType="VARCHAR"/>
+			<result property="coupon.couponDc"		column="coupon_dc"		jdbcType="INTEGER"/>
+	</resultMap>
+	
 	<insert id="addOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderNo">
 		INSERT
 		INTO orders(user_id,store_no,buyer_name,buyer_phone,pickup_time,order_req,order_price,prod_count,order_date,order_status)
@@ -25,16 +48,18 @@
 			 order_no = #{orderNo}
 	</delete>
 		
-	<select id="getOrdersList" parameterType="String" resultType="Orders">
-		SELECT
-			user_id,order_no,order_price,order_status,pickup_time,order_date
+	<select id="getOrdersList" parameterType="orders" resultMap="ordersSelectMap">
+			SELECT
+			o.user_id,o.order_no,o.order_price,o.order_status,o.pickup_time,o.order_date,p.prod_name,p.prod_img
 		FROM
-			orders
+			orders o ,product p 
 		WHERE
-			user_id = #{user.userId}
+			o.store_no = p.store_no
+			AND o.user_id = #{user.userId}
+		GROUP BY order_no;
 	</select>
 	
-	<select id="getOrdersTotalCount" parameterType="Orders" resultType="int">
+	<select id="getOrdersTotalCount" parameterType="Map" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
@@ -65,14 +90,23 @@
 		AND order_no = #{orderNo}
 	</update>
 	
-	<select id="getOrdersCartList">
-		SELECT c.store_name ,p.prod_img ,p.prod_name ,p.prod_info ,c.prod_count ,p.price  ,c.order_price
-		FROM Cart c , Product p
+	<select id="getOrdersCartList" resultType="Cart">
+	SELECT c.store_name,p.prod_img,p.prod_name,p.prod_info,c.prod_count,p.price,o.order_price
+		FROM cart c , product p , orders o
 		WHERE c.prod_no = p.prod_no
-		AND	  c.user_id = #{userId}
+        AND   c.user_id = o.user_id
+		AND	  c.user_id = #{user.userId}
 		AND   c.cart_status = #{cartStatus}
+        GROUP BY cart_no;
 	</select>
 
+	<select id="getCartTotalCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			cart
+	</select>
+	
 </mapper>
 	
 	

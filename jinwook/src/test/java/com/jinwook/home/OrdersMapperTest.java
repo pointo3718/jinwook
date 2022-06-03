@@ -79,7 +79,7 @@ public class OrdersMapperTest {
 	@Test
 	public void testSelectListOrders() {
 		User user = new User();
-		user.setUserId("test01");
+//		user.setUserId("test01");
 		
 //		Store store = new Store();
 //		store.setStoreNo(10000);
@@ -103,7 +103,7 @@ public class OrdersMapperTest {
 			if(CollectionUtils.isEmpty(ordersList) == false) {
 				System.out.println("==2");
 				for(Orders orders : ordersList) {
-					orders.setUser(user);
+//					orders.setUser(user);
 //					cart.setProduct(product);
 //					orders.setStore(store);
 //					orders.setProduct(product);
@@ -117,8 +117,8 @@ public class OrdersMapperTest {
 					System.out.println(orders.getOrderPrice());
 					
 //					Product product = ordersMapper.get
-//					System.out.println(cart.getProduct());
-//					System.out.println(orders.getProduct().getProdImg());
+					System.out.println(orders.getProduct().getProdName());
+					System.out.println(orders.getProduct().getProdImg());
 					System.out.println("=========================");
 				}
 			}
@@ -168,9 +168,49 @@ public class OrdersMapperTest {
 			System.out.println("결과는"+result+"입니다.");
 		}
 		
-//	@Test
+	//@Test
 	public void testgetOrdersCartList() {
+		User user = new User();
+		user.setUserId("test01");
 		
+		Product product = new Product();
+//		product.getProdName();
+//		product.getProdInfo();
+//		product.getProdImg();
+//		product.getPrice();
+//		
+//		Cart cart = new Cart();
+//		cart.getStoreName();
+//		cart.getProdCount();
+		
+		Orders orders = new Orders();
+		orders.getOrderPrice();
+	int getCartTotalCount = ordersMapper.getCartTotalCount();
+	if(getCartTotalCount > 0) {
+		List<Cart> cartList = ordersMapper.getOrdersCartList();
+		System.out.println("==3=="+getCartTotalCount);
+		System.out.println("=="+cartList);
+		if(CollectionUtils.isEmpty(cartList) == false) {
+			System.out.println("==5==");
+			for(Cart cart : cartList) {
+	//			cart.setUser(user);
+				cart.setProduct(product);
+	//			cart.setO
+				
+				System.out.println("=========================");
+				System.out.println(cart.getUserId());
+				System.out.println(cart.getProduct().getProdName());
+				System.out.println(cart.getProduct().getProdInfo());
+				System.out.println(cart.getProduct().getProdImg());
+				System.out.println(cart.getProduct().getPrice());
+				System.out.println(cart.getProdCount());
+	//			System.out.println(cart.getOrderNo());
+				System.out.println("=========================");
+				}
+			}
+		}
 	}
 	
+//	@Test
+//	public 
 }
