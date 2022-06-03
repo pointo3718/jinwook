@@ -9,6 +9,11 @@ import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
 import com.jinwook.home.service.user.UserServiceImpl;
 
+
+import lombok.Data;
+
+
+
 @SpringBootTest
 class UserMapperTest {
 

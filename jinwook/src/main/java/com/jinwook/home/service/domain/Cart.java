@@ -1,8 +1,5 @@
 package com.jinwook.home.service.domain;
 
-import java.sql.Date;
-import java.sql.Time;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,7 +15,7 @@ public class Cart {
 	private int orderNo;
 	private String storeName;
 	private int prodCount;
-	private int cartStatus;
+	private boolean cartStatus;
 
 	public Cart() {
 		// TODO Auto-generated constructor stub

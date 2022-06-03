@@ -47,7 +47,7 @@
 		useGeneratedKeys="true" keyProperty="prodNo">
 		INSERT INTO
 		product(prod_no,store_no,prod_name, price, prod_info, prod_img,
-		prod_orign, soldout)
+		prod_orign, is_soldout)
 		VALUES(#{prodNo:INTEGER},#{storeNo:INTEGER},
 		#{prodName},#{price}, #{prodInfo}, #{prodImg},#{prodOrign},1)
 	</insert>
@@ -60,24 +60,104 @@
 		store_no=#{storeNo}
 	</update>
 
+	<select id="getStoreReviewStar" parameterType="int"
+		resultType="Orders">
+		SELECT ROUND(AVG(review_star),1)
+		FROM orders
+		WHERE
+		store_no=#{storeNo}
+	</select>
+
+
 	<select id="getStore" parameterType="int" resultType="Store">
 		SELECT
-		s.store_no, s.store_name, s.store_type, s.store_addr, s.start_time,
-		s.end_time, s.holiday,
-		s.store_intro, vt.별점, p.prod_no, p.prod_name,
-		p.price, p.prod_orign, p.prod_info
-		FROM store s, product p, orders o,(SELECT ROUND(AVG(review_star),1) 별점
-		FROM orders
-		WHERE store_no=#{storeNo})vt
-		WHERE s.store_no=p.store_no AND
-		s.store_no=o.store_no AND
-		p.store_no=s.store_no AND
-		s.store_no = #{storeNo}
-		GROUP BY s.store_no, s.store_name, s.store_type, s.store_addr,
-		s.start_time, s.end_time, s.holiday,
-		s.store_intro, vt.별점, p.prod_no,
-		p.prod_name, p.price, p.prod_orign, p.prod_info;
+		store_no, store_name, store_type, store_addr, start_time, end_time,
+		holiday, store_intro
+		FROM store
+		WHERE
+		store_no =#{storeNo}
 	</select>
+
+	<select id="getStoreProductList" parameterType="int"
+		resultType="Product">
+		SELECT
+		prod_no, prod_name, price, prod_orign, prod_info
+		FROM
+		product
+		WHERE
+		store_no=#{storeNo}
+	</select>
+
+	<select id="getCouponList" parameterType="String"
+		resultType="Coupon">
+		SELECT
+		coupon_no, coupon_type, coupon_dc, coupon_valid_date
+		FROM coupon
+		WHERE
+		coupon_status=0 AND
+		user_id=#{userId}
+	</select>
+
+
+	<update id="addOrderCoupon" parameterType="Coupon">
+		UPDATE coupon
+		SET
+		coupon_status=#{couponStatus}
+		WHERE coupon_no=#{couponNo}
+	</update>
+
+	<select id="getStoreWallet" parameterType="String"
+		resultType="store">
+		SELECT
+		s.total_earn, u.jp_balance
+		FROM store s, users u
+		WHERE
+		s.user_id=u.user_id AND
+		s.user_id=#{userId}
+	</select>
+
+	<select id="getStoreWalletRefund" parameterType="String"
+		resultType="request">
+		SELECT
+		res_date,req_date,refund_money,req_status
+		FROM request
+		WHERE
+		user_id=#{userId}
+	</select>
+	
+	<select id="getStoreTotalCount" parameterType="Store"
+		resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+		store
+	</select>
+
+	<select id="getCouponTotalCount" parameterType="Coupon"
+		resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+		coupon
+	</select>
+
+	<select id="getProductTotalCount" parameterType="Product"
+		resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+		product
+	</select>
+	
+	<select id="getRequestTotalCount" parameterType="Request"
+		resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+		request
+	</select>
+	
+	
 
 
 

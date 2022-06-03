@@ -81,27 +81,33 @@ public class OrdersMapperTest {
 		User user = new User();
 		user.setUserId("test01");
 		
-		Store store = new Store();
-		store.setStoreNo(10000);
-		store.setStoreName("진욱이네");
+//		Store store = new Store();
+//		store.setStoreNo(10000);
+//		store.setStoreName("진욱이네");
 		
-//		Product product = new Product();
-//		product.setStoreNo(10000);
-//		product.setProdName("감자");
-//		product.setProdImg("가암자");
+		Product product = new Product();
+		product.setProdName("감자");
+		product.setProdImg("가암자.jsp");
 		
-//		Orders order = new Orders();
-//		order.setUser(user);
+		Cart cart = new Cart();
+		
+		
+//		Orders orders = new Orders();
+//		orders.setUser(user);
 		
 		int ordersTotalCount = ordersMapper.getOrdersTotalCount();
 		if(ordersTotalCount > 0) {
 			List<Orders> ordersList = ordersMapper.getOrdersList();
-			
-			if(CollectionUtils.isEmpty(ordersList) == false) { 
+			System.out.println(ordersList.get(1)); 
+			System.out.println(ordersTotalCount);
+			if(CollectionUtils.isEmpty(ordersList) == false) {
+				System.out.println("==2");
 				for(Orders orders : ordersList) {
 					orders.setUser(user);
-					orders.setStore(store);
+//					cart.setProduct(product);
+//					orders.setStore(store);
 //					orders.setProduct(product);
+					
 					System.out.println("=========================");
 					System.out.println(orders.getUser().getUserId());
 					System.out.println(orders.getOrderNo());
@@ -111,8 +117,8 @@ public class OrdersMapperTest {
 					System.out.println(orders.getOrderPrice());
 					
 //					Product product = ordersMapper.get
-					System.out.println(orders.getProduct().getProdName());
-					System.out.println(orders.getProduct().getProdImg());
+//					System.out.println(cart.getProduct());
+//					System.out.println(orders.getProduct().getProdImg());
 					System.out.println("=========================");
 				}
 			}
@@ -124,19 +130,47 @@ public class OrdersMapperTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testaddOrdersCart() {
 		
 		Product product = new Product();
 		product.setProdNo(10003);
 		
 		Cart cart = new Cart();
-		cart.setUserId("test09");
+		cart.setUserId("test01");
 		cart.setProduct(product);
-		cart.setOrderNo(0);
-		cart.setProdCount(4);
+//		cart.setOrderNo(null);// 
+		cart.setProdCount(2);
 		cart.setStoreName("진욱이네");
-		cart.setCartStatus(0);
+		cart.setCartStatus(false);
+		
+		int result = ordersMapper.addOrdersCart(cart);
+		System.out.println("결과는"+result+"입니다.");
+	}
+	
+	//@Test
+	public void testupdateOrdersCart() {
+		Cart cart= new Cart();
+		cart.setUserId("test01");
+		cart.setCartNo(10005);
+		cart.setProdCount(4);
+		int result = ordersMapper.updateOrdersCart(cart);
+		System.out.println("결과는"+result+"입니다.");
+	}
+	
+	//@Test
+		public void testdeleteOrdersCart() {
+			Cart cart= new Cart();
+			cart.setUserId("test01");
+			cart.setOrderNo(10000);
+			cart.setCartStatus(true);
+			int result = ordersMapper.deleteOrdersCart(cart);
+			System.out.println("결과는"+result+"입니다.");
+		}
+		
+	@Test
+	public void testgetOrdersCartList() {
+		
 	}
 	
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.jinwook.home.mapper.RequestMapper">
 
 
-	<!-- 상점 등록 신청 -->
+	<!-- 상점 등록 (미수락 상태) -->
 	<insert id="addRequestAddStore" parameterType="Store">
 			INSERT INTO store 
 			VALUES (
@@ -27,6 +27,20 @@
 				, 0
 			)
 	</insert>
+	
+	<!-- 상점 등록 요청 등록 -->
+	<insert id="addRequestAddStoreForAdmin" parameterType="Request">
+			INSERT INTO request 
+			VALUES (
+				  NULL
+				, #{userId}
+				, #{storeNo}
+				, 1 <!-- 상점등록요청 -->
+				, 0 <!-- 답변전 -->
+				, null
+				, SYSDATE()  
+			)
+	</insert>
 
 
 	<!-- 상점 등록 수락 -->
@@ -34,7 +48,6 @@
 		UPDATE store
 		SET
 			  store_status = true
-			
 		WHERE
 			store_no = #{storeNo}
 	</update>
@@ -51,6 +64,10 @@
 	
 	
 <!-- 환급 신청 -->
+
+
+
+
 <!-- 환급 수락 (진욱페이 잔액 변경) -->
 
 <!-- 상점 삭제 신청 -->

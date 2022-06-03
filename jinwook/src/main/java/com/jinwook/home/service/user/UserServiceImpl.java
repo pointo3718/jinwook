@@ -19,10 +19,12 @@ public class UserServiceImpl implements UserService{
 		this.userMapper = userMapper;
 	}
 	
+	/*
 	///Constructor
 	public UserServiceImpl() throws Exception {
 		System.out.println(this.getClass());
 	}
+	*/
 
 	///Method
 	public void addUser(User user) throws Exception {

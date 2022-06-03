@@ -1,7 +1,6 @@
 package com.jinwook.home.service.domain;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -15,6 +14,8 @@ public class Store {
 
    private int storeNo;
    private User user;
+   private Orders orders;
+   private Product product;
    private String userId;
    private String storeName;
    private String storeAddr;

@@ -27,9 +27,11 @@
 		
 	<select id="getOrdersList" parameterType="Orders" resultType="Orders">
 		SELECT
-			o.user_id,o.order_no,o.order_price,o.order_status,o.pickup_time,o.order_date
+			user_id,order_no,order_price,order_status,pickup_time,order_date
 		FROM
-			orders o 
+			orders
+		WHERE
+			user_id = "test01";
 	</select>
 	
 	<select id="getOrdersTotalCount" parameterType="Orders" resultType="int">
@@ -41,29 +43,34 @@
 	
 	<insert id="addOrdersCart" useGeneratedKeys="true" keyProperty="cartNo">
 		INSERT
-		INTO cart(user_id,prod_no,order_no,prod_count,store_name,cart_status)
-		VALUES(#{userId},#{prodNo},#{orderNo:VARCHAR},#{prodCount:VARCHAR},#{stroe_name},#{cart_status})
+		INTO cart(user_id,prod_no,prod_count,store_name,cart_status)
+		VALUES(#{userId},#{product.prodNo},#{prodCount:VARCHAR},#{storeName},#{cartStatus})
 	</insert>
 	
 	<update id="updateOrdersCart">
 		UPDATE cart
 		<set>
-		
+			prod_count = #{prodCount}
 		</set>
-		WHERE
+		WHERE user_id = #{userId}
+		AND cart_no	= #{cartNo}
 	</update>
 	
 	<update id="deleteOrdersCart">
-		UPDATE
-		FROM
-		WHERE
+		UPDATE cart
+		<set>
+			cart_status = #{cartStatus}
+		</set>
+		WHERE user_id = #{userId}
+		AND order_no = #{orderNo}
 	</update>
 	
 	<select id="getOrdersCartList">
-	
+		SELECT store_name ,prod_img ,prod_name ,prod_info ,prod_count ,price  ,order_price
+		FROM
+		WHERE
 	</select>
 
-	
 </mapper>
 	
 	
