@@ -23,7 +23,8 @@ public class Orders {
 	private String buyerPhone;		//구매자전화번호	|주문(기본으로 회원아이디에 해당하는 정보담아져있음)
 	private int orderNo;			//주문번호		|주문
 	private Date orderDate;			//주문날짜		|주문
-	private LocalDateTime pickupTime;		//픽업시간		|주문
+	private int plusTime;			//픽업시간인int	|주문
+	private LocalDateTime pickupTime;	//픽업시간형식	|주문
 	private String orderReq;		//주문요청		|주문
  	private String orderStatus;		//주문상태		|주문
  	private int finalPrice;			//실결제금액	|주문(회원주문시 쿠폰dc,등급dc 차감액)
@@ -40,7 +41,7 @@ public class Orders {
 	private Coupon coupon;
 	private String reviewTitle;		//리뷰제목		|주문리뷰
 	private String reviewContent;	//리뷰내용		|주문리뷰
-	private LocalDate reviewDate;		//리뷰날짜		|주문리뷰
+	private LocalDate reviewDate;	//리뷰날짜		|주문리뷰
 	private int reviewStar;			//별점		|주문리뷰
 	private String reviewImg1;		//리뷰사진 1	|주문리뷰
 	private String reviewImg2;		//리뷰사진 2	|주문리뷰

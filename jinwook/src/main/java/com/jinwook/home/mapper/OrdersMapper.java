@@ -16,7 +16,7 @@ public interface OrdersMapper {
 	
 	public List<Orders> getOrdersList(String userId); 	//주문내역
 	
-	public Orders getOrders(int orderNo);	//주문내역상세
+	public List<Orders> getOrders(int orderNo);	//주문내역상세
 	
 	public int deleteOrders(Orders orders);	//주문내역삭제
 	
@@ -30,7 +30,7 @@ public interface OrdersMapper {
 	
 	public int deleteOrdersCart(Cart cart);	// 장바구니 삭제
 	
-	public List<Cart> getOrdersCartList();	// 장바구니 목록
+	public List<Cart> getOrdersCartList(Cart cart);	// 장바구니 목록
 
 	public int getCartTotalCount();			// 장바구니 품목개수
 	
