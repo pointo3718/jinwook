@@ -40,6 +40,10 @@
 		WHERE user_id = #{userId}
 	 </update>
 	 
+	 <select id="checkId" parameterType="String" resultType="int">
+        SELECT COUNT(userId) FROM USER WHERE user_id= #{userId}
+    </select>
+	 
 	 <select 	id="checkNickName"	parameterType="string"	resultType="user">
 		SELECT
 		*	

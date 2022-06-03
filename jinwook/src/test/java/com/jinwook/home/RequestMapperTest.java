@@ -48,7 +48,7 @@ public class RequestMapperTest {
 		Store store = requestMapper.checkStoreStatus(10014);
 		
 		
-		request.setStoreNo(""); //??
+		request.setStoreNo(1); //??
 		store.setStoreAddr("서울시 강북구 진욱이네");
 		store.setStoreType("3");
 		store.setStorePhone("010-9500-7753");
