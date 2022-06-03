@@ -59,13 +59,15 @@
 	</select>
 
 	<!-- ?Board selectList? -->
-	<select id="getBoardList" parameterType="com.jinwook.home.service.domain.Board" resultType="com.jinwook.home.service.domain.Board">
+	<select id="getBoardList" parameterType="Criteria" resultType="com.jinwook.home.service.domain.Board">
 		SELECT
 			<include refid="boardColumns" />
 		FROM
 			board
 		WHERE
 			board_no = #{boardNo}
+		LIMIT
+         #{startPage}, #{recordsPerPage}
 	</select>
 
 	<!--  Board delete -->
@@ -77,7 +79,7 @@
 	</delete>
 	
 	<!-- 게시판 목록 개수 -->
-	<select id="getBoardTotalCount" parameterType="com.jinwook.home.service.domain.Board" resultType="int">
+	<select id="getBoardTotalCount" parameterType="Criteria" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
@@ -128,13 +130,15 @@
 	</select>
 
 	<!-- ?Recipe selectList? -->
-	<select id="getRecipeList" parameterType="com.jinwook.home.service.domain.Recipe" resultType="com.jinwook.home.service.domain.Recipe">
+	<select id="getRecipeList" parameterType="Criteria" resultType="com.jinwook.home.service.domain.Recipe">
 		SELECT
 			<include refid="recipeColumns" />
 		FROM
 			recipe
 		WHERE
 			rcp_no = #{rcpNo}
+		LIMIT
+         #{startPage}, #{recordsPerPage}
 	</select>
 
 	<!-- Recipe update -->
@@ -151,7 +155,7 @@
 	</update>
 
 	<!-- 레시피 목록 개수 -->
-	<select id="getRecipeTotalCount" parameterType="com.jinwook.home.service.domain.Recipe" resultType="int">
+	<select id="getRecipeTotalCount" parameterType="Criteria" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
@@ -190,7 +194,7 @@
 	</delete>
 	
 		<!-- 상점후기 목록 개수 -->
-	<select id="getReviewTotalCount" parameterType="com.jinwook.home.service.domain.Recipe" resultType="int">
+	<select id="getReviewTotalCount" parameterType="Criteria" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
@@ -199,13 +203,15 @@
 	</select>
 	
 		<!--   -->
-	<select id="getReviewList" parameterType="com.jinwook.home.service.domain.Orders" resultType="com.jinwook.home.service.domain.Orders">
+	<select id="getReviewList" parameterType="Criteria" resultType="com.jinwook.home.service.domain.Orders">
 		SELECT
 			*
 		FROM
 			orders
 		WHERE
 			order_no = #{orderNo}
+		LIMIT
+         #{startPage}, #{recordsPerPage}
 	</select>
 	
 	 <sql id="commentColumns">
@@ -250,36 +256,47 @@
 			comment_no = #{commentNo}
 	</update>
 
-	<sql id="jjimColumns">
-	jjim_no
-	,user_id
-	,rcp_no
-	,store_no
-	</sql>
+	<insert id="addStoreJjim" parameterType="Jjim" useGeneratedKeys="true" keyProperty="jjimNo">
+		INSERT INTO jjim (store_no, user_id)
+		VALUES(#{storeNo}, #{user.userId})
+	</insert>
 
-	<insert id="addJjim" parameterType="Jjim" useGeneratedKeys="true" keyProperty="jjimNo">
-		insert into Jjim (
-			<include refid="jjimColumns" />
-		) values(#{jjimNo:INTEGER} #{storeNo:INTEGER}, #{rcpNo:INTEGER}, #{user.userId:VARCHAR})
+	<insert id="addRecipeJjim" parameterType="Jjim" useGeneratedKeys="true" keyProperty="jjimNo">
+		INSERT INTO jjim (rcp_no, user_id)
+		VALUES(#{rcpNo}, #{user.userId})
 	</insert>
 	
-	<delete id="deleteBoardLike">
-	DELETE FROM tbl_board_like
-	WHERE board_id = #{boardId} AND user_id = #{userId}
-</delete>
+	<delete id="deleteStoreJjim" parameterType="Jjim">
+		DELETE FROM jjim
+		WHERE store_no = #{storeNo} AND user_id = #{user.userId}
+	</delete>
 
-	<select id="updateBoardLike">
-		UPDATE tbl_board
+	<delete id="deleteRecipeJjim" parameterType="Jjim">
+		DELETE FROM jjim
+		WHERE rcp_no = #{rcpNo} AND user_id = #{user.userId}
+	</delete>
+	
+	<select id="updateRecipeJjim">
+		UPDATE recipe
+		SET
+		rcp_jjimcnt = (SELECT COUNT(*)
+		FROM jjim
+		WHERE rcp_no = #{rcpNo})
+		WHERE rcp_no = #{rcpNo}
+	</select>
+	
+	<!-- <select id="updateStoreJjim">
+		UPDATE store
 		SET
 		board_likecnt = (SELECT COUNT(*)
 		FROM tbl_board_like
 		WHERE board_id = #{boardId})
 		WHERE board_id = #{boardId}
-	</select>
+	</select> -->
 
-	<select id="getBoardLike" resultType="int">
-		SELECT COUNT(board_like_id) FROM tbl_board_like WHERE board_id = #{boardId}
-		AND user_id = #{userId}
+	<select id="getRecipeJjim" resultType="User">
+		SELECT COUNT(jjim_no) FROM jjim WHERE rcp_no = #{rcpNo}
+		AND user_id = #{user.userId}
 	</select>
 
 	

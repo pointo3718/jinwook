@@ -3,6 +3,7 @@ package com.jinwook.home.service.board;
 import java.util.List;
 import java.util.Map;
 
+import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
@@ -20,15 +21,15 @@ public interface BoardService {
 	
 	public Board getBoard(int boardNo);
 	
-	public List<Board> getBoardList();
+	public List<Board> getBoardList(Criteria criteria);
 	
-	public List<Board> getRankList();
+	public List<Board> getRankList(Criteria criteria);
 	
 	public int addReview(Orders orders);
 	
 	public int deleteReview(int ordersNo);
 	
-	public List<Orders> getReviewList();
+	public List<Orders> getReviewList(Criteria criteria);
 	
 	public int addRecipe(Recipe rcp);
 	
@@ -38,7 +39,7 @@ public interface BoardService {
 	
 	public Recipe getRecipe(int rcpNo);
 	
-	public List<Recipe> getRecipeList();
+	public List<Recipe> getRecipeList(Criteria criteria);
 	
 	public int addComment(Comment comment);
 	
