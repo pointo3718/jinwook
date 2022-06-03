@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.jinwook.home.common.Criteria;
 import com.jinwook.home.mapper.BoardMapper;
 import com.jinwook.home.mapper.OrdersMapper;
 import com.jinwook.home.service.domain.Board;
@@ -94,10 +95,10 @@ public class BoardMapperTest {
 	}
 	
 	@Test
-	public void testOfGetBoardList() {
-		int boardTotalCount = boardMapper.getBoardTotalCount();
+	public void testOfGetBoardList(Criteria criteria) {
+		int boardTotalCount = boardMapper.getBoardTotalCount(criteria);
 		if (boardTotalCount > 0) {
-			List<Board> boardList = boardMapper.getBoardList();
+			List<Board> boardList = boardMapper.getBoardList(criteria);
 			
 			// 리스트가 비어있는지 체크
 			if (CollectionUtils.isEmpty(boardList) == false) { 		
@@ -194,10 +195,10 @@ public class BoardMapperTest {
 	}
 	
 	@Test
-	public void testOfGetRecipeList() {
-		int boardTotalCount = boardMapper.getRecipeTotalCount();
+	public void testOfGetRecipeList(Criteria criteria) {
+		int boardTotalCount = boardMapper.getRecipeTotalCount(criteria);
 		if (boardTotalCount > 0) {
-			List<Recipe> rcpList = boardMapper.getRecipeList();
+			List<Recipe> rcpList = boardMapper.getRecipeList(criteria);
 			
 			// 리스트가 비어있는지 체크
 			if (CollectionUtils.isEmpty(rcpList) == false) { 		
@@ -243,17 +244,16 @@ public class BoardMapperTest {
 		
 		User user = new User();
 		
-		orders.setOrderNo(10036);
+		orders.setOrderNo(10035);
 		user.setUserId("test09");
 		orders.setUser(user);
-		orders.setStoreNo(10011);
 		orders.setReviewTitle("1번 리뷰");
 		orders.setReviewContent("1번 리뷰 내용");
 		orders.setReviewDate(LocalDate.now());
 		orders.setReviewStar(4);
-		orders.setReviewImg1("imge3");
-		orders.setReviewImg2("img1");
-		orders.setReviewImg3("img2");
+		orders.setReviewImg1("imge1");
+		orders.setReviewImg2("img2");
+		orders.setReviewImg3("img3");
 		
 		int result = boardMapper.addReview(orders);
 		System.out.println(" 결과는 "+result+"입니다.");
@@ -268,21 +268,20 @@ public class BoardMapperTest {
 		orders.setOrderNo(10036);
 		user.setUserId("test09");
 		orders.setUser(user);
-		orders.setStoreNo(10011);
 		
 		int result = boardMapper.deleteReview(10036);
 		System.out.println(" 결과는 "+result+"입니다.");
 	}
 	
 	@Test
-	public void testOfGetReviewList() {
-		int boardTotalCount = boardMapper.getReviewTotalCount();
+	public void testOfGetReviewList(Criteria criteria) {
+		int boardTotalCount = boardMapper.getReviewTotalCount(criteria);
 		if (boardTotalCount > 0) {
-			List<Orders> ordersList = ordersMapper.selectOrdersList();
+			List<Orders> reviewList = boardMapper.getReviewList(criteria);
 			
 			// 리스트가 비어있는지 체크
-			if (CollectionUtils.isEmpty(ordersList) == false) { 		
-				for (Orders orders : ordersList) {
+			if (CollectionUtils.isEmpty(reviewList) == false) { 		
+				for (Orders orders : reviewList) {
 					System.out.println("=========================");
 					System.out.println(orders.getUser().getUserId());
 					System.out.println(orders.getReviewTitle());
