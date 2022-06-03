@@ -15,7 +15,7 @@ public class Recipe {
 	private int rcpNo;
 //	private String userId;
 	private User user;
-	private int rcpSeqNo;
+//	private int rcpSeqNo;
 	private String rcpTitle;
 	private String rcpContent;
 	private LocalDate rcpDate;
