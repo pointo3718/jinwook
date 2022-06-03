@@ -37,20 +37,20 @@ class UserMapperTest {
 	@Test
 	public void addUserTest()  throws Exception{
 		User user = new User();
-		user.setUserId("dk111dk");
-		user.setPassword("dk1dk");
+		user.setUserId("dk1111dk");
+		user.setPassword("dk11dk");
 		user.setBirth("19991000");
-		user.setEmail("asd1a@1asd");
+		user.setEmail("asd11a@1asd");
 		user.setGrade("일반");
 		user.setRole("사장");
 		user.setUserName("ㅁ");
 		user.setGender("남");
-		user.setPhone("010-1221-5678");
-		user.setBusinessNo("123122323");
+		user.setPhone("010-1421-5678");
+		user.setBusinessNo("1231222323");
 		user.setUserByeStatus(false);
 		user.setJpBalance(0);
 		user.setJpPassword("123456");
-		user.setNickName("아아1아1");
+		user.setNickName("아1아1아1");
 		user.setBlacklistStatus(false);
 		
 		userMapper.addUser(user);
