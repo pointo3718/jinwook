@@ -1,13 +1,17 @@
 package com.jinwook.home.service.board;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.jinwook.home.common.Criteria;
 import com.jinwook.home.mapper.BoardMapper;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
 
@@ -37,13 +41,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> getBoardList() {
+	public List<Board> getBoardList(Criteria criteria) {
 		List<Board> boardList = Collections.emptyList();
 
-		int boardTotalCount = boardMapper.getBoardTotalCount();
+		int boardTotalCount = boardMapper.getBoardTotalCount(criteria);
 
 		if (boardTotalCount > 0) {
-			boardList = boardMapper.getBoardList();
+			boardList = boardMapper.getBoardList(criteria);
 		}
 
 		return boardList;
@@ -51,8 +55,8 @@ public class BoardServiceImpl implements BoardService {
 
 	//보류: 댓글, 추천, 레시피 정보 어떻게 다 담지?
 	@Override
-	public List<Board> getRankList() {
-		return boardMapper.getRankList();
+	public List<Board> getRankList(Criteria criteria) {
+		return boardMapper.getRankList(criteria);
 	}
 
 	@Override
@@ -66,13 +70,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Orders> getReviewList() {
+	public List<Orders> getReviewList(Criteria criteria) {
 		List<Orders> reviewList = Collections.emptyList();
 
-		int reviewTotalCount = boardMapper.getReviewTotalCount();
+		int reviewTotalCount = boardMapper.getReviewTotalCount(criteria);
 
 		if (reviewTotalCount > 0) {
-			reviewList = boardMapper.getReviewList();
+			reviewList = boardMapper.getReviewList(criteria);
 		}
 
 		return reviewList;
@@ -99,13 +103,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Recipe> getRecipeList() {
+	public List<Recipe> getRecipeList(Criteria criteria) {
 		List<Recipe> recipeList = Collections.emptyList();
 
-		int recipeTotalCount = boardMapper.getRecipeTotalCount();
+		int recipeTotalCount = boardMapper.getRecipeTotalCount(criteria);
 
 		if (recipeTotalCount > 0) {
-			recipeList = boardMapper.getRecipeList();
+			recipeList = boardMapper.getRecipeList(criteria);
 		}
 
 		return recipeList;
@@ -126,15 +130,16 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.deleteComment(commentNo);
 	}
 
-	@Override
-	public int addJjim(int jjimNo) {
-		return boardMapper.addJjim(jjimNo);
-	}
+	
+//	@Override
+//	public int addJjim(int jjimNo) {
+//		return boardMapper.addJjim(jjimNo);
+//	}
 
-	@Override
-	public int deleteJjim(int jjimNo) {
-		return boardMapper.deleteJjim(jjimNo);
-	}
+//	@Override
+//	public int deleteJjim(int jjimNo) {
+//		return boardMapper.deleteJjim(jjimNo);
+//	}
 
 	@Override
 	public int addRecommend(int recommendNo) {
@@ -146,5 +151,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.deleteRecommend(recommendNo);
 	}
 
+	@Override
+	public Jjim addJjim(int rcpNo, int storeNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
