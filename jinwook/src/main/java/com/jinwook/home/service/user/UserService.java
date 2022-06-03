@@ -13,7 +13,7 @@ public interface UserService {
 		
 		public void deleteUser(User user) throws Exception;
 		
-		public boolean checkId(String userId) throws Exception;
+		public int checkId(String userId) throws Exception;
 		
 		public boolean checkNickName(String nickName) throws Exception;
 		

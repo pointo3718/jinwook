@@ -57,12 +57,9 @@ public class UserServiceImpl implements UserService{
 		
 		
 	}
-	public boolean checkId(String userId) throws Exception {
-		boolean result=true;
-		User user=userMapper.getUser(userId);
-		if(user != null) {
-			result=false;
-		}
+	public int checkId(String userId) throws Exception {
+//		boolean result=true;
+		int result=userMapper.checkId(userId);
 		return result;
 	}
 	

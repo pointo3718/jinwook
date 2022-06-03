@@ -46,6 +46,19 @@ public class RequestMapperTest {
 		request.setUserId("test12");
 		request.setStoreNo(10014);  // 서비스에서 어떻게 가져올지 ?
 		
+		Store store = requestMapper.checkStoreStatus(10014);
+		
+		
+		request.setStoreNo(1); //??
+		store.setStoreAddr("서울시 강북구 진욱이네");
+		store.setStoreType("3");
+		store.setStorePhone("010-9500-7753");
+		store.setStoreIntro("부들이네에 어서오세요...");
+		store.setBussinessCard("부들이의_영업신고증.jpg");
+		store.setStoreImage("부들이네.jpg");
+		store.setAccNo("123123-12-123123");
+		store.setBank("농협");
+
 		int result = requestMapper.addRequestAddStoreForAdmin(request);
 		System.out.println("결과는 " + result + "입니다.");
 	}
