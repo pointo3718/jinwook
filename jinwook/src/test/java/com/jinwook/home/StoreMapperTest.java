@@ -135,8 +135,43 @@ class StoreMapperTest {
 		}
 	}
 	
+	@Test
+	public void testOfGetStore() {
+		
+		
+		int getStoreTotalCount = storeMapper.getStoreTotalCount();
+		if (getStoreTotalCount > 0) {
+			List<Store> getStore = storeMapper.getStore(10010);
+			
+			if (CollectionUtils.isEmpty(getStore) == false) { 		
+				for (Store store : getStore) {
+					System.out.println("=========================");
+	
+					System.out.println(store.getStoreNo());
+					System.out.println(store.getStoreName());	
+					System.out.println(store.getStoreType());
+					System.out.println(store.getStoreAddr());
+					System.out.println(store.getStartTime());
+					System.out.println(store.getEndTime());
+					System.out.println(store.getHoliday());
+					System.out.println(store.getStoreIntro());					
+		//		    System.out.println(store.getOrders().getReviewStar());
+					System.out.println(store.getProduct().getProdNo());
+					System.out.println(store.getProduct().getProdName());
+					System.out.println(store.getProduct().getPrice());
+					System.out.println(store.getProduct().getProdOrign());
+					System.out.println(store.getProduct().getProdInfo());
+					
+
+					
+					System.out.println("=========================");
+				}
+			}
+		}
+	}
 	
 	
+	/*
 	@Test
 	public void testOfGetStore() {
 		Store store = storeMapper.getStore(10011);
@@ -153,6 +188,7 @@ class StoreMapperTest {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	@Test
 	public void testOfGetStoreReviewStar() {
@@ -200,39 +236,25 @@ class StoreMapperTest {
 	}
 	
 	
+	*/
+	
 	@Test
 	public void testOfGetStoreWallet() {
-		Store store = storeMapper.getStoreWallet("test01");
-//		System.out.println(product.toString());
-		try {
-			//String boardJson = new ObjectMapper().writeValueAsString(board);
-            String storeJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(store);
-
-			System.out.println("=========================");
-			System.out.println(storeJson);
-			System.out.println("=========================");
-
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Test
-	public void testOfGetStoreWalletRefund() {
 		
-		int getRequestTotalCount = storeMapper.getRequestTotalCount();
-		if (getRequestTotalCount > 0) {
-			System.out.println(getRequestTotalCount);
-			List<Request> requestList = storeMapper.getStoreWalletRefund("test01");
-			System.out.println(requestList.get(1));
-			if (CollectionUtils.isEmpty(requestList) == false) { 		
-				for (Request request : requestList) {
+		int getStoreTotalCount = storeMapper.getStoreTotalCount();
+		if (getStoreTotalCount > 0) {
+			System.out.println(getStoreTotalCount);
+			List<Store> walletList = storeMapper.getStoreWallet(10000);
+			if (CollectionUtils.isEmpty(walletList) == false) { 		
+				for (Store store : walletList) {
 					System.out.println("=========================");
-	
-					System.out.println(request.getResDate());
-					System.out.println(request.getReqDate());					
-					System.out.println(request.getRefundMoney());
-					System.out.println(request.getReqStatus());
+					
+					System.out.println(store.getTotalEarn());					
+					System.out.println(store.getUser().getJpBalance());
+					System.out.println(store.getRequest().getResDate());
+					System.out.println(store.getRequest().getReqDate());					
+					System.out.println(store.getRequest().getRefundMoney());
+					System.out.println(store.getRequest().getReqStatus());
 
 					
 					System.out.println("=========================");

@@ -5,25 +5,31 @@
 
 <configuration>
 
-	<!-- 별칭 -->
-	<typeAliases>
-		<typeAlias type="com.jinwook.home.common.Criteria" alias="criteria"/>
-		<typeAlias type="com.jinwook.home.service.domain.User" alias="user"/>
-		<typeAlias type="com.jinwook.home.service.domain.Store" alias="store"/>
-		<typeAlias type="com.jinwook.home.service.domain.Complain" alias="complain"/>
-		<typeAlias type="com.jinwook.home.service.domain.Board" alias="board"/>
-		<typeAlias type="com.jinwook.home.service.domain.Cart" alias="cart"/>
-		<typeAlias type="com.jinwook.home.service.domain.Comment" alias="comment"/>
-		<typeAlias type="com.jinwook.home.service.domain.Jjim" alias="jjim"/>
-		<typeAlias type="com.jinwook.home.service.domain.Jpay" alias="jpay"/>
-		<typeAlias type="com.jinwook.home.service.domain.Notice" alias="notice"/>
-		<typeAlias type="com.jinwook.home.service.domain.Orders" alias="orders"/>
-		<typeAlias type="com.jinwook.home.service.domain.Product" alias="product"/>
-		<typeAlias type="com.jinwook.home.service.domain.Recipe" alias="recipe"/>
-		<typeAlias type="com.jinwook.home.service.domain.Recommend" alias="recommend"/>
-		<typeAlias type="com.jinwook.home.service.domain.Request" alias="request"/>
-		<typeAlias type="com.jinwook.home.service.domain.Coupon" alias="coupon"/>
-		<typeAlias type="com.jinwook.home.common.Criteria" alias="criteria"/>
-	</typeAliases>
-
+   <settings>
+      <setting name="mapUnderscoreToCamelCase" value="true"/>
+      <setting name="callSettersOnNulls" value="true"/>
+      <setting name="jdbcTypeForNull" value="NULL"/>
+   </settings>
+   
+   <!-- 별칭 -->
+   <typeAliases>
+      <typeAlias type="com.jinwook.home.service.domain.User" alias="user"/>
+      <typeAlias type="com.jinwook.home.service.domain.Store" alias="store"/>
+      <typeAlias type="com.jinwook.home.service.domain.Complain" alias="complain"/>
+      <typeAlias type="com.jinwook.home.service.domain.Board" alias="board"/>
+      <typeAlias type="com.jinwook.home.service.domain.Cart" alias="cart"/>
+      <typeAlias type="com.jinwook.home.service.domain.Comment" alias="comment"/>
+      <typeAlias type="com.jinwook.home.service.domain.Jjim" alias="jjim"/>
+      <typeAlias type="com.jinwook.home.service.domain.Jpay" alias="jpay"/>
+      <typeAlias type="com.jinwook.home.service.domain.Notice" alias="notice"/>
+      <typeAlias type="com.jinwook.home.service.domain.Orders" alias="orders"/>
+      <typeAlias type="com.jinwook.home.service.domain.Product" alias="product"/>
+      <typeAlias type="com.jinwook.home.service.domain.Recipe" alias="recipe"/>
+      <typeAlias type="com.jinwook.home.service.domain.Recommend" alias="recommend"/>
+      <typeAlias type="com.jinwook.home.service.domain.Request" alias="request"/>
+      <typeAlias type="com.jinwook.home.service.domain.Coupon" alias="coupon"/>
+      
+      <typeAlias type="com.jinwook.home.common.Criteria" alias="criteria"/>
+   </typeAliases>
+   
 </configuration>

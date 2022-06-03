@@ -2,11 +2,9 @@ package com.jinwook.home.mapper;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
@@ -32,15 +30,13 @@ public interface StoreMapper {
 	
 	public List<Coupon> getCouponList(String userId);
 	
-	public Store getStore(int storeNo);
+	public List<Store> getStore(int storeNo);
 	
-	public Orders getStoreReviewStar(int storeNo);
+//	public Orders getStoreReviewStar(int storeNo);
 	
-	public List<Product> getStoreProductList(int StoreNo);
+//	public List<Product> getStoreProductList(int StoreNo);
 	
-	public Store getStoreWallet(String userId);
-	
-	public List<Request> getStoreWalletRefund(String userId);
+	public List<Store> getStoreWallet(int storeNo);
 	
 	public int getStoreTotalCount();
 	
