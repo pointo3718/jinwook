@@ -24,6 +24,7 @@ public class AdminMapperTest {
 	
 	
 	///////////////// 유저 상세 //////////////////
+
 	@Test
 	public void testOfSelectUserDetail() {
 		User user = adminMapper.getUserAdmin("test01");
@@ -62,7 +63,7 @@ public class AdminMapperTest {
 		}
 	}
 	
-	
+
 	///////////////// 상점 목록 //////////////////
 	@Test
 	public void testSelectStoreList() {

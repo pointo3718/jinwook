@@ -2,6 +2,7 @@ package com.jinwook.home.service.domain;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -13,8 +14,9 @@ import lombok.ToString;
 @ToString
 public class Orders {
 
-	private int storeNo;			//상점번호		|상점(둘다 용도 같음)
-	private String storeName;		//상점이름		|상점
+//	private int storeNo;			//상점번호		|상점(둘다 용도 같음)
+//	private String storeName;		//상점이름		|상점
+	private Store store;			//상점
 //	private String userId;			//유저아이디	|유저
 //	private String grade;			//유저등급		|유저
 	private User user;				//유저		|유저(세트로 위 주석 받아사용 예정)
@@ -39,7 +41,7 @@ public class Orders {
 	private Coupon coupon;
 	private String reviewTitle;		//리뷰제목		|주문리뷰
 	private String reviewContent;	//리뷰내용		|주문리뷰
-	private Date reviewDate;		//리뷰날짜		|주문리뷰
+	private LocalDate reviewDate;		//리뷰날짜		|주문리뷰
 	private int reviewStar;			//별점		|주문리뷰
 	private String reviewImg1;		//리뷰사진 1	|주문리뷰
 	private String reviewImg2;		//리뷰사진 2	|주문리뷰
