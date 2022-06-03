@@ -1,7 +1,9 @@
 package com.jinwook.home.service.board;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,6 +11,7 @@ import com.jinwook.home.mapper.BoardMapper;
 import com.jinwook.home.mapper.OrdersMapper;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.User;
@@ -128,15 +131,16 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.deleteComment(commentNo);
 	}
 
-	@Override
-	public int addJjim(int jjimNo) {
-		return boardMapper.addJjim(jjimNo);
-	}
+	
+//	@Override
+//	public int addJjim(int jjimNo) {
+//		return boardMapper.addJjim(jjimNo);
+//	}
 
-	@Override
-	public int deleteJjim(int jjimNo) {
-		return boardMapper.deleteJjim(jjimNo);
-	}
+//	@Override
+//	public int deleteJjim(int jjimNo) {
+//		return boardMapper.deleteJjim(jjimNo);
+//	}
 
 	@Override
 	public int addRecommend(int recommendNo) {
@@ -147,6 +151,5 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteRecommend(int recommendNo) {
 		return boardMapper.deleteRecommend(recommendNo);
 	}
-
 
 }

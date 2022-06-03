@@ -1,11 +1,14 @@
 package com.jinwook.home.service.board;
 
 import java.util.List;
+import java.util.Map;
 
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
+import com.jinwook.home.service.domain.User;
 
 public interface BoardService {
 	
@@ -43,9 +46,11 @@ public interface BoardService {
 	
 	public int deleteComment(int commentNo);
 	
-	public int addJjim(int jjimNo);
+	public Jjim addJjim(int rcpNo, int storeNo);
 	
-	public int deleteJjim(int jjimNo);
+	//public int addJjim(int jjimNo);
+	
+	//public int deleteJjim(int jjimNo);
 	
 	public int addRecommend(int recommendNo);
 	
