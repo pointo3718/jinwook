@@ -2,25 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jinwook.home.mapper.StoreMapper">
 
+<resultMap type="store" id="storeSelectMap">
+	<result property="storeNo"	          column="store_no"       jdbcType="INTEGER"/>	
+	<result property="userId"	          column="user_id"        jdbcType="VARCHAR"/>	
+	<result property="storeName"	      column="store_name"     jdbcType="VARCHAR"/>
+	<result property="storeAddr"	      column="store_addr"     jdbcType="VARCHAR"/>
+	<result property="storeType"	      column="store_type"     jdbcType="CHAR"/>
+	<result property="storeStatus"	      column="store_status"   jdbcType="TINYINT"/>
+	<result property="storePhone"	      column="store_phone"    jdbcType="VARCHAR"/>
+	<result property="storeIntro"	      column="store_intro"    jdbcType="VARCHAR"/>
+	<result property="storeStart"	      column="store_start"    jdbcType="DATE"/>
+	<result property="startTime"	      column="start_time"     jdbcType="TIME"/>
+	<result property="endTime"	          column="end_time"       jdbcType="TIME"/>
+	<result property="holiday"	          column="holiday"        jdbcType="VARCHAR"/>
+	<result property="bussinessCard"      column="bussiness_card" jdbcType="VARCHAR"/>
+	<result property="storeImage"	      column="store_image"    jdbcType="VARCHAR"/>
+	<result property="accNo"	          column="acc_no"         jdbcType="VARCHAR"/>
+	<result property="bank"	              column="bank"           jdbcType="VARCHAR"/>
+	<result property="totalEarn"	      column="total_earn"     jdbcType="INTEGER"/>
+	<result property="isOpen"	          column="is_open"        jdbcType="TINYINT"/>	
+	<result property="user.jpBalance"	  column="jp_balance"     jdbcType="INTEGER"/>	
+	<result property="orders.reviewStar"  column="review_star"    jdbcType="INTEGER"/>
+	<result property="product.prodNo"     column="prod_no"        jdbcType="INTEGER"/>	  
+	<result property="product.prodName"   column="prod_name"      jdbcType="VARCHAR"/>	  
+	<result property="product.price"      column="price"          jdbcType="INTEGER"/>	  
+	<result property="product.prodOrign"  column="prod_orign"    jdbcType="VARCHAR"/>	
+	<result property="product.prodInfo"  column="prod_info"    jdbcType="VARCHAR"/>	  	
+	<result property="request.resDate"      column="res_date"          jdbcType="DATE"/>	  
+	<result property="request.reqDate"  column="req_date"    jdbcType="DATE"/>	
+	<result property="request.refundMoney"  column="refund_money"    jdbcType="INTEGER"/>	
+	<result property="request.reqStatus"  column="req_status"    jdbcType="CHAR"/>	     		
+</resultMap>
 
-	<update id="updateStoreProduct" parameterType="Product">
-		UPDATE product
-		SET
-		price = #{price}
-		, prod_info = #{prodInfo}
-		, prod_img = #{prodImg}
-		,prod_orign = #{prodOrign}
-		WHERE
-		prod_no = #{prodNo}
-	</update>
+<resultMap type="coupon" id="couponSelectMap">
+	<result property="couponNO"  column="coupon_no"    jdbcType="INTEGER"/>
+	<result property="user.userId"  column="user_id"    jdbcType="VARCHAR"/>	
+	<result property="couponType"  column="coupon_type"    jdbcType="CHAR"/>	
+	<result property="couponStatus"  column="coupon_status"    jdbcType="INTEGER"/>	
+	<result property="couponValidDate"  column="coupon_valid_date"    jdbcType="DATE"/>	
+	<result property="couponDc"  column="coupon_dc"    jdbcType="INTEGER"/>		
+</resultMap>
 
-	<update id="isSoldout" parameterType="Product">
-		UPDATE product
-		SET
-		is_soldout=#{isSoldout}
-		WHERE
-		prod_no=#{prodNo}
-	</update>
 
 	<update id="updateStore" parameterType="Store">
 		UPDATE store
@@ -35,14 +57,7 @@
 		acc_no=#{accNo:VARCHAR}
 		WHERE store_no = #{storeNo}
 	</update>
-
-
-	<delete id="deleteStoreProduct" parameterType="product">
-		DELETE FROM
-		product
-		WHERE prod_no = #{prodNo}
-	</delete>
-
+	
 	<insert id="addStoreProduct" parameterType="Product"
 		useGeneratedKeys="true" keyProperty="prodNo">
 		INSERT INTO
@@ -51,6 +66,31 @@
 		VALUES(#{prodNo:INTEGER},#{storeNo:INTEGER},
 		#{prodName},#{price}, #{prodInfo}, #{prodImg},#{prodOrign},1)
 	</insert>
+	
+	<update id="updateStoreProduct" parameterType="Product">
+		UPDATE product
+		SET
+		price = #{price}
+		, prod_info = #{prodInfo}
+		, prod_img = #{prodImg}
+		,prod_orign = #{prodOrign}
+		WHERE
+		prod_no = #{prodNo}
+	</update>
+	
+	<delete id="deleteStoreProduct" parameterType="product">
+		DELETE FROM
+		product
+		WHERE prod_no = #{prodNo}
+	</delete>
+
+	<update id="isSoldout" parameterType="Product">
+		UPDATE product
+		SET
+		is_soldout=#{isSoldout}
+		WHERE
+		prod_no=#{prodNo}
+	</update>
 
 	<update id="isOpen" parameterType="Store">
 		UPDATE store
@@ -59,36 +99,15 @@
 		WHERE
 		store_no=#{storeNo}
 	</update>
-
-	<select id="getStoreReviewStar" parameterType="int"
-		resultType="Orders">
-		SELECT ROUND(AVG(review_star),1)
-		FROM orders
-		WHERE
-		store_no=#{storeNo}
-	</select>
-
-
-	<select id="getStore" parameterType="int" resultType="Store">
-		SELECT
-		store_no, store_name, store_type, store_addr, start_time, end_time,
-		holiday, store_intro
-		FROM store
-		WHERE
-		store_no =#{storeNo}
-	</select>
-
-	<select id="getStoreProductList" parameterType="int"
-		resultType="Product">
-		SELECT
-		prod_no, prod_name, price, prod_orign, prod_info
-		FROM
-		product
-		WHERE
-		store_no=#{storeNo}
-	</select>
-
-	<select id="getCouponList" parameterType="String"
+	
+	<update id="addOrderCoupon" parameterType="Coupon">
+		UPDATE coupon
+		SET
+		coupon_status=#{couponStatus}
+		WHERE coupon_no=#{couponNo}
+	</update>
+	
+	<select id="getCouponList" parameterType="string"
 		resultType="Coupon">
 		SELECT
 		coupon_no, coupon_type, coupon_dc, coupon_valid_date
@@ -97,34 +116,34 @@
 		coupon_status=0 AND
 		user_id=#{userId}
 	</select>
-
-
-	<update id="addOrderCoupon" parameterType="Coupon">
-		UPDATE coupon
-		SET
-		coupon_status=#{couponStatus}
-		WHERE coupon_no=#{couponNo}
-	</update>
-
-	<select id="getStoreWallet" parameterType="String"
-		resultType="store">
-		SELECT
-		s.total_earn, u.jp_balance
-		FROM store s, users u
-		WHERE
-		s.user_id=u.user_id AND
-		s.user_id=#{userId}
-	</select>
-
-	<select id="getStoreWalletRefund" parameterType="String"
-		resultType="request">
-		SELECT
-		res_date,req_date,refund_money,req_status
-		FROM request
-		WHERE
-		user_id=#{userId}
-	</select>
 	
+	<select id="getStore" parameterType="int" resultMap="storeSelectMap">
+        SELECT
+		s.store_no, s.store_name, s.store_type, s.store_addr, s.start_time, s.end_time, s.holiday,
+		s.store_intro, vt.star, p.prod_no, p.prod_name, p.price, p.prod_orign, p.prod_info		
+		FROM store s, product p, orders o,(SELECT ROUND(AVG(review_star),1) star 
+						FROM orders
+						WHERE store_no=#{storeNo})vt
+		WHERE 	s.store_no=p.store_no AND
+			s.store_no=o.store_no AND
+            		p.store_no=s.store_no AND
+			  s.store_no = #{storeNo}
+		GROUP BY  p.prod_no
+	</select>
+
+	<select id="getStoreWallet" parameterType="int"
+		resultMap="storeSelectMap">
+		SELECT
+		s.total_earn, u.jp_balance, r.res_date, r.req_date, r.refund_money, r.req_status
+		FROM store s, users u, request r
+		WHERE s.user_id=u.user_id AND
+			s.user_id=r.user_id AND
+			u.user_id=r.user_id AND
+			r.store_no=s.store_no AND 
+    		s.store_no=#{storeNo}
+    </select>
+
+
 	<select id="getStoreTotalCount" parameterType="Store"
 		resultType="int">
 		SELECT
@@ -148,7 +167,7 @@
 		FROM
 		product
 	</select>
-	
+
 	<select id="getRequestTotalCount" parameterType="Request"
 		resultType="int">
 		SELECT
@@ -156,9 +175,6 @@
 		FROM
 		request
 	</select>
-	
-	
-
 
 
 </mapper>

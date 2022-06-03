@@ -16,6 +16,7 @@ public class Store {
    private User user;
    private Orders orders;
    private Product product;
+   private Request request;
    private String userId;
    private String storeName;
    private String storeAddr;
