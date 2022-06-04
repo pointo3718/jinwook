@@ -82,15 +82,8 @@ public class PaginationInfo {
       /* 이전 페이지 존재 여부 */
       hasPreviousPage = firstPage != 1;
 
-<<<<<<< HEAD
 		/* 다음 페이지 존재 여부 */
 		hasNextPage = (lastPage * criteria.getRecordsPerPage()) < totalRecordCount;
 	}
 }
-=======
-      /* 다음 페이지 존재 여부 */
-      hasNextPage = (lastPage * criteria.getRecordsPerPage()) < totalRecordCount;
-   }
 
-}
->>>>>>> refs/heads/master

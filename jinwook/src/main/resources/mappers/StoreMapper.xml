@@ -35,11 +35,7 @@
 </resultMap>
 
 <resultMap type="coupon" id="couponSelectMap">
-<<<<<<< HEAD
    <result property="couponNo"  column="coupon_no"    jdbcType="INTEGER"/>
-=======
-   <result property="couponNO"  column="coupon_no"    jdbcType="INTEGER"/>
->>>>>>> refs/heads/master
    <result property="user.userId"  column="user_id"    jdbcType="VARCHAR"/>   
    <result property="couponType"  column="coupon_type"    jdbcType="CHAR"/>   
    <result property="couponStatus"  column="coupon_status"    jdbcType="INTEGER"/>   

@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class Board {
 
-	private int boardNo;
+	private Integer boardNo;
 	//private String userId;
 	private User user;
 	private String boardTitle;

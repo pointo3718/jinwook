@@ -250,20 +250,32 @@
 	</update>
 	
 	<!--  Comment delete -->
-	<delete id="deleteComment" parameterType="int">
+	<delete id="deleteComment" parameterType="Integer">
 		DELETE 
 		FROM comment
 		WHERE
 			comment_no = #{commentNo}
 	</delete>
 	
-	<select id="getCommentTotalCount" parameterType="Comment" resultType="int">
+	<select id="getCommentTotalCount" parameterType="Comment" resultType="Integer">
 		SELECT
 			COUNT(*)
 		FROM
 			comment
 		WHERE
 			board_no = #{boardNo}
+	</select>
+
+	<select id="getCommentList" parameterType="Comment" resultType="Comment">
+		SELECT
+			<include refid="commentColumns" />
+		FROM
+			comment
+		WHERE
+			board_no = #{boardNo}
+		ORDER BY
+			board_no DESC,
+			comment_date DESC
 	</select>
 
 	<insert id="addStoreJjim" parameterType="Jjim" useGeneratedKeys="true" keyProperty="jjimNo">
