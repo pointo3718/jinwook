@@ -13,13 +13,13 @@ import com.jinwook.home.service.domain.User;
 
 public interface BoardService {
 	
-	public int addBoard(Board board);
+	public boolean addBoard(Board board);
 	
 	public int updateBoard(Board board);
 	
-	public int deleteBoard(int boardNo);
+	public int deleteBoard(Integer boardNo);
 	
-	public Board getBoard(int boardNo);
+	public Board getBoard(Integer boardNo);
 	
 	public List<Board> getBoardList(Board board);
 	
@@ -44,9 +44,9 @@ public interface BoardService {
 	//댓글 등록이면서 수정, 삭제, 목록조회
 	public boolean addComment(Comment comment);
 
-	public void deleteComment(Comment comment);
+	public int deleteComment(Integer commentNo);
 	
-	public List<Comment> getCommentList(int boardNo);
+	public List<Comment> getCommentList(Comment comment);
 	
 	// 찜
 	public void addStoreJjim(Jjim jjim);

@@ -20,10 +20,10 @@ public class Comment {
 //	private LocalDate commentDate;//등록날짜
 //	private int recommendCount; //추천수
 	
-	private int commentNo;
+	private Integer commentNo;
 	private User user;
-	private int boardNo;
-	private int rcpNo;
+	private Integer boardNo;
+	private Integer rcpNo;
 	private String commentContent;
 	private String commentWriter;
 	private LocalDate commentDate;
