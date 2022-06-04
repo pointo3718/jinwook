@@ -20,9 +20,9 @@ public interface BoardMapper {
 	
 	public int updateBoard(Board board);
 	
-	public int deleteBoard(int boardNo);
+	public int deleteBoard(Integer boardNo);
 	
-	public Board getBoard(int boardNo);
+	public Board getBoard(Integer boardNo);
 	
 	public List<Board> getBoardList(Board board);
 	
@@ -49,11 +49,11 @@ public interface BoardMapper {
 	//댓글 수정
 	public int updateComment(Comment comment);
 	//댓글 삭제
-	public void deleteComment(Comment comment);
+	public int deleteComment(Integer commentNo);
 	//특정 게시글에 포함된 댓글 목록을 조회하는 SELECT 쿼리를 호출
-	//public List<Comment> getCommentList(Comment comment);
+	public List<Comment> getCommentList(Comment comment);
 	//특정 게시글에 포함된 댓글 개수를 조회하는 select 쿼리를 호출
-	public int getCommentTotalCount(int boardNo);
+	public int getCommentTotalCount(Comment comment);
 	
 	// 찜
 	public int addStoreJjim(Jjim jjim);

@@ -15,6 +15,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jinwook.home.mapper.OrdersMapper;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Coupon;
+import com.jinwook.home.service.domain.Jpay;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
@@ -26,7 +27,7 @@ public class OrdersMapperTest {
 	@Autowired
 	private OrdersMapper ordersMapper;
 	
-	@Test
+	//@Test
 	public void testOfaddOrders() {
 		Product product = new Product();
 		product.setProdNo(10000);
@@ -67,7 +68,7 @@ public class OrdersMapperTest {
 	//@Test
 	public void testOfupdateOrders() {
 		Orders orders = new Orders();
-		orders.setOrderNo(10003);
+		orders.setOrderNo(10006);
 		orders.setOrderStatus("1");
 		int result = ordersMapper.updateOrders(orders);
 		System.out.println("결과는"+result+"입니다.");
@@ -119,7 +120,6 @@ public class OrdersMapperTest {
 				
 					System.out.println("=========================");
 					System.out.println(orders.getUser().getUserId());
-//					System.out.println(orders.getOrderNo());
 					System.out.println(orders.getProduct().getProdName());
 					System.out.println(orders.getProdCount());
 					System.out.println(orders.getProduct().getPrice());
@@ -168,16 +168,33 @@ public class OrdersMapperTest {
 	}
 	
 	//@Test
+	public void testdeleteOrderCartAfter() {
+		Orders orders = new Orders();
+		orders.setOrderNo(10003);
+		
+		Cart cart = new Cart();
+		cart.setUserId("test01");
+		cart.setCartNo(10006);
+		cart.setCartStatus(true);
+		cart.setOrders(orders);
+		int result = ordersMapper.deleteOrderCartAfter(cart);
+		System.out.println("결과는"+result+"입니다.");
+	}
+	
+	//@Test
 		public void testdeleteOrdersCart() {
-			Orders orders = new Orders();
-			orders.setOrderNo(10000);
-			
-			Cart cart= new Cart();
-			cart.setUserId("test01");
-			cart.setOrders(orders);
-			cart.setCartStatus(true);
+			Cart cart = new Cart();
+			cart.setCartNo(10011);
 			int result = ordersMapper.deleteOrdersCart(cart);
-			System.out.println("결과는"+result+"입니다.");
+		    System.out.println("결과는" + result + "입니다.");
+		}
+		
+	//@Test
+		public void testdeleteOrdersCartAll() {
+			Cart cart = new Cart();
+			cart.setCartStatus(false);
+			int result = ordersMapper.deleteOrdersCartAll(cart);
+		    System.out.println("결과는" + result + "입니다.");
 		}
 		
 	//@Test
@@ -207,6 +224,54 @@ public class OrdersMapperTest {
 		}
 	}
 	
-//	@Test
-//	public 
+	//@Test
+	public void testaddJpayPassword() {
+		User user = new User();
+		user.setUserId("test01");
+		user.setJpPassword("333333");
+		
+		int result = ordersMapper.addOrdersJpayPassword(user);
+		System.out.println("결과는"+result+"입니다.");
+	}
+	
+	//@Test
+	public void testupdateOrdersJpayPassword() {
+		User user = new User();
+		user.setUserId("test01");
+		user.setJpPassword("012345");
+		
+		int result = ordersMapper.updateOrdersJpayPassword(user);
+		System.out.println("결과는"+result+"입니다.");
+	}
+	
+	@Test
+	public void addOrdersjBCharge() {
+		Jpay jpay = new Jpay();
+		jpay.setJpStatus(1);
+		jpay.setUserId("test01");
+		jpay.setJpNo(10000);
+		jpay.setOrderNo(10047);
+		
+		int result = ordersMapper.addOrdersjBCharge(jpay);
+	      System.out.println("결과는 " + result + "입니다.");
+
+	}
+
+	
+	
+	//@Test
+	public void testaddOrdersJpayCharge() {
+		Jpay jpay = new Jpay();
+		jpay.setUserId("test01");
+		jpay.setOrderNo(0);
+		jpay.setJpStatus(1);
+		jpay.setFinalPrice(0);
+		jpay.setChargePay(1000);
+		
+		int result = ordersMapper.addOrdersJpayCharge(jpay);
+		System.out.println("결과는"+result+"입니다.");
+	}
+	
+	
+
 }
