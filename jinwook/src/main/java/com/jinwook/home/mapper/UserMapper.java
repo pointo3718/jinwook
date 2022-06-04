@@ -23,13 +23,16 @@ public interface UserMapper {
 	public int checkId(String userId) throws Exception;
 	
 	//CHECK DUPLICATION NICKNAME
-	public User checkNickName(String nickName) throws Exception;
+	public int checkNickName(String nickName) throws Exception;
 
 	//CHECK DUPLICATION PHONE
-	public User checkPhone(String phone) throws Exception;
+	public int checkPhone(String phone) throws Exception;
 	
 	//CHECK DUPLICATION EMAIL
-	public User checkEmail(String email) throws Exception;
+	public int checkEmail(String email) throws Exception;
+	
+	//CHECK DUPLICATION PASSWORD
+	public int checkPassword(String userId, String password) throws Exception;
 	
 	//FIND ID PHONE
 	public User findIdPhone(User user) throws Exception;

@@ -49,28 +49,71 @@
 			});
 		});	
 	
-		
+		//============아이디 중복 확인 ==============
 		function checkId(){
-            var userId = $('#user_id').val();
-        $.ajax({
-            url:'/user/checkId',
-            type:'post',
-            data:{id:id},
-            success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
-                if(cnt != 1){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
-                    $('.id_ok').css("display","inline-block"); 
-                    $('.id_already').css("display", "none");
-                } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
-                    $('.id_already').css("display","inline-block");
-                    $('.id_ok').css("display", "none");
-                }
-            },
-            error:function(){
-                alert("에러입니다");
-            }
-        });
-        };
+			$.ajax({
+				url : "/user/checkId",
+				type : "post",
+				dataType : "json",
+				data : {"userId" : $("#userId").val()},
+				success : function(data){
+					if($("#userId").val().length <1){
+						alert("아이디를 입력해주세요.")
+					}else if(data == 1){
+						alert("중복된 아이디입니다.");
+					}else if(data == 0){
+						$("#idChk").attr("value", "Y");
+						alert("사용가능한 아이디입니다.");
+					}
+				}
+			});
+			
+		}
 		
+		//============아이디 중복 확인 ==============
+			function checkNickName(){
+			$.ajax({
+				url : "/user/checkNickName",
+				type : "post",
+				dataType : "json",
+				data : {"nickName" : $("#nickName").val()},
+				success : function(data){
+					if($("#nickName").val().length <1){
+						alert("닉네임을 입력해주세요.")
+					}else if(data == 1){
+						alert("중복된 닉네임입니다.");
+					}else if(data == 0){
+						$("#nickNameChk").attr("value", "Y");
+						alert("사용가능한 닉네임입니다.");
+					}
+				}
+			});
+			
+		}
+			
+		//==>"이메일" 유효성Check  Event 처리 및 연결
+		function checkEmail(){
+			$.ajax({
+				url : "/user/checkEmail",
+				type : "post",
+				dataType : "json",
+				data : {"email" : $("#email").val()},
+				success : function(data){
+					if($("#email").val() != "" && ($("#email").val().indexOf('@') < 1 || $("#email").val().indexOf('.') == -1) ){
+						alert("이메일 형식이 아닙니다.");
+					}
+					else if($("#email").val().length <1){
+						alert("이메일을 입력해주세요.")
+					}else if(data == 1){
+						alert("중복된 이메일입니다.");
+					}else if(data == 0){
+						$("#emailChk").attr("value", "Y");
+						alert("사용가능한 이메일입니다.");
+					}
+				}
+			});
+			
+		}
 		
 		
 		function fncAddUser() {
@@ -117,19 +160,8 @@
 		}
 		
 
-		//==>"이메일" 유효성Check  Event 처리 및 연결
-		 $(function() {
-			 
-			 $("input[name='email']").on("change" , function() {
-				
-				 var email=$("input[name='email']").val();
-			    
-				 if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
-			    	alert("이메일 형식이 아닙니다.");
-			     }
-			});
-			 
-		});	
+		
+		
 		
 		
 	   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -203,9 +235,11 @@
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required oninput = "checkId()">
-				<span class="id_ok">사용 가능한 아이디입니다.</span>
-				<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>		   
+		      <input type="text" class="form-control" id="userId" name="userId" placeholder="중복확인하세요">
+				<button class="idChk" type="button" id="idChk" onclick="checkId()" value="N">중복확인</button>
+				
+				<!-- <span class="id_ok">사용 가능한 아이디입니다.</span>
+				<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>		   --> 
 		    </div>
 		  </div>
 		  
@@ -226,24 +260,22 @@
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="userName" name="userName" placeholder="회원이름">
+		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">주민번호</label>
+		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label">생년월일</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="ssn" name="ssn" placeholder="주민번호">
-		      <span id="helpBlock" class="help-block">
-		      	 <strong class="text-danger">" -  " 제외 13자리입력하세요</strong>
-		      </span>
+		      <input type="text" class="form-control" id="birth" name="birth" placeholder="생년월일">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">주소</label>
+		    <label for="nickName" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="addr" name="addr" placeholder="주소">
+		      <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임">
+		      <button class="nickNameChk" type="button" id="nickNameChk" onclick="checkNickName()" value="N" >중복확인</button>
 		    </div>
 		  </div>
 		  
@@ -267,10 +299,17 @@
 		    <input type="hidden" name="phone"  />
 		  </div>
 		  
+		  <div class="form-group">
+		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">성별</label>
+		    		<input type="radio" 	name="gender" value="남"/>남
+					<input type="radio" 	name="gender" value="여"/>여
+		  </div>
+		  
 		   <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="email" name="email" placeholder="이메일">
+		      <button class="emailChk" type="button" id="emailChk" onclick="checkEmail()" value="N">중복확인</button> 
 		    </div>
 		  </div>
 		  

@@ -41,7 +41,7 @@ public class UserController {
 	@RequestMapping( value="addUser", method=RequestMethod.GET )
 	public String addUser() throws Exception{
 	
-		System.out.println("/user/addUser : GET");
+		System.out.println("/user/addUserView : GET");
 		
 		return "/user/addUserView";
 	}
@@ -51,6 +51,7 @@ public class UserController {
 
 		System.out.println("/user/addUser : POST");
 		//Business Logic
+		user.setRole("일반");
 		userService.addUser(user);
 		
 		return "/user/loginView";
@@ -66,7 +67,7 @@ public class UserController {
 		// Model �� View ����
 		model.addAttribute("user", user);
 		
-		return "forward:/user/getUser.jsp";
+		return "/user/getUser";
 	}
 	
 
@@ -79,7 +80,7 @@ public class UserController {
 		// Model �� View ����
 		model.addAttribute("user", user);
 		
-		return "forward:/user/updateUser.jsp";
+		return "/user/updateUser";
 	}
 
 	@RequestMapping( value="updateUser", method=RequestMethod.POST )
@@ -94,7 +95,7 @@ public class UserController {
 			session.setAttribute("user", user);
 		}
 		
-		return "redirect:/user/getUser?userId="+user.getUserId();
+		return "/user/getUser?userId="+user.getUserId();
 	}
 	
 	
@@ -173,10 +174,30 @@ public class UserController {
 	@PostMapping("/checkId")
     @ResponseBody
     public int checkId(@RequestParam("userId") String userId) throws Exception{
-//        log.info("userIdCheck 진입");
-//        logger.info("전달받은 id:"+userId);
-        int cnt = userService.checkId(userId);
-//        logger.info("확인 결과:"+cnt);
+        int cnt = userService.checkId(userId); 
+        
+        System.out.println("===========ID CHECK SUCCESS==========");
+        
         return cnt;
     }
+	
+	@PostMapping("/checkNickName")
+	@ResponseBody
+	public int checkNickName(@RequestParam("nickName") String nickName) throws Exception{
+		int cnt = userService.checkNickName(nickName); 
+		
+		System.out.println("===========NICKNAME CHECK SUCCESS==========");
+		
+		return cnt;
+	}
+	
+	@PostMapping("/checkEmail")
+	@ResponseBody
+	public int checkEMail(@RequestParam("email") String email) throws Exception{
+		int cnt = userService.checkEmail(email); 
+		
+		System.out.println("===========EMAIL CHECK SUCCESS==========");
+		
+		return cnt;
+	}
 }

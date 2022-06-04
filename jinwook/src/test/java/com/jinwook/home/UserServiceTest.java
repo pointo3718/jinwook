@@ -85,7 +85,7 @@ class UserServiceTest {
 		userService.deleteUser(user);
 	}
 	
-	@Test
+	//@Test
 	public void checkIdTest() throws Exception{
 		System.out.println("----------------------------------");
 		System.out.println(userService.checkId("dk1dk"));
@@ -97,6 +97,14 @@ class UserServiceTest {
 	public void checkNickNameTest() throws Exception{
 		System.out.println("----------------------------------");
 		System.out.println(userService.checkNickName("ㅁ"));
+		System.out.println("----------------------------------");
+//	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
+	}
+	
+	@Test
+	public void checkPasswordTest() throws Exception{
+		System.out.println("----------------------------------");
+		System.out.println(userService.checkPassword("test01", "1111"));
 		System.out.println("----------------------------------");
 //	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
 	}

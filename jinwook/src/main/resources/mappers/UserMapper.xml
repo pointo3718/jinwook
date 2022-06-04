@@ -40,32 +40,39 @@
 		WHERE user_id = #{userId}
 	 </update>
 	 
-	 <select id="checkId" parameterType="String" resultType="int">
-        SELECT COUNT(userId) FROM USER WHERE user_id= #{userId}
+	 <select id="checkId"  resultType="int">
+        SELECT COUNT(*) FROM users WHERE user_id= #{userId}
     </select>
 	 
-	 <select 	id="checkNickName"	parameterType="string"	resultType="user">
+	 <select id="checkNickName"	resultType="int">
 		SELECT
-		*	
+		COUNT(*)	
 		FROM users 
 		WHERE nick_name = #{nickName}
 	 </select>
 	 
-	<select 	id="checkEmail"	parameterType="string"	resultType="user">	
+	<select 	id="checkEmail"	parameterType="string"	resultType="int">	
 		SELECT
-		*	
+		COUNT(*)	
 		FROM users 
 		WHERE email = #{email}
 	 </select>
 	
-	<select 	id="checkPhone"	parameterType="string"	resultType="user">
+	<select 	id="checkPhone"	parameterType="string"	resultType="int">
 		SELECT
-		*	
+		COUNT(*)	
 		FROM users 
 		WHERE phone = #{phone}
 	 </select>
 	 
-	 <select 	id="findIdPhone"	parameterType="string"	resultType="user">
+	<select 	id="checkPassword"	resultType="int">
+		SELECT
+		COUNT(*)	
+		FROM users 
+		WHERE user_Id = #{userId} AND password = #{password}
+	 </select>
+	 
+	 <select 	id="findIdPhone"	parameterType="string"	resultType="int">
 		SELECT
 		*	
 		FROM users 
