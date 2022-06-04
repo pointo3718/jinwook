@@ -665,7 +665,7 @@ public class BoardMapperTest {
 		
 		comment.setCommentNo(1);
 		
-		boardMapper.deleteComment(comment);
+		boardMapper.deleteComment(1);
 		
 	}
 	
