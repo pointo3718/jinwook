@@ -31,11 +31,7 @@ public interface StoreMapper {
 	public List<Coupon> getCouponList(String userId);
 	
 	public List<Store> getStore(int storeNo);
-	
-//	public Orders getStoreReviewStar(int storeNo);
-	
-//	public List<Product> getStoreProductList(int StoreNo);
-	
+		
 	public List<Store> getStoreWallet(int storeNo);
 	
 	public int getStoreTotalCount();

@@ -48,45 +48,34 @@ public class UserServiceImpl implements UserService{
 
 	public void updateUser(User user) throws Exception{
 		userMapper.updateUser(user);
-		
 	}
 
 	public void deleteUser(User user) throws Exception{
 		userMapper.deleteUser(user);
-		
-		
-		
 	}
+	
 	public int checkId(String userId) throws Exception {
-//		boolean result=true;
 		int result=userMapper.checkId(userId);
 		return result;
 	}
 	
-	public boolean checkNickName(String nickName) throws Exception {
-		boolean result=true;
-		User user=userMapper.checkNickName(nickName);
-		if(user != null) {
-			result=false;
-		}
+	public int checkNickName(String nickName) throws Exception {
+		int result = userMapper.checkNickName(nickName);
 		return result;
 	}
 	
-	public boolean checkPhone(String phone) throws Exception{
-		boolean result=true;
-		User user=userMapper.checkPhone(phone);
-		if(user != null) {
-			result=false;
-		}
+	public int checkPhone(String phone) throws Exception{
+		int result = userMapper.checkPhone(phone);
 		return result;
 	}
 	
-	public boolean checkEmail(String email) throws Exception {
-		boolean result=true;
-		User user=userMapper.checkEmail(email);
-		if(user != null) {
-			result=false;
-		}
+	public int checkEmail(String email) throws Exception {
+		int result = userMapper.checkEmail(email);
+		return result;
+	}
+	
+	public int checkPassword(String userId, String password) throws Exception {
+		int result = userMapper.checkPassword(userId, password);
 		return result;
 	}
 	
@@ -97,6 +86,7 @@ public class UserServiceImpl implements UserService{
 	public User findIdEmail(User user) throws Exception {
 		return userMapper.findIdEmail(user);
 	}
+	
 	public User findPasswordPhone(User user) throws Exception {
 		return userMapper.findPasswordPhone(user);
 	}

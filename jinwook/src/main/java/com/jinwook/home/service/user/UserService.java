@@ -15,11 +15,13 @@ public interface UserService {
 		
 		public int checkId(String userId) throws Exception;
 		
-		public boolean checkNickName(String nickName) throws Exception;
+		public int checkNickName(String nickName) throws Exception;
 		
-		public boolean checkPhone(String phone) throws Exception;
+		public int checkPhone(String phone) throws Exception;
 		
-		public boolean checkEmail(String email) throws Exception;
+		public int checkEmail(String email) throws Exception;
+		
+		public int checkPassword(String userId, String password) throws Exception;
 		
 		public User findIdPhone(User user) throws Exception;
 	

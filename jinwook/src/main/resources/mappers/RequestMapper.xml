@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jinwook.home.mapper.RequestMapper">
 
+	<resultMap type="request" id="requestSelectMap">
+	   <result property="reqNo"  column="req_no"    jdbcType="INTEGER"/>
+	   <result property="userId"  column="user_id"    jdbcType="VARCHAR"/>
+	   <result property="user.userName"  column="user_name"    jdbcType="VARCHAR"/>   
+	   <result property="store.storeType"  column="store_type"    jdbcType="CHAR"/>   
+	   <result property="store.storeName"  column="store_name"    jdbcType="VARCHAR"/>   
+	   <result property="store.storeAddr"  column="store_addr"    jdbcType="VARCHAR"/>   
+	   <result property="store.storeStart"  column="store_start"    jdbcType="DATE"/>      
+	   <result property="store.storeIntro"  column="store_intro"    jdbcType="VARCHAR"/>      
+	   <result property="store.storePhone"  column="store_phone"    jdbcType="VARCHAR"/>      
+	   <result property="user.businessNo"  column="business_no"    jdbcType="VARCHAR"/>      
+	   <result property="store.accNo"  column="acc_no"    jdbcType="VARCHAR"/>      
+	   <result property="store.bank"  column="bank"    jdbcType="VARCHAR"/>      
+	   <result property="reqDate"  column="req_date"    jdbcType="DATE"/>      
+	   <result property="adTitle"  column="ad_title"    jdbcType="VARCHAR"/>      
+	   <result property="adContent"  column="ad_content"    jdbcType="VARCHAR"/>      
+	   <result property="adImg"  column="ad_img"    jdbcType="VARCHAR"/>      
+	</resultMap>
+
 
 	<!-- 상점 등록 (미수락 상태) -->
 	<insert id="addRequestAddStore" parameterType="Store">
@@ -36,25 +55,32 @@
 				, #{userId}
 				, #{storeNo}
 				, 1 <!-- 상점등록요청 -->
-				, 0 <!-- 답변전 -->
+				, 1 <!-- 답변전 -->
 				, NULL
 				, SYSDATE()  
 				, NULL
 				, NULL
 				, NULL
 				, NULL
+				, false
 			)
 	</insert>
 	
 	
 	<!-- 상점 등록 요청 보기 -->
-	<select id="getRequestStore" parameterType="String" resultType="Store">
+	<select id="getRequestStore" parameterType="int" resultMap="requestSelectMap">
 		SELECT
-			*
+			s.user_id, u.user_name, s.store_type, s.store_name, s.store_addr, 
+			s.store_start, s.store_intro, s.store_phone, u.business_no, s.acc_no, 
+			s.bank, r.req_date 
 		FROM
-			store
+			store s, users u, request r
 		WHERE
-			user_id = #{userId}
+			s.user_id = u.user_id 
+			and 
+			u.user_id = r.user_id
+			and 
+			r.req_no = #{reqNo};
 	</select>
 
 
@@ -62,36 +88,13 @@
 	<update id="updateRequestAddStore" parameterType="Store">
 		UPDATE store
 		SET
-			  store_status = true
+			store_status = true
 		WHERE
 			store_no = #{storeNo}
 	</update>
 	
 	
-	<!-- ////// 공통 ////// -->
-	<!-- 요청 상태 수락으로 변경 -->
-	<update id="updateRequestStatusToAccept" parameterType="Request">
-		UPDATE 
-			  request
-		SET
-			  req_status = true,
-			  res_date = SYSDATE()
-		WHERE
-			<if test="reqCode == 1">
-			  req_code = 1 
-			</if>
-			<if test="reqCode == 2">
-			  req_code = 2 
-			</if>
-			<if test="reqCode == 3">
-			  req_code = 3 
-			</if>
-			<if test="reqCode == 4">
-			  req_code = 4 
-			</if>
-			  and
-			  user_id = #{userId}
-	</update>
+
 	
 
 	<!-- 상점 등록 확인을 위한 sql ***삭제예정*** -->
@@ -112,17 +115,17 @@
 				  NULL
 				, #{userId}
 				, NULL
-				, 4 <!-- 상점등록요청 -->
-				, 0 <!-- 수락전 -->
+				, 3 <!-- 환급요청 -->
+				, 1 <!-- 수락전 -->
 				, NULL
 				, SYSDATE()  
 				, #{refundMoney}
 				, NULL
 				, NULL
 				, NULL
+				, false
 			)
 	</insert>
-
 
 
 	<!-- 환급 수락 (진욱페이 잔액 변경) -->
@@ -130,28 +133,133 @@
 		UPDATE 
 			  users
 		SET
-			  jp_balance = (SELECT u.jp_balance - r.refund_money
+			  jp_balance = (SELECT * FROM(SELECT u.jp_balance - r.refund_money
 			  				FROM users u, request r
-			  				WHERE u.user_id = r.user_id and u.user_id = #{userId}) vt
+			  				WHERE u.user_id = r.user_id and u.user_id = #{userId})as vt)
 		WHERE
 			  user_id = #{userId}	
 	</update>
 
 
+	<!-- 상점 삭제 신청 -->
+	<insert id="addRequestDeleteStore" parameterType="Request">
+			INSERT INTO request 
+			VALUES (
+				  NULL
+				, #{userId}
+				, #{storeNo}
+				, 2 <!-- 상점삭제요청 -->
+				, 1 <!-- 수락전 -->
+				, NULL
+				, SYSDATE()  
+				, NULL
+				, NULL
+				, NULL
+				, NULL
+				, false
+			)
+	</insert>
+	
+	
+	
+	<!-- 남은 픽업 개수 -->
+	<select id="countPickup" parameterType="int" resultType="request">
+		<!-- orderStatus가 3인 내역만 count -->
+		SELECT COUNT(order_no) countPickup
+		FROM 
+			orders
+		WHERE 
+			store_no = #{storeNo} 
+			AND 
+			order_status = 3
+		GROUP BY 
+			store_no;
+	</select>
+	
+	
+	
+	<!-- 상점 삭제 수락 -->
+	<update id="deleteStore" parameterType="Request">
+		UPDATE store
+		SET
+			store_status = false
+		WHERE
+			user_id = #{userId} and store_no = #{storeNo}
+	</update>
 
-<!-- 상점 삭제 신청 -->
-<!-- 상점 삭제 수락 -->
-<!-- 광고 등록 신청 -->
-<!-- 광고 등록 요청 보기 -->
-<!-- 광고 등록 수락 -->
+	<!-- 광고 등록 신청 -->
+	<insert id="addRequestAd" parameterType="Request">
+			INSERT INTO request 
+			VALUES (
+				  NULL
+				, #{userId}
+				, #{storeNo}
+				, 4 <!-- 광고등록요청 -->
+				, 1 <!-- 수락전 -->
+				, NULL
+				, SYSDATE()  
+				, NULL
+				, #{adTitle}
+				, #{adContent}
+				, #{adImg}
+				, false
+			)
+	</insert>
 
 
-<!-- 요청 목록 4개-->
-<!-- 요청 목록 삭제 -->
-<!-- ??? 신고하기 ??? -->
+	<!-- 광고 등록 요청 보기 -->
+	<select id="getRequestAd" parameterType="int" resultMap="requestSelectMap">
+		SELECT
+			r.ad_title, u.user_name, r.req_date, r.ad_content, r.ad_img
+		FROM
+			request r, users u
+		WHERE
+			r.user_id = u.user_id
+			and
+			r.req_no = #{reqNo}
+	</select>
+	
+
+	<!-- 요청 목록 4개-->
 
 
 
+	<!-- 요청 목록 삭제 -->
+	<update id="deleteRequest" parameterType="int">
+		UPDATE 
+			  request
+		SET
+			  req_delete_yn = true
+		WHERE
+			  req_no = #{reqNo}	
+	</update>
+	
+
+
+	<!-- ////// 공통 ////// -->
+	<!-- 요청 상태 수락으로 변경 -->
+	<update id="updateRequestStatusToAccept" parameterType="Request">
+		UPDATE 
+			  request
+		SET
+			  req_status = 2,
+			  res_date = SYSDATE()
+		WHERE
+			  req_No = #{reqNo}
+	</update>
+	
+	
+	<!-- ////// 공통 ////// -->
+	<!-- 요청 상태 거절으로 변경 -->
+	<update id="updateRequestStatusToRefuse" parameterType="Request">
+		UPDATE 
+			  request
+		SET
+			  req_status = 3,
+			  res_date = SYSDATE()
+		WHERE
+			  req_no = #{reqNo}
+	</update>
 
 
 </mapper>
