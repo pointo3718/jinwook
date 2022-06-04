@@ -104,8 +104,7 @@ class StoreMapperTest {
 	@Test
 	public void testOfAddOrderCoupon() {
 		Coupon coupon = new Coupon();
-		coupon.setCouponStatus(true);
-		coupon.setCouponNo(10015);
+		coupon.setCouponNo(10025);
 
 		int result = storeMapper.addOrderCoupon(coupon);
 		System.out.println("결과는" + result + "입니다.");
@@ -155,12 +154,13 @@ class StoreMapperTest {
 					System.out.println(store.getEndTime());
 					System.out.println(store.getHoliday());
 					System.out.println(store.getStoreIntro());					
-		//		    System.out.println(store.getOrders().getReviewStar());
+				    System.out.println(store.getOrders().getReviewStar());
 					System.out.println(store.getProduct().getProdNo());
 					System.out.println(store.getProduct().getProdName());
 					System.out.println(store.getProduct().getPrice());
 					System.out.println(store.getProduct().getProdOrign());
 					System.out.println(store.getProduct().getProdInfo());
+					System.out.println(store.getProduct().isSoldout());
 					
 
 					
@@ -169,75 +169,7 @@ class StoreMapperTest {
 			}
 		}
 	}
-	
-	
-	/*
-	@Test
-	public void testOfGetStore() {
-		Store store = storeMapper.getStore(10011);
-//		System.out.println(product.toString());
-		try {
-			//String boardJson = new ObjectMapper().writeValueAsString(board);
-            String storeJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(store);
-
-			System.out.println("=========================");
-			System.out.println(storeJson);
-			System.out.println("=========================");
-
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	@Test
-	public void testOfGetStoreReviewStar() {
 		
-		Orders orders = new Orders();
-		orders=storeMapper.getStoreReviewStar(10013);
-//		System.out.println(product.toString());
-		try {
-			//String boardJson = new ObjectMapper().writeValueAsString(board);
-            String ordersJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(orders);
-
-			System.out.println("=========================");
-			System.out.println(ordersJson);
-			System.out.println("=========================");
-
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	@Test
-	public void testOfGetStoreProductList() {
-		
-		
-		int getProductTotalCount = storeMapper.getProductTotalCount();
-		if (getProductTotalCount > 0) {
-			List<Product> productList = storeMapper.getStoreProductList(10011);
-			
-			if (CollectionUtils.isEmpty(productList) == false) { 		
-				for (Product product : productList) {
-					System.out.println("=========================");
-	
-					System.out.println(product.getProdNo());
-					System.out.println(product.getProdName());					
-					System.out.println(product.getPrice());
-					System.out.println(product.getProdOrign());
-					System.out.println(product.getProdInfo());
-
-					
-					System.out.println("=========================");
-				}
-			}
-		}
-	}
-	
-	
-	*/
-	
 	@Test
 	public void testOfGetStoreWallet() {
 		

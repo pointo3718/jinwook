@@ -23,9 +23,18 @@ public class BoardServiceImpl implements BoardService {
 	private BoardMapper boardMapper;
 	
 	@Override
-	public int addBoard(Board board) {
-		return boardMapper.addBoard(board);
+	public boolean addBoard(Board board) {
+		int queryResult = 0;
+
+		if (board.getBoardNo() == null) {
+			queryResult = boardMapper.addBoard(board);
+		} else {
+			queryResult = boardMapper.updateBoard(board);
+		}
+
+		return (queryResult == 1) ? true : false;
 	}
+
 
 	@Override
 	public int updateBoard(Board board) {
@@ -33,12 +42,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int deleteBoard(int boardNo) {
+	public int deleteBoard(Integer boardNo) {
 		return boardMapper.deleteBoard(boardNo);
 	}
 
 	@Override
-	public Board getBoard(int boardNo) {
+	public Board getBoard(Integer boardNo) {
 		return boardMapper.getBoard(boardNo);
 	}
 
@@ -121,7 +130,7 @@ public class BoardServiceImpl implements BoardService {
 	public boolean addComment(Comment comment) {
 		int queryResult = 0;
 
-		if (comment.getCommentNo() == 0) {
+		if (comment.getCommentNo() == null) {
 			queryResult = boardMapper.addComment(comment);
 		} else {
 			queryResult = boardMapper.updateComment(comment);
@@ -131,18 +140,18 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void deleteComment(Comment comment) {
-		boardMapper.deleteComment(comment);
+	public int deleteComment(Integer commentNo) {
+		return boardMapper.deleteComment(commentNo);
 	}
 
 	@Override
-	public List<Comment> getCommentList(int boardNo) {
+	public List<Comment> getCommentList(Comment comment) {
 		List<Comment> commentList = Collections.emptyList();
 
-		int commentTotalCount = boardMapper.getCommentTotalCount(boardNo);
-//		if (commentTotalCount > 0) {
-//			commentList = boardMapper.getCommentList(params);
-//		}
+		int commentTotalCount = boardMapper.getCommentTotalCount(comment);
+	if (commentTotalCount > 0) {
+			commentList = boardMapper.getCommentList(comment);
+		}
 		return commentList;
 	}
 	

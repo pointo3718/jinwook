@@ -35,7 +35,7 @@ public class CommentTests {
 	@Test
 	public void deleteComment() {
 		Comment comment = new Comment();
-		commentService.deleteComment(comment); // 삭제할 댓글 번호
+		commentService.deleteComment(1); // 삭제할 댓글 번호
 
 		System.out.println("댓글 " + comment + "가 삭제되었습니다.");
 	}

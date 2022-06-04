@@ -12,7 +12,9 @@ import lombok.ToString;
 public class Request {
 
 	private int reqNo;
+	private User user;
 	private String userId;
+	private Store store;
 	private int storeNo;
 	private String reqCode;
 	private Date reqDate;
@@ -22,6 +24,9 @@ public class Request {
 	private String adTitle;
 	private String adContent;
 	private String adImg;
+	private int countPickup;
+	
+	
 	
 	public Request() {}
    

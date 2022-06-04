@@ -41,6 +41,11 @@
 			<result property="product.price"		column="price"			jdbcType="INTEGER"/>
 	</resultMap>
 	
+	<resultMap type="user" id="userSelectMap">
+			<result property="userId"		column="user_id"		jdbcType="VARCHAR"/>
+			<result property="jpBalance"	column="jp_-balance"	jdbcType="INTEGER"/>
+	</resultMap>
+	
 	<insert id="addOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderNo">
 		INSERT
 		INTO orders(user_id,store_no,buyer_name,buyer_phone,pickup_time,order_req,order_price,prod_count,order_date,order_status)
@@ -59,37 +64,28 @@
 	<delete id="deleteOrders">
 		DELETE FROM 
 		orders
-		WHERE
-			 order_no = #{orderNo}
+		WHERE order_no = #{orderNo}
 	</delete>
 	
 	<select id="getOrders" parameterType="int" resultMap="ordersSelectMap" >
-		SELECT
-			o.user_id,o.order_no,p.prod_name,o.prod_count,p.price,p.prod_info,s.store_name,o.order_date,o.order_price,o.buyer_name,o.buyer_phone,o.order_req,o.pickup_time,o.order_status,p.prod_img
-		FROM
-			orders o, product p, store s
-		WHERE
-			o.store_no = p.store_no
-			AND o.store_no = s.store_no
-			AND order_no = #{orderNo}
+		SELECT o.user_id,o.order_no,p.prod_name,o.prod_count,p.price,p.prod_info,s.store_name,o.order_date,o.order_price,o.buyer_name,o.buyer_phone,o.order_req,o.pickup_time,o.order_status,p.prod_img
+		FROM orders o, product p, store s
+		WHERE o.store_no = p.store_no
+		AND o.store_no = s.store_no
+		AND order_no = #{orderNo}
 	</select>
 		
 	<select id="getOrdersList" parameterType="orders" resultMap="ordersSelectMap">
-		SELECT
-			o.user_id,o.order_no,o.order_price,o.order_status,o.pickup_time,o.order_date,p.prod_name,p.prod_img
-		FROM
-			orders o ,product p 
-		WHERE
-			o.store_no = p.store_no
-			AND o.user_id = #{user.userId}
+		SELECT o.user_id,o.order_no,o.order_price,o.order_status,o.pickup_time,o.order_date,p.prod_name,p.prod_img
+		FROM orders o ,product p 
+		WHERE o.store_no = p.store_no
+		AND o.user_id = #{user.userId}
 		GROUP BY order_no;
 	</select>
 	
 	<select id="getOrdersTotalCount" parameterType="Map" resultType="int">
-		SELECT
-			COUNT(*)
-		FROM
-			orders
+		SELECT COUNT(*)
+		FROM orders
 	</select>
 	
 	<insert id="addOrdersCart" useGeneratedKeys="true" keyProperty="cartNo">
@@ -107,14 +103,28 @@
 		AND cart_no	= #{cartNo}
 	</update>
 	
-	<update id="deleteOrdersCart">
-		UPDATE cart
+	<update id="deleteOrderCartAfter">
+		UPDATE cart c ,orders o
 		<set>
-			cart_status = #{cartStatus}
+			c.order_no = #{orders.orderNo},
+			c.cart_status = #{cartStatus}
 		</set>
-		WHERE user_id = #{userId}
-		AND order_no = #{orderNo}
+		WHERE c.user_id = o.user_id
+		AND c.user_id = #{userId}
+		AND c.cart_no	= #{cartNo}
 	</update>
+	
+	<delete id="deleteOrdersCart">
+		DELETE FROM 
+		cart
+		WHERE cart_no = #{cartNo}
+	</delete>
+	
+	<delete id="deleteOrdersCartAll">
+		DELETE FROM 
+		cart
+		WHERE cart_status = #{cartStatus}
+	</delete>
 	
 	<select id="getOrdersCartList" parameterType="cart" resultMap="cartSelectMap">
 	SELECT c.store_name,p.prod_img,p.prod_name,p.prod_info,c.prod_count,p.price,o.order_price
@@ -128,10 +138,86 @@
 	</select>
 
 	<select id="getCartTotalCount" resultType="int">
-		SELECT
-			COUNT(*)
-		FROM
-			cart
+		SELECT COUNT(*)
+		FROM cart
+	</select>
+	
+	<update id="addOrdersJpayPassword">
+		UPDATE users
+		<set>
+			jp_password = #{jpPassword}
+		</set>
+		WHERE user_id = #{userId}
+	</update>
+	
+	<update id="updateOrdersJpayPassword">
+		UPDATE users
+		<set>
+			jp_password = #{jpPassword}
+		</set>
+		WHERE user_id = #{userId}
+	</update>
+	
+	<update id="addOrdersjBCharge">
+		UPDATE users u, jpay j
+    	<if test="jpStatus==0">
+    	<set>
+           u.jp_balance = (SELECT * FROM(SELECT u.jp_balance + j.charge_pay
+                       FROM users u, jpay j
+                       WHERE u.user_id = j.user_id 
+                       AND u.user_id = #{userId}
+                       AND j.jp_no =#{jpNo})as vt)
+     	</set>
+     	</if>
+     	<if test="jpStatus==1">
+     	<set>
+           u.jp_balance = (SELECT * FROM(SELECT u.jp_balance - o.final_price
+                       FROM users u, orders o
+                       WHERE u.user_id = o.user_id 
+                       AND u.user_id = #{userId}
+                       AND o.order_no = #{orderNo})as vt)
+     	</set>
+     	</if>                
+      	WHERE u.user_id = j.user_id
+      	AND u.user_id = #{userId} 
+	</update>
+	
+	<insert id="addOrdersJpayCharge" useGeneratedKeys="true" keyProperty="jpNo">
+		INSERT
+		INTO jpay(user_id,order_no,jp_status,final_price,charge_pay,jp_date)
+		VALUES(#{userId},#{orderNo:INTEGER},#{jpStatus},#{finalPrice:INTEGER},#{chargePay:INTEGER},SYSDATE())
+	</insert>
+	
+	<select id="getOrdersJpaylist">
+	
+	</select>
+	
+	<select id="getOrdersJpaylistTotalCount">
+	
+	</select>
+	
+	<select id="getOrdersJpayChargelist">
+	
+	</select>
+	
+	<select id="getOrdersJpayChargelistTotalCount">
+	
+	</select>
+	
+	<insert id="addOrdersNotice">
+	
+	</insert>
+	
+	<delete id="deleteOrdersNotice">
+	
+	</delete>
+	
+	<select id="getOrdersNoticelist">
+	
+	</select>
+	
+	<select id="getOrdersNoticelistTotalCount">
+	
 	</select>
 	
 </mapper>
