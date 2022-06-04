@@ -20,7 +20,7 @@ class UserMapperTest {
 	@Autowired
 	private UserMapper userMapper;
 
-	@Test
+	//@Test
 	public void getUserTest() throws Exception{
 		User user = userMapper.getUser("test02");
 		System.out.println("-------------------------------------------");
@@ -86,10 +86,16 @@ class UserMapperTest {
 	
 	//@Test
 	public void checkIdTest() throws Exception{
-		UserServiceImpl userServiceImpl=null;
-		UserService userService = null;
 		System.out.println("----------------------------------");
-		System.out.println(userService.checkId("dk1dk"));
+		System.out.println(userMapper.checkId("dk1dk"));
+		System.out.println("----------------------------------");
+//	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
+	}
+	
+	//@Test
+	public void checkPhoneTest() throws Exception{
+		System.out.println("----------------------------------");
+		System.out.println(userMapper.checkPhone("010-1111-1110"));
 		System.out.println("----------------------------------");
 //	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
 	}
@@ -98,6 +104,14 @@ class UserMapperTest {
 	public void checkNickNameTest() throws Exception{
 		System.out.println("----------------------------------");
 		System.out.println(userMapper.checkNickName("ㅁ"));
+		System.out.println("----------------------------------");
+//	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
+	}
+	
+	@Test
+	public void checkPasswordTest() throws Exception{
+		System.out.println("----------------------------------");
+		System.out.println(userMapper.checkPassword("test01","1111"));
 		System.out.println("----------------------------------");
 //	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
 	}
