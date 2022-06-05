@@ -2,6 +2,8 @@ package com.jinwook.home.service.domain;
 
 import java.time.LocalDate;
 
+import com.jinwook.home.common.PaginationInfo;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,5 +28,5 @@ public class Board {
 	
 	public Board() {
 	}
-
+	
 }

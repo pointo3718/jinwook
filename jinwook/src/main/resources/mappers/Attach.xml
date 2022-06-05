@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.mapper.AttachMapper">
+
+	<sql id="attachColumns">
+		  attach_no
+		, board_no
+		, order_no
+		, original_name
+		, save_name
+		, size
+		, delete_yn
+		, insert_time
+		, delete_time
+	</sql>
+
+	<insert id="Attach" parameterType="list">
+		INSERT INTO attach (
+			<include refid="attachColumns" />
+		) VALUES
+		<foreach collection="list" item="item" separator=",">
+		(
+			  #{item.attach_no}
+			, #{item.board_no}
+			, #{item.order_no}
+			, #{item.originalName}
+			, #{item.saveName}
+			, #{item.size}
+			, 'N'
+			, NOW()
+			, NULL
+		)
+		</foreach>
+	</insert>
+
+	<select id="getAttach" parameterType="Integer" resultType="Attach">
+		SELECT
+			<include refid="attachColumns" />
+		FROM
+			attach
+		WHERE
+			delete_yn = 'N'
+		AND
+			attach_no = #{attachNo}
+	</select>
+
+	<update id="deleteAttach" parameterType="Integer">
+		UPDATE attach
+		SET
+			  delete_yn = 'Y'
+			, delete_time = NOW()
+		WHERE
+			board_no = #{boardNo}
+	</update>
+
+	<select id="getAttachList" parameterType="long" resultType="Attach">
+		SELECT
+			<include refid="attachColumns" />
+		FROM
+			attach
+		WHERE
+			delete_yn = 'N'
+		AND
+			board_no = #{boardNo}
+	</select>
+
+	<select id="getAttachTotalCount" parameterType="Integer" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			attach
+		WHERE
+			delete_yn = 'N'
+		AND
+			board_no = #{boardNo}
+	</select>
+
+</mapper>

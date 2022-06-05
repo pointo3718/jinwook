@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -131,6 +130,3 @@
 </body>
 
 </html>
-    
-=======
->>>>>>> refs/heads/master

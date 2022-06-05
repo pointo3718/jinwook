@@ -78,12 +78,55 @@ public class BoardController {
 	}
 	
 	//게시글 목록 조회
-	@GetMapping(value = "boardList")
-	public String boardList(@ModelAttribute("board") Board board, Model model) {
-		List<Board> boardList = boardService.getBoardList(board);
-		model.addAttribute("boardList", boardList);
+	@GetMapping(value = "getBoardList")
+	public String getBoardList(@ModelAttribute("board") Board board, Model model) {
+		List<Board> getBoardList = boardService.getBoardList(board);
+		model.addAttribute("getBoardList", getBoardList);
 		
-		return "board/boardList";
+		return "board/getBoardList";
+	}
+	
+	//게시글 상세 조회
+	@GetMapping(value = "getBoard")
+	public String getBoard(@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
+		System.out.println("/board/getBoard: GET");
+		
+//		if (boardNo == null) {
+//			// TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
+//			return "redirect:/board/getBoardList";
+//		}
+
+		Board board = boardService.getBoard(boardNo);
+//		if (board == null || "Y".equals(board.getDeleteYn())) {
+//			// TODO => 없는 게시글이거나, 이미 삭제된 게시글이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
+//			return "redirect:/board/list.do";
+//		}
+		model.addAttribute("board", board);
+
+		return "board/getBoard";
+	}
+	
+	//게시글 삭제 처리
+	@PostMapping(value = "deleteBoard")
+	public String deleteBoard(@RequestParam(value = "boardNo", required = false) Integer boardNo) {
+		if (boardNo == null) {
+			// TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
+			return "redirect:/board/getBoardList";
+		}
+
+		try {
+			int isDeleted = boardService.deleteBoard(boardNo);
+			if (isDeleted == 0) {
+				// TODO => 게시글 삭제에 실패하였다는 메시지를 전달
+			}
+		} catch (DataAccessException e) {
+			// TODO => 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
+
+		} catch (Exception e) {
+			// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
+		}
+
+		return "redirect:/board/getBoardList";
 	}
 	
 }//class
