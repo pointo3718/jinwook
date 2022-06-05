@@ -20,20 +20,6 @@
 		, user_bye_status
 	</sql>
 	
-	<!-- <resultMap type="User" id="User">
-		<result column="USER_ID" property="userId" />
-		<result column="USER_NAME" property="userName" />
-		<result column="BUSINESS_NO" property="businessNo" />
-	</resultMap>
-
-	<resultMap type="Store" id="Store">
-		<result column="STORE_NO" property="storeNo" />
-		<result column="STORE_NAME" property="storeName" />
-		<result column="STORE_ADDR" property="storeAddr" />
-		<result column="STORE_PHONE" property="storePhone" />
-		<collection property="user" resultMap="User" />
-	</resultMap> -->
-	
 
 	<!-- 유저 상세 -->
 	<select id="getUserAdmin" parameterType="String" resultType="user">

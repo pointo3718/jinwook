@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.jinwook.home.mapper.RequestMapper">
 
 	<resultMap type="request" id="requestSelectMap">
 	   <result property="reqNo"  column="req_no"    jdbcType="INTEGER"/>
+	   <result property="reqCode"  column="req_code"    jdbcType="CHAR"/>
+	   <result property="reqStatus"  column="req_status"    jdbcType="CHAR"/>
 	   <result property="userId"  column="user_id"    jdbcType="VARCHAR"/>
 	   <result property="user.userName"  column="user_name"    jdbcType="VARCHAR"/>   
 	   <result property="store.storeType"  column="store_type"    jdbcType="CHAR"/>   
@@ -31,10 +34,10 @@
 				, #{storeName}
 				, #{storeAddr}
 				, #{storeType}
-				, 0
+				, 0 <!-- storeStatus (미등록) -->
 				, #{storePhone}
 				, #{storeIntro}
-				, SYSDATE()
+				, #{storeStart}
 				, NULL
 				, NULL
 				, NULL
@@ -42,10 +45,22 @@
 				, #{storeImage}
 				, #{accNo}
 				, #{bank}
-				, 0
-				, 0
+				, 0 <!-- totalEarn -->
+				, 0 <!-- isOpen -->
 			)
 	</insert>
+	
+	
+	<!-- 최근 등록된 상점 가져오기 -->
+	<select id="getNewStore"  resultType="Store">
+			SELECT * 
+			FROM 
+				store
+			ORDER BY 
+				store_no DESC 
+			LIMIT 1
+	</select>
+	
 	
 	<!-- 상점 등록 요청 등록 -->
 	<insert id="addRequestAddStoreForAdmin" parameterType="Request">
@@ -90,13 +105,10 @@
 		SET
 			store_status = true
 		WHERE
-			store_no = #{storeNo}
+			store_no = #{storeNo} 
 	</update>
 	
 	
-
-	
-
 	<!-- 상점 등록 확인을 위한 sql ***삭제예정*** -->
 	<select id="checkStoreStatus" parameterType="int" resultType="Store">
 		SELECT
@@ -114,7 +126,7 @@
 			VALUES (
 				  NULL
 				, #{userId}
-				, NULL
+				, #{storeNo}
 				, 3 <!-- 환급요청 -->
 				, 1 <!-- 수락전 -->
 				, NULL
@@ -135,7 +147,7 @@
 		SET
 			  jp_balance = (SELECT * FROM(SELECT u.jp_balance - r.refund_money
 			  				FROM users u, request r
-			  				WHERE u.user_id = r.user_id and u.user_id = #{userId})as vt)
+			  				WHERE u.user_id = r.user_id and u.user_id = #{userId} and req_no = #{reqNo})as vt)
 		WHERE
 			  user_id = #{userId}	
 	</update>
@@ -161,7 +173,6 @@
 	</insert>
 	
 	
-	
 	<!-- 남은 픽업 개수 -->
 	<select id="countPickup" parameterType="int" resultType="request">
 		<!-- orderStatus가 3인 내역만 count -->
@@ -177,7 +188,6 @@
 	</select>
 	
 	
-	
 	<!-- 상점 삭제 수락 -->
 	<update id="deleteStore" parameterType="Request">
 		UPDATE store
@@ -186,6 +196,7 @@
 		WHERE
 			user_id = #{userId} and store_no = #{storeNo}
 	</update>
+
 
 	<!-- 광고 등록 신청 -->
 	<insert id="addRequestAd" parameterType="Request">
@@ -219,9 +230,63 @@
 			r.req_no = #{reqNo}
 	</select>
 	
-
-	<!-- 요청 목록 4개-->
-
+	
+	<!-- 광고/상점 등록 요청 목록 (사장님용)  -->
+	<select id="getRequestAdStoreList" parameterType="String" resultMap="requestSelectMap">
+		SELECT
+			r.req_no, r.ad_title, u.user_id, u.user_name, r.req_date, r.req_status, r.req_code
+		FROM
+			request r, users u
+		WHERE
+			(r.req_code = 1 OR r.req_code = 4)
+            AND
+			r.user_id = u.user_id 
+			AND 
+			u.user_id = #{userId}
+	</select>
+	
+	
+	<!-- 광고/상점 요청목록 개수 (사장님용) -->
+	<select id="getRequestAdStoreTotalCount" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			request r, users u
+		WHERE
+			(r.req_code = 1 OR r.req_code = 4)
+            AND
+			r.user_id = u.user_id 
+			AND 
+			u.user_id = #{userId}
+	</select>
+	
+	<!-- 요청 목록 (관리자용) -->
+	<select id="getRequestListForAdmin" parameterType="Request" resultMap="requestSelectMap">
+		SELECT
+			r.req_no, s.store_name, u.user_id, u.user_name, r.ad_title,
+			r.req_date, r.req_status, r.refund_money 
+		FROM
+			store s, users u, request r
+		WHERE
+			s.user_id = u.user_id 
+			AND
+			u.user_id = r.user_id
+			AND 
+			r.req_code = ${reqCode}
+	</select>
+	
+	
+	<!-- 요청 목록 개수 (관리자용)-->
+	<select id="getRequestTotalCount" parameterType="Request" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			request r, users u
+		WHERE
+			r.user_id = u.user_id 
+			AND
+			r.req_code = ${reqCode}   
+	</select>
 
 
 	<!-- 요청 목록 삭제 -->
@@ -233,7 +298,6 @@
 		WHERE
 			  req_no = #{reqNo}	
 	</update>
-	
 
 
 	<!-- ////// 공통 ////// -->
@@ -250,7 +314,7 @@
 	
 	
 	<!-- ////// 공통 ////// -->
-	<!-- 요청 상태 거절으로 변경 -->
+	<!-- 요청 상태 거절로 변경 -->
 	<update id="updateRequestStatusToRefuse" parameterType="Request">
 		UPDATE 
 			  request
@@ -262,4 +326,15 @@
 	</update>
 
 
+	<!-- 대기중인 요청 개수 -->
+	<select id="CountRequestWaiting" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			request 
+		WHERE
+			req_code = ${reqCode} 
+			AND
+			req_status = 1
+	</select>
 </mapper>
