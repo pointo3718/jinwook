@@ -22,7 +22,7 @@ public interface AdminMapper {
 	
 	public List<User> getBlacklistAdmin();			// 블랙리스트 목록
 
-	public int updateBlacklist(User user);	// 블랙리스트 등록
+	public int updateBlacklist(User user);			// 블랙리스트 등록
 	
 	
 	public int getUserTotalCount();				// 유저 목록 개수

@@ -1,8 +1,12 @@
 package com.jinwook.home;
 
+import java.sql.Date;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.CollectionUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,9 +27,10 @@ public class RequestMapperTest {
 	@Test
 	public void testOfInsertRequestAdd() {
 		Store store = new Store();
-		store.setUserId("test13");
-		store.setStoreName("부들이네");
+		store.setUserId("test16");
+		store.setStoreName("쓸쓸이네");
 		store.setStoreAddr("서울시 강북구 진욱이네");
+<<<<<<< HEAD
 		store.setStoreType("3");
 		store.setStorePhone("010-9500-7753");
 		store.setStoreIntro("부들이네에 어서오세요...");
@@ -33,6 +38,16 @@ public class RequestMapperTest {
 		store.setStoreImage("부들이네.jpg");
 		store.setAccNo("123123-12-123123");
 		store.setBank("농협");
+=======
+		store.setStoreType("1");
+		store.setStorePhone("010-9500-7703");
+		store.setStoreIntro("쓸쓸이네에 어서오세요...");
+		store.setBusinessCard("쓸쓸이의_영업신고증.jpg");
+		store.setStoreImage("쓸쓸이네.jpg");
+		store.setAccNo("123123-18-123123");
+		store.setBank("KB국민");
+		store.setStoreStart(Date.valueOf("2002-02-01"));
+>>>>>>> refs/remotes/origin/master
 
 		int result = requestMapper.addRequestAddStore(store);
 		System.out.println("결과는 " + result + "입니다.");
@@ -43,11 +58,12 @@ public class RequestMapperTest {
 	@Test
 	public void testOfInsertRequestAddForAdmin() {
 		Request request = new Request();
-		request.setUserId("test12");
-		request.setStoreNo(10014);  // 서비스에서 어떻게 가져올지 ?
+		request.setUserId("test16");
+		request.setStoreNo(10018);  // 서비스에서 어떻게 가져올지 ? (getStore -> storeNo 가져오기)
 		
-		Store store = requestMapper.checkStoreStatus(10014);
+//		Store store = requestMapper.checkStoreStatus(10018);
 		
+<<<<<<< HEAD
 		
 		request.setStoreNo(1); //??
 		store.setStoreAddr("서울시 강북구 진욱이네");
@@ -58,10 +74,23 @@ public class RequestMapperTest {
 		store.setStoreImage("부들이네.jpg");
 		store.setAccNo("123123-12-123123");
 		store.setBank("농협");
+=======
+//		
+//		request.setStoreNo(1); //??
+//		store.setStoreAddr("서울시 강북구 진욱이네");
+//		store.setStoreType("3");
+//		store.setStorePhone("010-9500-7753");
+//		store.setStoreIntro("부들이네에 어서오세요...");
+//		store.setBussinessCard("부들이의_영업신고증.jpg");
+//		store.setStoreImage("부들이네.jpg");
+//		store.setAccNo("123123-12-123123");
+//		store.setBank("농협");
+>>>>>>> refs/remotes/origin/master
 
 		int result = requestMapper.addRequestAddStoreForAdmin(request);
 		System.out.println("결과는 " + result + "입니다.");
 	}
+	
 	
 	
 	////////////////// 상점 등록 요청 보기 /////////////////
@@ -132,7 +161,10 @@ public class RequestMapperTest {
 	/////////////// 환급 신청 수락 ////////////////
 	@Test
 	public void testOfUpdateRequestRefund() {	
-		int result = requestMapper.updateRequestRefund("test05");
+		Request request = new Request();
+		request.setReqNo(10008);
+		request.setUserId("test14");
+		int result = requestMapper.updateRequestRefund(request);
 		System.out.println("결과는 " + result + "입니다.");
 	}
 
@@ -207,18 +239,64 @@ public class RequestMapperTest {
 	}
 	
 	
-	///////////////  요청 목록들 확인하고 테스트 ///////////////
-
-	
-	
-	///////////////  요청 목록 삭제 ///////////////
+	/////////////  광고/상점 요청 목록 /////////////
 	@Test
-	public void testOfUpdateDeleteStatus() {	
-		int result = requestMapper.updateRequestStatusToRefuse(10004);
+	public void testSelectRequestList() {
+		int userTotalCount = requestMapper.getRequestAdStoreTotalCount("test05");
+		if (userTotalCount > 0) {
+			List<Request> requestList = requestMapper.getRequestAdStoreList("test05");
+			
+			// 리스트가 비어있는지 체크
+			if (CollectionUtils.isEmpty(requestList) == false) { 		
+				for (Request request : requestList) {
+					System.out.println("=========================");
+					System.out.println(request.getUser().getUserName());
+					System.out.println(request.getUser().getUserId());
+					System.out.println(request.getAdTitle());
+					System.out.println(request.getReqDate());
+					System.out.println(request.getReqStatus());
+					System.out.println("=========================");
+				}
+			}
+		}
+	}
+	
+
+	///////////// 요청 목록 (관리자용) //////////////
+	@Test
+	public void testSelectAddStoreRequestList() {
+		Request request1 = new Request();
+		request1.setReqCode("4");
+		int requestTotalCount = requestMapper.getRequestTotalCount(request1);
+		if (requestTotalCount > 0) {
+			List<Request> requestList = requestMapper.getRequestListForAdmin(request1);
+		
+			// 리스트가 비어있는지 체크
+			if (CollectionUtils.isEmpty(requestList) == false) { 		
+				for (Request request : requestList) {
+					System.out.println("=========================");
+					System.out.println(request.getReqNo());
+					System.out.println(request.getUserId());
+					System.out.println(request.getUser().getUserName());
+					System.out.println(request.getStore().getStoreName());
+					System.out.println(request.getAdTitle());
+					System.out.println(request.getReqDate());
+					System.out.println(request.getReqStatus());
+					System.out.println(request.getRefundMoney());
+					System.out.println("=========================");
+				}
+			}
+		}
+	}
+	
+	
+	///////////////  대기중인 요청 개수 ///////////////
+	@Test
+	public void testOfCountRequestWaiting() {	
+		// 1. 상점등록	  2. 상점삭제  3. 환급  4. 광고
+		int result = requestMapper.CountRequestWaiting("3");
 		System.out.println("결과는 " + result + "입니다.");
-	}	
-	
-	
+	}
 	
 }
 
