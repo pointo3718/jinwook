@@ -3,6 +3,8 @@ package com.jinwook.home.service.board;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
@@ -14,6 +16,8 @@ import com.jinwook.home.service.domain.User;
 public interface BoardService {
 	
 	public boolean addBoard(Board board);
+	
+	public boolean addBoard(Board board, MultipartFile[] files);
 	
 	public int updateBoard(Board board);
 	

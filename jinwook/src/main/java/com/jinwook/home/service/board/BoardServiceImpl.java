@@ -6,10 +6,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jinwook.home.common.Criteria;
+import com.jinwook.home.common.FileUtils;
+import com.jinwook.home.mapper.AttachMapper;
 import com.jinwook.home.mapper.BoardMapper;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
@@ -21,6 +27,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardMapper boardMapper;
+	
+	@Autowired
+	private AttachMapper attachMapper;
+
+	@Autowired
+	private FileUtils fileUtils;
 	
 	@Override
 	public boolean addBoard(Board board) {
@@ -34,7 +46,25 @@ public class BoardServiceImpl implements BoardService {
 
 		return (queryResult == 1) ? true : false;
 	}
+	
+	@Override
+	public boolean addBoard(Board board, MultipartFile[] files) {
+		int queryResult = 1;
 
+		if (addBoard(board) == false) {
+			return false;
+		}
+
+		List<Attach> fileList = fileUtils.uploadFiles(files, board.getBoardNo());
+		if (CollectionUtils.isEmpty(fileList) == false) {
+			queryResult = attachMapper.addAttach(fileList);
+			if (queryResult < 1) {
+				queryResult = 0;
+			}
+		}
+
+		return (queryResult > 0);
+	}
 
 	@Override
 	public int updateBoard(Board board) {

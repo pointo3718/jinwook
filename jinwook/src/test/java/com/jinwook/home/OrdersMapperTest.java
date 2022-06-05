@@ -16,6 +16,7 @@ import com.jinwook.home.mapper.OrdersMapper;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Jpay;
+import com.jinwook.home.service.domain.Notice;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
@@ -76,9 +77,9 @@ public class OrdersMapperTest {
 	
 	//@Test
 	public void testOfdeleteOrders() {	
-		Orders orders = new Orders();
-		orders.setOrderNo(10005);
-		int result = ordersMapper.deleteOrders(orders);
+//		Orders orders = new Orders();
+//		orders.setOrderNo(10005);
+		int result = ordersMapper.deleteOrders(10005);
 	    System.out.println("결과는" + result + "입니다.");
 	     
 	}
@@ -148,7 +149,7 @@ public class OrdersMapperTest {
 		Cart cart = new Cart();
 		cart.setUserId("test01");
 		cart.setProduct(product);
-//		cart.setOrderNo(null);// 
+//		cart.setOrderNo(null); 
 		cart.setProdCount(2);
 		cart.setStoreName("진욱이네");
 		cart.setCartStatus(false);
@@ -183,9 +184,9 @@ public class OrdersMapperTest {
 	
 	//@Test
 		public void testdeleteOrdersCart() {
-			Cart cart = new Cart();
-			cart.setCartNo(10011);
-			int result = ordersMapper.deleteOrdersCart(cart);
+//			Cart cart = new Cart();
+//			cart.setCartNo(10011);
+			int result = ordersMapper.deleteOrdersCart(10011);
 		    System.out.println("결과는" + result + "입니다.");
 		}
 		
@@ -244,26 +245,30 @@ public class OrdersMapperTest {
 		System.out.println("결과는"+result+"입니다.");
 	}
 	
-	@Test
+	//@Test
 	public void addOrdersjBCharge() {
+		Orders orders = new Orders();
+		orders.setOrderNo(10047);
+		
 		Jpay jpay = new Jpay();
 		jpay.setJpStatus(1);
 		jpay.setUserId("test01");
 		jpay.setJpNo(10000);
-		jpay.setOrderNo(10047);
+		jpay.setOrders(orders);
 		
 		int result = ordersMapper.addOrdersjBCharge(jpay);
 	      System.out.println("결과는 " + result + "입니다.");
 
 	}
 
-	
-	
 	//@Test
 	public void testaddOrdersJpayCharge() {
+		Orders orders = new Orders();
+		orders.setOrderNo(0);
+		
 		Jpay jpay = new Jpay();
 		jpay.setUserId("test01");
-		jpay.setOrderNo(0);
+		jpay.setOrders(orders);
 		jpay.setJpStatus(1);
 		jpay.setFinalPrice(0);
 		jpay.setChargePay(1000);
@@ -272,6 +277,80 @@ public class OrdersMapperTest {
 		System.out.println("결과는"+result+"입니다.");
 	}
 	
+	//@Test
+	public void testgetOrdersJpaylist() {
+		int jpayTotalCount = ordersMapper.getOrdersJpaylistTotalCount();
+		System.out.println(jpayTotalCount);
+		if(jpayTotalCount > 0) {
+			List<Jpay> jpayList = ordersMapper.getOrdersJpaylist("test01");
+			System.out.println(jpayList.get(1)); 
+			System.out.println(jpayTotalCount);
+			if(CollectionUtils.isEmpty(jpayList) == false) {
+				for(Jpay jpay : jpayList) {
+					System.out.println("=========================");
+					System.out.println(jpay.getJpNo());
+					System.out.println(jpay.getJpDate());
+					System.out.println(jpay.getJpStatus());
+					System.out.println(jpay.getChargePay());
+					System.out.println(jpay.getFinalPrice());
+					System.out.println(jpay.getOrders().getStore().getStoreName());
+					System.out.println("=========================");
+				}
+				
+			}
+		}
+	}
 	
+	//@Test
+	public void testgetOrdersJpayChargelist() {
+		
+	}
+	
+	//@Test
+	public void testaddOrdersNotice() {
+	Notice notice = new Notice();
+	notice.setSendId("test01");
+	notice.setReceiveId("test14");
+	notice.setOrderNo(10000);
+	notice.setNotiType('0');
+	notice.setNotiContent("고객님이 주문하셨습니다.");
+	notice.setStoreName("몽자네");
+	notice.setBuyerName("부들이");
+	int result = ordersMapper.addOrdersNotice(notice);
+	System.out.println("결과는"+result+"입니다.");
+	}
+	
+	//@Test
+	public void testdeleteOrdersNotice() {
+		Notice notice = new Notice();
+		notice.setNotiNo(10002);
+		int result = ordersMapper.deleteOrdersNotice(notice);
+	    System.out.println("결과는" + result + "입니다.");
+	}
+	
+	@Test
+	public void testgetOrdersNoticelist() {
+		int getOrdersNoticelistTotalCount = ordersMapper.getOrdersNoticelistTotalCount();
+		if(getOrdersNoticelistTotalCount > 0) {
+			List<Notice> noticeList = ordersMapper.getOrdersNoticelist("test01");
+			System.out.println(noticeList.get(1)); 
+			if(CollectionUtils.isEmpty(noticeList) == false) {
+				System.out.println("==2");
+				for(Notice notice : noticeList) {
+					System.out.println("=========================");
+					System.out.println(notice.getNotiNo());
+					System.out.println(notice.getSendId());
+					System.out.println(notice.getReceiveId());
+					System.out.println(notice.getOrderNo());
+					System.out.println(notice.getNotiType());
+					System.out.println(notice.getNotiContent());
+					System.out.println(notice.getNotiDate());
+					System.out.println(notice.getStoreName());
+					System.out.println(notice.getBuyerName());
+					System.out.println("=========================");
+				}
+			}
+		}
+	}
 
 }

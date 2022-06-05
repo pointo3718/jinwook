@@ -48,7 +48,7 @@
 		
 		<div class="row">
 	  		<div class="col-xs-3 col-md-1"><strong>게시글 내용</strong></div>
-			<div class="col-xs-7 col-md-5">${c}</div>
+			<div class="col-xs-7 col-md-5">${board}</div>
 		</div>
 		
 		<hr/>
