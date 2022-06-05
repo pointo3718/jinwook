@@ -49,7 +49,7 @@
 	 <resultMap type="jpay" id="jpaySelectMap">
 			<result property="jpNo"					column="jp_no"			jdbcType="INTEGER"/>
 			<result property="userId"				column="user_id"		jdbcType="VARCHAR"/>
-			<result property="orderNo"				column="order_no"		jdbcType="VARCHAR"/>
+			<result property="orders.orderNo"		column="order_no"		jdbcType="VARCHAR"/>
 			<result property="jpStatus"				column="jp_status"		jdbcType="INTEGER"/>
 			<result property="finalPrice"			column="final_price"	jdbcType="INTEGER"/>
 			<result property="chargePay"			column="charge_pay"		jdbcType="INTEGER"/>
