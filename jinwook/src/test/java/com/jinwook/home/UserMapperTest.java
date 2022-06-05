@@ -111,6 +111,7 @@ class UserMapperTest {
 	@Test
 	public void checkPasswordTest() throws Exception{
 		System.out.println("----------------------------------");
+		
 		System.out.println(userMapper.checkPassword("test01","1111"));
 		System.out.println("----------------------------------");
 //	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
