@@ -31,5 +31,6 @@ public interface StoreService {
 	public List<Store> getStore(int storeNo);
 	
 	public List<Store> getStoreWallet(int storeNo);
+	
 
 }
