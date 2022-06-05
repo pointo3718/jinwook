@@ -33,7 +33,7 @@ public class RequestMapperTest {
 		store.setStoreType("1");
 		store.setStorePhone("010-9500-7703");
 		store.setStoreIntro("쓸쓸이네에 어서오세요...");
-		store.setBussinessCard("쓸쓸이의_영업신고증.jpg");
+		store.setBusinessCard("쓸쓸이의_영업신고증.jpg");
 		store.setStoreImage("쓸쓸이네.jpg");
 		store.setAccNo("123123-18-123123");
 		store.setBank("KB국민");

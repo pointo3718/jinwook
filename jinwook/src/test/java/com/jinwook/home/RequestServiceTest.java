@@ -30,7 +30,7 @@ class RequestServiceTest {
 		store.setStoreType("5");
 		store.setStorePhone("010-9500-7003");
 		store.setStoreIntro("씩씩이네에 어서오세요...");
-		store.setBussinessCard("씩씩이의_영업신고증.jpg");
+		store.setBusinessCard("씩씩이의_영업신고증.jpg");
 		store.setStoreImage("씩씩이네.jpg");
 		store.setAccNo("123123-10-123153");
 		store.setBank("카카오뱅크");

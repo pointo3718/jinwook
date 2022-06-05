@@ -15,7 +15,7 @@
    <result property="startTime"         column="start_time"     jdbcType="TIME"/>
    <result property="endTime"             column="end_time"       jdbcType="TIME"/>
    <result property="holiday"             column="holiday"        jdbcType="VARCHAR"/>
-   <result property="bussinessCard"      column="bussiness_card" jdbcType="VARCHAR"/>
+   <result property="businessCard"      column="business_card" jdbcType="VARCHAR"/>
    <result property="storeImage"         column="store_image"    jdbcType="VARCHAR"/>
    <result property="accNo"             column="acc_no"         jdbcType="VARCHAR"/>
    <result property="bank"                 column="bank"           jdbcType="VARCHAR"/>
@@ -116,7 +116,7 @@
       FROM coupon
       WHERE
       coupon_status=0 AND
-      coupon_valid_date > sysdate() AND
+      coupon_valid_date >= sysdate() AND
       user_id=#{userId}
    </select>
    
