@@ -28,7 +28,7 @@ public class Store {
    private LocalDateTime startTime;
    private LocalDateTime endTime;
    private String holiday;
-   private String bussinessCard;
+   private String businessCard;
    private String storeImage;
    private String accNo;
    private String bank;
