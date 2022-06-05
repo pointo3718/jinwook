@@ -18,7 +18,6 @@ public class RequestMapperTest {
 	@Autowired
 	private RequestMapper requestMapper;
 	
-	
 	////////////////// 상점 예비 등록 /////////////////
 	@Test
 	public void testOfInsertRequestAdd() {
@@ -29,7 +28,7 @@ public class RequestMapperTest {
 		store.setStoreType("3");
 		store.setStorePhone("010-9500-7753");
 		store.setStoreIntro("부들이네에 어서오세요...");
-		store.setBussinessCard("부들이의_영업신고증.jpg");
+//		store.setBussinessCard("부들이의_영업신고증.jpg");
 		store.setStoreImage("부들이네.jpg");
 		store.setAccNo("123123-12-123123");
 		store.setBank("농협");
@@ -54,7 +53,7 @@ public class RequestMapperTest {
 		store.setStoreType("3");
 		store.setStorePhone("010-9500-7753");
 		store.setStoreIntro("부들이네에 어서오세요...");
-		store.setBussinessCard("부들이의_영업신고증.jpg");
+//		store.setBussinessCard("부들이의_영업신고증.jpg");
 		store.setStoreImage("부들이네.jpg");
 		store.setAccNo("123123-12-123123");
 		store.setBank("농협");
