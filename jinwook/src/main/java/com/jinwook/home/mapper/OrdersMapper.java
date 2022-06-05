@@ -53,8 +53,6 @@ public interface OrdersMapper {
 	
 	public int getOrdersJpaylistTotalCount();		//진욱페이 내역카운트
 	
-	public List<Jpay> getOrdersJpayChargelist();
-	
 	public int addOrdersNotice(Notice notice);
 	
 	public int deleteOrdersNotice(Notice notice);

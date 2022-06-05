@@ -224,10 +224,6 @@
 		SELECT COUNT(*)
 		FROM jpay
 	</select>
-
-	<select id="getOrdersJpayChargelist">
-		
-	</select>
 	
 	<insert id="addOrdersNotice" useGeneratedKeys="true" keyProperty="notiNo">
 		INSERT
