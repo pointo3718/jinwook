@@ -13,11 +13,11 @@ public class Jpay {
 
 	private int jpNo;
 	private String userId;
-	private int orderNo;
 	private int jpStatus;
 	private int finalPrice;
 	private int chargePay;
 	private Date jpDate; 
+	private Orders orders;
 	
 	public Jpay() {
 		// TODO Auto-generated constructor stub
