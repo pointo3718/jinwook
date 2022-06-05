@@ -42,9 +42,32 @@
 	</resultMap>
 	
 	<resultMap type="user" id="userSelectMap">
-			<result property="userId"		column="user_id"		jdbcType="VARCHAR"/>
-			<result property="jpBalance"	column="jp_-balance"	jdbcType="INTEGER"/>
+			<result property="userId"				column="user_id"		jdbcType="VARCHAR"/>
+			<result property="jpBalance"			column="jp_-balance"	jdbcType="INTEGER"/>
 	</resultMap>
+	
+	 <resultMap type="jpay" id="jpaySelectMap">
+			<result property="jpNo"					column="jp_no"			jdbcType="INTEGER"/>
+			<result property="userId"				column="user_id"		jdbcType="VARCHAR"/>
+			<result property="orders.orderNo"		column="order_no"		jdbcType="VARCHAR"/>
+			<result property="jpStatus"				column="jp_status"		jdbcType="INTEGER"/>
+			<result property="finalPrice"			column="final_price"	jdbcType="INTEGER"/>
+			<result property="chargePay"			column="charge_pay"		jdbcType="INTEGER"/>
+			<result property="jpDate"				column="jp_date"		jdbcType="DATE"/>
+			<result property="orders.store.storeName" 	column="store_name" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap type="notice" id="noticeSelectMap">
+			<result property="notiNo"				column="noti_no"		jdbcType="INTEGER"/>
+			<result property="sendId"				column="send_id"		jdbcType="VARCHAR"/>
+			<result property="receiveId"			column="receive_id"		jdbcType="VARCHAR"/>
+			<result property="orderNo"				column="order_no"		jdbcType="INTEGER"/>
+			<result property="notiType"				column="noti_type"		jdbcType="VARCHAR"/>
+			<result property="notiContent"			column="noti_content"	jdbcType="VARCHAR"/>
+			<result property="storeName"			column="store_name"		jdbcType="VARCHAR"/>
+			<result property="buyerName"			column="buyer_name"		jdbcType="VARCHAR"/>
+			<result property="notiDate"				column="noti_date"		jdbcType="DATE"/>
+	</resultMap> 
 	
 	<insert id="addOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderNo">
 		INSERT
@@ -80,7 +103,7 @@
 		FROM orders o ,product p 
 		WHERE o.store_no = p.store_no
 		AND o.user_id = #{user.userId}
-		GROUP BY order_no;
+		GROUP BY order_no
 	</select>
 	
 	<select id="getOrdersTotalCount" parameterType="Map" resultType="int">
@@ -188,36 +211,45 @@
 		VALUES(#{userId},#{orderNo:INTEGER},#{jpStatus},#{finalPrice:INTEGER},#{chargePay:INTEGER},SYSDATE())
 	</insert>
 	
-	<select id="getOrdersJpaylist">
-	
+	<select id="getOrdersJpaylist" parameterType="jpay" resultMap="jpaySelectMap">
+		SELECT j.jp_no,j.jp_date,j.jp_status,j.charge_pay,j.final_price,c.store_name
+		FROM jpay j ,cart c, orders o
+		WHERE j.user_id = c.user_id
+		AND c.order_no = o.order_no
+		AND j.order_no = c.order_no 
+		AND j.user_id = #{userId}
+	</select> 
+
+	<select id="getOrdersJpaylistTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM jpay
 	</select>
-	
-	<select id="getOrdersJpaylistTotalCount">
-	
-	</select>
-	
+
 	<select id="getOrdersJpayChargelist">
-	
+		
 	</select>
 	
-	<select id="getOrdersJpayChargelistTotalCount">
-	
-	</select>
-	
-	<insert id="addOrdersNotice">
-	
+	<insert id="addOrdersNotice" useGeneratedKeys="true" keyProperty="notiNo">
+		INSERT
+		INTO notice(send_id,receive_id,order_no,noti_type,noti_content,noti_date,store_name,buyer_name)
+		VALUES (#{sendId},#{receiveId},#{orderNo},#{notiType},#{notiContent},SYSDATE(),#{storeName},#{buyerName})
 	</insert>
 	
 	<delete id="deleteOrdersNotice">
-	
+		DELETE 
+		FROM notice
+		WHERE noti_no = #{notiNo}
 	</delete>
 	
-	<select id="getOrdersNoticelist">
-	
+	<select id="getOrdersNoticelist" resultMap="noticeSelectMap">
+		SELECT send_id,receive_id,order_no,noti_type,noti_content,noti_date,store_name,buyer_name
+		FROM notice
+		WHERE user_id = #{userId}
 	</select>
 	
-	<select id="getOrdersNoticelistTotalCount">
-	
+	<select id="getOrdersNoticelistTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM notice
 	</select>
 	
 </mapper>

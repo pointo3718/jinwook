@@ -21,7 +21,7 @@ public interface OrdersMapper {
 	
 	public List<Orders> getOrders(int orderNo);		//주문내역상세
 	
-	public int deleteOrders(Orders orders);			//주문내역삭제
+	public int deleteOrders(int orderNo);			//주문내역삭제
 	
 	public int updateOrders(Orders orders);			//주문내역(수락,거절,픽업완료)
 	
@@ -33,7 +33,7 @@ public interface OrdersMapper {
 		
 	public int deleteOrderCartAfter(Cart cart);		//장바구니	삭제(status변경)
 	
-	public int deleteOrdersCart(Cart cart);			//장바구니 목록삭제
+	public int deleteOrdersCart(int cartNo);			//장바구니 목록삭제
 	
 	public int deleteOrdersCartAll(Cart cart);		//장바구니 목록전부삭제
 	
@@ -45,23 +45,21 @@ public interface OrdersMapper {
 	
 	public int updateOrdersJpayPassword(User user); //진욱페이 비밀번호 수정
 	
-	public int addOrdersJpayCharge(Jpay jpay);		
+	public int addOrdersJpayCharge(Jpay jpay);		//진욱페이 충전
 	
-	public int addOrdersjBCharge(Object object);
+	public int addOrdersjBCharge(Object object);	//진욱페이 잔액 
 	
-	public List<Jpay> getOrdersJpaylist();
+	public List<Jpay> getOrdersJpaylist(String userId);			//진욱페이 내역
 	
-	public int getOrdersJpaylistTotalCount();
+	public int getOrdersJpaylistTotalCount();		//진욱페이 내역카운트
 	
 	public List<Jpay> getOrdersJpayChargelist();
 	
-	public int getOrdersJpayChargelistTotalCount();
+	public int addOrdersNotice(Notice notice);
 	
-	public int addOrdersNotice();
+	public int deleteOrdersNotice(Notice notice);
 	
-	public int deleteOrdersNotice();
-	
-	public List<Notice>getOrdersNoticelist();
+	public List<Notice>getOrdersNoticelist(String userId);
 
 	public int getOrdersNoticelistTotalCount();
 }
