@@ -1,5 +1,8 @@
 package com.jinwook.home.configuration;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -12,11 +15,14 @@ import com.jinwook.home.interceptor.LoggerInterceptor;
 @Configuration
 public class MvcConfiguration implements WebMvcConfigurer {
 
+	private static final List<String> URL_PATTERNS = (List<String>) Arrays.asList("/board/*", "/admin/*", "/user/*");  //인터셉터가 동작 해야 될 요청 주소 mapping 목록
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LoggerInterceptor())
+		registry.addInterceptor(new LoggerInterceptor()).addPathPatterns(URL_PATTERNS)
 		.excludePathPatterns("/css/**", "/fonts/**", "/plugin/**", "/scripts/**");
 	}
+	
 	
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
@@ -27,4 +33,6 @@ public class MvcConfiguration implements WebMvcConfigurer {
 	}
 
 
+	
+	
 }

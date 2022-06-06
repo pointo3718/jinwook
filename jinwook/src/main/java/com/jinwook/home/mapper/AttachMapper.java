@@ -23,4 +23,7 @@ public interface AttachMapper {
 
 	//특정 게시글에 포함된 파일 개수를 조회하는 SELECT 쿼리
 	public int getAttachTotalCount(Integer boardNo);
+	
+	//게시글을 삭제 취소(undelete) 처리하는 메서드
+	public int undeleteAttach(List<Integer> idxs);
 }

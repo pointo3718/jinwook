@@ -16,32 +16,28 @@ import com.jinwook.home.service.domain.User;
 @Mapper
 public interface BoardMapper {
 
+	//1:1문의, 공지사항
 	public int addBoard(Board board);
-	
 	public int updateBoard(Board board);
-	
 	public int deleteBoard(Integer boardNo);
-	
+	//조인 필요: board, comment
 	public Board getBoard(Integer boardNo);
-	
+	//답변 상태에 대한 if문 필요
 	public List<Board> getBoardList(Board board);
-	
+	//전체 랭킹 리스트 조인 필요: store, comment, recipe
 	public List<Board> getRankList(Board board);
 	
+	//상점 후기 등록: Orders
 	public int addReview(Orders orders);
-	
 	public int deleteReview(int ordersNo);
-	
 	public List<Orders> getReviewList(Board board);
 	
+	//레시피
 	public int addRecipe(Recipe rcp);
-	
 	public int updateRecipe(Recipe rcp);
-	
 	public int deleteRecipe(int rcpNo);
-	
+	//조인 필요: recipe, comment
 	public Recipe getRecipe(int rcpNo);
-	
 	public List<Recipe> getRecipeList(Board board);
 	
 	//댓글 등록
@@ -52,37 +48,52 @@ public interface BoardMapper {
 	public int deleteComment(Integer commentNo);
 	//특정 게시글에 포함된 댓글 목록을 조회하는 SELECT 쿼리를 호출
 	public List<Comment> getCommentList(Comment comment);
-	//특정 게시글에 포함된 댓글 개수를 조회하는 select 쿼리를 호출
-	public int getCommentTotalCount(Comment comment);
 	
 	// 찜
 	public int addStoreJjim(Jjim jjim);
-
 	public int addRecipeJjim(Jjim jjim);
-
 	public int deleteStoreJjim(Jjim jjim);
-
 	public int deleteRecipeJjim(Jjim jjim);
-	
 	public int updateStoreJjim(int storeNo);
-	
 	public int updateRecipeJjim(int rcpNo);
-	
 	public int getRecipeJjim(Jjim jjim);
-
 	public int getStoreJjim(Jjim jjim);
 	
-	//추천
-	public int addRecommend(int recommendNo);
-	
-	public int deleteRecommend(int recommendNo);
+	//레시피 추천
+	public void updateRecipeReco(int rcpNo);
+	//댓글 추천
+	public void updateCommentReco(int commentNo);
+	//레시피 추천 취소
+	public void updateRecipeRecoCancel(int rcpNo);
+	//댓글 추천 취소
+	public void updateCommentRecoCancel(int commentNo);
+	//레시피 추천 테이블에 add
+	public void addRecipeReco(int rcpNo, String userId);
+	//댓글 추천 테이블에 add
+	public void addCommentReco(int commentNo, String userId);
+	//레시피 추천 테이블에서 delete
+	public void deleteRecipeReco(int rcpNo, String userId);
+	//댓글 추천 테이블에서 delete
+	public void deleteCommentReco(int commentNo, String userId);
+	//레시피 추천 시 recocheck를 1로 만들어서 중복방지
+	public void updateRecipeRecoCheck(int rcpNo, String userId);
+	//댓글 추천 시 recocheck를 1로 만들어서 중복방지
+	public void updateCommentRecoCheck(int commentNo, String userId);
+	// 레시피 추천취소 시 다시 0
+	public void updateRecipeRecoCheckCancel(int rcpNo, String userId);
+	// 댓글 추천취소 시 다시 0
+	public void updateCommentRecoCheckCancel(int commentNo, String userId);
+	//레시피 추천 중복방지 select문
+	public int recipeRecoCheck(int rcpNo, String userId);
+	//댓글 추천 중복방지 select문
+	public int commentRecoCheck(int commentNo, String userId);
 
+	
 	public int getBoardTotalCount(Board board);
-
 	public int getRecipeTotalCount(Board board);
-	
 	public int getReviewTotalCount(Board board);
-	
 	public int getRankTotalCount(Board board);
+	//특정 게시글에 포함된 댓글 개수를 조회하는 select 쿼리를 호출
+	public int getCommentTotalCount(Comment comment);
 	
 }

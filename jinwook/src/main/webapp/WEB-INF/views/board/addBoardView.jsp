@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
 <html>
 <head>
@@ -28,6 +29,35 @@
         }
      </style>
 
+<script type="text/javascript">
+
+var rcpNo = ${recipe.rcpNo};
+var userId = ${user.userId};
+
+function updateRecipeReco() {
+	$.ajax({
+		type : "POST",
+		url : "/board/updateRecipeReco",
+		dataType : "json",
+		data : {'rcpNo' : rcpNo, 'userId' : userId},
+		error : function() {
+			alert("통신 에러");
+		},
+		success : function(recoCheck) {
+			if (recoCheck == 0) {
+				alert("추천 완료!");
+				location.reload();
+			}
+			else if (recoCheck == 1) {
+				alert("추천 취소!");
+				location.reload();
+			}
+		}
+	});
+}
+
+</script>
+
 </head>
 
 <body>
@@ -48,7 +78,7 @@
 		
 		<div class="row">
 	  		<div class="col-xs-3 col-md-1"><strong>게시글 내용</strong></div>
-			<div class="col-xs-7 col-md-5">${board}</div>
+			<div class="col-xs-7 col-md-5">${board.boardNo}</div>
 		</div>
 		
 		<hr/>
@@ -61,7 +91,13 @@
 		<hr/>
 		
  	</div>
- 	<!--  화면구성 div Start /////////////////////////////////////-->
+
+<h1>Test Complete!</h1>
+
+<div style="margin-right:1px;">
+	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco(); return false;">추천 ${recipe.getRecommendCount}</button>
+	<button type="button" class="btn btn-danger" id="hate_btn">비추천</button>
+</div>
 	
 </body>
 

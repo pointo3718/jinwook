@@ -39,7 +39,7 @@
 		FROM
 			users
 		WHERE
-			user_bye_status = 0
+			user_bye_status = 0 AND blacklist_status = false
 		order by 
 			reg_date
 		
@@ -74,6 +74,23 @@
 		FROM
 			store
 	</select>
+	
+	
+	<!-- 신고 등록 -->
+	<insert id="addComplain" parameterType="Complain">
+			INSERT INTO complain 
+			VALUES (
+				  NULL
+				, #{userId} <!-- 세션으로 받기 -->
+				, #{complainId} <!-- 해당 게시글 통해 받기 -->
+				, SYSDATE()
+				, #{complainCode}
+				, #{complainTarget} <!-- reqNo, commentNo,  -->
+				, #{complainTargetNo} <!-- 컬럼 추가해야 할듯 ... reqNo, commentNo, reviewNo 받는 -->
+			)
+			
+			<!-- 해당 게시글로 넘어갈 수 있는 메서드 필요... board에 있을듯 ... -->
+	</insert>
 
 
 	<!-- 신고 목록 -->
@@ -98,7 +115,7 @@
 	<!-- 블랙리스트 등록 -->
 	<update id="updateBlacklist" parameterType="User">
 		UPDATE users
-		SET
+		<set>
 			blacklist_status = true,
 			blacklist_reg_date = SYSDATE(),
 			<if test= 'blackPeriod == "7days"'>
@@ -113,6 +130,7 @@
 			<if test= 'blackPeriod == "1year"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +1 YEAR)
 			</if>
+		</set>
 		WHERE
 			user_id = #{userId}
 	</update>
