@@ -126,7 +126,7 @@
 		AND cart_no	= #{cartNo}
 	</update>
 	
-	<update id="deleteOrderCartAfter">
+	<update id="deleteOrdersCartAfter">
 		UPDATE cart c ,orders o
 		<set>
 			c.order_no = #{orders.orderNo},

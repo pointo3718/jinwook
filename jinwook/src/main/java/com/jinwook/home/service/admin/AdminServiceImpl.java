@@ -80,7 +80,6 @@ public class AdminServiceImpl implements AdminService{
 		if (blacklistTotalCount > 0) {
 			blacklist = adminMapper.getBlacklistAdmin();
 		}
-
 		return blacklist;
 	}
 	
