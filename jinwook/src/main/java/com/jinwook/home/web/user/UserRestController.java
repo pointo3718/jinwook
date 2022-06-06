@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jinwook.home.service.domain.User;
@@ -138,5 +141,32 @@ public class UserRestController {
 //		map.put("userId", userId);
 //		return map;
 //	}
+	
+	@PostMapping("/checkId")
+    public int checkId(@RequestBody String userId) throws Exception{
+        int cnt = userService.checkId(userId); 
+        
+        System.out.println("===========ID CHECK SUCCESS==========");
+        
+        return cnt;
+    }
+	
+	@PostMapping("/checkNickName")
+	public int checkNickName(@RequestBody String nickName) throws Exception{
+		int cnt = userService.checkNickName(nickName); 
+		
+		System.out.println("===========NICKNAME CHECK SUCCESS==========");
+		
+		return cnt;
+	}
+	
+	@PostMapping("/checkEmail")
+	public int checkEMail(@RequestBody String email) throws Exception{
+		int cnt = userService.checkEmail(email); 
+		
+		System.out.println("===========EMAIL CHECK SUCCESS==========");
+		
+		return cnt;
+	}
 	
 }

@@ -21,7 +21,7 @@ public interface UserService {
 		
 		public int checkEmail(String email) throws Exception;
 		
-		public int checkPassword(String userId, String password) throws Exception;
+		public int confirmPassword(User user) throws Exception;
 		
 		public User findIdPhone(User user) throws Exception;
 	

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jinwook.home.common.Criteria;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
@@ -26,6 +27,11 @@ public interface BoardService {
 	public Board getBoard(Integer boardNo);
 	
 	public List<Board> getBoardList(Board board);
+	
+	public Attach getAttachDetail(Integer attachNo);
+	
+	//파일 리스트를 조회
+	public List<Attach> getAttachFileList(Integer boardNo);
 	
 	public List<Board> getRankList(Board board);
 	
@@ -69,8 +75,46 @@ public interface BoardService {
 
 	public int getStoreJjim(Jjim jjim);
 	
-	public int addRecommend(int recommendNo);
-	
-	public int deleteRecommend(int recommendNo);
-	
+	// 레시피 추천
+	public void updateRecipeReco(int rcpNo);
+
+	// 댓글 추천
+	public void updateCommentReco(int commentNo);
+
+	// 레시피 추천 취소
+	public void updateRecipeRecoCancel(int rcpNo);
+
+	// 댓글 추천 취소
+	public void updateCommentRecoCancel(int commentNo);
+
+	// 레시피 추천 테이블에 add
+	public void addRecipeReco(int rcpNo, String userId);
+
+	// 댓글 추천 테이블에 add
+	public void addCommentReco(int commentNo, String userId);
+
+	// 레시피 추천 테이블에서 delete
+	public void deleteRecipeReco(int rcpNo, String userId);
+
+	// 댓글 추천 테이블에서 delete
+	public void deleteCommentReco(int commentNo, String userId);
+
+	// 레시피 추천 시 recocheck를 1로 만들어서 중복방지
+	public void updateRecipeRecoCheck(int rcpNo, String userId);
+
+	// 댓글 추천 시 recocheck를 1로 만들어서 중복방지
+	public void updateCommentRecoCheck(int commentNo, String userId);
+
+	// 레시피 추천취소 시 다시 0
+	public void updateRecipeRecoCheckCancel(int rcpNo, String userId);
+
+	// 댓글 추천취소 시 다시 0
+	public void updateCommentRecoCheckCancel(int commentNo, String userId);
+
+	// 레시피 추천 중복방지 select문
+	public int recipeRecoCheck(int rcpNo, String userId);
+
+	// 댓글 추천 중복방지 select문
+	public int commentRecoCheck(int commentNo, String userId);
+
 }

@@ -3,11 +3,13 @@ package com.jinwook.home.service.store;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import com.jinwook.home.common.Criteria;
 import com.jinwook.home.mapper.StoreMapper;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;

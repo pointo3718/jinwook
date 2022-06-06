@@ -12,8 +12,8 @@ import lombok.ToString;
 public class Comment {
 
 //	private int commentNo;//댓글번호
-//	private String userId;
 //	private User user;
+//	private String userId;
 //	private int rcpNo;
 //	private int boardNo;
 //	private String commentContent;//댓글 내용
@@ -22,11 +22,15 @@ public class Comment {
 	
 	private Integer commentNo;
 	private User user;
+	private String userId;
+	private Board board;
 	private Integer boardNo;
+	private Recipe recipe;
 	private Integer rcpNo;
 	private String commentContent;
 	private String commentWriter;
 	private LocalDate commentDate;
+	private int recommendCount;
 	
 	
 }

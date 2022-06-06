@@ -1,6 +1,7 @@
 package com.jinwook.home.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jinwook.home.service.domain.User;
 
@@ -34,7 +35,7 @@ public interface UserMapper {
 	public int checkEmail(String email) throws Exception;
 	
 	//CHECK DUPLICATION PASSWORD
-	//public int checkPassword(@Param("userId") String userId, @Param("password")String password) throws Exception;
+	public int checkPassword(User user) throws Exception;
 	
 	//FIND ID PHONE
 	public User findIdPhone(User user) throws Exception;

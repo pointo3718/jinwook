@@ -23,6 +23,7 @@ public class Recipe {
 	private String rcpIngredient;
 	private int rcpHits;
 	private int commentCount;
+	private int recommendCount;
 	
 	public Recipe() {
 	}
