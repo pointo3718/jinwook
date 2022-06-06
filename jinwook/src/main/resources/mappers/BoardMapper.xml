@@ -62,7 +62,7 @@
 			, #{boardTitle:VARCHAR}
 			, #{boardContent:VARCHAR}
 			, #{boardHits:INTEGER}
-			, #{boardCode}
+			, #{boardCode:CHAR}
 			, SYSDATE()
 			, #{boardImg1:VARCHAR}
 			, #{boardImg2:VARCHAR}
