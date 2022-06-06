@@ -145,8 +145,8 @@ public class AdminMapperTest {
 	@Test
 	public void testOfUpdateBlacklist() {
 		User user = new User();
-		user.setBlackPeriod("7days");
-		user.setUserId("test01");
+		user.setBlackPeriod("6month");
+		user.setUserId("jw1111");
 		
 
 		int result = adminMapper.updateBlacklist(user);

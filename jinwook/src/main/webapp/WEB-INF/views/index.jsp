@@ -18,8 +18,6 @@
 	
 <head>
 
-
-
 	<meta charset="EUC-KR">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   -->
@@ -56,6 +54,15 @@
 				self.location = "/user/login"
 			});
 		});
+		
+		//============= 회원목록 화면이동 =============
+		$( function() {
+			//==> 추가된부분 : "addUser"  Event 연결
+			$("a[href='#' ]:contains('회원정보조회')").on("click" , function() {
+				self.location = "/admin/listUserAdmin"
+			});
+		});
+		
 		
 	</script>	
 	
