@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.CollectionUtils;
 
+import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
@@ -136,8 +137,8 @@ class StoreServiceTest {
 				}
 			}
 		}
-		
-		
+	
+				
 	
 	@Test
 	public void getStoreTest() throws Exception {

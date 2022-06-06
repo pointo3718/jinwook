@@ -109,7 +109,7 @@
       coupon_no=#{couponNo}
    </update>
    
-   <select id="getCouponList" parameterType="string"
+   <select id="getCouponList" parameterType="String"
       resultType="Coupon">
       SELECT
       coupon_no, coupon_type, coupon_dc, coupon_valid_date
