@@ -126,7 +126,7 @@
 		AND cart_no	= #{cartNo}
 	</update>
 	
-	<update id="deleteOrderCartAfter">
+	<update id="deleteOrdersCartAfter">
 		UPDATE cart c ,orders o
 		<set>
 			c.order_no = #{orders.orderNo},
@@ -224,10 +224,6 @@
 		SELECT COUNT(*)
 		FROM jpay
 	</select>
-
-	<select id="getOrdersJpayChargelist">
-		
-	</select>
 	
 	<insert id="addOrdersNotice" useGeneratedKeys="true" keyProperty="notiNo">
 		INSERT
@@ -242,9 +238,9 @@
 	</delete>
 	
 	<select id="getOrdersNoticelist" resultMap="noticeSelectMap">
-		SELECT send_id,receive_id,order_no,noti_type,noti_content,noti_date,store_name,buyer_name
+		SELECT noti_no,send_id,receive_id,order_no,noti_type,noti_content,noti_date,store_name,buyer_name
 		FROM notice
-		WHERE user_id = #{userId}
+		WHERE receive_id = #{receiveId}
 	</select>
 	
 	<select id="getOrdersNoticelistTotalCount" resultType="int">
@@ -252,6 +248,37 @@
 		FROM notice
 	</select>
 	
+	<update id="updateOrdersCeoJb">
+	UPDATE users u, jpay j,orders o
+	<if test="orders.orderStatus==5">
+    	<set>
+           u.jp_balance = (SELECT * FROM(SELECT u.jp_balance + o.order_price
+                       FROM users u, orders o
+                       WHERE u.user_id = o.user_id 
+                       AND u.user_id = #{userId}
+                       AND o.order_no = #{orders.orderNo})as vt)
+     	</set>
+     </if>
+     WHERE u.user_id = j.user_id
+     AND u.user_id = o.user_id
+     AND u.user_id = #{userId} 
+	</update>
+	
+	<update id="updateOrdersCeoEarn">
+	UPDATE store s,orders o
+	<if test="orders.orderStatus==5">
+    	<set>
+           s.total_earn = (SELECT * FROM(SELECT s.total_earn + o.order_price
+                       FROM store s, orders o
+                       WHERE s.user_id = o.user_id 
+                       AND s.user_id = #{userId}
+                       AND o.order_no = #{orders.orderNo})as vt)
+    	</set>
+     </if>
+     WHERE s.user_id = o.user_id
+     AND s.user_id = o.user_id
+     AND s.user_id = #{userId} 
+	</update>
 </mapper>
 	
 	
