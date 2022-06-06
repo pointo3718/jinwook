@@ -65,7 +65,11 @@
 		WHERE phone = #{phone}
 	 </select>
 	 
+<<<<<<< HEAD
 	<select 	id="checkPassword"	parameterType="map" >
+=======
+	<select 	id="checkPassword"	parameterType="user" resultType="int">
+>>>>>>> refs/heads/master
 		SELECT
 		COUNT(*)	
 		FROM users 

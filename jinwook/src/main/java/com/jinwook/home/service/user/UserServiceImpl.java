@@ -75,8 +75,8 @@ public class UserServiceImpl implements UserService{
 		return result;
 	}
 	
-	public int checkPassword(String userId, String password) throws Exception {
-		int result = userMapper.checkPassword(userId, password);
+	public int confirmPassword(User user) throws Exception {
+		int result = userMapper.checkPassword(user);
 		return result;
 	}
 	
