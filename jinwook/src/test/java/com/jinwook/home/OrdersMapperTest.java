@@ -69,8 +69,8 @@ public class OrdersMapperTest {
 	//@Test
 	public void testOfupdateOrders() {
 		Orders orders = new Orders();
-		orders.setOrderNo(10047);
-		orders.setOrderStatus("5");
+		orders.setOrderNo(10006);
+		orders.setOrderStatus("1");
 		int result = ordersMapper.updateOrders(orders);
 		System.out.println("결과는"+result+"입니다.");
 	}
@@ -192,9 +192,9 @@ public class OrdersMapperTest {
 		
 	//@Test
 		public void testdeleteOrdersCartAll() {
-//			Cart cart = new Cart();
-//			cart.setCartStatus(false);
-			int result = ordersMapper.deleteOrdersCartAll(false);
+			Cart cart = new Cart();
+			cart.setCartStatus(false);
+			int result = ordersMapper.deleteOrdersCartAll(cart);
 		    System.out.println("결과는" + result + "입니다.");
 		}
 		
@@ -322,21 +322,20 @@ public class OrdersMapperTest {
 	
 	//@Test
 	public void testdeleteOrdersNotice() {
-//		Notice notice = new Notice();
-//		notice.setNotiNo(10002);
-		int result = ordersMapper.deleteOrdersNotice(10002);
+		Notice notice = new Notice();
+		notice.setNotiNo(10002);
+		int result = ordersMapper.deleteOrdersNotice(notice);
 	    System.out.println("결과는" + result + "입니다.");
 	}
 	
-	//@Test
+	@Test
 	public void testgetOrdersNoticelist() {
 		int getOrdersNoticelistTotalCount = ordersMapper.getOrdersNoticelistTotalCount();
 		if(getOrdersNoticelistTotalCount > 0) {
-			List<Notice> noticeList = ordersMapper.getOrdersNoticelist("test02");
+			List<Notice> noticeList = ordersMapper.getOrdersNoticelist("test01");
 			System.out.println(noticeList.get(1)); 
-			System.out.println(getOrdersNoticelistTotalCount);
 			if(CollectionUtils.isEmpty(noticeList) == false) {
-				System.out.println("==");
+				System.out.println("==2");
 				for(Notice notice : noticeList) {
 					System.out.println("=========================");
 					System.out.println(notice.getNotiNo());
@@ -346,41 +345,12 @@ public class OrdersMapperTest {
 					System.out.println(notice.getNotiType());
 					System.out.println(notice.getNotiContent());
 					System.out.println(notice.getNotiDate());
+					System.out.println(notice.getStoreName());
 					System.out.println(notice.getBuyerName());
 					System.out.println("=========================");
 				}
 			}
 		}
 	}
-	
-	//Test
-	public void testupdateOrdersCeoPrice() {
-		Orders orders = new Orders();
-		orders.setOrderNo(10047);
-		orders.setOrderStatus("5");
-		
-		Jpay jpay = new Jpay();
-		jpay.setJpStatus(1);
-		jpay.setUserId("test01");
-		jpay.setJpNo(10000);
-		jpay.setOrders(orders);
-		
-		int result = ordersMapper.updateOrdersCeoJb(jpay);
-	      System.out.println("결과는 " + result + "입니다.");
-	}
 
-	//@Test
-	public void testupdateOrdersCeoEarn() {
-		Orders orders = new Orders();
-		orders.setOrderNo(10047);
-		orders.setOrderStatus("5");
-		
-		Store store = new Store();
-		store.setTotalEarn(0);
-		store.setUserId("test01");
-		store.setOrders(orders);
-		
-		int result = ordersMapper.updateOrdersCeoEarn(store);
-	    System.out.println("결과는 " + result + "입니다.");	
-	}
 }
