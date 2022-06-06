@@ -42,9 +42,19 @@ public class BoardServiceImpl implements BoardService {
 			queryResult = boardMapper.addBoard(board);
 		} else {
 			queryResult = boardMapper.updateBoard(board);
+
+			// 파일이 추가, 삭제, 변경된 경우
+			if ("Y".equals(board.getChangeYn())) {
+				attachMapper.deleteAttach(board.getBoardNo());
+
+				// fileIdxs에 포함된 idx를 가지는 파일의 삭제여부를 'N'으로 업데이트
+				if (CollectionUtils.isEmpty(board.getAttachNos()) == false) {
+					attachMapper.undeleteAttach(board.getAttachNos());
+				}
+			}
 		}
 
-		return (queryResult == 1) ? true : false;
+		return (queryResult > 0);
 	}
 	
 	@Override
@@ -186,16 +196,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public int addRecommend(int recommendNo) {
-		return boardMapper.addRecommend(recommendNo);
-	}
-
-	@Override
-	public int deleteRecommend(int recommendNo) {
-		return boardMapper.deleteRecommend(recommendNo);
-	}
-
-	@Override
 	public void addStoreJjim(Jjim jjim) {
 		boardMapper.addStoreJjim(jjim);
 		boardMapper.updateStoreJjim(jjim.getStoreNo());
@@ -237,5 +237,89 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.getStoreJjim(jjim);
 	}
 
+	@Override
+	public List<Attach> getAttachFileList(Integer boardNo) {
+		
+		int fileTotalCount = attachMapper.getAttachTotalCount(boardNo);
+		if (fileTotalCount < 1) {
+			return Collections.emptyList();
+		}
+		return attachMapper.getAttachList(boardNo);
+	}
+
+	@Override
+	public Attach getAttachDetail(Integer attachNo) {
+		return attachMapper.getAttach(attachNo);
+	}
+
+	@Override
+	public void updateRecipeReco(int rcpNo) {
+		boardMapper.updateRecipeReco(rcpNo);
+	}
+
+	@Override
+	public void updateCommentReco(int commentNo) {
+		boardMapper.updateCommentReco(commentNo);
+	}
+
+	@Override
+	public void updateRecipeRecoCancel(int rcpNo) {
+		boardMapper.updateRecipeRecoCancel(rcpNo);
+	}
+
+	@Override
+	public void updateCommentRecoCancel(int commentNo) {
+		boardMapper.updateCommentRecoCancel(commentNo);
+	}
+
+	@Override
+	public void addRecipeReco(int rcpNo, String userId) {
+		boardMapper.addRecipeReco(rcpNo, userId);
+	}
+
+	@Override
+	public void addCommentReco(int commentNo, String userId) {
+		boardMapper.addCommentReco(commentNo, userId);
+	}
+
+	@Override
+	public void deleteRecipeReco(int rcpNo, String userId) {
+		boardMapper.deleteRecipeReco(rcpNo, userId);
+	}
+
+	@Override
+	public void deleteCommentReco(int commentNo, String userId) {
+		boardMapper.deleteCommentReco(commentNo, userId);
+	}
+
+	@Override
+	public void updateRecipeRecoCheck(int rcpNo, String userId) {
+		boardMapper.updateRecipeRecoCheck(rcpNo, userId);
+	}
+
+	@Override
+	public void updateCommentRecoCheck(int commentNo, String userId) {
+		boardMapper.updateCommentRecoCheck(commentNo, userId);
+	}
+
+	@Override
+	public void updateRecipeRecoCheckCancel(int rcpNo, String userId) {
+		boardMapper.updateRecipeRecoCheckCancel(rcpNo, userId);
+	}
+
+	@Override
+	public void updateCommentRecoCheckCancel(int commentNo, String userId) {
+		boardMapper.updateCommentRecoCheckCancel(commentNo, userId);
+	}
+
+	@Override
+	public int recipeRecoCheck(int rcpNo, String userId) {
+		return boardMapper.recipeRecoCheck(rcpNo, userId);
+	}
+
+	@Override
+	public int commentRecoCheck(int commentNo, String userId) {
+		return boardMapper.commentRecoCheck(commentNo, userId);
+	}
 
 }

@@ -17,6 +17,41 @@
 	,board_inq_status	
 	</sql>
 	
+<resultMap type="board" id="boardSelectMap">
+   <result property="boardNo"            column="store_no"         jdbcType="INTEGER"/>   
+   <result property="user.userId"        column="user_id"          jdbcType="VARCHAR"/>   
+   <result property="boardTitle"         column="board_title"      jdbcType="VARCHAR"/>   
+   <result property="boardContent"       column="board_content"    jdbcType="VARCHAR"/>   
+   <result property="boardHits"          column="board_hits"       jdbcType="INTEGER"/>   
+   <result property="boardCode"          column="board_code"       jdbcType="CHAR"/>   
+   <result property="writeDate"          column="write_date"       jdbcType="DATETIME"/>   
+   <result property="boardImg1"          column="board_img1"       jdbcType="VARCHAR"/>   
+   <result property="boardImg2"          column="board_img2"       jdbcType="VARCHAR"/>   
+   <result property="boardImg3"          column="board_img3"       jdbcType="VARCHAR"/>   
+   <result property="boardInqStatus"     column="board_inq_status" jdbcType="TINYINT"/>   
+</resultMap>
+
+<resultMap type="comment" id="commentSelectMap">
+   <result property="commentNo"          column="commen_no"         jdbcType="INTEGER"/>   
+   <result property="board.boardNo"      column="board_no"          jdbcType="INTEGER"/>   
+   <result property="recipe.rcpNo"       column="rcp_no"      		jdbcType="INTEGER"/>   
+   <result property="commentContent"     column="comment_content"   jdbcType="VARCHAR"/>   
+   <result property="commentWriter"      column="comment_writer"    jdbcType="VARCHAR"/>   
+   <result property="commentDate"        column="comment_date"      jdbcType="DATETIME"/>   
+   <result property="recommendCount"     column="recommend_count"   jdbcType="INTEGER"/>   
+</resultMap>
+   
+<resultMap type="orders" id="ordersSelectMap">
+	<result property="orderNo"			column="order_no"			jdbcType="INTEGER"/>
+	<result property="reviewTitle"		column="review_title"		jdbcType="VARCHAR"/>
+	<result property="reviewContent"	column="review_content"		jdbcType="VARCHAR"/>
+	<result property="reviewDate"		column="review_date"		jdbcType="DATETIME"/>
+	<result property="reviewStar"		column="review_star"		jdbcType="INTEGER"/>
+	<result property="reviewImg1"		column="review_img1"		jdbcType="VARCHAR"/>
+	<result property="reviewImg2"		column="review_img2"		jdbcType="VARCHAR"/>
+	<result property="reviewImg3"		column="review_img3"		jdbcType="VARCHAR"/>
+</resultMap>   
+	
 	<!-- Board insert -->
 	<insert id="addBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="boardNo">
 		INSERT INTO board (
@@ -48,13 +83,15 @@
 			board_no = #{boardNo}
 	</update>
 	
-	<!-- Board selectDetail -->
-	<select id="getBoard" parameterType="int" resultType="Board">
+	<!-- Board getBoard -->
+	<select id="getBoard" parameterType="int" resultType="Board" resultMap="boardSelectMap">
 		SELECT
-			<include refid="boardColumns" />
+			b.board_title, b.board_content, b.user_id, b.write_date, b.board_inq_status, c.comment_content
 		FROM
-			board
-		WHERE
+			board b, comment c
+		WHERE b.board_no = c.board_no
+		AND board_inq_status==0
+		AND 
 			board_no = #{boardNo}
 	</select>
 
@@ -326,6 +363,114 @@
 		AND user_id = #{user.userId}
 	</select>
 
+	<!--  레시피 추천수 -->
+	<update id="updateRecipeReco" parameterType="int">
+		UPDATE recipe
+		SET
+		recommend_count = recommendCount+1
+		WHERE rcp_no = #{rcpNo}
+	</update>
 	
+	<!--  댓글 추천수 -->
+	<update id="updateCommentReco" parameterType="int">
+		UPDATE comment
+		SET
+		recommend_count = recommendCount+1
+		WHERE comment_no = #{commentNo}
+	</update>
+	
+	<!-- 레시피 추천수 취소 -->
+	<update id="updateRecipeRecoCancel" parameterType="int">
+		UPDATE recipe
+		SET
+		recommend_count = recommendCount-1
+		WHERE rcp_no = #{rcpNo}
+	</update>
+	
+	<!-- 댓글 추천수 취소 -->
+	<update id="updateCommentRecoCancel" parameterType="int">
+		UPDATE comment
+		SET
+		recommend_count = recommendCount-1
+		WHERE comment_no = #{commentNo}
+	</update>
+	
+	<!-- 레시피 추천 시 recommend 테이블에 add -->
+	<insert id="addRecipeReco">
+		INSERT INTO recommend(recommend_no, rcp_no, user_id)
+		VALUES ((SELECT NVL(MAX(recommendNo), 0) + 1 FROM recommend), #{rcpNo}, #{userId}
+	</insert>
+
+	<!-- 댓글 추천 시 recommend 테이블에 add -->
+	<insert id="addCommentReco">
+		INSERT INTO comment(recommend_no, comment_no, user_id)
+		VALUES ((SELECT NVL(MAX(recommendNo), 0) + 1 FROM recommend), #{recommendNo}, #{userId}
+	</insert>
+	
+	<!-- 레시피 추천취소 시 delete -->
+	<delete id="deleteRecipeReco">
+		DELETE FROM recommend
+		WHERE rcp_no = #{rcpNo}
+		AND user_id = #{userId}
+	</delete>
+	
+	<!-- 댓글 추천취소 시 delete -->
+	<delete id="deleteCommentReco">
+		DELETE FROM recommend
+		WHERE comment_no = #{commentNo}
+		AND user_id = #{userId}
+	</delete>
+	
+	<!-- 레시피 추천 시 recocheck를 1로 만들어서 중복방지 -->
+	<update id="updateRecipeRecoCheck">
+		UPDATE recommend
+		SET
+		recocheck = 1
+		WHERE rcp_no = #{rcpNo}
+		AND user_id = #{userId}
+	</update>
+	
+	<!-- 댓글 추천 시 recocheck를 1로 만들어서 중복방지 -->
+	<update id="updateCommentRecoCheck">
+		UPDATE recommend
+		SET
+		recocheck = 1
+		WHERE comment_no = #{commentNo}
+		AND user_id = #{userId}
+	</update>
+	
+	<!-- 레시피 추천취소 시 다시 0 -->
+	<update id="updateRecipeRecoCheckCancel">
+		UPDATE recommend
+		SET
+		recocheck = 0
+		WHERE rcp_no = #{rcpNo}
+		AND user_id = #{userId}
+	</update>
+	
+	<!-- 댓글 추천취소 시 다시 0 -->
+	<update id="updateCommentRecoCheckCancel">
+		UPDATE recommend
+		SET
+		recocheck = 0
+		WHERE comment_no = #{commentNo}
+		AND user_id = #{userId}
+	</update>
+	
+	<!-- 레시피 추천 중복방지 select문 -->
+	<select id="recipeRecoCheck" resultType="int">
+		SELECT COUNT(*)
+		FROM recommend
+		WHERE rcp_no = #{rcp_no}
+		AND user_id = #{userId}
+	</select>
+	
+	<!-- 댓글 추천 중복방지 select문 -->
+	<select id="commentRecoCheck" resultType="int">
+		SELECT COUNT(*)
+		FROM recommend
+		WHERE comment_no = #{comment_no}
+		AND user_id = #{userId}
+	</select>
 
 </mapper>

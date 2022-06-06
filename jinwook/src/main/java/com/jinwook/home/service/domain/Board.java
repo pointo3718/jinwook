@@ -1,6 +1,7 @@
 package com.jinwook.home.service.domain;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.jinwook.home.common.PaginationInfo;
 
@@ -14,8 +15,8 @@ import lombok.ToString;
 public class Board {
 
 	private Integer boardNo;
-	//private String userId;
 	private User user;
+	private String userId;
 	private String boardTitle;
 	private String boardContent;
 	private int boardHits;
@@ -25,6 +26,12 @@ public class Board {
 	private String boardImg2;
 	private String boardImg3;
 	private String boardInqStatus;
+	
+	/** 파일 변경 여부 */
+	private String changeYn;
+
+	/** 파일 인덱스 리스트 */
+	private List<Integer> attachNos;
 	
 	public Board() {
 	}

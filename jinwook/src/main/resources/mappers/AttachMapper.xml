@@ -54,7 +54,7 @@
 			board_no = #{boardNo}
 	</update>
 
-	<select id="getAttachList" parameterType="long" resultType="Attach">
+	<select id="getAttachList" parameterType="Integer" resultType="Attach">
 		SELECT
 			<include refid="attachColumns" />
 		FROM
@@ -75,5 +75,17 @@
 		AND
 			board_no = #{boardNo}
 	</select>
+
+	<update id="undeleteAttach" parameterType="list">
+		UPDATE attach
+		SET
+		delete_yn = 'N'
+		WHERE
+		attach_no IN
+		<foreach collection="list" item="item" separator="," open="("
+			close=")">
+			#{item}
+		</foreach>
+	</update>
 
 </mapper>
