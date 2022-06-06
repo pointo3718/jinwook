@@ -10,6 +10,7 @@ import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Jpay;
 import com.jinwook.home.service.domain.Notice;
 import com.jinwook.home.service.domain.Orders;
+import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 
 @Mapper
@@ -35,7 +36,7 @@ public interface OrdersMapper {
 	
 	public int deleteOrdersCart(int cartNo);			//장바구니 목록삭제
 	
-	public int deleteOrdersCartAll(Cart cart);		//장바구니 목록전부삭제
+	public int deleteOrdersCartAll(boolean cartStatus);		//장바구니 목록전부삭제
 	
 	public List<Cart> getOrdersCartList(Cart cart);	//장바구니 목록
 
@@ -53,14 +54,16 @@ public interface OrdersMapper {
 	
 	public int getOrdersJpaylistTotalCount();		//진욱페이 내역카운트
 	
-	public List<Jpay> getOrdersJpayChargelist();
-	
 	public int addOrdersNotice(Notice notice);
 	
-	public int deleteOrdersNotice(Notice notice);
+	public int deleteOrdersNotice(int notiNo);
 	
-	public List<Notice>getOrdersNoticelist(String userId);
+	public List<Notice>getOrdersNoticelist(String receiveId);
 
 	public int getOrdersNoticelistTotalCount();
+	
+	public int updateOrdersCeoJb(Jpay jpay);
+	
+	public int updateOrdersCeoEarn(Store store);
 }
  
