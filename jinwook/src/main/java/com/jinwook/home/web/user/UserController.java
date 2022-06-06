@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +52,7 @@ public class UserController {
 
 		System.out.println("/user/addUser : POST");
 		//Business Logic
+		//일반회원, 사장님, 관리자 구분 가입
 		user.setRole("일반");
 		userService.addUser(user);
 		
@@ -171,33 +173,25 @@ public class UserController {
 //		return "forward:/user/listUser.jsp";
 //	}
 	
-	@PostMapping("/checkId")
-    @ResponseBody
-    public int checkId(@RequestParam("userId") String userId) throws Exception{
-        int cnt = userService.checkId(userId); 
-        
-        System.out.println("===========ID CHECK SUCCESS==========");
-        
-        return cnt;
-    }
-	
-	@PostMapping("/checkNickName")
-	@ResponseBody
-	public int checkNickName(@RequestParam("nickName") String nickName) throws Exception{
-		int cnt = userService.checkNickName(nickName); 
+	@GetMapping(value="confirmPasswordView")
+	public String comfirmPasswordView() throws Exception {
 		
-		System.out.println("===========NICKNAME CHECK SUCCESS==========");
+		System.out.println("===========CONFIRM PASSWORD PAGE===========");
 		
-		return cnt;
+		return "/user/confirmPasswordView";
 	}
 	
-	@PostMapping("/checkEmail")
-	@ResponseBody
-	public int checkEMail(@RequestParam("email") String email) throws Exception{
-		int cnt = userService.checkEmail(email); 
+	@PostMapping(value="confirmPassword")
+	public String comfirmPassword(@ModelAttribute("user") User user , Model model  ) throws Exception {
+		System.out.println("===========CONFIRM PASSWORD=========");
+		System.out.println(user.getUserId());
+		int password = userService.confirmPassword(user);
+		if(password==0) {
+			return "/user/confirmPasswordView";
+		}
 		
-		System.out.println("===========EMAIL CHECK SUCCESS==========");
-		
-		return cnt;
+		return "/user/updateUser";
 	}
+	
+	
 }
