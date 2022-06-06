@@ -34,7 +34,7 @@ public interface UserMapper {
 	public int checkEmail(String email) throws Exception;
 	
 	//CHECK DUPLICATION PASSWORD
-	public int checkPassword(@Param("userId") String userId, @Param("password")String password) throws Exception;
+	//public int checkPassword(@Param("userId") String userId, @Param("password")String password) throws Exception;
 	
 	//FIND ID PHONE
 	public User findIdPhone(User user) throws Exception;

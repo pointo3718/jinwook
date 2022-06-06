@@ -11,6 +11,7 @@ import org.springframework.util.CollectionUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.jinwook.home.common.Criteria;
 import com.jinwook.home.mapper.StoreMapper;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Orders;
@@ -110,8 +111,35 @@ class StoreMapperTest {
 		System.out.println("결과는" + result + "입니다.");
 	}
 	
+//	@Test
+//	public void testOfGetCouponList() {
+//		
+//		
+//		int getCouponTotalCount = storeMapper.getCouponTotalCount();
+//		if (getCouponTotalCount > 0) {
+//			List<Coupon> couponList = storeMapper.getCouponList("test13");
+//			
+//			if (CollectionUtils.isEmpty(couponList) == false) { 		
+//				for (Coupon coupon : couponList) {
+//					System.out.println("=========================");
+//	
+//					System.out.println(coupon.getCouponNo());
+//					System.out.println(coupon.getCouponType());					
+//					System.out.println(coupon.getCouponDc());
+//					System.out.println(coupon.getCouponValidDate());
+//
+//					
+//					System.out.println("=========================");
+//				}
+//			}
+//		}
+//	}
+	
+	
 	@Test
-	public void testOfGetCouponList() {
+	public void testOfGetCouponListPaging() {
+		
+		Criteria criteria = new Criteria();
 		
 		
 		int getCouponTotalCount = storeMapper.getCouponTotalCount();

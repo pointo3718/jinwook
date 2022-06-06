@@ -31,7 +31,7 @@ public interface OrdersMapper {
 		
 	public int updateOrdersCart(Cart cart);			//장바구니 수정
 		
-	public int deleteOrderCartAfter(Cart cart);		//장바구니	삭제(status변경)
+	public int deleteOrdersCartAfter(Cart cart);		//장바구니	삭제(status변경)
 	
 	public int deleteOrdersCart(int cartNo);			//장바구니 목록삭제
 	
@@ -53,14 +53,34 @@ public interface OrdersMapper {
 	
 	public int getOrdersJpaylistTotalCount();		//진욱페이 내역카운트
 	
+<<<<<<< HEAD
 	public List<Jpay> getOrdersJpayChargelist();
 	
 	public int addOrdersNotice(Notice notice);
+=======
+	public int addOrdersNotice(Notice notice);		//알림등록
+>>>>>>> refs/remotes/origin/master
 	
+<<<<<<< HEAD
 	public int deleteOrdersNotice(Notice notice);
+=======
+	public int deleteOrdersNotice(int notiNo);		//알림삭제
+>>>>>>> refs/remotes/origin/master
 	
+<<<<<<< HEAD
 	public List<Notice>getOrdersNoticelist(String userId);
+=======
+	public List<Notice>getOrdersNoticelist(String receiveId); 	//알림목록
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
 	public int getOrdersNoticelistTotalCount();
+=======
+	public int getOrdersNoticelistTotalCount();		//알림목록개수
+	
+	public int updateOrdersCeoJb(Jpay jpay);		//사장님 jb증가
+	
+	public int updateOrdersCeoEarn(Store store);	//사장님 매출액 증가
+>>>>>>> refs/remotes/origin/master
 }
  

@@ -41,7 +41,7 @@
 				, NULL
 				, NULL
 				, NULL
-				, #{bussinessCard}
+				, #{businessCard}
 				, #{storeImage}
 				, #{accNo}
 				, #{bank}
@@ -338,3 +338,4 @@
 			req_status = 1
 	</select>
 </mapper>
+	

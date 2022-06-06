@@ -178,7 +178,7 @@ public class OrdersMapperTest {
 		cart.setCartNo(10006);
 		cart.setCartStatus(true);
 		cart.setOrders(orders);
-		int result = ordersMapper.deleteOrderCartAfter(cart);
+		int result = ordersMapper.deleteOrdersCartAfter(cart);
 		System.out.println("결과는"+result+"입니다.");
 	}
 	
