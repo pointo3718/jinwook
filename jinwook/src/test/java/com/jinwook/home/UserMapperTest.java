@@ -109,10 +109,12 @@ class UserMapperTest {
 	}
 	
 	@Test
-	public void checkPasswordTest() throws Exception{
+	public void confirmPasswordTest() throws Exception{
+		User user = new User();
+		user.setUserId("test01");
+		user.setPassword("1111");
 		System.out.println("----------------------------------");
-		
-		System.out.println(userMapper.checkPassword("test01","1111"));
+		System.out.println(userMapper.checkPassword(user));
 		System.out.println("----------------------------------");
 //	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
 	}

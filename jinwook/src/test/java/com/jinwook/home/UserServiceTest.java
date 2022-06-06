@@ -102,9 +102,12 @@ class UserServiceTest {
 	}
 	
 	@Test
-	public void checkPasswordTest() throws Exception{
+	public void confirmPasswordTest() throws Exception{
+		User user = new User();
+		user.setUserId("test01");
+		user.setPassword("1111");
 		System.out.println("----------------------------------");
-		System.out.println(userService.checkPassword("test01", "1111"));
+		System.out.println(userService.confirmPassword(user));
 		System.out.println("----------------------------------");
 //	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
 	}
