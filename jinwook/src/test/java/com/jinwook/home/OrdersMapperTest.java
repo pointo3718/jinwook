@@ -84,7 +84,7 @@ public class OrdersMapperTest {
         
    }
    
-   //@Test
+   @Test
    public void testSelectListOrders() {
       int ordersTotalCount = ordersMapper.getOrdersTotalCount();
       if(ordersTotalCount > 0) {
