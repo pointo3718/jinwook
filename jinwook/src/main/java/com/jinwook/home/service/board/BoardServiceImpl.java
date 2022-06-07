@@ -28,11 +28,11 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper boardMapper;
 	
-	@Autowired
-	private AttachMapper attachMapper;
-
-	@Autowired
-	private FileUtils fileUtils;
+	/*
+	 * @Autowired private AttachMapper attachMapper;
+	 * 
+	 * @Autowired private FileUtils fileUtils;
+	 */
 	
 	@Override
 	public boolean addBoard(Board board) {

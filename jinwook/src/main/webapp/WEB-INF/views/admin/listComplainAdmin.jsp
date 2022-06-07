@@ -82,7 +82,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>회원목록조회</h3>
+	       <h3>신고목록조회</h3>
 	    </div>
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -134,20 +134,25 @@
             <th align="left">이름</th>
             <th align="left">휴대전화번호</th>
             <th align="left">구분</th>
+            <th align="left">구분</th>
+            <th align="left">구분</th>
           </tr>
         </thead>
        
 		<tbody>
 		
 		  <c:set var="i" value="0" />
-		  <c:forEach var="user" items="${userList}">
+		  <c:forEach var="complain" items="${complainList}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
-			  <td align="left"  title="Click : 회원정보 확인"><a href="/admin/getUserAdmin?userId=${user.userId}">${user.userId}</a></td>
-			  <td align="left">${user.userName}</td>
-			  <td align="left">${user.phone}</td>
-			  <td align="left">${user.role}</td>
+			  <td align="left">${complain.complainNo}</td>
+			  <td align="left">${complain.userId}</td>
+			  <td align="left">${complain.complainId}</td>
+			  <td align="left">${complain.complainDate}</td>
+			  <td align="left">${complain.complainCode}</td>
+			  <td align="left">${complain.complainTarget}</td>
+			  <td align="left">${complain.complainStatus}</td>
 			</tr>
           </c:forEach>
         

@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jinwook.home.mapper.AdminMapper">
 
+	<resultMap type="store" id="storeSelectMap">
+	   <result property="storeNo"  column="store_no"    jdbcType="INTEGER"/>
+	   <result property="storeName"  column="store_name"    jdbcType="CHAR"/>
+	   <result property="userId"  column="user_id"    jdbcType="CHAR"/>
+	   <result property="storeAddr"  column="store_addr"    jdbcType="VARCHAR"/>
+	   <result property="storePhone"  column="store_phone"    jdbcType="VARCHAR"/>   
+	   <result property="user.userName"  column="user_name"    jdbcType="CHAR"/>      
+	</resultMap>
+
 	<sql id="usersColumns">
 		  user_id
 		, user_name
@@ -33,21 +42,23 @@
 	
 	
 	<!-- 유저 목록 -->
-	<select id="getUserListAdmin" parameterType="User" resultType="User">
+	<select id="getUserListAdmin" parameterType="Criteria" resultType="User">
 		SELECT
 			user_id, user_name, phone, role
 		FROM
 			users
 		WHERE
-			user_bye_status = 0 AND blacklist_status = false
-		order by 
+			user_bye_status = 0 
+		ORDER BY 
 			reg_date
+		LIMIT
+			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 		
 	</select>
 	
 	
 	<!-- 유저 목록 개수 -->
-	<select id="getUserTotalCount" parameterType="User" resultType="int">
+	<select id="getUserTotalCount" parameterType="Criteria" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
@@ -58,17 +69,22 @@
 	
 	
 	<!-- 상점 목록 -->
-	<select id="getStoreListAdmin" parameterType="store" resultType="Store">
+	<select id="getStoreListAdmin" parameterType="Criteria" resultMap="storeSelectMap">
 		SELECT
-			 store_no, store_name, user_id, store_addr, store_phone
+			 s.store_no, u.user_name, s.store_name, s.user_id, s.store_addr, s.store_phone
 		FROM
-			store s
-		ORDER BY store_no
+			store s, users u
+		WHERE 
+			s.user_id = u.user_id
+		ORDER BY 
+			s.store_no
+		LIMIT
+			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 	
 	
 	<!-- 상점 목록 개수 -->
-	<select id="getStoreTotalCount" parameterType="Store" resultType="int">
+	<select id="getStoreTotalCount" parameterType="Criteria" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
@@ -94,17 +110,20 @@
 
 
 	<!-- 신고 목록 -->
-	<select id="getComplainListAdmin" parameterType="Complain" resultType="Complain">
+	<select id="getComplainListAdmin" parameterType="Criteria" resultType="Complain">
 		SELECT
 			 *
 		FROM
 			complain
-		ORDER BY complain_no
+		ORDER BY 
+			complain_no
+		LIMIT
+			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 	
 	
 	<!-- 신고 목록 개수 -->
-	<select id="getComplainTotalCount" parameterType="Complain" resultType="int">
+	<select id="getComplainTotalCount" parameterType="Criteria" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
@@ -137,26 +156,32 @@
 	
 	
 	<!-- 블랙리스트 목록 -->
-	<select id="getBlacklistAdmin" parameterType="User" resultType="User">
+	<select id="getBlacklistAdmin" parameterType="Criteria" resultType="User">
 		SELECT
 			u.user_id, u.user_name, u.nick_name, u.birth, u.gender, u.email, u.phone, u.blacklist_reg_date, u.blacklist_end_date, c.complain_code 
 		FROM
 			users u, complain c
 		WHERE
 			u.user_id = c.complain_id
-			and 
+			AND
+			user_bye_status = 0
+			AND 
 			u.blacklist_status = true
+		LIMIT
+			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 	
 	
 	<!-- 블랙리스트 목록 개수 -->
-	<select id="getBlacklistTotalCount" parameterType="User" resultType="int">
+	<select id="getBlacklistTotalCount" parameterType="Criteria" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
 			users
 		WHERE
 			blacklist_status = true
+			AND
+			user_bye_status = 0
 	</select>
 	
 	

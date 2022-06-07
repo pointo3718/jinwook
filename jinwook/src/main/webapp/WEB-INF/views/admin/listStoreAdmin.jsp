@@ -8,6 +8,7 @@
 	
 <head>
 
+
 <meta charset="EUC-KR">
 
 <meta name="viewport"
@@ -82,7 +83,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>회원목록조회</h3>
+	       <h3>상점목록조회</h3>
 	    </div>
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -133,32 +134,32 @@
             <th align="left" >ID</th>
             <th align="left">이름</th>
             <th align="left">휴대전화번호</th>
-            <th align="left">구분</th>
+            <th align="left">${storeList[0].user.phone}</th>
           </tr>
         </thead>
        
 		<tbody>
 		
 		  <c:set var="i" value="0" />
-		  <c:forEach var="user" items="${userList}">
+		  <c:forEach var="store" items="${storeList}">
 			<c:set var="i" value="${ i+1 }" />
+			
 			<tr>
 			  <td align="center">${ i }</td>
-			  <td align="left"  title="Click : 회원정보 확인"><a href="/admin/getUserAdmin?userId=${user.userId}">${user.userId}</a></td>
-			  <td align="left">${user.userName}</td>
-			  <td align="left">${user.phone}</td>
-			  <td align="left">${user.role}</td>
+			  <td align="left"  title="Click : 회원정보 확인"><a href="/admin/getUserAdmin?userId=${store.storeNo}">${store.storeNo}</a></td>
+			  <td align="left">${store.storeName}</td>
+			  <td align="left">${store.user.userName}</td>
+			  <td align="left">${store.storePhone}</td>
 			</tr>
           </c:forEach>
-        
+
         </tbody>
       
       </table>
-      
+
       
       <table>
       <tbody class="userlist">
-      
       </tbody>
       
       </table>
