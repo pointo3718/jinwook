@@ -1,14 +1,11 @@
 package com.jinwook.home.service.store;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
 
 import com.jinwook.home.common.Criteria;
->>>>>>> refs/remotes/origin/master
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;

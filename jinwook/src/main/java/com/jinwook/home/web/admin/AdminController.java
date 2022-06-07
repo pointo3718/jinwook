@@ -11,12 +11,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-<<<<<<< HEAD
-=======
 import org.springframework.beans.factory.annotation.Value;
 
 import com.jinwook.home.common.Criteria;
->>>>>>> refs/remotes/origin/master
 import com.jinwook.home.service.admin.AdminService;
 import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Store;

@@ -1,6 +1,5 @@
 package com.jinwook.home;
 
-<<<<<<< HEAD
 //@SpringBootTest
 //@AutoConfigureMockMvc
 //class StoreControllerTest {
@@ -33,7 +32,6 @@ package com.jinwook.home;
 //////
 //////    	Assertions.assertThat(product.deleteStoreProduct(10024).isEmpty());
 //////    }
-=======
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -202,4 +200,3 @@ public class StoreControllerTest {
 	
 	
 }
->>>>>>> refs/remotes/origin/master

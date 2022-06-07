@@ -1,13 +1,10 @@
 package com.jinwook.home.web.store;
 
-<<<<<<< HEAD
-=======
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
->>>>>>> refs/remotes/origin/master
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;

@@ -25,13 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jinwook.home.service.board.BoardService;
 import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Board;
-<<<<<<< HEAD
-=======
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
->>>>>>> refs/remotes/origin/master
 
 @Controller
 @RequestMapping("/board/*")
