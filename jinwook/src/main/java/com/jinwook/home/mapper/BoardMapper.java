@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
@@ -16,6 +15,10 @@ import com.jinwook.home.service.domain.User;
 @Mapper
 public interface BoardMapper {
 
+	//1:1문의 조회수 증가
+	public int updateBoardInquiryHits(Integer boardNo);
+	//공지사항 조회수 증가
+	public int updateBoardAnnouncementHits(Integer boardNo);
 	//1:1문의 등록
 	public int addBoardInquiry(Board board);
 	//공지사항 등록
@@ -31,7 +34,7 @@ public interface BoardMapper {
 	//조인 필요: board, comment 1:1문의 상세 조회 시 답변상태 false/true로 표시.
 	public Board getBoardInquiry(Integer boardNo);
 	//1:1문의 답변대기중 -> 답변완료(true)
-	public int updateBoardInqStatus(int storeNo);	
+	public int updateBoardInqStatus(int boardNo);	
 	//조인 필요: board, comment 공지사항 상세 조회
 	public Board getBoardAnnouncement(Integer boardNo);
 	//1:1문의 목록 조회
@@ -50,9 +53,9 @@ public interface BoardMapper {
 	//레시피
 	public int addRecipe(Recipe rcp);
 	public int updateRecipe(Recipe rcp);
-	public int deleteRecipe(int rcpNo);
-	//조인 필요: recipe, comment
-	public Recipe getRecipe(int rcpNo);
+	public int deleteRecipe(Integer rcpNo);
+	//조인 필요: recipe, comment, recommend
+	public Recipe getRecipe(Integer rcpNo);
 	public List<Recipe> getRecipeList(Board board);
 	
 	//댓글 등록
@@ -103,8 +106,9 @@ public interface BoardMapper {
 	//댓글 추천 중복방지 select문
 	public int commentRecoCheck(int commentNo, String userId);
 
-	
-	public int getBoardTotalCount(Board board);
+	// 목록 개수
+	public int getBoardInquiryTotalCount(Board board);
+	public int getBoardAnnouncementTotalCount(Board board);
 	public int getRecipeTotalCount(Board board);
 	public int getReviewTotalCount(Board board);
 	public int getRankTotalCount(Board board);
