@@ -30,6 +30,7 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 	}
 	
 	///Method
+	@Override
 	public boolean preHandle(	HttpServletRequest request,
 														HttpServletResponse response, 
 														Object handler) throws Exception {

@@ -345,27 +345,22 @@
 package com.jinwook.home;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 import org.springframework.util.CollectionUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.jinwook.home.common.Criteria;
 import com.jinwook.home.mapper.BoardMapper;
 import com.jinwook.home.mapper.OrdersMapper;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
-import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.User;
 

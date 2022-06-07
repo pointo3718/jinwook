@@ -1,11 +1,7 @@
 package com.jinwook.home.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.jinwook.home.service.domain.User;
-
-import io.lettuce.core.dynamic.annotation.Param;
 
 @Mapper
 public interface UserMapper {

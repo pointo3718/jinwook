@@ -4,14 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
-import com.jinwook.home.service.domain.Store;
-import com.jinwook.home.service.domain.User;
 
 @Mapper
 public interface BoardMapper {

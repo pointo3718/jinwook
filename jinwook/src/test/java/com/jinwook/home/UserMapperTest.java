@@ -2,13 +2,10 @@ package com.jinwook.home;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.jinwook.home.mapper.UserMapper;
 import com.jinwook.home.service.domain.User;
-import com.jinwook.home.service.user.UserService;
-import com.jinwook.home.service.user.UserServiceImpl;
 
 
 
@@ -111,7 +108,7 @@ class UserMapperTest {
 	@Test
 	public void confirmPasswordTest() throws Exception{
 		User user = new User();
-		user.setUserId("test01");
+		user.setUserId("test03");
 		user.setPassword("1111");
 		System.out.println("----------------------------------");
 		System.out.println(userMapper.checkPassword(user));

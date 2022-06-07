@@ -1,8 +1,5 @@
 package com.jinwook.home.web.store;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;

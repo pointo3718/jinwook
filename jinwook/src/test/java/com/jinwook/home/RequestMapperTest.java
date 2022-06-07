@@ -14,7 +14,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jinwook.home.mapper.RequestMapper;
 import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
-import com.jinwook.home.service.domain.User;
 
 @SpringBootTest
 public class RequestMapperTest {
