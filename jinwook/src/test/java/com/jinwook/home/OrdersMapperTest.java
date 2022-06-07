@@ -84,7 +84,7 @@ public class OrdersMapperTest {
         
    }
    
-   //@Test
+   @Test
    public void testSelectListOrders() {
       int ordersTotalCount = ordersMapper.getOrdersTotalCount();
       if(ordersTotalCount > 0) {
@@ -299,11 +299,6 @@ public class OrdersMapperTest {
             
          }
       }
-   }
-   
-   //@Test
-   public void testgetOrdersJpayChargelist() {
-      
    }
    
    //@Test
