@@ -13,14 +13,29 @@ import com.jinwook.home.service.domain.Recipe;
 @Mapper
 public interface BoardMapper {
 
-	//1:1문의, 공지사항
-	public int addBoard(Board board);
-	public int updateBoard(Board board);
-	public int deleteBoard(Integer boardNo);
-	//조인 필요: board, comment
-	public Board getBoard(Integer boardNo);
-	//답변 상태에 대한 if문 필요
-	public List<Board> getBoardList(Board board);
+	//1:1문의 등록
+	public int addBoardInquiry(Board board);
+	//공지사항 등록
+	public int addBoardAnnouncement(Board board);
+	//1:1문의 수정
+	public int updateBoardInquiry(Board board);
+	//공지사항 수정
+	public int updateBoardAnnouncement(Board board);
+	//1:1문의 삭제
+	public int deleteBoardInquiry(Integer boardNo);
+	//공지사항 삭제
+	public int deleteBoardAnnouncement(Integer boardNo);
+	//조인 필요: board, comment 1:1문의 상세 조회 시 답변상태 false/true로 표시.
+	public Board getBoardInquiry(Integer boardNo);
+	//1:1문의 답변대기중 -> 답변완료(true)
+	public int updateBoardInqStatus(int storeNo);	
+	//조인 필요: board, comment 공지사항 상세 조회
+	public Board getBoardAnnouncement(Integer boardNo);
+	//1:1문의 목록 조회
+	public List<Board> getBoardInquiryList(Board board);
+	//공지사항 목록 조회
+	public List<Board> getBoardAnnouncementList(Board board);
+	
 	//전체 랭킹 리스트 조인 필요: store, comment, recipe
 	public List<Board> getRankList(Board board);
 	

@@ -23,7 +23,7 @@ public class Board {
 	private String boardImg1;
 	private String boardImg2;
 	private String boardImg3;
-	private String boardInqStatus;
+	private boolean boardInqStatus;
 	
 	/** 파일 변경 여부 */
 	private String changeYn;

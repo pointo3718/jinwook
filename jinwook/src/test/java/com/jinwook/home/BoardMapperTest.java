@@ -392,7 +392,7 @@ public class BoardMapperTest {
 		board.setBoardImg1(null);
 		board.setBoardImg2(null);
 		board.setBoardImg3(null);
-		board.setBoardInqStatus(null);
+		board.setBoardInqStatus(true);
 		
 		int result = boardMapper.addBoard(board);
 		System.out.println(" 결과는 "+result+"입니다.");
@@ -412,7 +412,7 @@ public class BoardMapperTest {
 		board.setBoardImg1(null);
 		board.setBoardImg2(null);
 		board.setBoardImg3(null);
-		board.setBoardInqStatus(null);
+		board.setBoardInqStatus(true);
 		
 		int result = boardMapper.updateBoard(board);
 		System.out.println(" 결과는 "+result+"입니다.");
