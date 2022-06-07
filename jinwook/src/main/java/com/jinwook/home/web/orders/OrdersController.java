@@ -185,17 +185,17 @@ public class OrdersController {
 //		return  "";
 //	}
 //	
-	@PostMapping()
-	public String addOrdersJpayPassword() throws Exception {
-		
-		return  "";
-	}
+//	@PostMapping()
+//	public String addOrdersJpayPassword() throws Exception {
+//		
+//		return  "";
+//	}
 	
-	@PostMapping()
-	public String updateOrdersJpayPassword() throws Exception {
-		
-		return  "";
-	}
+//	@PostMapping()
+//	public String updateOrdersJpayPassword() throws Exception {
+//		
+//		return  "";
+//	}
 	
 	@PostMapping(value = "addOrdersJpayCharge")
 	public String addOrdersJpayCharge(@ModelAttribute("jpay") Jpay jpay,Model model) throws Exception {
@@ -233,35 +233,35 @@ public class OrdersController {
 		return  "orders/getOrdersJpaylist";
 	}
 	
-	@PostMapping()
-	public String addOrdersNotice() throws Exception {
-		
-		return "";
-	}
+//	@PostMapping()
+//	public String addOrdersNotice() throws Exception {
+//		
+//		return "";
+//	}
 	
-	@PostMapping()
-	public String deleteOrdersNotice() throws Exception {
-		
-
-		return "";
-	}
+//	@PostMapping()
+//	public String deleteOrdersNotice() throws Exception {
+//		
+//
+//		return "";
+//	}
 	
-	@GetMapping()
-	public String getOrdersNoticelist() throws Exception {
-		
-		return "";
-	}
+//	@GetMapping()
+//	public String getOrdersNoticelist() throws Exception {
+//		
+//		return "";
+//	}
 	
-	@PostMapping()
-	public String updateOrdersCeoJb() throws Exception {
-		
-		return "";
-	}
+//	@PostMapping()
+//	public String updateOrdersCeoJb() throws Exception {
+//		
+//		return "";
+//	}
 	
-	@PostMapping()
-	public String updateOrdersCeoEarn() throws Exception {
-		
-		return "";
-	}
+//	@PostMapping()
+//	public String updateOrdersCeoEarn() throws Exception {
+//		
+//		return "";
+//	}
 	
 } 
