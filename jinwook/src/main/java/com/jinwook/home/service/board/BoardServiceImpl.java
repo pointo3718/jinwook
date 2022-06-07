@@ -28,11 +28,10 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper boardMapper;
 	
-	/*
-	 * @Autowired private AttachMapper attachMapper;
-	 * 
-	 * @Autowired private FileUtils fileUtils;
-	 */
+	  @Autowired private AttachMapper attachMapper;
+	  
+	  @Autowired private FileUtils fileUtils;
+	 
 	
 	//1:1문의 등록
 	@Override
