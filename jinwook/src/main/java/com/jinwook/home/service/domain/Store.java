@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Store {
+public class Store extends CommonDTO {
 
    private int storeNo;
    private User user;

@@ -27,18 +27,19 @@
 			phone			= #{phone},
 			business_no 	= #{businessNo} ,
 			email			=	#{email},
-			password		= #{password}
+			password		= #{password},
+			user_bye_status = #{userByeStatus}
 	   	</set>
 	   	WHERE user_id = #{userId}
 	 </update>
 
-	<update		id="deleteUser"	>
+	<!-- <update		id="deleteUser"	>
 		UPDATE users 
 		<set>
 			user_bye_status = #{userByeStatus}
 		</set>
 		WHERE user_id = #{userId}
-	 </update>
+	 </update> -->
 	 
 	 <select id="checkId"  resultType="int">
         SELECT COUNT(*) FROM users WHERE user_id= #{userId}
@@ -65,6 +66,8 @@
 		WHERE phone = #{phone}
 	 </select>
 	 
+
+
 	<select 	id="checkPassword"	parameterType="user" resultType="int">
 		SELECT
 		COUNT(*)	

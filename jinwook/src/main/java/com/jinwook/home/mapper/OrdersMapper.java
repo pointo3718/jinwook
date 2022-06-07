@@ -1,11 +1,8 @@
 package com.jinwook.home.mapper;
 
 import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Mapper;
 
-import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Jpay;
 import com.jinwook.home.service.domain.Notice;

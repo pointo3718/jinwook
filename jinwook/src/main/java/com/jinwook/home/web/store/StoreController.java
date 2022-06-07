@@ -3,8 +3,13 @@ package com.jinwook.home.web.store;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Coupon;
+import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.store.StoreService;
+
+import io.lettuce.core.GeoArgs.Sort;
 
 
 
@@ -121,28 +128,31 @@ public class StoreController {
 	
 	@GetMapping(value = "getStore")
 	public String getStore(@RequestParam("storeNo") int storeNo, Model model) {
-		List<Store> storeList = storeService.getStore(storeNo);
-		model.addAttribute("storeList", storeList);
+		List<Store> getStore = storeService.getStore(storeNo);
+		model.addAttribute("getStore", getStore);
 
 		return "/store/getStore";
 	}
 	
+	
 	@GetMapping(value = "getStoreWallet")
-	public String getStoreWallet(int storeNo, Model model) {
-		List<Store> storeList = storeService.getStoreWallet(storeNo);
-		model.addAttribute("storeList", storeList);
+	public String getStoreWallet(@RequestParam("storeNo") int storeNo, Model model) {
+		List<Store> getStoreWallet = storeService.getStoreWallet(storeNo);
+		model.addAttribute("getStoreWallet", getStoreWallet);
 
 		return "/store/getStoreWallet";
 	}
 	
 	
 	@GetMapping(value = "getCouponList")
-	public String getCouponList(String userId, Model model) {
+	public String getCouponList(@RequestParam("userId") String userId, Model model) {
+		
 		List<Coupon> couponList = storeService.getCouponList(userId);
 		model.addAttribute("couponList", couponList);
 
 		return "/orders/listOrderCoupon";
 	}
+	
 	
 
 }

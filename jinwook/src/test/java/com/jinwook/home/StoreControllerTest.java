@@ -1,5 +1,37 @@
 package com.jinwook.home;
 
+//@SpringBootTest
+//@AutoConfigureMockMvc
+//class StoreControllerTest {
+//
+////    @Autowired
+////    private MockMvc mockMvc;
+////
+////    @Autowired
+////    private ObjectMapper objectMapper;
+////
+//////    @Autowired
+//////    private Store store;
+//////    
+//////    @Autowired
+//////    private Product product;
+////
+////
+//////    @DisplayName("상품 삭제")
+//////    @Test
+//////    public void deleteStoreProductTest() throws Exception {
+//////
+//////    	Product product = new Product();
+//////    	product.setProdNo(10024);
+//////
+//////    	product.save(product);
+//////
+//////    	mockMvc.perform(delete("/store/"))
+//////    			.andExpect(status().isOk())
+//////    			.andDo(print());
+//////
+//////    	Assertions.assertThat(product.deleteStoreProduct(10024).isEmpty());
+//////    }
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -100,6 +132,7 @@ public class StoreControllerTest {
 	public void deleteStoreProduct() throws Exception{
 	  this.mvc.perform(post("/store/deleteStoreProduct")
 	                                    .param("prodNo", "10025"))
+	  									.andExpect(status().isOk())
 	                   					.andDo(print());
 	}
 	
@@ -109,6 +142,7 @@ public class StoreControllerTest {
 	public void isSoldout() throws Exception{
 	  this.mvc.perform(post("/store/isSoldout")
 	                                    .param("prodNo", "10025"))
+	  									.andExpect(status().isOk())
 	                   					.andDo(print());
 	}
 	
@@ -118,6 +152,7 @@ public class StoreControllerTest {
 	public void isOpen() throws Exception{
 	  this.mvc.perform(post("/store/isOpen")
 	                                    .param("storeNo", "10000"))
+	  									.andExpect(status().isOk())
 	                   					.andDo(print());
 	}
 	
@@ -127,6 +162,7 @@ public class StoreControllerTest {
 	public void addOrderCoupon() throws Exception{
 	  this.mvc.perform(post("/store/addOrderCoupon")
 	                                    .param("couponNo", "10000"))
+	  									.andExpect(status().isOk())
 	                   					.andDo(print());
 	}
 	
@@ -136,8 +172,10 @@ public class StoreControllerTest {
 	public void getStore() throws Exception{
 	  this.mvc.perform(get("/store/getStore")
 	                                    .param("storeNo", "10000"))
+	  									.andExpect(status().isOk())
 	                   					.andDo(print());
 	}
+	
 	
 	@Test
 	@Transactional
@@ -145,18 +183,19 @@ public class StoreControllerTest {
 	public void getStoreWallet() throws Exception{
 	  this.mvc.perform(get("/store/getStoreWallet")
 	                                    .param("storeNo", "10000"))
+	  									.andExpect(status().isOk())
 	                   					.andDo(print());
 	}
 	
-	@Test
-	@Transactional
-	@DisplayName("getCouponList 파라미터 방식 테스트")
-	public void getCouponList() throws Exception{
-	  this.mvc.perform(get("/store/getCouponList")
-	                                    .param("userId", "test01"))
-	                   					.andDo(print());
-	}
-
+	
+	   @Test
+	   @DisplayName("getCouponList GET 방식 테스트")
+	   public void getCouponList() throws Exception{
+	     this.mvc.perform(get("/store/getCouponList")
+         					.param("userId", "test01"))
+							.andExpect(status().isOk())
+							.andDo(print());
+	   } 
 
 	
 	

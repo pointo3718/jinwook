@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -7,9 +7,9 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -32,24 +32,24 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		//============= "°¡ÀÔ"  Event ¿¬°á =============
+		//============= "ê°€ì…"  Event ì—°ê²° =============
 		 $(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "button.btn.btn-primary" ).on("click" , function() {
 				fncAddUser();
 			});
 		});	
 		
 		
-		//============= "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á =============
+		//============= "ì·¨ì†Œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============
 		$(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
 				$("form")[0].reset();
 			});
 		});	
 	
-		//============¾ÆÀÌµğ Áßº¹ È®ÀÎ ==============
+		//============ì•„ì´ë”” ì¤‘ë³µ í™•ì¸ ==============
 		function checkId(){
 			$.ajax({
 				url : "/user/checkId",
@@ -58,19 +58,23 @@
 				data : {"userId" : $("#userId").val()},
 				success : function(data){
 					if($("#userId").val().length <1){
-						alert("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.")
+						alert("ì•„ì´ë””ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.")
 					}else if(data == 1){
-						alert("Áßº¹µÈ ¾ÆÀÌµğÀÔ´Ï´Ù.");
+						alert("ì¤‘ë³µëœ ì•„ì´ë””ì…ë‹ˆë‹¤.");
 					}else if(data == 0){
 						$("#idChk").attr("value", "Y");
-						alert("»ç¿ë°¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.");
+						alert("ì‚¬ìš©ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.");
 					}
 				}
 			});
 			
 		}
+		$("#userId").change(function(){
+			
 		
-		//============¾ÆÀÌµğ Áßº¹ È®ÀÎ ==============
+				idChk = false;
+		});
+		//============ì•„ì´ë”” ì¤‘ë³µ í™•ì¸ ==============
 			function checkNickName(){
 			$.ajax({
 				url : "/user/checkNickName",
@@ -79,19 +83,19 @@
 				data : {"nickName" : $("#nickName").val()},
 				success : function(data){
 					if($("#nickName").val().length <1){
-						alert("´Ğ³×ÀÓÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.")
+						alert("ë‹‰ë„¤ì„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.")
 					}else if(data == 1){
-						alert("Áßº¹µÈ ´Ğ³×ÀÓÀÔ´Ï´Ù.");
+						alert("ì¤‘ë³µëœ ë‹‰ë„¤ì„ì…ë‹ˆë‹¤.");
 					}else if(data == 0){
 						$("#nickNameChk").attr("value", "Y");
-						alert("»ç¿ë°¡´ÉÇÑ ´Ğ³×ÀÓÀÔ´Ï´Ù.");
+						alert("ì‚¬ìš©ê°€ëŠ¥í•œ ë‹‰ë„¤ì„ì…ë‹ˆë‹¤.");
 					}
 				}
 			});
 			
 		}
 			
-		//==>"ÀÌ¸ŞÀÏ" À¯È¿¼ºCheck  Event Ã³¸® ¹× ¿¬°á
+		//==>"ì´ë©”ì¼" ìœ íš¨ì„±Check  Event ì²˜ë¦¬ ë° ì—°ê²°
 		function checkEmail(){
 			$.ajax({
 				url : "/user/checkEmail",
@@ -100,15 +104,15 @@
 				data : {"email" : $("#email").val()},
 				success : function(data){
 					if($("#email").val() != "" && ($("#email").val().indexOf('@') < 1 || $("#email").val().indexOf('.') == -1) ){
-						alert("ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾Æ´Õ´Ï´Ù.");
+						alert("ì´ë©”ì¼ í˜•ì‹ì´ ì•„ë‹™ë‹ˆë‹¤.");
 					}
 					else if($("#email").val().length <1){
-						alert("ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.")
+						alert("ì´ë©”ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.")
 					}else if(data == 1){
-						alert("Áßº¹µÈ ÀÌ¸ŞÀÏÀÔ´Ï´Ù.");
+						alert("ì¤‘ë³µëœ ì´ë©”ì¼ì…ë‹ˆë‹¤.");
 					}else if(data == 0){
 						$("#emailChk").attr("value", "Y");
-						alert("»ç¿ë°¡´ÉÇÑ ÀÌ¸ŞÀÏÀÔ´Ï´Ù.");
+						alert("ì‚¬ìš©ê°€ëŠ¥í•œ ì´ë©”ì¼ì…ë‹ˆë‹¤.");
 					}
 				}
 			});
@@ -122,30 +126,37 @@
 			var pw=$("input[name='password']").val();
 			var pw_confirm=$("input[name='password2']").val();
 			var name=$("input[name='userName']").val();
+			var nickName=$("input[name='nickName']").val();
 			
 			
 			if(id == null || id.length <1){
-				alert("¾ÆÀÌµğ´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+				alert("ì•„ì´ë””ëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 				return;
 			}
 			if(pw == null || pw.length <1){
-				alert("ÆĞ½º¿öµå´Â  ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+				alert("íŒ¨ìŠ¤ì›Œë“œëŠ”  ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 				return;
 			}
 			if(pw_confirm == null || pw_confirm.length <1){
-				alert("ÆĞ½º¿öµå È®ÀÎÀº  ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+				alert("íŒ¨ìŠ¤ì›Œë“œ í™•ì¸ì€  ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 				return;
 			}
 			if(name == null || name.length <1){
-				alert("ÀÌ¸§Àº  ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+				alert("ì´ë¦„ì€  ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+				return;
+			}
+			
+			if(nickName == null || nickName.length <1){
+				alert("ë‹‰ë„¤ì„ì€  ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 				return;
 			}
 			
 			if( pw != pw_confirm ) {				
-				alert("ºñ¹Ğ¹øÈ£ È®ÀÎÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+				alert("ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 				$("input:text[name='password2']").focus();
 				return;
 			}
+				
 				
 			var value = "";	
 			if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
@@ -165,16 +176,16 @@
 		
 		
 	   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	   //==> ÁÖ¹Î¹øÈ£ À¯È¿¼º check ´Â ÀÌÇØÁ¤µµ·Î....
+	   //==> ì£¼ë¯¼ë²ˆí˜¸ ìœ íš¨ì„± check ëŠ” ì´í•´ì •ë„ë¡œ....
 		function checkSsn() {
 			var ssn1, ssn2; 
 			var nByear, nTyear; 
 			var today; 
 	
 			ssn = document.detailForm.ssn.value;
-			// À¯È¿ÇÑ ÁÖ¹Î¹øÈ£ Çü½ÄÀÎ °æ¿ì¸¸ ³ªÀÌ °è»ê ÁøÇà, PortalJuminCheck ÇÔ¼ö´Â CommonScript.js ÀÇ °øÅë ÁÖ¹Î¹øÈ£ Ã¼Å© ÇÔ¼öÀÓ 
+			// ìœ íš¨í•œ ì£¼ë¯¼ë²ˆí˜¸ í˜•ì‹ì¸ ê²½ìš°ë§Œ ë‚˜ì´ ê³„ì‚° ì§„í–‰, PortalJuminCheck í•¨ìˆ˜ëŠ” CommonScript.js ì˜ ê³µí†µ ì£¼ë¯¼ë²ˆí˜¸ ì²´í¬ í•¨ìˆ˜ì„ 
 			if(!PortalJuminCheck(ssn)) {
-				alert("Àß¸øµÈ ÁÖ¹Î¹øÈ£ÀÔ´Ï´Ù.");
+				alert("ì˜ëª»ëœ ì£¼ë¯¼ë²ˆí˜¸ì…ë‹ˆë‹¤.");
 				return false;
 			}
 		}
@@ -198,9 +209,9 @@
 		 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 		 
-		//==>"IDÁßº¹È®ÀÎ" Event Ã³¸® ¹× ¿¬°á
+		//==>"IDì¤‘ë³µí™•ì¸" Event ì²˜ë¦¬ ë° ì—°ê²°
 		 $(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			 $("button.btn.btn-info").on("click" , function() {
 				popWin 
 				= window.open("/user/checkDuplication.jsp",
@@ -219,68 +230,68 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Áø ¿í ÀÌ ³×</a>
+        	<a class="navbar-brand" href="index">ì§„ ìš± ì´ ë„¤</a>
    		</div>
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-primary text-center">È¸ ¿ø °¡ ÀÔ</h1>
+		<h1 class="bg-primary text-center">íšŒ ì› ê°€ ì…</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
 		  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">¾Æ ÀÌ µğ</label>
+		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">ì•„ ì´ ë””</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" placeholder="Áßº¹È®ÀÎÇÏ¼¼¿ä">
-				<button class="idChk" type="button" id="idChk" onclick="checkId()" value="N">Áßº¹È®ÀÎ</button>
+		      <input type="text" class="form-control" id="userId" name="userId" placeholder="ì¤‘ë³µí™•ì¸í•˜ì„¸ìš”">
+				<button class="idChk" type="button" id="idChk" onclick="checkId()" value="N">ì¤‘ë³µí™•ì¸</button>
 				
-				<!-- <span class="id_ok">»ç¿ë °¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.</span>
-				<span class="id_already">´©±º°¡ ÀÌ ¾ÆÀÌµğ¸¦ »ç¿ëÇÏ°í ÀÖ¾î¿ä.</span>		   --> 
+				<!-- <span class="id_ok">ì‚¬ìš© ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.</span>
+				<span class="id_already">ëˆ„êµ°ê°€ ì´ ì•„ì´ë””ë¥¼ ì‚¬ìš©í•˜ê³  ìˆì–´ìš”.</span>		   --> 
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">ºñ¹Ğ¹øÈ£</label>
+		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">ë¹„ë°€ë²ˆí˜¸</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password" placeholder="ºñ¹Ğ¹øÈ£">
+		      <input type="password" class="form-control" id="password" name="password" placeholder="ë¹„ë°€ë²ˆí˜¸">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">ºñ¹Ğ¹øÈ£ È®ÀÎ</label>
+		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="ºñ¹Ğ¹øÈ£ È®ÀÎ">
+		      <input type="password" class="form-control" id="password2" name="password2" placeholder="ë¹„ë°€ë²ˆí˜¸ í™•ì¸">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">ÀÌ¸§</label>
+		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">ì´ë¦„</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="È¸¿øÀÌ¸§">
+		      <input type="text" class="form-control" id="userName" name="userName" placeholder="íšŒì›ì´ë¦„">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label">»ı³â¿ùÀÏ</label>
+		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label">ìƒë…„ì›”ì¼</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="birth" name="birth" placeholder="»ı³â¿ùÀÏ">
+		      <input type="text" class="form-control" id="birth" name="birth" placeholder="ìƒë…„ì›”ì¼">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="nickName" class="col-sm-offset-1 col-sm-3 control-label">´Ğ³×ÀÓ</label>
+		    <label for="nickName" class="col-sm-offset-1 col-sm-3 control-label">ë‹‰ë„¤ì„</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="nickName" name="nickName" placeholder="´Ğ³×ÀÓ">
-		      <button class="nickNameChk" type="button" id="nickNameChk" onclick="checkNickName()" value="N" >Áßº¹È®ÀÎ</button>
+		      <input type="text" class="form-control" id="nickName" name="nickName" placeholder="ë‹‰ë„¤ì„">
+		      <button class="nickNameChk" type="button" id="nickNameChk" onclick="checkNickName()" value="N" >ì¤‘ë³µí™•ì¸</button>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ÈŞ´ëÀüÈ­¹øÈ£</label>
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">íœ´ëŒ€ì „í™”ë²ˆí˜¸</label>
 		     <div class="col-sm-2">
 		      <select class="form-control" name="phone1" id="phone1">
 				  	<option value="010" >010</option>
@@ -291,39 +302,39 @@
 				</select>
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="¹øÈ£">
+		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="ë²ˆí˜¸">
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="¹øÈ£">
+		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="ë²ˆí˜¸">
 		    </div>
 		    <input type="hidden" name="phone"  />
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">¼ºº°</label>
-		    		<input type="radio" 	name="gender" value="³²"/>³²
-					<input type="radio" 	name="gender" value="¿©"/>¿©
+		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">ì„±ë³„</label>
+		    		<input type="radio" 	name="gender" value="ë‚¨"/>ë‚¨
+					<input type="radio" 	name="gender" value="ì—¬"/>ì—¬
 		  </div>
 		  
 		   <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ÀÌ¸ŞÀÏ</label>
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ì´ë©”ì¼</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="email" name="email" placeholder="ÀÌ¸ŞÀÏ">
-		      <button class="emailChk" type="button" id="emailChk" onclick="checkEmail()" value="N">Áßº¹È®ÀÎ</button> 
+		      <input type="text" class="form-control" id="email" name="email" placeholder="ì´ë©”ì¼">
+		      <button class="emailChk" type="button" id="emailChk" onclick="checkEmail()" value="N">ì¤‘ë³µí™•ì¸</button> 
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >°¡ &nbsp;ÀÔ</button>
-			  <a class="btn btn-primary btn" href="#" role="button">Ãë&nbsp;¼Ò</a>
+		      <button type="button" class="btn btn-primary"  >ê°€ &nbsp;ì…</button>
+			  <a class="btn btn-primary btn" href="#" role="button">ì·¨&nbsp;ì†Œ</a>
 		    </div>
 		  </div>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 		
  	</div>
-	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 	
 </body>
 

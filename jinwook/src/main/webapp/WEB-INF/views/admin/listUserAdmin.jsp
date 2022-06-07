@@ -38,6 +38,14 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
   <script type = "text/javascript">
   
+  	/*<![CDATA[*/
+
+	function movePage(uri, queryString) {
+		location.href = uri + queryString;
+	}
+
+	/*]]>*/
+  
   ////////////////  블랙리스트 REST API //////////////// 
 	$(function() {
 		printBlackList();
@@ -136,7 +144,7 @@
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
-			  <td align="left"  title="Click : 회원정보 확인">${user.userId}</td>
+			  <td align="left"  title="Click : 회원정보 확인"><a href="/admin/getUserAdmin?userId=${user.userId}">${user.userId}</a></td>
 			  <td align="left">${user.userName}</td>
 			  <td align="left">${user.phone}</td>
 			  <td align="left">${user.role}</td>
