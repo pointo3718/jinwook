@@ -51,57 +51,64 @@ public class OrdersController {
 	}
 	
 	@PostMapping(value = "addOrders")
-	public String addOrders(@ModelAttribute("orders") Orders orders	) throws Exception {
+	public String addOrders(@ModelAttribute("orders") Orders orders) throws Exception {
 		
 		System.out.println("/orders/addOrders: POST");
-		
-		
 		
 		return "orders/addOrdersView";
 	}
 	
 	
 	@PostMapping(value = "updateOrders")
-	public String updateOrders() throws Exception {
+	public String updateOrders(@ModelAttribute("orders") Orders orders, Model model) throws Exception {
 		
 		System.out.println("/orders/updateOrders : POST");
 		
-		return "orders/updateOrders";
+		ordersService.updateOrders(orders);
+		
+		model.addAttribute("orders", orders);
+		
+		return "orders/getOrdersList";
 	}
 	
 	@PostMapping(value = "deleteOrders")
-	public String deleteOrders() throws Exception {
+	public String deleteOrders(@RequestParam("orderNo") int orderNo, Model model) throws Exception {
+		
+		ordersService.deleteOrders(orderNo);
 		
 		System.out.println("/orders/deleteOrders : POST");
 		
-		return "orders/updateOrders";
+		model.addAttribute("orderNo", orderNo);
+		
+		return "orders/getOrdersList";
 	}
 	
 	@GetMapping(value = "getOrdersList")
-	public String getOrdersList() throws Exception {
+	public String getOrdersList(@RequestParam("userId") String userId, Model model) throws Exception {
 		
 		System.out.println("/orders/getOrdersList : GET");
+		
+		List<Orders> getOrdersList = ordersService.getOrdersList(userId);
+		
+		model.addAttribute("getOrdersList", getOrdersList);
 		
 		return "orders/getOrdersList";
 	}
 	
 	@GetMapping(value = "getOrders")
-	public String getOrders() throws Exception {
+	public String getOrders(@ModelAttribute("orders") Orders orders, Model model) throws Exception {
 		
 		System.out.println("/orders/getOrders : GET");
+		
+//		List<Orders> get
 		
 		return "orders/getOrders";
 	}
 	
 	
 	@PostMapping(value = "addOrdersCart")
-	public String addOrdersCart(@ModelAttribute("cart")	Cart cart,HttpSession session) throws Exception {
+	public String addOrdersCart(@ModelAttribute("cart")	Cart cart,HttpSession session, Model model) throws Exception {
 		User user = (User) session.getAttribute("user");
-//		Product product = new Product();
-		
-//		cart.setProduct(prodNo);
-//		cart.setPrice(prodNo);
-//		cart.setUserId(user.getUserId());
 		
 		ordersService.addOrdersCart(cart);
 //		model.addAttribute(null)

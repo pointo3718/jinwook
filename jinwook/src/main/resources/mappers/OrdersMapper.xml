@@ -71,9 +71,9 @@
 	
 	<insert id="addOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderNo">
 		INSERT
-		INTO orders(user_id,store_no,buyer_name,buyer_phone,pickup_time,order_req,order_price,prod_count,order_date,order_status)
+		INTO orders(user_id,store_no,buyer_name,buyer_phone,pickup_time,order_req,order_price,prod_count,order_date,order_status,final_price)
 		VALUES(#{user.userId:VARCHAR} , #{store.storeNo:INTEGER} , #{buyerName:VARCHAR} , #{buyerPhone:VARCHAR} , #{pickupTime:TIME} , #{orderReq:VARCHAR}
-			, #{orderPrice:INTEGER} , #{prodCount} , SYSDATE() , #{orderStatus} )
+			, #{orderPrice:INTEGER} , #{prodCount} , SYSDATE() , #{orderStatus} ,#{finalPrice})
 	</insert>
 	
 	<update id="updateOrders">

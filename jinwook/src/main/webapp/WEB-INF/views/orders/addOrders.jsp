@@ -121,7 +121,7 @@ function fncAddPurchase() {
 		  <div class="form-group">
 		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">상품 설명</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="prodInfo" name="prodInfo" value="${cart.product.prodInfo}" readonly>
+		      <input type="text" class="ct_input_g" id="prodInfo" name="" value="${cart.product.prodInfo}" readonly>
 		    </div>
 		  </div>
 
@@ -151,7 +151,7 @@ function fncAddPurchase() {
 		  <div class="form-group">
 		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">쿠 폰</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="CouponDc" name="CouponDc">
+		      <input type="text" class="ct_input_g" id="couponType" name="couponType">
 		    </div>
 		  </div>
 	
