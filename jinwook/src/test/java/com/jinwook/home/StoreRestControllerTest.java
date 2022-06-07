@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -101,16 +102,24 @@ public class StoreRestControllerTest {
 	                   					.andDo(print());
 	}
 	
+	
 	@Test
 	@Transactional
 	@DisplayName("getStore 파라미터 방식 테스트")
 	public void getStore() throws Exception{
-	  this.mvc.perform(post("/store/getStore")
-	                                    .param("prodNo", "10000"))
-	  									.andExpect(status().isOk())	
+	  this.mvc.perform(get("/store/getStore")
+              							.param("storeNo", "10000")
+	                                    .param("userId", "test01")
+	                                    .param("prodNo", "10000")
+	                                    .param("prodCount", "1")
+	                                    .param("storeName", "진욱이네")
+	                                    .param("cartStatus", "0"))
+	  									.andExpect(status().isOk())
 	                   					.andDo(print());
 	}
 	
+	
+
 	@Test
 	@Transactional
 	@DisplayName("getStoreWallet 파라미터 방식 테스트")

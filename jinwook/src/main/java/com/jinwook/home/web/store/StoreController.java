@@ -7,6 +7,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Coupon;
+import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.store.StoreService;
+
+import io.lettuce.core.GeoArgs.Sort;
 
 
 
@@ -121,33 +127,33 @@ public class StoreController {
 	}
 	
 	
-	@GetMapping(value = "getStore/{storeNo}")
+	@GetMapping(value = "getStore")
 	public String getStore(@RequestParam("storeNo") int storeNo, Model model) {
-		List<Store> storeList = storeService.getStore(storeNo);
-		model.addAttribute("storeList", storeList);
+		List<Store> getStore = storeService.getStore(storeNo);
+		model.addAttribute("getStore", getStore);
 
 		return "/store/getStore";
 	}
 	
-	@GetMapping(value = "getStoreWallet/{storeNo}")
-	public String getStoreWallet(int storeNo, Model model) {
-		List<Store> storeList = storeService.getStoreWallet(storeNo);
-		model.addAttribute("storeList", storeList);
+	
+	@GetMapping(value = "getStoreWallet")
+	public String getStoreWallet(@RequestParam("storeNo") int storeNo, Model model) {
+		List<Store> getStoreWallet = storeService.getStoreWallet(storeNo);
+		model.addAttribute("getStoreWallet", getStoreWallet);
 
 		return "/store/getStoreWallet";
 	}
 	
 	
-	@GetMapping(value = "getCouponList/{userId}")
-	public String getCouponList(Model model, HttpSession session) {
+	@GetMapping(value = "getCouponList")
+	public String getCouponList(@RequestParam("userId") String userId, Model model) {
 		
-		User user = (User)session.getAttribute("user");
-		
-		List<Coupon> couponList = storeService.getCouponList(user.getUserId());
+		List<Coupon> couponList = storeService.getCouponList(userId);
 		model.addAttribute("couponList", couponList);
 
 		return "/orders/listOrderCoupon";
 	}
+	
 	
 
 }

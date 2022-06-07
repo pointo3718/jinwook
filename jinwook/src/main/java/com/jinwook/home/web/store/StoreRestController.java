@@ -94,7 +94,7 @@ public class StoreRestController {
 	}
 	
 	
-	@PostMapping(value = "json/getStore/{storeNo}")
+	@GetMapping(value = "json/getStore")
 	public Cart getStore(@RequestParam("prodNo") int prodNo , @RequestBody Cart cart) {
 		
 		ordersService.addOrdersCart(cart);	
@@ -104,7 +104,7 @@ public class StoreRestController {
 
 	
 	
-	@GetMapping(value = "json/getStoreWallet/{storeNo}")
+	@GetMapping(value = "json/getStoreWallet")
 	public List<Store> getStoreWallet(@PathVariable int storeNo) {
 		
 		List<Store> storeList = storeService.getStoreWallet(storeNo);

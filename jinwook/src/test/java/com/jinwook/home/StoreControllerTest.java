@@ -134,35 +134,36 @@ public class StoreControllerTest {
 	                   					.andDo(print());
 	}
 	
-//	@Test
-//	@Transactional
-//	@DisplayName("getStore 파라미터 방식 테스트")
-//	public void getStore() throws Exception{
-//	  this.mvc.perform(get("/store/getStore")
-//	                                    .param("storeNo", "10000"))
-//	  									.andExpect(status().isOk())
-//	                   					.andDo(print());
-//	}
-//	
-//	@Test
-//	@Transactional
-//	@DisplayName("getStoreWallet 파라미터 방식 테스트")
-//	public void getStoreWallet() throws Exception{
-//	  this.mvc.perform(get("/store/getStoreWallet")
-//	                                    .param("storeNo", "10000"))
-//	  									.andExpect(status().isOk())
-//	                   					.andDo(print());
-//	}
-//	
-//	
-//	   @Test
-//	   @DisplayName("getCouponList GET 방식 테스트")
-//	   public void getCouponList() throws Exception{
-//	     this.mvc.perform(get("/store/getCouponList")
-//         					.param("userId", "test01"))
-//							.andExpect(status().isOk())
-//							.andDo(print());
-//	   } 
+	@Test
+	@Transactional
+	@DisplayName("getStore 파라미터 방식 테스트")
+	public void getStore() throws Exception{
+	  this.mvc.perform(get("/store/getStore")
+	                                    .param("storeNo", "10000"))
+	  									.andExpect(status().isOk())
+	                   					.andDo(print());
+	}
+	
+	
+	@Test
+	@Transactional
+	@DisplayName("getStoreWallet 파라미터 방식 테스트")
+	public void getStoreWallet() throws Exception{
+	  this.mvc.perform(get("/store/getStoreWallet")
+	                                    .param("storeNo", "10000"))
+	  									.andExpect(status().isOk())
+	                   					.andDo(print());
+	}
+	
+	
+	   @Test
+	   @DisplayName("getCouponList GET 방식 테스트")
+	   public void getCouponList() throws Exception{
+	     this.mvc.perform(get("/store/getCouponList")
+         					.param("userId", "test01"))
+							.andExpect(status().isOk())
+							.andDo(print());
+	   } 
 
 	
 	
