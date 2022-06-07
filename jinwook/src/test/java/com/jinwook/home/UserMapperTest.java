@@ -81,10 +81,10 @@ class UserMapperTest {
 		userMapper.deleteUser(user);
 	}
 	
-	//@Test
+	@Test
 	public void checkIdTest() throws Exception{
 		System.out.println("----------------------------------");
-		System.out.println(userMapper.checkId("dk1dk"));
+		System.out.println(userMapper.checkId("test01"));
 		System.out.println("----------------------------------");
 //	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
 	}
@@ -105,7 +105,7 @@ class UserMapperTest {
 //	 	Assert.assertTrue( userService.checkId("testUserId"+System.currentTimeMillis()) );
 	}
 	
-	@Test
+	//@Test
 	public void confirmPasswordTest() throws Exception{
 		User user = new User();
 		user.setUserId("test03");

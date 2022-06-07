@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jinwook.home.service.domain.User;
@@ -134,10 +135,11 @@ public class UserRestController {
 //		map.put("userId", userId);
 //		return map;
 //	}
-	
-	@PostMapping("/checkId")
-    public int checkId(@RequestBody String userId) throws Exception{
+	@PostMapping("/user/checkId")
+    public int checkId(@RequestParam("userId") String userId) throws Exception{
         int cnt = userService.checkId(userId); 
+        
+        System.out.println("asdasdas"+userId);
         
         System.out.println("===========ID CHECK SUCCESS==========");
         
@@ -145,21 +147,23 @@ public class UserRestController {
     }
 	
 	@PostMapping("/checkNickName")
-	public int checkNickName(@RequestBody String nickName) throws Exception{
+	public int checkNickName(@RequestParam("nickName") String nickName) throws Exception{
 		int cnt = userService.checkNickName(nickName); 
 		
+		System.out.println("asdasdas"+nickName);
 		System.out.println("===========NICKNAME CHECK SUCCESS==========");
 		
 		return cnt;
 	}
 	
 	@PostMapping("/checkEmail")
-	public int checkEMail(@RequestBody String email) throws Exception{
+	public int checkEMail(@RequestParam("email") String email) throws Exception{
 		int cnt = userService.checkEmail(email); 
 		
 		System.out.println("===========EMAIL CHECK SUCCESS==========");
 		
 		return cnt;
 	}
+	
 	
 }
