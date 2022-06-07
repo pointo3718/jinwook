@@ -7,9 +7,7 @@ import org.springframework.data.domain.Page;
 
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Coupon;
-import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
-import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 
 public interface StoreService {

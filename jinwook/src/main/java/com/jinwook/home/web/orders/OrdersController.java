@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Jpay;
-import com.jinwook.home.service.domain.Notice;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
-import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
 

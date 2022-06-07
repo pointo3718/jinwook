@@ -10,12 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.CollectionUtils;
 
-import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.store.StoreService;
-import com.jinwook.home.service.store.StoreServiceImpl;
 
 @SpringBootTest
 class StoreServiceTest {
