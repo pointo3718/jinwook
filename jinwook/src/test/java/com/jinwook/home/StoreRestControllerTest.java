@@ -20,46 +20,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class StoreControllerTest {
+public class StoreRestControllerTest {
 
 	@Autowired
 	ObjectMapper mapper;
 
 	@Autowired
 	MockMvc mvc;
-
-   @Test
-   @DisplayName("updateStore GET 방식 테스트")
-   public void confirmPassword() throws Exception{
-     this.mvc.perform(get("/store/confirmPassword"))
-                      .andExpect(status().isOk())
-                      .andDo(print());
-   } 
-   	
-	@Test
-	@Transactional
-	@DisplayName("updateStore 파라미터 방식 테스트")
-	public void updateStore() throws Exception{
-	  this.mvc.perform(post("/store/updateStore")
-	                                    .param("storeIntro", "짱짱")
-	                                    .param("storePhone", "010-2222-3333")
-      									.param("storeImage", "짱.jpg")
-      									.param("holiday", "매주 일요일")
-      									.param("bank", "신한은행")
-      									.param("accNo", "110020201")
-      									.param("storeNo", "10000"))
-	                   .andExpect(status().isOk())
-	                   .andDo(print());
-	}
-	
-
-//  @Test
-//  @DisplayName("addStoreProduct GET 방식 테스트")
-//  public void addStoreProduct() throws Exception{
-//    this.mvc.perform(get("/store/addStoreProduct"))
-//                     .andExpect(status().isOk())
-//                     .andDo(print());
-//  } 
 
 	@Test
 	@Transactional
@@ -110,7 +77,7 @@ public class StoreControllerTest {
 	public void isSoldout() throws Exception{
 	  this.mvc.perform(post("/store/isSoldout")
 	                                    .param("prodNo", "10025"))
-	  									.andExpect(status().isOk())
+      									.andExpect(status().isOk())
 	                   					.andDo(print());
 	}
 	
@@ -134,36 +101,26 @@ public class StoreControllerTest {
 	                   					.andDo(print());
 	}
 	
-//	@Test
-//	@Transactional
-//	@DisplayName("getStore 파라미터 방식 테스트")
-//	public void getStore() throws Exception{
-//	  this.mvc.perform(get("/store/getStore")
-//	                                    .param("storeNo", "10000"))
-//	  									.andExpect(status().isOk())
-//	                   					.andDo(print());
-//	}
-//	
-//	@Test
-//	@Transactional
-//	@DisplayName("getStoreWallet 파라미터 방식 테스트")
-//	public void getStoreWallet() throws Exception{
-//	  this.mvc.perform(get("/store/getStoreWallet")
-//	                                    .param("storeNo", "10000"))
-//	  									.andExpect(status().isOk())
-//	                   					.andDo(print());
-//	}
-//	
-//	
-//	   @Test
-//	   @DisplayName("getCouponList GET 방식 테스트")
-//	   public void getCouponList() throws Exception{
-//	     this.mvc.perform(get("/store/getCouponList")
-//         					.param("userId", "test01"))
-//							.andExpect(status().isOk())
-//							.andDo(print());
-//	   } 
-
+	@Test
+	@Transactional
+	@DisplayName("getStore 파라미터 방식 테스트")
+	public void getStore() throws Exception{
+	  this.mvc.perform(post("/store/getStore")
+	                                    .param("prodNo", "10000"))
+	  									.andExpect(status().isOk())	
+	                   					.andDo(print());
+	}
+	
+	@Test
+	@Transactional
+	@DisplayName("getStoreWallet 파라미터 방식 테스트")
+	public void getStoreWallet() throws Exception{
+	  this.mvc.perform(get("/store/getStoreWallet")
+	                                    .param("storeNo", "10000"))
+	  									.andExpect(status().isOk())
+	                   					.andDo(print());
+	}
+	
 	
 	
 }

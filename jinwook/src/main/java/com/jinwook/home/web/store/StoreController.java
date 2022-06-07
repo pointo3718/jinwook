@@ -3,6 +3,8 @@ package com.jinwook.home.web.store;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -119,7 +121,7 @@ public class StoreController {
 	}
 	
 	
-	@GetMapping(value = "getStore")
+	@GetMapping(value = "getStore/{storeNo}")
 	public String getStore(@RequestParam("storeNo") int storeNo, Model model) {
 		List<Store> storeList = storeService.getStore(storeNo);
 		model.addAttribute("storeList", storeList);
@@ -127,7 +129,7 @@ public class StoreController {
 		return "/store/getStore";
 	}
 	
-	@GetMapping(value = "getStoreWallet")
+	@GetMapping(value = "getStoreWallet/{storeNo}")
 	public String getStoreWallet(int storeNo, Model model) {
 		List<Store> storeList = storeService.getStoreWallet(storeNo);
 		model.addAttribute("storeList", storeList);
@@ -136,9 +138,12 @@ public class StoreController {
 	}
 	
 	
-	@GetMapping(value = "getCouponList")
-	public String getCouponList(String userId, Model model) {
-		List<Coupon> couponList = storeService.getCouponList(userId);
+	@GetMapping(value = "getCouponList/{userId}")
+	public String getCouponList(Model model, HttpSession session) {
+		
+		User user = (User)session.getAttribute("user");
+		
+		List<Coupon> couponList = storeService.getCouponList(user.getUserId());
 		model.addAttribute("couponList", couponList);
 
 		return "/orders/listOrderCoupon";

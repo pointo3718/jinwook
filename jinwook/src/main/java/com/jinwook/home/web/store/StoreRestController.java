@@ -2,11 +2,12 @@ package com.jinwook.home.web.store;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Coupon;
-import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.orders.OrdersService;
@@ -24,8 +24,7 @@ import com.jinwook.home.service.store.StoreService;
 
 
 
-
-//@Controller
+@Controller
 @RequestMapping("/store/*")
 public class StoreRestController {
 	
@@ -34,7 +33,7 @@ public class StoreRestController {
 	private StoreService storeService;
 	
 	@Autowired
-	@Qualifier("OrdersServiceImpl")
+	@Qualifier("ordersServiceImpl")
 	private OrdersService ordersService;
 	
 	public StoreRestController(){
@@ -95,24 +94,17 @@ public class StoreRestController {
 	}
 	
 	
-	@GetMapping(value = "json/getStore")
-	public List<Store> getStore(@PathVariable int storeNo) {
-		
-		List<Store> storeList = storeService.getStore(storeNo);
-
-		return storeList;
-	}
-	
-	@PostMapping(value = "json/getStore")
+	@PostMapping(value = "json/getStore/{storeNo}")
 	public Cart getStore(@RequestParam("prodNo") int prodNo , @RequestBody Cart cart) {
 		
 		ordersService.addOrdersCart(cart);	
 		
 		return cart;
 	}
+
 	
 	
-	@GetMapping(value = "json/getStoreWallet")
+	@GetMapping(value = "json/getStoreWallet/{storeNo}")
 	public List<Store> getStoreWallet(@PathVariable int storeNo) {
 		
 		List<Store> storeList = storeService.getStoreWallet(storeNo);
