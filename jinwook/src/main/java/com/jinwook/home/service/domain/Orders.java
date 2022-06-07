@@ -21,6 +21,7 @@ public class Orders {
 	private User user;				//유저		|유저(세트로 위 주석 받아사용 예정)
 	private String buyerName;		//구매자이름	|주문(기본으로 회원아이디에 해당하는 정보담아져있음)
 	private String buyerPhone;		//구매자전화번호	|주문(기본으로 회원아이디에 해당하는 정보담아져있음)
+	private Cart cart;				//카트		|카트
 	private int orderNo;			//주문번호		|주문
 	private Date orderDate;			//주문날짜		|주문
 	private int plusTime;			//픽업시간인int	|주문

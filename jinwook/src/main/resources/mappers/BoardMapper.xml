@@ -24,7 +24,7 @@
    <result property="boardContent"       column="board_content"    jdbcType="VARCHAR"/>   
    <result property="boardHits"          column="board_hits"       jdbcType="INTEGER"/>   
    <result property="boardCode"          column="board_code"       jdbcType="CHAR"/>   
-   <result property="writeDate"          column="write_date"       jdbcType="DATETIME"/>   
+   <result property="writeDate"          column="write_date"       jdbcType="DATE"/>   
    <result property="boardImg1"          column="board_img1"       jdbcType="VARCHAR"/>   
    <result property="boardImg2"          column="board_img2"       jdbcType="VARCHAR"/>   
    <result property="boardImg3"          column="board_img3"       jdbcType="VARCHAR"/>   
@@ -37,7 +37,7 @@
    <result property="recipe.rcpNo"       column="rcp_no"      		jdbcType="INTEGER"/>   
    <result property="commentContent"     column="comment_content"   jdbcType="VARCHAR"/>   
    <result property="commentWriter"      column="comment_writer"    jdbcType="VARCHAR"/>   
-   <result property="commentDate"        column="comment_date"      jdbcType="DATETIME"/>   
+   <result property="commentDate"        column="comment_date"      jdbcType="DATE"/>   
    <result property="recommendCount"     column="recommend_count"   jdbcType="INTEGER"/>   
 </resultMap>
    
@@ -45,7 +45,7 @@
 	<result property="orderNo"			column="order_no"			jdbcType="INTEGER"/>
 	<result property="reviewTitle"		column="review_title"		jdbcType="VARCHAR"/>
 	<result property="reviewContent"	column="review_content"		jdbcType="VARCHAR"/>
-	<result property="reviewDate"		column="review_date"		jdbcType="DATETIME"/>
+	<result property="reviewDate"		column="review_date"		jdbcType="DATE"/>
 	<result property="reviewStar"		column="review_star"		jdbcType="INTEGER"/>
 	<result property="reviewImg1"		column="review_img1"		jdbcType="VARCHAR"/>
 	<result property="reviewImg2"		column="review_img2"		jdbcType="VARCHAR"/>
