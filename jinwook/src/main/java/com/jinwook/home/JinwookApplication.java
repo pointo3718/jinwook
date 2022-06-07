@@ -14,6 +14,7 @@ public class JinwookApplication extends SpringBootServletInitializer {
     
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    	System.out.println("==============11111");
         return builder.sources(JinwookApplication.class);
     }
 }

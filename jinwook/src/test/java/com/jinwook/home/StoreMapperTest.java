@@ -8,15 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.CollectionUtils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.mapper.StoreMapper;
 import com.jinwook.home.service.domain.Coupon;
-import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
-import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 
 @SpringBootTest

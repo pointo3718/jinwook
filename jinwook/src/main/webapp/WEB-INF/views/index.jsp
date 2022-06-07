@@ -87,7 +87,7 @@
 		
         <div class="container">
         
-        	<a class="navbar-brand" href="#">Model2 MVC Shop</a>
+        	<a class="navbar-brand" href="#">진 욱 이 네</a>
 			
 			<!-- toolBar Button Start //////////////////////// -->
 			<div class="navbar-header">

@@ -65,29 +65,38 @@ function updateRecipeReco() {
 	<div class="container">
 	
 	<div class="page-header">
-	       <h3 class=" text-info">Test Complete!</h3>
-	       <h5 class="text-muted">상품을 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5>
+	       <h3 class=" text-info">공지사항 등록</h3>
+	       <h5 class="text-muted">공지사항을 <strong class="text-danger">등록</strong>해 주세요.</h5>
 	    </div>
-	
 		<div class="row">
-	  		<div class="col-xs-3 col-md-1"><strong>게시글 제목</strong></div>
-			<div class="col-xs-7 col-md-5">${t}</div>
+	  		<div class="col-xs-5 col-md-3"><strong>1:1문의 제목</strong></div>
+			<div class="col-xs-7 col-md-5">${board.boardTitle}</div>
 		</div>
-		
 		<hr/>
-		
 		<div class="row">
-	  		<div class="col-xs-3 col-md-1"><strong>게시글 내용</strong></div>
-			<div class="col-xs-7 col-md-5">${board.boardNo}</div>
+	  		<div class="col-xs-5 col-md-3"><strong>1:1문의 내용</strong></div>
+			<div class="col-xs-7 col-md-5">${board.boardContent}</div>
 		</div>
-		
 		<hr/>
-		
 		<div class="row">
-	  		<div class="col-xs-3 col-md-1 "><strong>게시글 작성자</strong></div>
-			<div class="col-xs-7 col-md-5">${w}</div>
+	  		<div class="col-xs-5 col-md-3"><strong>작성자</strong></div>
+			<div class="col-xs-7 col-md-5">${board.user.userId}</div>
 		</div>
-		
+		<hr/>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>조회수</strong></div>
+			<div class="col-xs-7 col-md-5">${board.boardHits}</div>
+		</div>
+		<hr/>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>작성일</strong></div>
+			<div class="col-xs-7 col-md-5">${board.writeDate}</div>
+		</div>
+		<hr/>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>답변상태</strong></div>
+			<div class="col-xs-7 col-md-5">${board.boardInqStatus}</div>
+		</div>
 		<hr/>
 		
  	</div>
