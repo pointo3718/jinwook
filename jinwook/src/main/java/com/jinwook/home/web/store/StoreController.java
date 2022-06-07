@@ -17,6 +17,7 @@ import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
+import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.store.StoreService;
 
 
@@ -33,26 +34,27 @@ public class StoreController {
 		System.out.println(this.getClass());
 	}
 
-		
-	@GetMapping(value = "updateStore")
+	
+	@GetMapping(value = "confirmPassword")
 	public String updateStore() {
-		return "/common/comfirmPassword";
+
+		return "store/confirmPassword";
 	}
 
 	@PostMapping(value = "updateStore")
-	public String updateStore(@RequestParam("storeNo") int storeNo , Store store, Model model ) {
+	public String updateStore(@RequestParam("storeNo") int storeNo , Store store, Model model) {
 		
 		storeService.updateStore(store);
-
+		
 		model.addAttribute("store", store);
 		
-		return "/store/updateStore";
+		return "store/updateStore";
 	}
 	
 	@GetMapping(value = "addStoreProduct")
 	public String addStoreProduct() {
 
-		return "/store/addStoreProduct";
+		return "store/addStoreProduct";
 	}
 	
 	@PostMapping(value = "addStoreProduct")
@@ -61,7 +63,8 @@ public class StoreController {
 		product.setSoldout(true);
 		storeService.addStoreProduct(product);
 
-		return "/store/addStoreProduct";
+		return "store/addStoreProduct";
+		
 	}
 	
 	@PostMapping(value = "updateStoreProduct")
@@ -71,7 +74,7 @@ public class StoreController {
 		
 		model.addAttribute("product", product);
 		
-		return "/store/addStoreProduct";
+		return "store/addStoreProduct";
 	}
 	
 	@PostMapping(value = "deleteStoreProduct")
@@ -81,7 +84,7 @@ public class StoreController {
 		
 		model.addAttribute("product", product);
 		
-		return "/store/addStoreProduct";
+		return "store/addStoreProduct";
 	}
 	
 	@PostMapping(value = "isSoldout")
@@ -91,7 +94,7 @@ public class StoreController {
 		
 		model.addAttribute("product", product);
 		
-		return "/common/myPageTop";
+		return "common/myPageTop";
 	}
 	
 	@PostMapping(value = "isOpen")
@@ -101,7 +104,7 @@ public class StoreController {
 		
 		model.addAttribute("store", store);
 		
-		return "/common/myPageTop";
+		return "common/myPageTop";
 	}
 	
 	@PostMapping(value = "addOrderCoupon")
@@ -112,34 +115,34 @@ public class StoreController {
 		
 		model.addAttribute("coupon", coupon);
 		
-		return "/orders/?";
+		return "orders/addOrders";
 	}
 	
 	
 	@GetMapping(value = "getStore")
-	public String getStore() {
+	public String getStore(@RequestParam("storeNo") int storeNo, Model model) {
+		List<Store> storeList = storeService.getStore(storeNo);
+		model.addAttribute("storeList", storeList);
+
 		return "/store/getStore";
 	}
 	
-	@PostMapping(value = "getStoreWallet")
-	public String getStoreWallet(Model model) {
+	@GetMapping(value = "getStoreWallet")
+	public String getStoreWallet(int storeNo, Model model) {
+		List<Store> storeList = storeService.getStoreWallet(storeNo);
+		model.addAttribute("storeList", storeList);
+
 		return "/store/getStoreWallet";
 	}
 	
-//	@GetMapping(value = "getCouponList")
-//	public String getCouponList(Coupon coupon, @RequestParam("userId") String userId,  Model model) {
-//		List<Coupon> getCouponList = storeService.getCouponList();
-//		model.addAttribute("getCouponList", getCouponList);
-//
-//		return "/store/getCouponList";
-//	}
 	
-//	@GetMapping(value = "getCouponList")
-//	public String getCouponList(@RequestParam("storeNo") int storeNo,  Model model) {
-//		List<Store> getStore = storeService.getStore(storeNo);
-//		model.addAttribute("getStore", getStore);
-//
-//		return "/store/getStore";
-//	}
+	@GetMapping(value = "getCouponList")
+	public String getCouponList(String userId, Model model) {
+		List<Coupon> couponList = storeService.getCouponList(userId);
+		model.addAttribute("couponList", couponList);
+
+		return "/orders/listOrderCoupon";
+	}
+	
 
 }
