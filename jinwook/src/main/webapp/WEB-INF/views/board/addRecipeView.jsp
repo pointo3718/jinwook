@@ -65,39 +65,68 @@ function updateRecipeReco() {
 	<div class="container">
 	
 	<div class="page-header">
-	       <h3 class=" text-info">Test Complete!</h3>
-	       <h5 class="text-muted">상품을 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5>
+	       <h3 class=" text-info">레시피 등록</h3>
 	    </div>
-	
 		<div class="row">
-	  		<div class="col-xs-3 col-md-1"><strong>게시글 제목</strong></div>
-			<div class="col-xs-7 col-md-5">${t}</div>
+	  		<div class="col-xs-5 col-md-3"><strong>레시피 제목</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.rcpTitle}</div>
 		</div>
-		
 		<hr/>
-		
 		<div class="row">
-	  		<div class="col-xs-3 col-md-1"><strong>게시글 내용</strong></div>
-			<div class="col-xs-7 col-md-5">${board.boardNo}</div>
+	  		<div class="col-xs-5 col-md-3"><strong>레시피 내용</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.rcpContent}</div>
 		</div>
-		
 		<hr/>
-		
 		<div class="row">
-	  		<div class="col-xs-3 col-md-1 "><strong>게시글 작성자</strong></div>
-			<div class="col-xs-7 col-md-5">${w}</div>
+	  		<div class="col-xs-5 col-md-3"><strong>작성자</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.user.userId}</div>
 		</div>
-		
 		<hr/>
-		
- 	</div>
-
-<h1>Test Complete!</h1>
-
-<div style="margin-right:1px;">
-	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco(); return false;">추천 ${recipe.getRecommendCount}</button>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>레시피 재료</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.rcpIngredient}</div>
+		</div>
+		<hr/>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>레시피 썸네일</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.rcpThumb}</div>
+		</div>
+		<hr/>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>레시피 소개</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.rcpInfo}</div>
+		</div>
+		<hr/>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>조회수</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.rcpHits}</div>
+		</div>
+		<hr/>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>작성일</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.rcpDate}</div>
+		</div>
+		<hr/>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>댓글수</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.commentCount}</div>
+		</div>
+		<hr/>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>찜</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.rcpJjimCnt}</div>
+		</div>
+		<hr/>
+		 <div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>추천수</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.recommendCount}</div>
+		</div>
+		<hr/>
+	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco() return false">추천 ${recipe.getRecommendCount}</button>
 	<button type="button" class="btn btn-danger" id="hate_btn">비추천</button>
+
 </div>
+
 	
 </body>
 

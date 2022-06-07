@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
@@ -16,6 +15,10 @@ import com.jinwook.home.service.domain.User;
 @Mapper
 public interface BoardMapper {
 
+	//1:1문의 조회수 증가
+	public int updateBoardInquiryHits(Integer boardNo);
+	//공지사항 조회수 증가
+	public int updateBoardAnnouncementHits(Integer boardNo);
 	//1:1문의 등록
 	public int addBoardInquiry(Board board);
 	//공지사항 등록
@@ -50,9 +53,9 @@ public interface BoardMapper {
 	//레시피
 	public int addRecipe(Recipe rcp);
 	public int updateRecipe(Recipe rcp);
-	public int deleteRecipe(int rcpNo);
-	//조인 필요: recipe, comment
-	public Recipe getRecipe(int rcpNo);
+	public int deleteRecipe(Integer rcpNo);
+	//조인 필요: recipe, comment, recommend
+	public Recipe getRecipe(Integer rcpNo);
 	public List<Recipe> getRecipeList(Board board);
 	
 	//댓글 등록

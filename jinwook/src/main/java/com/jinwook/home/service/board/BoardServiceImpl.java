@@ -34,15 +34,15 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private FileUtils fileUtils;
 	
-	//
+	//1:1문의 등록
 	@Override
-	public boolean addBoard(Board board) {
+	public boolean addBoardInquiry(Board board) {
 		int queryResult = 0;
 
 		if (board.getBoardNo() == null) {
-			queryResult = boardMapper.addBoard(board);
+			queryResult = boardMapper.addBoardInquiry(board);
 		} else {
-			queryResult = boardMapper.updateBoard(board);
+			queryResult = boardMapper.updateBoardInquiry(board);
 
 			// 파일이 추가, 삭제, 변경된 경우
 			if ("Y".equals(board.getChangeYn())) {
@@ -58,11 +58,12 @@ public class BoardServiceImpl implements BoardService {
 		return (queryResult > 0);
 	}
 	
+	//1:1문의 사진 첨부
 	@Override
-	public boolean addBoard(Board board, MultipartFile[] files) {
+	public boolean addBoardInquiry(Board board, MultipartFile[] files) {
 		int queryResult = 1;
 
-		if (addBoard(board) == false) {
+		if (addBoardInquiry(board) == false) {
 			return false;
 		}
 
@@ -76,32 +77,111 @@ public class BoardServiceImpl implements BoardService {
 
 		return (queryResult > 0);
 	}
-
+	//공지사항 등록
 	@Override
-	public int updateBoard(Board board) {
-		return boardMapper.updateBoard(board);
+	public boolean addBoardAnnouncement(Board board) {
+		int queryResult = 0;
+		
+		if (board.getBoardNo() == null) {
+			queryResult = boardMapper.addBoardAnnouncement(board);
+		} else {
+			queryResult = boardMapper.updateBoardAnnouncement(board);
+			
+			// 파일이 추가, 삭제, 변경된 경우
+			if ("Y".equals(board.getChangeYn())) {
+				attachMapper.deleteAttach(board.getBoardNo());
+				
+				// fileIdxs에 포함된 idx를 가지는 파일의 삭제여부를 'N'으로 업데이트
+				if (CollectionUtils.isEmpty(board.getAttachNos()) == false) {
+					attachMapper.undeleteAttach(board.getAttachNos());
+				}
+			}
+		}
+		
+		return (queryResult > 0);
+	}
+	
+	//공지사항 사진 첨부
+	@Override
+	public boolean addBoardAnnouncement(Board board, MultipartFile[] files) {
+		int queryResult = 1;
+		
+		if (addBoardInquiry(board) == false) {
+			return false;
+		}
+		
+		List<Attach> fileList = fileUtils.uploadFiles(files, board.getBoardNo());
+		if (CollectionUtils.isEmpty(fileList) == false) {
+			queryResult = attachMapper.addAttach(fileList);
+			if (queryResult < 1) {
+				queryResult = 0;
+			}
+		}
+		
+		return (queryResult > 0);
 	}
 
+	//1:1문의 수정
 	@Override
-	public int deleteBoard(Integer boardNo) {
-		return boardMapper.deleteBoard(boardNo);
+	public int updateBoardInquiry(Board board) {
+		return boardMapper.updateBoardInquiry(board);
+	}
+	
+	//공지사항 수정
+	@Override
+	public int updateBoardAnnouncement(Board board) {
+		return boardMapper.updateBoardAnnouncement(board);
 	}
 
+	//1:1문의 삭제
 	@Override
-	public Board getBoard(Integer boardNo) {
-		return boardMapper.getBoard(boardNo);
+	public int deleteBoardInquiry(Integer boardNo) {
+		return boardMapper.deleteBoardInquiry(boardNo);
+	}
+	
+	//1:1문의 삭제
+	@Override
+	public int deleteBoardAnnouncement(Integer boardNo) {
+		return boardMapper.deleteBoardAnnouncement(boardNo);
 	}
 
+	//1:1문의 상세 조회
 	@Override
-	public List<Board> getBoardList(Board board) {
+	public Board getBoardInquiry(Integer boardNo) {
+		return boardMapper.getBoardInquiry(boardNo);
+	}
+	
+	//공지사항 상세 조회
+	@Override
+	public Board getBoardAnnouncement(Integer boardNo) {
+		return boardMapper.getBoardAnnouncement(boardNo);
+	}
+
+	//1:1문의 목록 조회
+	@Override
+	public List<Board> getBoardInquiryList(Board board) {
 		List<Board> boardList = Collections.emptyList();
 
-		int boardTotalCount = boardMapper.getBoardTotalCount(board);
+		int boardTotalCount = boardMapper.getBoardInquiryTotalCount(board);
 
 		if (boardTotalCount > 0) {
-			boardList = boardMapper.getBoardList(board);
+			boardList = boardMapper.getBoardInquiryList(board);
 		}
 
+		return boardList;
+	}
+	
+	//공지사항 목록 조회
+	@Override
+	public List<Board> getBoardAnnouncementList(Board board) {
+		List<Board> boardList = Collections.emptyList();
+		
+		int boardTotalCount = boardMapper.getBoardAnnouncementTotalCount(board);
+		
+		if (boardTotalCount > 0) {
+			boardList = boardMapper.getBoardAnnouncementList(board);
+		}
+		
 		return boardList;
 	}
 
@@ -145,12 +225,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int deleteRecipe(int rcpNo) {
+	public int deleteRecipe(Integer rcpNo) {
 		return boardMapper.deleteRecipe(rcpNo);
 	}
 
 	@Override
-	public Recipe getRecipe(int rcpNo) {
+	public Recipe getRecipe(Integer rcpNo) {
 		return boardMapper.getRecipe(rcpNo);
 	}
 
@@ -321,6 +401,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int commentRecoCheck(int commentNo, String userId) {
 		return boardMapper.commentRecoCheck(commentNo, userId);
+	}
+
+	@Override
+	public int updateBoardInquiryHits(Integer boardNo) {
+		return boardMapper.updateBoardInquiryHits(boardNo);
+	}
+
+	@Override
+	public int updateBoardAnnouncementHits(Integer boardNo) {
+		return boardMapper.updateBoardAnnouncementHits(boardNo);
 	}
 
 }

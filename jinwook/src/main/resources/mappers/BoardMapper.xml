@@ -51,6 +51,37 @@
 	<result property="reviewImg2"		column="review_img2"		jdbcType="VARCHAR"/>
 	<result property="reviewImg3"		column="review_img3"		jdbcType="VARCHAR"/>
 </resultMap>   
+
+<resultMap type="recipe" id="recipeSelectMap">
+   <result property="rcpNo"            column="rcp_no"          jdbcType="INTEGER"/>   
+   <result property="user.userId"      column="user_id"         jdbcType="VARCHAR"/>   
+   <result property="rcpTitle"         column="rcp_title"       jdbcType="VARCHAR"/>   
+   <result property="rcpContent"       column="rcp_content"     jdbcType="VARCHAR"/>   
+   <result property="rcpDate"          column="rcp_date"        jdbcType="DATE"/>   
+   <result property="rcpIngredient"     column="rcp_ingrdient"  jdbcType="VARCHAR"/>   
+   <result property="rcpThumb"         column="rcp_thumb"       jdbcType="VARCHAR"/>   
+   <result property="rcpInfo"          column="rcp_info"        jdbcType="VARCHAR"/>   
+   <result property="rcpHits"          column="rcp_hits"        jdbcType="INTEGER"/>   
+   <result property="commentCount"     column="comment_count"   jdbcType="INTEGER"/>   
+   <result property="rcpJjimCnt"       column="rcp_jjimcnt"     jdbcType="INTEGER"/>   
+   <result property="recommendCount"   column="recommend_count" jdbcType="INTEGER"/>   
+</resultMap>
+	
+	<!-- 1:1문의 조회수 올리기 -->
+	<update id="updateBoardInquiryHits">
+		UPDATE board 
+		SET board_hits = board_hits+1 
+		WHERE board_no = #{boardNo}
+		AND board_code = 0
+	</update>
+	
+	<!-- 1:1문의 조회수 올리기 -->
+	<update id="updateBoardAnnouncementHits">
+		UPDATE board 
+		SET board_hits = board_hits+1 
+		WHERE board_no = #{boardNo} 
+		AND board_code = 1
+	</update>
 	
 	<!-- boardCode 0: 1:1문의 / boardCode 1: 공지사항 -->
 	<!-- 1:1문의 insert -->
@@ -112,20 +143,17 @@
 		WHERE
 			board_no = #{boardNo}
 	</update>
-	
 	<!-- 1:1문의 상세 조회: 답변대기중 또는 답변완료로 출력되어야 함 -->
 	<select id="getBoardInquiry" parameterType="int" resultType="Board" resultMap="boardSelectMap">
 		SELECT
-			b.board_title, b.board_content, b.user_id, b.write_date, b.board_inq_status, c.comment_content
+			b.board_no, b.board_title, b.board_content, b.user_id, b.write_date, b.board_inq_status, b.board_hits, c.comment_content
 		FROM
 			board b, comment c
 		WHERE b.board_no = c.board_no
-		AND
-			board_code = 0
-		AND
-			board_inq_status = false OR board_inq_status = true
-		AND 
-			board_no = #{boardNo}
+		AND b.board_no = c.board_no
+		AND b.board_no = #{boardNo}
+		AND board_code = 0
+		AND (board_inq_status = false OR board_inq_status = true)
 	</select>
 	
 	<!-- 1:1문의 답변대기중 -> 답변완료 -->
@@ -140,7 +168,7 @@
 		<!-- 공지사항 상세 조회: 1 -->
 	<select id="getBoardAnnouncement" parameterType="int" resultType="Board" resultMap="boardSelectMap">
 		SELECT
-			b.board_title, b.board_content, b.user_id, b.write_date
+			board_title, board_content, user_id, write_date
 		FROM
 			board
 		WHERE
@@ -156,31 +184,29 @@
 		FROM
 			board
 		WHERE
-			bode_code = 0
+			board_code = 0
 		AND
 			board_inq_status = false OR board_inq_status = true
 		AND
 			board_no = #{boardNo}
 		ORDER BY
-			board_no ASC,
+			board_no ASC
 		<!-- LIMIT
          #{startPage}, #{recordsPerPage} -->
 	</select>
 	
-
-	
-	<!-- 공지사항 목록 조회 -->
+	<!-- 공지사항 목록 조회 1 -->
 	<select id="getBoardAnnouncementList" parameterType="Board" resultType="Board">
 		SELECT
-			<include refid="boardColumns" />
+			board_no, board_content, write_date
 		FROM
 			board
 		WHERE
-			bode_code = 1
+			board_code = 1
 		AND
 			board_no = #{boardNo}
 		ORDER BY
-			board_no ASC,
+			board_no ASC
 		<!-- LIMIT
          #{startPage}, #{recordsPerPage} -->
 	</select>
@@ -238,6 +264,8 @@
 	,rcp_info
 	,rcp_hits
 	,comment_count	
+	,rcp_Jjimcnt	
+	,recommend_count
 	</sql>
 	
 	<!-- Recipe insert -->
@@ -255,13 +283,15 @@
 			, #{rcpInfo:VARCHAR}
 			, #{rcpHits:INTEGER}
 			, #{commentCount:INTEGER}
+			, #{rcpJjimCnt:INTEGER}
+			, #{recommendCount:INTEGER}
 		)
 	</insert>
 	
 	<!-- Recipe getRecipe -->
-	<select id="getRecipe" parameterType="int" resultType="Recipe">
+	<select id="getRecipe" parameterType="int" resultType="Recipe" resultMap="recipeSelectMap">
 		SELECT
-			<include refid="recipeColumns" />
+			user_id, rcp_title, rcp_content, rcp_date, rcp_ingredient, rcp_thumb, rcp_info, rcp_hits, comment_count, rcp_jjimcnt, recommend_count
 		FROM
 			recipe
 		WHERE
@@ -276,8 +306,8 @@
 			recipe
 		WHERE
 			rcp_no = #{rcpNo}
-		LIMIT
-         #{startPage}, #{recordsPerPage}
+		<!-- LIMIT
+         #{startPage}, #{recordsPerPage} -->
 	</select>
 
 	<!-- Recipe update -->
@@ -342,7 +372,7 @@
 	</select>
 	
 		<!--   -->
-	<select id="getReviewList" parameterType="Orders" resultType="com.jinwook.home.service.domain.Orders">
+	<select id="getReviewList" parameterType="Orders" resultType="Orders">
 		SELECT
 			*
 		FROM
