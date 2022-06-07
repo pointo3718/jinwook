@@ -34,6 +34,7 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private FileUtils fileUtils;
 	
+	//
 	@Override
 	public boolean addBoard(Board board) {
 		int queryResult = 0;

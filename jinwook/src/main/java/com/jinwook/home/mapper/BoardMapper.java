@@ -31,7 +31,7 @@ public interface BoardMapper {
 	//조인 필요: board, comment 1:1문의 상세 조회 시 답변상태 false/true로 표시.
 	public Board getBoardInquiry(Integer boardNo);
 	//1:1문의 답변대기중 -> 답변완료(true)
-	public int updateBoardInqStatus(int storeNo);	
+	public int updateBoardInqStatus(int boardNo);	
 	//조인 필요: board, comment 공지사항 상세 조회
 	public Board getBoardAnnouncement(Integer boardNo);
 	//1:1문의 목록 조회
@@ -103,8 +103,9 @@ public interface BoardMapper {
 	//댓글 추천 중복방지 select문
 	public int commentRecoCheck(int commentNo, String userId);
 
-	
-	public int getBoardTotalCount(Board board);
+	// 목록 개수
+	public int getBoardInquiryTotalCount(Board board);
+	public int getBoardAnnouncementTotalCount(Board board);
 	public int getRecipeTotalCount(Board board);
 	public int getReviewTotalCount(Board board);
 	public int getRankTotalCount(Board board);
