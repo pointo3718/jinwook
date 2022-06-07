@@ -9,7 +9,6 @@
 		 <nav>
 		  <!-- 크기조절 :  pagination-lg pagination-sm-->
 		  <ul class="pagination" >
-		    
 		    <!--  <<== 좌측 nav -->
 		  	<c:if test="${ user.pagenationInfo.hasPreviousPage <= resultPage.pageUnit }">
 		 		<li class="disabled" onclick="movePage( [[${request.requestURI}]], [[${user.makeQuryString(1)}]] )">
