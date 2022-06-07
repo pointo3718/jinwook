@@ -63,6 +63,14 @@
 			});
 		});
 		
+		//============= 상점목록 화면이동 =============
+		$( function() {
+			//==> 추가된부분 : "addUser"  Event 연결
+			$("a[href='#' ]:contains('상점목록조회')").on("click" , function() {
+				self.location = "/admin/listStoreAdmin"
+			});
+		});
+		
 		
 	</script>	
 	
@@ -125,6 +133,9 @@
 						 </li>
 						 <li class="list-group-item">
 						 	<a href="#">회원정보조회</a> <i class="glyphicon glyphicon-ban-circle"></i>
+						 </li>
+						 <li class="list-group-item">
+						 	<a href="#">상점목록조회</a> <i class="glyphicon glyphicon-ban-circle"></i>
 						 </li>
 					</ul>
 		        </div>

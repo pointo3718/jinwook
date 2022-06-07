@@ -302,11 +302,6 @@ public class OrdersMapperTest {
    }
    
    //@Test
-   public void testgetOrdersJpayChargelist() {
-      
-   }
-   
-   //@Test
    public void testaddOrdersNotice() {
    Notice notice = new Notice();
    notice.setSendId("test01");
