@@ -1,145 +1,184 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
+
+<!--  ///////////////////////// JSTL  ////////////////////////// -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <!DOCTYPE html>
 
 <html lang="ko">
-	
+   
 <head>
-	<meta charset="EUC-KR">
-	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
+   <meta charset="UTF-8">
+   
+   <!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+   <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+   
+   
+   <!-- Bootstrap Dropdown Hover CSS -->
    <link href="/css/animate.min.css" rel="stylesheet">
    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
     <!-- Bootstrap Dropdown Hover JS -->
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
- 		body {
+   
+   
+   <!-- jQuery UI toolTip ì‚¬ìš© CSS-->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- jQuery UI toolTip ì‚¬ìš© JS-->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   
+   <!--  ///////////////////////// CSS ////////////////////////// -->
+   <style>
+     body {
             padding-top : 50px;
         }
-     </style>
-     
-    <script type="text/javascript">
-		
-		//============= È¸¿øÁ¤º¸¼öÁ¤ Event  Ã³¸® =============	
-		 $(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 $( "button.btn.btn-primary" ).on("click" , function() {
-					self.location = "/purchase/addPurchase?prodNo=${product.prodNo}"
-				});
-		});
-		
-		 $(function() {
-				//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-				 $("a[href='#' ]").on("click" , function() {
-					 history.go(-1);
-					});
-			});
-		 
-    
-				
-	</script>
+    </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-				
-	</script>
+   <script type="text/javascript">
+   
+      //=============    ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘  Event  ì²˜ë¦¬ =============   
+      function fncGetUserList(currentPage) {
+         $("#currentPage").val(currentPage)
+         $("form").attr("method" , "POST").attr("action" , "/purchase/listPurchase").submit();
+      }
+      
+      
+      //============= "ê²€ìƒ‰"  Event  ì²˜ë¦¬ =============   
+       $(function() {
+          //==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+          $( "button.btn.btn-default" ).on("click" , function() {
+            fncGetUserList(1);
+         });
+       });
+      
+      
+      //============= userId ì— íšŒì›ì •ë³´ë³´ê¸°  Event  ì²˜ë¦¬(Click) =============   
+       $(function() {
+      
+         //==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+         $( "td:nth-child(1)" ).on("click" , function() {
+             self.location ="/purchase/getPurchase?tranNo="+$(this).attr("tranNo");
+         });
+                  
+         //==> userId LINK Event End User ì—ê²Œ ë³´ì¼ìˆ˜ ìˆë„ë¡ 
+         $( "td:nth-child(2)" ).css("color" , "red");
+         
+      });  
+      
+       $(function() {
+    	      
+           //==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+           $( "td:nth-child(2)" ).on("click" , function() {
+               self.location ="/user/getUser?userId="+$(this).text().trim();
+           });
+                             
+        });  
+      
+    
+      
+      //============= userId ì— íšŒì›ì •ë³´ë³´ê¸°  Event  ì²˜ë¦¬ (double Click)=============
+       $(function() {
+         
+         //==> userId LINK Event End User ì—ê²Œ ë³´ì¼ìˆ˜ ìˆë„ë¡ 
+         $( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
+         $("h7").css("color" , "red");
+         
+         //==> ì•„ë˜ì™€ ê°™ì´ ì •ì˜í•œ ì´ìœ ëŠ” ??
+         $(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
+      });   
+       
+   
+   </script>
 	
 </head>
 
 <body>
-
-	<!-- ToolBar Start /////////////////////////////////////-->
-
-   	<!-- ToolBar End /////////////////////////////////////-->
-	
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
-	<div class="container">
-	
-		<div class="page-header">
-	       <h3 class=" text-info">»óÇ°»ó¼¼Á¤º¸</h3>
-	       <h5 class="text-muted">»óÇ° Á¤º¸¸¦ <strong class="text-danger">ÃÖ½ÅÁ¤º¸·Î °ü¸®</strong>ÇØ ÁÖ¼¼¿ä.</h5>
-	    </div>
-	
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>»óÇ° ¹øÈ£</strong></div>
-			<div class="col-xs-8 col-md-4">${product.prodNo}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>»ó Ç° ¸í</strong></div>
-			<div class="col-xs-8 col-md-4">${product.prodName}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>»óÇ°ÀÌ¹ÌÁö</strong></div>
-			<div class="col-xs-8 col-md-4">${product.fileName}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>»óÇ°»ó¼¼Á¤º¸</strong></div>
-			<div class="col-xs-8 col-md-4">${product.prodDetail}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>Á¦Á¶ÀÏÀÚ</strong></div>
-			<div class="col-xs-8 col-md-4">${product.manuDate}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>°¡ °İ</strong></div>
-			<div class="col-xs-8 col-md-4">${product.price}¿ø</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>µî·ÏÀÏÀÚ</strong></div>
-			<div class="col-xs-8 col-md-4">${product.regDate}</div>
-		</div>
-		
-		<hr/>
-				
-			<div class="form-group">
-				<div class="col-sm-offset-4  col-sm-4 text-center">
-					<button type="button" class="btn btn-primary">±¸&nbsp;¸Å</button>
-					<a class="btn btn-primary btn" href="#" role="button">ÀÌ&nbsp;Àü</a>
-				</div>
-			</div>
-			
-		
-		
-		
-		
-		
-		<br/>
-		
- 	</div>
- 	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
-
+   
+   <!-- ToolBar Start /////////////////////////////////////-->
+      <!-- ToolBar End /////////////////////////////////////-->
+   
+   <!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
+   <div class="container">
+   
+      <div class="page-header text-info">
+          <h3>ìƒì ì •ë³´</h3>
+       </div>
+       
+       <input type="hidden" id="storeNo" name="storeNo" value="10000"/>
+    
+       <!-- table ìœ„ìª½ ê²€ìƒ‰ Start /////////////////////////////////////-->
+       <div class="row">
+       
+          <div class="col-md-6 text-left">
+             <p class="text-primary">
+                ì „ì²´  ${resultPage.totalCount } ê±´ìˆ˜, í˜„ì¬ ${resultPage.currentPage}  í˜ì´ì§€
+             </p>
+          </div>
+          
+          <div class="col-md-6 text-right">
+             <form class="form-inline" name="detailForm">
+             
+              
+              <!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
+              <input type="hidden" id="currentPage" name="currentPage" value=""/>
+              
+            </form>
+          </div>
+          
+      </div>
+      <!-- table ìœ„ìª½ ê²€ìƒ‰ Start /////////////////////////////////////-->
+      
+      
+      <!--  table Start /////////////////////////////////////-->
+      <table class="table table-hover table-striped" >
+      
+        <thead>
+          <tr>
+            <th align="center">No</th>
+            <th align="left" >ìƒí’ˆë²ˆí˜¸</th>
+            <th align="left">ìƒí’ˆëª…</th>
+            <th align="left">ê°€ê²©</th>
+            <th align="left">ì›ì‚°ì§€</th>
+            <th align="left">ìƒí’ˆì†Œê°œ</th>
+            <th align="left">ë§¤ì§„ì—¬ë¶€</th>
+          </tr>
+        </thead>
+       
+      <tbody>
+      
+        <c:set var="i" value="0" />
+        <c:forEach var="product" items="${list}">
+         <c:set var="i" value="${ i+1 }" />
+         <tr>
+           <td align="Center">${product.prodNo}</td>
+        	<td align="left">${product.prodName}</td>
+        	<td align="left">${product.price}</td>
+        	<td align="left">${product.prodOrign}</td>
+        	<td align="left">${product.prodInfo}</td>
+        	<td align="left">${product.isSoldout}</td>
+         </tr>
+          </c:forEach>
+        
+        </tbody>
+      
+      </table>
+     <!--  table End /////////////////////////////////////-->
+     
+    </div>
+    <!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
+    
+    
+    <!-- PageNavigation Start... -->
+   <!-- PageNavigation End... -->
+   
 </body>
 
 </html>

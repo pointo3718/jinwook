@@ -1,25 +1,33 @@
 package com.jinwook.home.service.store;
 
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.util.Map;
+
+import org.springframework.data.domain.Page;
+
+import com.jinwook.home.common.Criteria;
+>>>>>>> refs/remotes/origin/master
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
 
 public interface StoreService {
 	
-	public int updateStore(Store store);
+	public void updateStore(Store store);
 	
-	public int addStoreProduct(Product Product);
+	public void addStoreProduct(Product Product);
 
-	public int updateStoreProduct(Product product);
+	public void updateStoreProduct(Product product);
 	   
-	public int deleteStoreProduct(Product Product);
+	public void deleteStoreProduct(Product Product);
 	   
-	public int isSoldout(Product Product);
+	public void isSoldout(Product Product);
 	
-	public int isOpen(Store store);
+	public void isOpen(Store store);
 	
-	public int addOrderCoupon(Coupon coupon);
+	public void addOrderCoupon(Coupon coupon);
 	
 	public List<Coupon> getCouponList(String userId);
 	

@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.CollectionUtils;
 
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.store.StoreService;
-
 
 @SpringBootTest
 class StoreServiceTest {
@@ -35,7 +35,7 @@ class StoreServiceTest {
 		store.setBank("신한은행");
 		store.setAccNo("110-111-1111");
 		
-		int result = storeService.updateStore(store);
+		storeService.updateStore(store);
 		
 	}
 	
@@ -50,8 +50,7 @@ class StoreServiceTest {
 		product.setProdImg("사과.jpg");
 		product.setProdOrign("강원도");
 
-		int result = storeService.addStoreProduct(product);
-		System.out.println("결과는" + result + "입니다.");	
+		storeService.addStoreProduct(product);
 		
 	}
 	
@@ -65,8 +64,7 @@ class StoreServiceTest {
 		product.setProdImg("홍길동.jpg");
 		product.setProdOrign("전라도");
 
-		int result = storeService.updateStoreProduct(product);
-		System.out.println("결과는" + result + "입니다.");	
+		storeService.updateStoreProduct(product);
 		
 	}
 	
@@ -76,8 +74,7 @@ class StoreServiceTest {
 		Product product = new Product();
 		product.setProdNo(10025);
 
-		int result = storeService.deleteStoreProduct(product);
-		System.out.println("결과는" + result + "입니다.");
+		storeService.deleteStoreProduct(product);
 		
 	}
 	
@@ -88,8 +85,7 @@ class StoreServiceTest {
 		product.setProdNo(10000);
 		product.setSoldout(false);
 
-		int result = storeService.isSoldout(product);
-		System.out.println("결과는" + result + "입니다.");	
+		storeService.isSoldout(product);
 		
 	}
 	
@@ -100,8 +96,7 @@ class StoreServiceTest {
 		store.setStoreNo(10000);
 		store.setOpen(false);
 
-		int result = storeService.isOpen(store);
-		System.out.println("결과는" + result + "입니다.");	
+		storeService.isOpen(store);
 		
 	}
 	
@@ -111,8 +106,7 @@ class StoreServiceTest {
 		Coupon coupon = new Coupon();
 		coupon.setCouponNo(10025);
 
-		int result = storeService.addOrderCoupon(coupon);
-		System.out.println("결과는" + result + "입니다.");
+		storeService.addOrderCoupon(coupon);
 		
 	}
 	

@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Complain {
+public class Complain extends CommonDTO {
 
 	private int complainNo;
 	private String userId;

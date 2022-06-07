@@ -66,6 +66,8 @@
 		WHERE phone = #{phone}
 	 </select>
 	 
+
+
 	<select 	id="checkPassword"	parameterType="user" resultType="int">
 		SELECT
 		COUNT(*)	

@@ -19,46 +19,47 @@ public class StoreServiceImpl implements StoreService{
 	private StoreMapper storeMapper;
 	
 	@Override
-	public int updateStore(Store store){
+	public void updateStore(Store store){
 		
-		return storeMapper.updateStore(store);
+		storeMapper.updateStore(store);
 	}
 	
 	@Override
-	public int addStoreProduct(Product product){
+	public void addStoreProduct(Product product){
 		
-		return storeMapper.addStoreProduct(product);
+		storeMapper.addStoreProduct(product);
 	}
 	
 	@Override
-	public int updateStoreProduct(Product product){
+	public void updateStoreProduct(Product product){
 		
-		return storeMapper.updateStoreProduct(product);
+		storeMapper.updateStoreProduct(product);
 	}
 	
 	@Override
-	public int deleteStoreProduct(Product product){
+	public void deleteStoreProduct(Product product){
 		
-		return storeMapper.deleteStoreProduct(product);
+		storeMapper.deleteStoreProduct(product);
 	}
 	
 	
 	@Override
-	public int isSoldout(Product product){
+	public void isSoldout(Product product){
 		
-		return storeMapper.isSoldout(product);
+		storeMapper.isSoldout(product);
+		
 	}
 	
 	@Override
-	public int isOpen(Store store){
+	public void isOpen(Store store){
 		
-		return storeMapper.isOpen(store);
+		storeMapper.isOpen(store);
 	}
 	
 	@Override
-	public int addOrderCoupon(Coupon coupon){
+	public void addOrderCoupon(Coupon coupon){
 		
-		return storeMapper.addOrderCoupon(coupon);
+		storeMapper.addOrderCoupon(coupon);
 	}
 	
 	@Override	

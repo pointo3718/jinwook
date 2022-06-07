@@ -3,12 +3,19 @@ package com.jinwook.home.service.domain;
 import java.time.LocalDate;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+import com.jinwook.home.common.PaginationInfo;
+
+import lombok.AllArgsConstructor;
+>>>>>>> refs/remotes/origin/master
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @ToString
 public class Board {
 

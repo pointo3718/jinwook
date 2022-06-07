@@ -25,6 +25,7 @@ import com.jinwook.home.service.domain.Recipe;
 @Service
 public class BoardServiceImpl implements BoardService {
 
+<<<<<<< HEAD
    @Autowired
    private BoardMapper boardMapper;
    
@@ -38,11 +39,33 @@ public class BoardServiceImpl implements BoardService {
    @Override
    public boolean addBoard(Board board) {
       int queryResult = 0;
+=======
+	@Autowired
+	private BoardMapper boardMapper;
+	
+	/*
+	 * @Autowired private AttachMapper attachMapper;
+	 * 
+	 * @Autowired private FileUtils fileUtils;
+	 */
+	
+	//1:1문의 등록
+	@Override
+	public boolean addBoardInquiry(Board board) {
+		int queryResult = 0;
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
       if (board.getBoardNo() == null) {
          queryResult = boardMapper.addBoard(board);
       } else {
          queryResult = boardMapper.updateBoard(board);
+=======
+		if (board.getBoardNo() == null) {
+			queryResult = boardMapper.addBoardInquiry(board);
+		} else {
+			queryResult = boardMapper.updateBoardInquiry(board);
+>>>>>>> refs/remotes/origin/master
 
          // 파일이 추가, 삭제, 변경된 경우
          if ("Y".equals(board.getChangeYn())) {
@@ -55,16 +78,32 @@ public class BoardServiceImpl implements BoardService {
          }
       }
 
+<<<<<<< HEAD
       return (queryResult > 0);
    }
    
    @Override
    public boolean addBoard(Board board, MultipartFile[] files) {
       int queryResult = 1;
+=======
+		return (queryResult > 0);
+	}
+	
+	//1:1문의 사진 첨부
+	@Override
+	public boolean addBoardInquiry(Board board, MultipartFile[] files) {
+		int queryResult = 1;
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
       if (addBoard(board) == false) {
          return false;
       }
+=======
+		if (addBoardInquiry(board) == false) {
+			return false;
+		}
+>>>>>>> refs/remotes/origin/master
 
       List<Attach> fileList = fileUtils.uploadFiles(files, board.getBoardNo());
       if (CollectionUtils.isEmpty(fileList) == false) {
@@ -74,6 +113,7 @@ public class BoardServiceImpl implements BoardService {
          }
       }
 
+<<<<<<< HEAD
       return (queryResult > 0);
    }
 
@@ -81,29 +121,152 @@ public class BoardServiceImpl implements BoardService {
    public int updateBoard(Board board) {
       return boardMapper.updateBoard(board);
    }
+=======
+		return (queryResult > 0);
+	}
+	//공지사항 등록
+	@Override
+	public boolean addBoardAnnouncement(Board board) {
+		int queryResult = 0;
+		
+		if (board.getBoardNo() == null) {
+			queryResult = boardMapper.addBoardAnnouncement(board);
+		} else {
+			queryResult = boardMapper.updateBoardAnnouncement(board);
+			
+			// 파일이 추가, 삭제, 변경된 경우
+			if ("Y".equals(board.getChangeYn())) {
+				attachMapper.deleteAttach(board.getBoardNo());
+				
+				// fileIdxs에 포함된 idx를 가지는 파일의 삭제여부를 'N'으로 업데이트
+				if (CollectionUtils.isEmpty(board.getAttachNos()) == false) {
+					attachMapper.undeleteAttach(board.getAttachNos());
+				}
+			}
+		}
+		
+		return (queryResult > 0);
+	}
+	
+	//공지사항 사진 첨부
+	@Override
+	public boolean addBoardAnnouncement(Board board, MultipartFile[] files) {
+		int queryResult = 1;
+		
+		if (addBoardInquiry(board) == false) {
+			return false;
+		}
+		
+		List<Attach> fileList = fileUtils.uploadFiles(files, board.getBoardNo());
+		if (CollectionUtils.isEmpty(fileList) == false) {
+			queryResult = attachMapper.addAttach(fileList);
+			if (queryResult < 1) {
+				queryResult = 0;
+			}
+		}
+		
+		return (queryResult > 0);
+	}
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
    @Override
    public int deleteBoard(Integer boardNo) {
       return boardMapper.deleteBoard(boardNo);
    }
+=======
+	//1:1문의 수정
+	@Override
+	public int updateBoardInquiry(Board board) {
+		return boardMapper.updateBoardInquiry(board);
+	}
+	
+	//공지사항 수정
+	@Override
+	public int updateBoardAnnouncement(Board board) {
+		return boardMapper.updateBoardAnnouncement(board);
+	}
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
    @Override
    public Board getBoard(Integer boardNo) {
       return boardMapper.getBoard(boardNo);
    }
+=======
+	//1:1문의 삭제
+	@Override
+	public int deleteBoardInquiry(Integer boardNo) {
+		return boardMapper.deleteBoardInquiry(boardNo);
+	}
+	
+	//1:1문의 삭제
+	@Override
+	public int deleteBoardAnnouncement(Integer boardNo) {
+		return boardMapper.deleteBoardAnnouncement(boardNo);
+	}
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
    @Override
    public List<Board> getBoardList(Board board) {
       List<Board> boardList = Collections.emptyList();
+=======
+	//1:1문의 상세 조회
+	@Override
+	public Board getBoardInquiry(Integer boardNo) {
+		return boardMapper.getBoardInquiry(boardNo);
+	}
+	
+	//공지사항 상세 조회
+	@Override
+	public Board getBoardAnnouncement(Integer boardNo) {
+		return boardMapper.getBoardAnnouncement(boardNo);
+	}
 
+	//1:1문의 목록 조회
+	@Override
+	public List<Board> getBoardInquiryList(Board board) {
+		List<Board> boardList = Collections.emptyList();
+>>>>>>> refs/remotes/origin/master
+
+<<<<<<< HEAD
       int boardTotalCount = boardMapper.getBoardTotalCount(board);
+=======
+		int boardTotalCount = boardMapper.getBoardInquiryTotalCount(board);
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
       if (boardTotalCount > 0) {
          boardList = boardMapper.getBoardList(board);
       }
+=======
+		if (boardTotalCount > 0) {
+			boardList = boardMapper.getBoardInquiryList(board);
+		}
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
       return boardList;
    }
+=======
+		return boardList;
+	}
+	
+	//공지사항 목록 조회
+	@Override
+	public List<Board> getBoardAnnouncementList(Board board) {
+		List<Board> boardList = Collections.emptyList();
+		
+		int boardTotalCount = boardMapper.getBoardAnnouncementTotalCount(board);
+		
+		if (boardTotalCount > 0) {
+			boardList = boardMapper.getBoardAnnouncementList(board);
+		}
+		
+		return boardList;
+	}
+>>>>>>> refs/remotes/origin/master
 
    //보류: 댓글, 추천, 레시피 정보 어떻게 다 담지?
    @Override
@@ -144,15 +307,29 @@ public class BoardServiceImpl implements BoardService {
       return boardMapper.updateRecipe(rcp);
    }
 
+<<<<<<< HEAD
    @Override
    public int deleteRecipe(int rcpNo) {
       return boardMapper.deleteRecipe(rcpNo);
    }
+=======
+	@Override
+	public int deleteRecipe(Integer rcpNo) {
+		return boardMapper.deleteRecipe(rcpNo);
+	}
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
    @Override
    public Recipe getRecipe(int rcpNo) {
       return boardMapper.getRecipe(rcpNo);
    }
+=======
+	@Override
+	public Recipe getRecipe(Integer rcpNo) {
+		return boardMapper.getRecipe(rcpNo);
+	}
+>>>>>>> refs/remotes/origin/master
 
    @Override
    public List<Recipe> getRecipeList(Board board) {
@@ -323,4 +500,18 @@ public class BoardServiceImpl implements BoardService {
       return boardMapper.commentRecoCheck(commentNo, userId);
    }
 
+<<<<<<< HEAD
 }
+=======
+	@Override
+	public int updateBoardInquiryHits(Integer boardNo) {
+		return boardMapper.updateBoardInquiryHits(boardNo);
+	}
+
+	@Override
+	public int updateBoardAnnouncementHits(Integer boardNo) {
+		return boardMapper.updateBoardAnnouncementHits(boardNo);
+	}
+
+}
+>>>>>>> refs/remotes/origin/master
