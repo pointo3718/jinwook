@@ -4,6 +4,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -135,35 +138,46 @@ public class UserRestController {
 //		map.put("userId", userId);
 //		return map;
 //	}
-	@PostMapping("/user/checkId")
+	@PostMapping("checkId")
     public int checkId(@RequestParam("userId") String userId) throws Exception{
         int cnt = userService.checkId(userId); 
         
-        System.out.println("asdasdas"+userId);
-        
         System.out.println("===========ID CHECK SUCCESS==========");
+        System.out.println("userId= "+userId);
         
         return cnt;
     }
 	
-	@PostMapping("/checkNickName")
+	@PostMapping("checkNickName")
 	public int checkNickName(@RequestParam("nickName") String nickName) throws Exception{
 		int cnt = userService.checkNickName(nickName); 
 		
-		System.out.println("asdasdas"+nickName);
 		System.out.println("===========NICKNAME CHECK SUCCESS==========");
+		System.out.println("nickName= "+nickName);
 		
 		return cnt;
 	}
 	
-	@PostMapping("/checkEmail")
-	public int checkEMail(@RequestParam("email") String email) throws Exception{
+	@PostMapping("checkEmail")
+	public int checkEmail(@RequestParam("email") String email) throws Exception{
 		int cnt = userService.checkEmail(email); 
 		
 		System.out.println("===========EMAIL CHECK SUCCESS==========");
+		System.out.println("email= "+email);
 		
 		return cnt;
 	}
 	
-	
+	@PostMapping("findIdEmail")
+	public ResponseEntity<Object> sendEmail(@ModelAttribute("user") User user) throws Exception{
+	    System.out.println("=====SEND METHOD=====");
+		User dbUser =userService.findIdEmail(user);
+	    user = dbUser;
+	    
+	    if(dbUser.getUserName()==user.getUserName()) {
+	        userService.sendUser(user.getEmail(), user.getUserId());
+	    }
+	    
+	    return new ResponseEntity<Object>(HttpStatus.OK);
+	}
 }

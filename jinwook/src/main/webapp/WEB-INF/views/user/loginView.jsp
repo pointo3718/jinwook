@@ -52,7 +52,13 @@
 				}
 				
 				
-				
+				/* var messege = "${msg}";
+				var url = "${url}"
+				alert(messege);
+				document.location.href= url;
+				 */
+/* 				 alert("로그인 성");
+ */				 
 				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 			});
 		});	

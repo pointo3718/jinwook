@@ -24,8 +24,8 @@
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
         }
-        .id_ok{color:#fff; display: none;}
-		.id_already{color:#6A82FB; display: none;}
+        .id_ok{color:blue; display: none;}
+		.id_already{color:red; display: none;}
         
     </style>
     
@@ -57,15 +57,21 @@
 				dataType : "json",
 				data : {"userId" : $("#userId").val()},
 				success : function(data){
-					if($("#userId").val().length <1){
-						alert("아이디를 입력해주세요.")
-					}else if(data == 1){
-						alert("중복된 아이디입니다.");
-					}else if(data == 0){
-						$("#idChk").attr("value", "Y");
-						alert("사용가능한 아이디입니다.");
+					 if(data != 1){
+					 /* $("#idChk").attr("value", "Y");
+						alert("사용가능한 아이디입니다."); */
+						$('.id_ok').css("display","inline-block"); 
+		                $('.id_already').css("display", "none");
+						
+					}else {
+						/* alert("중복된 아이디입니다."); */
+						$('.id_already').css("display","inline-block");
+	                    $('.id_ok').css("display", "none");
 					}
-				}
+				},
+				 error:function(){
+		                alert("에러입니다");
+		            }
 			});
 			
 		}
@@ -246,52 +252,51 @@
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" placeholder="중복확인하세요">
-				<button class="idChk" type="button" id="idChk" onclick="checkId()" value="N">중복확인</button>
-				
-				<!-- <span class="id_ok">사용 가능한 아이디입니다.</span>
-				<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>		   --> 
+		      <input type="text" maxlength='50' class="form-control" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required oninput = "checkId()">
+<!-- 				<button class="idChk" type="button" id="idChk" onclick="checkId()" value="N">중복확인</button>
+ -->					<span class="id_ok">사용 가능한 아이디입니다.</span>
+					<span class="id_already">사용 중인 아이디입니다.</span>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
+		      <input type="password" maxlength='50' class="form-control" id="password" name="password" placeholder="비밀번호">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="비밀번호 확인">
+		      <input type="password" maxlength='50' class="form-control" id="password2" name="password2" placeholder="비밀번호 확인">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
+		      <input type="text" maxlength='10' class="form-control" id="userName" name="userName" placeholder="회원이름">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label">생년월일</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="birth" name="birth" placeholder="생년월일">
+		      <input type="text" maxlength='8' class="form-control" id="birth" name="birth" placeholder="생년월일">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="nickName" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임">
+		      <input type="text" maxlength='20' class="form-control" id="nickName" name="nickName" placeholder="닉네임">
 		      <button class="nickNameChk" type="button" id="nickNameChk" onclick="checkNickName()" value="N" >중복확인</button>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">휴대전화번호</label>
+		    <label for="phone" class="col-sm-offset-1 col-sm-3 control-label">휴대전화번호</label>
 		     <div class="col-sm-2">
 		      <select class="form-control" name="phone1" id="phone1">
 				  	<option value="010" >010</option>
@@ -317,9 +322,9 @@
 		  </div>
 		  
 		   <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
+		    <label for="email" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="email" name="email" placeholder="이메일">
+		      <input type="text" maxlength='50' class="form-control" id="email" name="email" placeholder="이메일">
 		      <button class="emailChk" type="button" id="emailChk" onclick="checkEmail()" value="N">중복확인</button> 
 		    </div>
 		  </div>
