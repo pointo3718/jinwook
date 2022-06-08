@@ -11,6 +11,7 @@ import org.springframework.util.CollectionUtils;
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.mapper.StoreMapper;
 import com.jinwook.home.service.domain.Coupon;
+import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
 
@@ -169,7 +170,7 @@ class StoreMapperTest {
 				for (Store store : getStore) {
 					System.out.println("=========================");
 	
-					System.out.println(store.getStoreNo());
+					System.out.println(store.getStorePhone());
 					System.out.println(store.getStoreName());	
 					System.out.println(store.getStoreType());
 					System.out.println(store.getStoreAddr());
@@ -194,22 +195,45 @@ class StoreMapperTest {
 	}
 		
 	@Test
+	public void testOfGetStoreRefund() {
+		
+		int getStoreTotalCount = storeMapper.getStoreTotalCount();
+		if (getStoreTotalCount > 0) {
+			System.out.println(getStoreTotalCount);
+			List<Store> refundList = storeMapper.getStoreRefund(10025);
+			if (CollectionUtils.isEmpty(refundList) == false) { 		
+				for (Store store : refundList) {
+					System.out.println("=========================");
+					
+					System.out.println(store.getRequest().getResDate());
+					System.out.println(store.getRequest().getReqDate());					
+					System.out.println(store.getRequest().getRefundMoney());
+					System.out.println(store.getRequest().getReqStatus());
+					
+					System.out.println("=========================");
+				}
+			}
+		}
+	}
+	
+	@Test
 	public void testOfGetStoreWallet() {
 		
 		int getStoreTotalCount = storeMapper.getStoreTotalCount();
 		if (getStoreTotalCount > 0) {
 			System.out.println(getStoreTotalCount);
-			List<Store> walletList = storeMapper.getStoreWallet(10000);
+			
+			List<Store> walletList = storeMapper.getStoreWallet(10013);
 			if (CollectionUtils.isEmpty(walletList) == false) { 		
 				for (Store store : walletList) {
 					System.out.println("=========================");
 					
-					System.out.println(store.getTotalEarn());					
-					System.out.println(store.getUser().getJpBalance());
-					System.out.println(store.getRequest().getResDate());
-					System.out.println(store.getRequest().getReqDate());					
-					System.out.println(store.getRequest().getRefundMoney());
-					System.out.println(store.getRequest().getReqStatus());
+					System.out.println(store.getOrders().getOrderPrice());
+					System.out.println(store.getUser().getJpBalance());					
+					System.out.println(store.getOrders().getOrderNo());
+					System.out.println(store.getOrders().getOrderDate());
+					System.out.println(store.getOrders().getOrderPrice());
+					System.out.println(store.getOrders().getBuyerName());
 
 					
 					System.out.println("=========================");
