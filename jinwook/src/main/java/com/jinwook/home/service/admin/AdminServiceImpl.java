@@ -109,11 +109,13 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public boolean updateBlacklist(User user) {
 		int queryResult = 0;
+		
+		System.out.println(user);
 
-		user = adminMapper.getUserAdmin("test01");
-
-		if (user != null && user.isBlacklistStatus() == true) {
+		if (user != null && user.isBlacklistStatus() == false) {
 			queryResult = adminMapper.updateBlacklist(user);
+			System.out.println("블랙리스트 등록 서비스 통과");
+
 		}
 
 		return (queryResult == 1) ? true : false;

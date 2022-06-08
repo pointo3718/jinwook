@@ -32,7 +32,6 @@ public class BoardServiceImpl implements BoardService {
      
      @Autowired private FileUtils fileUtils;
     
-   
    //1:1문의 등록
    @Override
    public boolean addBoardInquiry(Board board) {
