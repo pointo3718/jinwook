@@ -1,25 +1,25 @@
 package com.jinwook.home.web.user;
 
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend.Attr;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
-
-import net.bytebuddy.asm.Advice.Exit;
 
 
 //==> ȸ������ Controller
@@ -42,13 +42,13 @@ public class UserController {
 //	@Value("#{commonProperties['pageSize']}")
 //	int pageSize;
 	
-	@GetMapping(value="index")
+	@GetMapping("index")
 	public String index(HttpSession session) throws Exception{
 		System.out.println("==========index===========");
 		return "index";
 	}
 	
-	@RequestMapping( value="addUser", method=RequestMethod.GET )
+	@GetMapping("addUser")
 	public String addUser() throws Exception{
 	
 		System.out.println("/user/addUserView : GET");
@@ -56,7 +56,7 @@ public class UserController {
 		return "/user/addUserView";
 	}
 	
-	@RequestMapping( value="addUser", method=RequestMethod.POST )
+	@PostMapping("addUser" )
 	public String addUser( @ModelAttribute("user") User user ) throws Exception {
 
 		System.out.println("/user/addUser : POST");
@@ -110,7 +110,7 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping( value="login", method=RequestMethod.GET )
+	@GetMapping("login")
 	public String login() throws Exception{
 		
 		System.out.println("/user/logon : GET");
@@ -118,8 +118,8 @@ public class UserController {
 		return "/user/loginView";
 	}
 	
-	@RequestMapping( value="login", method=RequestMethod.POST )
-	public String login(@ModelAttribute("user") User user , HttpSession session, RedirectAttributes attr ) throws Exception{
+	@PostMapping("login" )
+	public String login(@ModelAttribute("user") User user , HttpSession session, Model model ) throws Exception{
 		
 		System.out.println("/user/login : POST");
 		//Business Logic
@@ -132,7 +132,6 @@ public class UserController {
 		System.out.println(dbUser.isUserByeStatus());
 
 		if(dbUser.isUserByeStatus()==true) {
-			System.out.println("FALILED");
 			return "/user/loginView";
 		}
 		
@@ -140,14 +139,15 @@ public class UserController {
 			return "/user/loginView";
 		}
 		session.setAttribute("user", dbUser);
-		System.out.println(user.getPassword()+"=================");
-		System.out.println(dbUser.getPassword()+"=================");
+		
+//		model.addAttribute("msg", "로그인 성공");
+//		model.addAttribute("url", "login");
 		
 		return "index";
 	}
 		
 	
-	@RequestMapping( value="logout", method=RequestMethod.GET )
+	@GetMapping("logout")
 	public String logout(HttpSession session ) throws Exception{
 		
 		System.out.println("/user/logout : POST");
@@ -157,7 +157,8 @@ public class UserController {
 		return "index";
 	}
 	
-	@PostMapping(value="deleteUser")
+	
+	@PostMapping("deleteUser")
 	public String deleteUser(@ModelAttribute("user") User user, HttpSession session) throws Exception {
 		System.out.println("=============DELETE USER=============");
 		
@@ -185,7 +186,7 @@ public class UserController {
 
 	
 	
-	@GetMapping(value="confirmPasswordView")
+	@GetMapping("confirmPasswordView")
 	public String comfirmPasswordView() throws Exception {
 		
 		System.out.println("===========CONFIRM PASSWORD PAGE===========");
@@ -193,7 +194,7 @@ public class UserController {
 		return "/user/confirmPasswordView";
 	}
 	
-	@PostMapping(value="confirmPassword")
+	@PostMapping("confirmPassword")
 	public String comfirmPassword(@ModelAttribute("user") User user ,  HttpSession session, Model model ) throws Exception {
 		System.out.println("===========CONFIRM PASSWORD=========");
 		System.out.println(user);
@@ -208,7 +209,24 @@ public class UserController {
 		return "/user/updateUser";
 	}
 	
+	@GetMapping("findId")
+	public String findId() {
+		
+		System.out.println("============FIND ID PAGE============");
+		return "/user/findId";
+	}
 	
-	
+//	@PostMapping("findIdEmail")
+//	public String findIdEmail(@ModelAttribute("user") User user, HttpSession session) throws Exception {
+//		
+//		user.setUserName( ((User)session.getAttribute("user")).getUserName());
+//		
+//		int result = userService.findIdEmail(user);
+//		
+//		if(result != 0) {
+//			
+//		}
+//		return null;
+//	}
 	
 }

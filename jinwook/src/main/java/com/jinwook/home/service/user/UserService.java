@@ -1,6 +1,8 @@
 package com.jinwook.home.service.user;
 
 
+import java.util.List;
+
 import com.jinwook.home.service.domain.User;
 
 public interface UserService {
@@ -32,4 +34,7 @@ public interface UserService {
 		public User findPasswordEmail(User user) throws Exception;
 		
 		public void updatePassword(User user) throws Exception; 
+		
+		public void sendUser(String email, String userId) throws Exception;
+		
 }
