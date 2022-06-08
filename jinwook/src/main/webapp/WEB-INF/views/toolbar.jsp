@@ -78,8 +78,12 @@
 	                         </c:if>
 	                         
 	                         <li><a href="#">최근본상품</a></li>
+	                         
+	                         <li><a href="#">장바구니</a></li>
+	                         
 	                         <li class="divider"></li>
 	                         <li><a href="#">etc..</a></li>
+	                         
 	                     </ul>
 	                 </li>
 	                 
@@ -155,4 +159,9 @@
 			$(self.location).attr("href","/user/confirmPasswordView");
 		});
 		
+		
+		$( "a:contains('장바구니')" ).on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/orders/getOrdersCartList");
+		});
 	</script>  

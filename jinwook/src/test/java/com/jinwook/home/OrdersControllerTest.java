@@ -150,4 +150,61 @@ public class OrdersControllerTest {
 	  									.andDo(print());
 	}
 	
+	@Test
+	@Transactional
+	@DisplayName("addOrdersJpayPassword 파라미터 방식 테스트")
+	public void addOrdersJpayPassword() throws Exception{
+	  this.mvc.perform(post("/orders/addOrdersJpayPassword")
+									  	.param("userId", "test01")
+			  							.param("jpPassword", "123456"))
+	  									.andExpect(status().isOk())
+	  									.andDo(print());
+			  
+	}
+	
+	@Test
+	@Transactional
+	@DisplayName("updateOrdersJpayPassword 파라미터 방식 테스트")
+	public void updateOrdersJpayPassword() throws Exception{
+	  this.mvc.perform(post("/orders/updateOrdersJpayPassword")
+	                                    .param("userId", "test01")
+	  									.param("jpPassword", "654321"))
+	  									.andExpect(status().isOk())
+	  									.andDo(print());
+	}
+	
+	@Test
+	@Transactional
+	@DisplayName("addOrdersJpayCharge 파라미터 방식 테스트")
+	public void addOrdersJpayCharge() throws Exception{
+	  this.mvc.perform(post("/orders/addOrdersJpayCharge")
+			  							.param("userId", "test01")
+//			  							.param("orderNo", "0")
+			  							.param("jpStatus", "1")
+			  							.param("finalPrice", "0")
+			  							.param("chargePay", "0")
+									  	.param("jpDate", "2022-06-08"))
+	  									.andExpect(status().isOk())
+	  									.andDo(print());
+	}
+	
+	@Test
+	@Transactional
+	@DisplayName("getOrdersJpaylist 파라미터 방식 테스트")
+	public void getOrdersJpaylist() throws Exception{
+	  this.mvc.perform(get("/orders/getOrdersJpaylist")
+			  							.param("userId", "test01"))
+	  									.andExpect(status().isOk())
+	  									.andDo(print());
+	}
+	
+	@Test
+	@Transactional
+	@DisplayName("getOrdersNoticelist 파라미터 방식 테스트")
+	public void getOrdersNoticelist() throws Exception{
+	  this.mvc.perform(get("/orders/getOrdersNoticelist")
+			  							.param("receiveId", "test01"))
+	  									.andExpect(status().isOk())
+	  									.andDo(print());
+	}
 }
