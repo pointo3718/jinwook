@@ -4,9 +4,11 @@ import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Recipe {
 	
 	private Integer rcpNo;
@@ -23,7 +25,7 @@ public class Recipe {
 	private Integer rcpJjimCnt;
 	private Integer commentCount;
 	private Integer recommendCount;
-	
+
 	public Recipe() {
 	}
 

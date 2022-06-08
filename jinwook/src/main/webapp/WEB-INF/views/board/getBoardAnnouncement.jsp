@@ -148,7 +148,14 @@ function changeFilename(file) {
 		<hr/>
 		<div class="row">
 	  		<div class="col-xs-5 col-md-3 "><strong>답변상태</strong></div>
-			<div class="col-xs-7 col-md-5">${board.boardInqStatus}</div>
+		<c:choose>
+				<c:when test="${board.boardInqStatus == false}">
+					답변대기중
+				</c:when>
+				<c:otherwise>
+					답변 완료
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<hr/>
 <div data-name="fileDiv" class="form-group filebox bs3-primary">

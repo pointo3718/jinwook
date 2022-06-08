@@ -142,7 +142,7 @@ class StoreServiceTest {
 				for (Store store : getStore) {
 					System.out.println("=========================");
 	
-					System.out.println(store.getStoreNo());
+					System.out.println(store.getStorePhone());
 					System.out.println(store.getStoreName());	
 					System.out.println(store.getStoreType());
 					System.out.println(store.getStoreAddr());

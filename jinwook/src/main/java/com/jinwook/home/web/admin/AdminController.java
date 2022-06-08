@@ -40,6 +40,7 @@ public class AdminController {
 	
 	@GetMapping(value = "listUserAdmin")
 	public String listUserAdmin(@ModelAttribute("user") User user, Model model) {
+		
 		List<User> userList = adminService.getUserListAdmin(user);
 		model.addAttribute("userList", userList);
 

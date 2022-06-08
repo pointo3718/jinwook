@@ -13,6 +13,8 @@ import com.jinwook.home.service.domain.Recipe;
 @Mapper
 public interface BoardMapper {
 
+	//레시피 조회수 증가
+	public int updateBoardRecipeHits(Integer rcpNo);
 	//1:1문의 조회수 증가
 	public int updateBoardInquiryHits(Integer boardNo);
 	//공지사항 조회수 증가
@@ -46,6 +48,7 @@ public interface BoardMapper {
 	//상점 후기 등록: Orders
 	public int addReview(Orders orders);
 	public int deleteReview(int ordersNo);
+	public Orders getReview(int ordersNo);
 	public List<Orders> getReviewList(Board board);
 	
 	//레시피
@@ -54,7 +57,7 @@ public interface BoardMapper {
 	public int deleteRecipe(Integer rcpNo);
 	//조인 필요: recipe, comment, recommend
 	public Recipe getRecipe(Integer rcpNo);
-	public List<Recipe> getRecipeList(Board board);
+	public List<Recipe> getRecipeList(Recipe rcp);
 	
 	//댓글 등록
 	public int addComment(Comment comment);
@@ -68,10 +71,13 @@ public interface BoardMapper {
 	// 찜
 	public int addStoreJjim(Jjim jjim);
 	public int addRecipeJjim(Jjim jjim);
+	
 	public int deleteStoreJjim(Jjim jjim);
 	public int deleteRecipeJjim(Jjim jjim);
+	
 	public int updateStoreJjim(int storeNo);
 	public int updateRecipeJjim(int rcpNo);
+	//찜 목록
 	public int getRecipeJjim(Jjim jjim);
 	public int getStoreJjim(Jjim jjim);
 	
@@ -107,7 +113,7 @@ public interface BoardMapper {
 	// 목록 개수
 	public int getBoardInquiryTotalCount(Board board);
 	public int getBoardAnnouncementTotalCount(Board board);
-	public int getRecipeTotalCount(Board board);
+	public int getRecipeTotalCount(Recipe rcp);
 	public int getReviewTotalCount(Board board);
 	public int getRankTotalCount(Board board);
 	//특정 게시글에 포함된 댓글 개수를 조회하는 select 쿼리를 호출

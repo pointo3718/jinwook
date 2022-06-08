@@ -16,6 +16,7 @@ public class Cart {
 	private String storeName;
 	private int prodCount;
 	private boolean cartStatus;
+	private User user;
 
 	public Cart() {
 		// TODO Auto-generated constructor stub

@@ -20,14 +20,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jinwook.home.service.board.BoardService;
 import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.User;
+import com.jinwook.home.service.orders.OrdersService;
 import com.jinwook.home.service.user.UserService;
 
 @Controller
@@ -40,6 +43,9 @@ public class BoardController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private OrdersService ordersService;
 	
 	public BoardController(){
 		System.out.println(this.getClass());
@@ -72,7 +78,7 @@ public class BoardController {
 		return "board/addBoardInquiryView"; //보여줄 화면: .jsp
 	}
 	
-	//1:1문의 등록 + 사진 첨부 처리
+	//1:1문의 등록/수정 + 사진 첨부 처리
 	//페이징 처리 후 로직 추가 필요.
 	@PostMapping(value = "addBoardInquiry")
 	public String addBoardInquiry(final Board board, final MultipartFile[] files, Model model) throws Exception {
@@ -118,7 +124,7 @@ public class BoardController {
 			return "board/addBoardAnnouncementView"; //보여줄 화면: .jsp
 		}
 		
-		//공지사항 등록 + 사진 첨부 처리
+		//공지사항 등록/수정 + 사진 첨부 처리
 		//페이징 처리 후 로직 추가 필요.
 		@PostMapping(value = "addBoardAnnouncement")
 		public String addBoardAnnouncement(final Board board, final MultipartFile[] files, Model model) {
@@ -137,12 +143,13 @@ public class BoardController {
 			}
 			return "redirect:/board/getBoardAnnouncementList";
 		}
-	
+		
 	//1:1문의 목록 조회
 	@GetMapping(value = "getBoardInquiryList")
 	public String getBoardInquiryList(@ModelAttribute("board") Board board, Model model) {
 		List<Board> getBoardInquiryList = boardService.getBoardInquiryList(board);
-		model.addAttribute("getBoardInquiryList", getBoardInquiryList);
+		model.addAttribute("getBoardInquiryList", getBoardInquiryList);//jsp foreach items
+		System.out.println(getBoardInquiryList);
 		return "board/getBoardInquiryList";
 	}
 	
@@ -160,18 +167,11 @@ public class BoardController {
 	public String getBoardInquiry(@ModelAttribute("params") Board params, 
 														@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
 		System.out.println("/board/getBoardInquiry: GET");
+		
 		// 조회수 카운트
-		if (boardNo == null) {
-			boardService.updateBoardInquiryHits(boardNo);
-			// TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
-			return "redirect:/board/getBoardInquiryList";
-		}
+		boardService.updateBoardInquiryHits(boardNo);
 
 		Board board = boardService.getBoardInquiry(boardNo);
-//		if (board == null || "Y".equals(board.getDeleteYn())) {
-//			// TODO => 없는 게시글이거나, 이미 삭제된 게시글이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
-//			return "redirect:/board/list.do";
-//		}
 		model.addAttribute("board", board);
 		
 		List<Attach> fileList = boardService.getAttachFileList(boardNo); // 추가된 로직
@@ -214,17 +214,7 @@ public class BoardController {
 			return "redirect:/board/getBoardInquiryList";
 		}
 
-		try {
 			int isDeleted = boardService.deleteBoardInquiry(boardNo);
-			if (isDeleted == 0) {
-				// TODO => 게시글 삭제에 실패하였다는 메시지를 전달
-			}
-		} catch (DataAccessException e) {
-			// TODO => 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
-
-		} catch (Exception e) {
-			// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
-		}
 
 		return "redirect:/board/getBoardInquiryList";
 	}
@@ -236,22 +226,12 @@ public class BoardController {
 			// TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
 			return "redirect:/board/getBoardAnnouncementList";
 		}
-		
-		try {
-			int isDeleted = boardService.deleteBoardAnnouncement(boardNo);
-			if (isDeleted == 0) {
-				// TODO => 게시글 삭제에 실패하였다는 메시지를 전달
-			}
-		} catch (DataAccessException e) {
-			// TODO => 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
-			
-		} catch (Exception e) {
-			// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
-		}
+		int isDeleted = boardService.deleteBoardAnnouncement(boardNo);
 		
 		return "redirect:/board/getBoardAnnouncementList";
 	}
 	
+	//다운로드
 	@GetMapping("/board/download.do")
 	public void downloadAttachFile(@RequestParam(value = "idx", required = false) final Integer idx, Model model, HttpServletResponse response) {
 
@@ -287,27 +267,6 @@ public class BoardController {
 		}
 	}
 	
-	
-	
-	@ResponseBody
-	@PostMapping(value = "updateRecipeReco")
-	public int updateRecipeReco(int rcpNo, String userId) throws Exception {
-		System.out.println("/board/updateRecipeReco: POST");
-		
-		int recoCheck = boardService.recipeRecoCheck(rcpNo, userId);
-		if(recoCheck == 0) {
-			//추천수 처음 누름
-			boardService.addRecipeReco(rcpNo, userId); //recommend테이블에 삽입
-			boardService.updateRecipeReco(rcpNo); //recipe테이블 + 1
-			boardService.updateRecipeRecoCheck(rcpNo, userId); //recommend 테이블 구분자 1
-		} else if(recoCheck == 1) {
-			boardService.updateRecipeRecoCheck(rcpNo, userId); //recommend 테이블 구분자 0
-			boardService.updateRecipeRecoCheckCancel(rcpNo, userId); //recipe테이블 - 1
-			boardService.deleteRecipeReco(rcpNo, userId); //recommend 테이블 삭제
-		}
-		return recoCheck;
-	}
-	
 	//레시피 등록 화면
 		@GetMapping(value = "addRecipeView")
 		public String addRecipeView(@RequestParam(value = "rcpNo", required = false) Integer rcpNo, 
@@ -334,5 +293,114 @@ public class BoardController {
 			}
 			return "board/addRecipeView"; //보여줄 화면: .jsp
 		}
-	
+		
+		//레시피 등록 처리
+		//페이징 처리 후 로직 추가 필요.
+		@PostMapping(value = "addRecipe")
+		public String addRecipe(final Recipe recipe, final MultipartFile[] files, Model model) throws Exception {
+			System.out.println("/board/addRecipe: POST");
+				boardService.addRecipe(recipe);
+			return "redirect:/board/getRecipeList";
+		}
+		
+		//레시피 수정 처리
+		@PostMapping(value = "updateRecipe")
+		public String updateRecipe(@ModelAttribute("recipe") Recipe recipe, final MultipartFile[] files, Model model) {
+			System.out.println("/board/updateRecipe: POST");
+			boardService.updateRecipe(recipe);
+			return "redirect:/board/getRecipeList";
+		}
+		
+		//레시피 삭제 처리
+		@PostMapping(value = "deleteRecipe")
+		public String deleteRecipe(@RequestParam(value = "rcpNo", required = false) Integer rcpNo) {
+			System.out.println("/board/deleteRecipe: POST");
+			boardService.deleteRecipe(rcpNo);
+			return "redirect:/board/getRecipeList";
+		}
+		
+		//레시피 목록 조회
+		@GetMapping(value = "getRecipeList")
+		public String getRecipeList(@ModelAttribute("rcp") Recipe rcp, Model model) {
+			List<Recipe> getRecipeList = boardService.getRecipeList(rcp);
+			model.addAttribute("getRecipeList", getRecipeList);
+			return "board/getRecipeList";
+		}
+		
+		//레시피 상세 조회 + 조회수 증가
+		@GetMapping(value = "getRecipe")
+		public String getRecipe(@RequestParam("rcpNo") Integer rcpNo , 
+											@RequestParam(value = "userId", required = false) String userId,
+											Model model) throws Exception {
+			System.out.println("/board/getRecipe : GET");
+			// 조회수 카운트
+			boardService.updateBoardRecipeHits(rcpNo);
+			Recipe recipe = boardService.getRecipe(rcpNo);
+			User user = userService.getUser(userId);
+			model.addAttribute("user", user);
+			model.addAttribute("recipe", recipe);
+			return "board/getRecipe";
+		}
+		
+		//레시피 추천수 /board/updateRecipeReco
+		@ResponseBody
+		@PostMapping(value = "updateRecipeReco")
+		public int updateRecipeReco(@RequestParam("rcpNo") Integer rcpNo , 
+													@RequestParam(value = "userId", required = false) String userId,
+				Model model) throws Exception {
+			System.out.println("/board/updateRecipeReco: POST");
+			
+			User user = userService.getUser(userId);
+			model.addAttribute("user", user);
+			int recoCheck = boardService.recipeRecoCheck(rcpNo, userId);
+			if(recoCheck == 0) {
+				//추천수 처음 누름
+				boardService.addRecipeReco(rcpNo, userId); //recommend테이블에 삽입
+				boardService.updateRecipeReco(rcpNo); //recipe테이블 + 1
+				boardService.updateRecipeRecoCheck(rcpNo, userId); //recommend 테이블 구분자 1
+			} else if(recoCheck == 1) {
+				boardService.updateRecipeRecoCheck(rcpNo, userId); //recommend 테이블 구분자 0
+				boardService.updateRecipeRecoCheckCancel(rcpNo, userId); //recipe테이블 - 1
+				boardService.deleteRecipeReco(rcpNo, userId); //recommend 테이블 삭제
+			}
+			return recoCheck;
+		}
+		
+		//상점 후기 등록 화면
+		@GetMapping(value = "addReviewView") 
+		public String addReviewView() {
+			System.out.println("/board/addReviewView : GET");
+			return "redirect:/board/addReviewView";
+		}
+		
+		//상점 후기 등록 처리
+		@PostMapping(value = "addReview")
+		public String addReview(@ModelAttribute("orders") Orders orders) {
+			System.out.println("/board/addReview : POST");
+			boardService.addReview(orders);
+			return "redirect:/board/addReviewView";
+		}
+		
+		//상점 후기 내용 조회
+		@GetMapping(value = "getReview")
+		public String getReview(@RequestParam(value = "orderNo", required = false) int orderNo , 
+											@RequestParam(value = "userId", required = false) String userId, Model model) throws Exception {
+			System.out.println("/board/getReview : GET");
+			
+			User user = userService.getUser(userId);
+			model.addAttribute("user", user);
+			Orders orders = boardService.getReview(orderNo);
+			model.addAttribute("orders", orders);
+			return "board/getReview";
+		}
+		
+		//상점 후기 삭제 처리
+		@PostMapping(value = "deleteReview")
+		public String deleteReview(@RequestParam(value = "orderNo", required = false) int orderNo) {
+			System.out.println("/board/deleteReview : POST");
+			boardService.deleteReview(orderNo);
+			return "redirect:/board/addReviewView";
+		}
+		
+		
 }//class

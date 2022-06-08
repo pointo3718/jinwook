@@ -44,9 +44,12 @@ public class AdminMapperTest {
 	///////////////// 유저 목록 //////////////////
 	@Test
 	public void testSelectUserList() {
-		int userTotalCount = adminMapper.getUserTotalCount();
+		
+		User user2 = new User();
+		
+		int userTotalCount = adminMapper.getUserTotalCount(user2);
 		if (userTotalCount > 0) {
-			List<User> userList = adminMapper.getUserListAdmin();
+			List<User> userList = adminMapper.getUserListAdmin(user2);
 			
 			// 리스트가 비어있는지 체크
 			if (CollectionUtils.isEmpty(userList) == false) { 		
@@ -66,9 +69,12 @@ public class AdminMapperTest {
 	///////////////// 상점 목록 //////////////////
 	@Test
 	public void testSelectStoreList() {
-		int storeTotalCount = adminMapper.getStoreTotalCount(); // 목록 개수
+		
+		Store store2 = new Store();
+		
+		int storeTotalCount = adminMapper.getStoreTotalCount(store2); // 목록 개수
 		if (storeTotalCount > 0) {
-			List<Store> storeList = adminMapper.getStoreListAdmin();
+			List<Store> storeList = adminMapper.getStoreListAdmin(store2);
 			
 			// 리스트가 비어있는지 체크
 			if (CollectionUtils.isEmpty(storeList) == false) { 	
@@ -92,9 +98,12 @@ public class AdminMapperTest {
 	///////////////// 신고 목록 //////////////////
 	@Test
 	public void testSelectComplainList() {
-		int complainTotalCount = adminMapper.getComplainTotalCount();
+		
+		Complain complain2 = new Complain();
+		
+		int complainTotalCount = adminMapper.getComplainTotalCount(complain2);
 		if (complainTotalCount > 0) {
-			List<Complain> complainList = adminMapper.getComplainListAdmin();
+			List<Complain> complainList = adminMapper.getComplainListAdmin(complain2);
 			
 			// 리스트가 비어있는지 체크
 			if (CollectionUtils.isEmpty(complainList) == false) { 		
@@ -117,9 +126,12 @@ public class AdminMapperTest {
 	///////////////// 블랙리스트 목록 //////////////////
 	@Test
 	public void testSelectBliacklist() {
-		int blacklistTotalCount = adminMapper.getBlacklistTotalCount();
+		
+		User user2 = new User();
+		
+		int blacklistTotalCount = adminMapper.getBlacklistTotalCount(user2);
 		if (blacklistTotalCount > 0) {
-			List<User> blacklist = adminMapper.getBlacklistAdmin();
+			List<User> blacklist = adminMapper.getBlacklistAdmin(user2);
 	
 			// 리스트가 비어있는지 체크
 			if (CollectionUtils.isEmpty(blacklist) == false) { 		

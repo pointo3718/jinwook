@@ -31,6 +31,8 @@ public interface StoreMapper {
 		
 	public List<Store> getStoreWallet(int storeNo);
 	
+	public List<Store> getStoreRefund(int storeNo);
+	
 	public int getStoreTotalCount();
 	
 	public int getCouponTotalCount();

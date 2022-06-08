@@ -122,7 +122,7 @@ function updateRecipeReco() {
 			<div class="col-xs-7 col-md-5">${recipe.recommendCount}</div>
 		</div>
 		<hr/>
-	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco() return false">추천 ${recipe.getRecommendCount}</button>
+	<!-- <button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco() return false">추천</button> -->
 	<button type="button" class="btn btn-danger" id="hate_btn">비추천</button>
 
 </div>

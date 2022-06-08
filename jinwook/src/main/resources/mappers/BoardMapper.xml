@@ -43,6 +43,8 @@
    
 <resultMap type="orders" id="ordersSelectMap">
 	<result property="orderNo"			column="order_no"			jdbcType="INTEGER"/>
+	<result property="user.userId"		column="user_id"			jdbcType="VARCHAR"/>
+	<result property="store.storeName"	column="store_name"			jdbcType="VARCHAR"/>
 	<result property="reviewTitle"		column="review_title"		jdbcType="VARCHAR"/>
 	<result property="reviewContent"	column="review_content"		jdbcType="VARCHAR"/>
 	<result property="reviewDate"		column="review_date"		jdbcType="DATE"/>
@@ -58,7 +60,7 @@
    <result property="rcpTitle"         column="rcp_title"       jdbcType="VARCHAR"/>   
    <result property="rcpContent"       column="rcp_content"     jdbcType="VARCHAR"/>   
    <result property="rcpDate"          column="rcp_date"        jdbcType="DATE"/>   
-   <result property="rcpIngredient"     column="rcp_ingrdient"  jdbcType="VARCHAR"/>   
+   <result property="rcpIngredient"    column="rcp_ingredient"  jdbcType="VARCHAR"/>   
    <result property="rcpThumb"         column="rcp_thumb"       jdbcType="VARCHAR"/>   
    <result property="rcpInfo"          column="rcp_info"        jdbcType="VARCHAR"/>   
    <result property="rcpHits"          column="rcp_hits"        jdbcType="INTEGER"/>   
@@ -67,7 +69,7 @@
    <result property="recommendCount"   column="recommend_count" jdbcType="INTEGER"/>   
 </resultMap>
 	
-	<!-- 1:1문의 조회수 올리기 -->
+	<!-- 1:1문의 조회수 올리기v -->
 	<update id="updateBoardInquiryHits">
 		UPDATE board 
 		SET board_hits = board_hits+1 
@@ -75,13 +77,21 @@
 		AND board_code = 0
 	</update>
 	
-	<!-- 1:1문의 조회수 올리기 -->
+	<!-- 공지사항 조회수 올리기v -->
 	<update id="updateBoardAnnouncementHits">
 		UPDATE board 
 		SET board_hits = board_hits+1 
 		WHERE board_no = #{boardNo} 
 		AND board_code = 1
 	</update>
+	
+	<!-- 레시피 조회수 올리기v -->
+	<update id="updateBoardRecipeHits">
+		UPDATE recipe 
+		SET rcp_hits = rcp_hits+1 
+		WHERE rcp_no = #{rcpNo} 
+	</update>
+	
 	
 	<!-- boardCode 0: 1:1문의 / boardCode 1: 공지사항 -->
 	<!-- 1:1문의 insert -->
@@ -180,15 +190,13 @@
 	<!-- 1:1문의 목록 조회 0, 답변상태 쿼리 필요 -->
 	<select id="getBoardInquiryList" parameterType="Board" resultType="Board">
 		SELECT
-			board_no, board_content, board_inq_status
+			board_no, board_title, board_inq_status
 		FROM
 			board
 		WHERE
 			board_code = 0
 		AND
 			board_inq_status = false OR board_inq_status = true
-		AND
-			board_no = #{boardNo}
 		ORDER BY
 			board_no ASC
 		<!-- LIMIT
@@ -198,13 +206,11 @@
 	<!-- 공지사항 목록 조회 1 -->
 	<select id="getBoardAnnouncementList" parameterType="Board" resultType="Board">
 		SELECT
-			board_no, board_content, write_date
+			board_no, board_title, write_date
 		FROM
 			board
 		WHERE
 			board_code = 1
-		AND
-			board_no = #{boardNo}
 		ORDER BY
 			board_no ASC
 		<!-- LIMIT
@@ -291,7 +297,7 @@
 	<!-- Recipe getRecipe -->
 	<select id="getRecipe" parameterType="int" resultType="Recipe" resultMap="recipeSelectMap">
 		SELECT
-			user_id, rcp_title, rcp_content, rcp_date, rcp_ingredient, rcp_thumb, rcp_info, rcp_hits, comment_count, rcp_jjimcnt, recommend_count
+			rcp_no, user_id, rcp_title, rcp_content, rcp_date, rcp_ingredient, rcp_thumb, rcp_info, rcp_hits, comment_count, rcp_jjimcnt, recommend_count
 		FROM
 			recipe
 		WHERE
@@ -344,7 +350,9 @@
 	<update id="addReview" parameterType="Orders">
 	UPDATE orders
 	SET
-	  review_title = #{reviewTitle:VARCHAR}
+	  store_name = #{storeName:VARCHAR}
+	, user_id = #{userId:VARCHAR}	
+	, review_title = #{reviewTitle:VARCHAR}
 	, review_content = #{reviewContent:VARCHAR}
 	, review_date = SYSDATE()
 	, review_star = #{reviewStar:INTEGER}
@@ -362,7 +370,17 @@
 			order_no = #{orderNo}
 	</delete>
 	
-		<!-- 상점후기 목록 개수 -->
+	<!-- Review 상세 조회 -->
+	<select id="getReview" parameterType="int" resultType="Orders" resultMap="ordersSelectMap">
+		SELECT
+			o.order_no, s.store_name, o.user_id, o.review_title, o.review_content, o.review_date, o.review_star, o.review_img1, o.review_img2, o.review_img3
+		FROM
+			orders o, store s
+		WHERE o.store_no = s.store_no
+		AND o.order_no = #{orderNo}
+	</select>
+	
+	<!-- 상점후기 목록 개수 -->
 	<select id="getReviewTotalCount" parameterType="Orders" resultType="int">
 		SELECT
 			COUNT(*)
@@ -371,7 +389,7 @@
 		ORDER BY order_no	
 	</select>
 	
-		<!--   -->
+	<!--   -->
 	<select id="getReviewList" parameterType="Orders" resultType="Orders">
 		SELECT
 			*
