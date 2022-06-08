@@ -12,11 +12,11 @@ import com.jinwook.home.service.domain.Recipe;
 
 public interface BoardService {
 	
-	//레시피 조회수 증가
+	//레시피 조회수 증가v
 	public int updateBoardRecipeHits(Integer rcpNo);
-	//1:1문의 조회수 증가
+	//1:1문의 조회수 증가v
 	public int updateBoardInquiryHits(Integer boardNo);
-	//공지사항 조회수 증가
+	//공지사항 조회수 증가v
 	public int updateBoardAnnouncementHits(Integer boardNo);
 	//1:1문의 등록v
 	public boolean addBoardInquiry(Board board);

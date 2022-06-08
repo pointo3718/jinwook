@@ -330,13 +330,12 @@ public class BoardController {
 		//레시피 상세 조회 + 조회수 증가
 		@GetMapping(value = "getRecipe")
 		public String getRecipe(@RequestParam("rcpNo") Integer rcpNo , 
-											@RequestParam(value = "userId", required = false) String userId,
+										@ModelAttribute("user")User user,
 											Model model) throws Exception {
 			System.out.println("/board/getRecipe : GET");
 			// 조회수 카운트
 			boardService.updateBoardRecipeHits(rcpNo);
 			Recipe recipe = boardService.getRecipe(rcpNo);
-			User user = userService.getUser(userId);
 			model.addAttribute("user", user);
 			model.addAttribute("recipe", recipe);
 			return "board/getRecipe";
