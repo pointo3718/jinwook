@@ -25,7 +25,6 @@ import com.jinwook.home.service.domain.Recipe;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-<<<<<<< HEAD
    @Autowired
    private BoardMapper boardMapper;
    
@@ -33,25 +32,10 @@ public class BoardServiceImpl implements BoardService {
      
      @Autowired private FileUtils fileUtils;
     
-   
    //1:1문의 등록
    @Override
    public boolean addBoardInquiry(Board board) {
       int queryResult = 0;
-=======
-	@Autowired
-	private BoardMapper boardMapper;
-	
-	  @Autowired private AttachMapper attachMapper;
-	  
-	  @Autowired private FileUtils fileUtils;
-	 
-	
-	//1:1문의 등록
-	@Override
-	public boolean addBoardInquiry(Board board) {
-		int queryResult = 0;
->>>>>>> refs/heads/Song
 
       if (board.getBoardNo() == null) {
          queryResult = boardMapper.addBoardInquiry(board);

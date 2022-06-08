@@ -51,7 +51,8 @@ public class RequestServiceImpl implements RequestService {
 		
 		int queryResult = 0;
 		Request request = requestMapper.getRequestStore(reqNo);
-		queryResult = requestMapper.updateRequestAddStore(request.getStoreNo()); // 2. 상점 등록
+		System.out.println(request);
+		queryResult = requestMapper.updateRequestAddStore(request.getStore().getStoreNo()); // 2. 상점 등록
 
 		return (queryResult == 1) ? true : false;
 	}
@@ -71,10 +72,13 @@ public class RequestServiceImpl implements RequestService {
 	// 1. reqStatus 변경   2. 상점 등록
 	@Override
 	public boolean updateRequestRefund(Request request) {
+		
 		requestMapper.updateRequestStatusToAccept(request.getReqNo()); // 1. reqStatus 변경
 		
+		
+		
 		int queryResult = 0;
-		queryResult = requestMapper.updateRequestRefund(request); // 2. 상점 등록
+		queryResult = requestMapper.updateRequestRefund(request); // 2. 진욱페이 차감
 
 		return (queryResult == 1) ? true : false;
 	}
@@ -93,6 +97,9 @@ public class RequestServiceImpl implements RequestService {
 	// =========== 남은 픽업개수 ===========
 	@Override
 	public int countPickup(int storeNo) {
+		
+		System.out.println(storeNo);
+		
 		Request request = requestMapper.countPickup(storeNo);
 		int countPickup = request.getCountPickup();
 		
@@ -182,7 +189,6 @@ public class RequestServiceImpl implements RequestService {
 	@Override
 	public int CountRequestWaiting(String reqCode) {
 		return requestMapper.CountRequestWaiting(reqCode);
-
 	}
 	
 }
