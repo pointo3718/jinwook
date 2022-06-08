@@ -23,12 +23,17 @@
    <result property="isOpen"             column="is_open"        jdbcType="TINYINT"/>   
    <result property="user.jpBalance"     column="jp_balance"     jdbcType="INTEGER"/>   
    <result property="orders.reviewStar"  column="review_star"    jdbcType="INTEGER"/>
+   <result property="orders.orderDateStart"  column="order_date_start"    jdbcType="DATE"/>
+   <result property="orders.orderDateEnd"  column="order_date_end"    jdbcType="DATE"/>
+   <result property="orders.orderPrice"  column="order_date_end"    jdbcType="DATE"/>
+   <result property="orders.orderNo"  column="order_date_end"    jdbcType="DATE"/>
+   <result property="orders.orderDateEnd"  column="order_date_end"    jdbcType="DATE"/>
    <result property="product.prodNo"     column="prod_no"        jdbcType="INTEGER"/>     
    <result property="product.prodName"   column="prod_name"      jdbcType="VARCHAR"/>     
    <result property="product.price"      column="price"          jdbcType="INTEGER"/>     
    <result property="product.prodOrign"  column="prod_orign"    jdbcType="VARCHAR"/>   
    <result property="product.prodInfo"  column="prod_info"    jdbcType="VARCHAR"/>  
-   <result property="product.isSoldout"  column="is_soldout"    jdbcType="TINYINT"/>       
+   <result property="product.isSoldout"  column="is_soldout"    jdbcType="INTEGER"/>       
    <result property="request.resDate"      column="res_date"          jdbcType="DATE"/>     
    <result property="request.reqDate"  column="req_date"    jdbcType="DATE"/>   
    <result property="request.refundMoney"  column="refund_money"    jdbcType="INTEGER"/>   
@@ -122,7 +127,7 @@
    
    <select id="getStore" parameterType="int" resultMap="storeSelectMap">
         SELECT
-      s.store_no, s.store_name, s.store_type, s.store_addr, s.start_time, s.end_time, s.holiday,
+      s.store_phone, s.store_name, s.store_type, s.store_addr, s.start_time, s.end_time, s.holiday,
       s.store_intro, vt.review_star, p.prod_no, p.prod_name, p.price, p.prod_orign, p.prod_info, p.is_soldout      
       FROM store s, product p, orders o,(SELECT ROUND(AVG(review_star),1) review_star 
                   FROM orders
@@ -134,7 +139,7 @@
       GROUP BY  p.prod_no
    </select>
 
-   <select id="getStoreWallet" parameterType="int"
+   <!-- <select id="getStoreWallet" parameterType="int"
       resultMap="storeSelectMap">
       SELECT
       s.total_earn, u.jp_balance, r.res_date, r.req_date, r.refund_money, r.req_status
@@ -144,7 +149,29 @@
          u.user_id=r.user_id AND
          r.store_no=s.store_no AND 
           s.store_no=#{storeNo}
-    </select>
+    </select>-->
+    
+    <select id="getStoreRefund" parameterType="int"
+      resultMap="storeSelectMap">
+      SELECT
+     res_date, req_date, refund_money, req_status
+      FROM request
+      WHERE store_no=#{storeNo}
+   </select>
+   
+    <select id="getStoreWallet" parameterType="int"
+      resultMap="storeSelectMap">
+		SELECT 
+		SUM(o.order_price), u.jp_balance, o.order_no, o.order_date, o.order_price, o.buyer_name
+		FROM  users u,orders o
+		WHERE u.user_id=o.user_id AND
+	  	o.order_status=5 AND
+	  	date(o.order_date) between '2022-06-08' and '2022-06-08' AND
+	 	o.store_no=#{storeNo}
+		ORDER BY order_no
+   </select>
+    
+    
 
 
    <select id="getStoreTotalCount" parameterType="Store"

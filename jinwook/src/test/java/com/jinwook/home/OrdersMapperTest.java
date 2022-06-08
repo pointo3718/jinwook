@@ -374,4 +374,6 @@ public class OrdersMapperTest {
       int result = ordersMapper.updateOrdersCeoEarn(store);
        System.out.println("결과는 " + result + "입니다.");   
    }
+   
+   
 }

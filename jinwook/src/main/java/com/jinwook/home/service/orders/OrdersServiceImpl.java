@@ -24,7 +24,8 @@ public class OrdersServiceImpl implements OrdersService{
 	
 	@Override
 	public int addOrders(Orders orders) {
-		
+		System.out.println(orders);
+		System.out.println(2);
 		return ordersMapper.addOrders(orders);
 	}
 

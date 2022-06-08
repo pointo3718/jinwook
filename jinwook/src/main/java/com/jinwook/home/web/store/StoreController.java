@@ -89,7 +89,7 @@ public class StoreController {
 		
 		storeService.deleteStoreProduct(product);
 		
-		model.addAttribute("product", product);
+		
 		
 		return "store/addStoreProduct";
 	}

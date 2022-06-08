@@ -32,10 +32,17 @@ public class BoardServiceImpl implements BoardService {
      
      @Autowired private FileUtils fileUtils;
     
+<<<<<<< HEAD
 	//1:1문의 등록v
 	@Override
 	public boolean addBoardInquiry(Board board) {
 		int queryResult = 0;
+=======
+   //1:1문의 등록
+   @Override
+   public boolean addBoardInquiry(Board board) {
+      int queryResult = 0;
+>>>>>>> refs/heads/master
 
       if (board.getBoardNo() == null) {
          queryResult = boardMapper.addBoardInquiry(board);

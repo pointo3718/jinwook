@@ -31,14 +31,14 @@
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-function fncAddPurchase() {
+function fncAddOrders() {
 		
 	/* document.addPurchase.submit(); action="/purchase/addPurchase*/
 	$("form").attr("method" , "POST").attr("action" , "/purchase/addPurchase").submit();
 }
 	$(function(){
 		$( "button" ).on("click" , function() {
-			fncAddPurchase();
+			fncAddOrders();
 		}); 
 	});
 	$(function(){
@@ -65,7 +65,7 @@ function fncAddPurchase() {
 		<h1 class="bg-primary text-center">상 품 구 매</h1>
 <form class="form-horizontal" name="addOrders">
 
- <input type="hidden" name="userId" value="${userId}" /> 
+ <input type="hidden" name="userId" value="${user.userId}" /> 
 		주문자 정보
 		<div class="form-group">
 		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">이 름</label>
@@ -79,7 +79,7 @@ function fncAddPurchase() {
 		  <div class="form-group">
 		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">전 화 번 호</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="buyerPhone" name="buyerPhone" value="${user.userPhone}">
+		      <input type="text" class="ct_input_g" id="buyerPhone" name="buyerPhone" value="${user.phone}">
 		       <span id="helpBlock" class="help-block">
 		      </span>
 		    </div>
@@ -99,52 +99,45 @@ function fncAddPurchase() {
 		    </div>
 		  </div>
 		</br>
+<!-- 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		상품 정보
+		상품 정보 -->
 		
-		   <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">상품 사진</label >
-		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id=prodImg name="prodImg" value="${cart.product.prodImg}" readonly>
-		    </div>
-		  </div>
+<table class="table table-hover table-striped" >
+         
+       <thead>
+          <tr>
+            <th align="center">상품사진</th>
+            <th align="left" >상품이름</th>
+            <th align="left">상품설명</th>
+            <th align="left">상품가격</th>
+            <th align="left">상품수량</th>
+          </tr>
+       </thead>
+        
+   	<tbody>
+        <c:forEach var="cart" items="${getCartList}">
+         <tr>
+           <td align="center">${cart.product.prodImg}</td>
+           <td align="left">${cart.product.prodName}</td>
+           <td align="left">${cart.product.prodInfo}</td>
+           <td align="left">${cart.product.price}</td>
+           <td align="left">${cart.prodCount}</td>
+         </tr>
+          </c:forEach>
+        
+    </tbody>
+     
+</table>
 
-		  <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">상품 이름</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="prodName" name="prodName" value="${cart.product.prodName}" readonly>
-		    </div>
-		  </div>
-
-		  <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">상품 설명</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="prodInfo" name="" value="${cart.product.prodInfo}" readonly>
-		    </div>
-		  </div>
-
-		<div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">상품 가격</label>
-			<div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="Price" name="Price" value="${cart.product.Price}" readonly>
-		    </div>
-		</div>
-	
-		 <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">상품 수량</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="prodCount" name="prodCount" value="${cart.prodCount}" readonly>
-		    </div>
-		  </div>
 		  </br>
 		 결제 정보 
 
 		 <div class="form-group">
 		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">총 상품 금액</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="orderPrice" name="orderPrice" value="${orders.orderPrice}" readonly>
+		      <input type="text" class="ct_input_g" id="orderPrice" name="orderPrice" value="${cart.orders.orderPrice}" readonly>
 		    </div>
 		  </div>
 
@@ -172,7 +165,22 @@ function fncAddPurchase() {
 			<div class="form-group">
 		     <label for="price" class="col-sm-offset-1 col-sm-3 control-label">총 결제금액</label>
 		      <div class="col-sm-4">
-		       <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${orders.finalPrice}" readonly>
+		      
+		       <c:choose>
+			       <c:when test="${user.grade=='프랜즈'}">
+			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice*0.99}" readonly>
+			      </c:when>
+			      <c:when test="${user.grade=='패밀리'}">
+			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice*0.97}" readonly>
+			      </c:when>
+			      <c:when test="${user.grade=='퍼스트'}">
+			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice*0.95}" readonly>
+			      </c:when>
+			     <c:when test="${user.grade=='일반'}">
+			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice}" readonly>
+			      </c:when>
+		      </c:choose>
+		      
 		      </div>
 		    </div>
 

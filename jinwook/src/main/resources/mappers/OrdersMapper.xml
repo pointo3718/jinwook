@@ -156,13 +156,13 @@
         AND   c.user_id = o.user_id
 		AND	  c.user_id = #{userId}
 		AND   c.cart_status = #{cartStatus}
-		AND   c.store_name = #{storeName}
         GROUP BY cart_no;
 	</select>
 
 	<select id="getCartTotalCount" resultType="int">
 		SELECT COUNT(*)
 		FROM cart
+		WHERE cart_status = 0
 	</select>
 	
 	<update id="addOrdersJpayPassword">
@@ -208,7 +208,7 @@
 	<insert id="addOrdersJpayCharge" useGeneratedKeys="true" keyProperty="jpNo">
 		INSERT
 		INTO jpay(user_id,order_no,jp_status,final_price,charge_pay,jp_date)
-		VALUES(#{userId},#{orderNo:INTEGER},#{jpStatus},#{finalPrice:INTEGER},#{chargePay:INTEGER},SYSDATE())
+		VALUES(#{userId},#{orders.orderNo:INTEGER},#{jpStatus},#{finalPrice:INTEGER},#{chargePay:INTEGER},SYSDATE())
 	</insert>
 	
 	<select id="getOrdersJpaylist" parameterType="jpay" resultMap="jpaySelectMap">

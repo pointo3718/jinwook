@@ -3,6 +3,7 @@ package com.jinwook.home.service.domain;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -47,6 +48,8 @@ public class Orders {
 	private String reviewImg1;		//리뷰사진 1	|주문리뷰
 	private String reviewImg2;		//리뷰사진 2	|주문리뷰
 	private String reviewImg3;		//리뷰사진 3	|주문리뷰
+	private LocalDateTime orderDateStart;
+	private LocalDateTime orderDateEnd;
 	
 	public Orders() {
 		// TODO Auto-generated constructor stub
