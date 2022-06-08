@@ -21,7 +21,7 @@ import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
 
-//@Controller
+@Controller
 @RequestMapping("/orders/*")
 public class OrdersController {
 
