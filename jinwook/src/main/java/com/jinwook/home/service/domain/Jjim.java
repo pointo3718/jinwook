@@ -9,11 +9,11 @@ import lombok.ToString;
 @ToString
 public class Jjim {
 
-	private int jjimNo;
+	private Integer jjimNo;
 	private User user;
-	private int rcpNo;
-	private int storeNo;
-//	private String userId;
+	private Integer rcpNo;
+	private Integer storeNo;
+	private String userId;
 //	private int boardNo;
 //	private String jjimStatus;
 	

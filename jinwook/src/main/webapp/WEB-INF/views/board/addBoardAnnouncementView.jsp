@@ -12,7 +12,6 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
@@ -29,10 +28,28 @@
         }
      </style>
 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
+$(function() {
+	$("button.btn.btn-primary").on("click", function() {
+		fncAddBoardInquiry();
+	});
+});
 
-var rcpNo = ${recipe.rcpNo};
-var userId = ${user.userId};
+//==> 추가된부분 : "취소"  Event 처리 및  연결
+$(function() {
+	$("a[href='#' ]").on("click", function() {
+		$("form")[0].reset();
+	});
+});
+
+function fncAddBoardInquiry() {
+	
+	$("form").attr("method", "POST").attr("action", "/board/addBoardInquiry").submit();
+}
+
+var rcpNo = ${recipe.rcpNo}
+var userId = ${board.user.userId}
 
 function updateRecipeReco() {
 	$.ajax({
@@ -61,23 +78,29 @@ function updateRecipeReco() {
 </head>
 
 <body>
-
 	<div class="container">
-	
-	<div class="page-header">
-	       <h3 class=" text-info">공지사항 등록</h3>
-	       <h5 class="text-muted">공지사항을 <strong class="text-danger">등록</strong>해 주세요.</h5>
-	    </div>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>1:1문의 제목</strong></div>
-			<div class="col-xs-7 col-md-5">${board.boardTitle}</div>
-		</div>
-		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>1:1문의 내용</strong></div>
-			<div class="col-xs-7 col-md-5">${board.boardContent}</div>
-		</div>
-		<hr/>
+			<form method="post" action="board/addBoardAnnouncement">
+				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+					<thead>
+						<tr>
+							<th colspan="2" style="background-color: #eee; text-align: center;">공지사항 등록</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" class="form-control"
+								placeholder="공지사항 제목을 써주세요." name="bbsTitle" maxlength="50"></td>
+						</tr>
+						<tr>
+							<td><textarea type="text" class="form-control"
+									placeholder="글 내용" name="bbsContent" maxlength="2048"
+									style="height: 350px;">
+                        </textarea></td>
+						</tr>
+					</tbody>
+				
+				</table>
 		<div class="row">
 	  		<div class="col-xs-5 col-md-3"><strong>작성자</strong></div>
 			<div class="col-xs-7 col-md-5">${board.user.userId}</div>
@@ -93,21 +116,16 @@ function updateRecipeReco() {
 			<div class="col-xs-7 col-md-5">${board.writeDate}</div>
 		</div>
 		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>답변상태</strong></div>
-			<div class="col-xs-7 col-md-5">${board.boardInqStatus}</div>
+		<div class="col-sm-offset-4  col-sm-4 text-center">
+			<!-- <a href="<c:url value='/board/addBoardInquiry'/>" role="button" class="btn btn-outline-info">글쓰기</a> -->
+		    <button type="button" class="btn btn-primary" onclick="fncAddBoardInquiry()">등 &nbsp;록</button>
+			<a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
 		</div>
-		<hr/>
-		
- 	</div>
+		</div>
+			</form>
+		</div>
+	</div>
 
-<h1>Test Complete!</h1>
-
-<div style="margin-right:1px;">
-	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco(); return false;">추천 ${recipe.getRecommendCount}</button>
-	<button type="button" class="btn btn-danger" id="hate_btn">비추천</button>
-</div>
-	
 </body>
 
 </html>

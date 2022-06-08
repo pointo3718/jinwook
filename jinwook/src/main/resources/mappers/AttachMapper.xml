@@ -15,7 +15,7 @@
 		, delete_time
 	</sql>
 
-	<insert id="Attach" parameterType="list">
+	<insert id="addAttach" parameterType="list">
 		INSERT INTO attach (
 			<include refid="attachColumns" />
 		) VALUES

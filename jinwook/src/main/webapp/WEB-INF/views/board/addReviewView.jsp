@@ -118,14 +118,7 @@ function updateRecipeReco() {
 		<hr/>
 		<div class="row">
 	  		<div class="col-xs-5 col-md-3 "><strong>답변상태</strong></div>
-			<c:choose>
-				<c:when test="${board.boardInqStatus == false}">
-					답변대기중
-				</c:when>
-				<c:otherwise>
-					답변 완료
-				</c:otherwise>
-			</c:choose>
+			<div class="col-xs-7 col-md-5">${board.boardInqStatus}</div>
 		<hr/>  
 		<div class="col-sm-offset-4  col-sm-4 text-center">
 			<!-- <a href="<c:url value='/board/addBoardInquiry'/>" role="button" class="btn btn-outline-info">글쓰기</a> -->
@@ -137,23 +130,6 @@ function updateRecipeReco() {
 		</div>
 	</div>
 
-<div class="container">
-	<div class="form-group">
-		<form method="post" encType = "multipart/form-data">
-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-			1:1문의 답변
-				<tr>
-					<td style="border-bottom:none;" valign="middle"><br><br></td>
-					<td><input type="text" style="height:100px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "commentText"></td>
-					<td><br><br><input type="submit" class="btn-primary pull" value="댓글 작성"></td>
-				</tr>
-				<tr>
-					<td colspan="3"><input type="file" name="fileName"></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-</div>
 </body>
 
 </html>

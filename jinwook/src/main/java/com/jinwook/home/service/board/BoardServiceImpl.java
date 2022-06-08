@@ -25,7 +25,6 @@ import com.jinwook.home.service.domain.Recipe;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-<<<<<<< HEAD
    @Autowired
    private BoardMapper boardMapper;
    
@@ -33,25 +32,10 @@ public class BoardServiceImpl implements BoardService {
      
      @Autowired private FileUtils fileUtils;
     
-   
-   //1:1문의 등록
-   @Override
-   public boolean addBoardInquiry(Board board) {
-      int queryResult = 0;
-=======
-	@Autowired
-	private BoardMapper boardMapper;
-	
-	  @Autowired private AttachMapper attachMapper;
-	  
-	  @Autowired private FileUtils fileUtils;
-	 
-	
-	//1:1문의 등록
+	//1:1문의 등록v
 	@Override
 	public boolean addBoardInquiry(Board board) {
 		int queryResult = 0;
->>>>>>> refs/heads/Song
 
       if (board.getBoardNo() == null) {
          queryResult = boardMapper.addBoardInquiry(board);
@@ -72,7 +56,7 @@ public class BoardServiceImpl implements BoardService {
       return (queryResult > 0);
    }
    
-   //1:1문의 사진 첨부
+   //1:1문의 사진 첨부v
    @Override
    public boolean addBoardInquiry(Board board, MultipartFile[] files) {
       int queryResult = 1;
@@ -91,7 +75,7 @@ public class BoardServiceImpl implements BoardService {
 
       return (queryResult > 0);
    }
-   //공지사항 등록
+   //공지사항 등록v
    @Override
    public boolean addBoardAnnouncement(Board board) {
       int queryResult = 0;
@@ -115,7 +99,7 @@ public class BoardServiceImpl implements BoardService {
       return (queryResult > 0);
    }
    
-   //공지사항 사진 첨부
+   //공지사항 사진 첨부v
    @Override
    public boolean addBoardAnnouncement(Board board, MultipartFile[] files) {
       int queryResult = 1;
@@ -135,43 +119,43 @@ public class BoardServiceImpl implements BoardService {
       return (queryResult > 0);
    }
 
-   //1:1문의 수정
+   //1:1문의 수정v
    @Override
    public int updateBoardInquiry(Board board) {
       return boardMapper.updateBoardInquiry(board);
    }
    
-   //공지사항 수정
+   //공지사항 수정v
    @Override
    public int updateBoardAnnouncement(Board board) {
       return boardMapper.updateBoardAnnouncement(board);
    }
 
-   //1:1문의 삭제
+   //1:1문의 삭제v
    @Override
    public int deleteBoardInquiry(Integer boardNo) {
       return boardMapper.deleteBoardInquiry(boardNo);
    }
    
-   //1:1문의 삭제
+   //공지사항 삭제v
    @Override
    public int deleteBoardAnnouncement(Integer boardNo) {
       return boardMapper.deleteBoardAnnouncement(boardNo);
    }
 
-   //1:1문의 상세 조회
+   //1:1문의 상세 조회v
    @Override
    public Board getBoardInquiry(Integer boardNo) {
       return boardMapper.getBoardInquiry(boardNo);
    }
    
-   //공지사항 상세 조회
+   //공지사항 상세 조회v
    @Override
    public Board getBoardAnnouncement(Integer boardNo) {
       return boardMapper.getBoardAnnouncement(boardNo);
    }
 
-   //1:1문의 목록 조회
+   //1:1문의 목록 조회v
    @Override
    public List<Board> getBoardInquiryList(Board board) {
       List<Board> boardList = Collections.emptyList();
@@ -185,7 +169,7 @@ public class BoardServiceImpl implements BoardService {
       return boardList;
    }
    
-   //공지사항 목록 조회
+   //공지사항 목록 조회v
    @Override
    public List<Board> getBoardAnnouncementList(Board board) {
       List<Board> boardList = Collections.emptyList();
@@ -205,16 +189,25 @@ public class BoardServiceImpl implements BoardService {
       return boardMapper.getRankList(board);
    }
 
+   //상점후기 등록
    @Override
    public int addReview(Orders orders) {
       return boardMapper.addReview(orders);
    }
 
+   //상점후기 삭제
    @Override
    public int deleteReview(int ordersNo) {
       return boardMapper.deleteReview(ordersNo);
    }
 
+   //상점후기 상세 조회
+   @Override
+   public Orders getReview(int ordersNo) {
+   	return boardMapper.getReview(ordersNo);
+   }
+   
+   //상점후기 목록 조회
    @Override
    public List<Orders> getReviewList(Board board) {
       List<Orders> reviewList = Collections.emptyList();
@@ -228,39 +221,45 @@ public class BoardServiceImpl implements BoardService {
       return reviewList;
    }
 
+   //레시피 등록
    @Override
    public int addRecipe(Recipe rcp) {
       return boardMapper.addRecipe(rcp);
    }
 
+   //레시피 수정
    @Override
    public int updateRecipe(Recipe rcp) {
       return boardMapper.updateRecipe(rcp);
    }
 
+   //레시피 삭제
    @Override
    public int deleteRecipe(Integer rcpNo) {
       return boardMapper.deleteRecipe(rcpNo);
    }
 
+   //레시피 상세 조회
    @Override
    public Recipe getRecipe(Integer rcpNo) {
       return boardMapper.getRecipe(rcpNo);
    }
 
+   //레시피 목록 조회
    @Override
-   public List<Recipe> getRecipeList(Board board) {
+   public List<Recipe> getRecipeList(Recipe rcp) {
       List<Recipe> recipeList = Collections.emptyList();
 
-      int recipeTotalCount = boardMapper.getRecipeTotalCount(board);
+      int recipeTotalCount = boardMapper.getRecipeTotalCount(rcp);
 
       if (recipeTotalCount > 0) {
-         recipeList = boardMapper.getRecipeList(board);
+         recipeList = boardMapper.getRecipeList(rcp);
       }
 
       return recipeList;
    }
 
+   //댓글 등록
    @Override
    public boolean addComment(Comment comment) {
       int queryResult = 0;
@@ -426,5 +425,12 @@ public class BoardServiceImpl implements BoardService {
    public int updateBoardAnnouncementHits(Integer boardNo) {
       return boardMapper.updateBoardAnnouncementHits(boardNo);
    }
+
+	@Override
+	public int updateBoardRecipeHits(Integer rcpNo) {
+		return boardMapper.updateBoardRecipeHits(rcpNo);
+	}
+
+
 
 }

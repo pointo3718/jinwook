@@ -1,104 +1,208 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-    
-<html>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
+
+<!--  ///////////////////////// JSTL  ////////////////////////// -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+
+<!DOCTYPE html>
+
+<html lang="ko">
+
 <head>
-<meta charset="EUC-KR">
-	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
- 		body {
-            padding-top : 50px;
-        }
-     </style>
+<meta charset="UTF-8">
 
-<script type="text/javascript">
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-var rcpNo = ${recipe.rcpNo};
-var userId = ${user.userId};
+<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-function updateRecipeReco() {
-	$.ajax({
-		type : "POST",
-		url : "/board/updateRecipeReco",
-		dataType : "json",
-		data : {'rcpNo' : rcpNo, 'userId' : userId},
-		error : function() {
-			alert("Åë½Å ¿¡·¯");
-		},
-		success : function(recoCheck) {
-			if (recoCheck == 0) {
-				alert("ÃßÃµ ¿Ï·á!");
-				location.reload();
-			}
-			else if (recoCheck == 1) {
-				alert("ÃßÃµ Ãë¼Ò!");
-				location.reload();
-			}
-		}
-	});
+
+<!-- Bootstrap Dropdown Hover CSS -->
+<link href="/css/animate.min.css" rel="stylesheet">
+<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<!-- Bootstrap Dropdown Hover JS -->
+<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<!-- jQuery UI toolTip ì‚¬ìš© CSS-->
+<link rel="stylesheet"
+   href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- jQuery UI toolTip ì‚¬ìš© JS-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/js/jquery.twbsPagination.js"></script>
+
+<!-- jQuery -->
+<script src="/js/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+
+
+
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<style>
+body {
+   padding-top: 50px;
 }
 
+.paging-div {
+  padding: 15px 0 5px 10px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+</style>
+
+
+
+
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
+<script type="text/javascript">
+
+
+   //=============    ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘  Event  ì²˜ë¦¬ =============   
+   function fncGetUserList(currentPage) {
+      $("#currentPage").val(currentPage)
+      $("form").attr("method", "POST").attr("action",
+            "/purchase/listPurchase").submit();
+   }
+
+   //============= "ê²€ìƒ‰"  Event  ì²˜ë¦¬ =============   
+   $(function() {
+      //==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+      $("button.btn.btn-default").on("click", function() {
+         fncGetUserList(1);
+      });
+   });
+
+   //============= userId ì— íšŒì›ì •ë³´ë³´ê¸°  Event  ì²˜ë¦¬(Click) =============   
+   $(function() {
+
+      //==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+      $("td:nth-child(1)").on(
+            "click",
+            function() {
+               self.location = "/purchase/getPurchase?tranNo="
+                     + $(this).attr("tranNo");
+            });
+
+      //==> userId LINK Event End User ì—ê²Œ ë³´ì¼ìˆ˜ ìˆë„ë¡ 
+      $("td:nth-child(2)").css("color", "red");
+
+   });
+
+   $(function() {
+
+      //==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+      $("td:nth-child(2)").on("click", function() {
+         self.location = "/user/getUser?userId=" + $(this).text().trim();
+      });
+
+   });
+
+   //============= userId ì— íšŒì›ì •ë³´ë³´ê¸°  Event  ì²˜ë¦¬ (double Click)=============
+   $(function() {
+
+      //==> userId LINK Event End User ì—ê²Œ ë³´ì¼ìˆ˜ ìˆë„ë¡ 
+      $(".ct_list_pop td:nth-child(3)").css("color", "red");
+      $("h7").css("color", "red");
+
+      //==> ì•„ë˜ì™€ ê°™ì´ ì •ì˜í•œ ì´ìœ ëŠ” ??
+      $(".ct_list_pop:nth-child(4n+6)").css("background-color", "whitesmoke");
+   });
+   
 </script>
 
 </head>
 
 <body>
 
-	<div class="container">
-	
-	<div class="page-header">
-	       <h3 class=" text-info">1:1¹®ÀÇ ¸ñ·Ï</h3>
-	       <h5 class="text-muted">»óÇ°À» <strong class="text-danger">ÃÖ½ÅÁ¤º¸·Î °ü¸®</strong>ÇØ ÁÖ¼¼¿ä.</h5>
-	    </div>
-	
-		<div class="row">
-	  		<div class="col-xs-3 col-md-1"><strong>°Ô½Ã±Û Á¦¸ñ</strong></div>
-			<div class="col-xs-7 col-md-5">${t}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-3 col-md-1"><strong>°Ô½Ã±Û ³»¿ë</strong></div>
-			<div class="col-xs-7 col-md-5">${board.boardNo}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-3 col-md-1 "><strong>°Ô½Ã±Û ÀÛ¼ºÀÚ</strong></div>
-			<div class="col-xs-7 col-md-5">${w}</div>
-		</div>
-		
-		<hr/>
-		
- 	</div>
+   <!-- ToolBar Start /////////////////////////////////////-->
+   <!-- ToolBar End /////////////////////////////////////-->
 
-<h1>Test Complete!</h1>
+   <!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
+   <div class="container">
 
-<div style="margin-right:1px;">
-	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco(); return false;">ÃßÃµ ${recipe.getRecommendCount}</button>
-	<button type="button" class="btn btn-danger" id="hate_btn">ºñÃßÃµ</button>
-</div>
-	
+      <div class="page-header text-info">
+         <h3>1:1ë¬¸ì˜ ëª©ë¡</h3>
+      </div>
+
+
+      <!-- table ìœ„ìª½ ê²€ìƒ‰ Start /////////////////////////////////////-->
+      <div class="row">
+
+         <div class="col-md-6 text-left">
+            <p class="text-primary">ì „ì²´ ${resultPage.totalCount } ê±´ìˆ˜, í˜„ì¬
+               ${resultPage.currentPage} í˜ì´ì§€</p>
+         </div>
+
+         <div class="col-md-6 text-right">
+            <form class="form-inline" name="detailForm">
+
+
+               <!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
+               <input type="hidden" id="currentPage" name="currentPage" value="" />
+
+            </form>
+         </div>
+
+      </div>
+
+      <!--  table Start /////////////////////////////////////-->
+      <table class="table table-hover table-striped">
+
+         <thead>
+            <tr>
+               <th align="center">No</th>
+               <th align="left">ë¬¸ì˜ ì œëª©</th>
+               <th align="left">ë‹µë³€ ìƒíƒœ</th>
+            </tr>
+         </thead>
+
+         <tbody>
+
+            <c:set var="i" value="0" />
+            <c:forEach var="board" items="${getBoardInquiryList}">
+               <c:set var="i" value="${ i+1 }" />
+               <tr>
+                  <td align="Center">${ board.boardNo }</td>
+                  <td align="left">${board.boardTitle}</td>
+                  <td align="left">
+             <c:choose>
+				<c:when test="${board.boardInqStatus == false}">
+					ë‹µë³€ëŒ€ê¸°ì¤‘
+				</c:when>
+				<c:otherwise>
+					ë‹µë³€ ì™„ë£Œ
+				</c:otherwise>
+			</c:choose>
+                  </td>
+               </tr>
+            </c:forEach>
+
+         </tbody>
+
+      </table>
+      <!--  table End /////////////////////////////////////-->
+
+   </div>
+   <!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
+
+
+   <!-- PageNavigation Start... -->
+   <!-- PageNavigation End... -->
+
 </body>
 
 </html>
