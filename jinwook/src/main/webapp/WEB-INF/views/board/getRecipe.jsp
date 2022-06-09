@@ -49,7 +49,10 @@ $(function() {
  $(function() {
 	 
 	$('#reco_btn').on('click', function() {
+<<<<<<< HEAD
 		
+=======
+>>>>>>> refs/heads/Song
 		$.ajax(
 				{
 			type : "POST",
@@ -87,7 +90,7 @@ $(function() {
 		textarea.select();
 		document.execCommand("copy");
 		document.body.removeChild(textarea);
-		alert("URL�� ����Ǿ����ϴ�.")
+		alert("URL을 복사하였습니다.")
 	}
 </script>
 
@@ -168,8 +171,8 @@ $(function() {
 </a>url</span>
 		</div>
 		<hr/>
-	<button type="button" class="btn btn-warning" id="reco_btn">��õ</button>
-	<button type="button" class="btn btn-danger" id="hate_btn">����õ</button>
+	<button type="button" class="btn btn-warning" id="reco_btn">추천</button>
+	<button type="button" class="btn btn-danger" id="hate_btn">비추천</button>
 	
 	
 
