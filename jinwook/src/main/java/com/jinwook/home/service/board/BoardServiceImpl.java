@@ -1,7 +1,13 @@
 package com.jinwook.home.service.board;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jinwook.home.common.FileUtils;
+import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.AttachMapper;
 import com.jinwook.home.mapper.BoardMapper;
 import com.jinwook.home.service.domain.Attach;
@@ -17,6 +24,7 @@ import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
+import com.jinwook.home.service.domain.User;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -157,6 +165,11 @@ public class BoardServiceImpl implements BoardService {
       List<Board> boardList = Collections.emptyList();
 
       int boardTotalCount = boardMapper.getBoardInquiryTotalCount(board);
+      
+      PaginationInfo paginationInfo = new PaginationInfo(board);
+      paginationInfo.setTotalRecordCount(boardTotalCount);
+
+      board.setPaginationInfo(paginationInfo);
 
       if (boardTotalCount > 0) {
          boardList = boardMapper.getBoardInquiryList(board);
@@ -171,6 +184,11 @@ public class BoardServiceImpl implements BoardService {
       List<Board> boardList = Collections.emptyList();
       
       int boardTotalCount = boardMapper.getBoardAnnouncementTotalCount(board);
+      
+      PaginationInfo paginationInfo = new PaginationInfo(board);
+      paginationInfo.setTotalRecordCount(boardTotalCount);
+
+      board.setPaginationInfo(paginationInfo);
       
       if (boardTotalCount > 0) {
          boardList = boardMapper.getBoardAnnouncementList(board);
@@ -248,6 +266,11 @@ public class BoardServiceImpl implements BoardService {
 
       int recipeTotalCount = boardMapper.getRecipeTotalCount(rcp);
 
+      PaginationInfo paginationInfo = new PaginationInfo(rcp);
+      paginationInfo.setTotalRecordCount(recipeTotalCount);
+
+      rcp.setPaginationInfo(paginationInfo);
+      
       if (recipeTotalCount > 0) {
          recipeList = boardMapper.getRecipeList(rcp);
       }
@@ -286,27 +309,41 @@ public class BoardServiceImpl implements BoardService {
    }
    
    @Override
-   public void addStoreJjim(Jjim jjim) {
-      boardMapper.addStoreJjim(jjim);
-      boardMapper.updateStoreJjim(jjim.getStoreNo());
+   public boolean addStoreJjim(Jjim jjim) {
+	   int queryResult = 0;
+
+	      if (jjim.getJjimNo() == null) {
+	         queryResult =  boardMapper.addStoreJjim(jjim);
+	      } else {
+	         queryResult = boardMapper.updateStoreJjim(jjim.getStoreNo());
+	      }
+
+	      return (queryResult == 1) ? true : false;
    }
 
    @Override
-   public void addRecipeJjim(Jjim jjim) {
-      boardMapper.addRecipeJjim(jjim);
-      boardMapper.updateRecipeJjim(jjim.getRcpNo());
+   public boolean addRecipeJjim(Jjim jjim) {
+	   int queryResult = 0;
+
+	      if (jjim.getJjimNo() == null) {
+	         queryResult = boardMapper.addRecipeJjim(jjim);
+	      } else {
+	         queryResult = boardMapper.updateRecipeJjim(jjim.getRcpNo());
+	      }
+
+	      return (queryResult == 1) ? true : false;
    }
 
    @Override
-   public void deleteStoreJjim(Jjim jjim) {
+   public int deleteStoreJjim(Jjim jjim) {
       boardMapper.deleteStoreJjim(jjim);
-      boardMapper.updateStoreJjim(jjim.getStoreNo());      
+      return boardMapper.updateStoreJjim(jjim.getStoreNo());      
    }
 
    @Override
-   public void deleteRecipeJjim(Jjim jjim) {
+   public int deleteRecipeJjim(Jjim jjim) {
       boardMapper.deleteRecipeJjim(jjim);
-      boardMapper.updateRecipeJjim(jjim.getRcpNo());      
+      return boardMapper.updateRecipeJjim(jjim.getRcpNo());      
    }
 
    @Override
@@ -426,7 +463,6 @@ public class BoardServiceImpl implements BoardService {
 	public int updateBoardRecipeHits(Integer rcpNo) {
 		return boardMapper.updateBoardRecipeHits(rcpNo);
 	}
-
 
 
 }

@@ -31,31 +31,6 @@
 
 <script type="text/javascript">
 
-var rcpNo = ${recipe.rcpNo};
-var userId = ${user.userId};
-
-function updateRecipeReco() {
-	$.ajax({
-		type : "POST",
-		url : "/board/updateRecipeReco",
-		dataType : "json",
-		data : {'rcpNo' : rcpNo, 'userId' : userId},
-		error : function() {
-			alert("통신 에러");
-		},
-		success : function(recoCheck) {
-			if (recoCheck == 0) {
-				alert("추천 완료!");
-				location.reload();
-			}
-			else if (recoCheck == 1) {
-				alert("추천 취소!");
-				location.reload();
-			}
-		}
-	});
-}
-
 </script>
 
 </head>
@@ -105,11 +80,26 @@ function updateRecipeReco() {
 			<!-- <div class="col-xs-7 col-md-5">${board.boardInqStatus}</div> -->
 		</div>
 		<hr/>
-<div style="margin-right:1px;">
-<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>답변</strong></div>
-			<div class="col-xs-7 col-md-5">${comment.CommentContent}</div>
-		</div>
+		
+		 <!--                     추가                         -->
+    <!--  댓글  -->
+    <div class="container">
+        <label for="content">답변</label>
+        <form name="commentInsertForm">
+            <div class="input-group">
+               <input type="hidden" name="bno" value="${board.boardNo}"/>
+               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+               <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+               </span>
+              </div>
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="commentList"></div>
+    </div>
+</div>
 		<hr/>
 	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco() return false">추천 ${recipe.getRecommendCount}</button>
 	<button type="button" class="btn btn-danger" id="hate_btn">비추천</button>
