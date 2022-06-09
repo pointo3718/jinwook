@@ -26,15 +26,20 @@
  		body {
             padding-top : 50px;
         }
+        
+     .link-icon { position: relative; display: inline-block; width: auto;    font-size: 14px; font-weight: 500; color: #333; margin-right: 10px; padding-top: 50px; }
+	 .link-icon.kakao { background-image: url(../images/icon-kakao.png); background-repeat: no-repeat; }
      </style>
+     
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
-$(()=>{
-	$('#reco_btn').click(function() {	
-		var rcpNo = ${recipe.rcpNo}
-		var userId = ${recipe.user.userId};
-		function updateRecipeReco() {
+<%--	var rcpNo = ${recipe.rcpNo};
+		var userId = ${recipe.userId};
+ $(function() {
+	 
+	$('#reco_btn').on('click', function() {
 		
 		$.ajax({
 			type : "POST",
@@ -53,14 +58,45 @@ $(()=>{
 					alert("추천 취소!");
 					location.reload();
 					}
-				}
-			});
-		}
+			}
+		});
 	});
-})
+}); --%>
+
+<%-- function shareKakao() {
+	 
+	  // 사용할 앱의 JavaScript 키 설정
+	  Kakao.init('a0a80d65a577c18111b0b6018483114f');
+	 
 	
+	// 카카오링크 버튼 생성
+		Kakao.Link.createDefaultButton({
+			container : '#btnKakao', // 카카오공유버튼ID
+			objectType : 'feed',
+			content : {
+				title : "개발새발", // 보여질 제목
+				description : "개발새발 블로그입니다", // 보여질 설명
+				imageUrl : "devpad.tistory.com/", // 콘텐츠 URL
+				link : {
+					mobileWebUrl : "devpad.tistory.com/",
+					webUrl : "devpad.tistory.com/"
+				}
+			}
+		});
+	}--%>
+	
+	function clip(){
 
-
+		var url = '';
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		alert("URL이 복사되었습니다.")
+	}
 </script>
 
 </head>
@@ -127,11 +163,18 @@ $(()=>{
 			<div class="col-xs-7 col-md-5">${recipe.recommendCount}</div>
 		</div>
 		<hr/>
-
-</div>
-
-	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco()">추천${recipe.recommendCount}</button>
+		<div class="row">
+		
+			<span class="button gray medium"><a href="#" onclick="clip(); return false;">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-fill" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/></svg>		
+</a>url복사</span>
+		</div>
+		<hr/>
+	<button type="button" class="btn btn-warning" id="reco_btn">추천</button>
 	<button type="button" class="btn btn-danger" id="hate_btn">비추천</button>
+	
+	
 
 	
 </body>

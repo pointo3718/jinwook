@@ -9,6 +9,7 @@ import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
+import com.jinwook.home.service.domain.User;
 
 public interface BoardService {
 	
@@ -68,26 +69,22 @@ public interface BoardService {
 	//레시피 목록 조회v
 	public List<Recipe> getRecipeList(Recipe rcp);
 	
-	//댓글 등록이면서 수정, 삭제, 목록조회
+	//댓글 등록v이면서 수정v, 삭제v, 목록조회v
 	public boolean addComment(Comment comment);
 	public int deleteComment(Integer commentNo);
 	public List<Comment> getCommentList(Comment comment);
 	
 	// 찜
-	public void addStoreJjim(Jjim jjim);
+	public boolean addStoreJjim(Jjim jjim);
+	public boolean addRecipeJjim(Jjim jjim);
 
-	public void addRecipeJjim(Jjim jjim);
-
-	public void deleteStoreJjim(Jjim jjim);
-
-	public void deleteRecipeJjim(Jjim jjim);
+	public int deleteStoreJjim(Jjim jjim);
+	public int deleteRecipeJjim(Jjim jjim);
 
 	public void updateStoreJjim(int storeNo);
-
 	public void updateRecipeJjim(int rcpNo);
 
 	public int getRecipeJjim(Jjim jjim);
-
 	public int getStoreJjim(Jjim jjim);
 	
 	// 레시피 추천

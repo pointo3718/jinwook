@@ -7,7 +7,6 @@
 
 <!-- ToolBar Start /////////////////////////////////////-->
 <div class="navbar  navbar-inverse navbar-fixed-top">
-<<<<<<< HEAD
    
    <div class="container">
           
@@ -96,98 +95,8 @@
       <!-- dropdown hover END -->          
        
    </div>
-=======
 	
-	<div class="container">
-	       
-		<a class="navbar-brand" href="index">진 욱 이 네</a>
-		
-		<!-- toolBar Button Start //////////////////////// -->
-		<div class="navbar-header">
-		    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#target">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		    </button>
-		</div>
-		<!-- toolBar Button End //////////////////////// -->
-		
-	    <!--  dropdown hover Start -->
-		<div 	class="collapse navbar-collapse" id="target" 
-	       			data-hover="dropdown" data-animations="fadeInDownNew fadeInRightNew fadeInUpNew fadeInLeftNew">
-	         
-	         	<!-- Tool Bar 를 다양하게 사용하면.... -->
-	             <ul class="nav navbar-nav">
-	             
-	              <!--  회원관리 DrowDown -->
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >회원관리</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">개인정보조회</a></li>
-	                         
-	                         <c:if test="${sessionScope.user.role == 'admin'}">
-	                         	<li><a href="#">회원정보조회</a></li>
-	                         </c:if>
-	                         
-	                         <li class="divider"></li>
-	                         <li><a href="#">etc...</a></li>
-	                     </ul>
-	                 </li>
-	                 
-	              <!-- 판매상품관리 DrowDown  -->
-	               <c:if test="${sessionScope.user.role == 'admin'}">
-		              <li class="dropdown">
-		                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-		                         <span >판매상품관리</span>
-		                         <span class="caret"></span>
-		                     </a>
-		                     <ul class="dropdown-menu">
-		                         <li><a href="#">판매상품 등록</a></li>
-		                         <li><a href="#">판매상품 관리</a></li>
-		                         <li class="divider"></li>
-		                         <li><a href="#">etc..</a></li>
-		                     </ul>
-		                </li>
-	                 </c:if>
-	                 
-	              <!-- 구매관리 DrowDown -->
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >상품구매</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">상 품 검 색</a></li>
-	                         
-	                         <c:if test="${sessionScope.user.role == 'user'}">
-	                           <li><a href="#">구매이력조회</a></li>
-	                         </c:if>
-	                         
-	                         <li><a href="#">최근본상품</a></li>
-	       
-	                         <li class="divider"></li>
-	                         <li><a href="#">etc..</a></li>
-	                         
-	                     </ul>
-	                 </li>
-	                 
-	                 <li><a href="#">etc...</a></li>
-	             </ul>
-	             
-	             <ul class="nav navbar-nav navbar-right">
-	                <li><a href="#">로그아웃</a></li>
-	            </ul>
-		</div>
-		<!-- dropdown hover END -->	       
-	    
-	</div>
->>>>>>> refs/remotes/origin/master
 </div>
-<<<<<<< HEAD
       <!-- ToolBar End /////////////////////////////////////-->
     
       
@@ -255,7 +164,6 @@
          $(self.location).attr("href","/orders/getOrdersCartList");
       });
    </script>  
-=======
 		<!-- ToolBar End /////////////////////////////////////-->
  	
    	
@@ -323,4 +231,3 @@
 			$(self.location).attr("href","/orders/getOrdersCartList");
 		});
 	</script>  
->>>>>>> refs/remotes/origin/master

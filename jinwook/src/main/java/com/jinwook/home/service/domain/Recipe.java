@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Recipe {
+public class Recipe extends CommonDTO {
 	
 	private Integer rcpNo;
 	private String userId;
