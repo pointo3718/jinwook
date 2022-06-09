@@ -49,7 +49,6 @@ $(function() {
  $(function() {
 	 
 	$('#reco_btn').on('click', function() {
->>>>>>> refs/heads/Song
 		
 		$.ajax(
 				{
@@ -69,38 +68,14 @@ $(function() {
 					alert("추천 취소!");
 					location.reload();
 					}
-<<<<<<< HEAD
 				}
 			});
 		/* } */
-=======
 			}
 		});
->>>>>>> refs/heads/Song
 	});
 }); --%>
 
-<%-- function shareKakao() {
-	 
-	  // ����� ���� JavaScript Ű ����
-	  Kakao.init('a0a80d65a577c18111b0b6018483114f');
-	 
-	
-	// īī����ũ ��ư ����
-		Kakao.Link.createDefaultButton({
-			container : '#btnKakao', // īī��������ưID
-			objectType : 'feed',
-			content : {
-				title : "���߻���", // ������ ����
-				description : "���߻��� ��α��Դϴ�", // ������ ����
-				imageUrl : "devpad.tistory.com/", // ������ URL
-				link : {
-					mobileWebUrl : "devpad.tistory.com/",
-					webUrl : "devpad.tistory.com/"
-				}
-			}
-		});
-	}--%>
 	
 	function clip(){
 
