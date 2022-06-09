@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
@@ -41,7 +42,6 @@ public interface BoardMapper {
 	public List<Board> getBoardInquiryList(Board board);
 	//공지사항 목록 조회
 	public List<Board> getBoardAnnouncementList(Board board);
-	
 	//전체 랭킹 리스트 조인 필요: store, comment, recipe
 	public List<Board> getRankList(Board board);
 	
@@ -68,16 +68,16 @@ public interface BoardMapper {
 	//특정 게시글에 포함된 댓글 목록을 조회하는 SELECT 쿼리를 호출
 	public List<Comment> getCommentList(Comment comment);
 	
-	// 찜
+	// 찜 등록 rest test v
 	public int addStoreJjim(Jjim jjim);
 	public int addRecipeJjim(Jjim jjim);
-	
+	//
 	public int deleteStoreJjim(Jjim jjim);
 	public int deleteRecipeJjim(Jjim jjim);
-	
+	//
 	public int updateStoreJjim(int storeNo);
 	public int updateRecipeJjim(int rcpNo);
-	//찜 목록
+	//레시피 찜 목록 확인
 	public int getRecipeJjim(Jjim jjim);
 	public int getStoreJjim(Jjim jjim);
 	

@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @ToString
-public class Board {
+public class Board extends CommonDTO {
 
 	private Integer boardNo;
 	private User user;

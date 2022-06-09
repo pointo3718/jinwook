@@ -195,7 +195,7 @@
 		SET
 			store_status = false
 		WHERE
-			user_id = #{userId} and store_no = #{storeNo}
+			store_no = #{storeNo}
 	</update>
 
 
@@ -339,4 +339,3 @@
 			req_status = 1
 	</select>
 </mapper>
-	

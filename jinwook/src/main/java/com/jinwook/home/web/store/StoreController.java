@@ -1,5 +1,7 @@
 package com.jinwook.home.web.store;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Orders;
@@ -125,19 +129,21 @@ public class StoreController {
 		return "orders/addOrders";
 	}
 	
-	
-	@GetMapping(value = "getStore")
-	public String getStore(@RequestParam("storeNo") int storeNo, Model model) {
-		List<Store> getStore = storeService.getStore(storeNo);
-		model.addAttribute("getStore", getStore);
 
+	@GetMapping(value = "getStore")
+	public String getStore(Store store, @RequestParam("storeNo") int storeNo, Model model) {
+		
+		List<Store> getStore = storeService.getStore(store);
+		model.addAttribute("getStore", getStore);
+		
 		return "/store/getStore";
 	}
 	
 	
 	@GetMapping(value = "getStoreWallet")
-	public String getStoreWallet(@RequestParam("storeNo") int storeNo, Model model) {
-		List<Store> getStoreWallet = storeService.getStoreWallet(storeNo);
+	public String getStoreWallet(@RequestParam("storeNo") int storeNo, @RequestParam("orderDateStart") Date orderDateStart,			
+			@RequestParam("orderDateEnd") Date orderDateEnd, Model model) {
+		List<Store> getStoreWallet = storeService.getStoreWallet(storeNo, orderDateStart, orderDateEnd);
 		model.addAttribute("getStoreWallet", getStoreWallet);
 
 		return "/store/getStoreWallet";

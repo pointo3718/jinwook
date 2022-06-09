@@ -40,8 +40,25 @@
 		/* document.addOrders.submit(); action="/orders/addOrders*/
 	$("form").attr("method" , "GET").attr("action" , "/orders/addOrders").submit();
 	}
+	
+	function fncDeleteOrdersCart() {
+		 $.ajax({
+				url : "/orders/deleteOrdersCart",
+				type : "POST",
+				dataType : "json",
+				data : {"cartNo" : $("#cartNo").val()},
+				success : function(data){
+					if(data == 1){
+						alert("삭제완료");
+						location.reload();
+					}
+				}
+			
+			});
+	}
+	
 	$(function(){
-		$( "button" ).on("click" , function() {
+		$( "#button" ).on("click" , function() {
 			fncAddOrders();
 		}); 
 	});
@@ -50,13 +67,25 @@
 			history.go(-1);
 		});
 	});
+	$(function(){
+		$( "#buttons" ).on("click" , function() {
+			fncDeleteOrdersCart();
+		}); 
+	});
 	</script>
+	
+	
    </head> 
 
 <body>
 
 <form class="form-horizontal" name="addPurchase">
-
+	<div class="navbar  navbar-default">
+        <div class="container">
+        	<a class="navbar-brand" href="/index.jsp">진욱이네</a>
+   		</div>
+   	</div>
+<br><br><br><br>
    <table class="table table-hover table-striped" >
          
        <thead>
@@ -67,6 +96,7 @@
             <th align="left">상품가격</th>
             <th align="left">상품수량</th>
             <th align="left">상품별총액</th>
+            <th align="left"></th>
           </tr>
        </thead>
         
@@ -77,12 +107,13 @@
         <c:forEach var="cart" items="${getCartList}">
          <c:set var="i" value="${ i+1 }" />
          <tr>
-           <td align="center">${cart.product.prodImg}</td>
+           <td align="center" type="hidden" id="cartNo" name="cartNo" value="${cart.cartNo}">${cart.product.prodImg}</td>
            <td align="left">${cart.product.prodName}</td>
            <td align="left">${cart.product.prodInfo}</td>
            <td align="left">${cart.product.price}</td>
            <td align="left">${cart.prodCount}</td>
            <td align="left">${cart.product.price*cart.prodCount}</td>
+           <td align="left"><button id="buttons" class="btn btn-primary">X</button></td>
            <c:set var="total" value="${total + (cart.product.price*cart.prodCount) }" />
          </tr>
           </c:forEach>
@@ -100,13 +131,17 @@
   <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <a class="btn btn-primary btn" href="#" role="button">더담으러가기</a>
-		      <button type="button" class="btn btn-primary"  >주문하기</button>
+		      <button id="button" class="btn btn-primary"  >주문하기</button>
 			</div>
 		</div>
+		<a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
+		<a href="/orders/getOrdersList">주문내역</a> <hr>
+		<a href="/orders/getOrdersJpayList">진욱페이내역</a> <hr>
+		<a href="/orders/getOrdersNoticeList">알림내역</a> <hr>
 		
 </form>
      <!--  table End /////////////////////////////////////-->
-     
+     <a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
       
     <!--  화면구성 div End /////////////////////////////////////-->  
     

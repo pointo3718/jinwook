@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Orders {
+public class Orders extends CommonDTO 	{
 
 //	private int storeNo;			//상점번호		|상점(둘다 용도 같음)
 //	private String storeName;		//상점이름		|상점
@@ -48,8 +48,8 @@ public class Orders {
 	private String reviewImg1;		//리뷰사진 1	|주문리뷰
 	private String reviewImg2;		//리뷰사진 2	|주문리뷰
 	private String reviewImg3;		//리뷰사진 3	|주문리뷰
-	private LocalDateTime orderDateStart;
-	private LocalDateTime orderDateEnd;
+	private Date orderDateStart;
+	private Date orderDateEnd;
 	
 	public Orders() {
 		// TODO Auto-generated constructor stub

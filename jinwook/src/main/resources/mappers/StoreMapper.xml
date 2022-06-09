@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.jinwook.home.mapper.StoreMapper">
 
 <resultMap type="store" id="storeSelectMap">
@@ -25,16 +26,17 @@
    <result property="orders.reviewStar"  column="review_star"    jdbcType="INTEGER"/>
    <result property="orders.orderDateStart"  column="order_date_start"    jdbcType="DATE"/>
    <result property="orders.orderDateEnd"  column="order_date_end"    jdbcType="DATE"/>
-   <result property="orders.orderPrice"  column="order_date_end"    jdbcType="DATE"/>
-   <result property="orders.orderNo"  column="order_date_end"    jdbcType="DATE"/>
-   <result property="orders.orderDateEnd"  column="order_date_end"    jdbcType="DATE"/>
+   <result property="orders.orderPrice"  column="order_price"    jdbcType="INTEGER"/>
+   <result property="orders.orderNo"  column="order_no"    jdbcType="INTEGER"/>
+   <result property="orders.orderDate"  column="order_date"    jdbcType="DATE"/>
+   <result property="orders.buyerName"  column="buyer_name"    jdbcType="VARCHAR"/>
    <result property="product.prodNo"     column="prod_no"        jdbcType="INTEGER"/>     
    <result property="product.prodName"   column="prod_name"      jdbcType="VARCHAR"/>     
    <result property="product.price"      column="price"          jdbcType="INTEGER"/>     
    <result property="product.prodOrign"  column="prod_orign"    jdbcType="VARCHAR"/>   
    <result property="product.prodInfo"  column="prod_info"    jdbcType="VARCHAR"/>  
    <result property="product.isSoldout"  column="is_soldout"    jdbcType="INTEGER"/>       
-   <result property="request.resDate"      column="res_date"          jdbcType="DATE"/>     
+   <result property="request.resDate"      column="res_date"     jdbcType="DATE"/>     
    <result property="request.reqDate"  column="req_date"    jdbcType="DATE"/>   
    <result property="request.refundMoney"  column="refund_money"    jdbcType="INTEGER"/>   
    <result property="request.reqStatus"  column="req_status"    jdbcType="CHAR"/>              
@@ -125,7 +127,7 @@
       user_id=#{userId}
    </select>
    
-   <select id="getStore" parameterType="int" resultMap="storeSelectMap">
+   <select id="getStore" parameterType="store" resultMap="storeSelectMap">
         SELECT
       s.store_phone, s.store_name, s.store_type, s.store_addr, s.start_time, s.end_time, s.holiday,
       s.store_intro, vt.review_star, p.prod_no, p.prod_name, p.price, p.prod_orign, p.prod_info, p.is_soldout      
@@ -137,6 +139,10 @@
                   p.store_no=s.store_no AND
            s.store_no = #{storeNo}
       GROUP BY  p.prod_no
+      
+      LIMIT
+         #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
+      
    </select>
 
    <!-- <select id="getStoreWallet" parameterType="int"
@@ -159,15 +165,19 @@
       WHERE store_no=#{storeNo}
    </select>
    
-    <select id="getStoreWallet" parameterType="int"
+    <select id="getStoreWallet" parameterType="map"
       resultMap="storeSelectMap">
-		SELECT 
-		SUM(o.order_price), u.jp_balance, o.order_no, o.order_date, o.order_price, o.buyer_name
-		FROM  users u,orders o
+		SELECT
+		vt.total_earn, u.jp_balance, o.order_no, o.order_date, o.order_price, o.buyer_name
+		FROM users u,orders o, (SELECT SUM(order_price) total_earn
+		FROM orders
+		WHERE DATE(order_date) between #{order_date_start} and #{order_date_end} AND
+		order_status=5 AND
+		store_no=#{storeNo})vt
 		WHERE u.user_id=o.user_id AND
-	  	o.order_status=5 AND
-	  	date(o.order_date) between '2022-06-08' and '2022-06-08' AND
-	 	o.store_no=#{storeNo}
+		o.order_status=5 AND
+		DATE(o.order_date) between #{order_date_start} and #{order_date_end} AND
+		o.store_no=#{storeNo}
 		ORDER BY order_no
    </select>
     
@@ -175,6 +185,14 @@
 
 
    <select id="getStoreTotalCount" parameterType="Store"
+      resultType="int">
+      SELECT
+      COUNT(*)
+      FROM
+      store
+   </select>
+   
+   <select id="getStoreWalletTotalCount" parameterType="Store"
       resultType="int">
       SELECT
       COUNT(*)

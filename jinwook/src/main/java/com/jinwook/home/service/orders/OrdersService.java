@@ -13,7 +13,7 @@ public interface OrdersService {
    
 public int addOrders(Orders orders);          
    
-   public List<Orders> getOrdersList(String userId);    
+   public List<Orders> getOrdersList(Orders orders);    
    
    public List<Orders> getOrders(int orderNo);      
    
@@ -41,13 +41,13 @@ public int addOrders(Orders orders);
    
    public int addOrdersjBCharge(Object object);   
    
-   public List<Jpay> getOrdersJpaylist(String userId);            
+   public List<Jpay> getOrdersJpayList(Jpay jpay);            
    
    public int addOrdersNotice(Notice notice);
    
    public int deleteOrdersNotice(int notiNo);
    
-   public List<Notice>getOrdersNoticelist(String receiveId);
+   public List<Notice>getOrdersNoticeList(Notice notice);
 
    public int updateOrdersCeoJb(Jpay jpay);
    

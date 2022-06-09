@@ -73,6 +73,7 @@ public class AdminRestController {
 				System.out.println("user 객체에 값 넣어줌");
 				user.setUserId(userId);
 			}
+			
 			System.out.println("컨트롤러에서의 User :: "+user);
 
 			boolean result = adminService.updateBlacklist(user);

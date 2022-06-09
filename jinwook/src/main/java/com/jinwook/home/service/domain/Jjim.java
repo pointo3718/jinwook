@@ -10,10 +10,12 @@ import lombok.ToString;
 public class Jjim {
 
 	private Integer jjimNo;
-	private User user;
 	private Integer rcpNo;
 	private Integer storeNo;
+	private User user;
 	private String userId;
+	private Integer jjim_cnt;
+	
 //	private int boardNo;
 //	private String jjimStatus;
 	

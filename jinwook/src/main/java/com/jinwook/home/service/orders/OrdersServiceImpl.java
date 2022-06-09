@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.OrdersMapper;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Jpay;
@@ -30,13 +31,17 @@ public class OrdersServiceImpl implements OrdersService{
 	}
 
 	@Override
-	public List<Orders> getOrdersList(String userId) {
+	public List<Orders> getOrdersList(Orders orders) {
 		List<Orders> ordersList = Collections.emptyList();
 
-		int OrdersTotalCount = ordersMapper.getOrdersTotalCount();
+		int OrdersTotalCount = ordersMapper.getOrdersTotalCount(orders);
+		PaginationInfo paginationInfo = new PaginationInfo(orders);
+	    paginationInfo.setTotalRecordCount(OrdersTotalCount);
+
+	    orders.setPaginationInfo(paginationInfo);
 
 		if (OrdersTotalCount > 0) {
-			ordersList = ordersMapper.getOrdersList(userId);
+			ordersList = ordersMapper.getOrdersList(orders);
 		}
 
 		return ordersList;
@@ -131,14 +136,19 @@ public class OrdersServiceImpl implements OrdersService{
 	}
 
 	@Override
-	public List<Jpay> getOrdersJpaylist(String userId) {
+	public List<Jpay> getOrdersJpayList(Jpay jpay) {
 		List<Jpay> jpayList = Collections.emptyList();
 
-		int OrdersJpaylistTotalCount = ordersMapper.getOrdersJpaylistTotalCount();
+		int OrdersJpayListTotalCount = ordersMapper.getOrdersJpayListTotalCount(jpay);
+		PaginationInfo paginationInfo = new PaginationInfo(jpay);
+	    paginationInfo.setTotalRecordCount(OrdersJpayListTotalCount);
 
-		if (OrdersJpaylistTotalCount > 0) {
-			jpayList = ordersMapper.getOrdersJpaylist(userId);
+	    jpay.setPaginationInfo(paginationInfo);
+
+		if (OrdersJpayListTotalCount > 0) {
+			jpayList = ordersMapper.getOrdersJpayList(jpay);
 		}
+
 
 		return jpayList;
 	}
@@ -156,13 +166,17 @@ public class OrdersServiceImpl implements OrdersService{
 	}
 
 	@Override
-	public List<Notice> getOrdersNoticelist(String receiveId) {
+	public List<Notice> getOrdersNoticeList(Notice notice) {
 		List<Notice> noticeList = Collections.emptyList();
+		
+		int OrdersNoticeListTotalCount = ordersMapper.getOrdersNoticeListTotalCount(notice);
+		PaginationInfo paginationInfo = new PaginationInfo(notice);
+	    paginationInfo.setTotalRecordCount(OrdersNoticeListTotalCount);
 
-		int OrdersNoticelistTotalCount = ordersMapper.getOrdersNoticelistTotalCount();
-
-		if (OrdersNoticelistTotalCount > 0) {
-			noticeList = ordersMapper.getOrdersNoticelist(receiveId);
+	    notice.setPaginationInfo(paginationInfo);
+		
+		if (OrdersNoticeListTotalCount > 0) {
+			noticeList = ordersMapper.getOrdersNoticeList(notice);
 		}
 
 		return noticeList;
@@ -179,5 +193,6 @@ public class OrdersServiceImpl implements OrdersService{
 		
 		return ordersMapper.updateOrdersCeoEarn(store);
 	}
+
 
 }

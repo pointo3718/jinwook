@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import com.jinwook.home.service.board.BoardService;
 import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.User;
@@ -328,30 +330,35 @@ public class BoardController {
 		}
 		
 		//레시피 상세 조회 + 조회수 증가
+		//@RequestParam userId는 레시피 작성자 id
 		@GetMapping(value = "getRecipe")
-		public String getRecipe(@RequestParam("rcpNo") Integer rcpNo , 
+		public String getRecipe(@RequestParam(value = "rcpNo", required = false) Integer rcpNo, 
 											@RequestParam(value = "userId", required = false) String userId,
-											Model model) throws Exception {
+											Model model,HttpSession session) throws Exception {
 			System.out.println("/board/getRecipe : GET");
+			//추천을 누르는 로그인한 유저 id
+			String recoUserId = ((User) session.getAttribute("user")).getUserId();
 			// 조회수 카운트
+			String usid = ((User) session.getAttribute("user")).getUserId();
 			boardService.updateBoardRecipeHits(rcpNo);
+
 			Recipe recipe = boardService.getRecipe(rcpNo);
-			User user = userService.getUser(userId);
-			model.addAttribute("user", user);
-			model.addAttribute("recipe", recipe);
+			User user = userService.getUser(recoUserId);
+			model.addAttribute("usid", usid);
+			model.addAttribute("recoUserId",recoUserId);
+			
 			return "board/getRecipe";
 		}
 		
-		//레시피 추천수 /board/updateRecipeReco
+		//레시피 추천수 /board/updateRecipeReco	
 		@ResponseBody
 		@PostMapping(value = "updateRecipeReco")
 		public int updateRecipeReco(@RequestParam("rcpNo") Integer rcpNo , 
-													@RequestParam(value = "userId", required = false) String userId,
-				Model model) throws Exception {
+													@RequestParam("userId") String userId, Model model) throws Exception {
 			System.out.println("/board/updateRecipeReco: POST");
 			
-			User user = userService.getUser(userId);
-			model.addAttribute("user", user);
+//			User user = userService.getUser(userId);
+//			model.addAttribute("user", user);
 			int recoCheck = boardService.recipeRecoCheck(rcpNo, userId);
 			if(recoCheck == 0) {
 				//추천수 처음 누름

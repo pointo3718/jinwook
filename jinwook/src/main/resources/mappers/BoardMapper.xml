@@ -68,6 +68,13 @@
    <result property="rcpJjimCnt"       column="rcp_jjimcnt"     jdbcType="INTEGER"/>   
    <result property="recommendCount"   column="recommend_count" jdbcType="INTEGER"/>   
 </resultMap>
+
+<resultMap type="jjim" id="jjimSelectMap">
+   <result property="jjimNo"            column="jjim_no"        jdbcType="INTEGER"/>   
+   <result property="user.userId"       column="user_id"        jdbcType="VARCHAR"/>   
+   <result property="rcpNo"         	column="rcp_no"         jdbcType="VARCHAR"/>   
+   <result property="storeNo"         	column="store_no"       jdbcType="VARCHAR"/>   
+</resultMap>
 	
 	<!-- 1:1문의 조회수 올리기v -->
 	<update id="updateBoardInquiryHits">
@@ -199,8 +206,8 @@
 			board_inq_status = false OR board_inq_status = true
 		ORDER BY
 			board_no ASC
-		<!-- LIMIT
-         #{startPage}, #{recordsPerPage} -->
+		 LIMIT
+         #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 	
 	<!-- 공지사항 목록 조회 1 -->
@@ -213,8 +220,8 @@
 			board_code = 1
 		ORDER BY
 			board_no ASC
-		<!-- LIMIT
-         #{startPage}, #{recordsPerPage} -->
+		 LIMIT
+         #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 
 	<!--  1:1문의 delete -->
@@ -305,15 +312,15 @@
 	</select>
 
 	<!-- ?Recipe selectList? -->
-	<select id="getRecipeList" parameterType="Board" resultType="Recipe">
+	<select id="getRecipeList" parameterType="Recipe" resultType="Recipe">
 		SELECT
 			<include refid="recipeColumns" />
 		FROM
 			recipe
 		WHERE
 			rcp_no = #{rcpNo}
-		<!-- LIMIT
-         #{startPage}, #{recordsPerPage} -->
+		LIMIT
+         #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 
 	<!-- Recipe update -->
@@ -464,22 +471,22 @@
 
 	<insert id="addStoreJjim" parameterType="Jjim" useGeneratedKeys="true" keyProperty="jjimNo">
 		INSERT INTO jjim (store_no, user_id)
-		VALUES(#{storeNo}, #{user.userId})
+		VALUES(#{storeNo}, #{userId})
 	</insert>
 
 	<insert id="addRecipeJjim" parameterType="Jjim" useGeneratedKeys="true" keyProperty="jjimNo">
 		INSERT INTO jjim (rcp_no, user_id)
-		VALUES(#{rcpNo}, #{user.userId})
+		VALUES(#{rcpNo}, #{userId})
 	</insert>
 	
 	<delete id="deleteStoreJjim" parameterType="Jjim">
 		DELETE FROM jjim
-		WHERE store_no = #{storeNo} AND user_id = #{user.userId}
+		WHERE store_no = #{storeNo} AND user_id = #{userId}
 	</delete>
 
 	<delete id="deleteRecipeJjim" parameterType="Jjim">
 		DELETE FROM jjim
-		WHERE rcp_no = #{rcpNo} AND user_id = #{user.userId}
+		WHERE rcp_no = #{rcpNo} AND user_id = #{userId}
 	</delete>
 	
 	<select id="updateRecipeJjim">
@@ -491,13 +498,13 @@
 		WHERE rcp_no = #{rcpNo}
 	</select>
 	
-	<!-- <select id="updateStoreJjim">
+	 <!-- <select id="updateStoreJjim">
 		UPDATE store
 		SET
-		board_likecnt = (SELECT COUNT(*)
-		FROM tbl_board_like
-		WHERE board_id = #{boardId})
-		WHERE board_id = #{boardId}
+		store_jjimcnt = (SELECT COUNT(*)
+		FROM jjim
+		WHERE store_no = #{storeNo})
+		WHERE store_no = #{storeNo}
 	</select> -->
 
 	<select id="getRecipeJjim" resultType="Jjim">
