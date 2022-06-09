@@ -104,11 +104,14 @@
 		WHERE o.store_no = p.store_no
 		AND o.user_id = #{user.userId}
 		GROUP BY order_no
+		LIMIT
+         #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 	
-	<select id="getOrdersTotalCount" parameterType="Map" resultType="int">
+	<select id="getOrdersTotalCount" resultType="int">
 		SELECT COUNT(*)
 		FROM orders
+		WHERE user_id =#{user.userId}
 	</select>
 	
 	<insert id="addOrdersCart" useGeneratedKeys="true" keyProperty="cartNo">
@@ -211,18 +214,22 @@
 		VALUES(#{userId},#{orders.orderNo:INTEGER},#{jpStatus},#{finalPrice:INTEGER},#{chargePay:INTEGER},SYSDATE())
 	</insert>
 	
-	<select id="getOrdersJpaylist" parameterType="jpay" resultMap="jpaySelectMap">
+	<select id="getOrdersJpayList" parameterType="jpay" resultMap="jpaySelectMap">
 		SELECT j.jp_no,j.jp_date,j.jp_status,j.charge_pay,j.final_price,c.store_name
 		FROM jpay j ,cart c, orders o
 		WHERE j.user_id = c.user_id
-		AND c.order_no = o.order_no
-		AND j.order_no = c.order_no 
+        AND j.user_id = o.user_id
+        AND c.order_no = o.order_no
 		AND j.user_id = #{userId}
+		GROUP BY j.jp_no
+		LIMIT
+         #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select> 
 
-	<select id="getOrdersJpaylistTotalCount" resultType="int">
+	<select id="getOrdersJpayListTotalCount" resultType="int">
 		SELECT COUNT(*)
 		FROM jpay
+		WHERE user_id = #{userId}
 	</select>
 	
 	<insert id="addOrdersNotice" useGeneratedKeys="true" keyProperty="notiNo">
@@ -237,13 +244,15 @@
 		WHERE noti_no = #{notiNo}
 	</delete>
 	
-	<select id="getOrdersNoticelist" resultMap="noticeSelectMap">
+	<select id="getOrdersNoticeList" resultMap="noticeSelectMap">
 		SELECT noti_no,send_id,receive_id,order_no,noti_type,noti_content,noti_date,store_name,buyer_name
 		FROM notice
 		WHERE receive_id = #{receiveId}
+		LIMIT
+         #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 	
-	<select id="getOrdersNoticelistTotalCount" resultType="int">
+	<select id="getOrdersNoticeListTotalCount" resultType="int">
 		SELECT COUNT(*)
 		FROM notice
 	</select>

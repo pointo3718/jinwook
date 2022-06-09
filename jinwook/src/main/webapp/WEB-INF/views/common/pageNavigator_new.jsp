@@ -8,6 +8,7 @@
 
 <c:set var="params" value="${user}"/>
 		
+
 	
 	<c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
 		<nav>
