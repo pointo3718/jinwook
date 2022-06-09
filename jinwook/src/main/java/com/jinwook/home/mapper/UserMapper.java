@@ -1,6 +1,6 @@
 package com.jinwook.home.mapper;
 
-import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -54,6 +54,12 @@ public interface UserMapper {
 	
 //	public int getTotalCount(Search search) throws Exception ;
 	
+	//---------------------------------------------
+	public String emailCheck(Map<String, Object> map) throws Exception;
+	 
+	public String phoneCheck(Map<String, Object> map) throws Exception;
+	
 
+	//---------------------------------------------
 	
 }

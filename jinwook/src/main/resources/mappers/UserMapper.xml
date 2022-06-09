@@ -87,7 +87,7 @@
 	 
 	 <select 	id="findIdEmail"	resultType="string" parameterType="user" resultMap="userSelectMap">
 		SELECT
-		user_id, user_name, email
+		user_id, user_name, email, reg_date
 		FROM users 
 		WHERE user_name = #{userName} AND email = #{email}
 	 </select>
@@ -99,12 +99,36 @@
 		WHERE user_id = #{userId} AND phone = #{phone}
 	 </select>
 	 
-	 <select 	id="findPasswordEmail"	parameterType="user"	resultType="user">
+	 <select 	id="findPasswordEmail"	parameterType="user"	resultType="user" resultMap="userSelectMap">
 		SELECT
 		*	
 		FROM users 
 		WHERE user_id = #{userId} AND email = #{email}
 	 </select>
+	 
+	 
+	 <select id="emailCheck" resultType="String">
+    SELECT	1 result 
+    FROM 	DUAL 
+    WHERE EXISTS(
+        SELECT	1 
+        FROM 	users 
+        WHERE 	user_name = #{userName } 
+        AND 	email = #{email }
+    ) 
+</select>
+ 
+ 
+<select id="phoneCheck" resultType="String">
+    SELECT	1 result 
+    FROM 	DUAL 
+    WHERE EXISTS(
+        SELECT	1 
+        FROM 	users 
+        WHERE 	user_name = #{userName } 
+        AND 	PHONE = #{phone }
+    )
+</select>
 	 
 	 
 	 
