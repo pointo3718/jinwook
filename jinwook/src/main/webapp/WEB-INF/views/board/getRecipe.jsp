@@ -49,8 +49,6 @@ $(function() {
  $(function() {
 	 
 	$('#reco_btn').on('click', function() {
->>>>>>> refs/heads/Song
-		
 		$.ajax(
 				{
 			type : "POST",
@@ -69,38 +67,14 @@ $(function() {
 					alert("추천 취소!");
 					location.reload();
 					}
-<<<<<<< HEAD
 				}
 			});
 		/* } */
-=======
 			}
 		});
->>>>>>> refs/heads/Song
 	});
 }); --%>
 
-<%-- function shareKakao() {
-	 
-	  // ����� ���� JavaScript Ű ����
-	  Kakao.init('a0a80d65a577c18111b0b6018483114f');
-	 
-	
-	// īī����ũ ��ư ����
-		Kakao.Link.createDefaultButton({
-			container : '#btnKakao', // īī��������ưID
-			objectType : 'feed',
-			content : {
-				title : "���߻���", // ������ ����
-				description : "���߻��� ��α��Դϴ�", // ������ ����
-				imageUrl : "devpad.tistory.com/", // ������ URL
-				link : {
-					mobileWebUrl : "devpad.tistory.com/",
-					webUrl : "devpad.tistory.com/"
-				}
-			}
-		});
-	}--%>
 	
 	function clip(){
 
@@ -112,7 +86,7 @@ $(function() {
 		textarea.select();
 		document.execCommand("copy");
 		document.body.removeChild(textarea);
-		alert("URL�� ����Ǿ����ϴ�.")
+		alert("URL을 복사하였습니다.")
 	}
 </script>
 
@@ -193,8 +167,8 @@ $(function() {
 </a>url</span>
 		</div>
 		<hr/>
-	<button type="button" class="btn btn-warning" id="reco_btn">��õ</button>
-	<button type="button" class="btn btn-danger" id="hate_btn">����õ</button>
+	<button type="button" class="btn btn-warning" id="reco_btn">추천</button>
+	<button type="button" class="btn btn-danger" id="hate_btn">비추천</button>
 	
 	
 
