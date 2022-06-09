@@ -33,27 +33,17 @@
      body {
             padding-top : 50px;
         }
-<<<<<<< HEAD
     </style>
-=======
-        
-     .link-icon { position: relative; display: inline-block; width: auto;    font-size: 14px; font-weight: 500; color: #333; margin-right: 10px; padding-top: 50px; }
-	 .link-icon.kakao { background-image: url(../images/icon-kakao.png); background-repeat: no-repeat; }
-     </style>
-     
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
->>>>>>> refs/heads/Song
 <script type="text/javascript">
-<<<<<<< HEAD
 $(function() {
 	$('#reco_btn').on('click',function() {	
 		var rcpNo = ${recipe.rcpNo};
 		var userId = "${usid}";
 
 		/* function updateRecipeReco() { */
-=======
 <%--	var rcpNo = ${recipe.rcpNo};
 		var userId = ${recipe.userId};
  $(function() {
@@ -92,18 +82,18 @@ $(function() {
 
 <%-- function shareKakao() {
 	 
-	  // »ç¿ëÇÒ ¾ÛÀÇ JavaScript Å° ¼³Á¤
+	  // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ JavaScript Å° ï¿½ï¿½ï¿½ï¿½
 	  Kakao.init('a0a80d65a577c18111b0b6018483114f');
 	 
 	
-	// Ä«Ä«¿À¸µÅ© ¹öÆ° »ý¼º
+	// Ä«Ä«ï¿½ï¿½ï¿½ï¿½Å© ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
 		Kakao.Link.createDefaultButton({
-			container : '#btnKakao', // Ä«Ä«¿À°øÀ¯¹öÆ°ID
+			container : '#btnKakao', // Ä«Ä«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ°ID
 			objectType : 'feed',
 			content : {
-				title : "°³¹ß»õ¹ß", // º¸¿©Áú Á¦¸ñ
-				description : "°³¹ß»õ¹ß ºí·Î±×ÀÔ´Ï´Ù", // º¸¿©Áú ¼³¸í
-				imageUrl : "devpad.tistory.com/", // ÄÜÅÙÃ÷ URL
+				title : "ï¿½ï¿½ï¿½ß»ï¿½ï¿½ï¿½", // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				description : "ï¿½ï¿½ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½Î±ï¿½ï¿½Ô´Ï´ï¿½", // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				imageUrl : "devpad.tistory.com/", // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ URL
 				link : {
 					mobileWebUrl : "devpad.tistory.com/",
 					webUrl : "devpad.tistory.com/"
@@ -122,7 +112,7 @@ $(function() {
 		textarea.select();
 		document.execCommand("copy");
 		document.body.removeChild(textarea);
-		alert("URLÀÌ º¹»çµÇ¾ú½À´Ï´Ù.")
+		alert("URLï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.")
 	}
 </script>
 
@@ -190,26 +180,23 @@ $(function() {
 			<div class="col-xs-7 col-md-5">${recipe.recommendCount}</div>
 		</div>
 		<hr/>
-<<<<<<< HEAD
 
 </div>
 
 	<button type="button" class="btn btn-warning" id="reco_btn">ì¶”ì²œ${recipe.recommendCount}</button>
 	<button type="button" class="btn btn-danger" id="hate_btn">ë¹„ì¶”ì²œ</button>
-=======
 		<div class="row">
 		
 			<span class="button gray medium"><a href="#" onclick="clip(); return false;">
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-fill" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/></svg>		
-</a>urlº¹»ç</span>
+</a>url</span>
 		</div>
 		<hr/>
-	<button type="button" class="btn btn-warning" id="reco_btn">ÃßÃµ</button>
-	<button type="button" class="btn btn-danger" id="hate_btn">ºñÃßÃµ</button>
+	<button type="button" class="btn btn-warning" id="reco_btn">ï¿½ï¿½Ãµ</button>
+	<button type="button" class="btn btn-danger" id="hate_btn">ï¿½ï¿½ï¿½ï¿½Ãµ</button>
 	
 	
->>>>>>> refs/heads/Song
 
 	
 </body>

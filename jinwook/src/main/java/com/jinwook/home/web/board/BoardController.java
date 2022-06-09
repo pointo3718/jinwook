@@ -344,14 +344,9 @@ public class BoardController {
 
 			Recipe recipe = boardService.getRecipe(rcpNo);
 			User user = userService.getUser(recoUserId);
-			model.addAttribute("user", user);
-			model.addAttribute("recipe", recipe);
-<<<<<<< HEAD
 			model.addAttribute("usid", usid);
-=======
 			model.addAttribute("recoUserId",recoUserId);
 			
->>>>>>> refs/heads/Song
 			return "board/getRecipe";
 		}
 		
