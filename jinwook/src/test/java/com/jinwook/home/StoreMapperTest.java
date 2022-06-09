@@ -1,5 +1,6 @@
 package com.jinwook.home;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -158,77 +159,78 @@ class StoreMapperTest {
 		}
 	}
 	
-	@Test
-	public void testOfGetStore() {
-		
-		
-		int getStoreTotalCount = storeMapper.getStoreTotalCount();
-		if (getStoreTotalCount > 0) {
-			List<Store> getStore = storeMapper.getStore(10010);
-			
-			if (CollectionUtils.isEmpty(getStore) == false) { 		
-				for (Store store : getStore) {
-					System.out.println("=========================");
-	
-					System.out.println(store.getStorePhone());
-					System.out.println(store.getStoreName());	
-					System.out.println(store.getStoreType());
-					System.out.println(store.getStoreAddr());
-					System.out.println(store.getStartTime());
-					System.out.println(store.getEndTime());
-					System.out.println(store.getHoliday());
-					System.out.println(store.getStoreIntro());					
-				    System.out.println(store.getOrders().getReviewStar());
-					System.out.println(store.getProduct().getProdNo());
-					System.out.println(store.getProduct().getProdName());
-					System.out.println(store.getProduct().getPrice());
-					System.out.println(store.getProduct().getProdOrign());
-					System.out.println(store.getProduct().getProdInfo());
-					System.out.println(store.getProduct().isSoldout());
-					
-
-					
-					System.out.println("=========================");
-				}
-			}
-		}
-	}
-		
-	@Test
-	public void testOfGetStoreRefund() {
-		
-		int getStoreTotalCount = storeMapper.getStoreTotalCount();
-		if (getStoreTotalCount > 0) {
-			System.out.println(getStoreTotalCount);
-			List<Store> refundList = storeMapper.getStoreRefund(10025);
-			if (CollectionUtils.isEmpty(refundList) == false) { 		
-				for (Store store : refundList) {
-					System.out.println("=========================");
-					
-					System.out.println(store.getRequest().getResDate());
-					System.out.println(store.getRequest().getReqDate());					
-					System.out.println(store.getRequest().getRefundMoney());
-					System.out.println(store.getRequest().getReqStatus());
-					
-					System.out.println("=========================");
-				}
-			}
-		}
-	}
+//	@Test
+//	public void testOfGetStore() {
+//		
+//		
+//		int getStoreTotalCount = storeMapper.getStoreTotalCount();
+//		if (getStoreTotalCount > 0) {
+//			List<Store> getStore = storeMapper.getStore(10010);
+//			
+//			if (CollectionUtils.isEmpty(getStore) == false) { 		
+//				for (Store store : getStore) {
+//					System.out.println("=========================");
+//	
+//					System.out.println(store.getStorePhone());
+//					System.out.println(store.getStoreName());	
+//					System.out.println(store.getStoreType());
+//					System.out.println(store.getStoreAddr());
+//					System.out.println(store.getStartTime());
+//					System.out.println(store.getEndTime());
+//					System.out.println(store.getHoliday());
+//					System.out.println(store.getStoreIntro());					
+//				    System.out.println(store.getOrders().getReviewStar());
+//					System.out.println(store.getProduct().getProdNo());
+//					System.out.println(store.getProduct().getProdName());
+//					System.out.println(store.getProduct().getPrice());
+//					System.out.println(store.getProduct().getProdOrign());
+//					System.out.println(store.getProduct().getProdInfo());
+//					System.out.println(store.getProduct().isSoldout());
+//					
+//
+//					
+//					System.out.println("=========================");
+//				}
+//			}
+//		}
+//	}
+//		
+//	@Test
+//	public void testOfGetStoreRefund() {
+//		
+//		int getStoreTotalCount = storeMapper.getStoreTotalCount();
+//		if (getStoreTotalCount > 0) {
+//			System.out.println(getStoreTotalCount);
+//			List<Store> refundList = storeMapper.getStoreRefund(10025);
+//			if (CollectionUtils.isEmpty(refundList) == false) { 		
+//				for (Store store : refundList) {
+//					System.out.println("=========================");
+//					
+//					System.out.println(store.getRequest().getResDate());
+//					System.out.println(store.getRequest().getReqDate());					
+//					System.out.println(store.getRequest().getRefundMoney());
+//					System.out.println(store.getRequest().getReqStatus());
+//					
+//					System.out.println("=========================");
+//				}
+//			}
+//		}
+//	}
 	
 	@Test
 	public void testOfGetStoreWallet() {
 		
-		int getStoreTotalCount = storeMapper.getStoreTotalCount();
+		int getStoreTotalCount = storeMapper.getStoreWalletTotalCount();
 		if (getStoreTotalCount > 0) {
 			System.out.println(getStoreTotalCount);
 			
-			List<Store> walletList = storeMapper.getStoreWallet(10013);
+			List<Store> walletList = storeMapper.getStoreWallet(10013, Date.valueOf("2022-06-08")
+					, Date.valueOf("2022-06-08"));
 			if (CollectionUtils.isEmpty(walletList) == false) { 		
 				for (Store store : walletList) {
 					System.out.println("=========================");
 					
-					System.out.println(store.getOrders().getOrderPrice());
+					System.out.println(store.getTotalEarn());
 					System.out.println(store.getUser().getJpBalance());					
 					System.out.println(store.getOrders().getOrderNo());
 					System.out.println(store.getOrders().getOrderDate());
