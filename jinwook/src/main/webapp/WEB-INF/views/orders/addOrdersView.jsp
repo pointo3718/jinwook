@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+주문에 성공하셨습니다. 와 박수 !!!
 </body>
 </html>
