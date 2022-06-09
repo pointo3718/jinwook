@@ -141,6 +141,7 @@
 		
 		  <c:set var="i" value="0" />
 		  <c:forEach var="user" items="${userList}">
+		  	<c:set var="user" value="${user}"/>
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
@@ -167,10 +168,10 @@
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
- 	
- 	<!-- PageNavigation Start... -->
+ 	<!-- PageNavigation Start... --> 	
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
 	<!-- PageNavigation End... -->
+
 	
 </body>
 

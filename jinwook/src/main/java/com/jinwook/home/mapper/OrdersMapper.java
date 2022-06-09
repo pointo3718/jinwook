@@ -15,7 +15,7 @@ public interface OrdersMapper {
 
    public int addOrders(Orders orders);          //주문
    
-   public List<Orders> getOrdersList(String userId);    //주문내역
+   public List<Orders> getOrdersList(Orders orders);    //주문내역
    
    public List<Orders> getOrders(int orderNo);      //주문내역상세
    
@@ -23,7 +23,7 @@ public interface OrdersMapper {
    
    public int updateOrders(Orders orders);         //주문내역(수락,거절,픽업완료)
    
-   public int getOrdersTotalCount();            //주문목록 개수
+   public int getOrdersTotalCount(Orders orders);            //주문목록 개수
    
    public int addOrdersCart(Cart cart);         //장바구니 담기
       
@@ -47,17 +47,17 @@ public interface OrdersMapper {
    
    public int addOrdersjBCharge(Object object);   //진욱페이 잔액 
    
-   public List<Jpay> getOrdersJpaylist(String userId);         //진욱페이 내역
+   public List<Jpay> getOrdersJpayList(Jpay jpay);         //진욱페이 내역
    
-   public int getOrdersJpaylistTotalCount();      //진욱페이 내역카운트
+   public int getOrdersJpayListTotalCount(Jpay jpay);      //진욱페이 내역카운트
    
    public int addOrdersNotice(Notice notice);      //알림등록
    
    public int deleteOrdersNotice(int notiNo);      //알림삭제
    
-   public List<Notice>getOrdersNoticelist(String receiveId);    //알림목록
+   public List<Notice>getOrdersNoticeList(Notice notice);    //알림목록
 
-   public int getOrdersNoticelistTotalCount();      //알림목록개수
+   public int getOrdersNoticeListTotalCount(Notice notice);      //알림목록개수
    
    public int updateOrdersCeoJb(Jpay jpay);      //사장님 jb증가
    

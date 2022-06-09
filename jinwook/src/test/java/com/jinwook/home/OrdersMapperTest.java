@@ -24,7 +24,7 @@ public class OrdersMapperTest {
    @Autowired
    private OrdersMapper ordersMapper;
    
-   //@Test
+   @Test
    public void testOfaddOrders() {
       Product product = new Product();
       product.setProdNo(10000);
@@ -49,6 +49,7 @@ public class OrdersMapperTest {
       orders.setStore(store);
       orders.setBuyerName("강진욱");
       orders.setBuyerPhone("010-1234-9876");
+//      orders.setPickupTime(LocalDateTime.now().plusMinutes(orders.getPlusTime()));
       orders.setPickupTime(LocalDateTime.now().plusMinutes(orders.getPlusTime()));
       orders.setOrderReq(null);
       orders.setProdCount(3);
@@ -82,24 +83,25 @@ public class OrdersMapperTest {
    
    @Test
    public void testSelectListOrders() {
-      int ordersTotalCount = ordersMapper.getOrdersTotalCount();
+	  Orders orders = new Orders();
+      int ordersTotalCount = ordersMapper.getOrdersTotalCount(orders);
       if(ordersTotalCount > 0) {
-         List<Orders> ordersList = ordersMapper.getOrdersList("test01");
+         List<Orders> ordersList = ordersMapper.getOrdersList(orders);
          System.out.println(ordersList.get(1)); 
          System.out.println(ordersTotalCount);
          if(CollectionUtils.isEmpty(ordersList) == false) {
             System.out.println("==2");
-            for(Orders orders : ordersList) {
+            for(Orders orders1 : ordersList) {
                
                System.out.println("=========================");
-               System.out.println(orders.getUser().getUserId());
-               System.out.println(orders.getOrderNo());
-               System.out.println(orders.getOrderStatus());
-               System.out.println(orders.getPickupTime());
-               System.out.println(orders.getOrderDate());
-               System.out.println(orders.getOrderPrice());
-               System.out.println(orders.getProduct().getProdName());
-               System.out.println(orders.getProduct().getProdImg());
+               System.out.println(orders1.getUser().getUserId());
+               System.out.println(orders1.getOrderNo());
+               System.out.println(orders1.getOrderStatus());
+               System.out.println(orders1.getPickupTime());
+               System.out.println(orders1.getOrderDate());
+               System.out.println(orders1.getOrderPrice());
+               System.out.println(orders1.getProduct().getProdName());
+               System.out.println(orders1.getProduct().getProdImg());
                System.out.println("=========================");
             }
          }
@@ -108,28 +110,29 @@ public class OrdersMapperTest {
    
    //@Test
    public void testgetOrders() {
-      int ordersTotalCount = ordersMapper.getOrdersTotalCount();
+	  Orders orders = new Orders();
+      int ordersTotalCount = ordersMapper.getOrdersTotalCount(orders);
       if(ordersTotalCount > 0) {
          List<Orders> ordersGet = ordersMapper.getOrders(10007);
          if(CollectionUtils.isEmpty(ordersGet) == false) {
             System.out.println("==2");
-            for(Orders orders : ordersGet) {
+            for(Orders orders1 : ordersGet) {
             
                System.out.println("=========================");
-               System.out.println(orders.getUser().getUserId());
-               System.out.println(orders.getProduct().getProdName());
-               System.out.println(orders.getProdCount());
-               System.out.println(orders.getProduct().getPrice());
-               System.out.println(orders.getProduct().getProdInfo());
-               System.out.println(orders.getProduct().getProdImg());
-               System.out.println(orders.getStore().getStoreName());
-               System.out.println(orders.getOrderDate());
-               System.out.println(orders.getOrderPrice());
-               System.out.println(orders.getBuyerName());
-               System.out.println(orders.getBuyerPhone());
-               System.out.println(orders.getOrderReq());
-               System.out.println(orders.getPickupTime());
-               System.out.println(orders.getOrderStatus());
+               System.out.println(orders1.getUser().getUserId());
+               System.out.println(orders1.getProduct().getProdName());
+               System.out.println(orders1.getProdCount());
+               System.out.println(orders1.getProduct().getPrice());
+               System.out.println(orders1.getProduct().getProdInfo());
+               System.out.println(orders1.getProduct().getProdImg());
+               System.out.println(orders1.getStore().getStoreName());
+               System.out.println(orders1.getOrderDate());
+               System.out.println(orders1.getOrderPrice());
+               System.out.println(orders1.getBuyerName());
+               System.out.println(orders1.getBuyerPhone());
+               System.out.println(orders1.getOrderReq());
+               System.out.println(orders1.getPickupTime());
+               System.out.println(orders1.getOrderStatus());
                System.out.println("=========================");
             }
          }
@@ -275,21 +278,22 @@ public class OrdersMapperTest {
    
    //@Test
    public void testgetOrdersJpaylist() {
-      int jpayTotalCount = ordersMapper.getOrdersJpaylistTotalCount();
+	   Jpay jpay =new Jpay();
+      int jpayTotalCount = ordersMapper.getOrdersJpayListTotalCount(jpay);
       System.out.println(jpayTotalCount);
       if(jpayTotalCount > 0) {
-         List<Jpay> jpayList = ordersMapper.getOrdersJpaylist("test01");
+         List<Jpay> jpayList = ordersMapper.getOrdersJpayList(jpay);
          System.out.println(jpayList.get(1)); 
          System.out.println(jpayTotalCount);
          if(CollectionUtils.isEmpty(jpayList) == false) {
-            for(Jpay jpay : jpayList) {
+            for(Jpay jpay1 : jpayList) {
                System.out.println("=========================");
-               System.out.println(jpay.getJpNo());
-               System.out.println(jpay.getJpDate());
-               System.out.println(jpay.getJpStatus());
-               System.out.println(jpay.getChargePay());
-               System.out.println(jpay.getFinalPrice());
-               System.out.println(jpay.getOrders().getStore().getStoreName());
+               System.out.println(jpay1.getJpNo());
+               System.out.println(jpay1.getJpDate());
+               System.out.println(jpay1.getJpStatus());
+               System.out.println(jpay1.getChargePay());
+               System.out.println(jpay1.getFinalPrice());
+               System.out.println(jpay1.getOrders().getStore().getStoreName());
                System.out.println("=========================");
             }
             
@@ -321,23 +325,24 @@ public class OrdersMapperTest {
    
    //@Test
    public void testgetOrdersNoticelist() {
-      int getOrdersNoticelistTotalCount = ordersMapper.getOrdersNoticelistTotalCount();
+	   Notice notice = new Notice();
+      int getOrdersNoticelistTotalCount = ordersMapper.getOrdersNoticeListTotalCount(notice);
       if(getOrdersNoticelistTotalCount > 0) {
-         List<Notice> noticeList = ordersMapper.getOrdersNoticelist("test02");
+         List<Notice> noticeList = ordersMapper.getOrdersNoticeList(notice);
          System.out.println(noticeList.get(1)); 
          System.out.println(getOrdersNoticelistTotalCount);
          if(CollectionUtils.isEmpty(noticeList) == false) {
             System.out.println("==");
-            for(Notice notice : noticeList) {
+            for(Notice notice1 : noticeList) {
                System.out.println("=========================");
-               System.out.println(notice.getNotiNo());
-               System.out.println(notice.getSendId());
-               System.out.println(notice.getReceiveId());
-               System.out.println(notice.getOrderNo());
-               System.out.println(notice.getNotiType());
-               System.out.println(notice.getNotiContent());
-               System.out.println(notice.getNotiDate());
-               System.out.println(notice.getBuyerName());
+               System.out.println(notice1.getNotiNo());
+               System.out.println(notice1.getSendId());
+               System.out.println(notice1.getReceiveId());
+               System.out.println(notice1.getOrderNo());
+               System.out.println(notice1.getNotiType());
+               System.out.println(notice1.getNotiContent());
+               System.out.println(notice1.getNotiDate());
+               System.out.println(notice1.getBuyerName());
                System.out.println("=========================");
             }
          }

@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Jpay {
+public class Jpay extends CommonDTO{
 
 	private int jpNo;
 	private String userId;

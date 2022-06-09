@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 
@@ -34,7 +35,7 @@
 function fncAddOrders() {
 		
 	/* document.addPurchase.submit(); action="/purchase/addPurchase*/
-	$("form").attr("method" , "POST").attr("action" , "/purchase/addPurchase").submit();
+	$("form").attr("method" , "POST").attr("action" , "/orders/addOrders").submit();
 }
 	$(function(){
 		$( "button" ).on("click" , function() {
@@ -54,7 +55,7 @@ function fncAddOrders() {
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
+        	<a class="navbar-brand" href="/index.jsp">진욱이네</a>
    		</div>
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->
@@ -88,7 +89,7 @@ function fncAddOrders() {
 		  <div class="form-group">
 		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">픽업희망시간</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="pickupTime" name="pickupTime">분
+		      <input type="text" class="ct_input_g" id="plusTime" name="plusTime">분
 		    </div>
 		  </div>
 		  
@@ -144,17 +145,18 @@ function fncAddOrders() {
 		  <div class="form-group">
 		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">쿠 폰</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="couponType" name="couponType">
+		    <select class="ct_input_g" id="couponType" name="couponType">
+		    
+		    <option>선택안함</option>
+		    <option value="couponType=0">첫가입</option>
+		    <option value="couponType=1">첫구매</option>
+		    <option value="couponType=2">생일</option>
+		    <option value="couponType=3">추천인</option>
+		    </select>
+		    
 		    </div>
 		  </div>
 	
-		   <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">쿠폰 할인금액</label>
-		     <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="couponDc" name="couponDc" readonly>
-		     </div>
-		   </div>
-
 			<div class="form-group">
 		     <label for="price" class="col-sm-offset-1 col-sm-3 control-label">회원 등급할인</label>
 		      <div class="col-sm-4">
@@ -165,22 +167,25 @@ function fncAddOrders() {
 			<div class="form-group">
 		     <label for="price" class="col-sm-offset-1 col-sm-3 control-label">총 결제금액</label>
 		      <div class="col-sm-4">
-		      
+		     
 		       <c:choose>
 			       <c:when test="${user.grade=='프랜즈'}">
-			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice*0.99}" readonly>
+			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice"   value="${cart.orders.orderPrice*0.99}" readonly>
 			      </c:when>
 			      <c:when test="${user.grade=='패밀리'}">
 			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice*0.97}" readonly>
 			      </c:when>
 			      <c:when test="${user.grade=='퍼스트'}">
-			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice*0.95}" readonly>
+			      	 <%-- <fmt:parseNumber var= "total" integerOnly= "true" value= " ${cart.orders.orderPrice*0.95} " /> --%>
+			      	 <%-- <fmt:parseNumber type="total" maxFractionDigits="0" value= " ${cart.orders.orderPrice*0.95} " /> --%>
+			      <td align="left"><fmt:formatNumber var="total" pattern="###" value="${cart.orders.orderPrice*0.95}"/></td>
+			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${total}" readonly>
 			      </c:when>
 			     <c:when test="${user.grade=='일반'}">
 			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice}" readonly>
 			      </c:when>
 		      </c:choose>
-		      
+		                 
 		      </div>
 		    </div>
 

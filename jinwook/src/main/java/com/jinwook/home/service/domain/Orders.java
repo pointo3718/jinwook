@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Orders {
+public class Orders extends CommonDTO 	{
 
 //	private int storeNo;			//상점번호		|상점(둘다 용도 같음)
 //	private String storeName;		//상점이름		|상점

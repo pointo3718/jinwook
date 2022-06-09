@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -331,18 +332,20 @@ public class BoardController {
 		@GetMapping(value = "getRecipe")
 		public String getRecipe(@RequestParam("rcpNo") Integer rcpNo , 
 											@RequestParam(value = "userId", required = false) String userId,
-											Model model) throws Exception {
+											Model model,HttpSession session) throws Exception {
 			System.out.println("/board/getRecipe : GET");
 			// 조회수 카운트
+			String usid = ((User) session.getAttribute("user")).getUserId();
 			boardService.updateBoardRecipeHits(rcpNo);
 			Recipe recipe = boardService.getRecipe(rcpNo);
 			User user = userService.getUser(userId);
 			model.addAttribute("user", user);
 			model.addAttribute("recipe", recipe);
+			model.addAttribute("usid", usid);
 			return "board/getRecipe";
 		}
 		
-		//레시피 추천수 /board/updateRecipeReco
+		//레시피 추천수 /board/updateRecipeReco	
 		@ResponseBody
 		@PostMapping(value = "updateRecipeReco")
 		public int updateRecipeReco(@RequestParam("rcpNo") Integer rcpNo , 

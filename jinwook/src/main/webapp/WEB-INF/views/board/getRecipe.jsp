@@ -1,61 +1,68 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
-<meta charset="EUC-KR">
-	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
+
+<meta charset="UTF-8">
+   
+   <!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+   <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+   
+   <!-- Bootstrap Dropdown Hover CSS -->
    <link href="/css/animate.min.css" rel="stylesheet">
    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
     <!-- Bootstrap Dropdown Hover JS -->
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
- 		body {
+   
+   
+   <!-- jQuery UI toolTip ì‚¬ìš© CSS-->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- jQuery UI toolTip ì‚¬ìš© JS-->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   
+   <!--  ///////////////////////// CSS ////////////////////////// -->
+   <style>
+     body {
             padding-top : 50px;
         }
-     </style>
-
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    </style>
 <script type="text/javascript">
-$(()=>{
-	$('#reco_btn').click(function() {	
-		var rcpNo = ${recipe.rcpNo}
-		var userId = ${recipe.user.userId};
-		function updateRecipeReco() {
+$(function() {
+	$('#reco_btn').on('click',function() {	
+		var rcpNo = ${recipe.rcpNo};
+		var userId = "${usid}";
+
+		/* function updateRecipeReco() { */
 		
-		$.ajax({
+		$.ajax(
+				{
 			type : "POST",
 			url : "/board/updateRecipeReco",
 			dataType : "json",
 			data : {'rcpNo' : rcpNo, 'userId' : userId},
 			error : function() {
-				alert("Åë½Å ¿¡·¯");
+				alert("í†µì‹  ì—ëŸ¬");
 			},
 			success : function(recoCheck) {
 				if (recoCheck == 0) {
-					alert("ÃßÃµ ¿Ï·á!");
+					alert("ì¶”ì²œ ì™„ë£Œ!");
 					location.reload();
 				}
 				else if (recoCheck == 1) {
-					alert("ÃßÃµ Ãë¼Ò!");
+					alert("ì¶”ì²œ ì·¨ì†Œ!");
 					location.reload();
 					}
 				}
 			});
-		}
+		/* } */
 	});
 })
 	
@@ -70,68 +77,68 @@ $(()=>{
 	<div class="container">
 	
 	<div class="page-header">
-	       <h3 class=" text-info">·¹½ÃÇÇ »ó¼¼ Á¶È¸</h3>
+	       <h3 class=" text-info">ë ˆì‹œí”¼ ìƒì„¸ ì¡°íšŒ</h3>
 	    </div>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>·¹½ÃÇÇ Á¦¸ñ</strong></div>
+	  		<div class="col-xs-5 col-md-3"><strong>ë ˆì‹œí”¼ ì œëª©</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.rcpTitle}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>·¹½ÃÇÇ ³»¿ë</strong></div>
+	  		<div class="col-xs-5 col-md-3"><strong>ë ˆì‹œí”¼ ë‚´ìš©</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.rcpContent}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>ÀÛ¼ºÀÚ</strong></div>
+	  		<div class="col-xs-5 col-md-3"><strong>ì‘ì„±ì</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.user.userId}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>·¹½ÃÇÇ Àç·á</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ë ˆì‹œí”¼ ì¬ë£Œ</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.rcpIngredient}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>·¹½ÃÇÇ ½æ³×ÀÏ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ë ˆì‹œí”¼ ì¸ë„¤ì¼</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.rcpThumb}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>·¹½ÃÇÇ ¼Ò°³</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ë ˆì‹œí”¼ ì†Œê°œ</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.rcpInfo}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>Á¶È¸¼ö</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì¡°íšŒìˆ˜</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.rcpHits}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>ÀÛ¼ºÀÏ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì‘ì„±ì¼</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.rcpDate}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>´ñ±Û¼ö</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ëŒ“ê¸€ìˆ˜</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.commentCount}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>Âò</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì°œ</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.rcpJjimCnt}</div>
 		</div>
 		<hr/>
 		 <div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>ÃßÃµ¼ö</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì¶”ì²œìˆ˜</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.recommendCount}</div>
 		</div>
 		<hr/>
 
 </div>
 
-	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco()">ÃßÃµ${recipe.recommendCount}</button>
-	<button type="button" class="btn btn-danger" id="hate_btn">ºñÃßÃµ</button>
+	<button type="button" class="btn btn-warning" id="reco_btn">ì¶”ì²œ${recipe.recommendCount}</button>
+	<button type="button" class="btn btn-danger" id="hate_btn">ë¹„ì¶”ì²œ</button>
 
 	
 </body>

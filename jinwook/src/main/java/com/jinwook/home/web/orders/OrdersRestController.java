@@ -2,14 +2,18 @@ package com.jinwook.home.web.orders;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.JsonObject;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Jpay;
 import com.jinwook.home.service.domain.Notice;
@@ -36,18 +40,29 @@ public class OrdersRestController {
 		System.out.println("/orders/updateOrdersCart : POST");
 		
 		int result = ordersService.updateOrdersCart(cart);
-
+		
 		return result;
 	}
 	
-	@PostMapping(value = "deleteOrdersCart")
-	public int deleteOrdersCart(@RequestParam("cartNo") int cartNo) throws Exception {
+	@DeleteMapping(value = "deleteOrdersCart/{cartNo}")
+	public JsonObject deleteOrdersCart(@PathVariable(value="cartNo",required = false) int cartNo){
 		
 		System.out.println("/orders/deleteOrdersCart : POST");
 		
-		int result = ordersService.deleteOrdersCart(cartNo);
+		JsonObject jsonObj = new JsonObject();
 		
-		return result;
+		try {
+			int result = ordersService.deleteOrdersCart(cartNo);
+			jsonObj.addProperty("result", result);
+
+		} catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+
+		return jsonObj;
 	}
 	
 	@PostMapping(value = "deleteOrderCartAfter")
