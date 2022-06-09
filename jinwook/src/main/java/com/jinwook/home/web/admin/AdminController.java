@@ -11,13 +11,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 
-import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.admin.AdminService;
 import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
+
 
 @Controller
 @RequestMapping("/admin/*")
@@ -30,14 +29,8 @@ public class AdminController {
 	public AdminController(){
 		System.out.println(this.getClass());
 	}
-	
-//	@Value("#{commonProperties['pageUnit']}")
-//	int pageUnit;
-//	@Value("#{commonProperties['pageSize']}")
-//	int pageSize;
-	
-	/////////////////////// 블랙리스트 목록/등록 해야함 ///////////////////////
-	
+
+		
 	@GetMapping(value = "listUserAdmin")
 	public String listUserAdmin(@ModelAttribute("user") User user, Model model) {
 		
@@ -46,7 +39,7 @@ public class AdminController {
 
 		return "/admin/listUserAdmin";
 	}
-	
+
 	
 	@GetMapping(value = "getUserAdmin")
 	public String getUserAdmin(@RequestParam(value = "userId", required = false) String userId, Model model) {

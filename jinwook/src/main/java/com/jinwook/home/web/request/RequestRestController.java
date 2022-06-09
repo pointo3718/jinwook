@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
@@ -69,15 +70,16 @@ public class RequestRestController {
 	
 	
 	// ========== 환급 요청 수락 ===========
+	@ResponseBody
 	@PatchMapping(value={"updateRequestRefund/{reqNo}/{userId}"})
-	public JsonObject updateRequestRefund(@ModelAttribute("request") Request request, 
-											@PathVariable(value = "reqNo", required = false) int reqNo,
+	public JsonObject updateRequestRefund(@PathVariable(value = "reqNo", required = false) int reqNo,
 											 @PathVariable(value = "userId", required = false) String userId) {
 	
 		System.out.println("/request/updateRequestRefund : PATCH");
 		System.out.println("reqNo :: "+reqNo);
 		
 		JsonObject jsonObj = new JsonObject();
+		Request request = new Request();
 		
 		try { 
 			if (request != null) {
@@ -130,19 +132,21 @@ public class RequestRestController {
 	 
 
 	// ========== 상점 삭제 수락 ===========
-	 @PatchMapping(value={"deleteStore/{reqNo}/{userId}"})
-		public JsonObject deleteStore(@PathVariable(value = "reqNo", required = false) int reqNo,
-												@RequestBody Request request) {
+	 @ResponseBody
+	 @PatchMapping(value={"deleteStore/{reqNo}/{storeNo}"})
+		public JsonObject deleteStore(@PathVariable(value = "reqNo", required = false) int reqNo
+												) {
 		
 			System.out.println("/request/deleteStore : PATCH");
 			System.out.println("reqNo :: "+reqNo);
 			
 			JsonObject jsonObj = new JsonObject();
-			
+			Request request = new Request();
 			try { 
 				if (request != null) {
 					System.out.println("request 객체에 값 넣어줌");
 					request.setReqNo(reqNo);
+					request.setStoreNo(10016);
 				}
 				
 				boolean result = requestService.deleteStore(request);
@@ -232,8 +236,6 @@ public class RequestRestController {
 
 			return jsonObj;
 		}
-
-	
 	 
 
 	// ============== 대기중인 요청 목록 개수 ================
