@@ -157,7 +157,7 @@ main button {
 	$(document).ready(function() {
 		$(".find_btn").click(function() {
 			const email = $(".email").val();
-			const userName = $(".userName").val();
+			const userId = $(".userId").val();
 			/* if (!emailCheck(email)) {
 				swal("이메일을 정확히 입력해주세요");
 				return;
@@ -169,16 +169,16 @@ main button {
 			}
 			
 			$.ajax({
-				url: "findIdEmail",
+				url: "findPasswordEmail",
 				type: "POST",
 				data: {email: email,
-						userName : userName}
+						userId : userId}
 			})
 			.done(function() {
 				const html =
 					`<div class="send_email">
 						<div>
-							<h3>${user.email }</h3>
+							<h3>${email }</h3>
 							<span>으로 아이디를 전송했습니다</span><br>
 							<div>가입한 적이 없는 이메일 주소나 올바르지 않은 이메일 주소를 입력하신 경우에는 메일을 받을 수 없습니다.</div>
 							<button class="back_btn">돌아가기</button>
@@ -186,6 +186,8 @@ main button {
 					</div>`;
 	 
 				$("main").html(html);
+				
+				
 	 
 			})
 			.fail(function() {
@@ -207,9 +209,10 @@ main button {
 <body>
 	<main class="find_id_page">
 		<div class="find_info">
-			<h3>가입하신 이름과 이메일을 입력해주세요</h3>
-			<input type="text" name="userName" class="userName">
+			<h3>가입하신 아이디와 이메일을 입력해주세요</h3>
+			<input type="text" name="userId" class="userId">
 			<input type="email" name="email" class="email">
+			<button type="button" class="auth_num_send_eemail">인증번호받기</button>
 			<button class="find_btn">확인</button>
 		</div>
 	</main>	

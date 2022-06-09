@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,7 +9,7 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
@@ -28,7 +28,7 @@
     <!-- Bootstrap Dropdown Hover JS -->
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 	
-	<!--  CSS 異�媛� : �대��� ��硫� 媛�由щ�� ���� �닿껐 :  二쇱��泥�由� ��, �� ����-->
+	<!--  CSS �곤옙揶�占� : 占쎈��占쏙옙占� 占쏙옙筌�占� 揶�占썹�귐�占쏙옙 占쏙옙占쏙옙 占쎈�욧� :  雅��깍옙占쏙㎗占썹�깍옙 占쏙옙, 占쏙옙 占쏙옙占쏙옙-->
 	<style>
         body {
             padding-top : 70px;
@@ -46,23 +46,21 @@
 	<jsp:include page="toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  ������ �댁�⑹�� http://getbootstrap.com/getting-started/  李몄“ -->	
+	<!--  占쏙옙占쏙옙占쏙옙 占쎈��占썩�뱄옙占� http://getbootstrap.com/getting-started/  筌〓��� -->	
    	<div class="container ">
       <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Model2MVCShop </h1>
+      <div class="jumbotron" >
+        <h1 class="text-center">          진 욱 이 네 </h1>
      </div>
     </div>
 
-	<!-- 李몄“ : http://getbootstrap.com/css/   : container part..... -->
+	<!-- 筌〓��� : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container">
-        <h3>���대���뱀�� �대��寃� 留�����.</h3>
-        <p>"�ㅻ�� ���� 遺����� �몄��媛� �닿� ��紐� 蹂대�� ��媛��� 蹂대났�대��."</p>
-  	 	<h3>"... �λ꼍�� ���ㅽ��寃� ����吏� ���� �щ���ㅼ�� 嫄몃�щ�대�ㅺ� 議댁�ы�⑸����. �λ꼍��. �뱀���� ������ '�ㅻⅨ' �щ���ㅼ�� 硫�異�寃� ���ㅺ� 嫄곌린 ���� 寃��댁���."</h3>
-         <h3>��愿��ㅻ��</h3>
-         <p>��蹂듯�� �띠�� 鍮�寃곗��.</p>
-         <p>醫������� �쇱�� ���� 寃��� ��由щ��,</p>
-         <p>吏�湲� ���� �쇱�� 醫������� 寃�������.</p>
+        <h3>강진욱 홍선경 최인규 문수진 송지호</h3>
+        <p>진욱이네입니다.</p>
+  	 	<h3>할 수 있다.</h3>
+         <h3>비트캠프 217기</h3>
+         <p>6월 30일까지 화이팅.</p>
   	 </div>
 
 </body>

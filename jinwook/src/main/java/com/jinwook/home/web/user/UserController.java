@@ -1,7 +1,8 @@
 package com.jinwook.home.web.user;
 
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -215,6 +216,69 @@ public class UserController {
 		System.out.println("============FIND ID PAGE============");
 		return "/user/findId";
 	}
+	
+	@GetMapping("findPassword")
+	public String findPassword() {
+		
+		System.out.println("============FIND ID PAGE============");
+		return "/user/findPassword";
+	}
+	//---------------------------------------
+	// 5분동안 유저확인 세션생성 (인증완료 X)
+	@PostMapping("auth")
+	public ResponseEntity<Object> authenticateUser(String username, HttpSession session) {
+	    Map<String, Object> authStatus = new HashMap<>();
+	    authStatus.put("username", username);
+	    authStatus.put("status", false);
+	    
+	    session.setMaxInactiveInterval(300);
+	    session.setAttribute("authStatus", authStatus);
+	    return new ResponseEntity<Object>(username, HttpStatus.OK);
+	}
+
+	// 인증번호 보내기 페이지
+	@GetMapping("auth")
+	public String auth(String username, HttpSession session) {
+	    Map<String, Object> authStatus = (Map<String, Object>) session.getAttribute("authStatus");
+	    if(authStatus == null || !username.equals(authStatus.get("username"))) {
+	        return "/user/findPassword";
+	    }
+	    
+	    return "/user/auth";
+	}
+
+	// username의 이메일이 맞는지 확인
+	@GetMapping("emailCheck")
+	public ResponseEntity<Boolean> emailCheck(String username, String email) throws Exception {
+	    boolean emailCheck = userService.emailCheck(username, email);
+	    return new ResponseEntity<Boolean>(emailCheck, HttpStatus.OK);
+	}
+	 
+	 
+	// username의 전화번호가 맞는지 확인
+	@GetMapping("phoneCheck")
+	public ResponseEntity<Boolean> phoneCheck(String username, String phone)  throws Exception {
+	    boolean phoneCheck = userService.phoneCheck(username, phone);
+	    return new ResponseEntity<Boolean>(phoneCheck,HttpStatus.OK);
+	}
+
+
+	//---------------------------------------
+	// 비밀번호 변경 페이지
+		@GetMapping("updatePassword")
+		public String moldifyPassword(String username, HttpSession session) {
+		    Map<String, Object> authStatus = (Map<String, Object>) session.getAttribute("authStatus");
+		    
+//		    if(authStatus == null || !username.equals(authStatus.get("userId"))) {
+//		        return "/user/findPassword";
+//		    }
+//		    
+//		    // 페이지에 왔을때 인증이 안되있다면
+//		    if(!(boolean) authStatus.get("status")) {
+//		        return "/user/findPassword";
+//		    }
+		    return "/user/updatePassword";
+		}
 	
 //	@PostMapping("findIdEmail")
 //	public String findIdEmail(@ModelAttribute("user") User user, HttpSession session) throws Exception {

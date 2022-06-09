@@ -1,5 +1,8 @@
 package com.jinwook.home.web.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
+
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 
 //==> ȸ������ RestController
@@ -169,15 +174,92 @@ public class UserRestController {
 	}
 	
 	@PostMapping("findIdEmail")
-	public ResponseEntity<Object> sendEmail(@ModelAttribute("user") User user) throws Exception{
+	public ResponseEntity<Object> sendIdEmail(@ModelAttribute("user") User user) throws Exception{
 	    System.out.println("=====SEND METHOD=====");
 		User dbUser =userService.findIdEmail(user);
 	    user = dbUser;
 	    
-	    if(dbUser.getUserName()==user.getUserName()) {
-	        userService.sendUser(user.getEmail(), user.getUserId());
+	    if(dbUser != null) {
+	        userService.sendIdUser(user);
 	    }
 	    
 	    return new ResponseEntity<Object>(HttpStatus.OK);
 	}
+	
+	@PostMapping("findPasswordEmail")
+	public ResponseEntity<Object> sendPasswordEmail(@ModelAttribute("user") User user, HttpSession session) throws Exception{
+		System.out.println("=====SEND METHOD=====");
+		User dbUser =userService.findPasswordEmail(user);
+		user = dbUser;
+		
+	    
+	    session.setMaxInactiveInterval(300);
+	    session.setAttribute("userId", user.getUserId());
+		
+		if(dbUser != null) {
+			userService.sendPasswordUser(user);
+		}
+		
+		Map<String, Object> authNumMap = new HashMap<>();
+	    long createTime = System.currentTimeMillis(); // 인증번호 생성시간
+	    long endTime = createTime + (300 *1000);	// 인증번호 만료시간
+	    
+	    authNumMap.put("createTime", createTime);
+	    authNumMap.put("endTime", endTime);
+	    
+	    session.setMaxInactiveInterval(300);
+	    session.setAttribute("authNum", authNumMap);
+	    System.out.println(authNumMap);
+		
+		System.out.println("--------------------------------------------------------"+user);
+		
+		return new ResponseEntity<Object>(user, HttpStatus.OK);
+	}
+	
+	
+	
+	// 인증번호 보내기
+	@PostMapping("/send/authNum")
+	private ResponseEntity<String> authNum(String phone, String email, HttpSession session) throws Exception{
+	    String authNum = "";
+	    for(int i=0;i<6;i++) {
+	        authNum += (int)(Math.random() * 10);
+	    }
+	    
+	    System.out.println("인증번호 : " + authNum);
+	    
+	    // 전화번호로 인증번호 보내기 추가
+	    if(phone != null) {
+//				System.out.println("전화번호로 인증번호 보내기");
+	 
+	        
+	        
+	    // 이메일로 인증번호 보내기
+	    } else if(email != null) {
+//				System.out.println("이메일로 인증번호 보내기");
+	        userService.sendAuthNum(email, authNum);
+	    }
+	    
+	    
+	    Map<String, Object> authNumMap = new HashMap<>();
+	    long createTime = System.currentTimeMillis(); // 인증번호 생성시간
+	    long endTime = createTime + (300 *1000);	// 인증번호 만료시간
+	    
+	    authNumMap.put("createTime", createTime);
+	    authNumMap.put("endTime", endTime);
+	    authNumMap.put("authNum", authNum);
+	    
+	    session.setMaxInactiveInterval(300);
+	    session.setAttribute("authNum", authNumMap);
+	    
+	    return new ResponseEntity<String>("인증번호가 전송되었습니다", HttpStatus.OK);
+	}
+	
+	//문자 인증
+	@PostMapping("/findIdPhone")
+	public User findIdPhone(@ModelAttribute("user") User user ) throws Exception {
+			
+		return userService.findIdPhone(user);
+	}
+
 }

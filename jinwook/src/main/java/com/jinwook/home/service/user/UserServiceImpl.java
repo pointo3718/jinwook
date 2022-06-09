@@ -1,7 +1,9 @@
 package com.jinwook.home.service.user;
 
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -102,8 +104,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User findIdEmail(User user) throws Exception {
-		User dbUser =  userMapper.findIdEmail(user);
-		return dbUser;
+		return userMapper.findIdEmail(user);
 	}
 	
 	@Override
@@ -123,20 +124,26 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public void sendUser(String email, String userId) throws Exception{
+	public void sendIdUser(User user) throws Exception{
 		SimpleMailMessage simpleMailMessage = new  SimpleMailMessage();
-		simpleMailMessage.setTo(email);
-		simpleMailMessage.setSubject("아이디 찾기");
+		simpleMailMessage.setTo(user.getEmail());
+		simpleMailMessage.setSubject("[진욱이네] 아이디 안내를 드립니다.");
 		
 		StringBuffer sb = new StringBuffer();
-		sb.append("가입하신 아이디는");
+		sb.append(user.getUserName()+"님 안녕하세요 마켓컬리입니다.\n"
+				+ "\n"
+				+ "요청하신 아이디를 안내드립니다.\n"
+				+ "\n"
+				+ user.getUserId()
+				+ " \n"
+				+ " ");
 //		sb.append(System.lineSeparator());
 		
 //		for(int i=0;i<usernames.size()-1;i++) {
 //			sb.append(usernames.get(i));
 //			sb.append(System.lineSeparator());
 //		}
-		sb.append(userId+"입니다");
+		sb.append("가입일 "+user.getRegDate());
 		
 		simpleMailMessage.setText(sb.toString());
 		
@@ -148,4 +155,80 @@ public class UserServiceImpl implements UserService{
 		}).start();
 	}
 
+	@Override
+	public void sendPasswordUser(User user) throws Exception{
+		SimpleMailMessage simpleMailMessage = new  SimpleMailMessage();
+		simpleMailMessage.setTo(user.getEmail());
+		simpleMailMessage.setSubject("[진욱이네] 비밀번호 재설정 안내를 드립니다.");
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("강진욱님 안녕하세요 마켓컬리입니다.\n"
+				+ "\n"
+				+ "아래 버튼을 눌러 비밀번호를 재설정 해주세요.\n"
+				+ "\n"
+				+ "유효 시간 : "+LocalDateTime.now()+"\n"
+				+ "유효 시간 내에 비밀번호 재설정을 완료해 주세요.\n"
+				+ "");
+//		sb.append(System.lineSeparator());
+		
+//		for(int i=0;i<usernames.size()-1;i++) {
+//			sb.append(usernames.get(i));
+//			sb.append(System.lineSeparator());
+//		}
+		
+//		simpleMailMessage.setText(sb.toString()+"\n"+msg);
+		
+		
+		new Thread(new Runnable() {
+			public void run() {
+				mailSender.send(simpleMailMessage);
+			}
+		}).start();
+	}
+	
+	@Override
+	public void sendAuthNum(String email, String authNum) throws Exception {
+	    SimpleMailMessage simpleMailMessage = new  SimpleMailMessage();
+	    simpleMailMessage.setTo(email);
+	    simpleMailMessage.setSubject("비밀번호 찾기 인증번호");
+	    
+	    String text = "인증번호는 " + authNum + "입니다";
+	    
+	    simpleMailMessage.setText(text);
+	    new Thread(new Runnable() {
+	        public void run() {
+	            mailSender.send(simpleMailMessage);
+	        }
+	    }).start();
+	    
+	}
+	//-----------------------------------------
+	@Override
+	public boolean emailCheck(String username, String email) throws Exception{
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("username", username);
+	    map.put("email", email);
+	    String result = userMapper.emailCheck(map);
+	    if("1".equals(result)) {
+	        return true;
+	    }
+	    return false;
+	}
+	 
+	 
+	@Override
+	public boolean phoneCheck(String username, String phone) throws Exception {
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("username", username);
+	    map.put("phone", phone);
+	    System.out.println(map);
+	    String result = userMapper.phoneCheck(map);
+	    if("1".equals(result)) {
+	        return true;
+	    }
+	    return false;
+	}
+	//-----------------------------------------
+
+	
 }

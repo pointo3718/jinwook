@@ -154,50 +154,35 @@ main button {
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 				
-	$(document).ready(function() {
-		$(".find_btn").click(function() {
-			const email = $(".email").val();
-			const userName = $(".userName").val();
-			/* if (!emailCheck(email)) {
-				swal("이메일을 정확히 입력해주세요");
-				return;
-			} */
-	 		
-			if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1 )){
-				alert("이메일 형식이 아닙니다.");
-				return;
+	//휴대폰번호 인증번호 보내기 버튼 클릭 이벤트
+	$('#memberPhoneCheck').click(function(){
+	 
+		var to = $('input[name="memberPhone"]').val();
+		$.ajax({
+			url : "/memberPhoneCheck",
+			type : "POST",
+			data : "to=" + to,
+			dataType : "json",
+			success : function(data) {
+				const checkNum = data;
+				alert('checkNum:'+ checkNum);
+				
+	            //인증하기 버튼 클릭 이벤트
+				$('#certifyCheck').click(function(){
+					const userNum = $('input[name="memberPhoneCertify"]').val();		
+					if(checkNum == userNum){
+						alert('인증 성공하였습니다.');
+					}else {
+						alert('인증 실패하였습니다. 다시 입력해주세요.');
+					}
+				});
+	            
+			},
+			error : function() {
+				alert("에러")
 			}
-			
-			$.ajax({
-				url: "findIdEmail",
-				type: "POST",
-				data: {email: email,
-						userName : userName}
-			})
-			.done(function() {
-				const html =
-					`<div class="send_email">
-						<div>
-							<h3>${user.email }</h3>
-							<span>으로 아이디를 전송했습니다</span><br>
-							<div>가입한 적이 없는 이메일 주소나 올바르지 않은 이메일 주소를 입력하신 경우에는 메일을 받을 수 없습니다.</div>
-							<button class="back_btn">돌아가기</button>
-						</div>
-					</div>`;
-	 
-				$("main").html(html);
-	 
-			})
-			.fail(function() {
-				alert("다시 확인해주세요.");
-				return;
-			})
-		})
-	 
-		$(document).on("click", ".back_btn", function() {
-			location.href = "login";
-		})
-	})
+		});
+	});
 		
 		
 	</script>		
@@ -205,14 +190,18 @@ main button {
 </head>
 
 <body>
-	<main class="find_id_page">
-		<div class="find_info">
-			<h3>가입하신 이름과 이메일을 입력해주세요</h3>
-			<input type="text" name="userName" class="userName">
-			<input type="email" name="email" class="email">
-			<button class="find_btn">확인</button>
-		</div>
-	</main>	
+	<div class="form-group phoneCertifyDiv">
+	<label class="inputTitle">휴대폰 번호</label><br>
+	<div class="phoneNum-formgroup">
+		<input th:if="${memberPhone != null}" type="text" name="memberPhone" class="phoneNum" readonly th:value="${memberPhone}">
+		<input th:unless="${memberPhone != null}" type="text" name="memberPhone" class="phoneNum" >
+		<input type="button" id="memberPhoneCheck" class="btn memberPhoneBtn active" value="인증번호 전송">
+	</div>
+	<div class="phoneNum-formgroup" id="phoneCertifyDiv">
+		<input type="text" name="memberPhoneCertify" class="phoneNum">
+		<input type="button" id="certifyCheck" class="btn memberPhoneBtn" value="인증하기">
+	</div>
+</div>
  	<!--  화면구성 div end /////////////////////////////////////-->
 
 </body>
