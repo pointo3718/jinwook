@@ -1,7 +1,9 @@
 package com.jinwook.home;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -70,10 +72,8 @@ class StoreMapperTest {
 	
 	@Test
 	public void testOfDeleteStoreProduct() {
-		Product product = new Product();
-		product.setProdNo(10018);
 
-		int result = storeMapper.deleteStoreProduct(product);
+		int result = storeMapper.deleteStoreProduct(10038);
 		System.out.println("결과는" + result + "입니다.");
 		
 	}
@@ -100,11 +100,9 @@ class StoreMapperTest {
 	}
 	
 	@Test
-	public void testOfAddOrderCoupon() {
-		Coupon coupon = new Coupon();
-		coupon.setCouponNo(10025);
-
-		int result = storeMapper.addOrderCoupon(coupon);
+	public void testOfAddOrdersCoupon() {
+		
+		int result = storeMapper.addOrdersCoupon(10031);
 		System.out.println("결과는" + result + "입니다.");
 	}
 	
@@ -159,63 +157,63 @@ class StoreMapperTest {
 		}
 	}
 	
-//	@Test
-//	public void testOfGetStore() {
-//		
-//		
-//		int getStoreTotalCount = storeMapper.getStoreTotalCount();
-//		if (getStoreTotalCount > 0) {
-//			List<Store> getStore = storeMapper.getStore(10010);
-//			
-//			if (CollectionUtils.isEmpty(getStore) == false) { 		
-//				for (Store store : getStore) {
-//					System.out.println("=========================");
-//	
-//					System.out.println(store.getStorePhone());
-//					System.out.println(store.getStoreName());	
-//					System.out.println(store.getStoreType());
-//					System.out.println(store.getStoreAddr());
-//					System.out.println(store.getStartTime());
-//					System.out.println(store.getEndTime());
-//					System.out.println(store.getHoliday());
-//					System.out.println(store.getStoreIntro());					
-//				    System.out.println(store.getOrders().getReviewStar());
-//					System.out.println(store.getProduct().getProdNo());
-//					System.out.println(store.getProduct().getProdName());
-//					System.out.println(store.getProduct().getPrice());
-//					System.out.println(store.getProduct().getProdOrign());
-//					System.out.println(store.getProduct().getProdInfo());
-//					System.out.println(store.getProduct().isSoldout());
-//					
-//
-//					
-//					System.out.println("=========================");
-//				}
-//			}
-//		}
-//	}
-//		
-//	@Test
-//	public void testOfGetStoreRefund() {
-//		
-//		int getStoreTotalCount = storeMapper.getStoreTotalCount();
-//		if (getStoreTotalCount > 0) {
-//			System.out.println(getStoreTotalCount);
-//			List<Store> refundList = storeMapper.getStoreRefund(10025);
-//			if (CollectionUtils.isEmpty(refundList) == false) { 		
-//				for (Store store : refundList) {
-//					System.out.println("=========================");
-//					
-//					System.out.println(store.getRequest().getResDate());
-//					System.out.println(store.getRequest().getReqDate());					
-//					System.out.println(store.getRequest().getRefundMoney());
-//					System.out.println(store.getRequest().getReqStatus());
-//					
-//					System.out.println("=========================");
-//				}
-//			}
-//		}
-//	}
+	@Test
+	public void testOfGetStore() {
+		
+		
+		int getStoreTotalCount = storeMapper.getStoreTotalCount();
+		if (getStoreTotalCount > 0) {
+			List<Store> getStore = storeMapper.getStore(10000);
+			
+			if (CollectionUtils.isEmpty(getStore) == false) { 		
+				for (Store store : getStore) {
+					System.out.println("=========================");
+	
+					System.out.println(store.getStorePhone());
+					System.out.println(store.getStoreName());	
+					System.out.println(store.getStoreType());
+					System.out.println(store.getStoreAddr());
+					System.out.println(store.getStartTime());
+					System.out.println(store.getEndTime());
+					System.out.println(store.getHoliday());
+					System.out.println(store.getStoreIntro());					
+				    System.out.println(store.getOrders().getReviewStar());
+					System.out.println(store.getProduct().getProdNo());
+					System.out.println(store.getProduct().getProdName());
+					System.out.println(store.getProduct().getPrice());
+					System.out.println(store.getProduct().getProdOrign());
+					System.out.println(store.getProduct().getProdInfo());
+					System.out.println(store.getProduct().isSoldout());
+					
+
+					
+					System.out.println("=========================");
+				}
+			}
+		}
+	}
+		
+	@Test
+	public void testOfGetStoreRefund() {
+		
+		int getStoreTotalCount = storeMapper.getStoreTotalCount();
+		if (getStoreTotalCount > 0) {
+			System.out.println(getStoreTotalCount);
+			List<Store> refundList = storeMapper.getStoreRefund(10015);
+			if (CollectionUtils.isEmpty(refundList) == false) { 		
+				for (Store store : refundList) {
+					System.out.println("=========================");
+					
+					System.out.println(store.getRequest().getResDate());
+					System.out.println(store.getRequest().getReqDate());					
+					System.out.println(store.getRequest().getRefundMoney());
+					System.out.println(store.getRequest().getReqStatus());
+					
+					System.out.println("=========================");
+				}
+			}
+		}
+	}
 	
 	@Test
 	public void testOfGetStoreWallet() {
@@ -224,8 +222,14 @@ class StoreMapperTest {
 		if (getStoreTotalCount > 0) {
 			System.out.println(getStoreTotalCount);
 			
-			List<Store> walletList = storeMapper.getStoreWallet(10013, Date.valueOf("2022-06-08")
-					, Date.valueOf("2022-06-08"));
+			HashMap<String, Object> map = new HashMap<>();
+			
+			map.put("storeNo", "10000");					
+			map.put("orderDateStart", "LocalDate.now()");			
+			map.put("orderDateEnd", "LocalDate.now()");
+		
+			
+			List<Store> walletList = storeMapper.getStoreWallet(map);
 			if (CollectionUtils.isEmpty(walletList) == false) { 		
 				for (Store store : walletList) {
 					System.out.println("=========================");

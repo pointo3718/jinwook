@@ -24,14 +24,15 @@
    <result property="isOpen"             column="is_open"        jdbcType="TINYINT"/>   
    <result property="user.jpBalance"     column="jp_balance"     jdbcType="INTEGER"/>   
    <result property="orders.reviewStar"  column="review_star"    jdbcType="INTEGER"/>
-   <result property="orders.orderDateStart"  column="order_date_start"    jdbcType="DATE"/>
+   <result property="orders.orderDateStart"  column="order_date_start"    jdbcType="VARCHAR"/>
    <result property="orders.orderDateEnd"  column="order_date_end"    jdbcType="DATE"/>
-   <result property="orders.orderPrice"  column="order_price"    jdbcType="INTEGER"/>
+   <result property="orders.orderPrice"  column="order_price"    jdbcType="DATE"/>
    <result property="orders.orderNo"  column="order_no"    jdbcType="INTEGER"/>
    <result property="orders.orderDate"  column="order_date"    jdbcType="DATE"/>
    <result property="orders.buyerName"  column="buyer_name"    jdbcType="VARCHAR"/>
    <result property="product.prodNo"     column="prod_no"        jdbcType="INTEGER"/>     
    <result property="product.prodName"   column="prod_name"      jdbcType="VARCHAR"/>     
+   <result property="product.prodImg"   column="prod_img"      jdbcType="VARCHAR"/>     
    <result property="product.price"      column="price"          jdbcType="INTEGER"/>     
    <result property="product.prodOrign"  column="prod_orign"    jdbcType="VARCHAR"/>   
    <result property="product.prodInfo"  column="prod_info"    jdbcType="VARCHAR"/>  
@@ -86,7 +87,7 @@
       prod_no = #{prodNo}
    </update>
    
-   <delete id="deleteStoreProduct" parameterType="product">
+   <delete id="deleteStoreProduct" parameterType="int">
       DELETE FROM
       product
       WHERE prod_no = #{prodNo}
@@ -108,7 +109,7 @@
       store_no=#{storeNo}
    </update>
    
-   <update id="addOrderCoupon" parameterType="Coupon">
+   <update id="addOrdersCoupon" parameterType="int">
       UPDATE coupon
       SET
       coupon_status=1
@@ -127,10 +128,10 @@
       user_id=#{userId}
    </select>
    
-   <select id="getStore" parameterType="store" resultMap="storeSelectMap">
+   <select id="getStore" parameterType="int" resultMap="storeSelectMap">
         SELECT
       s.store_phone, s.store_name, s.store_type, s.store_addr, s.start_time, s.end_time, s.holiday,
-      s.store_intro, vt.review_star, p.prod_no, p.prod_name, p.price, p.prod_orign, p.prod_info, p.is_soldout      
+      s.store_intro, vt.review_star, p.prod_no, p.prod_name, p.prod_img, p.price, p.prod_orign, p.prod_info, p.is_soldout      
       FROM store s, product p, orders o,(SELECT ROUND(AVG(review_star),1) review_star 
                   FROM orders
                   WHERE store_no=#{storeNo})vt
@@ -139,10 +140,6 @@
                   p.store_no=s.store_no AND
            s.store_no = #{storeNo}
       GROUP BY  p.prod_no
-      
-      LIMIT
-         #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
-      
    </select>
 
    <!-- <select id="getStoreWallet" parameterType="int"
@@ -165,18 +162,34 @@
       WHERE store_no=#{storeNo}
    </select>
    
-    <select id="getStoreWallet" parameterType="map"
+    <select id="getStoreWallet" parameterType="hashmap"
       resultMap="storeSelectMap">
 		SELECT
-		vt.total_earn, u.jp_balance, o.order_no, o.order_date, o.order_price, o.buyer_name
-		FROM users u,orders o, (SELECT SUM(order_price) total_earn
+		vt.total_earn, u.jp_balance, o.order_no, o.order_date,
+		o.order_price, o.buyer_name
+		FROM users u,orders o, (SELECT
+		SUM(order_price) total_earn
 		FROM orders
-		WHERE DATE(order_date) between #{order_date_start} and #{order_date_end} AND
-		order_status=5 AND
+		WHERE order_status=5 AND
+		<if test="order_date_start and order_date_end != null">
+			DATE(order_date) between #{order_date_start} and
+			#{order_date_end}
+		</if>
+		<if test="order_date_start || order_date_end == null">
+			DATE(order_date) between sysdate() and sysdate()
+		</if>
+		AND
 		store_no=#{storeNo})vt
 		WHERE u.user_id=o.user_id AND
 		o.order_status=5 AND
-		DATE(o.order_date) between #{order_date_start} and #{order_date_end} AND
+		<if test="order_date_start and order_date_end != null">
+			DATE(o.order_date) between #{order_date_start} and
+			#{order_date_end}
+		</if>
+		<if test="order_date_start || order_date_end == null">
+			DATE(o.order_date) between sysdate() and sysdate()
+		</if>
+		AND
 		o.store_no=#{storeNo}
 		ORDER BY order_no
    </select>

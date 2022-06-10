@@ -7,7 +7,7 @@
 </script>
 
 <div class="container text-center">
-	<c:set var="params" value="${board}"/>
+	<c:set var="params" value="${store}"/>
 	<c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
 		<nav>
 			<!-- 크기조절 :  pagination-lg pagination-sm-->

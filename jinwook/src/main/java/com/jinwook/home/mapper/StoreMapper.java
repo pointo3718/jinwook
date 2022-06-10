@@ -25,25 +25,23 @@ public interface StoreMapper {
 
 	public int updateStoreProduct(Product product);
 	   
-	public int deleteStoreProduct(Product Product);
+	public int deleteStoreProduct(int prodNo);
 	   
 	public int isSoldout(Product Product);
 	
 	public int isOpen(Store store);
 	
-	public int addOrderCoupon(Coupon coupon);
+	public int addOrdersCoupon(int couponNo);
 	
 	public List<Coupon> getCouponList(String userId);
 	
-	public List<Store> getStore(Store store);
+	public List<Store> getStore(int storeNo);
 	
-	public List<Store> getStoreWallet(@RequestParam("storeNo") int storeNo, @RequestParam("orderDateStart") Date orderDateStart,
-			
-			@RequestParam("orderDateEnd") Date orderDateEnd);
+	public List<Store> getStoreWallet(HashMap<String, Object> map);
 	
 	public List<Store> getStoreRefund(int storeNo);
 	
-	public int getStoreTotalCount(Store store);
+	public int getStoreTotalCount();
 	
 	public int getStoreWalletTotalCount();
 	
