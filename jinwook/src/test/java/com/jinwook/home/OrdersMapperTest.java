@@ -26,7 +26,7 @@ public class OrdersMapperTest {
    private OrdersMapper ordersMapper;
    
    @Test
-   public void  () {
+   public void testOfaddOrders() {
       Product product = new Product();
       product.setProdNo(10000);
       product.setPrice(500);
