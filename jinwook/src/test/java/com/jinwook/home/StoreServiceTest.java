@@ -1,6 +1,8 @@
 package com.jinwook.home;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,7 @@ class StoreServiceTest {
 	public void updateStoreTest() throws Exception {
 		Store store = new Store();
 		store.setStoreNo(10000);
-		store.setStoreIntro("우리상점짱짱");
+		store.setStoreIntro("우리상점짱짱이다");
 		store.setStorePhone("010-2222-3333");
 		store.setStoreImage("진욱진욱.jpg");
 		store.setStartTime(LocalDateTime.now());
@@ -71,10 +73,7 @@ class StoreServiceTest {
 	@Test
 	public void deleteStoreProductTest() throws Exception {
 
-		Product product = new Product();
-		product.setProdNo(10025);
-
-		storeService.deleteStoreProduct(product);
+		storeService.deleteStoreProduct(10037);
 		
 	}
 	
@@ -101,12 +100,9 @@ class StoreServiceTest {
 	}
 	
 	@Test
-	public void addOrderCouponTest() throws Exception {
+	public void addOrdersCouponTest() throws Exception {
 
-		Coupon coupon = new Coupon();
-		coupon.setCouponNo(10025);
-
-		storeService.addOrderCoupon(coupon);
+		storeService.addOrdersCoupon(10030);
 		
 	}
 	
@@ -133,37 +129,56 @@ class StoreServiceTest {
 	
 				
 	
-//	@Test
-//	public void getStoreTest() throws Exception {
-//		
-//
-//			List<Store> getStore = storeService.getStore(storeNo);
-//			
-//			if (CollectionUtils.isEmpty(getStore) == false) { 		
-//				for (Store store : getStore) {
-//					System.out.println("=========================");
-//	
-//					System.out.println(store.getStorePhone());
-//					System.out.println(store.getStoreName());	
-//					System.out.println(store.getStoreType());
-//					System.out.println(store.getStoreAddr());
-//					System.out.println(store.getStartTime());
-//					System.out.println(store.getEndTime());
-//					System.out.println(store.getHoliday());
-//					System.out.println(store.getStoreIntro());					
-//				    System.out.println(store.getOrders().getReviewStar());
-//					System.out.println(store.getProduct().getProdNo());
-//					System.out.println(store.getProduct().getProdName());
-//					System.out.println(store.getProduct().getPrice());
-//					System.out.println(store.getProduct().getProdOrign());
-//					System.out.println(store.getProduct().getProdInfo());
-//					System.out.println(store.getProduct().isSoldout());
-//					
-//					
-//					System.out.println("=========================");
-//				}
-//			}
-//		}
+	@Test
+	public void getStoreTest() throws Exception {
+		
+
+			List<Store> getStore = storeService.getStore(10013);
+			
+			if (CollectionUtils.isEmpty(getStore) == false) { 		
+				for (Store store : getStore) {
+					System.out.println("=========================");
+	
+					System.out.println(store.getStorePhone());
+					System.out.println(store.getStoreName());	
+					System.out.println(store.getStoreType());
+					System.out.println(store.getStoreAddr());
+					System.out.println(store.getStartTime());
+					System.out.println(store.getEndTime());
+					System.out.println(store.getHoliday());
+					System.out.println(store.getStoreIntro());					
+				    System.out.println(store.getOrders().getReviewStar());
+					System.out.println(store.getProduct().getProdNo());
+					System.out.println(store.getProduct().getProdName());
+					System.out.println(store.getProduct().getPrice());
+					System.out.println(store.getProduct().getProdOrign());
+					System.out.println(store.getProduct().getProdInfo());
+					System.out.println(store.getProduct().isSoldout());
+					
+					
+					System.out.println("=========================");
+				}
+			}
+		}
+	
+	@Test
+	public void testOfGetStoreRefund() {
+		
+			List<Store> refundList = storeService.getStoreRefund(10015);
+			if (CollectionUtils.isEmpty(refundList) == false) { 		
+				for (Store store : refundList) {
+					System.out.println("=========================");
+					
+					System.out.println(store.getRequest().getResDate());
+					System.out.println(store.getRequest().getReqDate());					
+					System.out.println(store.getRequest().getRefundMoney());
+					System.out.println(store.getRequest().getReqStatus());
+					
+					System.out.println("=========================");
+				}
+			}
+		}
+	
 	
 //	@Test
 //	public void getStoreWalletTest() throws Exception {
@@ -185,5 +200,33 @@ class StoreServiceTest {
 //			}
 //		}
 //	
-  }
+	
+	@Test
+	public void testOfGetStoreWallet() {
+		
+			HashMap<String, Object> map = new HashMap<>();
+			
+			map.put("storeNo", "10000");					
+			map.put("orderDateStart", LocalDate.now());			
+			map.put("orderDateEnd", LocalDate.now());
+		
+			
+			List<Store> walletList = storeService.getStoreWallet(map);
+			if (CollectionUtils.isEmpty(walletList) == false) { 		
+				for (Store store : walletList) {
+					System.out.println("=========================");
+					
+					System.out.println(store.getTotalEarn());
+					System.out.println(store.getUser().getJpBalance());					
+					System.out.println(store.getOrders().getOrderNo());
+					System.out.println(store.getOrders().getOrderDate());
+					System.out.println(store.getOrders().getOrderPrice());
+					System.out.println(store.getOrders().getBuyerName());
+
+					
+					System.out.println("=========================");
+				}
+			}
+	}
+}
 

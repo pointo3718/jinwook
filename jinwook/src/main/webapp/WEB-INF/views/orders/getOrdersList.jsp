@@ -31,7 +31,7 @@
    <!--  ///////////////////////// CSS ////////////////////////// -->
    <style>
      body {
-            padding-top : 50px;
+            padding-top : 0px;
         }
     </style>
     <script type="text/javascript">
@@ -49,9 +49,11 @@
 <form class="form-horizontal" name="getOrdersList">
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">진욱이네</a>
+        	<a class="navbar-brand" href="/user/index">진욱이네</a>
    		</div>
    	</div>
+
+	<h2 class="text-center">주문내역</h2>
 
    <table class="table table-hover table-striped" >
          <br><br><br><br>
@@ -79,14 +81,21 @@
            <td align="left">${orders.product.prodName}</td>
            <td align="left">${orders.orderPrice}</td>
            <td align="left">${orders.pickupTime}</td>
-           <td align="left">${orders.orderStatus}</td>
+           <td align="left">
+           <c:if test="${orders.orderStatus eq '0'}">주문 접수중</c:if>
+           <c:if test="${orders.orderStatus eq '1'}">주문 거절</c:if>
+           <c:if test="${orders.orderStatus eq '2'}">픽업 준비중</c:if>
+           <c:if test="${orders.orderStatus eq '3'}">주문 취소</c:if>
+           <c:if test="${orders.orderStatus eq '4'}">픽업 완료</c:if>
+           <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
+           </td>
          </tr>
           </c:forEach>
          	
     </tbody>
       
 </table>
-
+</form>
 
 <jsp:include page="../common/pageNavigator_new.jsp"/>
 </body>

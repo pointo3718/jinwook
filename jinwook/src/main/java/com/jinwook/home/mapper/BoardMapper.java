@@ -1,6 +1,7 @@
 package com.jinwook.home.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -82,7 +83,7 @@ public interface BoardMapper {
 	public int getStoreJjim(Jjim jjim);
 	
 	//레시피 추천
-	public void updateRecipeReco(int rcpNo);
+	public int updateRecipeReco(int rcpNo);
 	//댓글 추천
 	public void updateCommentReco(int commentNo);
 	//레시피 추천 취소
@@ -90,7 +91,7 @@ public interface BoardMapper {
 	//댓글 추천 취소
 	public void updateCommentRecoCancel(int commentNo);
 	//레시피 추천 테이블에 add
-	public void addRecipeReco(int rcpNo, String userId);
+	public int addRecipeReco(int rcpNo, String userId);
 	//댓글 추천 테이블에 add
 	public void addCommentReco(int commentNo, String userId);
 	//레시피 추천 테이블에서 delete
@@ -98,7 +99,7 @@ public interface BoardMapper {
 	//댓글 추천 테이블에서 delete
 	public void deleteCommentReco(int commentNo, String userId);
 	//레시피 추천 시 recocheck를 1로 만들어서 중복방지
-	public void updateRecipeRecoCheck(int rcpNo, String userId);
+	public int updateRecipeRecoCheck(Map<String, Object> map);
 	//댓글 추천 시 recocheck를 1로 만들어서 중복방지
 	public void updateCommentRecoCheck(int commentNo, String userId);
 	// 레시피 추천취소 시 다시 0
@@ -106,7 +107,7 @@ public interface BoardMapper {
 	// 댓글 추천취소 시 다시 0
 	public void updateCommentRecoCheckCancel(int commentNo, String userId);
 	//레시피 추천 중복방지 select문
-	public int recipeRecoCheck(int rcpNo, String userId);
+	public int recipeRecoCheck(Map<String, Object> map);
 	//댓글 추천 중복방지 select문
 	public int commentRecoCheck(int commentNo, String userId);
 

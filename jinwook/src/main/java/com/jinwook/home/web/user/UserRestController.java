@@ -23,11 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
 
+<<<<<<< HEAD
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 
 
 //==> User RestController
+=======
+//==> ȸ������ RestController
+>>>>>>> refs/remotes/origin/master
 @RestController
 @RequestMapping("/user/*")
 public class UserRestController {
