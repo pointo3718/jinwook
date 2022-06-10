@@ -10,7 +10,7 @@
    
    <div class="container">
           
-      <a class="navbar-brand" href="index">진 욱 이 네</a>
+      <a class="navbar-brand" href="index2">진 욱 이 네</a>
       
       <!-- toolBar Button Start //////////////////////// -->
       <div class="navbar-header">

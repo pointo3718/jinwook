@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +17,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
 
+
+
+
+//==> User RestController
 //==> ȸ������ RestController
 @RestController
 @RequestMapping("/user/*")
@@ -212,8 +218,16 @@ public class UserRestController {
 		
 		return new ResponseEntity<Object>(user, HttpStatus.OK);
 	}
-	
-	
+		
+		@PostMapping("updatePassword")
+		public int updatePassword(@ModelAttribute("user") User user, HttpSession session) throws Exception {
+			
+			int result = userService.updatePassword(user);
+				
+			session.setAttribute("user", user.getUserId());	
+				
+			return result;
+		}
 	
 	// 인증번호 보내기
 	@PostMapping("/send/authNum")
@@ -252,11 +266,23 @@ public class UserRestController {
 	    return new ResponseEntity<String>("인증번호가 전송되었습니다", HttpStatus.OK);
 	}
 	
-	//문자 인증
-	@PostMapping("/findIdPhone")
-	public User findIdPhone(@ModelAttribute("user") User user ) throws Exception {
-			
-		return userService.findIdPhone(user);
+	
+	    
+	@RequestMapping(value = "/phoneCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+
+		userService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
+		System.out.println("-------------"+randomNumber+"------------");
+		return Integer.toString(randomNumber);
 	}
+	
+//	//문자 인증
+//	@PostMapping("findIdPhone")
+//	public User findIdPhone(@ModelAttribute("user") User user ) throws Exception {
+//			
+//		return userService.findIdPhone(user);
+//	}
 
 }

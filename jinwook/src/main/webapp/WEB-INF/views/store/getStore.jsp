@@ -166,6 +166,12 @@ body {
 
 <body>
 
+   <div class="navbar  navbar-default">
+        <div class="container">
+           <a class="navbar-brand" href="/user/index">진욱이네</a>
+         </div>
+      </div>
+
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<!-- ToolBar End /////////////////////////////////////-->
 
@@ -210,7 +216,10 @@ body {
 				<div class="col-xs-4 col-md-2 ">
 					<strong>상점종류</strong>
 				</div>
-				<div class="col-xs-8 col-md-4">${store.storeType}</div>
+				<div class="col-xs-8 col-md-4">
+				<c:if test= "${store.storeType.trim()=='1'}" >
+				 	종합			
+				</c:if></div>
 				<div class="col-xs-4 col-md-2 ">
 					<strong>상점주소</strong>
 				</div>
@@ -234,7 +243,7 @@ body {
 				<div class="col-xs-4 col-md-2 ">
 					<strong>상점별점</strong>
 				</div>
-				<div class="col-xs-8 col-md-4">${store.orders.reviewStar}</div>
+				<div class="col-xs-8 col-md-4">${store.orders.reviewStar}점</div>
 			</div>
 
 			<hr />
@@ -251,6 +260,7 @@ body {
 					<th align="center">No</th>
 					<th align="left">상품번호</th>
 					<th align="left">상품명</th>
+					<th align="left">상품사진</th>
 					<th align="left">가격</th>
 					<th align="left">원산지</th>
 					<th align="left">상품소개</th>
@@ -268,14 +278,18 @@ body {
 						<td align="Center">${ i }</td>
 						<td align="left">${store.product.prodNo}</td>
 						<td align="left">${store.product.prodName}</td>
+						<td align="left">${store.product.prodImg}</td>
 						<td align="left">${store.product.price}</td>
 						<td align="left">${store.product.prodOrign}</td>
-						<td align="left">${store.product.prodInfo}</td>
-						<td align="left">${store.product.soldout}</td>
-						<td align="left"><div class="form-group">
-								<div class="col-sm-offset-4  col-sm-4 text-center">
-									<button type="button" class="btn btn-primary">담&nbsp;기</button>
-								</div></td>
+						<td align="left">${store.product.prodInfo}</td>						
+						<td align="left">
+						<c:if test= "${store.product.soldout==true}" >
+				 		판매중			
+						</c:if>
+						<c:if test= "${store.product.soldout==false}" >
+				 		매진			
+						</c:if></td>
+						<td align="left"><button type="button" class="btn btn-primary">담&nbsp;기</button></div></td>
 
 					</tr>
 				</c:forEach>

@@ -17,27 +17,27 @@ import com.jinwook.home.service.domain.Store;
 
 public interface StoreService {
 	
-	public void updateStore(Store store);
+	public boolean updateStore(Store store);
 	
 	public void addStoreProduct(Product Product);
 
-	public void updateStoreProduct(Product product);
+	public boolean updateStoreProduct(Product product);
 	   
-	public void deleteStoreProduct(Product Product);
+	public boolean deleteStoreProduct(int prodNo);
 	   
-	public void isSoldout(Product Product);
+	public boolean isSoldout(Product Product);
 	
-	public void isOpen(Store store);
+	public boolean isOpen(Store store);
 	
-	public void addOrderCoupon(Coupon coupon);
+	public boolean addOrdersCoupon(int couponNo);
 	
 	public List<Coupon> getCouponList(String userId);
 	
-	public List<Store> getStore(Store store);
+	public List<Store> getStore(int storeNo);
+	
+	public List<Store> getStoreRefund(int storeNo);
 
-	public List<Store> getStoreWallet(@RequestParam("storeNo") int storeNo, @RequestParam("orderDateStart") Date orderDateStart,
-			
-			@RequestParam("orderDateEnd") Date orderDateEnd);
+	public List<Store> getStoreWallet(HashMap<String, Object> map);
 
 	
 
