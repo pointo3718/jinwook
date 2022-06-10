@@ -33,7 +33,26 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 function fncAddOrders() {
-		
+	
+	const name=$("input[name='buyerName']").val();
+	const phone=$("input[name='buyerPhone']").val();
+	const pick=$("input[name='plusTime']").val();
+	
+	if(name == null || name.length <1){
+		alert("이름은 반드시 입력하셔야 합니다.");
+		return;
+	}
+	
+	if(phone == null || phone.length <1){
+		alert("전화번호는 반드시 입력하셔야 합니다.");
+		return;
+	}
+	
+	if(pick == null || pick.length <1){
+		alert("픽업시간은 반드시 입력하셔야 합니다.");
+		return;
+	}
+	
 	/* document.addPurchase.submit(); action="/purchase/addPurchase*/
 	$("form").attr("method" , "POST").attr("action" , "/orders/addOrders").submit();
 }
@@ -55,7 +74,7 @@ function fncAddOrders() {
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">진욱이네</a>
+        	<a class="navbar-brand" href="/user/index">진욱이네</a>
    		</div>
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->
@@ -148,10 +167,10 @@ function fncAddOrders() {
 		    <select class="ct_input_g" id="couponType" name="couponType">
 		    
 		    <option>선택안함</option>
-		    <option value="couponType=0">첫가입</option>
-		    <option value="couponType=1">첫구매</option>
-		    <option value="couponType=2">생일</option>
-		    <option value="couponType=3">추천인</option>
+		    <option value="couponType=0">첫가입 이벤트</option>
+		    <option value="couponType=1">첫구매 이벤트</option>
+		    <option value="couponType=2">생일을 축하합니다</option>
+		    <option value="couponType=3">추천인 이벤트</option>
 		    </select>
 		    
 		    </div>
