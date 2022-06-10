@@ -5,27 +5,11 @@
 
 
 <div class="container text-center">
-<<<<<<< HEAD
-	<c:set var="params" value="${board}"/>
-	<c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
-		<nav>
-			<!-- Å©±âÁ¶Àý :  pagination-lg pagination-sm-->
-			<ul class="pagination">
-				<!--  <<== ÁÂÃø nav -->
-				<c:if test="${ params.paginationInfo.hasPreviousPage == false }">
-					<li>
-				</c:if>
-				<c:if test="${ params.paginationInfo.hasPreviousPage == true  }">
-					<li
-						onclick="javascript:void(0);">
-				</c:if>
-				<a href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(1)}');"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a>
-				</li>
-=======
+
+<%-- <c:set var="params" value="${user}"/> --%>
+<c:set var="params" value="${orders}"/>
       
-<c:set var="params" value="${board}"/>
+
    
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
       <nav>
@@ -44,7 +28,6 @@
                aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
             </a>
             </li>
->>>>>>> refs/remotes/origin/master
 
             <!--  <== ÁÂÃø nav -->
             <c:if test="${ params.paginationInfo.hasPreviousPage == false }">
