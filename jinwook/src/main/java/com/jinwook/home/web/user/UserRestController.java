@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
 
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
-
-
 //==> ȸ������ RestController
 @RestController
 @RequestMapping("/user/*")
