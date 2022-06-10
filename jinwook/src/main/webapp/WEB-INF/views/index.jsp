@@ -123,7 +123,7 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <a href="/user/login"><i class="fa fa-user"></i> Login</a>
                             </div>
                         </div>
                     </div>

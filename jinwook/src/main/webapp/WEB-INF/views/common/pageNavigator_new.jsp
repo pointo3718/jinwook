@@ -20,8 +20,7 @@
 					<li
 						onclick="javascript:void(0);">
 				</c:if>
-				<a	
-					href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(1)}');"
+				<a href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(1)}');"
 					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 				</a>
 				</li>

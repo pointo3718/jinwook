@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
 	<main class="password_modify_page">
 		<div class="find_info">	
 			<h3>새로운 비밀번호로 재설정해주세요</h3>
@@ -20,6 +19,7 @@
 	</main>
 	
  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
  
  
 <script>
@@ -27,7 +27,7 @@ const URLSearch = new URLSearchParams(location.search);
 const username = URLSearch.get("username"); 
  
 	
-// 비밀번호 변경시 비밀번호입력 상태 확인
+/* // 비밀번호 변경시 비밀번호입력 상태 확인
 const isSubmit = (function() {
 	let submit = false;
 	
@@ -40,7 +40,7 @@ const isSubmit = (function() {
 		return submit;
 	}
 	return {getSubmit : getSubmit, setSubmit : setSubmit};
-})();	
+})();	 */
 	
  
 	
@@ -77,10 +77,8 @@ $(".modify_btn").click(function(){
 	if(!pwdCheck()) {
 		return;
 	}
-	
 	const data = {
 		password: $(".password1").val(),
-		valueType : "password", 
 		userId : userId
 	}
 	
@@ -89,15 +87,15 @@ $(".modify_btn").click(function(){
 		type: "PATCH",
 		data: data
 	})
+	/* 
 	.done(function(result){
 		swal({
 			text : result,
 			closeOnClickOutside : false
-		})
+		}) */
 		.then(function(){
 			location.href = "login";
 		})
-	})
 	.fail(function(){
 		alert("에러");
 	})

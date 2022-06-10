@@ -81,7 +81,7 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="index">진 욱 이 네</a>
+        	<a class="navbar-brand" href="index2">진 욱 이 네</a>
    		</div>
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->	

@@ -62,7 +62,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			url: "/user/auth",
-			type: "POST",
+			type: "GET",
 			data: data
 		})
 		.then(function(result){

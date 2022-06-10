@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.SimpleMailMessage;
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import com.jinwook.home.mapper.UserMapper;
 import com.jinwook.home.service.domain.User;
+
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service("userServiceImpl")
 public class UserServiceImpl implements UserService{
@@ -118,9 +122,9 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public void updatePassword(User user) throws Exception {
-		userMapper.updateUser(user);
-//		userMapper.updatePassword(user);
+	public int updatePassword(User user) throws Exception {
+//		userMapper.updateUser(user);
+		return userMapper.updatePassword(user);
 	}
 	
 	@Override
@@ -130,13 +134,13 @@ public class UserServiceImpl implements UserService{
 		simpleMailMessage.setSubject("[진욱이네] 아이디 안내를 드립니다.");
 		
 		StringBuffer sb = new StringBuffer();
-		sb.append(user.getUserName()+"님 안녕하세요 마켓컬리입니다.\n"
+		sb.append(user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n"
 				+ "\n"
 				+ "요청하신 아이디를 안내드립니다.\n"
 				+ "\n"
 				+ user.getUserId()
 				+ " \n"
-				+ " ");
+				+ " \n");
 //		sb.append(System.lineSeparator());
 		
 //		for(int i=0;i<usernames.size()-1;i++) {
@@ -229,6 +233,27 @@ public class UserServiceImpl implements UserService{
 	    return false;
 	}
 	//-----------------------------------------
+	public void certifiedPhoneNumber(String userPhoneNumber, int randomNumber) {
+		String api_key = "NCSSFG2Q5MODW2A2";
+	    String api_secret = "HHYIQMHQW3JGYVN9HIDMKA70H32RYZYM";
+	    Message coolsms = new Message(api_key, api_secret);
 
+	    // 4 params(to, from, type, text) are mandatory. must be filled
+	    HashMap<String, String> params = new HashMap<String, String>();
+	    params.put("to", userPhoneNumber);    // 수신전화번호
+	    params.put("from", "01082582676");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+	    params.put("type", "SMS");
+	    params.put("text", "[진욱이네] 인증번호는" + "["+randomNumber+"]" + "입니다."); // 문자 내용 입력
+	    params.put("app_version", "test app 1.2"); // application name and version
+
+	    try {
+	        JSONObject obj = (JSONObject) coolsms.send(params);
+	        System.out.println(obj.toString());
+	      } catch (CoolsmsException e) {
+	        System.out.println(e.getMessage());
+	        System.out.println(e.getCode());
+	      }
+	    
+	}
 	
 }

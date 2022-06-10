@@ -43,10 +43,10 @@ public class UserController {
 //	@Value("#{commonProperties['pageSize']}")
 //	int pageSize;
 	
-	@GetMapping("index")
+	@GetMapping("index2")
 	public String index(HttpSession session) throws Exception{
 		System.out.println("==========index===========");
-		return "index";
+		return "/user/index2";
 	}
 	
 	@GetMapping("addUser")
@@ -144,7 +144,7 @@ public class UserController {
 //		model.addAttribute("msg", "로그인 성공");
 //		model.addAttribute("url", "login");
 		
-		return "index";
+		return "index2";
 	}
 		
 	
@@ -155,7 +155,7 @@ public class UserController {
 		
 		session.invalidate();
 		
-		return "index";
+		return "index2";
 	}
 	
 	
@@ -169,7 +169,7 @@ public class UserController {
 		session.invalidate();
 		System.out.println(user.getUserId());
 		
-		return "index";
+		return "index2";
 	}
 	
 //	@RequestMapping( value="checkDuplication", method=RequestMethod.POST )
@@ -255,31 +255,34 @@ public class UserController {
 	}
 	 
 	 
-	// username의 전화번호가 맞는지 확인
-	@GetMapping("phoneCheck")
-	public ResponseEntity<Boolean> phoneCheck(String username, String phone)  throws Exception {
-	    boolean phoneCheck = userService.phoneCheck(username, phone);
-	    return new ResponseEntity<Boolean>(phoneCheck,HttpStatus.OK);
-	}
+//	// username의 전화번호가 맞는지 확인
+//	@GetMapping("phoneCheck")
+//	public ResponseEntity<Boolean> phoneCheck(String username, String phone)  throws Exception {
+//	    boolean phoneCheck = userService.phoneCheck(username, phone);
+//	    return new ResponseEntity<Boolean>(phoneCheck,HttpStatus.OK);
+//	}
 
 
 	//---------------------------------------
 	// 비밀번호 변경 페이지
 		@GetMapping("updatePassword")
-		public String moldifyPassword(String username, HttpSession session) {
-		    Map<String, Object> authStatus = (Map<String, Object>) session.getAttribute("authStatus");
+		public String updatePassword(User user, HttpSession session) {
+//		    Map<String, Object> authStatus = (Map<String, Object>) session.getAttribute("authStatus");
 		    
 //		    if(authStatus == null || !username.equals(authStatus.get("userId"))) {
 //		        return "/user/findPassword";
 //		    }
-//		    
+		    session.setAttribute("userId", user.getUserId());
 //		    // 페이지에 왔을때 인증이 안되있다면
 //		    if(!(boolean) authStatus.get("status")) {
 //		        return "/user/findPassword";
 //		    }
 		    return "/user/updatePassword";
 		}
-	
+		@GetMapping("/findIdPhone")
+		public String mySms() {
+			return "/user/findIdPhone";
+		}
 //	@PostMapping("findIdEmail")
 //	public String findIdEmail(@ModelAttribute("user") User user, HttpSession session) throws Exception {
 //		

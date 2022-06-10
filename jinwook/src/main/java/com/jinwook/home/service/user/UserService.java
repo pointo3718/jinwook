@@ -4,6 +4,8 @@ package com.jinwook.home.service.user;
 
 import com.jinwook.home.service.domain.User;
 
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
 public interface UserService {
 
 		public void addUser(User user) throws Exception;
@@ -32,7 +34,7 @@ public interface UserService {
 		
 		public User findPasswordEmail(User user) throws Exception;
 		
-		public void updatePassword(User user) throws Exception; 
+		public int updatePassword(User user) throws Exception; 
 		
 		public void sendIdUser(User user) throws Exception;
 		
@@ -45,6 +47,6 @@ public interface UserService {
 		 
 		public boolean phoneCheck(String username, String phone) throws Exception;
 		//----------------------------------
-
+		public void certifiedPhoneNumber(String userPhoneNumber, int randomNumber);
 		
 }

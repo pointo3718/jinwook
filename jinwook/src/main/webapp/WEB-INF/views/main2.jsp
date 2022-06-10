@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,7 +9,7 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
@@ -28,7 +28,7 @@
     <!-- Bootstrap Dropdown Hover JS -->
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 	
-	<!--  CSS �곤옙揶�占� : 占쎈��占쏙옙占� 占쏙옙筌�占� 揶�占썹�귐�占쏙옙 占쏙옙占쏙옙 占쎈�욧� :  雅��깍옙占쏙㎗占썹�깍옙 占쏙옙, 占쏙옙 占쏙옙占쏙옙-->
+	<!--  CSS 占쎄낀���띰옙��占� : ����占쏙옙��������占� ������嶺�占썲��占� �띰옙���뱄옙洹�占썲������ ������������ ����占쎌�㏆옙 :  ��占쏙옙源������������뱄옙源��� ������, ������ ������������-->
 	<style>
         body {
             padding-top : 70px;
@@ -46,7 +46,7 @@
 	<jsp:include page="toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  占쏙옙占쏙옙占쏙옙 占쎈��占썩�뱄옙占� http://getbootstrap.com/getting-started/  筌〓��� -->	
+	<!--  ������������������ ����占쏙옙���⑼옙諭�����占� http://getbootstrap.com/getting-started/  嶺���占쏙옙占� -->	
    	<div class="container ">
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
@@ -54,9 +54,9 @@
      </div>
     </div>
 
-	<!-- 筌〓��� : http://getbootstrap.com/css/   : container part..... -->
+	<!-- 嶺���占쏙옙占� : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container">
-       <h3>강진욱 홍선경 최인규 문수진 송지호</h3>
+      <h3>강진욱 홍선경 최인규 문수진 송지호</h3>
         <p>진욱이네입니다.</p>
   	 	<h3>할 수 있다.</h3>
          <h3>비트캠프 217기</h3>

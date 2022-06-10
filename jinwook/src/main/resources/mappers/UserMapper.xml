@@ -130,14 +130,12 @@
     )
 </select>
 	 
-	 
-	 
-	<!--  <update		id="updatePassword"	>
+	 <update id="updatePassword"	parameterType="user" >
 		UPDATE users 
 		<set>
 			password = #{password}
 		</set>
-		WHERE user_id = #{userId}
-	 </update> -->
+		WHERE user_id = #{userId} AND phone = ${phone}
+	 </update>
 	 
 </mapper>
