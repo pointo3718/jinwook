@@ -31,7 +31,7 @@
    <!--  ///////////////////////// CSS ////////////////////////// -->
    <style>
      body {
-            padding-top : 50px;
+            padding-top : 0px;
         }
     </style>
     <script type="text/javascript">
@@ -49,7 +49,7 @@
 <form class="form-horizontal" name="getOrdersJpayList">
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">진욱이네</a>
+        	<a class="navbar-brand" href="/user/index">진욱이네</a>
    		</div>
    	</div>
 
@@ -76,7 +76,10 @@
            <td align="left">${jpay.jpDate}</td>
            <td align="left">${jpay.chargePay}</td>
            <td align="left">${jpay.finalPrice}</td>
-           <td align="left">${jpay.jpStatus}</td>
+           <td align="left">
+           <c:if test="${jpay.jpStatus eq '0'}">충전</c:if>
+           <c:if test="${jpay.jpStatus eq '1'}">결제</c:if>
+           </td>
            <td align="left">${jpay.orders.store.storeName}</td>
          </tr>
           </c:forEach>

@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,15 +46,17 @@ public class OrdersRestController {
 		return result;
 	}
 	
-	@DeleteMapping(value = "deleteOrdersCart/{cartNo}")
+	@GetMapping(value = "deleteOrdersCart/{cartNo}")
 	public JsonObject deleteOrdersCart(@PathVariable(value="cartNo",required = false) int cartNo){
 		
-		System.out.println("/orders/deleteOrdersCart : POST");
+		System.out.println("/orders/deleteOrdersCart : GET");
+		System.out.println("rest cartNo"+cartNo);
 		
 		JsonObject jsonObj = new JsonObject();
 		
 		try {
 			int result = ordersService.deleteOrdersCart(cartNo);
+			System.out.println("result"+result);
 			jsonObj.addProperty("result", result);
 
 		} catch (DataAccessException e) {
@@ -61,7 +65,7 @@ public class OrdersRestController {
 		} catch (Exception e) {
 			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
 		}
-
+		System.out.println("jsonObj"+jsonObj);
 		return jsonObj;
 	}
 	

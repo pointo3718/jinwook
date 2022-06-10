@@ -1,6 +1,7 @@
 package com.jinwook.home;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -49,8 +50,9 @@ public class OrdersMapperTest {
       orders.setStore(store);
       orders.setBuyerName("강진욱");
       orders.setBuyerPhone("010-1234-9876");
+      ZoneId zoneId = ZoneId.of("Asia/Seoul");
 //      orders.setPickupTime(LocalDateTime.now().plusMinutes(orders.getPlusTime()));
-      orders.setPickupTime(LocalDateTime.now().plusMinutes(orders.getPlusTime()));
+      orders.setPickupTime(LocalDateTime.now(zoneId).plusMinutes(orders.getPlusTime()));
       orders.setOrderReq(null);
       orders.setProdCount(3);
       orders.setOrderStatus("0");
