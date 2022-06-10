@@ -141,7 +141,9 @@ public class StoreControllerTest {
 	@DisplayName("isSoldout 파라미터 방식 테스트")
 	public void isSoldout() throws Exception{
 	  this.mvc.perform(post("/store/isSoldout")
-	                                    .param("prodNo", "10025"))
+	                                    .param("prodNo", "10025")
+	                                    .param("soldout", "1"))
+	  
 	  									.andExpect(status().isOk())
 	                   					.andDo(print());
 	}
@@ -151,16 +153,18 @@ public class StoreControllerTest {
 	@DisplayName("isOpen 파라미터 방식 테스트")
 	public void isOpen() throws Exception{
 	  this.mvc.perform(post("/store/isOpen")
-	                                    .param("storeNo", "10000"))
+	                                    .param("storeNo", "10000")
+	                                    .param("open", "1"))
+	                                    
 	  									.andExpect(status().isOk())
 	                   					.andDo(print());
 	}
 	
 	@Test
 	@Transactional
-	@DisplayName("addOrderCoupon 파라미터 방식 테스트")
-	public void addOrderCoupon() throws Exception{
-	  this.mvc.perform(post("/store/addOrderCoupon")
+	@DisplayName("addOrdersCoupon 파라미터 방식 테스트")
+	public void addOrdersCoupon() throws Exception{
+	  this.mvc.perform(post("/store/addOrdersCoupon")
 	                                    .param("couponNo", "10000"))
 	  									.andExpect(status().isOk())
 	                   					.andDo(print());
@@ -182,7 +186,17 @@ public class StoreControllerTest {
 	@DisplayName("getStoreWallet 파라미터 방식 테스트")
 	public void getStoreWallet() throws Exception{
 	  this.mvc.perform(get("/store/getStoreWallet")
-	                                    .param("storeNo", "10000"))
+	                                    .param("storeNo", "10000")) 
+	  									.andExpect(status().isOk())
+	                   					.andDo(print());
+	}
+	
+	@Test
+	@Transactional
+	@DisplayName("getStoreRefund 파라미터 방식 테스트")
+	public void getStoreRefund() throws Exception{
+	  this.mvc.perform(get("/store/getStoreRefund")
+	                                    .param("storeNo", "10015"))  
 	  									.andExpect(status().isOk())
 	                   					.andDo(print());
 	}

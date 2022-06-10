@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-аж╧╝©║ ╪╨╟Ьго╪л╫ю╢о╢ы. ©м ╧з╪Ж !!!
+	<div class="navbar  navbar-default">
+        <div class="container">
+        	<a class="navbar-brand" href="/user/index">Л╖└Л ╠Л²╢К└╓</a>
+   		</div>
+   	</div>
+Лё╪К╛╦Л≈░ Л└╠ЙЁ╣М∙≤Л┘╗Л┼╣К▀┬К▀╓. Л≥─ К╟∙Л┬≤ !!!
 </body>
 </html>

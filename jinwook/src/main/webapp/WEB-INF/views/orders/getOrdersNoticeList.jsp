@@ -31,7 +31,7 @@
    <!--  ///////////////////////// CSS ////////////////////////// -->
    <style>
      body {
-            padding-top : 50px;
+            padding-top : 0px;
         }
     </style>
     <script type="text/javascript">
@@ -49,7 +49,7 @@
 <form class="form-horizontal" name="getOrdersNoticeList">
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">진욱이네</a>
+        	<a class="navbar-brand" href="/user/index">진욱이네</a>
    		</div>
    	</div>
 

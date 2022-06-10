@@ -1,6 +1,7 @@
 package com.jinwook.home.web.orders;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -63,7 +64,8 @@ public class OrdersController {
      
       orders.setCart(cart);
       orders.setUser(user);
-      orders.setPickupTime(LocalDateTime.now().plusMinutes(plusTime));
+      ZoneId zoneId = ZoneId.of("Asia/Seoul");
+      orders.setPickupTime(LocalDateTime.now(zoneId).plusMinutes(plusTime));
       
       System.out.println(orders);
       ordersService.addOrders(orders);
@@ -144,6 +146,15 @@ public class OrdersController {
       return "orders/addOrdersCart";
    }
    
+   @PostMapping(value = "deleteOrdersCart")
+   public String deleteOrdersCart(@RequestParam("cartNo")int cartNo) throws Exception {
+	   
+	   ordersService.deleteOrdersCart(cartNo);
+	   
+	return "orders/deleteOrdersCart";
+	   
+   }
+   
    
    @GetMapping(value = "getOrdersCartList")
    public String getOrdersCartList(@ModelAttribute("cart") Cart cart, Model model,HttpSession session) throws Exception {
@@ -151,10 +162,11 @@ public class OrdersController {
       String userid = ((User) session.getAttribute("user")).getUserId();
       cart.setUserId(userid);
       //cart.setStoreName();
+      System.out.println("cart"+cart);
       List<Cart> getCartList = ordersService.getOrdersCartList(cart);
       model.addAttribute("getCartList", getCartList);
       
-      System.out.println(getCartList);
+      System.out.println("getCartList"+getCartList);
       return "orders/getOrdersCartList";
    }
    

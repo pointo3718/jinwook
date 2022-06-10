@@ -31,46 +31,44 @@
    <!--  ///////////////////////// CSS ////////////////////////// -->
    <style>
      body {
-            padding-top : 50px;
+            padding-top : 0px;
         }
     </style>
 	<script type="text/javascript">
-	function fncAddOrders() {
+	function fncDeleteOrdersCart(e) {
+		if (!confirm('상품을 삭제하시겠어요?')) {
+			return false;
+		}
 		
-		/* document.addOrders.submit(); action="/orders/addOrders*/
-	$("form").attr("method" , "GET").attr("action" , "/orders/addOrders").submit();
-	}
-	
-	function fncDeleteOrdersCart() {
+		console.log(e);
+		const no = $(e).data("value");
+		var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
 		 $.ajax({
-				url : "/orders/deleteOrdersCart",
-				type : "POST",
+				url : "/orders/deleteOrdersCart/"+no,
 				dataType : "json",
-				data : {"cartNo" : $("#cartNo").val()},
-				success : function(data){
-					if(data == 1){
+				success : function(result){
+					if(result != null){
 						alert("삭제완료");
-						location.reload();
+						self.location = "/orders/getOrdersCartList";
 					}
 				}
 			
 			});
+		
 	}
 	
-	$(function(){
+/* 	function addOrders(){
+		$("form").attr("method" , "GET").attr("action" , "/orders/addOrders").submit();
+	} */
+ 	$(function(){
 		$( "#button" ).on("click" , function() {
-			fncAddOrders();
+			$("form").attr("method" , "GET").attr("action" , "/orders/addOrders").submit();
 		}); 
-	});
+	}); 
 	$(function(){
 		$("a[href='#' ]").on("click" , function() {
 			history.go(-1);
 		});
-	});
-	$(function(){
-		$( "#buttons" ).on("click" , function() {
-			fncDeleteOrdersCart();
-		}); 
 	});
 	</script>
 	
@@ -78,14 +76,16 @@
    </head> 
 
 <body>
-
-<form class="form-horizontal" name="addPurchase">
+		
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">진욱이네</a>
+        	<a class="navbar-brand" href="/user/index">진욱이네</a>
    		</div>
    	</div>
+   	
+   			<h2 class="text-center">장바구니</h2>
 <br><br><br><br>
+<form class="form-horizontal">
    <table class="table table-hover table-striped" >
          
        <thead>
@@ -107,13 +107,14 @@
         <c:forEach var="cart" items="${getCartList}">
          <c:set var="i" value="${ i+1 }" />
          <tr>
-           <td align="center" type="hidden" id="cartNo" name="cartNo" value="${cart.cartNo}">${cart.product.prodImg}</td>
+           <td hidden="cartNo" id="cartNo" name="cartNo" value="${cart.cartNo}">+cart.cartNo</td>
+           <td align="center">${cart.product.prodImg}</td>
            <td align="left">${cart.product.prodName}</td>
            <td align="left">${cart.product.prodInfo}</td>
            <td align="left">${cart.product.price}</td>
            <td align="left">${cart.prodCount}</td>
            <td align="left">${cart.product.price*cart.prodCount}</td>
-           <td align="left"><button id="buttons" class="btn btn-primary">X</button></td>
+           <td align="left"><button data-value="${cart.cartNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteOrdersCart(this)">X</button></td>
            <c:set var="total" value="${total + (cart.product.price*cart.prodCount) }" />
          </tr>
           </c:forEach>
@@ -121,6 +122,7 @@
     </tbody>
       
 </table>
+
 <div class="form-group">
 		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">총 상품 금액</label>
 		    <div class="col-sm-4">
@@ -131,17 +133,19 @@
   <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <a class="btn btn-primary btn" href="#" role="button">더담으러가기</a>
-		      <button id="button" class="btn btn-primary"  >주문하기</button>
+		      <button class="btn btn-primary" id="button" name="button" >주문하기</button>
 			</div>
 		</div>
+</form>
+		<br><br>
+		<hr>
 		<a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
 		<a href="/orders/getOrdersList">주문내역</a> <hr>
 		<a href="/orders/getOrdersJpayList">진욱페이내역</a> <hr>
 		<a href="/orders/getOrdersNoticeList">알림내역</a> <hr>
+		<a href="/store/getStore?storeNo=10000" class="primary-btn">SHOP</a><hr>
 		
-</form>
      <!--  table End /////////////////////////////////////-->
-     <a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
       
     <!--  화면구성 div End /////////////////////////////////////-->  
     
