@@ -105,7 +105,7 @@
 						<li><a href="./checkout.html">Check Out</a></li>
 						<li><a href="./blog-details.html">Blog Details</a></li>
 					</ul></li>
-				<li><a href="./blog.html">Blog</a></li>
+				<li><a href="./blog.html">마이페이지</a></li>
 				<li><a href="./contact.html">Contact</a></li>
 			</ul>
 		</nav>
@@ -181,7 +181,7 @@
 									<li><a href="./checkout.html">Check Out</a></li>
 									<li><a href="./blog-details.html">Blog Details</a></li>
 								</ul></li>
-							<li class="active"><a href="./blog.html">Blog</a></li>
+							<li class="active"><a href="./blog.html">마이페이지</a></li>
 							<li><a href="./contact.html">Contact</a></li>
 						</ul>
 					</nav>

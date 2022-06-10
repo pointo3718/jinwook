@@ -7,14 +7,14 @@
 <div class="container text-center">
 
 <%-- <c:set var="params" value="${user}"/> --%>
-<c:set var="params" value="${orders}"/>
+<c:set var="params" value="${user}"/>
       
 
    
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
       <nav>
          <!-- 크기조절 :  pagination-lg pagination-sm-->
-         <ul class="pagination">
+         <ul class="product__pagination blog__pagination">
             <!--  <<== 좌측 nav -->
             <c:if test="${ params.paginationInfo.hasPreviousPage == false }">
                <li>
@@ -87,9 +87,10 @@
             <a href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(params.paginationInfo.totalPageCount)}');" aria-label="Next"> <span
                aria-hidden="true">&raquo;</span>
             </a>
-            </li>
-
+            </li>	
          </ul>
+         <i class="fa fa-long-arrow-right"></i>
       </nav>
    </c:if> 
+ 
 </div>
