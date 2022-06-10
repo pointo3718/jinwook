@@ -75,6 +75,16 @@
    <result property="rcpNo"         	column="rcp_no"         jdbcType="VARCHAR"/>   
    <result property="storeNo"         	column="store_no"       jdbcType="VARCHAR"/>   
 </resultMap>
+
+<resultMap type="recommend" id="recoSelectMap">
+   <result property="recommendNo"       column="recommend_no"    jdbcType="INTEGER"/>   
+   <result property="commentNo"         column="comment_no"      jdbcType="INTEGER"/>   
+   <result property="rcpNo"         	column="rcp_no"          jdbcType="INTEGER"/>   
+   <result property="user.userId"       column="user_id"         jdbcType="VARCHAR"/>   
+   <result property="recocheck"         column="recocheck"       jdbcType="INTEGER"/>   
+   <result property="recoDate"          column="recodate"        jdbcType="DATE"/>   
+   <result property="recommendCount"    column="recommend_count" jdbcType="INTEGER"/>   
+</resultMap>
 	
 	<!-- 1:1문의 조회수 올리기v -->
 	<update id="updateBoardInquiryHits">
@@ -550,15 +560,18 @@
 	</update>
 	
 	<!-- 레시피 추천 시 recommend 테이블에 add -->
-	<insert id="addRecipeReco">
+	<insert id="addRecipeReco" parameterType="Recommend" useGeneratedKeys="true" keyProperty="recommendNo">
 		INSERT INTO recommend(recommend_no, rcp_no, user_id)
-		VALUES ((SELECT NVL(MAX(recommendNo), 0) + 1 FROM recommend), #{rcpNo}, #{userId}
+		VALUES (
+		( SELECT IFNULL(MAX(recommendNo), 0) + 1 FROM recommend a), 
+		#{rcpNo}, 
+		#{userId})
 	</insert>
 
 	<!-- 댓글 추천 시 recommend 테이블에 add -->
 	<insert id="addCommentReco">
 		INSERT INTO comment(recommend_no, comment_no, user_id)
-		VALUES ((SELECT NVL(MAX(recommendNo), 0) + 1 FROM recommend), #{recommendNo}, #{userId}
+		VALUES ((SELECT IFNULL(MAX(recommendNo), 0) + 1 FROM recommend), #{recommendNo}, #{userId})
 	</insert>
 	
 	<!-- 레시피 추천취소 시 delete -->
@@ -576,7 +589,7 @@
 	</delete>
 	
 	<!-- 레시피 추천 시 recocheck를 1로 만들어서 중복방지 -->
-	<update id="updateRecipeRecoCheck">
+	<update id="updateRecipeRecoCheck" parameterType="int">
 		UPDATE recommend
 		SET
 		recocheck = 1
@@ -615,7 +628,7 @@
 	<select id="recipeRecoCheck" resultType="int">
 		SELECT COUNT(*)
 		FROM recommend
-		WHERE rcp_no = #{rcp_no}
+		WHERE rcp_no = #{rcpNo}
 		AND user_id = #{userId}
 	</select>
 	

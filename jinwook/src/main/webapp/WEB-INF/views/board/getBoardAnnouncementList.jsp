@@ -122,6 +122,14 @@ body {
       $(".ct_list_pop:nth-child(4n+6)").css("background-color", "whitesmoke");
    });
    
+   /*<![CDATA[*/
+
+   function movePage(uri, queryString) {
+      location.href = uri + queryString;
+   }
+
+   /*]]>*/
+   
 </script>
 
 </head>

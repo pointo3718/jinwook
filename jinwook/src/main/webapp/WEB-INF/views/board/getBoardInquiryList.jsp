@@ -70,6 +70,13 @@ body {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
+/*<![CDATA[*/
+
+function movePage(uri, queryString) {
+   location.href = uri + queryString;
+}
+
+/*]]>*/
 
    //=============    검색 / page 두가지 경우 모두  Event  처리 =============   
    function fncGetUserList(currentPage) {
@@ -121,6 +128,8 @@ body {
       //==> 아래와 같이 정의한 이유는 ??
       $(".ct_list_pop:nth-child(4n+6)").css("background-color", "whitesmoke");
    });
+   
+
    
 </script>
 

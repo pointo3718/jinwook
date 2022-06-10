@@ -70,7 +70,7 @@ public class FileUtils {
 				attach.setBoardNo(boardNo);
 				attach.setOriginalName(file.getOriginalFilename());
 				attach.setSaveName(saveName);
-				attach.setSize((int) file.getSize());
+				attach.setSize((int) file.getSize());//int형변환 추가
 
 				/* 파일 정보 추가 */
 				attachList.add(attach);

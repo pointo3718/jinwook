@@ -32,9 +32,11 @@ public class BoardServiceImpl implements BoardService {
    @Autowired
    private BoardMapper boardMapper;
    
-     @Autowired private AttachMapper attachMapper;
+     @Autowired 
+     private AttachMapper attachMapper;
      
-     @Autowired private FileUtils fileUtils;
+     @Autowired 
+     private FileUtils fileUtils;
     
    //1:1문의 등록
    @Override
@@ -380,8 +382,8 @@ public class BoardServiceImpl implements BoardService {
    }
 
    @Override
-   public void updateRecipeReco(int rcpNo) {
-      boardMapper.updateRecipeReco(rcpNo);
+   public int updateRecipeReco(int rcpNo) {
+      return boardMapper.updateRecipeReco(rcpNo);
    }
 
    @Override
@@ -400,8 +402,8 @@ public class BoardServiceImpl implements BoardService {
    }
 
    @Override
-   public void addRecipeReco(int rcpNo, String userId) {
-      boardMapper.addRecipeReco(rcpNo, userId);
+   public int addRecipeReco(int rcpNo, String userId) {
+      return boardMapper.addRecipeReco(rcpNo, userId);
    }
 
    @Override
@@ -420,8 +422,11 @@ public class BoardServiceImpl implements BoardService {
    }
 
    @Override
-   public void updateRecipeRecoCheck(int rcpNo, String userId) {
-      boardMapper.updateRecipeRecoCheck(rcpNo, userId);
+   public int updateRecipeRecoCheck(int rcpNo, String userId) {
+	   Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("userId", userId);
+	      map.put("rcpNo", rcpNo);
+      return boardMapper.updateRecipeRecoCheck(map);
    }
 
    @Override
@@ -441,7 +446,11 @@ public class BoardServiceImpl implements BoardService {
 
    @Override
    public int recipeRecoCheck(int rcpNo, String userId) {
-      return boardMapper.recipeRecoCheck(rcpNo, userId);
+      Map<String, Object> map = new HashMap<String, Object>();
+      map.put("userId", userId);
+      map.put("rcpNo", rcpNo);
+	   return boardMapper.recipeRecoCheck(map);
+      
    }
 
    @Override

@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Attach {
+public class Attach extends CommonDTO {
 
 	/** 파일 번호 (PK) */
 	private Integer attachNo;

@@ -88,7 +88,7 @@ public interface BoardService {
 	public int getStoreJjim(Jjim jjim);
 	
 	// 레시피 추천
-	public void updateRecipeReco(int rcpNo);
+	public int updateRecipeReco(int rcpNo);
 	// 댓글 추천
 	public void updateCommentReco(int commentNo);
 	// 레시피 추천 취소
@@ -96,7 +96,7 @@ public interface BoardService {
 	// 댓글 추천 취소
 	public void updateCommentRecoCancel(int commentNo);
 	// 레시피 추천 테이블에 add
-	public void addRecipeReco(int rcpNo, String userId);
+	public int addRecipeReco(int rcpNo, String userId);
 	// 댓글 추천 테이블에 add
 	public void addCommentReco(int commentNo, String userId);
 	// 레시피 추천 테이블에서 delete
@@ -104,7 +104,7 @@ public interface BoardService {
 	// 댓글 추천 테이블에서 delete
 	public void deleteCommentReco(int commentNo, String userId);
 	// 레시피 추천 시 recocheck를 1로 만들어서 중복방지
-	public void updateRecipeRecoCheck(int rcpNo, String userId);
+	public int updateRecipeRecoCheck(int rcpNo, String userId);
 	// 댓글 추천 시 recocheck를 1로 만들어서 중복방지
 	public void updateCommentRecoCheck(int commentNo, String userId);
 	// 레시피 추천취소 시 다시 0
