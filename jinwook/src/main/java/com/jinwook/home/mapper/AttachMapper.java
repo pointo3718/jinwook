@@ -9,7 +9,7 @@ import com.jinwook.home.service.domain.Attach;
 @Mapper
 public interface AttachMapper {
 	
-	//파일 등록
+	//파일 등록, insert쿼리 호출
 	public int addAttach(List<Attach> attachList);
 
 	//파일 상세 조회 - 다운로드 처리에 필요

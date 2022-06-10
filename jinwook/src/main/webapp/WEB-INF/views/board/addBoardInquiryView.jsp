@@ -26,28 +26,81 @@
  		body {
             padding-top : 50px;
         }
+ /*
+ * start of file css
+ */
+.filebox input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+.filebox.bs3-primary .col-sm-10>label {
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #2e6da4;
+}
+.filebox .col-sm-10>label {
+	display: inline-block;
+	padding: .5em .75em;
+	color: #999;
+	font-size: inherit;
+	font-weight: 600;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+.filebox .upload-name {
+	display: inline-block;
+	width: 350px;
+	padding: .5em .75em;
+	/* label의 패딩값과 일치 */
+	font-size: inherit;
+	font-family: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	-webkit-appearance: none;
+	/* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+/*
+ * end of file css
+ */
      </style>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
-$(function() {
-	$("button.btn.btn-primary").on("click", function() {
-		fncAddBoardInquiry();
-	});
-});
 
-//==> 추가된부분 : "취소"  Event 처리 및  연결
-$(function() {
-	$("a[href='#' ]").on("click", function() {
-		$("form")[0].reset();
-	});
-});
+function registerBoard(form) {
 
-function fncAddBoardInquiry() {
-	
-	$("form").attr("method", "POST").attr("action", "/board/addBoardInquiry").submit();
+	form.noticeYn.value = form.noticeYn.checked == false ? 'N' : 'Y';
+	form.secretYn.value = form.secretYn.checked == false ? 'N' : 'Y';
+
+	var result = (
+			   isValid(form.title, "제목", null, null)
+			&& isValid(form.writer, "이름", null, null)
+			&& isValid(form.content, "내용", null, null)
+	);
+
+	if ( result == false ) {
+		return false;
+	}
 }
-
+/*[- end of function -]*/
+ 
 var rcpNo = ${recipe.rcpNo}
 var userId = ${board.user.userId}
 
@@ -78,9 +131,9 @@ function updateRecipeReco() {
 </head>
 
 <body>
+<form class="form-horizontal" method="post" enctype="multipart/form-data" onsubmit="return registerBoard(this)">
 	<div class="container">
 		<div class="row">
-			<form method="post" action="board/addBoardInquiry">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
@@ -133,13 +186,11 @@ function updateRecipeReco() {
 			<a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
 		</div>
 		</div>
-			</form>
 		</div>
 	</div>
 
 <div class="container">
 	<div class="form-group">
-		<form method="post" encType = "multipart/form-data">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 			1:1문의 답변
 				<tr>
@@ -147,13 +198,22 @@ function updateRecipeReco() {
 					<td><input type="text" style="height:100px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "commentText"></td>
 					<td><br><br><input type="submit" class="btn-primary pull" value="댓글 작성"></td>
 				</tr>
-				<tr>
-					<td colspan="3"><input type="file" name="fileName"></td>
-				</tr>
 			</table>
-		</form>
 	</div>
 </div>
+
+<!--/* 저장된 파일이 없는 파일 영역 */-->
+<div data-name="fileDiv" class="form-group filebox bs3-primary">
+	<div class="col-sm-10">
+		<input type="text" class="upload-name" value="파일 찾기" readonly />
+		<label for="file_0" class="control-label">찾아보기</label> 
+		<input multiple="multiple" type="file" name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)" />
+
+	</div>
+</div>
+
+
+</form>
 </body>
 
 </html>

@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -19,11 +22,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.board.BoardService;
 import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Board;
@@ -85,18 +90,8 @@ public class BoardController {
 	@PostMapping(value = "addBoardInquiry")
 	public String addBoardInquiry(final Board board, final MultipartFile[] files, Model model) throws Exception {
 		System.out.println("/board/addBoardInquiry: POST");
-		
-		try {
-			boolean isAdded = boardService.addBoardInquiry(board);
-			if (isAdded == false) {
-				// TODO => 게시글 등록에 실패하였다는 메시지를 전달
-			}
-		} catch (DataAccessException e) {
-			// TODO => 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
-
-		} catch (Exception e) {
-			// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
-		}
+		Map<String, Object> pagingParams = getPagingParams(board);
+		boolean isAdded = boardService.addBoardInquiry(board, files);
 		return "redirect:/board/getBoardInquiryList";
 	}
 	
@@ -182,7 +177,7 @@ public class BoardController {
 		return "board/getBoardInquiry";
 	}
 	
-	//공지사항 상세 조회
+	//공지사항 상세 조회 - 파일첨부
 	@GetMapping(value = "getBoardAnnouncement")
 	public String getBoardAnnouncement(@ModelAttribute("params") Board params, 
 			@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
@@ -336,16 +331,19 @@ public class BoardController {
 											@RequestParam(value = "userId", required = false) String userId,
 											Model model,HttpSession session) throws Exception {
 			System.out.println("/board/getRecipe : GET");
-			//추천을 누르는 로그인한 유저 id
-			String recoUserId = ((User) session.getAttribute("user")).getUserId();
 			// 조회수 카운트
-			String usid = ((User) session.getAttribute("user")).getUserId();
 			boardService.updateBoardRecipeHits(rcpNo);
 
 			Recipe recipe = boardService.getRecipe(rcpNo);
-			User user = userService.getUser(recoUserId);
-			model.addAttribute("usid", usid);
-			model.addAttribute("recoUserId",recoUserId);
+			//레시피 작성자 id
+			User user1 = userService.getUser(userId);
+			//추천을 누르는 로그인한 유저 id
+			User user2 = userService.getUser(((User) session.getAttribute("user")).getUserId());
+			
+			//model.addAttribute("recoUserId",recoUserId);
+			model.addAttribute("user1",user1);
+			model.addAttribute("user2",user2);
+			model.addAttribute("recipe",recipe);
 			
 			return "board/getRecipe";
 		}
@@ -353,22 +351,26 @@ public class BoardController {
 		//레시피 추천수 /board/updateRecipeReco	
 		@ResponseBody
 		@PostMapping(value = "updateRecipeReco")
-		public int updateRecipeReco(@RequestParam("rcpNo") Integer rcpNo , 
-													@RequestParam("userId") String userId, Model model) throws Exception {
+		public int updateRecipeReco(@RequestParam(value = "rcpNo", required = false) Integer rcpNo , 
+													Model model,HttpSession session) throws Exception {
 			System.out.println("/board/updateRecipeReco: POST");
-			
-//			User user = userService.getUser(userId);
-//			model.addAttribute("user", user);
-			int recoCheck = boardService.recipeRecoCheck(rcpNo, userId);
+			String userId = ((User) session.getAttribute("user")).getUserId();
+			//추천을 누르는 로그인한 유저 id
+			//((User) session.getAttribute("user")).getUserId();
+			System.out.println(rcpNo);
+			int recoCheck = boardService.recipeRecoCheck(rcpNo,userId);//성공1
+			System.out.println(recoCheck);//0
 			if(recoCheck == 0) {
 				//추천수 처음 누름
-				boardService.addRecipeReco(rcpNo, userId); //recommend테이블에 삽입
-				boardService.updateRecipeReco(rcpNo); //recipe테이블 + 1
-				boardService.updateRecipeRecoCheck(rcpNo, userId); //recommend 테이블 구분자 1
+				boardService.addRecipeReco(rcpNo, userId); //recommend테이블에 삽입 //성공2
+				System.out.println(boardService.addRecipeReco(rcpNo, userId));
+				boardService.updateRecipeReco(rcpNo); //recipe테이블 + 1 //
+				System.out.println(rcpNo);
+				boardService.updateRecipeRecoCheck(rcpNo, userId); //recommend 테이블 구분자 1 //
 			} else if(recoCheck == 1) {
-				boardService.updateRecipeRecoCheck(rcpNo, userId); //recommend 테이블 구분자 0
-				boardService.updateRecipeRecoCheckCancel(rcpNo, userId); //recipe테이블 - 1
-				boardService.deleteRecipeReco(rcpNo, userId); //recommend 테이블 삭제
+				boardService.updateRecipeRecoCheck(rcpNo, userId); //recommend 테이블 구분자 0 //
+				boardService.updateRecipeRecoCheckCancel(rcpNo, userId); //recipe테이블 - 1 //
+				boardService.deleteRecipeReco(rcpNo, userId); //recommend 테이블 삭제 //
 			}
 			return recoCheck;
 		}
@@ -409,5 +411,16 @@ public class BoardController {
 			return "redirect:/board/addReviewView";
 		}
 		
-		
+		//페이징 파람스
+		public Map<String, Object> getPagingParams(Criteria criteria) {
+
+			Map<String, Object> params = new LinkedHashMap<>();
+			params.put("currentPageNo", criteria.getCurrentPageNo());
+			params.put("recordsPerPage", criteria.getRecordsPerPage());
+			params.put("pageSize", criteria.getPageSize());
+			params.put("searchType", criteria.getSearchType());
+			params.put("searchKeyword", criteria.getSearchKeyword());
+
+			return params;
+		}
 }//class
