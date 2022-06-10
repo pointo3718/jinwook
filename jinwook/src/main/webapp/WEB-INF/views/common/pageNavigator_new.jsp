@@ -5,15 +5,8 @@
 
 
 <div class="container text-center">
-
-<<<<<<< HEAD
-<%-- <c:set var="params" value="${user}"/> --%>
-<c:set var="params" value="${orders}"/>
       
-
-=======
 <c:set var="params" value="${board}"/>
->>>>>>> refs/heads/Song
    
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
       <nav>

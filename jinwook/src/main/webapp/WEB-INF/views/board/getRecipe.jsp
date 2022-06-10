@@ -40,17 +40,13 @@
 	
 var rcpNo = ${recipe.rcpNo};
 
-<<<<<<< HEAD
 		/* function updateRecipeReco() { */
 <%--	var rcpNo = ${recipe.rcpNo};
 		var userId = ${recipe.userId};
  $(function() {
 	 
 	$('#reco_btn').on('click', function() {
-<<<<<<< HEAD
 		
-=======
->>>>>>> refs/heads/Song
 		$.ajax(
 				{
 			type : "POST",
@@ -68,7 +64,6 @@ var rcpNo = ${recipe.rcpNo};
 				else if (recoCheck == 1) {
 					alert("추천 취소!");
 					location.reload();
-=======
 function updateRecipeReco() {
 	$.ajax({
 		type : "POST",
@@ -86,7 +81,6 @@ function updateRecipeReco() {
 			else if (recoCheck == 1) {
 				alert("추천 취소!");
 				location.reload();
->>>>>>> refs/heads/Song
 					}
 				}
 			});
