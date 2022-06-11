@@ -387,38 +387,44 @@ public class BoardServiceImpl implements BoardService {
    }
 
    @Override
-   public void updateCommentReco(int commentNo) {
-      boardMapper.updateCommentReco(commentNo);
+   public int updateCommentReco(int commentNo) {
+      return boardMapper.updateCommentReco(commentNo);
    }
 
    @Override
-   public void updateRecipeRecoCancel(int rcpNo) {
-      boardMapper.updateRecipeRecoCancel(rcpNo);
+   public int updateRecipeRecoCancel(int rcpNo) {
+      return boardMapper.updateRecipeRecoCancel(rcpNo);
    }
 
    @Override
-   public void updateCommentRecoCancel(int commentNo) {
-      boardMapper.updateCommentRecoCancel(commentNo);
+   public int updateCommentRecoCancel(int commentNo) {
+      return boardMapper.updateCommentRecoCancel(commentNo);
    }
 
    @Override
    public int addRecipeReco(int rcpNo, String userId) {
-      return boardMapper.addRecipeReco(rcpNo, userId);
+	   Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("userId", userId);
+	      map.put("rcpNo", rcpNo);
+      return boardMapper.addRecipeReco(map);
    }
 
    @Override
-   public void addCommentReco(int commentNo, String userId) {
-      boardMapper.addCommentReco(commentNo, userId);
+   public int addCommentReco(int commentNo, String userId) {
+	   Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("userId", userId);
+	      map.put("rcpNo", commentNo);
+   return boardMapper.addCommentReco(map);
    }
 
    @Override
-   public void deleteRecipeReco(int rcpNo, String userId) {
-      boardMapper.deleteRecipeReco(rcpNo, userId);
+   public int deleteRecipeReco(int rcpNo, String userId) {
+      return boardMapper.deleteRecipeReco(rcpNo, userId);
    }
 
    @Override
-   public void deleteCommentReco(int commentNo, String userId) {
-      boardMapper.deleteCommentReco(commentNo, userId);
+   public int deleteCommentReco(int commentNo, String userId) {
+      return boardMapper.deleteCommentReco(commentNo, userId);
    }
 
    @Override
@@ -430,18 +436,27 @@ public class BoardServiceImpl implements BoardService {
    }
 
    @Override
-   public void updateCommentRecoCheck(int commentNo, String userId) {
-      boardMapper.updateCommentRecoCheck(commentNo, userId);
+   public int updateCommentRecoCheck(int commentNo, String userId) {
+	   Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("userId", userId);
+	      map.put("commentNo", commentNo);
+   return boardMapper.updateCommentRecoCheck(map);
    }
 
    @Override
-   public void updateRecipeRecoCheckCancel(int rcpNo, String userId) {
-      boardMapper.updateRecipeRecoCheckCancel(rcpNo, userId);
+   public int updateRecipeRecoCheckCancel(int rcpNo, String userId) {
+	   Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("userId", userId);
+	      map.put("rcpNo", rcpNo);
+		  return boardMapper.updateRecipeRecoCheckCancel(map);
    }
 
    @Override
-   public void updateCommentRecoCheckCancel(int commentNo, String userId) {
-      boardMapper.updateCommentRecoCheckCancel(commentNo, userId);
+   public int updateCommentRecoCheckCancel(int commentNo, String userId) {
+	   Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("userId", userId);
+	      map.put("commentNo", commentNo);
+		  return boardMapper.updateCommentRecoCheckCancel(map);
    }
 
    @Override

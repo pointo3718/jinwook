@@ -16,6 +16,7 @@ import com.jinwook.home.mapper.StoreMapper;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
+import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 
 @SpringBootTest
@@ -215,6 +216,7 @@ class StoreMapperTest {
 		}
 	}
 	
+
 	@Test
 	public void testOfGetStoreWallet() {
 		
@@ -222,24 +224,22 @@ class StoreMapperTest {
 		if (getStoreTotalCount > 0) {
 			System.out.println(getStoreTotalCount);
 			
-			HashMap<String, Object> map = new HashMap<>();
-			
-			map.put("storeNo", "10000");					
-			map.put("orderDateStart", "LocalDate.now()");			
-			map.put("orderDateEnd", "LocalDate.now()");
-		
-			
-			List<Store> walletList = storeMapper.getStoreWallet(map);
+			Store store=new Store();
+			store.setStoreNo(10000);
+			store.setOrderDateStart(null);
+			store.setOrderDateEnd(null);
+				
+			List<Store> walletList = storeMapper.getStoreWallet(store);
 			if (CollectionUtils.isEmpty(walletList) == false) { 		
-				for (Store store : walletList) {
+				for (Store store1 : walletList) {
 					System.out.println("=========================");
 					
-					System.out.println(store.getTotalEarn());
-					System.out.println(store.getUser().getJpBalance());					
-					System.out.println(store.getOrders().getOrderNo());
-					System.out.println(store.getOrders().getOrderDate());
-					System.out.println(store.getOrders().getOrderPrice());
-					System.out.println(store.getOrders().getBuyerName());
+					System.out.println(store1.getTotalEarn());
+					System.out.println(store1.getUser().getJpBalance());					
+					System.out.println(store1.getOrders().getOrderNo());
+					System.out.println(store1.getOrders().getOrderDate());
+					System.out.println(store1.getOrders().getOrderPrice());
+					System.out.println(store1.getOrders().getBuyerName());
 
 					
 					System.out.println("=========================");

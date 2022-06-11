@@ -13,6 +13,7 @@
    <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" >
    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
    
@@ -40,30 +41,6 @@
 	
 var rcpNo = ${recipe.rcpNo};
 
-		/* function updateRecipeReco() { */
-<%--	var rcpNo = ${recipe.rcpNo};
-		var userId = ${recipe.userId};
- $(function() {
-	 
-	$('#reco_btn').on('click', function() {
-		
-		$.ajax(
-				{
-			type : "POST",
-			url : "/board/updateRecipeReco",
-			dataType : "json",
-			data : {'rcpNo' : rcpNo, 'userId' : userId},
-			error : function() {
-				alert("통신 에러");
-			},
-			success : function(recoCheck) {
-				if (recoCheck == 0) {
-					alert("추천 완료!");
-					location.reload();
-				}
-				else if (recoCheck == 1) {
-					alert("추천 취소!");
-					location.reload();
 function updateRecipeReco() {
 	$.ajax({
 		type : "POST",
@@ -85,8 +62,6 @@ function updateRecipeReco() {
 				}
 			});
 		} 
-	<%-- });--%>
-
 
 function clip(){
 
@@ -105,7 +80,6 @@ function clip(){
 </head>
 
 <body>
-
 	<div class="container">
 	
 	<div class="page-header">
@@ -173,6 +147,8 @@ function clip(){
 		<div class="row">
 			<span class="button gray medium"><a href="#" onclick="clip(); return false;">URL주소복사</a></span>
 		</div>
+		
+		
 </body>
 
 </html>

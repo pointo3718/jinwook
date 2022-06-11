@@ -6,11 +6,11 @@
 
 <div class="col-lg-12" style="left:120px; margin-top:70px;">
 
+
 <%-- <c:set var="params" value="${user}"/> --%>
 <c:set var="params" value="${user}"/>
       
 
-   
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
       <div class="product__pagination blog__pagination" style="padding-top: 0px;">
             <!--  <<== ÁÂÃø nav -->
