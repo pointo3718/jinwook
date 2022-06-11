@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<div class="container text-center">
+<div class="col-lg-12" style="left:120px; margin-top:70px;">
 
 <%-- <c:set var="params" value="${user}"/> --%>
 <c:set var="params" value="${user}"/>
@@ -12,35 +12,33 @@
 
    
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
-      <nav>
-         <!-- 크기조절 :  pagination-lg pagination-sm-->
-         <ul class="product__pagination blog__pagination">
+      <div class="product__pagination blog__pagination" style="padding-top: 0px;">
             <!--  <<== 좌측 nav -->
-            <c:if test="${ params.paginationInfo.hasPreviousPage == false }">
+           <%--  <c:if test="${ params.paginationInfo.hasPreviousPage == false }">
                <li>
             </c:if>
             <c:if test="${ params.paginationInfo.hasPreviousPage == true  }">
                <li
                   onclick="javascript:void(0);">
-            </c:if>
+            </c:if> --%>
             <a   
                href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(1)}');"
                aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
             </a>
-            </li>
+           
 
             <!--  <== 좌측 nav -->
-            <c:if test="${ params.paginationInfo.hasPreviousPage == false }">
+            <%-- <c:if test="${ params.paginationInfo.hasPreviousPage == false }">
                <li>
             </c:if>
             <c:if test="${ params.paginationInfo.hasPreviousPage == true  }">
                <li
                   onclick="javascript:void(0);">
-            </c:if>
+            </c:if> --%>
             <a href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(params.paginationInfo.firstPage-1)}');" aria-label="Previous"> <span
                aria-hidden="true">&lsaquo;</span>
             </a>
-            </li>
+           
 
 
             <!--  중앙  나중에 .....-->
@@ -49,48 +47,46 @@
 
                <c:if test="${ pageNo == params.currentPageNo }">
                   <!--  현재 page 가르킬경우 : active -->
-                  <li class="active"><a
+                  <a
                      href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(pageNo)}');">${ pageNo }
                         <span class="sr-only">(current)</span>
-                  </a></li>
+                  </a>
                </c:if>
 
                <c:if test="${ pageNo != params.currentPageNo }">
-                  <li><a
+                  <a
                      href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(pageNo)}');">${ pageNo }</a>
-                  </li>
+                  
                </c:if>
             </c:forEach>
 
             <!--  <== 우측 nav -->
-            <c:if test="${ params.paginationInfo.hasNextPage == false }">
+            <%-- <c:if test="${ params.paginationInfo.hasNextPage == false }">
                <li>
             </c:if>
             <c:if test="${ params.paginationInfo.hasNextPage == true  }">
                <li
                   onclick="javascript:void(0);">
-            </c:if>
+            </c:if> --%>
             <a href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(params.paginationInfo.lastPage+1)}');" aria-label="Next"> <span
                aria-hidden="true">&rsaquo;</span>
             </a>
-            </li>
+            
 
 
             <!--  <<== 우측 nav -->
-            <c:if test="${ params.paginationInfo.hasNextPage == false }">
+          <%--   <c:if test="${ params.paginationInfo.hasNextPage == false }">
                <li>
             </c:if>
             <c:if test="${ params.paginationInfo.hasNextPage == true  }">
                <li
                   onclick= "javascript:void(0);">
-            </c:if>
+            </c:if> --%>
             <a href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(params.paginationInfo.totalPageCount)}');" aria-label="Next"> <span
                aria-hidden="true">&raquo;</span>
             </a>
-            </li>	
-         </ul>
-         <i class="fa fa-long-arrow-right"></i>
-      </nav>
+          
+        </div>
+       
    </c:if> 
- 
 </div>
