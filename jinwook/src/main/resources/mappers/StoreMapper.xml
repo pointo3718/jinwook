@@ -24,8 +24,8 @@
    <result property="isOpen"             column="is_open"        jdbcType="TINYINT"/>   
    <result property="user.jpBalance"     column="jp_balance"     jdbcType="INTEGER"/>   
    <result property="orders.reviewStar"  column="review_star"    jdbcType="INTEGER"/>
-   <result property="orders.orderDateStart"  column="order_date_start"    jdbcType="VARCHAR"/>
-   <result property="orders.orderDateEnd"  column="order_date_end"    jdbcType="DATE"/>
+   <result property="orderDateStart"  column="order_date_start"    jdbcType="DATE"/>
+   <result property="orderDateEnd"  column="order_date_end"    jdbcType="DATE"/>
    <result property="orders.orderPrice"  column="order_price"    jdbcType="DATE"/>
    <result property="orders.orderNo"  column="order_no"    jdbcType="INTEGER"/>
    <result property="orders.orderDate"  column="order_date"    jdbcType="DATE"/>
@@ -39,7 +39,8 @@
    <result property="product.isSoldout"  column="is_soldout"    jdbcType="INTEGER"/>       
    <result property="request.resDate"      column="res_date"     jdbcType="DATE"/>     
    <result property="request.reqDate"  column="req_date"    jdbcType="DATE"/>   
-   <result property="request.refundMoney"  column="refund_money"    jdbcType="INTEGER"/>   
+   <result property="request.refundMoney"  column="refund_money"    jdbcType="INTEGER"/> 
+   <result property="request.userId"  column="user_id"    jdbcType="VARCHAR"/>    
    <result property="request.reqStatus"  column="req_status"    jdbcType="CHAR"/>              
 </resultMap>
 
@@ -156,13 +157,14 @@
     
     <select id="getStoreRefund" parameterType="int"
       resultMap="storeSelectMap">
-      SELECT
+     SELECT
      res_date, req_date, refund_money, req_status
       FROM request
-      WHERE store_no=#{storeNo}
+      WHERE refund_money is not null AND 
+            store_no=#{storeNo}
    </select>
    
-    <select id="getStoreWallet" parameterType="hashmap"
+    <select id="getStoreWallet" parameterType="Store"
       resultMap="storeSelectMap">
 		SELECT
 		vt.total_earn, u.jp_balance, o.order_no, o.order_date,
@@ -171,23 +173,23 @@
 		SUM(order_price) total_earn
 		FROM orders
 		WHERE order_status=5 AND
-		<if test="order_date_start and order_date_end != null">
-			DATE(order_date) between #{order_date_start} and
-			#{order_date_end}
+		<if test="orderDateStart and orderDateEnd != null">
+			DATE(order_date) between #{orderDateStart} and
+			#{orderDateEnd}
 		</if>
-		<if test="order_date_start || order_date_end == null">
-			DATE(order_date) between sysdate() and sysdate()
+		<if test="orderDateStart || orderDateEnd == null">
+			DATE(order_date) between DATE(sysdate()) and DATE(sysdate())
 		</if>
 		AND
 		store_no=#{storeNo})vt
 		WHERE u.user_id=o.user_id AND
 		o.order_status=5 AND
-		<if test="order_date_start and order_date_end != null">
-			DATE(o.order_date) between #{order_date_start} and
-			#{order_date_end}
+		<if test="orderDateStart and orderDateEnd != null">
+			DATE(o.order_date) between #{orderDateStart} and
+			#{orderDateEnd}
 		</if>
-		<if test="order_date_start || order_date_end == null">
-			DATE(o.order_date) between sysdate() and sysdate()
+		<if test="orderDateStart || orderDateEnd == null">
+			DATE(o.order_date) between DATE(sysdate()) and DATE(sysdate())
 		</if>
 		AND
 		o.store_no=#{storeNo}

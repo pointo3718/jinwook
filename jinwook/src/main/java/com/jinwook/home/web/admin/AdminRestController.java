@@ -23,6 +23,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.admin.AdminService;
 import com.jinwook.home.service.domain.User;
+import com.jinwook.home.service.request.RequestService;
 
 @RestController
 @RequestMapping("/admin/*")
@@ -33,13 +34,20 @@ public class AdminRestController {
    @Qualifier("adminServiceImpl")
    private AdminService adminService;
    
+   @Autowired
+   @Qualifier("requestServiceImpl")
+   private RequestService requestService;
+   
    public AdminRestController(){
       System.out.println(this.getClass());
    }
    
    
+   
+   
 	///////////////// 블랙리스트 목록 //////////////////
    @GetMapping( value="/listBlacklistAdmin" )
+   @ResponseBody
    public JsonObject listBlacklistAdmin(@ModelAttribute("user") User user) throws Exception{
       
       System.out.println("/admin/listBlacklistAdmin : GET ");
@@ -91,9 +99,32 @@ public class AdminRestController {
 		return jsonObj;
 	}
 
-   
+// ============== 대기중인 요청 목록 개수 ================
+	@GetMapping( value={"/CountRequestWaiting/{reqCode}"} )
+	public JsonObject CountRequestWaiting(@PathVariable(value = "reqCode", required = false) String reqCode) throws Exception{
+	   
+	   System.out.println("/admin/CountRequestWaiting : GET ");
+	
+	   JsonObject jsonObj = new JsonObject();
+	   
+	   try { 	
+			int CountRequestWaiting = requestService.CountRequestWaiting(reqCode);
+			System.out.println("   ::  "+CountRequestWaiting);
+			jsonObj.addProperty("CountRequestWaiting", CountRequestWaiting);
+	
+			} catch (DataAccessException e) {
+				jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+	
+			} catch (Exception e) {
+				jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+			}
+			
+	     System.out.println("픽업 개수 컨트롤러 통과");
+	     
+			return jsonObj;
+		}
+	}
+	
    
    ///////////////// 신고 등록  //////////////////	
    
-
-}

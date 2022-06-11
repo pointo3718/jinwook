@@ -139,6 +139,8 @@
 		<br><br>
 		<hr>
 		<a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
+		<a href="/board/getBoardAnnouncement?boardNo=1">공지사항</a> <hr>
+		<a href="/board/getBoardInquiry?boardNo=1">1:1문의</a> <hr>
 		<a href="/orders/getOrdersList">주문내역</a> <hr>
 		<a href="/orders/getOrdersJpayList">진욱페이내역</a> <hr>
 		<a href="/orders/getOrdersNoticeList">알림내역</a> <hr>

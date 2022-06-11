@@ -85,30 +85,30 @@ public class StoreControllerTest {
 	}
 	
 
-//  @Test
-//  @DisplayName("addStoreProduct GET 방식 테스트")
-//  public void addStoreProduct() throws Exception{
-//    this.mvc.perform(get("/store/addStoreProduct"))
-//                     .andExpect(status().isOk())
-//                     .andDo(print());
-//  } 
+  @Test
+  @DisplayName("addStoreProduct GET 방식 테스트")
+  public void addStoreProduct() throws Exception{
+    this.mvc.perform(get("/store/addStoreProduct"))
+                     .andExpect(status().isOk())
+                     .andDo(print());
+  } 
 
-	@Test
-	@Transactional
-	@DisplayName("addStoreProduct 파라미터 방식 테스트")
-	public void addStoreProduct() throws Exception{
-	  this.mvc.perform(post("/store/addStoreProduct")
-              							.param("storeNo", "10000")
-	                                    .param("prodNo", "10025")
-	                                    .param("prodName", "수박")
-      									.param("price", "1000")
-      									.param("prodInfo", "맛나요")
-      									.param("prodOrign", "과천")
-      									.param("prodImg", "수박.jpg")
-      									.param("isSoldOut", "1"))
-	                   .andExpect(status().isOk())
-	                   .andDo(print());
-	}
+//	@Test
+//	@Transactional
+//	@DisplayName("addStoreProduct 파라미터 방식 테스트")
+//	public void addStoreProduct() throws Exception{
+//	  this.mvc.perform(post("/store/addStoreProduct")
+//              							.param("storeNo", "10000")
+//	                                    .param("prodNo", "10025")
+//	                                    .param("prodName", "수박")
+//      									.param("price", "1000")
+//      									.param("prodInfo", "맛나요")
+//      									.param("prodOrign", "과천")
+//      									.param("prodImg", "수박.jpg")
+//      									.param("isSoldOut", "1"))
+//	                   .andExpect(status().isOk())
+//	                   .andDo(print());
+//	}
 	
 	@Test
 	@Transactional

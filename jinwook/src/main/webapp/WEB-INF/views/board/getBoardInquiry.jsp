@@ -10,6 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -30,6 +31,30 @@
      </style>
 
 <script type="text/javascript">
+
+var commentNo = ${comment.commentNo};
+
+function updateCommentReco() {
+	$.ajax({
+		type : "POST",
+		url : "updateCommentReco",
+		dataType : "json",
+		data : {'commentNo' : commentNo},
+		error : function() {
+			alert("통신 에러");
+		},
+		success : function(recoCheck) {
+			if (recoCheck == 0) {
+				alert("추천 완료!");
+				location.reload();
+			}
+			else if (recoCheck == 1) {
+				alert("추천 취소!");
+				location.reload();
+			}
+		}
+	});
+}
 
 </script>
 
@@ -100,14 +125,12 @@
         <div class="commentList"></div>
     </div>
 </div>
-		<hr/>
-	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco() return false">추천 ${recipe.getRecommendCount}</button>
-	<button type="button" class="btn btn-danger" id="hate_btn">비추천</button>
-</div>
+	<hr/>
+	<div id="btnDiv" style="margin-right:1px;">
+		<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateCommentReco();">추천 ${comment.recommendCount}</button>
+		<button type="button" class="btn btn-danger" id="hate_btn">비추천</button>
+	</div>
 
-</div>
-
-	
 </body>
 
 </html>
