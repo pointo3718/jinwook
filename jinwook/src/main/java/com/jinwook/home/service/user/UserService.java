@@ -36,9 +36,9 @@ public interface UserService {
 		
 		public int updatePassword(User user) throws Exception; 
 		
-		public void sendIdUser(User user) throws Exception;
+		public void sendIdEmail(User user) throws Exception;
 		
-		public void sendPasswordUser(User user) throws Exception;
+		public void sendPasswordEmail(User user) throws Exception;
 		
 		public void sendAuthNum(String email, String authNum) throws Exception;
 		

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+	
 	<main class="password_modify_page">
 		<div class="find_info">	
 			<h3>새로운 비밀번호로 재설정해주세요</h3>
@@ -48,7 +50,7 @@ const isSubmit = (function() {
  
  
  
-function pwdCheck() {
+$(".modify_btn").click(function(){
 	const password1 = $(".password1").val().replaceAll(" ", "");
 	const password2 = $(".password2").val().replaceAll(" ", "");
  
@@ -67,40 +69,50 @@ function pwdCheck() {
 	} else {
 		msgBox.text("");
 	}
-	
-	return true;
-}
+	alert("변경 완료되었습니다.");
+	$("form").attr("method" , "GET").attr("action" , "updatePasswo1rd").submit();
+})
  
  
 // 패스워드 변경
-$(".modify_btn").click(function(){
+/* $(".modify_btn").click(function(){
+			$.ajax({
+				url : "/user/updatePassword",
+				type : "post",
+				dataType : "json",
+				data : {"password1" : $(".password1").val()},
+				success : function(data){
+					if(!pwdCheck()) {
+						return;
+					}
+			self.location = "login";
+				} */
+/* $(".modify_btn").click(function(){
 	if(!pwdCheck()) {
 		return;
 	}
 	const data = {
 		password: $(".password1").val(),
-		userId : userId
+		userId : $(userId).val()
 	}
 	
 	$.ajax({
 		url: "/updatePassword",
 		type: "PATCH",
 		data: data
-	})
+	}) */
 	/* 
 	.done(function(result){
 		swal({
 			text : result,
 			closeOnClickOutside : false
 		}) */
-		.then(function(){
-			location.href = "login";
-		})
-	.fail(function(){
+	/* .fail(function(){
 		alert("에러");
 	})
-})
-
+	})
+			})
+			 */
 </script>
 </body>
 </html>

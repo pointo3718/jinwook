@@ -10,12 +10,10 @@
 <title>문자인증</title>
 </head>
 <body>
-	<tr class="mobileNo">
-	<th>
+	<form class="form-horizontal">
 		<label for="phone">휴대폰 번호</label>
-	</th>
-	<td>
 		<p>
+			<input type="text" name="userId" class="userId"><br>
 			<input id="phone" type="text" name="phone" title="전화번호 입력" required/>
 			<span id="phoneChk" class="doubleChk">인증번호 보내기</span><br/>
 			<input id="phone2" type="text" name="phone2" title="인증번호 입력" disabled required/>
@@ -26,8 +24,7 @@
 		<p class="tip">
 			최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다.(번호만 입력해주세요.)
 		</p>
-	</td>
-</tr>
+</form>
 </body>
 
 <script type="text/javascript">
@@ -37,9 +34,10 @@ var code2 = "";
 $("#phoneChk").click(function(){
 	alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
 	var phone = $("#phone").val();
+	var userId = $(".userId").val();
 	$.ajax({
         type:"GET",
-        url:"phoneCheck?phone=" + phone,
+        url:"sendPasswordPhone?phone=" + phone+"&userId="+userId,
         cache : false,
         success:function(data){
         	alert("asdas"+data)

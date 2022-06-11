@@ -49,7 +49,7 @@ public interface UserMapper {
 	public User findPasswordEmail(User user) throws Exception;
 	
 //	//UPDATE PASSWORD
-	public int updatePassword(User user) throws Exception; 
+	public User updatePassword(User user) throws Exception; 
 
 	
 //	public int getTotalCount(Search search) throws Exception ;

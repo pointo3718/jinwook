@@ -200,8 +200,8 @@ public class UserController {
 		System.out.println("===========CONFIRM PASSWORD=========");
 		System.out.println(user);
 		user.setUserId( ((User)session.getAttribute("user")).getUserId());
-		int password = userService.confirmPassword(user);
-		if(password==0) {
+		int result = userService.confirmPassword(user);
+		if(result==0) {
 			return "/user/confirmPasswordView";
 		}
 		User dbUser = userService.getUser("userId");
@@ -210,18 +210,18 @@ public class UserController {
 		return "/user/updateUser";
 	}
 	
-	@GetMapping("findId")
+	@GetMapping("findIdEmail")
 	public String findId() {
 		
 		System.out.println("============FIND ID PAGE============");
-		return "/user/findId";
+		return "/user/findIdEmail";
 	}
 	
-	@GetMapping("findPassword")
+	@GetMapping("findPasswordEmail")
 	public String findPassword() {
 		
 		System.out.println("============FIND ID PAGE============");
-		return "/user/findPassword";
+		return "/user/findPasswordEmail";
 	}
 	//---------------------------------------
 	// 5분동안 유저확인 세션생성 (인증완료 X)
@@ -279,10 +279,14 @@ public class UserController {
 //		    }
 		    return "/user/updatePassword";
 		}
-		@GetMapping("/findIdPhone")
-		public String mySms() {
-			return "/user/findIdPhone";
+		@GetMapping("/findPasswordPhone")
+		public String findPasswordPhone(@ModelAttribute("user") User user) {
+			user.setUserId("user");
+			System.out.println(user+"11111111111111111111122222222222233333333333333");
+			return "/user/findPasswordPhone";
 		}
+		
+		
 //	@PostMapping("findIdEmail")
 //	public String findIdEmail(@ModelAttribute("user") User user, HttpSession session) throws Exception {
 //		

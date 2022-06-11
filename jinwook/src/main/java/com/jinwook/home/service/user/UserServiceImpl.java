@@ -5,11 +5,14 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.jinwook.home.mapper.UserMapper;
@@ -31,6 +34,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
 	
 	/*
 	///Constructor
@@ -123,44 +127,75 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public int updatePassword(User user) throws Exception {
-//		userMapper.updateUser(user);
-		return userMapper.updatePassword(user);
+		userMapper.updateUser(user);
+//		int result =  userMapper.updatePassword(user);
+		
+		return 0;
 	}
 	
 	@Override
-	public void sendIdUser(User user) throws Exception{
-		SimpleMailMessage simpleMailMessage = new  SimpleMailMessage();
-		simpleMailMessage.setTo(user.getEmail());
-		simpleMailMessage.setSubject("[진욱이네] 아이디 안내를 드립니다.");
+	public void sendIdEmail(User user) throws Exception{
 		
-		StringBuffer sb = new StringBuffer();
-		sb.append(user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n"
-				+ "\n"
-				+ "요청하신 아이디를 안내드립니다.\n"
-				+ "\n"
-				+ user.getUserId()
-				+ " \n"
-				+ " \n");
+		
+		SimpleMailMessage simpleMailMessage = new  SimpleMailMessage();
+//		simpleMailMessage.setTo(user.getEmail());
+//		simpleMailMessage.setSubject("[진욱이네] 아이디 안내를 드립니다.");
+
+		MimeMessage mimeMessage = mailSender.createMimeMessage();
+		
+		try {
+	         
+	         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
+	         mimeMessageHelper.setTo(user.getEmail());
+	         
+	         mimeMessageHelper.setSubject("[진욱이네] 아이디 안내를 드립니다.");
+	         String content= " ";
+	         content = user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r";
+	         content += "\n ";
+	         System.out.println();
+	         content+= "요청하신 아이디를 안내드립니다.\n ";
+	         content+= "\n ";
+	         content+= user.getUserId();
+	         content+= " \n ";
+	         content+= "가입일 "+user.getRegDate()+"\n ";
+	         content+= "<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n ";
+	         mimeMessageHelper.setText(content, true);
+//	         mailSender.send(mimeMessage);
+	         System.out.println("성공");
+	      } catch (Exception e) {
+	         // TODO: handle exception
+	         System.out.println("실패");
+	         throw new RuntimeException(e);
+	      }
+		
+		//		StringBuffer sb = new StringBuffer();
+//		sb.append(user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n"
+//				+ "\n"
+//				+ "요청하신 아이디를 안내드립니다.\n"
+//				+ "\n"
+//				+ user.getUserId()
+//				+ " \n"
+//				+ " \n");
 //		sb.append(System.lineSeparator());
 		
 //		for(int i=0;i<usernames.size()-1;i++) {
 //			sb.append(usernames.get(i));
 //			sb.append(System.lineSeparator());
 //		}
-		sb.append("가입일 "+user.getRegDate());
-		
-		simpleMailMessage.setText(sb.toString());
+//		sb.append("가입일 "+user.getRegDate());
+//		
+//		simpleMailMessage.setText(sb.toString());
 		
 		
 		new Thread(new Runnable() {
 			public void run() {
-				mailSender.send(simpleMailMessage);
+				mailSender.send(mimeMessage);
 			}
 		}).start();
 	}
 
 	@Override
-	public void sendPasswordUser(User user) throws Exception{
+	public void sendPasswordEmail(User user) throws Exception{
 		SimpleMailMessage simpleMailMessage = new  SimpleMailMessage();
 		simpleMailMessage.setTo(user.getEmail());
 		simpleMailMessage.setSubject("[진욱이네] 비밀번호 재설정 안내를 드립니다.");
@@ -170,6 +205,7 @@ public class UserServiceImpl implements UserService{
 				+ "\n"
 				+ "아래 버튼을 눌러 비밀번호를 재설정 해주세요.\n"
 				+ "\n"
+				+ "<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n "
 				+ "유효 시간 : "+LocalDateTime.now()+"\n"
 				+ "유효 시간 내에 비밀번호 재설정을 완료해 주세요.\n"
 				+ "");
