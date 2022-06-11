@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="zxx">
 
 <head>
     <meta charset="UTF-8">
@@ -56,7 +57,7 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="/user/login"><i class="fa fa-user"></i> Login</a>
+                <a href="#"><i class="fa fa-user"></i> Login</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -71,11 +72,7 @@
                         <li><a href="./blog-details.jsp">Blog Details</a></li>
                     </ul>
                 </li>
-<<<<<<< HEAD
-                <li><a href="/admin/blog.jsp">마이페이지</a></li>
-=======
                 <li><a href="/admin/blog.jsp">          </a></li>
->>>>>>> refs/remotes/origin/master
                 <li><a href="./contact.jsp">Contact</a></li>
             </ul>
         </nav>
@@ -153,11 +150,7 @@
                                     <li><a href="./blog-details.jsp">Blog Details</a></li>
                                 </ul>
                             </li>
-<<<<<<< HEAD
-                            <li><a href="/admin/blog">마이페이지</a></li>
-=======
                             <li><a href="/admin/blog">          </a></li>
->>>>>>> refs/remotes/origin/master
                             <li><a href="./contact.jsp">Contact</a></li>
                         </ul>
                     </nav>
