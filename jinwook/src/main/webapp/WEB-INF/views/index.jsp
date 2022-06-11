@@ -72,7 +72,7 @@
                         <li><a href="./blog-details.jsp">Blog Details</a></li>
                     </ul>
                 </li>
-                <li><a href="/admin/blog.jsp">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</a></li>
+                <li><a href="/admin/blog.jsp">¸¶ÀÌÆäÀÌÁö</a></li>
                 <li><a href="./contact.jsp">Contact</a></li>
             </ul>
         </nav>
