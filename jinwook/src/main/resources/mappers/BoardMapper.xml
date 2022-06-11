@@ -32,7 +32,8 @@
 </resultMap>
 
 <resultMap type="comment" id="commentSelectMap">
-   <result property="commentNo"          column="commen_no"         jdbcType="INTEGER"/>   
+   <result property="commentNo"          column="commen_no"         jdbcType="INTEGER"/>
+   <result property="user.userId"		 column="user_id"			jdbcType="VARCHAR"/>   
    <result property="board.boardNo"      column="board_no"          jdbcType="INTEGER"/>   
    <result property="recipe.rcpNo"       column="rcp_no"      		jdbcType="INTEGER"/>   
    <result property="commentContent"     column="comment_content"   jdbcType="VARCHAR"/>   
@@ -109,6 +110,21 @@
 		WHERE rcp_no = #{rcpNo} 
 	</update>
 	
+	<insert id="addFile" parameterType="hashMap">
+		INSERT INTO MP_FILE(
+			FILE_NO,
+			BNO,
+			ORG_FILE_NAME,
+			STORED_FILE_NAME,
+			FILE_SIZE
+		)VALUES(
+			SEQ_MP_FILE_NO.NEXTVAL,
+			#{BNO},
+			#{ORG_FILE_NAME},
+			#{STORED_FILE_NAME},
+			#{FILE_SIZE}
+		)
+    </insert>
 	
 	<!-- boardCode 0: 1:1문의 / boardCode 1: 공지사항 -->
 	<!-- 1:1문의 insert -->
@@ -179,8 +195,8 @@
 		WHERE b.board_no = c.board_no
 		AND b.board_no = c.board_no
 		AND b.board_no = #{boardNo}
-		AND board_code = 0
-		AND (board_inq_status = false OR board_inq_status = true)
+		AND b.board_code = 0
+		AND (b.board_inq_status = false OR b.board_inq_status = true)
 	</select>
 	
 	<!-- 1:1문의 답변대기중 -> 답변완료 -->
@@ -192,7 +208,7 @@
 			board_no = #{boardNo} 
 	</update>
 	
-		<!-- 공지사항 상세 조회: 1 -->
+	<!-- 공지사항 상세 조회: 1 -->
 	<select id="getBoardAnnouncement" parameterType="int" resultType="Board" resultMap="boardSelectMap">
 		SELECT
 			board_title, board_content, user_id, write_date
@@ -531,7 +547,7 @@
 	<update id="updateRecipeReco" parameterType="int">
 		UPDATE recipe
 		SET
-		recommend_count = recommendCount+1
+		recommend_count = recommend_count+1
 		WHERE rcp_no = #{rcpNo}
 	</update>
 	
@@ -539,7 +555,7 @@
 	<update id="updateCommentReco" parameterType="int">
 		UPDATE comment
 		SET
-		recommend_count = recommendCount+1
+		recommend_count = recommend_count+1
 		WHERE comment_no = #{commentNo}
 	</update>
 	
@@ -547,7 +563,7 @@
 	<update id="updateRecipeRecoCancel" parameterType="int">
 		UPDATE recipe
 		SET
-		recommend_count = recommendCount-1
+		recommend_count = recommend_count-1
 		WHERE rcp_no = #{rcpNo}
 	</update>
 	
@@ -555,23 +571,26 @@
 	<update id="updateCommentRecoCancel" parameterType="int">
 		UPDATE comment
 		SET
-		recommend_count = recommendCount-1
+		recommend_count = recommend_count-1
 		WHERE comment_no = #{commentNo}
 	</update>
 	
 	<!-- 레시피 추천 시 recommend 테이블에 add -->
-	<insert id="addRecipeReco" parameterType="Recommend" useGeneratedKeys="true" keyProperty="recommendNo">
+	<insert id="addRecipeReco">
 		INSERT INTO recommend(recommend_no, rcp_no, user_id)
 		VALUES (
-		( SELECT IFNULL(MAX(recommendNo), 0) + 1 FROM recommend a), 
+		( SELECT IFNULL(MAX(recommend_no), 0) + 1 FROM recommend a), 
 		#{rcpNo}, 
 		#{userId})
 	</insert>
 
 	<!-- 댓글 추천 시 recommend 테이블에 add -->
 	<insert id="addCommentReco">
-		INSERT INTO comment(recommend_no, comment_no, user_id)
-		VALUES ((SELECT IFNULL(MAX(recommendNo), 0) + 1 FROM recommend), #{recommendNo}, #{userId})
+		INSERT INTO recommend(recommend_no, comment_no, user_id)
+		VALUES (
+		( SELECT IFNULL(MAX(recommend_no), 0) + 1 FROM recommend a), 
+		#{commentNo}, 
+		#{userId})
 	</insert>
 	
 	<!-- 레시피 추천취소 시 delete -->
@@ -589,7 +608,7 @@
 	</delete>
 	
 	<!-- 레시피 추천 시 recocheck를 1로 만들어서 중복방지 -->
-	<update id="updateRecipeRecoCheck" parameterType="int">
+	<update id="updateRecipeRecoCheck">
 		UPDATE recommend
 		SET
 		recocheck = 1

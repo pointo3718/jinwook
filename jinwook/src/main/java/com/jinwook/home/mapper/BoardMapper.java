@@ -82,32 +82,34 @@ public interface BoardMapper {
 	public int getRecipeJjim(Jjim jjim);
 	public int getStoreJjim(Jjim jjim);
 	
-	//레시피 추천
-	public int updateRecipeReco(int rcpNo);
-	//댓글 추천
-	public void updateCommentReco(int commentNo);
-	//레시피 추천 취소
-	public void updateRecipeRecoCancel(int rcpNo);
-	//댓글 추천 취소
-	public void updateCommentRecoCancel(int commentNo);
-	//레시피 추천 테이블에 add
-	public int addRecipeReco(int rcpNo, String userId);
-	//댓글 추천 테이블에 add
-	public void addCommentReco(int commentNo, String userId);
-	//레시피 추천 테이블에서 delete
-	public void deleteRecipeReco(int rcpNo, String userId);
-	//댓글 추천 테이블에서 delete
-	public void deleteCommentReco(int commentNo, String userId);
 	//레시피 추천 시 recocheck를 1로 만들어서 중복방지
 	public int updateRecipeRecoCheck(Map<String, Object> map);
-	//댓글 추천 시 recocheck를 1로 만들어서 중복방지
-	public void updateCommentRecoCheck(int commentNo, String userId);
-	// 레시피 추천취소 시 다시 0
-	public void updateRecipeRecoCheckCancel(int rcpNo, String userId);
-	// 댓글 추천취소 시 다시 0
-	public void updateCommentRecoCheckCancel(int commentNo, String userId);
 	//레시피 추천 중복방지 select문
 	public int recipeRecoCheck(Map<String, Object> map);
+	//레시피 추천
+	public int updateRecipeReco(int rcpNo);
+	//레시피 추천 테이블에 add
+	public int addRecipeReco(Map<String, Object> map);
+//	public int addRecipeReco(int rcpNo, String userId);
+	//레시피 추천 취소
+	public int updateRecipeRecoCancel(int rcpNo);
+	// 레시피 추천취소 시 다시 0
+	public int updateRecipeRecoCheckCancel(Map<String, Object> map);
+	//레시피 추천 테이블에서 delete
+	public int deleteRecipeReco(int rcpNo, String userId);
+	
+	//댓글 추천v
+	public int updateCommentReco(int commentNo);
+	//댓글 추천 취소
+	public int updateCommentRecoCancel(int commentNo);
+	//댓글 추천 테이블에 add
+	public int addCommentReco(Map<String, Object> map);
+	//댓글 추천 테이블에서 delete
+	public int deleteCommentReco(int commentNo, String userId);
+	//댓글 추천 시 recocheck를 1로 만들어서 중복방지
+	public int updateCommentRecoCheck(Map<String, Object> map);
+	// 댓글 추천취소 시 다시 0
+	public int updateCommentRecoCheckCancel(Map<String, Object> map);
 	//댓글 추천 중복방지 select문
 	public int commentRecoCheck(int commentNo, String userId);
 
@@ -119,5 +121,8 @@ public interface BoardMapper {
 	public int getRankTotalCount(Board board);
 	//특정 게시글에 포함된 댓글 개수를 조회하는 select 쿼리를 호출
 	public int getCommentTotalCount(Comment comment);
+	
+	//첨부파일 업로드
+	public void addFile(Map<String, Object> map) throws Exception;
 	
 }

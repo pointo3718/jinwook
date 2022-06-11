@@ -6,11 +6,7 @@
 
 <div class="container text-center">
 
-<%-- <c:set var="params" value="${user}"/> --%>
-<c:set var="params" value="${orders}"/>
-      
-
-   
+<c:set var="params" value="${board}"/>
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
       <nav>
          <!-- 크기조절 :  pagination-lg pagination-sm-->
