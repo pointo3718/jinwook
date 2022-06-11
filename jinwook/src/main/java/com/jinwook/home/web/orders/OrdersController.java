@@ -133,29 +133,6 @@ public class OrdersController {
       return "orders/getOrders";
    }
    
-   
-   @PostMapping(value = "addOrdersCart")
-   public String addOrdersCart(@ModelAttribute("cart")   Cart cart,HttpSession session, Model model) throws Exception {
-      User user = (User) session.getAttribute("user");
-      
-      ordersService.addOrdersCart(cart);
-      
-      model.addAttribute("cart",cart);
-      model.addAttribute("user",user);
-      
-      return "orders/addOrdersCart";
-   }
-   
-   @PostMapping(value = "deleteOrdersCart")
-   public String deleteOrdersCart(@RequestParam("cartNo")int cartNo) throws Exception {
-	   
-	   ordersService.deleteOrdersCart(cartNo);
-	   
-	return "orders/deleteOrdersCart";
-	   
-   }
-   
-   
    @GetMapping(value = "getOrdersCartList")
    public String getOrdersCartList(@ModelAttribute("cart") Cart cart, Model model,HttpSession session) throws Exception {
       

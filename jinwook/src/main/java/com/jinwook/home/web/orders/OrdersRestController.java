@@ -1,5 +1,7 @@
 package com.jinwook.home.web.orders;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
@@ -13,14 +15,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Jpay;
 import com.jinwook.home.service.domain.Notice;
+import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
+import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
+import com.jinwook.home.service.store.StoreService;
 import com.jinwook.home.service.user.UserService;
 
 @RestController
@@ -67,6 +73,20 @@ public class OrdersRestController {
 		}
 		System.out.println("jsonObj"+jsonObj);
 		return jsonObj;
+	}
+	
+	@GetMapping(value = "addOrdersCart/{prodNo}")
+	public int addOrdersCart(@ModelAttribute("cart")Cart cart,@PathVariable(value="prodNo",required = false) int prodNo,
+								@PathVariable(value="storeName",required = false) String storeName,HttpSession session) throws Exception {
+	User user = (User) session.getAttribute("user");
+	Product product =new Product();
+	product.setProdNo(prodNo);
+	cart.setProduct(product);
+	cart.setUserId(user.getUserId());
+	cart.setStoreName("진욱이네");
+	System.out.println(cart);
+	int result = ordersService.addOrdersCart(cart);
+	       return result;
 	}
 	
 	@PostMapping(value = "deleteOrderCartAfter")
@@ -138,4 +158,5 @@ public class OrdersRestController {
 
 		return "orders/getOrdersNoticelist";
 	}
+
 }

@@ -160,6 +160,27 @@ body {
 		//==> 아래와 같이 정의한 이유는 ??
 		$(".ct_list_pop:nth-child(4n+6)").css("background-color", "whitesmoke");
 	});
+	
+	function fncaddOrdersCart(e) {
+		const prodNo = $(e).data("value");
+		const storeName = $("#stoName").data("values");
+		
+		const passdata = {'prodNo' : prodNo,'storeName' : storeName};
+		console.log(storeName);
+		console.log(prodNo);
+		$.ajax({
+			anyne:true,
+			url : "/orders/addOrdersCart/"+prodNo,
+			contentType: 'application/json',
+			data: JSON.stringify(passdata).e,
+			dataType : "text",
+			success : function(result){
+				if(result != null){
+					alert("담기완료");
+				}
+			}
+		});
+	}
 </script>
 
 </head>
@@ -212,7 +233,7 @@ body {
 				<div class="col-xs-4 col-md-2 ">
 					<strong>상점이름</strong>
 				</div>
-				<div class="col-xs-8 col-md-4">${store.storeName}</div>
+				<div class="col-xs-8 col-md-4" id="stoName" data-values="${store.storeName}">${store.storeName}</div>
 				<div class="col-xs-4 col-md-2 ">
 					<strong>상점종류</strong>
 				</div>
@@ -289,7 +310,7 @@ body {
 						<c:if test= "${store.product.soldout==false}" >
 				 		매진			
 						</c:if></td>
-						<td align="left"><button type="button" class="btn btn-primary">담&nbsp;기</button></div></td>
+						<td align="left"><button type="button" data-value="${store.product.prodNo}" class="btn btn-primary" onClick="fncaddOrdersCart(this)">담&nbsp;기</button></div></td>
 
 					</tr>
 				</c:forEach>

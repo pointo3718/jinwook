@@ -42,7 +42,6 @@
 		
 		console.log(e);
 		const no = $(e).data("value");
-		var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
 		 $.ajax({
 				url : "/orders/deleteOrdersCart/"+no,
 				dataType : "json",
@@ -144,6 +143,7 @@
 		<a href="/orders/getOrdersJpayList">진욱페이내역</a> <hr>
 		<a href="/orders/getOrdersNoticeList">알림내역</a> <hr>
 		<a href="/store/getStore?storeNo=10000" class="primary-btn">SHOP</a><hr>
+		<a href="/orders/addOrdersJpayPassword">진욱페이비밀번호등록창</a> <hr>
 		
      <!--  table End /////////////////////////////////////-->
       

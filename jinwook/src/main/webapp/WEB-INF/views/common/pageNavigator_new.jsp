@@ -6,9 +6,28 @@
 
 <div class="container text-center">
 
-<%-- <c:set var="params" value="${user}"/> --%>
 <c:set var="params" value="${orders}"/>
-      
+<c:if test="${params == null}">
+<c:set var="params" value="${jpay}"/>
+</c:if>      
+<c:if test="${params == null}">
+<c:set var="params" value="${notice}"/>
+</c:if>      
+<c:if test="${params == null}">
+<c:set var="params" value="${user}"/>
+</c:if>      
+<c:if test="${params == null}">
+<c:set var="params" value="${store}"/>
+</c:if>      
+<c:if test="${params == null}">
+<c:set var="params" value="${coupon}"/>
+</c:if>      
+<c:if test="${params == null}">
+<c:set var="params" value="${request}"/>
+</c:if>      
+<c:if test="${params == null}">
+<c:set var="params" value="${board}"/>
+</c:if>      
 
    
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
