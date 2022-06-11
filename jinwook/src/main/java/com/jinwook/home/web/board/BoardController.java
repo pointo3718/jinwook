@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.board.BoardService;
@@ -89,10 +88,10 @@ public class BoardController {
 	//1:1문의 등록/수정 + 사진 첨부 처리
 	//페이징 처리 후 로직 추가 필요.
 	@PostMapping(value = "addBoardInquiry")
-	public String addBoardInquiry(final Board board, MultipartHttpServletRequest mpRequest, Model model) throws Exception {
+	public String addBoardInquiry(final Board board, final MultipartFile[] files, Model model) throws Exception {
 		System.out.println("/board/addBoardInquiry: POST");
 		Map<String, Object> pagingParams = getPagingParams(board);
-		boolean isAdded = boardService.addBoardInquiry(board);
+		boolean isAdded = boardService.addBoardInquiry(board, files);
 		return "redirect:/board/getBoardInquiryList";
 	}
 	
@@ -359,45 +358,19 @@ public class BoardController {
 			//추천을 누르는 로그인한 유저 id
 			//((User) session.getAttribute("user")).getUserId();
 			System.out.println(rcpNo);
-			int recoCheck = boardService.recipeRecoCheck(rcpNo,userId);//성공
+			int recoCheck = boardService.recipeRecoCheck(rcpNo,userId);//성공1
 			System.out.println(recoCheck);//0
 			if(recoCheck == 0) {
 				//추천수 처음 누름
-				boardService.addRecipeReco(rcpNo, userId); //recommend테이블에 삽입 //성공
+				boardService.addRecipeReco(rcpNo, userId); //recommend테이블에 삽입 //성공2
 				System.out.println(boardService.addRecipeReco(rcpNo, userId));
-				boardService.updateRecipeReco(rcpNo); //recipe테이블 + 1 //성공
+				boardService.updateRecipeReco(rcpNo); //recipe테이블 + 1 //
 				System.out.println(rcpNo);
-				boardService.updateRecipeRecoCheck(rcpNo, userId); //recommend 테이블 구분자 1 //??
+				boardService.updateRecipeRecoCheck(rcpNo, userId); //recommend 테이블 구분자 1 //
 			} else if(recoCheck == 1) {
 				boardService.updateRecipeRecoCheck(rcpNo, userId); //recommend 테이블 구분자 0 //
 				boardService.updateRecipeRecoCheckCancel(rcpNo, userId); //recipe테이블 - 1 //
 				boardService.deleteRecipeReco(rcpNo, userId); //recommend 테이블 삭제 //
-			}
-			return recoCheck;
-		}
-		
-		//댓글 추천수 /board/updateCommentReco	
-		//레시피 추천은 레시피 번호 하나를 ?rcpNo=1로 할 수 있었는데 댓글은 게시판에 달린건데 어떻게 추천하지? boardNo, commentNo 둘다 필요한가?
-		@ResponseBody
-		@PostMapping(value = "updateCommentReco")
-		public int updateCommentReco(@RequestParam(value = "commentNo", required = false) Integer commentNo , 
-													Model model,HttpSession session) throws Exception {
-			System.out.println("/board/updateCommentReco: POST");
-			String userId = ((User) session.getAttribute("user")).getUserId();
-			System.out.println(commentNo);
-			int recoCheck = boardService.commentRecoCheck(commentNo,userId);//성공v
-			System.out.println(recoCheck);//0
-			if(recoCheck == 0) {
-				//추천수 처음 누름
-				boardService.addCommentReco(commentNo, userId); //recommend테이블에 삽입 //성공v
-				System.out.println(boardService.addCommentReco(commentNo, userId));
-				boardService.updateCommentReco(commentNo); //recipe테이블 + 1 //성공v
-				System.out.println(commentNo);
-				boardService.updateCommentRecoCheck(commentNo, userId); //recommend 테이블 구분자 1 //v
-			} else if(recoCheck == 1) {
-				boardService.commentRecoCheck(commentNo, userId); //recommend 테이블 구분자 0 //v
-				boardService.updateCommentRecoCheckCancel(commentNo, userId); //recipe테이블 - 1 //v
-				boardService.deleteCommentReco(commentNo, userId); //recommend 테이블 삭제 //v
 			}
 			return recoCheck;
 		}
@@ -450,6 +423,4 @@ public class BoardController {
 
 			return params;
 		}
-		
-		
 }//class

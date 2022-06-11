@@ -30,7 +30,7 @@ public class Comment {
 	private String commentContent;
 	private String commentWriter;
 	private LocalDate commentDate;
-	private Integer recommendCount;
+	private int recommendCount;
 	
 	
 }

@@ -11,14 +11,14 @@ import lombok.ToString;
 @ToString
 public class Recommend {
 
-	private Integer recommendNo;
+	private int recommendNo;
 	private Integer commentNo;
-	private Integer rcpNo;
+	private int rcpNo;
 	private String userId;
 	private User user;
-	private Integer recocheck;
+	private int recocheck;
 	private LocalDate recoDate;
-	private Integer recommendCount;
+	private int recommendCount;
 	
 	public Recommend() {
 	}

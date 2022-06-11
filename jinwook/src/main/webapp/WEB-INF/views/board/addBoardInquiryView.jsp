@@ -21,9 +21,6 @@
     <!-- Bootstrap Dropdown Hover JS -->
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 	
-	<script src="/js/summernote/summernote-lite.js"></script>
-	<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
-	<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
  		body {
@@ -87,6 +84,22 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
+function registerBoard(form) {
+
+	form.noticeYn.value = form.noticeYn.checked == false ? 'N' : 'Y';
+	form.secretYn.value = form.secretYn.checked == false ? 'N' : 'Y';
+
+	var result = (
+			   isValid(form.title, "제목", null, null)
+			&& isValid(form.writer, "이름", null, null)
+			&& isValid(form.content, "내용", null, null)
+	);
+
+	if ( result == false ) {
+		return false;
+	}
+}
+/*[- end of function -]*/
  
 var rcpNo = ${recipe.rcpNo}
 var userId = ${board.user.userId}
@@ -113,48 +126,34 @@ function updateRecipeReco() {
 	});
 }
 
-//서머노트에 text 쓰기
-$('#summernote').summernote('insertText', 써머노트에 쓸 텍스트);
-
-
-// 서머노트 쓰기 비활성화
-$('#summernote').summernote('disable');
-
-// 서머노트 쓰기 활성화
-$('#summernote').summernote('enable');
-
-
-// 서머노트 리셋
-$('#summernote').summernote('reset');
-
-
-// 마지막으로 한 행동 취소 ( 뒤로가기 )
-$('#summernote').summernote('undo');
-// 앞으로가기
-$('#summernote').summernote('redo');
-
-$(document).ready(function() {
-	//여기 아래 부분
-	$('#summernote').summernote({
-		  height: 300,                 // 에디터 높이
-		  minHeight: null,             // 최소 높이
-		  maxHeight: null,             // 최대 높이
-		  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-		  lang: "ko-KR",					// 한글 설정
-		  placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
-          
-	});
-});
-
 </script>
 
 </head>
 
 <body>
+<form class="form-horizontal" method="post" enctype="multipart/form-data" onsubmit="return registerBoard(this)">
 	<div class="container">
-	<div id="summernote">Hello summerNote!</div>
 		<div class="row">
+				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+					<thead>
+						<tr>
+							<th colspan="2" style="background-color: #eee; text-align: center;">1:1문의 등록</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" class="form-control"
+								placeholder="1:1 문의 제목을 써주세요." name="bbsTitle" maxlength="50"></td>
+						</tr>
+						<tr>
+							<td><textarea type="text" class="form-control"
+									placeholder="글 내용" name="bbsContent" maxlength="2048"
+									style="height: 350px;">
+                        </textarea></td>
+						</tr>
+					</tbody>
 				
+				</table>
 		<div class="row">
 	  		<div class="col-xs-5 col-md-3"><strong>작성자</strong></div>
 			<div class="col-xs-7 col-md-5">${board.user.userId}</div>
@@ -202,13 +201,19 @@ $(document).ready(function() {
 			</table>
 	</div>
 </div>
-<tr>
-	<td>
-		<input type="file" name="file">
-	</td>
-</tr>
+
+<!--/* 저장된 파일이 없는 파일 영역 */-->
+<div data-name="fileDiv" class="form-group filebox bs3-primary">
+	<div class="col-sm-10">
+		<input type="text" class="upload-name" value="파일 찾기" readonly />
+		<label for="file_0" class="control-label">찾아보기</label> 
+		<input multiple="multiple" type="file" name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)" />
+
+	</div>
+</div>
 
 
+</form>
 </body>
 
 </html>

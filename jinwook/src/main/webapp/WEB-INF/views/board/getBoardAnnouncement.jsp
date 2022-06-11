@@ -31,15 +31,15 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
-var boardNo = ${board.boardNo};
-var commentNo = ${comment.commentNo};
+var rcpNo = ${recipe.rcpNo};
+var userId = ${user.userId};
 
-function updateCommentReco() {
+function updateRecipeReco() {
 	$.ajax({
 		type : "POST",
-		url : "updateCommentReco",
+		url : "/board/updateRecipeReco",
 		dataType : "json",
-		data : {'boardNo' : boardNo, 'commentNo' : commentNo},
+		data : {'rcpNo' : rcpNo, 'userId' : userId},
 		error : function() {
 			alert("통신 에러");
 		},
@@ -179,7 +179,7 @@ function changeFilename(file) {
 <h1>Test Complete!</h1>
 
 <div id="btnDiv" style="margin-right:1px;">
-	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateCommentReco();">댓글 추천 ${comment.recommendCount}</button>
+	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco(); return false;">추천 ${recipe.getRecommendCount}</button>
 	<button type="button" class="btn btn-danger" id="hate_btn">비추천</button>
 </div>
 	

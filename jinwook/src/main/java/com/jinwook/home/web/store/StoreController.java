@@ -4,7 +4,6 @@ package com.jinwook.home.web.store;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
-import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.store.StoreService;
 
 
@@ -131,21 +129,27 @@ public class StoreController {
 		return "store/getStore";
 	}
 
-	
+	/*
 	
 	@GetMapping(value = "getStoreWallet")
-	public String getStoreWallet(@RequestParam("storeNo") int storeNo, Store store, Model model) {
-				
-		List<Store> getStoreWallet = storeService.getStoreWallet(store);
+	public String getStoreWallet(@RequestParam HashMap<String, Object> map, Model model) {
+		
+//		map = new HashMap<>();
+//		
+//		map.put("storeNo", "store_no");					
+//		map.put("orderDateStart", "order_date_start");			
+//		map.put("orderDateEnd", "order_date_end");
+		
+		List<Store> getStoreWallet = storeService.getStoreWallet(map);
 		model.addAttribute("getStoreWallet", getStoreWallet);
 
 		return "store/getStoreWallet";
 	}
 	
-	
+	*/
 	
 	@GetMapping(value = "getStoreRefund")
-	public String getStoreRefund(@RequestParam("storeNo") int storeNo, Model model) {
+	public String getStoreWallet(@RequestParam("storeNo") int storeNo, Model model) {
 		
 		List<Store> getStoreRefund = storeService.getStoreRefund(storeNo);
 		model.addAttribute("getStoreRefund", getStoreRefund);

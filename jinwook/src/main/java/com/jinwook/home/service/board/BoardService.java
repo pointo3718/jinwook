@@ -2,7 +2,6 @@ package com.jinwook.home.service.board;
 
 import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Board;
@@ -23,7 +22,7 @@ public interface BoardService {
 	//1:1문의 등록v
 	public boolean addBoardInquiry(Board board);
 	//1:1문의 등록 + 사진 첨부v
-	public boolean addBoardInquiry(Board board,  MultipartFile[] files);
+	public boolean addBoardInquiry(Board board, MultipartFile[] files);
 	//1:1문의 등록v
 	public boolean addBoardAnnouncement(Board board);
 	//1:1문의 등록 + 사진 첨부v
@@ -91,31 +90,30 @@ public interface BoardService {
 	// 레시피 추천
 	public int updateRecipeReco(int rcpNo);
 	// 댓글 추천
-	public int updateCommentReco(int commentNo);
+	public void updateCommentReco(int commentNo);
 	// 레시피 추천 취소
-	public int updateRecipeRecoCancel(int rcpNo);
+	public void updateRecipeRecoCancel(int rcpNo);
 	// 댓글 추천 취소
-	public int updateCommentRecoCancel(int commentNo);
+	public void updateCommentRecoCancel(int commentNo);
 	// 레시피 추천 테이블에 add
 	public int addRecipeReco(int rcpNo, String userId);
 	// 댓글 추천 테이블에 add
-	public int addCommentReco(int commentNo, String userId);
+	public void addCommentReco(int commentNo, String userId);
 	// 레시피 추천 테이블에서 delete
-	public int deleteRecipeReco(int rcpNo, String userId);
+	public void deleteRecipeReco(int rcpNo, String userId);
 	// 댓글 추천 테이블에서 delete
-	public int deleteCommentReco(int commentNo, String userId);
+	public void deleteCommentReco(int commentNo, String userId);
 	// 레시피 추천 시 recocheck를 1로 만들어서 중복방지
 	public int updateRecipeRecoCheck(int rcpNo, String userId);
 	// 댓글 추천 시 recocheck를 1로 만들어서 중복방지
-	public int updateCommentRecoCheck(int commentNo, String userId);
+	public void updateCommentRecoCheck(int commentNo, String userId);
 	// 레시피 추천취소 시 다시 0
-	public int updateRecipeRecoCheckCancel(int rcpNo, String userId);
+	public void updateRecipeRecoCheckCancel(int rcpNo, String userId);
 	// 댓글 추천취소 시 다시 0
-	public int updateCommentRecoCheckCancel(int commentNo, String userId);
+	public void updateCommentRecoCheckCancel(int commentNo, String userId);
 	// 레시피 추천 중복방지 select문
 	public int recipeRecoCheck(int rcpNo, String userId);
 	// 댓글 추천 중복방지 select문
 	public int commentRecoCheck(int commentNo, String userId);
-	
 
 }

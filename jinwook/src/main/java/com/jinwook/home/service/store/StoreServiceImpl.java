@@ -130,14 +130,14 @@ public class StoreServiceImpl implements StoreService {
 
 
 	@Override
-	public List<Store> getStoreWallet(Store store) {
+	public List<Store> getStoreWallet(HashMap<String, Object> map) {
 		
 		List<Store> getStoreWallet = Collections.emptyList();
 
 		int storeTotalCount = storeMapper.getStoreWalletTotalCount();
 
 		if (storeTotalCount > 0) {
-			getStoreWallet = storeMapper.getStoreWallet(store);
+			getStoreWallet = storeMapper.getStoreWallet(map);
 		}
 
 		return getStoreWallet;
