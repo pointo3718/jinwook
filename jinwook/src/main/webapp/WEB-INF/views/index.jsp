@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8"%>
+
     
 <!DOCTYPE html>
 <html lang="ko">
@@ -73,8 +75,7 @@
                     </ul>
                 </li>
 
-                <li><a href="/admin/blog.jsp">ë§ì´íì´ì§</a></li>
-                <li><a href="/admin/blog.jsp">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</a></li>
+                <li><a href="/admin/blog.jsp">마이페이지</a></li>
                 <li><a href="./contact.jsp">Contact</a></li>
             </ul>
         </nav>
@@ -152,7 +153,7 @@
                                     <li><a href="./blog-details.jsp">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/admin/blog">ë§ì´íì´ì§</a></li>
+                            <li><a href="/admin/blog">마이페이지</a></li>
                             <li><a href="./contact.jsp">Contact</a></li>
                         </ul>
                     </nav>

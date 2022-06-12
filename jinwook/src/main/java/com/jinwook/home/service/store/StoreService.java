@@ -37,7 +37,7 @@ public interface StoreService {
 	
 	public List<Store> getStoreRefund(int storeNo);
 
-	public List<Store> getStoreWallet(HashMap<String, Object> map);
+	public List<Store> getStoreWallet(Store store);
 
 	
 

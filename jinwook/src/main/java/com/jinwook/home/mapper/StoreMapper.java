@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
+import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 
 @Mapper
@@ -37,7 +38,7 @@ public interface StoreMapper {
 	
 	public List<Store> getStore(int storeNo);
 	
-	public List<Store> getStoreWallet(HashMap<String, Object> map);
+	public List<Store> getStoreWallet(Store store);
 	
 	public List<Store> getStoreRefund(int storeNo);
 	
