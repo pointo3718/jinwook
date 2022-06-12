@@ -160,22 +160,25 @@ body {
 		//==> 아래와 같이 정의한 이유는 ??
 		$(".ct_list_pop:nth-child(4n+6)").css("background-color", "whitesmoke");
 	});
-	
+
 	function fncaddOrdersCart(e) {
 		const prodNo = $(e).data("value");
 		const storeName = $("#stoName").data("values");
-		
-		const passdata = {'prodNo' : prodNo,'storeName' : storeName};
+
+		const passdata = {
+			'prodNo' : prodNo,
+			'storeName' : storeName
+		};
 		console.log(storeName);
 		console.log(prodNo);
 		$.ajax({
-			anyne:true,
-			url : "/orders/addOrdersCart/"+prodNo,
-			contentType: 'application/json',
-			data: JSON.stringify(passdata).e,
+			anyne : true,
+			url : "/orders/addOrdersCart/" + prodNo,
+			contentType : 'application/json',
+			data : JSON.stringify(passdata).e,
 			dataType : "text",
-			success : function(result){
-				if(result != null){
+			success : function(result) {
+				if (result != null) {
 					alert("담기완료");
 				}
 			}
@@ -187,11 +190,11 @@ body {
 
 <body>
 
-   <div class="navbar  navbar-default">
-        <div class="container">
-           <a class="navbar-brand" href="/user/index">진욱이네</a>
-         </div>
-      </div>
+	<div class="navbar  navbar-default">
+		<div class="container">
+			<a class="navbar-brand" href="/user/index">진욱이네</a>
+		</div>
+	</div>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<!-- ToolBar End /////////////////////////////////////-->
@@ -233,14 +236,16 @@ body {
 				<div class="col-xs-4 col-md-2 ">
 					<strong>상점이름</strong>
 				</div>
-				<div class="col-xs-8 col-md-4" id="stoName" data-values="${store.storeName}">${store.storeName}</div>
+				<div class="col-xs-8 col-md-4" id="stoName"
+					data-values="${store.storeName}">${store.storeName}</div>
 				<div class="col-xs-4 col-md-2 ">
 					<strong>상점종류</strong>
 				</div>
 				<div class="col-xs-8 col-md-4">
-				<c:if test= "${store.storeType.trim()=='1'}" >
+					<c:if test="${store.storeType.trim()=='1'}">
 				 	종합			
-				</c:if></div>
+				</c:if>
+				</div>
 				<div class="col-xs-4 col-md-2 ">
 					<strong>상점주소</strong>
 				</div>
@@ -286,6 +291,7 @@ body {
 					<th align="left">원산지</th>
 					<th align="left">상품소개</th>
 					<th align="left">매진여부</th>
+					<th align="left">수량</th>
 					<th align="left">장바구니</th>
 				</tr>
 			</thead>
@@ -302,15 +308,27 @@ body {
 						<td align="left">${store.product.prodImg}</td>
 						<td align="left">${store.product.price}</td>
 						<td align="left">${store.product.prodOrign}</td>
-						<td align="left">${store.product.prodInfo}</td>						
-						<td align="left">
-						<c:if test= "${store.product.soldout==true}" >
+						<td align="left">${store.product.prodInfo}</td>
+						<td align="left"><c:if test="${store.product.soldout==true}">
 				 		판매중			
-						</c:if>
-						<c:if test= "${store.product.soldout==false}" >
+						</c:if> <c:if test="${store.product.soldout==false}">
 				 		매진			
 						</c:if></td>
-						<td align="left"><button type="button" data-value="${store.product.prodNo}" class="btn btn-primary" onClick="fncaddOrdersCart(this)">담&nbsp;기</button></div></td>
+						<td align="left">
+								<div class="col-xs-8 col-md-4">
+									<select name=prodCount class="ct_input_g"
+										style="width: 100px; height: 19px" maxLength="20">
+										<option value="1" selected="selected">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+							</div></td>
+						<td align="left"><button type="button"
+								data-value="${store.product.prodNo}" class="btn btn-primary"
+								onClick="fncaddOrdersCart(this)">담&nbsp;기</button>
+							</div></td>
 
 					</tr>
 				</c:forEach>
