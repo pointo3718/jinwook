@@ -4,34 +4,29 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
-import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.jinwook.home.service.domain.Cart;
-import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
-import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
 import com.jinwook.home.service.store.StoreService;
+import com.mysql.cj.xdevapi.JsonArray;
 
 @RestController
 @RequestMapping("/store/*")
@@ -228,47 +223,32 @@ public class StoreRestController {
 		return jsonObj;
 	}
 	
-	   @PostMapping( value="/getStoreWallet/{storeNo}/{orderDateStart}/{orderDateEnd}" )
-	   public JsonObject getStoreWallet(@PathVariable(value="storeNo",required = false) int storeNo, 
+	   @PostMapping( value="/getStoreWallet/{storeNo}")
+	   public JsonObject getStoreWallet(@PathVariable(value="storeNo",required = false) int storeNo,
 			   							@PathVariable(value="orderDateStart",required = false) Date orderDateStart,
 			   							@PathVariable(value="orderDateEnd",required = false) Date orderDateEnd) throws Exception{
 	      
-	      System.out.println("/orders/getStoreWallet : POST ");
-	  
-	      JsonObject jsonObj = new JsonObject();
-	      
-	      Store store = new Store();
-	      
-	      HashMap<String, Object> map = new HashMap<String, Object>();
-			
-			map.put("storeNo", "store_no");					
-			map.put("orderDateStart", "order_date_start");			
-			map.put("orderDateEnd", "order_date_end");
-	      
-	      
-			try {
-				if (store != null) {
-					System.out.println("product 객체에 값 넣어줌");
-				}
-				
-				System.out.println("컨트롤러에서의 Product :: "+store);
+		   	  Store store = new Store();
+		   	  store.setStoreNo(storeNo);
+		   	  store.setOrderDateStart(orderDateStart);
+		   	  store.setOrderDateEnd(orderDateEnd);
+		   
+		      System.out.println("/store/getStoreWallet : GET ");
+		      
+		      JsonObject jsonObj = new JsonObject();
+		      
+		      List<Store> storeWallet = storeService.getStoreWallet(store);
+		      
+		      if (CollectionUtils.isEmpty(storeWallet) == false) {
+		         com.google.gson.JsonArray jsonArr = new Gson().toJsonTree(storeWallet).getAsJsonArray();
+		         jsonObj.add("storeWallet", jsonArr);
+		      
+		         System.out.println("지갑 조회 컨트롤러 통과");
+		      }
 
-				storeService.getStoreWallet(map);
-				jsonObj.addProperty("storeNo", storeNo);
-
-
-			} catch (DataAccessException e) {
-				jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
-
-			} catch (Exception e) {
-				jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
-			}
-			
-	        System.out.println("지갑 조회 컨트롤러 통과");
-	        
-			return jsonObj;
-			
-	  }
+		      return jsonObj;
+		   }
+	   
 	   
 //		@PostMapping(value = "addOrdersCart/{prodNo}")
 //		public JsonObject getStore(@PathVariable(value = "prodNo", required = false) int prodNo, @RequestBody Cart cart) {
