@@ -137,7 +137,7 @@ public class UserServiceImpl implements UserService{
 	public void sendIdEmail(User user) throws Exception{
 		
 		
-		SimpleMailMessage simpleMailMessage = new  SimpleMailMessage();
+//		SimpleMailMessage simpleMailMessage = new  SimpleMailMessage();
 //		simpleMailMessage.setTo(user.getEmail());
 //		simpleMailMessage.setSubject("[진욱이네] 아이디 안내를 드립니다.");
 
@@ -150,15 +150,26 @@ public class UserServiceImpl implements UserService{
 	         
 	         mimeMessageHelper.setSubject("[진욱이네] 아이디 안내를 드립니다.");
 	         String content= " ";
-	         content = user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r";
-	         content += "\n ";
-	         System.out.println();
-	         content+= "요청하신 아이디를 안내드립니다.\n ";
-	         content+= "\n ";
-	         content+= user.getUserId();
-	         content+= " \n ";
-	         content+= "가입일 "+user.getRegDate()+"\n ";
-	         content+= "<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n ";
+	         content = user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r ";
+	         content += "<br> ";
+	        content += "요청하신 아이디를 안내드립니다.\n ";
+	        content += "<br> ";
+	        content += user.getUserId();
+	        content += "<br> ";
+	        content += "가입일 "+user.getRegDate()+"\n ";
+	        content += "<br> ";
+	        content += "<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n ";
+//	         StringBuffer sb = new StringBuffer();
+//			 sb.append(user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n"
+//					+ "\n"
+//					+ "요청하신 아이디를 안내드립니다.\n"
+//					+ "\n"
+//					+ user.getUserId()
+//					+ " \n"
+//					+ "<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n ");
+//			 sb.append(System.lineSeparator());
+	         
+	         
 	         mimeMessageHelper.setText(content, true);
 //	         mailSender.send(mimeMessage);
 	         System.out.println("성공");
@@ -168,21 +179,13 @@ public class UserServiceImpl implements UserService{
 	         throw new RuntimeException(e);
 	      }
 		
-		//		StringBuffer sb = new StringBuffer();
-//		sb.append(user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n"
-//				+ "\n"
-//				+ "요청하신 아이디를 안내드립니다.\n"
-//				+ "\n"
-//				+ user.getUserId()
-//				+ " \n"
-//				+ " \n");
-//		sb.append(System.lineSeparator());
 		
 //		for(int i=0;i<usernames.size()-1;i++) {
 //			sb.append(usernames.get(i));
 //			sb.append(System.lineSeparator());
 //		}
 //		sb.append("가입일 "+user.getRegDate());
+//		sb.append("<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n ");
 //		
 //		simpleMailMessage.setText(sb.toString());
 		

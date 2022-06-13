@@ -7,9 +7,6 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
-	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -17,6 +14,39 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<meta name="description" content="Ogani Template">
+	<meta name="keywords" content="Ogani, unica, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>로그인</title>
+	
+	<!-- Google Font -->
+	<link
+	   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+	   rel="stylesheet">
+	
+	<!-- Css Styles -->
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/font-awesome.min.css"
+	   type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/elegant-icons.css" type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/nice-select.css" type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/owl.carousel.min.css"
+	   type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/slicknav.min.css" type="text/css">
+	<link rel="stylesheet" href="${path}/resources/static/css/style.css"
+	   type="text/css">
+	<link rel="stylesheet"
+	   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -185,7 +215,7 @@ main button {
 						+"</div> "
 					+"</div>";
 	 
-				$("main").html(html);
+				$("form").html(html);
 	 
 			})
 			.fail(function() {
@@ -205,16 +235,24 @@ main button {
 </head>
 
 <body>
-	<main class="find_id_page">
+<jsp:include page="../layout/top.jsp" />
+	<form class="find_id_page">
 		<div class="find_info">
-			<h3>가입하신 이름과 이메일을 입력해주세요</h3>
-			<input type="text" name="userName" class="userName">
-			<input type="email" name="email" class="email">
-			<button class="find_btn">확인</button>
+			<h1 class="text-center">아이디 찾기</h1>
 		</div>
-	</main>	
+		</form>		
+			<br><br>
+		<form class = "ad text-center">
+			<div class="aaa" >
+			<input type="text" name="userName" class="userName">
+			</div>
+			<div class="adad">
+			<input type="email" name="email" class="email">
+			</div>
+			<button class="find_btn">확인</button>
+	</form>	
  	<!--  화면구성 div end /////////////////////////////////////-->
-
+<jsp:include page="../layout/footer.jsp" />
 </body>
 
 </html>

@@ -23,6 +23,9 @@ import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
 
 
+//7a50e1995f458ef51a98c92f52419d00
+
+
 //==> ȸ������ Controller
 @Controller
 @RequestMapping("/user/*")
@@ -43,10 +46,15 @@ public class UserController {
 //	@Value("#{commonProperties['pageSize']}")
 //	int pageSize;
 	
+	@GetMapping("index")
+	public String index1(HttpSession session) throws Exception{
+		System.out.println("==========index===========");
+		return "index";
+	}
 	@GetMapping("index2")
 	public String index(HttpSession session) throws Exception{
 		System.out.println("==========index===========");
-		return "/user/index2";
+		return "index2";
 	}
 	
 	@GetMapping("addUser")
@@ -123,10 +131,14 @@ public class UserController {
 	public String login(@ModelAttribute("user") User user , HttpSession session, Model model ) throws Exception{
 		
 		System.out.println("/user/login : POST");
+		System.out.println(user.getUserId()+"112312312321321312321312");
 		//Business Logic
 		User dbUser=userService.getUser(user.getUserId());
+		
+		System.out.println("-=-=-=-=-=-=-=-=-=-"+dbUser+"------------=-=-=-=-=");
 
 		if(dbUser == null) {
+			System.out.println("id null=--------------------------");
 			return "/user/loginView";
 		}
 		
@@ -264,7 +276,7 @@ public class UserController {
 
 
 	//---------------------------------------
-	// 비밀번호 변경 페이지
+	// 비밀번호 재설정 페이지
 		@GetMapping("updatePassword")
 		public String updatePassword(User user, HttpSession session) {
 //		    Map<String, Object> authStatus = (Map<String, Object>) session.getAttribute("authStatus");
