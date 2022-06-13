@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -26,194 +26,123 @@
  		body {
             padding-top : 50px;
         }
- /*
- * start of file css
- */
-.filebox input[type="file"] {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0;
-}
-.filebox.bs3-primary .col-sm-10>label {
-	color: #fff;
-	background-color: #337ab7;
-	border-color: #2e6da4;
-}
-.filebox .col-sm-10>label {
-	display: inline-block;
-	padding: .5em .75em;
-	color: #999;
-	font-size: inherit;
-	font-weight: 600;
-	line-height: normal;
-	vertical-align: middle;
-	background-color: #fdfdfd;
-	cursor: pointer;
-	border: 1px solid #ebebeb;
-	border-bottom-color: #e2e2e2;
-	border-radius: .25em;
-}
-.filebox .upload-name {
-	display: inline-block;
-	width: 350px;
-	padding: .5em .75em;
-	/* labelÀÇ ÆĞµù°ª°ú ÀÏÄ¡ */
-	font-size: inherit;
-	font-family: inherit;
-	line-height: normal;
-	vertical-align: middle;
-	background-color: #f5f5f5;
-	border: 1px solid #ebebeb;
-	border-bottom-color: #e2e2e2;
-	border-radius: .25em;
-	-webkit-appearance: none;
-	/* ³×ÀÌÆ¼ºê ¿ÜÇü °¨Ãß±â */
-	-moz-appearance: none;
-	appearance: none;
-}
-/*
- * end of file css
- */
      </style>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
-function registerBoard(form) {
-
-	form.noticeYn.value = form.noticeYn.checked == false ? 'N' : 'Y';
-	form.secretYn.value = form.secretYn.checked == false ? 'N' : 'Y';
-
-	var result = (
-			   isValid(form.title, "Á¦¸ñ", null, null)
-			&& isValid(form.writer, "ÀÌ¸§", null, null)
-			&& isValid(form.content, "³»¿ë", null, null)
-	);
-
-	if ( result == false ) {
-		return false;
-	}
-}
-/*[- end of function -]*/
- 
-var rcpNo = ${recipe.rcpNo}
-var userId = ${board.user.userId}
-
-function updateRecipeReco() {
-	$.ajax({
-		type : "POST",
-		url : "/board/updateRecipeReco",
-		dataType : "json",
-		data : {'rcpNo' : rcpNo, 'userId' : userId},
-		error : function() {
-			alert("Åë½Å ¿¡·¯");
-		},
-		success : function(recoCheck) {
-			if (recoCheck == 0) {
-				alert("ÃßÃµ ¿Ï·á!");
-				location.reload();
-			}
-			else if (recoCheck == 1) {
-				alert("ÃßÃµ Ãë¼Ò!");
-				location.reload();
-			}
-		}
+$(function() {
+	$("button.btn.btn-primary").on("click", function() {
+		fncAddInquiry();
 	});
+});
+
+$(function() {
+	$("a[href='#' ]").on("click", function() {
+		$("form")[0].reset();
+	});
+});
+
+function fncAddInquiry() {
+	$("form").attr("method", "POST").attr("action", "/board/addBoardInquiry").submit();
 }
+
 
 </script>
 
 </head>
 
 <body>
-<form class="form-horizontal" method="post" enctype="multipart/form-data" onsubmit="return registerBoard(this)">
-	<div class="container">
+<div class="container">
+		<h1 class="bg-primary text-center">1:1 ë¬¸ì˜ ë“± ë¡</h1>
+		
+		<!-- form Start /////////////////////////////////////-->
+		<form id="MultiUpload" action="board/addBoardInquiry" method="post" enctype="multipart/form-data">
+		
+			<div class="form-group">
+		    <label for="boardTitle" class="col-sm-offset-1 col-sm-3 control-label">1:1ë¬¸ì˜ ì œëª©</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="boardTitle" name="boardTitle">
+		       <span id="helpBlock" class="help-block"></span>
+		    </div>
+		   </div> 
+			<hr/><br/><br/>
+			<div class="form-group">
+		    <label for="boardContent" class="col-sm-offset-1 col-sm-3 control-label">1:1ë¬¸ì˜ ë‚´ìš©</label>
+		    <div class="col-sm-7">
+		      <input type="text" class="form-control" id="boardContent" name="boardContent">
+		       <span id="helpBlock" class="help-block"></span>
+		    </div>
+			</div>
+ 			<hr/><br/>
+			<div class="form-group">
+		    <label for="file" class="col-sm-offset-1 col-sm-3 control-label">ë‹¤ì¤‘ íŒŒì¼ ì—…ë¡œë“œ</label>
+		    <div class="col-sm-3"><!-- ì…ë ¥ì¹¸ -->
+		      	<input type="file" id="uploadfiles" name="uploadfiles" multiple="multiple" placeholder="íŒŒì¼ ì„ íƒ" class="form-control" >
+		      	<input type="submit" value="upload">
+		    </div>
+		  </div>
+ 			
+			<%-- <div class="form-group">
+		    <label for="file" class="col-sm-offset-1 col-sm-3 control-label">ì—…ë¡œë“œ ì‚¬ì§„</label>
+		    <div class="col-sm-3"><!-- ì…ë ¥ì¹¸ -->
+		      	<input type="file" multiple="multiple" class="form-control" id="files" name="files">
+		    </div>
+		  </div>--%>
+		<br/><br/><br/>  
 		<div class="row">
-				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-					<thead>
-						<tr>
-							<th colspan="2" style="background-color: #eee; text-align: center;">1:1¹®ÀÇ µî·Ï</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><input type="text" class="form-control"
-								placeholder="1:1 ¹®ÀÇ Á¦¸ñÀ» ½áÁÖ¼¼¿ä." name="bbsTitle" maxlength="50"></td>
-						</tr>
-						<tr>
-							<td><textarea type="text" class="form-control"
-									placeholder="±Û ³»¿ë" name="bbsContent" maxlength="2048"
-									style="height: 350px;">
-                        </textarea></td>
-						</tr>
-					</tbody>
-				
-				</table>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>ÀÛ¼ºÀÚ</strong></div>
-			<div class="col-xs-7 col-md-5">${board.user.userId}</div>
+	  		<div class="col-xs-5 col-md-3"><strong>ì‘ì„±ì</strong></div>
+			<div class="col-xs-7 col-md-5">${user.userId}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>Á¶È¸¼ö</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì¡°íšŒìˆ˜</strong></div>
 			<div class="col-xs-7 col-md-5">${board.boardHits}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>ÀÛ¼ºÀÏ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì‘ì„±ì¼</strong></div>
 			<div class="col-xs-7 col-md-5">${board.writeDate}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>´äº¯»óÅÂ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ë‹µë³€ìƒíƒœ</strong></div>
 			<c:choose>
 				<c:when test="${board.boardInqStatus == false}">
-					´äº¯´ë±âÁß
+					ë‹µë³€ëŒ€ê¸°ì¤‘
 				</c:when>
 				<c:otherwise>
-					´äº¯ ¿Ï·á
+					ë‹µë³€ ì™„ë£Œ
 				</c:otherwise>
 			</c:choose>
-		<hr/>  
-		<div class="col-sm-offset-4  col-sm-4 text-center">
-			<!-- <a href="<c:url value='/board/addBoardInquiry'/>" role="button" class="btn btn-outline-info">±Û¾²±â</a> -->
-		    <button type="button" class="btn btn-primary" onclick="fncAddBoardInquiry()">µî &nbsp;·Ï</button>
-			<a class="btn btn-primary btn" href="#" role="button">Ãë&nbsp;¼Ò</a>
-		</div>
-		</div>
-		</div>
-	</div>
+		</div>	
+			<div class="form-group">
+		    <div class="col-sm-offset-4  col-sm-4 text-center">
+		      <button type="submit" class="btn btn-primary">ë“± &nbsp;ë¡</button>
+			  <a class="btn btn-primary btn" href="#" role="button">ì·¨&nbsp;ì†Œ</a>
+		    </div>
+		  </div>
+		  
+		</form>
+		<!-- form Start /////////////////////////////////////-->
+		
+ 	</div>
+	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
+	
 
 <div class="container">
 	<div class="form-group">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-			1:1¹®ÀÇ ´äº¯
+			1:1ë¬¸ì˜ ë‹µë³€
 				<tr>
 					<td style="border-bottom:none;" valign="middle"><br><br></td>
-					<td><input type="text" style="height:100px;" class="form-control" placeholder="»ó´ë¹æÀ» Á¸ÁßÇÏ´Â ´ñ±ÛÀ» ³²±é½Ã´Ù." name = "commentText"></td>
-					<td><br><br><input type="submit" class="btn-primary pull" value="´ñ±Û ÀÛ¼º"></td>
+					<td><input type="text" style="height:100px;" class="form-control" placeholder="ìƒëŒ€ë°©ì„ ì¡´ì¤‘í•˜ëŠ” ëŒ“ê¸€ì„ ë‚¨ê¹ì‹œë‹¤." name = "commentText"></td>
+					<td><br><br><input type="submit" class="btn-primary pull" value="ëŒ“ê¸€ ì‘ì„±"></td>
 				</tr>
 			</table>
 	</div>
 </div>
 
-<!--/* ÀúÀåµÈ ÆÄÀÏÀÌ ¾ø´Â ÆÄÀÏ ¿µ¿ª */-->
-<div data-name="fileDiv" class="form-group filebox bs3-primary">
-	<div class="col-sm-10">
-		<input type="text" class="upload-name" value="ÆÄÀÏ Ã£±â" readonly />
-		<label for="file_0" class="control-label">Ã£¾Æº¸±â</label> 
-		<input multiple="multiple" type="file" name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)" />
-
-	</div>
-</div>
-
-
-</form>
 </body>
 
 </html>

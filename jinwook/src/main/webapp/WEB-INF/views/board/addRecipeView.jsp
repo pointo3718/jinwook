@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
@@ -27,33 +27,26 @@
  		body {
             padding-top : 50px;
         }
+        .select_img img { margin:20px 0; }
      </style>
-
+     
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
-var rcpNo = ${recipe.rcpNo};
-var userId = ${user.userId};
-
-function updateRecipeReco() {
-	$.ajax({
-		type : "POST",
-		url : "/board/updateRecipeReco",
-		dataType : "json",
-		data : {'rcpNo' : rcpNo, 'userId' : userId},
-		error : function() {
-			alert("Åë½Å ¿¡·¯");
-		},
-		success : function(recoCheck) {
-			if (recoCheck == 0) {
-				alert("ÃßÃµ ¿Ï·á!");
-				location.reload();
-			}
-			else if (recoCheck == 1) {
-				alert("ÃßÃµ Ãë¼Ò!");
-				location.reload();
-			}
-		}
+$(function() {
+	$("button.btn.btn-primary").on("click", function() {
+		fncAddRecipe();
 	});
+});
+
+$(function() {
+	$("a[href='#' ]").on("click", function() {
+		$("form")[0].reset();
+	});
+});
+
+function fncAddRecipe() {
+	$("form").attr("method", "POST").attr("action", "/board/addRecipe").submit();
 }
 
 </script>
@@ -61,72 +54,76 @@ function updateRecipeReco() {
 </head>
 
 <body>
-
 	<div class="container">
-	
-	<div class="page-header">
-	       <h3 class=" text-info">·¹½ÃÇÇ µî·Ï</h3>
-	    </div>
+		<h1 class="bg-primary text-center">ë ˆì‹œí”¼ ë“±ë¡</h1>
+		
+		<!-- form Start /////////////////////////////////////-->
+		<form id="MultiUpload" action="addRecipe" method="post" enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="rcpTitle" class="col-sm-offset-1 col-sm-3 control-label">ë ˆì‹œí”¼ ì œëª©</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="rcpTitle" name="rcpTitle">
+		       <span id="helpBlock" class="help-block"></span>
+		    </div>
+		   </div>
+		<hr/><br/><br/>    
+		<div class="form-group">
+			<label for="rcpContent" class="col-sm-offset-1 col-sm-3 control-label">ë ˆì‹œí”¼ ë‚´ìš©</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="rcpContent" name="rcpContent">
+		       <span id="helpBlock" class="help-block"></span>
+		    </div>
+		   </div>
+		<hr/><br/>
+		<div class="form-group">
+			<label for="rcpIngredient" class="col-sm-offset-1 col-sm-3 control-label">ë ˆì‹œí”¼ ì¬ë£Œ</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="rcpIngredient" name="rcpIngredient">
+		       <span id="helpBlock" class="help-block"></span>
+		    </div>
+		   </div>
+		<hr/><br/>
+		<div class="form-group">
+			<label for="rcpInfo" class="col-sm-offset-1 col-sm-3 control-label">ë ˆì‹œí”¼ ì†Œê°œ</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="rcpInfo" name="rcpInfo">
+		       <span id="helpBlock" class="help-block"></span>
+		    </div>
+		   </div>
+		<hr/><br/>
+		
+		<div class="form-group">
+		    <label for="file" class="col-sm-offset-1 col-sm-3 control-label">ë‹¤ì¤‘ íŒŒì¼ ì—…ë¡œë“œ</label>
+		    <div class="col-sm-3"><!-- ì…ë ¥ì¹¸ -->
+		      	<input type="file" id="files" name="files" multiple="multiple" placeholder="íŒŒì¼ ì„ íƒ" class="form-control" >
+		      	<input type="submit" value="upload">
+		    </div>
+		  </div>
+		<hr/><br/><br/><br/>
+		<div class="form-group">
+		    <div class="col-sm-offset-4  col-sm-4 text-center">
+		      <button type="submit" class="btn btn-primary">ë“± &nbsp;ë¡</button>
+			  <a class="btn btn-primary btn" href="#" role="button">ì·¨&nbsp;ì†Œ</a>
+		    </div>
+		  </div>
+		  </form>
+		<hr/><br/><br/><br/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>·¹½ÃÇÇ Á¦¸ñ</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.rcpTitle}</div>
-		</div>
-		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>·¹½ÃÇÇ ³»¿ë</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.rcpContent}</div>
-		</div>
-		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>ÀÛ¼ºÀÚ</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.user.userId}</div>
-		</div>
-		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>·¹½ÃÇÇ Àç·á</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.rcpIngredient}</div>
-		</div>
-		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>·¹½ÃÇÇ ½æ³×ÀÏ</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.rcpThumb}</div>
-		</div>
-		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>·¹½ÃÇÇ ¼Ò°³</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.rcpInfo}</div>
-		</div>
-		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>Á¶È¸¼ö</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì¡°íšŒìˆ˜</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.rcpHits}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>ÀÛ¼ºÀÏ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì‘ì„±ì¼</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.rcpDate}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>´ñ±Û¼ö</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.commentCount}</div>
+	  		<div class="col-xs-5 col-md-3"><strong>ì‘ì„±ì</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.user.userId}</div>
 		</div>
 		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>Âò</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.rcpJjimCnt}</div>
-		</div>
-		<hr/>
-		 <div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>ÃßÃµ¼ö</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.recommendCount}</div>
-		</div>
-		<hr/>
-	<!-- <button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco() return false">ÃßÃµ</button> -->
-	<button type="button" class="btn btn-danger" id="hate_btn">ºñÃßÃµ</button>
-
 </div>
-
 	
 </body>
 
