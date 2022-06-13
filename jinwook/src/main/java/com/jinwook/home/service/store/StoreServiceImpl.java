@@ -80,6 +80,7 @@ public class StoreServiceImpl implements StoreService {
 		queryResult = storeMapper.addOrdersCoupon(couponNo);
 		return (queryResult == 1) ? true : false;
 	}
+	
 
 	@Override
 	public List<Coupon> getCouponList(String userId) {

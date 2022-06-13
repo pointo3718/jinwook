@@ -1,21 +1,17 @@
 package com.jinwook.home.web.store;
 
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
 
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,10 +19,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
-import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
 import com.jinwook.home.service.store.StoreService;
-import com.mysql.cj.xdevapi.JsonArray;
 
 @RestController
 @RequestMapping("/store/*")
@@ -45,7 +39,7 @@ public class StoreRestController {
 	}
 
 	
-	  @PostMapping(value = "addStoreProduct/{storeNo}")
+	@PostMapping(value = "addStoreProduct/{storeNo}")
 	   public JsonObject addStoreProduct(@PathVariable(value = "storeNo", required = false) int storeNo, @RequestBody Product product) {
 
 		    System.out.println("/store/addStoreProduct : Post ");
@@ -74,6 +68,35 @@ public class StoreRestController {
 			return jsonObj;
 			
 	  }
+	  
+		@GetMapping(value = "updateStore/{storeNo}")
+		public JsonObject updateStore(@PathVariable(value = "storeNo", required = false) int storeNo ,@RequestBody Store store) {
+			
+			JsonObject jsonObj = new JsonObject();
+
+			try {
+				if (store != null) {
+					System.out.println("product 객체에 값 넣어줌");
+					store.setStoreNo(storeNo);
+				}
+				
+				System.out.println("컨트롤러에서의 store :: "+store);
+
+				boolean result = storeService.updateStore(store);
+				jsonObj.addProperty("result", result);
+
+			} catch (DataAccessException e) {
+				jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+			} catch (Exception e) {
+				jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+			}
+			
+	        System.out.println("상점 수정 컨트롤러 통과");
+	        
+			return jsonObj;
+			
+		}
 
 	  @PostMapping(value = "updateStoreProduct/{prodNo}")
 	   public JsonObject updateStoreProduct(@PathVariable(value = "prodNo", required = false) int prodNo, 
@@ -107,7 +130,7 @@ public class StoreRestController {
 			
 	  }
 
-	@PostMapping(value = "deleteStoreProduct/{prodNo}")
+	@GetMapping(value = "deleteStoreProduct/{prodNo}")
 	public JsonObject deleteStoreProduct(@PathVariable(value="prodNo",required = false) int prodNo){
 		
 		System.out.println("/orders/deleteStoreProduct : POST");
@@ -127,6 +150,8 @@ public class StoreRestController {
 
 		return jsonObj;
 	}
+	
+	
 
 	@PostMapping(value = "isSoldout/{prodNo}/{soldout}")
 	@ResponseBody
