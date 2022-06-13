@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jinwook.home.common.FileUtils;
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.BoardMapper;
 import com.jinwook.home.service.domain.Board;
@@ -25,8 +24,6 @@ public class BoardServiceImpl implements BoardService {
    @Autowired
    private BoardMapper boardMapper;
    
-     @Autowired 
-     private FileUtils fileUtils;
     
      
    //1:1문의 등록
