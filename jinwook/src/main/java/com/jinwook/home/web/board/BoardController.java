@@ -1,44 +1,55 @@
 package com.jinwook.home.web.board;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.board.BoardService;
-import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.FileVO;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
 import com.jinwook.home.service.user.UserService;
+import com.mysql.cj.log.Log;
 
 @Controller
 @RequestMapping("/board/*")
@@ -62,7 +73,7 @@ public class BoardController {
 	@GetMapping(value = "addBoardInquiryView")
 	public String addBoardInquiryView(@RequestParam(value = "boardNo", required = false) Integer boardNo, 
 														@RequestParam(value = "userId", required = false) String userId,
-			Model model) throws Exception {
+														HttpSession session, Model model) throws Exception {
 		System.out.println("/board/addBoardInquiryView: GET");
 		
 		if (boardNo == null) {
@@ -74,24 +85,72 @@ public class BoardController {
 				return "redirect:/board/list";
 				//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
 			}
+			String sessionUserId = ((User) session.getAttribute("user")).getUserId();
+		    user.setUserId(sessionUserId);
+		    
 			model.addAttribute("user", user);
 			model.addAttribute("board", board);
 			System.out.println(user);
 			System.out.println(board);
 			
-			List<Attach> fileList = boardService.getAttachFileList(boardNo);
-			model.addAttribute("fileList", fileList);
 		}
 		return "board/addBoardInquiryView"; //보여줄 화면: .jsp
 	}
 	
-	//1:1문의 등록/수정 + 사진 첨부 처리
+	//1:1문의 등록
 	//페이징 처리 후 로직 추가 필요.
 	@PostMapping(value = "addBoardInquiry")
-	public String addBoardInquiry(final Board board, final MultipartFile[] files, Model model) throws Exception {
+	public String addBoardInquiry(Board board, HttpSession session, HttpServletRequest request, @RequestPart MultipartFile files) throws Exception {
 		System.out.println("/board/addBoardInquiry: POST");
+		
+		Board boardVO = new Board();
+		FileVO  file  = new FileVO();
+		boardVO.setBoardTitle(request.getParameter("boardTitle"));
+		boardVO.setBoardContent(request.getParameter("boardContent"));
+
 		Map<String, Object> pagingParams = getPagingParams(board);
-		boolean isAdded = boardService.addBoardInquiry(board, files);
+		
+		String userId = ((User) session.getAttribute("user")).getUserId();
+		User user = new User();
+		user.setUserId(userId);
+		board.setUser(user);
+		
+		if(files.isEmpty()) { //업로드 할 파일이 없을 시
+			boardService.addBoardInquiry(boardVO);
+		} else {
+			String fileName = files.getOriginalFilename();
+			String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
+			File destinationFile; 
+			String destinationFileName;
+			String fileUrl = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img";
+			
+			do { 
+				destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension; 
+				destinationFile = new File(fileUrl + destinationFileName); 
+			} while (destinationFile.exists()); 
+			
+			destinationFile.getParentFile().mkdirs(); 
+			files.transferTo(destinationFile);
+
+			boardService.addBoardInquiry(board);//게시글 등록
+			
+			file.setBoardNo(board.getBoardNo());
+			file.setFileName(destinationFileName);
+			file.setFileOriName(fileName);
+			file.setFileUrl(fileUrl);
+			
+			boardService.fileInsert(file); //파일 등록
+		}
+		
+		return "redirect:/board/getBoardInquiryList";
+	}
+	
+	//1:1문의 수정
+	@PostMapping(value = "updateBoardInquiry")
+	public String updateBoardInquiry(Board board, MultipartFile file) throws Exception {
+		
+		boardService.updateBoardInquiry(board);
+		
 		return "redirect:/board/getBoardInquiryList";
 	}
 	
@@ -115,31 +174,29 @@ public class BoardController {
 				System.out.println(user);
 				System.out.println(board);
 				
-				List<Attach> fileList = boardService.getAttachFileList(boardNo);
-				model.addAttribute("fileList", fileList);
 			}
 			return "board/addBoardAnnouncementView"; //보여줄 화면: .jsp
 		}
 		
 		//공지사항 등록/수정 + 사진 첨부 처리
 		//페이징 처리 후 로직 추가 필요.
-		@PostMapping(value = "addBoardAnnouncement")
-		public String addBoardAnnouncement(final Board board, final MultipartFile[] files, Model model) {
-			System.out.println("/board/addBoardAnnouncement: POST");
-			
-			try {
-				boolean isAdded = boardService.addBoardAnnouncement(board);
-				if (isAdded == false) {
-					// TODO => 게시글 등록에 실패하였다는 메시지를 전달
-				}
-			} catch (DataAccessException e) {
-				// TODO => 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
-
-			} catch (Exception e) {
-				// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
-			}
-			return "redirect:/board/getBoardAnnouncementList";
-		}
+//		@PostMapping(value = "addBoardAnnouncement")
+//		public String addBoardAnnouncement(final Board board, final MultipartFile[] files, Model model) {
+//			System.out.println("/board/addBoardAnnouncement: POST");
+//			
+//			try {
+//				boolean isAdded = boardService.addBoardAnnouncement(board);
+//				if (isAdded == false) {
+//					// TODO => 게시글 등록에 실패하였다는 메시지를 전달
+//				}
+//			} catch (DataAccessException e) {
+//				// TODO => 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
+//
+//			} catch (Exception e) {
+//				// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
+//			}
+//			return "redirect:/board/getBoardAnnouncementList";
+//		}
 		
 	//1:1문의 목록 조회
 	@GetMapping(value = "getBoardInquiryList")
@@ -161,8 +218,7 @@ public class BoardController {
 	
 	//1:1문의 상세 조회
 	@GetMapping(value = "getBoardInquiry")
-	public String getBoardInquiry(@ModelAttribute("params") Board params, 
-														@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
+	public String getBoardInquiry(@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
 		System.out.println("/board/getBoardInquiry: GET");
 		
 		// 조회수 카운트
@@ -171,9 +227,6 @@ public class BoardController {
 		Board board = boardService.getBoardInquiry(boardNo);
 		model.addAttribute("board", board);
 		
-		List<Attach> fileList = boardService.getAttachFileList(boardNo); // 추가된 로직
-		model.addAttribute("fileList", fileList); // 추가된 로직
-
 		return "board/getBoardInquiry";
 	}
 	
@@ -196,9 +249,6 @@ public class BoardController {
 //			return "redirect:/board/list.do";
 //		}
 		model.addAttribute("board", board);
-		
-		List<Attach> fileList = boardService.getAttachFileList(boardNo); // 추가된 로직
-		model.addAttribute("fileList", fileList); // 추가된 로직
 		
 		return "board/getBoardAnnouncement";
 	}
@@ -228,43 +278,8 @@ public class BoardController {
 		return "redirect:/board/getBoardAnnouncementList";
 	}
 	
-	//다운로드
-	@GetMapping("/board/download.do")
-	public void downloadAttachFile(@RequestParam(value = "idx", required = false) final Integer idx, Model model, HttpServletResponse response) {
-
-		if (idx == null) throw new RuntimeException("올바르지 않은 접근입니다.");
-
-		Attach fileInfo = boardService.getAttachDetail(idx);
-		if (fileInfo == null || "Y".equals(fileInfo.getDeleteYn())) {
-			throw new RuntimeException("파일 정보를 찾을 수 없습니다.");
-		}
-
-		String uploadDate = fileInfo.getInsertTime().format(DateTimeFormatter.ofPattern("yyMMdd"));
-		String uploadPath = Paths.get("C:", "develop", "upload", uploadDate).toString();
-
-		String filename = fileInfo.getOriginalName();
-		File file = new File(uploadPath, fileInfo.getSaveName());
-
-		try {
-			byte[] data = FileUtils.readFileToByteArray(file);
-			response.setContentType("application/octet-stream");
-			response.setContentLength(data.length);
-			response.setHeader("Content-Transfer-Encoding", "binary");
-			response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(filename, "UTF-8") + "\";");
-
-			response.getOutputStream().write(data);
-			response.getOutputStream().flush();
-			response.getOutputStream().close();
-
-		} catch (IOException e) {
-			throw new RuntimeException("파일 다운로드에 실패하였습니다.");
-
-		} catch (Exception e) {
-			throw new RuntimeException("시스템에 문제가 발생하였습니다.");
-		}
-	}
 	
-	//레시피 등록 화면
+	//레시피 등록 화면v
 		@GetMapping(value = "addRecipeView")
 		public String addRecipeView(@RequestParam(value = "rcpNo", required = false) Integer rcpNo, 
 													@RequestParam(value = "userId", required = false) String userId,
@@ -284,28 +299,93 @@ public class BoardController {
 				model.addAttribute("recipe", recipe);
 				System.out.println(user);
 				System.out.println(recipe);
-				
-				List<Attach> fileList = boardService.getAttachFileList(rcpNo);
-				model.addAttribute("fileList", fileList);
 			}
 			return "board/addRecipeView"; //보여줄 화면: .jsp
 		}
 		
-		//레시피 등록 처리
+		//레시피 등록 처리v
 		//페이징 처리 후 로직 추가 필요.
-		@PostMapping(value = "addRecipe")
-		public String addRecipe(final Recipe recipe, final MultipartFile[] files, Model model) throws Exception {
+		@PostMapping(value = "addRecipe")//MultipartFile files = <input type name="files">
+		public String addRecipe(Recipe recipe,  HttpSession session, HttpServletRequest request, 
+										@RequestPart MultipartFile files, Model model) throws Exception {
 			System.out.println("/board/addRecipe: POST");
+			
+			Recipe recipeVO = new Recipe();
+			FileVO file = new FileVO();
+			
+			recipeVO.setRcpTitle(request.getParameter("rcpTitle"));
+			recipeVO.setRcpContent(request.getParameter("rcpContent"));
+			recipeVO.setRcpIngredient(request.getParameter("rcpIngredient"));
+			recipeVO.setRcpInfo(request.getParameter("rcpInfo"));
+			
+			String userId = ((User) session.getAttribute("user")).getUserId();
+			User user = new User();
+			user.setUserId(userId);
+			recipe.setUser(user);
+			
+			if(files.isEmpty()) { //업로드 할 파일이 없을 시
 				boardService.addRecipe(recipe);
+			} else {
+				String fileName = files.getOriginalFilename();
+				String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
+				File destinationFile; 
+				String destinationFileName;
+				String fileUrl = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img";
+				
+				do { 
+					destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension; 
+					destinationFile = new File(fileUrl + destinationFileName); 
+				} while (destinationFile.exists()); 
+				
+				destinationFile.getParentFile().mkdirs(); 
+				files.transferTo(destinationFile);
+
+				boardService.addRecipe(recipe);//레시피 등록
+				
+				file.setBoardNo(recipe.getRcpNo());
+				file.setFileName(destinationFileName);
+				file.setFileOriName(fileName);
+				file.setFileUrl(fileUrl);
+				
+				boardService.fileInsert(file); //파일 등록
+			}
+			
 			return "redirect:/board/getRecipeList";
 		}
 		
-		//레시피 수정 처리
+		// 레시피 수정 화면v
+		@GetMapping(value = "updateRecipeView")
+		public String updateRecipeView(@RequestParam(value = "rcpNo", required = false) Integer rcpNo,
+				@RequestParam(value = "userId", required = false) String userId, HttpSession session, Model model)
+				throws Exception {
+			System.out.println("/board/updateRecipeView: GET");
+			
+			if (rcpNo == null) {
+				model.addAttribute("recipe", new Recipe());
+			} else {
+				Recipe recipe = boardService.getRecipe(rcpNo);
+//				User user = userService.getUser(userId);
+				if (recipe == null) {
+					return "redirect:/board/getRecipeList";
+					//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
+				}
+//				String sessionUserId = ((User) session.getAttribute("user")).getUserId();
+//				user.setUserId(sessionUserId);
+		    
+//				model.addAttribute("user", user);
+				model.addAttribute("recipe", recipe);
+
+			}
+			return "board/updateRecipeView"; // 보여줄 화면: .jsp
+		}
+		
+		//레시피 수정 처리v
 		@PostMapping(value = "updateRecipe")
-		public String updateRecipe(@ModelAttribute("recipe") Recipe recipe, final MultipartFile[] files, Model model) {
+		public String updateRecipe(@ModelAttribute("recipe") Recipe recipe, 
+				@RequestParam(value = "rcpNo", required = false) Integer rcpNo, Model model) {
 			System.out.println("/board/updateRecipe: POST");
 			boardService.updateRecipe(recipe);
-			return "redirect:/board/getRecipeList";
+			return "redirect:/board/getRecipeList?rcpNo="+recipe.getRcpNo();
 		}
 		
 		//레시피 삭제 처리
@@ -423,4 +503,5 @@ public class BoardController {
 
 			return params;
 		}
+		
 }//class

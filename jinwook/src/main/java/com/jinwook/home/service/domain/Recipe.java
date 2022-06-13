@@ -18,7 +18,7 @@ public class Recipe extends CommonDTO {
 	private String rcpTitle;
 	private String rcpContent;
 	private LocalDate rcpDate;
-	private String rcpThumb;
+	private String rcpThumb;//레시피 썸네일 사진
 	private String rcpInfo;
 	private String rcpIngredient;
 	private Integer rcpHits;

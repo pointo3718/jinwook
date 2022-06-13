@@ -114,12 +114,12 @@
 	<!-- 1:1문의 insert -->
 	<insert id="addBoardInquiry" parameterType="Board" useGeneratedKeys="true" keyProperty="boardNo">
 		INSERT INTO board (
-			<include refid="boardColumns" />
+			board_no, board_title, board_content, user_id, board_hits, board_code, write_date, board_img1, board_img2, board_img3, board_inq_status
 		) VALUES (
 			  #{boardNo:INTEGER}
-			, #{user.userId:VARCHAR}
 			, #{boardTitle:VARCHAR}
 			, #{boardContent:VARCHAR}
+			, #{user.userId:VARCHAR}
 			, #{boardHits:INTEGER}
 			, 0 <!-- bodeCode 0: 1:1문의 -->
 			, SYSDATE()
@@ -129,6 +129,13 @@
 			, #{boardInqStatus}
 		)
 	</insert>
+	
+	<insert id="fileInsert" parameterType="FileVO">
+       INSERT INTO files (
+       FILE_NO, BOARD_NO, FILENAME, FILEORINAME, FILEURL
+       ) VALUES (#{fileNo},#{boardNo},#{fileName},#{fileOriName},#{fileUrl})
+	</insert>
+	
 	
 	<insert id="addBoardAnnouncement" parameterType="Board" useGeneratedKeys="true" keyProperty="boardNo">
 		INSERT INTO board (
@@ -173,7 +180,7 @@
 	<!-- 1:1문의 상세 조회: 답변대기중 또는 답변완료로 출력되어야 함 -->
 	<select id="getBoardInquiry" parameterType="int" resultType="Board" resultMap="boardSelectMap">
 		SELECT
-			b.board_no, b.board_title, b.board_content, b.user_id, b.write_date, b.board_inq_status, b.board_hits, c.comment_content
+			b.board_title, b.board_content, b.user_id, b.write_date, b.board_inq_status, b.board_hits, c.comment_content
 		FROM
 			board b, comment c
 		WHERE b.board_no = c.board_no
@@ -294,20 +301,16 @@
 	<!-- Recipe insert -->
 	<insert id="addRecipe" parameterType="Recipe" useGeneratedKeys="true" keyProperty="rcpNo">
 		INSERT INTO recipe (
-			<include refid="recipeColumns" />
+			rcp_no, rcp_title, user_id, rcp_content, rcp_ingredient, rcp_info, rcp_date, rcp_hits
 		) VALUES (
-			  #{rcpNo:INTEGER}
-			, #{user.userId:VARCHAR}
-			, #{rcpTitle:VARCHAR}
+			#{rcpNo:INTEGER}
+			,#{rcpTitle:VARCHAR}
+			,#{user.userId:VARCHAR}
 			, #{rcpContent:VARCHAR}
-			, SYSDATE()
 			, #{rcpIngredient:VARCHAR}
-			, #{rcpThumb:VARCHAR}
 			, #{rcpInfo:VARCHAR}
-			, #{rcpHits:INTEGER}
-			, #{commentCount:INTEGER}
-			, #{rcpJjimCnt:INTEGER}
-			, #{recommendCount:INTEGER}
+			, SYSDATE()
+			, 0
 		)
 	</insert>
 	
@@ -324,11 +327,11 @@
 	<!-- ?Recipe selectList? -->
 	<select id="getRecipeList" parameterType="Recipe" resultType="Recipe">
 		SELECT
-			<include refid="recipeColumns" />
+			rcp_no, rcp_title, rcp_date, rcp_hits
 		FROM
 			recipe
-		WHERE
-			rcp_no = #{rcpNo}
+		ORDER BY
+			rcp_no ASC
 		LIMIT
          #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
@@ -340,7 +343,6 @@
 			rcp_title = #{rcpTitle:VARCHAR}
 			, rcp_content = #{rcpContent:VARCHAR}
 			, rcp_ingredient = #{rcpIngredient:VARCHAR}
-			, rcp_thumb = #{rcpThumb:VARCHAR}
 			, rcp_info = #{rcpInfo:VARCHAR}
 		WHERE
 			rcp_no = #{rcpNo}

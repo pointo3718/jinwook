@@ -3,9 +3,9 @@ package com.jinwook.home.service.board;
 import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.FileVO;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
@@ -19,16 +19,16 @@ public interface BoardService {
 	public int updateBoardInquiryHits(Integer boardNo);
 	//공지사항 조회수 증가v
 	public int updateBoardAnnouncementHits(Integer boardNo);
+	
+	//사진 첨부v
+	public int fileInsert(FileVO file) throws Exception;
+
 	//1:1문의 등록v
-	public boolean addBoardInquiry(Board board);
-	//1:1문의 등록 + 사진 첨부v
-	public boolean addBoardInquiry(Board board, MultipartFile[] files);
-	//1:1문의 등록v
-	public boolean addBoardAnnouncement(Board board);
-	//1:1문의 등록 + 사진 첨부v
-	public boolean addBoardAnnouncement(Board board, MultipartFile[] files);
+	public void addBoardInquiry(Board board) throws Exception;
+	//공지사항 등록v
+	public boolean addBoardAnnouncement(Board board, MultipartFile file);
 	//1:1문의 수정v
-	public int updateBoardInquiry(Board board);
+	public void updateBoardInquiry(Board board) throws Exception;
 	//공지사항 수정v
 	public int updateBoardAnnouncement(Board board);
 	//1:1문의 삭제v
@@ -44,10 +44,6 @@ public interface BoardService {
 	//공지사항 목록 조회v
 	public List<Board> getBoardAnnouncementList(Board board);
 	
-	//파일 상세 조회?
-	public Attach getAttachDetail(Integer attachNo);
-	//파일 리스트를 조회?
-	public List<Attach> getAttachFileList(Integer boardNo);
 	//랭킹 리스트 조회?
 	public List<Board> getRankList(Board board);
 
@@ -61,7 +57,7 @@ public interface BoardService {
 	//레시피 등록v
 	public int addRecipe(Recipe rcp);
 	//레시피 수정v
-	public int updateRecipe(Recipe rcp);
+	public void updateRecipe(Recipe rcp);
 	//레시피 삭제v
 	public int deleteRecipe(Integer rcpNo);
 	//레시피 상세 조회v

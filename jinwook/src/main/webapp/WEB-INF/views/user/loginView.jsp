@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -7,9 +7,9 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
-	<!-- ¬¸¡∂ : http://getbootstrap.com/css/   ¬¸¡∂ -->
+	<!-- Ï∞∏Ï°∞ : http://getbootstrap.com/css/   Ï∞∏Ï°∞ -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -17,37 +17,132 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<meta name="description" content="Ogani Template">
+<meta name="keywords" content="Ogani, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Î°úÍ∑∏Ïù∏</title>
+
+<!-- Google Font -->
+<link
+   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+   rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet"
+   href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/font-awesome.min.css"
+   type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/nice-select.css" type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/owl.carousel.min.css"
+   type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${path}/resources/static/css/style.css"
+   type="text/css">
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-    	 body >  div.container{ 
-        	border: 3px solid #D6CDB7;
+	 <style>
+    	 .row{ 
+        	/* border: 3px solid #D6CDB7; */
             margin-top: 10px;
+            justify-content: center;
+            align-items: center;
         }
-    </style>
+        .find_id{
+        	
+        }
+       /*  .form-group{
+       		 justify-content: center;
+           	 align-items: center;
+        } */
+        input{
+          width:100px;
+		  height:50px;
+		  font-size:15px;
+		  text-indent: 1em;
+        }
+        a{
+        justify-content: center;
+        align-items: center;
+        font-size:15px;
+        color:black;
+        text-indent:-1em;
+        }
+        h1{
+        justify-content: center;
+        }
+        .userId{
+       		 justify-content: center;
+           	 align-items: center;
+           	  width : 350px;
+           	  hight : 100%;
+        }
+        .password{
+       		 justify-content: center;
+           	 align-items: center;
+           	  width : 350px;
+           	   hight : 100px;
+        }
+        .button1{
+			  background-color: #7fad39; /* Green */
+			  border: none;
+			  color: white;
+			  width : 350px;
+			  }
+        .button2{
+			  background-color: white; /* Green */
+			  width : 350px;
+			  border: 1px solid #7fad39;
+			  color: #7fad39;
+			  }
+    </style> 
+    <!-- Ïπ¥Ïπ¥Ïò§ Î°úÍ∑∏Ïù∏ -->
+	<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
     
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-		//============= "∑Œ±◊¿Œ"  Event ø¨∞· =============
+	<!-- Ïπ¥Ïπ¥Ïò§ Î°úÍ∑∏Ïù∏ -->
+	 $(document).ready(function(){
+	        Kakao.init('7a50e1995f458ef51a98c92f52419d00');
+	        Kakao.isInitialized();
+	    });
+
+	    function loginWithKakao() {
+	        Kakao.Auth.authorize({ 
+	        redirectUri: 'http://localhost:8082/index' 
+	        }); // Îì±Î°ùÌïú Î¶¨Îã§Ïù¥Î†âÌä∏uri ÏûÖÎ†•
+	    }	
+	
+		//============= "Î°úÍ∑∏Ïù∏"  Event Ïó∞Í≤∞ =============
 		$( function() {
 			
 			$("#userId").focus();
 			
-			//==> DOM Object GET 3∞°¡ˆ πÊπ˝ ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("button").on("click" , function() {
-				var id=$("input:text").val();
-				var pw=$("input:password").val();
+			//==> DOM Object GET 3Í∞ÄÏßÄ Î∞©Î≤ï ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(".button1").on("click" , function() {
+				var id=$(".userId").val();
+				var pw=$(".password").val();
 				
 				
 				if(id == null || id.length <1) {
-					alert('ID ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
-					$("#userId").focus();
+					alert('ID Î•º ÏûÖÎ†•ÌïòÏßÄ ÏïäÏúºÏÖ®ÏäµÎãàÎã§.');
+					$(".userId").focus();
 					return;
 				}
 				
 				if(pw == null || pw.length <1) {
-					alert('∆–Ω∫øˆµÂ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
-					$("#password").focus();
+					alert('Ìå®Ïä§ÏõåÎìúÎ•º ÏûÖÎ†•ÌïòÏßÄ ÏïäÏúºÏÖ®ÏäµÎãàÎã§.');
+					$(".password").focus();
 					return;
 				}
 				
@@ -57,18 +152,20 @@
 				alert(messege);
 				document.location.href= url;
 				 */
-/* 				 alert("∑Œ±◊¿Œ º∫");
- */				 
-				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+				 alert("Î°úÍ∑∏Ïù∏ ÏÑ±Í≥µ");
+				 alert(id);
+ 			 
+				$(".form-horizontal").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 			});
 		});	
 		
 		
-		//============= »∏ø¯ø¯∞°¿‘»≠∏È¿Ãµø =============
+		//============= ÌöåÏõêÏõêÍ∞ÄÏûÖÌôîÎ©¥Ïù¥Îèô =============
 		$( function() {
-			//==> DOM Object GET 3∞°¡ˆ πÊπ˝ ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("a[href='#' ]").on("click" , function() {
-				self.location = "/user/addUser"
+			//==> DOM Object GET 3Í∞ÄÏßÄ Î∞©Î≤ï ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(".button2").on("click" , function() {
+				/* self.location = "/user/addUser" */
+				$("form").attr("method" , "GET").attr("action" , "/user/addUser").submit();
 			});
 		});
 		
@@ -77,66 +174,76 @@
 </head>
 
 <body>
-
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="index2">¡¯ øÌ ¿Ã ≥◊</a>
-   		</div>
-   	</div>
-   	<!-- ToolBar End /////////////////////////////////////-->	
+ 	<jsp:include page="../layout/top.jsp" />
+    	<!-- ToolBar End /////////////////////////////////////-->	
 	
-	<!--  »≠∏È±∏º∫ div Start /////////////////////////////////////-->
-	<div class="container">
+	<!--  ÌôîÎ©¥Íµ¨ÏÑ± div Start /////////////////////////////////////-->
 		<!--  row Start /////////////////////////////////////-->
+		<div class="container">
+		
 		<div class="row">
 		
-			<div class="col-md-6">
-					<img src="/images/logo-spring.png" class="img-rounded" width="100%" />
-			</div>
 	   	 	
-	 	 	<div class="col-md-6">
+	 	 	<div class="col-md-6" >
 	 	 	
 		 	 	<br/><br/>
 				
-				<div class="jumbotron">	 	 	
-		 	 		<h1 class="text-center">∑Œ &nbsp;&nbsp;±◊ &nbsp;&nbsp;¿Œ</h1>
-
+				<div class="form-group">	 	 	
+		 	 		<h1 class="text-center">Î°ú &nbsp;&nbsp;Í∑∏ &nbsp;&nbsp;Ïù∏</h1>
+					<br/><br/>
+					
 			        <form class="form-horizontal">
 		  
 					  <div class="form-group">
-					    <label for="userId" class="col-sm-4 control-label">æ∆ ¿Ã µ</label>
-					    <div class="col-sm-6">
-					      <input type="text" class="form-control" name="userId" id="userId"  placeholder="æ∆¿Ãµ" >
+					    <label for="userId" class="col-sm-2 control-label"></label>
+					    <div class="col-sm-3">
+					      <input type=   "text" class="userId" name="userId" id="userId"  placeholder="ÏïÑÏù¥ÎîîÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî" required="required" >
 					    </div>
 					  </div>
 					  
 					  <div class="form-group">
-					    <label for="password" class="col-sm-4 control-label">∆– Ω∫ øˆ µÂ</label>
+					    <label for="password" class="col-sm-2 control-label"></label>
 					    <div class="col-sm-6">
-					      <input type="password" class="form-control" name="password" id="password" placeholder="∆–Ω∫øˆµÂ" >
+					      <input type="password" class="password" name="password" id="password" placeholder="Ìå®Ïä§ÏõåÎìúÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî" >
 					    </div>
 					  </div>
-					  
-					  <div class="form-group">
-					    <div class="col-sm-offset-4 col-sm-6 text-center">
-					    <div class="find_id"><a href="findIdEmail">æ∆¿Ãµ √£±‚</a></div><div class="find_password"><a href="findPasswordPhone">∫Òπ–π¯»£ √£±‚</a></div>
-					      <button type="button" class="btn btn-primary"  >∑Œ &nbsp;±◊ &nbsp;¿Œ</button>
-					      <a class="btn btn-primary btn" href="#" role="button">»∏ &nbsp;ø¯ &nbsp;∞° &nbsp;¿‘</a>
+					  	<br/><br/>
+					  <div class="form-group text-center">
+					    <a class="find_id" href="findIdEmail">ÏïÑÏù¥Îîî Ï∞æÍ∏∞</a><a> | </a><a class="find_password" href="findPhone">ÎπÑÎ∞ÄÎ≤àÌò∏ Ï∞æÍ∏∞</a>
+					  </div>
+					  <div class="form-group" style="text-align: center">
+					    <div class="col-sm-offset-2 col-sm-5 text-center">
+					      <button type="button" class="button1 site-btn"  >Î°ú &nbsp;Í∑∏ &nbsp;Ïù∏</button>
+					    </div>
+					    </div>
+
+					  <div class="form-group" style="text-align: center">
+					    <div class="col-sm-offset-2 col-sm-5 text-center">
+				      <button type="button" class="button2 site-btn"  >Ìöå &nbsp;Ïõê &nbsp;Í∞Ä &nbsp;ÏûÖ</button>
+ 					     <!--  <a class="button2 site-btn" href="#" role="button">Ìöå &nbsp;Ïõê &nbsp;Í∞Ä &nbsp;ÏûÖ</a> -->
 					    </div>
 					  </div>
-			
+					  <hr>
+					  <div id="kakao_login" style="text-align: center">
+                     <a href="#">
+                     <img width="350" height="50" 
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs_esG5vNalcfhJ7BalYK2Uk06Dkp9JIK_KA&usqp=CAU" /></a>
+       				 </div>	
+						 <!--  <div class="form-group row">
+							<div class="or-seperator"><b>or</b></div>
+						</div> -->
 					</form>
+			
 			   	 </div>
 			
 			</div>
 			
   	 	</div>
-  	 	<!--  row Start /////////////////////////////////////-->
-  	 	
- 	</div>
- 	<!--  »≠∏È±∏º∫ div end /////////////////////////////////////-->
-
-</body>
+  	 	</div>
+  	 	<br/><br/>	<br/><br/>	<br/><br/>	<br/><br/>	<br/><br/>	<br/><br/>
+ 	<!--  ÌôîÎ©¥Íµ¨ÏÑ± div end /////////////////////////////////////-->
+ <jsp:include page="../layout/footer.jsp" />
+ </body>
 
 </html>
