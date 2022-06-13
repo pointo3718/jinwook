@@ -40,30 +40,6 @@
 	
 var rcpNo = ${recipe.rcpNo};
 
-		/* function updateRecipeReco() { */
-<%--	var rcpNo = ${recipe.rcpNo};
-		var userId = ${recipe.userId};
- $(function() {
-	 
-	$('#reco_btn').on('click', function() {
-		
-		$.ajax(
-				{
-			type : "POST",
-			url : "/board/updateRecipeReco",
-			dataType : "json",
-			data : {'rcpNo' : rcpNo, 'userId' : userId},
-			error : function() {
-				alert("통신 에러");
-			},
-			success : function(recoCheck) {
-				if (recoCheck == 0) {
-					alert("추천 완료!");
-					location.reload();
-				}
-				else if (recoCheck == 1) {
-					alert("추천 취소!");
-					location.reload();
 function updateRecipeReco() {
 	$.ajax({
 		type : "POST",
@@ -85,7 +61,6 @@ function updateRecipeReco() {
 				}
 			});
 		} 
-	<%-- });--%>
 
 
 function clip(){
@@ -100,6 +75,16 @@ function clip(){
 	document.body.removeChild(textarea);
 	alert("URL이 복사되었습니다.")
 }
+
+$(function(){
+	
+	$("button").on("click", function() {
+		self.location = "/board/updateRecipeView?rcpNo=${recipe.rcpNo}"
+	});
+	
+});	
+
+
 </script>
 
 </head>
@@ -111,6 +96,11 @@ function clip(){
 	<div class="page-header">
 	       <h3 class=" text-info">레시피 상세 조회</h3>
 	    </div>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3"><strong>레시피 번호</strong></div>
+			<div class="col-xs-7 col-md-5">${recipe.rcpNo}</div>
+		</div>
+		<hr/>
 		<div class="row">
 	  		<div class="col-xs-5 col-md-3"><strong>레시피 제목</strong></div>
 			<div class="col-xs-7 col-md-5">${recipe.rcpTitle}</div>
@@ -166,6 +156,12 @@ function clip(){
 			<div class="col-xs-7 col-md-5">${recipe.recommendCount}</div>
 		</div>
 		<hr/>
+		<div class="form-group">
+		    <div class="col-sm-offset-4  col-sm-4 text-center">
+		      <button type="button" class="btn btn-primary">수 &nbsp;정</button>
+		      <button type="button" class="btn btn-primary">삭 &nbsp;제</button>
+		    </div>
+		  </div>
 </div>
 
 	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco();">추천${recipe.recommendCount}</button>

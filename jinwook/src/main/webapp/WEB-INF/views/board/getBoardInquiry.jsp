@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
 <html>
 <head>
 <meta charset="EUC-KR">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -36,61 +36,66 @@
 </head>
 
 <body>
-
+<formÂ action="/board/getBoardInquiry"Â method="post">
 	<div class="container">
 	
 	<div class="page-header">
-	       <h3 class=" text-info">1:1¹®ÀÇ »ó¼¼</h3>
+	       <h3 class=" text-info">1:1ë¬¸ì˜ ìƒì„¸</h3>
 	    </div>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>1:1¹®ÀÇ Á¦¸ñ</strong></div>
+	  		<div class="col-xs-5 col-md-3"><strong>1:1ë¬¸ì˜ ì œëª©</strong></div>
 			<div class="col-xs-7 col-md-5">${board.boardTitle}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>1:1¹®ÀÇ ³»¿ë</strong></div>
+	  		<div class="col-xs-5 col-md-3"><strong>1:1ë¬¸ì˜ ë‚´ìš©</strong></div>
 			<div class="col-xs-7 col-md-5">${board.boardContent}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>ÀÛ¼ºÀÚ</strong></div>
+	  		<div class="col-xs-5 col-md-3"><strong>ì‘ì„±ì</strong></div>
 			<div class="col-xs-7 col-md-5">${user.userId}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>Á¶È¸¼ö</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì¡°íšŒìˆ˜</strong></div>
 			<div class="col-xs-7 col-md-5">${board.boardHits}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>ÀÛ¼ºÀÏ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì‘ì„±ì¼</strong></div>
 			<div class="col-xs-7 col-md-5">${board.writeDate}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>´äº¯»óÅÂ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì²¨ë¶€ ì‚¬ì§„</strong></div>
+			<div class="col-xs-7 col-md-5">${file.fileName}</div>
+		</div>
+		<hr/>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3 "><strong>ë‹µë³€ìƒíƒœ</strong></div>
 			<c:choose>
 				<c:when test="${board.boardInqStatus == false}">
-					´äº¯´ë±âÁß
+					ë‹µë³€ëŒ€ê¸°ì¤‘
 				</c:when>
 				<c:otherwise>
-					´äº¯ ¿Ï·á
+					ë‹µë³€ ì™„ë£Œ
 				</c:otherwise>
 			</c:choose>
 			<!-- <div class="col-xs-7 col-md-5">${board.boardInqStatus}</div> -->
 		</div>
 		<hr/>
 		
-		 <!--                     Ãß°¡                         -->
-    <!--  ´ñ±Û  -->
+		 <!--                     ì¶”ê°€                         -->
+    <!--  ëŒ“ê¸€  -->
     <div class="container">
-        <label for="content">´äº¯</label>
+        <label for="content">ë‹µë³€</label>
         <form name="commentInsertForm">
             <div class="input-group">
                <input type="hidden" name="bno" value="${board.boardNo}"/>
-               <input type="text" class="form-control" id="content" name="content" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
+               <input type="text" class="form-control" id="content" name="content" placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.">
                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" name="commentInsertBtn">µî·Ï</button>
+                    <button class="btn btn-default" type="button" name="commentInsertBtn">ë“±ë¡</button>
                </span>
               </div>
         </form>
@@ -101,12 +106,10 @@
     </div>
 </div>
 		<hr/>
-	<button type="button" class="btn btn-warning" id="reco_btn" onclick="updateRecipeReco() return false">ÃßÃµ ${recipe.getRecommendCount}</button>
-	<button type="button" class="btn btn-danger" id="hate_btn">ºñÃßÃµ</button>
 </div>
 
 </div>
-
+</form>
 	
 </body>
 
