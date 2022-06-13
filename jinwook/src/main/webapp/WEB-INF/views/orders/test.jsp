@@ -3,17 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <!-- jQuery UI toolTip 사용 JS-->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <meta charset="UTF-8">
 <title>password input modal</title>
 <style>
 #modal{
-	/* display : none; */
+	display : none;
 	z-index : 1;
 	background-color: rgba(0,0,0,.3);
 	position:fixed;
@@ -119,18 +113,21 @@
   cursor :pointer;
 }
 </style>
+
 </head>
 <body>
-<!-- <label>암호를 입력하려면 버튼을 클릭해 주세요.</label>
-<input type='button' value='addopen' id='btnOpen'> -->
+
+<label>암호를 입력하려면 버튼을 클릭해 주세요.</label>
+<input type='button' value='open' id='btnOpen'>
+
 <div id='modal'>
 	<div id='content'>
 		<input type='button' value='X' class="close" id='btnClose'/>
 		<div class="title">
-			<h2 class="h3">
+			<h2 class="h1">
 	   		   <span style="color : #7fad39">진욱페이</span>
 	    	</h2>
-			<h3 class="h4"> 비밀번호 입력</h3><hr>
+			<h3 class="h2"> 비밀번호 입력</h3><hr>
 		</div>
 		<div class="pwWrap">		
 			<div class="pwSection">
@@ -156,20 +153,20 @@
 		        <button class="number">0</button>
 		        <button class="number">X</button>
 	    	</div>
-	    	
 	    </div>
+	    
 	</div>
 </div>
 <script>
-/* var btnOpen  = document.getElementById('btnOpen'); */
+var btnOpen  = document.getElementById('btnOpen');
 var btnClose = document.getElementById('btnClose');
 
 // modal 창을 보여줌
-/* btnOpen.onclick = function(){
+btnOpen.onclick = function(){
 	var modal = document.getElementById('modal');
 	modal.style.display = 'block';
 	
-} */
+}
 //modal 창을 감춤
 var closeRtn = function(){
 	var modal = document.getElementById('modal');
@@ -185,6 +182,10 @@ function PwCheck(pw) {
     _this.passwordNumber = []; // 입력할 패스워드
     _this.cnt = 0; // 입력횟수 체크
     _this.compChk = false; // 입력완료 체크 
+    _this.msg = [	
+        'Wrong Password! Try Again! 👿',
+        'Success! 😍'
+    ]; 
 
     _this.parent = document.querySelector('.pwWrap');
     _this.dots = document.querySelectorAll('.dot');
@@ -219,7 +220,6 @@ function PwCheck(pw) {
             }
         }
         console.log(_this.passwordNumber);
-        $(".numberSection").attr("method" , "POST").attr("action" , "/orders/addOrdersJpayCharge").submit();
     }
 
     // dot 활성화 
@@ -233,39 +233,37 @@ function PwCheck(pw) {
                dot.classList.remove('active'); 
             })
         }
+        console.log(type);
     }
 
     // 비밀번호 비교
-    console.log(JSON.stringify(_this.password));
     _this.handleCheckPw = function(){
         let compare = JSON.stringify(_this.password) === JSON.stringify(_this.passwordNumber);
         return compare; 
     }
 
     // 결과처리 
-    
     _this.handleResult = function(){
         if(_this.handleCheckPw()) {
-        	console.log(_this.handleCheckPw())
-        	window.location.href = '/orders/addOrdersJpayCharge/';
-
+            _this.parent.classList.add('confirm');
+            _this.message.textContent = _this.msg[1];
             _this.compChk = true;
         } else {
             _this.parent.classList.add('error');
+            _this.message.textContent = _this.msg[0];
             // 입력상태 초기화 
             _this.passwordNumber = [];
             _this.cnt = 0; 
             _this.compChk = true; // 일시적인 클릭 방지 
-
+            
             setTimeout(function(){
-            	alert("비밀번호가 잘못입력되었습니다. 다시입력해주세요");
                 _this.compChk = false;	
                 _this.parent.classList.remove('error');
                 _this.handleDotActive();
-            }, 200);
+            }, 1000);
         }
     }
-    
+
     _this.init = function(){
         _this.handleListener();
         _this.getPw();
@@ -273,6 +271,8 @@ function PwCheck(pw) {
 }
 
 let pwCheck = new PwCheck(123456);
+
+
 
 </script>
 </body>
