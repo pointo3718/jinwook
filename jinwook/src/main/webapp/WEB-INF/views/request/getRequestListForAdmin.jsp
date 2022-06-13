@@ -11,7 +11,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>유저/사장/관리자 페이지</title>
+<title>상점 등록 요청</title>
 
 <!-- Google Font -->
 <link
@@ -50,54 +50,6 @@
 
 	/*]]>*/
 	
-	/////////////// 디폴트 화면(회원목록) 온로드 이벤트 ////////////////
-	 $(function() {
-		 listUserAdmin();
-	});
-	
-	
-	 function listUserAdmin () {
-			
-			var uri = "/admin/listUserAdmin"
-				$.get(uri, function(response) {
-					// ë¹ì´ìì§ ìë¤ë©´ ì¤í
-					var userListHtmlHead = "";
-					userListHtmlHead += `
-							<tr class="userinfohead">
-								
-								<th scope="col">#</th>
-								<th scope="col">ID</th>
-								<th scope="col">전화번호</th>
-								<th scope="col">지정기간</th>
-								<th scope="col">어쩌구</th>
-							</tr>
-					`;
-				
-					var userListHtmlBody = "";
-
-					$(response.userList).each(function(idx, user) {
-						userListHtmlBody += `
-							<tr class="userinfobody">
-								<td scope="row">\${idx}</td>
-								<td align="left"
-									style="color: forestgreen"><a
-									href="/admin/getUserAdmin?userId=${user.userId}">\${user.userId}</a></td>
-								<td align="left">\${user.phone}</td>
-								<td align="left">\${user.blacklistEndDate}</td>
-								<td align="left">\${user.role}</td>
-							</tr>
-						`;
-					});
-					$(".userinfohead").remove();
-					$(".userinfobody").remove();
-					
-					$(".userlisthead").html(userListHtmlHead);
-					$(".userlistbody").html(userListHtmlBody);
-					//$(".userlisthead").html(blacklistHtmlBody);
-				
-			}, "json");
-		}
-	
 	/////////////// 회원목록 이동 ////////////////
 		$(function() {
 	 	$( ".list-group-item:contains('회원 목록')").on("click" , function() {
@@ -111,6 +63,14 @@
 	 	$( ".list-group-item:contains('상점 목록')").on("click" , function() {
 	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$(self.location).attr("href","/admin/listStoreAdmin");
+		});
+	});
+	
+	/////////////// 신고접수 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('신고 접수 목록')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/admin/listComplainAdmin");
 		});
 	});
 	
@@ -154,14 +114,14 @@
 
 	function countAddRequest() {
 
-		var uri = "CountRequestWaiting/1";
+		var uri = "../admin/CountRequestWaiting/1";
 
 		$.get(uri, function(response) {
 		
 				var countAddHtml = "";
 
 					countAddHtml += `
-					상점 등록 요청<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						상점 등록 요청 &nbsp;<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".addStore").html(countAddHtml);
@@ -170,14 +130,13 @@
 	}
 	/*[- end of function -]*/
 	
-	
 	 $(function() {
 		countDeleteRequest();
 	});
 
 	function countDeleteRequest() {
 
-		var uri = "CountRequestWaiting/2";
+		var uri = "../admin/CountRequestWaiting/2";
 
 		$.get(uri, function(response) {
 				
@@ -185,7 +144,7 @@
 				var countDeleteHtml = "";
 
 				countDeleteHtml += `
-						상점 삭제 요청<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						상점 삭제 요청 &nbsp;<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
 					`;
 				
 				$(".deleteStore").html(countDeleteHtml); 
@@ -194,21 +153,20 @@
 	}
 	/*[- end of function -]*/
 	
-	
 	 $(function() {
 		countRefundRequest();
 	});
 
 	function countRefundRequest() {
 
-		var uri = "CountRequestWaiting/3";
+		var uri = "../admin/CountRequestWaiting/3";
 
 		$.get(uri, function(response) {
 		
 				var countRefundHtml = "";
 
 				countRefundHtml += `
-						환급 요청<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						환급 요청 &nbsp;<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".refundStore").html(countRefundHtml);
@@ -224,14 +182,14 @@
 
 	function countAdRequest() {
 
-		var uri = "CountRequestWaiting/4";
+		var uri = "../admin/CountRequestWaiting/4";
 
 		$.get(uri, function(response) {
 		
 				var countAdHtml = "";
 
 				countAdHtml += `
-						광고 등록 요청<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						광고 등록 요청 &nbsp;<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".adStore").html(countAdHtml);
@@ -241,102 +199,6 @@
 	/*[- end of function -]*/
 	 /////////////// 요청대기 COUNT REST 끝  ////////////////
 
-	
-	//////////////// 일반 유저 목록 REST 시작 /////////////////
-	$(function() {
-			$("#option1").on(
-					"click",
-					function listUserAdmin () {
-						
-		var uri = "/admin/listUserAdmin"
-			$.get(uri, function(response) {
-				// ë¹ì´ìì§ ìë¤ë©´ ì¤í
-				var userListHtmlHead = "";
-				userListHtmlHead += `
-						<tr class="userinfohead">
-							
-							<th scope="col">#</th>
-							<th scope="col">ID</th>
-							<th scope="col">전화번호</th>
-							<th scope="col">지정기간</th>
-							<th scope="col">어쩌구</th>
-						</tr>
-				`;
-			
-				var userListHtmlBody = "";
-
-				$(response.userList).each(function(idx, user) {
-					userListHtmlBody += `
-						<tr class="userinfobody">
-							<td scope="row">\${idx}</td>
-							<td align="left"
-								style="color: forestgreen"><a
-								href="/admin/getUserAdmin?userId=${user.userId}">\${user.userId}</a></td>
-							<td align="left">\${user.phone}</td>
-							<td align="left">\${user.blacklistEndDate}</td>
-							<td align="left">\${user.role}</td>
-						</tr>
-					`;
-				});
-				$(".userinfohead").remove();
-				$(".userinfobody").remove();
-				
-				$(".userlisthead").html(userListHtmlHead);
-				$(".userlistbody").html(userListHtmlBody);
-				//$(".userlisthead").html(blacklistHtmlBody);
-			
-		}, "json");
-	})
-	})
-	//////////////// 일반 유저 목록 REST 끝 /////////////////
-
-	//////////////// 블랙리스트 목록 REST 시작 /////////////////
-	$(function() {
-			$("#option3").on(
-					"click",
-					function() {
-
-		var uri = "/admin/listBlacklistAdmin"
-
-		$.get(uri, function(response) {
-			// ë¹ì´ìì§ ìë¤ë©´ ì¤í
-				var blacklistHtmlHead = "";
-				blacklistHtmlHead += `
-						<tr class="userinfohead">
-							<th scope="col">#</th>
-							<th scope="col">ID</th>
-							<th scope="col">전화번호</th>
-							<th scope="col">지정기간</th>
-							<th scope="col">어쩌구</th>
-						</tr>
-				`;
-			
-				var blacklistHtmlBody = "";
-
-				$(response.blacklist).each(function(idx, user) {
-					blacklistHtmlBody += `
-						<tr class="userinfobody">
-							<td scope="row">\${idx}</td>
-							<td align="left"
-								style="color: forestgreen"><a
-								href="/admin/getUserAdmin?userId=${user.userId}">\${user.userId}</a></td>
-							<td align="left">\${user.phone}</td>
-							<td align="left">\${user.blacklistEndDate}</td>
-							<td align="left">\${user.role}</td>
-						</tr>
-					`;
-				});
-				$(".userinfohead").remove();
-				$(".userinfobody").remove();
-				
-				$(".userlisthead").html(blacklistHtmlHead);
-				$(".userlistbody").html(blacklistHtmlBody);
-				//$(".userlisthead").html(blacklistHtmlBody);
-			
-		}, "json");
-	})
-	})
-	//////////////// 블랙리스트 목록 REST 끝 /////////////////
 </script>
 
 <style>
@@ -370,6 +232,11 @@
 
 .blog__sidebar__item {
 	width: 200px;
+}
+
+.btn-outline-success{
+color: #7fad39;
+border-color: #7fad39;
 }
 </style>
 
@@ -419,7 +286,6 @@
 			</div>
 
 		</div>
-	
 		<!-- /container -->
 	</section>
 	<!-- Breadcrumb Section End -->
@@ -443,13 +309,13 @@
 							<div class="list-group text-center" style="font-size: 15px;">
 								<button type="button"
 									class="list-group-item list-group-item-action"
-									aria-current="true" id="group-userList">회원 목록</button>
+									aria-current="true">회원 목록</button>
 								<button type="button"
 									class="list-group-item list-group-item-action">상점 목록</button>
 								<button type="button"
 									class="list-group-item list-group-item-action">신고 접수 목록</button>
 								<button type="button"
-									class="list-group-item list-group-item-action" class="addStore"><span class="addStore">상점 등록 요청
+									class="list-group-item list-group-item-action" reqNo="1"><span class="addStore">상점 등록 요청
 									</span>
 									 </button>
 								<button type="button"
@@ -484,23 +350,34 @@
 				<!-- UserList Table Start -->
 				<div>
 					<h4 class="text-left">
-						<strong>회원 목록</strong>
+						<c:if test="${param.reqCode eq 1}">
+						<strong>상점 등록 요청</strong>
 						<p class="text-muted" style="display: inline; font-size: 12px;">
-						회원 목록을 조회할 수 있습니다
+						사장님들의 상점 등록 요청을 조회할 수 있습니다
 						</p>
-						<div class="btn-group btn-group-toggle" data-toggle="buttons" style="left:300px;">
-							
-							<label class="btn btn-light active" style="font-size: 13px;"> 
-							<input type="radio" name="options" id="option1" checked>
-							 &nbsp; &nbsp; &nbsp; 일반 &nbsp; &nbsp; &nbsp;    
-							</label> 
-							
-							<label class="btn btn-light" style="font-size: 13px;" >
-							 <input type="radio" name="options" id="option3">
-							  블랙리스트
-							</label>
-							
-						</div>
+						</c:if>
+						
+						<c:if test="${param.reqCode eq 2}">
+						<strong>상점 삭제 요청</strong>
+						<p class="text-muted" style="display: inline; font-size: 12px;">
+						사장님들의 상점 삭제 요청을 조회할 수 있습니다
+						</p>
+						</c:if>
+						
+						<c:if test="${param.reqCode eq 3}">
+						<strong>환급 요청</strong>
+						<p class="text-muted" style="display: inline; font-size: 12px;">
+						사장님들의 환급 요청을 조회할 수 있습니다
+						</p>
+						</c:if>
+						
+						<c:if test="${param.reqCode eq 4}">
+						<strong>광고 등록 요청</strong>
+						<p class="text-muted" style="display: inline; font-size: 12px;">
+						사장님들의 광고 등록 요청을 조회할 수 있습니다
+						</p>
+						</c:if>
+						
 						<hr size="10px">
 					</h4>
 
@@ -510,28 +387,34 @@
 						
 						<thead class="userlisthead">
 							<tr class="userinfohead">
-							 	<th scope="col">#</th>
+								<th scope="col">#</th>
 								<th scope="col">ID</th>
 								<th scope="col">이름</th>
 								<th scope="col">전화번호</th>
-								<th scope="col">구분</th> 
+								<th scope="col">구분</th>
+								<th scope="col">&nbsp;</th>
+								<th scope="col">&nbsp;</th>
 							</tr>
 						</thead>
 
 						<tbody class="userlistbody">	
 							<tr class="userinfobody">
 							<c:set var="i" value="0" />
-							<c:forEach var="user" items="${userList}">
-								<c:set var="user" value="${user}" />
+							<c:forEach var="request" items="${requestList}">
+								<c:set var="request" value="${request}" />
 								<c:set var="i" value="${ i+1 }" />
 								<tr>
 									<th scope="row">${ i }</th>
 									<td align="left"
 										style="color: forestgreen"><a
-										href="/admin/getUserAdmin?userId=${user.userId}">${user.userId}</a></td>
-									<td align="left">${user.userName}</td>
-									<td align="left">${user.phone}</td>
-									<td align="left">${user.role}</td>
+										href="/admin/getUserAdmin?userId=${request.reqNo}">${request.reqNo}</a></td>
+									<td align="left">${request.userId}</td>
+									<td align="left">${request.user.userName}</td>
+									<td align="left">${request.reqDate}</td>
+									<td><button type="button" class="btn btn-outline-success" style="font-size: medium;">수락</button></td>
+									<td><button type="button" class="btn btn-outline-warning">거절</button>
+									</td>
+									
 								</tr>
 							</c:forEach>
 							</tr>

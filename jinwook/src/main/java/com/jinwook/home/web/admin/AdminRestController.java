@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.admin.AdminService;
+import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.request.RequestService;
 
@@ -42,6 +43,27 @@ public class AdminRestController {
       System.out.println(this.getClass());
    }
    
+   
+	///////////////// 일반 유저 목록 //////////////////
+   @GetMapping( value="/listUserAdmin" )
+   @ResponseBody
+   public JsonObject listUserAdmin(@ModelAttribute("user") User user) throws Exception{
+      
+      System.out.println("/admin/listUserAdmin : GET ");
+  
+      JsonObject jsonObj = new JsonObject();
+      
+      List<User> userList = adminService.getUserListAdmin(user);
+      
+      if (CollectionUtils.isEmpty(userList) == false) {
+         JsonArray jsonArr = new Gson().toJsonTree(userList).getAsJsonArray();
+         jsonObj.add("userList", jsonArr);
+      
+         System.out.println("일반 유저 목록 컨트롤러 통과");
+      }
+
+      return jsonObj;
+   }
    
    
    
@@ -68,36 +90,38 @@ public class AdminRestController {
    
    
 	///////////////// 블랙리스트 등록 //////////////////
-   @PatchMapping(value = { "updateBlacklist/{userId}" })
+   @PatchMapping(value = { "updateBlacklist/{userId}/{blackPeriod}/{complainNo}" })
    public JsonObject updateBlacklist(@PathVariable(value = "userId", required = false) String userId, 
-		   									@RequestBody User user) {
-
+		   								@PathVariable(value = "blackPeriod", required = false) String blackPeriod,
+		   								@PathVariable(value = "complainNo", required = false) int complainNo) {
+	   
 	    System.out.println("/admin/updateBlacklist : PATCH ");
 
+	    Complain complain = new Complain();
 		JsonObject jsonObj = new JsonObject();
-
-		try {
-			if (user != null) {
+		
+		
+			if (complain != null) {
 				System.out.println("user 객체에 값 넣어줌");
+				User user = new User();
 				user.setUserId(userId);
+				user.setBlackPeriod(blackPeriod);
+				complain.setComplainNo(complainNo);
+				complain.setUser(user);
 			}
 			
-			System.out.println("컨트롤러에서의 User :: "+user);
+			System.out.println("컨트롤러에서의 complain :: "+complain);
 
-			boolean result = adminService.updateBlacklist(user);
+			boolean result = adminService.updateBlacklist(complain);
 			jsonObj.addProperty("result", result);
 
-		} catch (DataAccessException e) {
-			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
-
-		} catch (Exception e) {
-			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
-		}
+		
 		
         System.out.println("블랙리스트 등록 컨트롤러 통과");
         
 		return jsonObj;
-	}
+   }
+	
 
 // ============== 대기중인 요청 목록 개수 ================
 	@GetMapping( value={"/CountRequestWaiting/{reqCode}"} )

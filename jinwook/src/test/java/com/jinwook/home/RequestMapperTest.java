@@ -28,12 +28,6 @@ public class RequestMapperTest {
 		store.setUserId("test16");
 		store.setStoreName("쓸쓸이네");
 		store.setStoreAddr("서울시 강북구 진욱이네");
-		store.setStoreType("3");
-		store.setStorePhone("010-9500-7753");
-		store.setStoreIntro("부들이네에 어서오세요...");
-		store.setStoreImage("부들이네.jpg");
-		store.setAccNo("123123-12-123123");
-		store.setBank("농협");
 		store.setStoreType("1");
 		store.setStorePhone("010-9500-7703");
 		store.setStoreIntro("쓸쓸이네에 어서오세요...");

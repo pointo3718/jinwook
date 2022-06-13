@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Request {
+public class Request extends CommonDTO  {
 
 	private int reqNo;
 	private User user;

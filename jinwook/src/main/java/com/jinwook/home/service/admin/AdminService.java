@@ -19,6 +19,6 @@ public interface AdminService {
 		
 		public List<User> getBlacklistAdmin(User user);	// 블랙리스트 목록 
 		
-		public boolean	updateBlacklist(User user);	// 블랙리스트 등록 
+		public boolean	updateBlacklist(Complain complain);	// 블랙리스트 등록 
 
 }

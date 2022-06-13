@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.RequestMapper;
 import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
@@ -170,6 +171,11 @@ public class RequestServiceImpl implements RequestService {
 		List<Request> requestStoreList = Collections.emptyList();
 
 		int requestTotalCount = requestMapper.getRequestTotalCount(request);
+		
+		PaginationInfo paginationInfo = new PaginationInfo(request);
+		paginationInfo.setTotalRecordCount(requestTotalCount);
+
+		request.setPaginationInfo(paginationInfo);
 		
 		if (requestTotalCount > 0) {
 			requestStoreList = requestMapper.getRequestListForAdmin(request);

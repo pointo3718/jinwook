@@ -132,27 +132,38 @@
 	
 	
 	<!-- 블랙리스트 등록 -->
-	<update id="updateBlacklist" parameterType="User">
+	<update id="updateBlacklist" parameterType="Complain">
 		UPDATE users
 		<set>
 			blacklist_status = true,
 			blacklist_reg_date = SYSDATE(),
-			<if test= 'blackPeriod == "7days"'>
+			<if test= 'user.blackPeriod == "7days"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +7 DAY)
 			</if>
-			<if test= 'blackPeriod == "1month"'>
+			<if test= 'user.blackPeriod == "1month"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +1 MONTH)
 			</if>
-			<if test= 'blackPeriod == "6month"'>
+			<if test= 'user.blackPeriod == "6month"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +6 MONTH)
 			</if>
-			<if test= 'blackPeriod == "1year"'>
+			<if test= 'user.blackPeriod == "1year"'>
 			blacklist_end_date = DATE_ADD(DATE(NOW()), INTERVAL +1 YEAR)
 			</if>
 		</set>
 		WHERE
-			user_id = #{userId}
+			user_id = #{user.userId}
 	</update>
+	
+	
+	<!-- complainStatus 변경 (false->true) -->
+	<update id="updateComplainStatus" parameterType="Complain">
+		UPDATE complain
+		SET
+			complain_status = true
+		WHERE
+			complain_no = #{complanNo}
+	</update>
+	
 	
 	
 	<!-- 블랙리스트 목록 -->
