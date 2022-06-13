@@ -33,6 +33,10 @@
      body {
             padding-top : 0px;
         }
+     #buttons{
+     border: 1px solid #7fad39;
+			  color: #7fad39;
+     }
     </style>
 	<script type="text/javascript">
 	function fncDeleteOrdersCart(e) {
@@ -100,7 +104,6 @@
        </thead>
         
    	<tbody>
-      
         <c:set var="i" value="0" />
         <c:set var="total" value="0" />
         <c:forEach var="cart" items="${getCartList}">
@@ -131,8 +134,8 @@
 
   <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <a class="btn btn-primary btn" href="#" role="button">더담으러가기</a>
-		      <button class="btn btn-primary" id="button" name="button" >주문하기</button>
+		      <a class="btn btn-outline btn" href="#" role="button">더담으러가기</a>
+		      <button class="btn btn-outline" id="button" name="button" >주문하기</button>
 			</div>
 		</div>
 </form>
@@ -144,6 +147,8 @@
 		<a href="/orders/getOrdersNoticeList">알림내역</a> <hr>
 		<a href="/store/getStore?storeNo=10000" class="primary-btn">SHOP</a><hr>
 		<a href="/orders/addOrdersJpayPassword">진욱페이비밀번호등록창</a> <hr>
+		<a href="/orders/addOrdersJpayCharge">충전창</a> <hr>
+		<a href="/orders/listOrdersJpayCharge">금액설정창</a> <hr>
 		
      <!--  table End /////////////////////////////////////-->
       

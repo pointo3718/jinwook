@@ -184,10 +184,14 @@ public class OrdersController {
       return  "orders/addOrdersJpayPassword";
    }
    
-   @PostMapping(value = "addOrdersJpayCharge")
-   public String addOrdersJpayCharge(@ModelAttribute("jpay") Jpay jpay,Model model) throws Exception {
+   @GetMapping(value = "addOrdersJpayCharge")
+   public String addOrdersJpayCharge(@ModelAttribute("jpay") Jpay jpay,Model model,HttpSession session) throws Exception {
       
       System.out.println("/orders/addOrdersJpayCharge : POST");
+      System.out.println("여기에요");
+      String userid = ((User) session.getAttribute("user")).getUserId();
+      
+      jpay.setUserId(userid);
       
       ordersService.addOrdersJpayCharge(jpay);
       
@@ -223,6 +227,14 @@ public class OrdersController {
       model.addAttribute("noticeList", noticeList);
       
       return "orders/getOrdersNoticeList";
+   }
+   
+   @GetMapping(value="getOrdersJpayCharge")
+   public String getOrdersJpayCharge() throws Exception{
+	   
+	   System.out.println("/orders/getOrdersJpayCharge : GET");
+	   
+	return "orders/getOrdersJpayCharge";
    }
    
 }
