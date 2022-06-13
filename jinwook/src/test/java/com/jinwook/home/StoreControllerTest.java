@@ -60,29 +60,29 @@ public class StoreControllerTest {
 	@Autowired
 	MockMvc mvc;
 
-   @Test
-   @DisplayName("updateStore GET 방식 테스트")
-   public void confirmPassword() throws Exception{
-     this.mvc.perform(get("/store/confirmPassword"))
-                      .andExpect(status().isOk())
-                      .andDo(print());
-   } 
+//   @Test
+//   @DisplayName("updateStore GET 방식 테스트")
+//   public void confirmPassword() throws Exception{
+//     this.mvc.perform(get("/store/confirmPassword"))
+//                      .andExpect(status().isOk())
+//                      .andDo(print());
+//   } 
    	
-	@Test
-	@Transactional
-	@DisplayName("updateStore 파라미터 방식 테스트")
-	public void updateStore() throws Exception{
-	  this.mvc.perform(post("/store/updateStore")
-	                                    .param("storeIntro", "짱짱")
-	                                    .param("storePhone", "010-2222-3333")
-      									.param("storeImage", "짱.jpg")
-      									.param("holiday", "매주 일요일")
-      									.param("bank", "신한은행")
-      									.param("accNo", "110020201")
-      									.param("storeNo", "10000"))
-	                   .andExpect(status().isOk())
-	                   .andDo(print());
-	}
+//	@Test
+//	@Transactional
+//	@DisplayName("updateStore 파라미터 방식 테스트")
+//	public void updateStore() throws Exception{
+//	  this.mvc.perform(post("/store/updateStore")
+//	                                    .param("storeIntro", "짱짱")
+//	                                    .param("storePhone", "010-2222-3333")
+//      									.param("storeImage", "짱.jpg")
+//      									.param("holiday", "매주 일요일")
+//      									.param("bank", "신한은행")
+//      									.param("accNo", "110020201")
+//      									.param("storeNo", "10000"))
+//	                   .andExpect(status().isOk())
+//	                   .andDo(print());
+//	}
 	
 
 //  @Test
@@ -108,6 +108,16 @@ public class StoreControllerTest {
       									.param("isSoldOut", "1"))
 	                   .andExpect(status().isOk())
 	                   .andDo(print());
+	}
+	
+	@Test
+	@Transactional
+	@DisplayName("updateStore 파라미터 방식 테스트")
+	public void updateStore() throws Exception{
+	  this.mvc.perform(get("/store/updateStore")
+	                                    .param("storeNo", "10000"))
+	  									.andExpect(status().isOk())
+	                   					.andDo(print());
 	}
 	
 	@Test

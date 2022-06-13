@@ -1,6 +1,7 @@
 package com.jinwook.home.service.domain;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -25,8 +26,8 @@ public class Store extends CommonDTO {
    private String storePhone;
    private String storeIntro;
    private Date storeStart;
-   private LocalDateTime startTime;
-   private LocalDateTime endTime;
+   private Time startTime;
+   private Time endTime;
    private String holiday;
    private String businessCard;
    private String storeImage;
