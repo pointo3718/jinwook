@@ -50,6 +50,30 @@
 
    /*]]>*/
    
+   	/////////////// 회원목록 이동 시작 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('회원 목록')").on("click" , function() {
+			$(self.location).attr("href","/admin/blog");
+		});
+	});
+	//////////////// 상점목록 이동 끝 /////////////////
+	
+	/////////////// 상점목록 이동 시작 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('상점 목록')").on("click" , function() {
+			$(self.location).attr("href","/admin/listStoreAdmin");
+		});
+	});
+	//////////////// 상점목록 이동 끝 /////////////////
+	
+	/////////////// 상점등록요청 목록 이동 시작 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('상점 등록 요청')").on("click" , function() {
+			$(self.location).attr("href","/request/getRequestListForAdmin");
+		});
+	});
+	//////////////// 상점등록요청 목록 이동 끝 /////////////////
+   
    
     /////////////// 요청대기 COUNT REST 시작 ////////////////
     $(function() {
