@@ -1,182 +1,544 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
+
+
 <!DOCTYPE html>
- 
 <html lang="ko">
-	
+
 <head>
+<meta charset="UTF-8">
+<meta name="description" content="Ogani Template">
+<meta name="keywords" content="Ogani, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>요청 목록</title>
 
-<meta charset="EUC-KR">
-
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
-<!-- Bootstrap icons-->
+<!-- Google Font -->
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="resources/css/styles.css" rel="stylesheet" />
+	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+	rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet"
+	href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/nice-select.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/owl.carousel.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${path}/resources/static/css/style.css"
+	type="text/css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" > 
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+<style>
+.row{
+	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+}
+
+.mytop01 {
+	padding-left: 20px;
+}
+
+.mytop01-content {
+	padding-left: 180px;
+	color: #6A8F00;
+	display: inline;
+}
+
+.blog {
+	padding-top: 50px;
+}
+
+.blog__sidebar {
+	padding-top: 0px;
+}
+
+.list-group {
+	padding-top: 0px;
+}
+
+.blog__sidebar__item {
+	width: 200px;
+}
+</style>
+
+
+</head>
+
+<body>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+/////////////// 모달창 열기 /////////////////////
+    var NOTIFYID="";
+    var COMPLAINNO="";
+    var BLACKPERIOD="";
+    
+    $(document).ready(function() {     
+        $('#exampleModal').on('show.bs.modal', function(event) {          
+            NOTIFYID = $(event.relatedTarget).data('notifyid');
+            COMPLAINNO = $(event.relatedTarget).data('complainno');
+            alert(NOTIFYID);
+            alert(COMPLAINNO);
+        });
+    });
+//////////////////////////////////////////////
+
+
+///////////////// 블랙리스트 등록 REST 시작 /////////////////
+$(function() {
+			$("#register").on(
+					"click",
+	function updateBlacklist() {
 	
-   <!-- jQuery UI toolTip ��� CSS-->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <!-- jQuery UI toolTip ��� JS-->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
-  <script type = "text/javascript">
-  
-  	/*<![CDATA[*/
+		var BLACKPERIOD = $(".form-check-input:checked").val();
+	
+		var uri = "/admin/updateBlacklist/" + NOTIFYID+ "/" +BLACKPERIOD+ "/" +COMPLAINNO;
+		alert(uri);
+		var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
+	
+		$.ajax({
+			url: uri,
+			type: "PATCH",
+			headers: headers,
+			dataType: "json",
+			
+			success: function(response) {
+				if (response.result == false) {
+					alert("블랙리스트 등록에 실패하였습니다.");
+					return false;
+				}
+				alert(NOTIFYID+"님을 블랙리스트로 등록했습니다.");
+				  location.reload();
+				  modal("hide");
+			},
+			error: function(xhr, status, error) {
+				alert("에러가 발생하였습니다.");
+				return false;
+			}
+		});
+	}); 
+});
+</script>
+
+		<!-- 블랙리스트 날짜 지정 Modal -->
+	<div class="modal fade" id="exampleModal" data-toggle="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">블랙리스트 지정기간을</br>선택해주세요</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      </br>
+	        <div class="form-check">
+			  <input class="form-check-input" type="radio" name="blackPeriod" id="blackPeriod"  value="7days" checked>
+			  <label class="form-check-label" for="exampleRadios1">
+			    일주일
+			  </label>
+			</div>
+			</br>
+			<div class="form-check">
+			  <input class="form-check-input" type="radio" name="blackPeriod" id="exampleRadios2" value="1month" >
+			  <label class="form-check-label" for="exampleRadios2">
+			    한 달
+			  </label>
+			</div>
+			</br>
+			<div class="form-check">
+			  <input class="form-check-input" type="radio" name="blackPeriod" id="exampleRadios1" value="6month"  >
+			  <label class="form-check-label" for="exampleRadios1">
+			    6개월
+			  </label>
+			</div>
+			</br>
+			<div class="form-check">
+			  <input class="form-check-input" type="radio" name="blackPeriod" id="exampleRadios1" value="1year" >
+			  <label class="form-check-label" for="exampleRadios1">
+			    1년
+			  </label>
+			</div>
+			</br>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-primary" id="register">등록</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Header Begin -->
+	<jsp:include page="../layout/top.jsp" />
+	<!-- Header End -->
+
+	<!-- Breadcrumb Section Begin -->
+	<section class="breadcrumb-section set-bg"
+		style="background-color: #F2F2F2">
+		<div class="container">
+			<div class="row my-1">
+				<div class="col-4">
+					<div class="bg-white text-black mx-3">
+
+						</br> <strong class="mytop01">새로운 문의내역</strong> </br> </br>
+						<h1 class="mytop01-content">5</h1>
+						건 </br> </br>
+
+					</div>
+				</div>
+
+				<div class="col-4">
+					<div class="bg-white text-black mx-3">
+
+						</br> <strong class="mytop01">새로운 요청접수</strong> </br> </br>
+						<h1 class="mytop01-content">13</h1>
+						건 </br> </br>
+
+					</div>
+				</div>
+
+				<div class="col-4">
+					<div class="bg-white text-black mx-3">
+
+						</br> <strong class="mytop01">새로운 신고접수</strong> </br> </br>
+						<h1 class="mytop01-content">7</h1>
+						건 </br> </br>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /container -->
+	</section>
+	<!-- Breadcrumb Section End -->
+
+	<!-- Blog Section Begin -->
+	<section class="blog spad">
+		<div class="container">
+			<div class="row" style="justify-content: space-around;">
+				<div class="col-xs-4 col-xs-5"
+					style="width: 200px; margin-right: 30px;">
+					<div class="blog__sidebar" style="width: 200px;">
+
+						<div class="blog__sidebar__item">
+
+							<h5 class="text-center" style="margin-bottom: 0px;">
+								<strong>관리자 페이지</strong>
+							</h5>
+
+							</br>
+
+							<div class="list-group text-center" style="font-size: 15px;">
+								<button type="button"
+									class="list-group-item list-group-item-action"
+									aria-current="true">회원 목록</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">상점 목록</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">신고 접수 목록</button>
+								<button type="button"
+									class="list-group-item list-group-item-action" >
+									<span class="addStore">상점 등록 요청</span>
+									 </button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+									<span class="deleteStore">상점 삭제 요청</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+									<span class="refundStore">환급 요청</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+									<span class="adStore">광고 등록 요청</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+								1:1 문의내역
+								</button>
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+
+				<!-- UserList Table Start -->
+				<div>
+					<h4 class="text-left">
+						<strong>신고 접수 목록</strong>
+						<p class="text-muted" style="display: inline; font-size: 12px;">
+						신고 접수건 조회와 블랙리스트 지정이 가능합니다.
+						</p>
+						<hr size="10px">
+					</h4>
+
+
+					<table class="table table-hover"
+						style="width: 730px; heigh: 300px; font-size: small;">
+						
+						<thead class="userlisthead">
+							<tr class="userinfohead">
+								<th scope="col">no</th>
+								<th scope="col">신고당한 ID</th>
+								<th scope="col">신고한 ID</th>
+								<th scope="col">신고 날짜</th>
+								<th scope="col">신고 유형</th>
+								<th scope="col">신고 위치</th>
+								<th scope="col">블랙 지정 여부</th>
+								<th scope="col">&nbsp;</th>
+							</tr>
+						</thead>
+
+						<tbody class="userlistbody">	
+							<tr class="userinfobody">
+							 <c:set var="i" value="0" />
+							  <c:forEach var="complain" items="${complainList}">
+								<c:set var="i" value="${ i+1 }" />
+								<tr>
+								  <td align="left">${complain.complainNo}</td>
+								  <td align="left">${complain.userId}</td>
+								  <td align="left">${complain.complainId}</td>
+								  <td align="left">${complain.complainDate}</td>
+								  <!-- a:  -->
+								  <td align="left">${complain.complainCode}</td>
+								  <td align="left">${complain.complainTarget}</td>
+								  <td align="left">${complain.complainStatus}</td>
+								  <c:if test="${complain.complainStatus == false}">
+								  <td align="left">
+								  <button type="button" class="btn btn-dark" id="preRegister" data-toggle="modal" data-target="#exampleModal" data-notifyid="${complain.userId}" data-complainno="${complain.complainNo}">등록</button>
+								  <!--  data-toggle="modal" data-target="#exampleModal -->
+								  </td>
+								  </c:if>
+								  <c:if test="${complain.complainStatus == true}">
+								  <td>&nbsp;</td>
+								  </c:if>
+								</tr>
+					          </c:forEach>
+							</tr>
+							
+						</tbody>
+						
+					</table>
+				</div>
+				<div class="text-center">
+					<!-- PageNavigation Start... -->
+					<jsp:include page="../common/pageNavigator_new.jsp" />
+					<!-- PageNavigation End... -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Blog Section End -->
+
+	<!-- Footer Begin -->
+	<jsp:include page="../layout/footer.jsp" />
+	<!-- Footer End -->
+	
+
+
+<script type="text/javascript">
+	/*<![CDATA[*/
 
 	function movePage(uri, queryString) {
 		location.href = uri + queryString;
 	}
 
 	/*]]>*/
-  
-  ////////////////  ��������Ʈ REST API //////////////// 
-	$(function() {
-		printBlackList();
+	
+	
+	
+	/////////////// 회원목록 이동 시작 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('회원 목록')").on("click" , function() {
+			$(self.location).attr("href","/admin/blog");
+		});
+	});
+	//////////////// 상점목록 이동 끝 /////////////////
+	
+	/////////////// 상점목록 이동 시작 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('상점 목록')").on("click" , function() {
+			$(self.location).attr("href","/admin/listStoreAdmin");
+		});
+	});
+	//////////////// 상점목록 이동 끝 /////////////////
+	
+	/////////////// 상점등록요청 목록 이동 시작 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('상점 등록 요청')").on("click" , function() {
+			$(self.location).attr("href","/request/getRequestListForAdmin");
+		});
+	});
+	//////////////// 상점등록요청 목록 이동 끝 /////////////////
+
+	
+	 /////////////// 요청대기 COUNT REST 시작 ////////////////
+	 $(function() {
+		countAddRequest();
 	});
 
-	function printBlackList() {
+	function countAddRequest() {
 
-		var uri = "/admin/listBlacklistAdmin"; 
-		/*[[ @{/admin/listBlacklistAdmin} ]]*/
+		var uri = "CountRequestWaiting/1";
 
 		$.get(uri, function(response) {
-				var blacklistHtml = "";
-				
-				$(response.blacklist).each(function(user) {
-					blacklistHtml += `
-						
-							<td class="name">${user.userId}</td>
-							<td class="desc">${user.userName}</td>
-						
-					`;
-				});
+		
+				var countAddHtml = "";
 
-				$(".userlist").html(blacklistHtml);
+					countAddHtml += `
+						상점 등록 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+					`;
+
+				$(".addStore").html(countAddHtml);
 			
 		}, "json");
 	}
 	/*[- end of function -]*/
-  </script>
-
-</head>
-<body>
-
-	<!--  ȭ�鱸�� div Start /////////////////////////////////////-->
-	<div class="container">
 	
-		<div class="page-header text-info">
-	       <h3>�Ű������ȸ</h3>
-	    </div>
-	    
-	    <!-- table ���� �˻� Start /////////////////////////////////////-->
-	    <div class="row">
-	    
-	    <button id="blacklist" onclick="">��������Ʈ</button>
-	    
-		    <div class="col-md-6 text-left">
-		    	<p class="text-primary">
-		    		��ü  ${resultPage.totalCount } �Ǽ�, ���� ${resultPage.currentPage}  ������
-		    	</p>
-		    </div>
-		    
-		    <div class="col-md-6 text-right">
-			    <form class="form-inline" name="detailForm">
-			    
-				  <div class="form-group">
-				    <select class="form-control" name="searchCondition" >
-						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>ȸ��ID</option>
-						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ȸ����</option>
-					</select>
-				  </div>
-				  
-				  <div class="form-group">
-				    <label class="sr-only" for="searchKeyword">�˻���</label>
-				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="�˻���"
-				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
-				  </div>
-				  
-				  <button type="button" class="btn btn-default\">�˻�</button>
+	 $(function() {
+		countDeleteRequest();
+	});
 
-				  <!-- PageNavigation ���� ������ ���� ������ �κ� -->
-				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
-				  
-				</form>
-	    	</div>
-	    	
-		</div>
-		<!-- table ���� �˻� Start /////////////////////////////////////-->
-		
-		
-      <!--  table Start /////////////////////////////////////-->
-      <table class="table table-hover table-striped" >
-      
-        <thead>
-          <tr>
-            <th align="center">No</th>
-            <th align="left" >ID</th>
-            <th align="left">�̸�</th>
-            <th align="left">�޴���ȭ��ȣ</th>
-            <th align="left">����</th>
-            <th align="left">����</th>
-            <th align="left">����</th>
-          </tr>
-        </thead>
-       
-		<tbody>
-		
-		  <c:set var="i" value="0" />
-		  <c:forEach var="complain" items="${complainList}">
-			<c:set var="i" value="${ i+1 }" />
-			<tr>
-			  <td align="center">${ i }</td>
-			  <td align="left">${complain.complainNo}</td>
-			  <td align="left">${complain.userId}</td>
-			  <td align="left">${complain.complainId}</td>
-			  <td align="left">${complain.complainDate}</td>
-			  <td align="left">${complain.complainCode}</td>
-			  <td align="left">${complain.complainTarget}</td>
-			  <td align="left">${complain.complainStatus}</td>
-			</tr>
-          </c:forEach>
-        
-        </tbody>
-      
-      </table>
-      
-      
-      <table>
-      <tbody class="userlist">
-      
-      </tbody>
-      
-      </table>
-	  <!--  table End /////////////////////////////////////-->
-	  
- 	</div>
- 	<!--  ȭ�鱸�� div End /////////////////////////////////////-->
- 	
- 	
- 	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp"/>
-	<!-- PageNavigation End... -->
+	function countDeleteRequest() {
+
+		var uri = "CountRequestWaiting/2";
+
+		$.get(uri, function(response) {
+				
+			
+				var countDeleteHtml = "";
+
+				countDeleteHtml += `
+						상점 삭제 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+					`;
+				
+				$(".deleteStore").html(countDeleteHtml); 
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
 	
+	 $(function() {
+		countRefundRequest();
+	});
+
+	function countRefundRequest() {
+
+		var uri = "CountRequestWaiting/3";
+
+		$.get(uri, function(response) {
+		
+				var countRefundHtml = "";
+
+				countRefundHtml += `
+						환급 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+					`;
+
+				$(".refundStore").html(countRefundHtml);
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
+	
+	
+	$(function() {
+		countAdRequest();
+	});
+
+	function countAdRequest() {
+
+		var uri = "CountRequestWaiting/4";
+
+		$.get(uri, function(response) {
+		
+				var countAdHtml = "";
+
+				countAdHtml += `
+						광고 등록 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+					`;
+
+				$(".adStore").html(countAdHtml);
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
+	 /////////////// 요청대기 COUNT REST 끝  ////////////////
+
+	
+	//////////////// 일반 유저 목록 REST 시작 /////////////////
+	$(function() {
+			$("#option1").on(
+					"click",
+					function() {
+
+		var uri = "/admin/listUserAdmin"
+
+		$.get(uri, function(response) {
+			// ë¹ì´ìì§ ìë¤ë©´ ì¤í
+				var userListHtmlHead = "";
+				userListHtmlHead += `
+						<tr class="userinfohead">
+							
+							<th scope="col">#</th>
+							<th scope="col">ID</th>
+							<th scope="col">전화번호</th>
+							<th scope="col">지정기간</th>
+							<th scope="col">어쩌구</th>
+						</tr>
+				`;
+			
+				var userListHtmlBody = "";
+
+				$(response.userList).each(function(idx, user) {
+					userListHtmlBody += `
+						<tr class="userinfobody">
+							<td scope="row">\${idx}</td>
+							<td align="left"
+								style="color: forestgreen"><a
+								href="/admin/getUserAdmin?userId=${user.userId}">\${user.userId}</a></td>
+							<td align="left">\${user.phone}</td>
+							<td align="left">\${user.blacklistEndDate}</td>
+							<td align="left">\${user.role}</td>
+						</tr>
+					`;
+				});
+				$(".userinfohead").remove();
+				$(".userinfobody").remove();
+				
+				$(".userlisthead").html(userListHtmlHead);
+				$(".userlistbody").html(userListHtmlBody);
+				//$(".userlisthead").html(blacklistHtmlBody);
+			
+		}, "json");
+	})
+	})
+	//////////////// 일반 유저 목록 REST 끝 /////////////////
+	
+	
+	
+	
+
+</script>
+
+
 </body>
 
 </html>

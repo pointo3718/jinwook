@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
-import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.store.StoreService;
 
 
@@ -39,27 +39,60 @@ public class StoreController {
 	}
 
 	
-	@GetMapping(value = "confirmPassword")
-	public String updateStore() {
-
-		return "store/confirmPassword";
-	}
-
-	@PostMapping(value = "updateStore")
-	public String updateStore(@RequestParam("storeNo") int storeNo , Store store, Model model) {
+//	@GetMapping(value = "confirmPassword")
+//	public String updateStore() {
+//
+//		return "store/confirmPassword";
+//	}
+	
+	@GetMapping(value = "updateStore")
+	public String updateStore(@RequestParam("storeNo") int storeNo, Model model) {
 		
-		storeService.updateStore(store);
+		Store store1 = new Store();
+		
+		if ("false".equals(store1.isStoreStatus())) {
+			// TODO => 등록된 상점이 없다는 메세지 전달 후 메인페이지로 이동
+			return "redirect:/../index";
+		}
+		
+		List<Store> store = storeService.getStore(storeNo);
 		
 		model.addAttribute("store", store);
-		
+
 		return "store/updateStore";
 	}
 	
 	@GetMapping(value = "addStoreProduct")
-	public String addStoreProduct() {
+	public String addStoreProduct(@RequestParam("storeNo") int storeNo, Model model) {
+		
+		Store store1 = new Store();
+		
+		if ("false".equals(store1.isStoreStatus())) {
+			// TODO => 등록된 상점이 없다는 메세지 전달 후 메인페이지로 이동
+			return "redirect:/../index";
+		}
+		
+		List<Store> store = storeService.getStore(storeNo);
+		
+		model.addAttribute("store", store);
 
 		return "store/addStoreProduct";
 	}
+	
+	@PostMapping(value = "updateStore")
+	public String updateStore(@RequestParam("storeNo") int storeNo , Store Store, Model model) {
+		
+		Store store = new Store();
+		store.setStoreNo(storeNo);
+		
+		storeService.updateStore(Store);
+		
+		model.addAttribute("Store", Store);
+		
+		return "store/updateStore";
+	}
+	
+
 	
 //	@PostMapping(value = "addStoreProduct")
 //	public String addStoreProduct( @ModelAttribute("product") Product product) {
@@ -71,25 +104,25 @@ public class StoreController {
 //		
 //	}
 	
-	@PostMapping(value = "updateStoreProduct")
-	public String updateStoreProduct(@RequestParam("prodNo") int prodNo , Product product, Model model) {
-		
-		storeService.updateStoreProduct(product);
-		
-		model.addAttribute("product", product);
-		
-		return "store/addStoreProduct";
-	}
+//	@PostMapping(value = "updateStoreProduct")
+//	public String updateStoreProduct(@RequestParam("prodNo") int prodNo , Product product, Model model) {
+//		
+//		storeService.updateStoreProduct(product);
+//		
+//		model.addAttribute("product", product);
+//		
+//		return "store/addStoreProduct";
+//	}
 	
-	@PostMapping(value = "deleteStoreProduct")
-	public String deleteStoreProduct(@RequestParam("prodNo") int prodNo, Model model) {
-		
-		storeService.deleteStoreProduct(prodNo);
-		
-		
-		
-		return "store/addStoreProduct";
-	}
+//	@PostMapping(value = "deleteStoreProduct")
+//	public String deleteStoreProduct(@RequestParam("prodNo") int prodNo, Model model) {
+//		
+//		storeService.deleteStoreProduct(prodNo);
+//		
+//		
+//		
+//		return "store/addStoreProduct";
+//	}
 	
 	@PostMapping(value = "isSoldout")
 	public String isSoldout(@RequestParam("prodNo") int prodNo , Product product, Model model) {

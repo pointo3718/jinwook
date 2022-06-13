@@ -12,10 +12,11 @@ import lombok.ToString;
 public class Complain extends CommonDTO {
 
 	private int complainNo;
+	private User user;
 	private String userId;
 	private String complainId;
 	private Date complainDate;
-	private char complainCode;
+	private String complainCode;
 	private String complainTarget;
 	private boolean complainStatus;
 	

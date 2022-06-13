@@ -1,211 +1,433 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
-
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <!DOCTYPE html>
-
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
+<meta name="description" content="Ogani Template">
+<meta name="keywords" content="Ogani, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>ìƒì ë“±ë¡</title>
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Google Font -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+	rel="stylesheet">
 
-<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+<!-- Css Styles -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	href="${path}/resources/static/css/font-awesome.min.css"
+	type="text/css">
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	href="${path}/resources/static/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/nice-select.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/owl.carousel.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${path}/resources/static/css/style.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<!-- Bootstrap Dropdown Hover CSS -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	/*<![CDATA[*/
+</script>
 
-<!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-
-<!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-body {
+.mytop01 {
+	padding-left: 20px;
+}
+
+.mytop01-content {
+	padding-left: 180px;
+	color: #6A8F00;
+	display: inline;
+}
+
+.blog {
 	padding-top: 50px;
+}
+
+.blog__sidebar {
+	padding-top: 0px;
+}
+
+.list-group {
+	padding-top: 0px;
+}
+
+.blog__sidebar__item {
+	width: 200px;
+	
 }
 </style>
 
-<!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-	//============= "¼öÁ¤"  Event ¿¬°á =============
+	//============= "ìˆ˜ì •"  Event ì—°ê²° =============
 	$(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		$("button.btn.btn-primary").on("click", function() {
-			fncUpdateProduct();
+		//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$("button.btn.btn-outline-primary").on("click", function() {
+			fncUpdateStore();
 		});
 	});
 
-	//============= "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á =============
-	$(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		$("a[href='#' ]").on("click", function() {
-			history.go(-1);
-		});
-	});
+	function fncUpdateStore() {
 
-	///////////////////////////////////////////////////////////////////////
-	function fncUpdateProduct() {
-
-		//Form À¯È¿¼º °ËÁõ
-		//var name = document.detailForm.prodName.value;
-		//var detail = document.detailForm.prodDetail.value;
-		//var manuDate = document.detailForm.manuDate.value;
-		//var price = document.detailForm.price.value;
-
-		var name = $("input[name='prodName']").val();
-		if (name == null || name.length < 1) {
-			alert("»óÇ°¸íÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
-			return;
-		}
-
-		var detail = $("input[name='prodDetail']").val();
-		if (detail == null || detail.length < 1) {
-			alert("»óÇ°»ó¼¼Á¤º¸´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
-			return;
-		}
-
-		var manuDate = $("input[name='manuDate']").val();
-		if (manuDate == null || manuDate.length < 1) {
-			alert("Á¦Á¶ÀÏÀÚ´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
-			return;
-		}
-
-		var price = $("input[name='price']").val();
-		if (price == null || price.length < 1) {
-			alert("°¡°İÀº ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
-			return;
-		}
-
-		//document.detailForm.action='/product/updateProduct';
-		//document.detailForm.submit();
 		$("form").attr("method", "POST").attr("action",
-				"/product/updateProduct").submit();
+				"/store/updateStore?storeNo=${store[0].storeNo}").submit();
 	}
+	
+
+	
 </script>
+
 
 </head>
 
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
-	<div class="container">
+	<!-- Header Begin -->
+	<jsp:include page="../layout/top.jsp" />
+	<!-- Header End -->
 
-		<div class="page-header text-center">
-			<h3 class=" text-info">»óÇ°Á¤º¸¼öÁ¤</h3>
-			<h5 class="text-muted">
-				»óÇ° Á¤º¸¸¦ <strong class="text-danger">ÃÖ½ÅÁ¤º¸·Î °ü¸®</strong>ÇØ ÁÖ¼¼¿ä.
-			</h5>
+	<!-- Breadcrumb Section Begin -->
+	<section class="breadcrumb-section set-bg"
+		style="background-color: #F2F2F2">
+
+
+
+		<div class="container">
+			<div class="row my-1">
+
+				<div class="col-4">
+					<div class="bg-white text-black mx-3">
+
+						</br> <strong class="mytop01"><h5>${store[0].user.userName}
+								ì‚¬ì¥ë‹˜</h5></strong> </br> </br> </br> </br>
+
+					</div>
+				</div>
+
+				<div class="col-4">
+					<div class="bg-white text-black mx-3">
+
+						</br> <strong class="mytop01">ì§„ìš±í˜ì´ ></strong> </br> </br>
+						<h1 class="mytop01-content">${store[0].user.jpBalance}</h1>
+						ì› </br> </br>
+
+
+					</div>
+				</div>
+
+				<div class="col-4">
+					<div class="bg-white text-black mx-3">
+
+						</br> <strong class="mytop01">${store[0].storeName}</strong> </br> </br>
+						<h1 class="mytop01-content"></h1>
+						</br> </br>
+
+
+					</div>
+				</div>
+
+			</div>
 		</div>
+		<!-- /container -->
+	</section>
+	<!-- Breadcrumb Section End -->
 
-		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
-		
-		  <div class="form-group">
-		    <label for="prodNo" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°¹øÈ£</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id=""prodNo"" name="prodNo" value="${product.prodNo }" placeholder="»óÇ°¹øÈ£"  readonly>
-		       <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger">»óÇ°¹øÈ£´Â ¼öÁ¤ºÒ°¡</strong>
-		      </span>
-		    </div>
-		  </div>
+	<!-- Blog Section Begin -->
+	<section class="blog spad">
+		<div class="container">
+			<div class="row" style="justify-content: space-around;">
+				<div class="col-xs-4 col-xs-5"
+					style="width: 200px; margin-right: 30px;">
+					<div class="blog__sidebar" style="width: 200px;">
+
+						<div class="blog__sidebar__item">
+
+							<h5 class="text-center" style="margin-bottom: 0px;">
+								<strong>My Page</strong>
+							</h5>
+
+							</br>
 
 
-			<div class="form-group">
-				<label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°¸í</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="prodName"
-						name="prodName" value="${product.prodName}" placeholder="º¯°æ»óÇ°¸í">
+							<div class="list-group text-center" style="font-size: 15px;">
+								<button type="button"
+									class="list-group-item list-group-item-action"
+									aria-current="true">ì£¼ë¬¸ ë‚´ì—­</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">ìƒì  ì •ë³´
+									ìˆ˜ì •</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">ì‹ ê³  ì ‘ìˆ˜
+									ëª©ë¡</button>
+								<button type="button"
+									class="list-group-item list-group-item-action" class="addStore">
+									<span class="addStore">ê°œì¸ ì •ë³´ ìˆ˜ì •</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+									<span class="deleteStore">ìƒí’ˆ ë“±ë¡</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+									<span class="refundStore">ê´‘ê³  ë“±ë¡</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+									<span class="adStore">ë‚´ê°€ í•œ ìš”ì²­</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+									<span class="adStore">ì§€ê°‘</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">1:1
+									ë¬¸ì˜ë‚´ì—­</button>
+							</div>
+
+						</div>
+
+
+					</div>
 				</div>
-			</div>
 
-			<div class="form-group">
-				<label for="prodDetail"
-					class="col-sm-offset-1 col-sm-3 control-label">»óÇ°»ó¼¼Á¤º¸</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="prodDetail"
-						name="prodDetail" value="${product.prodDetail}"
-						placeholder="º¯°æ»óÇ°»ó¼¼Á¤º¸">
+				<!-- ìƒì  ì •ë³´ ìˆ˜ì • -->
+				<div>
+					<h4 class="text-left">
+						<strong>ìƒì  ì •ë³´ ìˆ˜ì •</strong>
+
+						<hr size="10px">
+					</h4>
+
+
+					<table class="table table-hover"
+						style="width: 730px; heigh: 300px;">
+
+						<form class="form-horizontal" id="profileUpdate">
+
+
+							<div class="form-group">
+								<label for="storeName"
+									class="col-sm-offset-1 col-sm-3 control-label">ìƒì  ì´ë¦„</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="text" class="form-control" id="storeName"
+										name="storeName" value="${store[0].storeName}"
+										placeholder="${store[0].storeName}" readonly><span
+										id="helpBlock" class="help-block"> </span>
+								</div>
+							</div>
+
+
+
+							<div class="form-group">
+								<label for="storeType"
+									class="col-sm-offset-1 col-sm-3 control-label">ìƒì  ì—…ì¢…</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="text" class="form-control" id="storeType"
+										name="storeType" value="${store[0].storeType}"
+										placeholder="
+										<c:if test="${store[0].storeType.trim()=='1'}">
+										ê³¼ì¼
+										</c:if>
+										<c:if test="${store[0].storeType.trim()=='2'}">
+										ê¸°ì–µì•ˆë‚¨
+										</c:if>
+										<c:if test="${store[0].storeType.trim()=='3'}">
+										ìˆ˜ì‚°
+										</c:if>
+										<c:if test="${store[0].storeType.trim()=='4'}">
+										ì •ìœ¡
+										</c:if>
+										<c:if test="${store[0].storeType.trim()=='5'}">
+										ì¢…í•©
+										</c:if>"
+										readonly> <span id="helpBlock" class="help-block">
+									</span>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label for="storeAddr"
+									class="col-sm-offset-1 col-sm-3 control-label">ìƒì  ì£¼ì†Œ</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="text" class="form-control" id="storeAddr"
+										name="storeAddr" value="${store[0].storeAddr}"
+										placeholder="${store[0].storeAddr}" readonly> <span
+										id="helpBlock" class="help-block"> </span>
+								</div>
+							</div>
+							<!-- 
+							<div class="form-group">
+								<label for="storeStart"
+									class="col-sm-offset-1 col-sm-3 control-label">ìƒì  ì‹œì‘ ë‚ ì§œ</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="text" class="form-control" id="storeStart"
+										name="storeStart" value="${store[0].storeStart}"
+										placeholder="${store[0].storeStart}" readonly> <span
+										id="helpBlock" class="help-block"> </span>
+								</div>
+							</div>
+ -->
+							<div class="form-group">
+								<label for="storeIntro"
+									class="col-sm-offset-1 col-sm-3 control-label">ìƒì  ì†Œê°œ</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="text" class="form-control" id="storeIntro"
+										name="storeIntro" value="${store[0].storeIntro}"
+										placeholder="${store[0].storeIntro}">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="storePhone"
+									class="col-sm-offset-1 col-sm-3 control-label">ìƒì  ì „í™”ë²ˆí˜¸</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="text" class="form-control" id="storePhone"
+										name="storePhone" value="${store[0].storePhone}"
+										placeholder="${store[0].storePhone}">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="storeImage"
+									class="col-sm-offset-1 col-sm-3 control-label">ìƒì  ì‚¬ì§„</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="text" class="form-control" id="storeImage"
+										name="storeImage" value="${store[0].storeImage}"
+										placeholder="${store[0].storeImage}">
+								</div>
+							</div>
+							<!-- 
+							<div class="form-group">
+								<label for="startTime"
+									class="col-sm-offset-1 col-sm-3 control-label">ì˜ì—… ì‹œì‘ ì‹œê°„</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="time" class="form-control" id="startTime"
+										name="startTime" value="${store[0].startTime}"
+										placeholder="${store[0].startTime}">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="endTime"
+									class="col-sm-offset-1 col-sm-3 control-label">ì˜ì—… ì¢…ë£Œ ì‹œê°„</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="time" class="form-control" id="endTime"
+										name="endTime" value="${store[0].endTime}"
+										placeholder="${store[0].endTime}">
+								</div>
+							</div>
+ -->
+							<div class="form-group">
+								<label for="holiday"
+									class="col-sm-offset-1 col-sm-3 control-label">ìƒì  íœ´ë¬´ì¼</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="text" class="form-control" id="holiday"
+										name="holiday" value="${store[0].holiday}"
+										placeholder="${store[0].holiday}">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="businessNo"
+									class="col-sm-offset-1 col-sm-3 control-label">ì‚¬ì—…ìë“±ë¡ë²ˆí˜¸</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="text" class="form-control" id="businessNo"
+										name="businessNo" value="${store[0].user.businessNo}"
+										placeholder="${store[0].user.businessNo}" readonly> <span
+										id="helpBlock" class="help-block">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="businessCard"
+									class="col-sm-offset-1 col-sm-3 control-label">ì˜ì—…ì‹ ê³ ì¦</label>
+								<div class="col-sm-4" style="float:right;">
+									<input type="text" class="form-control" id="businessCard"
+										name="businessCard" value="${store[0].businessCard}"
+										placeholder="${store[0].businessCard}" readonly> <span
+										id="helpBlock" class="help-block">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="accNo"
+									class="col-sm-offset-1 col-sm-3 control-label">ê³„ì¢Œë²ˆí˜¸</label>
+								<div class="col-sm-4" style="float:right;">
+									<select name="bank" class="ct_input_g"
+										style="width: 100px; height: 19px" maxLength="20">
+										<option value="1" selected="selected">ì¹´ì¹´ì˜¤ë±…í¬</option>
+										<option value="2">ë†í˜‘</option>
+										<option value="3">ì‹ í•œ</option>
+										<option value="4">IBKê¸°ì—…</option>
+										<option value="5">í•˜ë‚˜</option>
+										<option value="6">ìš°ë¦¬</option>
+										<option value="7">êµ­ë¯¼</option>
+										<option value="8">SCì œì¼</option>
+										<option value="9">ëŒ€êµ¬</option>
+										<option value="10">ë¶€ì‚°</option>
+										<option value="11">ê´‘ì£¼</option>
+										<option value="12">ìƒˆë§ˆì„ê¸ˆê³ </option>
+										<option value="13">ê²½ë‚¨</option>
+										<option value="14">ì „ë¶</option>
+										<option value="15">ì œì£¼</option>
+										<option value="16">ì‚°ì—…</option>
+										<option value="17">ìš°ì²´êµ­</option>
+										<option value="18">ì‹ í˜‘</option>
+										<option value="19">ìˆ˜í˜‘</option>
+										<option value="20">ì”¨í‹°</option>
+										<option value="21">ì¼€ì´ë±…í¬</option>
+										<option value="22">í† ìŠ¤ë±…í¬</option>
+										<option value="23">ì‚°ë¦¼ì¡°í•©</option>
+										<option value="24">ì €ì¶•ì€í–‰</option>
+									</select>
+									
+									<button type="button" class="btn btn-light">ì‹¤ëª…ì¡°íšŒ</button>
+									
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="accNo" name="accNo"
+									value="${store[0].accNo}" placeholder="${store[0].accNo}">
+							</div>
+							</div>
+					</table>
+
+
+					<div class="form-group">
+						<div class="col-sm-offset-4  col-sm-4 text-center">
+							<button type="button" class="btn btn-outline-light" style="border-color: #7fad39; background-color: white;" style="color: #ffffff;">ìˆ˜ &nbsp;ì •</button>
+							<a class="btn btn-primary btn" href="#" role="button">ìƒì  ì‚­ì œ
+								ì‹ ì²­</a>
+						</div>
+					</div>
 				</div>
+				<div class="text-center"></div>
 			</div>
+		</div>
+	</section>
+	<!-- Blog Section End -->
 
-			<div class="form-group">
-				<label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">Á¦Á¶ÀÏÀÚ</label>
-				<div class="col-sm-4">
-					<input type="text" id="datePicker" class="form-control"
-						id="manuDate" name="manuDate" value="${product.manuDate}"
-						placeholder="Á¦Á¶ÀÏÀÚ">
-				</div>
-			</div>
-
-			<script
-				src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-			<script
-				src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
-				
-			</script>
-			<script
-				src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js">
-				
-			</script>
-			<script type="text/javascript">
-				$('#datePicker').datepicker({
-					format : "yyyy-mm-dd", // ´Ş·Â¿¡¼­ Å¬¸¯½Ã Ç¥½ÃÇÒ °ª Çü½Ä
-					language : "kr" // ¾ğ¾î(js Ãß°¡°¡ ÇÊ¿äÇÏ´Ù.)
-				});
-
-				$('#click-btn').on('click', function() {
-					var date = $('#dateRangePicker').val();
-					alert(date);
-				});
-			</script>
-
-			<div class="form-group">
-				<label for="price" class="col-sm-offset-1 col-sm-3 control-label">°¡°İ</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="price" name="price"
-						value="${product.price}" placeholder="º¯°æ°¡°İ">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="fileName" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°ÀÌ¹ÌÁö</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="fileName"
-						name="fileName" value="${product.fileName}" placeholder="º¯°æ»óÇ°ÀÌ¹ÌÁö">
-				</div>
-			</div>
-
-
-			<div class="form-group">
-				<div class="col-sm-offset-4  col-sm-4 text-center">
-					<button type="button" class="btn btn-primary">¼ö &nbsp;Á¤</button>
-					<a class="btn btn-primary btn" href="#" role="button">ÀÌ &nbsp;Àü</a>
-				</div>
-			</div>
-		</form>
-		<!-- form Start /////////////////////////////////////-->
-
-	</div>
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!-- Footer Begin -->
+	<jsp:include page="../layout/footer.jsp" />
+	<!-- Footer End -->
 
 </body>
 

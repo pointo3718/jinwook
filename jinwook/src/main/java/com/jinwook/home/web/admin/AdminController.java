@@ -32,10 +32,12 @@ public class AdminController {
 
 		
 	@GetMapping(value = "blog")
-	public String listUserAdmin(@ModelAttribute("user") User user, Model model) {
+	public String listUserAdmin() {
 		
-		List<User> userList = adminService.getUserListAdmin(user);
-		model.addAttribute("userList", userList);
+		/*
+		 * List<User> userList = adminService.getUserListAdmin(user);
+		 * model.addAttribute("userList", userList);
+		 */
 
 		return "/admin/blog";
 	}
@@ -63,7 +65,7 @@ public class AdminController {
 	
 	
 	@GetMapping(value = "listStoreAdmin")
-	public String listUserAdmin(@ModelAttribute("store") Store store, Model model) {
+	public String listStoreAdmin(@ModelAttribute("store") Store store, Model model) {
 		List<Store> storeList = adminService.getStoreListAdmin(store);
 		model.addAttribute("storeList", storeList);
 

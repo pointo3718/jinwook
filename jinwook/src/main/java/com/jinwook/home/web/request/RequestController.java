@@ -145,11 +145,13 @@ public class RequestController {
 	
 	// ============== 요청 목록 (관리자용) ================
 	@GetMapping(value = "getRequestListForAdmin")
-	public String getRequestListForAdmin(@ModelAttribute("request") Request request, Model model) {
+	public String getRequestListForAdmin(@RequestParam("reqCode") String reqCode, @ModelAttribute("request") Request request, Model model) {
+		request.setReqCode(reqCode);
+		
 		List<Request> requestList = requestService.getRequestListForAdmin(request);
 		model.addAttribute("requestList", requestList);
 
-		return "/admin/getRequestListForAdmin";
+		return "/request/getRequestListForAdmin";
 	}
 	
 }

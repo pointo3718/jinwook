@@ -75,7 +75,7 @@
                     </ul>
                 </li>
 
-                <li><a href="/admin/blog.jsp">마이페이지</a></li>
+                <li><a href="/admin/blog">마이페이지</a></li>
                 <li><a href="./contact.jsp">Contact</a></li>
             </ul>
         </nav>

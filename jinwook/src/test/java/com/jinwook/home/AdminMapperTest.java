@@ -156,12 +156,11 @@ public class AdminMapperTest {
 	///////////////// 블랙리스트 등록 //////////////////
 	@Test
 	public void testOfUpdateBlacklist() {
-		User user = new User();
-		user.setBlackPeriod("6month");
-		user.setUserId("jw1111");
+		Complain complain = new Complain();
+		complain.getUser().setBlackPeriod("6month");
+		complain.getUser().setUserId("jw1111");
 		
-
-		int result = adminMapper.updateBlacklist(user);
+		int result = adminMapper.updateBlacklist(complain);
 		if (result == 1) {
 			User user2 = adminMapper.getUserAdmin("test01");
 			try {

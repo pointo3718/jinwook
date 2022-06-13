@@ -262,7 +262,7 @@
 	</select>
 	
 	<!-- 요청 목록 (관리자용) -->
-	<select id="getRequestListForAdmin" parameterType="Request" resultMap="requestSelectMap">
+	<select id="getRequestListForAdmin" parameterType="Criteria" resultMap="requestSelectMap">
 		SELECT
 			r.req_no, s.store_name, u.user_id, u.user_name, r.ad_title,
 			r.req_date, r.req_status, r.refund_money 
@@ -274,11 +274,13 @@
 			u.user_id = r.user_id
 			AND 
 			r.req_code = ${reqCode}
+		LIMIT
+			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 	
 	
 	<!-- 요청 목록 개수 (관리자용)-->
-	<select id="getRequestTotalCount" parameterType="Request" resultType="int">
+	<select id="getRequestTotalCount" parameterType="Criteria" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
@@ -286,7 +288,9 @@
 		WHERE
 			r.user_id = u.user_id 
 			AND
-			r.req_code = ${reqCode}   
+			r.req_code = ${reqCode}  
+			
+		
 	</select>
 
 

@@ -25,8 +25,10 @@ public interface AdminMapper {
 	
 	public List<User> getBlacklistAdmin(User user);					// 블랙리스트 목록
 
-	public int updateBlacklist(User user);							// 블랙리스트 등록
+	public int updateBlacklist(Complain complain);					// 블랙리스트 등록
 	
+	public int updateComplainStatus(int complainNo);				// 신고 상태 변경
+		
 	public int getUserTotalCount(User user);						// 유저 목록 개수
 	
 	public int getStoreTotalCount(Store store);						// 상점 목록 개수

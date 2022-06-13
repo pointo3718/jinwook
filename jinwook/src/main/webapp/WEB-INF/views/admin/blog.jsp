@@ -406,11 +406,21 @@
          </div>
       </div>
    </section>
+<<<<<<< HEAD
    <!-- Blog Section End -->
+=======
+   <!— Blog Section End —>
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
    <!-- Footer Begin -->
    <jsp:include page="../layout/footer.jsp" />
    <!-- Footer End -->
+=======
+   <!— Footer Begin —>
+   <jsp:include page="../layout/footer.jsp" />
+   <!— Footer End —>
+>>>>>>> refs/remotes/origin/master
 
 </body>
 
