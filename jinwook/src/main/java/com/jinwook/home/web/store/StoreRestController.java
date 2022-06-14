@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -98,18 +99,26 @@ public class StoreRestController {
 			
 		}
 
-	  @PostMapping(value = "updateStoreProduct/{prodNo}")
+	  @PostMapping(value = "updateStoreProduct/{prodNo}/{price}/{prodOrign}/{prodInfo}/{prodImg}")
 	   public JsonObject updateStoreProduct(@PathVariable(value = "prodNo", required = false) int prodNo, 
-			   									@RequestBody Product product) {
+			   								@PathVariable(value = "price", required = false) int price,
+			   								@PathVariable(value = "prodOrign", required = false) String prodOrign,
+			   								@PathVariable(value = "prodInfo", required = false) String prodInfo,
+			   								@PathVariable(value = "prodImg", required = false) String prodImg) {
 
 		    System.out.println("/store/updateStoreProduct : PATCH ");
 
 			JsonObject jsonObj = new JsonObject();
+			Product product= new Product();
 
 			try {
 				if (product != null) {
 					System.out.println("product 객체에 값 넣어줌");
 					product.setProdNo(prodNo);
+					product.setPrice(price);
+					product.setProdOrign(prodOrign);
+					product.setProdInfo(prodInfo);
+					product.setProdImg(prodImg);
 				}
 				
 				System.out.println("컨트롤러에서의 Product :: "+product);

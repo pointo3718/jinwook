@@ -289,7 +289,6 @@
 			r.user_id = u.user_id 
 			AND
 			r.req_code = ${reqCode}  
-			
 		
 	</select>
 
