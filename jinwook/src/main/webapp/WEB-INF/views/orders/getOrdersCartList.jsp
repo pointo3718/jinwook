@@ -67,9 +67,6 @@
 		
 	}
 	
-	/* 	function addOrders(){
-	$("form").attr("method" , "GET").attr("action" , "/orders/addOrders").submit();
-	} */
  	$(function(){
 		$( "#button" ).on("click" , function() {
 			$("form").attr("method" , "GET").attr("action" , "/orders/addOrders").submit();
@@ -346,9 +343,7 @@
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close" onClick="fncDeleteOrdersCart(this)" data-value="${cart.cartNo}"></span>
                                     </td>
-                                    <td>
                                     <c:set var="total" value="${total + (cart.product.price*cart.prodCount) }" />
-                                    </td>
                                 </tr>
                                </c:forEach>
                         </table>
@@ -455,7 +450,15 @@
     <script src="${path}/resources/static/js/owl.carousel.min.js"></script>
     <script src="${path}/resources/static/js/main.js"></script>
 
-
+		<a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
+		<a href="/board/addBoardInquiryView">1:1문의 등록(파일 업로드)</a> <hr>
+		<a href="/orders/getOrdersList">주문내역</a> <hr>
+		<a href="/orders/getOrdersJpayList">진욱페이내역</a> <hr>
+		<a href="/orders/getOrdersNoticeList">알림내역</a> <hr>
+		<a href="/store/getStore?storeNo=10000" class="primary-btn">SHOP</a><hr>
+		<a href="/orders/addOrdersJpayPassword">진욱페이비밀번호등록창</a> <hr>
+		<a href="/orders/addOrdersJpayCharge">충전창</a> <hr>
+		<a href="/orders/listOrdersJpayCharge">금액설정창</a> <hr>
 </body>
 
 </html>
