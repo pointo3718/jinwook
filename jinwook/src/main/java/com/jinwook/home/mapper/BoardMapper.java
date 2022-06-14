@@ -96,7 +96,7 @@ public interface BoardMapper {
 	//댓글 추천 취소
 	public void updateCommentRecoCancel(int commentNo);
 	//레시피 추천 테이블에 add
-	public int addRecipeReco(int rcpNo, String userId);
+	public int addRecipeReco(Map<String, Object> map);
 	//댓글 추천 테이블에 add
 	public void addCommentReco(int commentNo, String userId);
 	//레시피 추천 테이블에서 delete

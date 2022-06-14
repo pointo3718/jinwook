@@ -38,9 +38,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript">
 	
-var rcpNo = ${recipe.rcpNo};
 
 function updateRecipeReco() {
+var rcpNo = ${recipe.rcpNo};
 	$.ajax({
 		type : "POST",
 		url : "updateRecipeReco",
@@ -78,10 +78,9 @@ function clip(){
 
 $(function(){
 	
-	$("button").on("click", function() {
+	$("#updateButton").on("click", function() {
 		self.location = "/board/updateRecipeView?rcpNo=${recipe.rcpNo}"
 	});
-	
 });	
 
 
@@ -158,8 +157,7 @@ $(function(){
 		<hr/>
 		<div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary">수 &nbsp;정</button>
-		      <button type="button" class="btn btn-primary">삭 &nbsp;제</button>
+		      <button type="button" class="btn btn-primary" id="updateButton">수 &nbsp;정</button>
 		    </div>
 		  </div>
 </div>

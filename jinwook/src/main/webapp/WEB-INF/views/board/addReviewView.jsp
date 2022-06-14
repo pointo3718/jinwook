@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -36,7 +36,7 @@ $(function() {
 	});
 });
 
-//==> Ãß°¡µÈºÎºĞ : "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á
+//==> ì¶”ê°€ëœë¶€ë¶„ : "ì·¨ì†Œ"  Event ì²˜ë¦¬ ë°  ì—°ê²°
 $(function() {
 	$("a[href='#' ]").on("click", function() {
 		$("form")[0].reset();
@@ -45,7 +45,7 @@ $(function() {
 
 function fncAddBoardInquiry() {
 	
-	$("form").attr("method", "POST").attr("action", "/board/addBoardInquiry").submit();
+	$("form").attr("method", "POST").attr("action", "/board/addReview").submit();
 }
 
 var rcpNo = ${recipe.rcpNo}
@@ -58,15 +58,15 @@ function updateRecipeReco() {
 		dataType : "json",
 		data : {'rcpNo' : rcpNo, 'userId' : userId},
 		error : function() {
-			alert("Åë½Å ¿¡·¯");
+			alert("í†µì‹  ì—ëŸ¬");
 		},
 		success : function(recoCheck) {
 			if (recoCheck == 0) {
-				alert("ÃßÃµ ¿Ï·á!");
+				alert("ì¶”ì²œ ì™„ë£Œ!");
 				location.reload();
 			}
 			else if (recoCheck == 1) {
-				alert("ÃßÃµ Ãë¼Ò!");
+				alert("ì¶”ì²œ ì·¨ì†Œ!");
 				location.reload();
 			}
 		}
@@ -84,17 +84,17 @@ function updateRecipeReco() {
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
-							<th colspan="2" style="background-color: #eee; text-align: center;">1:1¹®ÀÇ µî·Ï</th>
+							<th colspan="2" style="background-color: #eee; text-align: center;">1:1ë¬¸ì˜ ë“±ë¡</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><input type="text" class="form-control"
-								placeholder="1:1 ¹®ÀÇ Á¦¸ñÀ» ½áÁÖ¼¼¿ä." name="bbsTitle" maxlength="50"></td>
+								placeholder="ë¦¬ë·°ë¥¼ ë“±ë¡í•´ì£¼ì„¸ìš”." name="bbsTitle" maxlength="50"></td>
 						</tr>
 						<tr>
 							<td><textarea type="text" class="form-control"
-									placeholder="±Û ³»¿ë" name="bbsContent" maxlength="2048"
+									placeholder="ê¸€ ë‚´ìš©" name="bbsContent" maxlength="2048"
 									style="height: 350px;">
                         </textarea></td>
 						</tr>
@@ -102,28 +102,28 @@ function updateRecipeReco() {
 				
 				</table>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>ÀÛ¼ºÀÚ</strong></div>
+	  		<div class="col-xs-5 col-md-3"><strong>ì‘ì„±ì</strong></div>
 			<div class="col-xs-7 col-md-5">${board.user.userId}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>Á¶È¸¼ö</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì¡°íšŒìˆ˜</strong></div>
 			<div class="col-xs-7 col-md-5">${board.boardHits}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>ÀÛ¼ºÀÏ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì‘ì„±ì¼</strong></div>
 			<div class="col-xs-7 col-md-5">${board.writeDate}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>´äº¯»óÅÂ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ë‹µë³€ìƒíƒœ</strong></div>
 			<div class="col-xs-7 col-md-5">${board.boardInqStatus}</div>
 		<hr/>  
 		<div class="col-sm-offset-4  col-sm-4 text-center">
-			<!-- <a href="<c:url value='/board/addBoardInquiry'/>" role="button" class="btn btn-outline-info">±Û¾²±â</a> -->
-		    <button type="button" class="btn btn-primary" onclick="fncAddBoardInquiry()">µî &nbsp;·Ï</button>
-			<a class="btn btn-primary btn" href="#" role="button">Ãë&nbsp;¼Ò</a>
+			<!-- <a href="<c:url value='/board/addBoardInquiry'/>" role="button" class="btn btn-outline-info">ê¸€ì“°ê¸°</a> -->
+		    <button type="button" class="btn btn-primary" onclick="fncAddBoardInquiry()">ë“± &nbsp;ë¡</button>
+			<a class="btn btn-primary btn" href="#" role="button">ì·¨&nbsp;ì†Œ</a>
 		</div>
 		</div>
 			</form>

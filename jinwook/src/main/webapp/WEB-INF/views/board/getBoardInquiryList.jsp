@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
-
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -69,6 +67,26 @@ body {
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
+function fncDeleteInquiry(e) {
+	if (!confirm('상품을 삭제하시겠어요?')) {
+		return false;
+	}
+	
+	console.log(e);
+	const no = $(e).data("value");
+	 $.ajax({
+			url : "/board/deleteBoardInquiry/"+no,
+			dataType : "json",
+			success : function(result){
+				if(result != null){
+					alert("삭제완료");
+					self.location = "/board/getBoardInquiryList";
+				}
+			}
+		
+		});
+	
+}
 
 /*<![CDATA[*/
 
@@ -197,6 +215,7 @@ function movePage(uri, queryString) {
 				</c:otherwise>
 			</c:choose>
                   </td>
+                  <td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteInquiry(this)">X</button></td>
                </tr>
             </c:forEach>
 

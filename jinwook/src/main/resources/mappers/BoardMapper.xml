@@ -91,7 +91,6 @@
 		UPDATE board 
 		SET board_hits = board_hits+1 
 		WHERE board_no = #{boardNo}
-		AND board_code = 0
 	</update>
 	
 	<!-- 공지사항 조회수 올리기v -->
@@ -99,7 +98,6 @@
 		UPDATE board 
 		SET board_hits = board_hits+1 
 		WHERE board_no = #{boardNo} 
-		AND board_code = 1
 	</update>
 	
 	<!-- 레시피 조회수 올리기v -->
@@ -139,12 +137,12 @@
 	
 	<insert id="addBoardAnnouncement" parameterType="Board" useGeneratedKeys="true" keyProperty="boardNo">
 		INSERT INTO board (
-			<include refid="boardColumns" />
+			board_no, board_title, board_content, user_id, board_hits, board_code, write_date, board_img1, board_img2, board_img3, board_inq_status
 		) VALUES (
 			  #{boardNo:INTEGER}
-			, #{user.userId:VARCHAR}
 			, #{boardTitle:VARCHAR}
 			, #{boardContent:VARCHAR}
+			, #{user.userId:VARCHAR}
 			, #{boardHits:INTEGER}
 			, 1 <!-- bodeCode 1: 공지사항 -->
 			, SYSDATE()
@@ -202,7 +200,7 @@
 		<!-- 공지사항 상세 조회: 1 -->
 	<select id="getBoardAnnouncement" parameterType="int" resultType="Board" resultMap="boardSelectMap">
 		SELECT
-			board_title, board_content, user_id, write_date
+			board_title, board_content, user_id, write_date, board_hits
 		FROM
 			board
 		WHERE
@@ -533,7 +531,7 @@
 	<update id="updateRecipeReco" parameterType="int">
 		UPDATE recipe
 		SET
-		recommend_count = recommendCount+1
+		recommend_count = recommend_count+1
 		WHERE rcp_no = #{rcpNo}
 	</update>
 	
@@ -541,7 +539,7 @@
 	<update id="updateCommentReco" parameterType="int">
 		UPDATE comment
 		SET
-		recommend_count = recommendCount+1
+		recommend_count = recommend_count+1
 		WHERE comment_no = #{commentNo}
 	</update>
 	
@@ -549,7 +547,7 @@
 	<update id="updateRecipeRecoCancel" parameterType="int">
 		UPDATE recipe
 		SET
-		recommend_count = recommendCount-1
+		recommend_count = recommend_count-1
 		WHERE rcp_no = #{rcpNo}
 	</update>
 	
@@ -557,7 +555,7 @@
 	<update id="updateCommentRecoCancel" parameterType="int">
 		UPDATE comment
 		SET
-		recommend_count = recommendCount-1
+		recommend_count = recommend_count-1
 		WHERE comment_no = #{commentNo}
 	</update>
 	
@@ -565,7 +563,7 @@
 	<insert id="addRecipeReco" parameterType="Recommend" useGeneratedKeys="true" keyProperty="recommendNo">
 		INSERT INTO recommend(recommend_no, rcp_no, user_id)
 		VALUES (
-		( SELECT IFNULL(MAX(recommendNo), 0) + 1 FROM recommend a), 
+		( SELECT IFNULL(MAX(recommend_no), 0) + 1 FROM recommend a), 
 		#{rcpNo}, 
 		#{userId})
 	</insert>
@@ -591,7 +589,7 @@
 	</delete>
 	
 	<!-- 레시피 추천 시 recocheck를 1로 만들어서 중복방지 -->
-	<update id="updateRecipeRecoCheck" parameterType="int">
+	<update id="updateRecipeRecoCheck" parameterType="Map">
 		UPDATE recommend
 		SET
 		recocheck = 1

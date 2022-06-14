@@ -72,7 +72,9 @@ public class UserController {
 		//Business Logic
 		//일반회원, 사장님, 관리자 구분 가입
 		user.setRole("일반");
+		System.out.println("=====================12312312312312312312312");
 		userService.addUser(user);
+		
 		
 		return "/user/loginView";
 	}

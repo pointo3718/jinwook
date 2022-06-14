@@ -84,26 +84,26 @@
          </div>
       </div>
       <div class="sub_header" style="height: 50px;">
-      	<div class="container">
-      		<div class="row">
-      		<div class="col-lg-3">
-      			<div class="header__top__left text-left">
-					<button type="button" class="btn btn-outline-success" style="color: #7fad39; border-color: #7fad39" onclick="javascript:void(0);"> 픽업안내 > </button>
+         <div class="container">
+            <div class="row">
+            <div class="col-lg-3">
+               <div class="header__top__left text-left">
+               <button type="button" class="btn btn-outline-success" style="color: #7fad39; border-color: #7fad39" onclick="javascript:void(0);"> 픽업안내 > </button>
                   </div>
-      		</div>
-      		<div class="col-lg-6">
-      		
-      		</div>
-      		<div class="col-lg-3">
-      			<div class="header__top__right text-right">
-      				<div class="header__top__right__auth">
+            </div>
+            <div class="col-lg-6">
+            
+            </div>
+            <div class="col-lg-3">
+               <div class="header__top__right text-right">
+                  <div class="header__top__right__auth">
                         <a href="/user/login" style="word-break: break-all;"><i class="fa fa-user"></i> &nbsp;&nbsp;&nbsp;로그인&nbsp;</a>
-                        <a href="#"> <i class="fa fa-handshake-o" aria-hidden="true"></i> 회원가입</a>
+                        <a href="/user/addUser"> <i class="fa fa-handshake-o" aria-hidden="true"></i> 회원가입</a>
                      </div>
-      			</div>
-      		</div>
-      		</div>
-      	</div>
+               </div>
+            </div>
+            </div>
+         </div>
       </div>
       <div class="container">
          <div class="row">

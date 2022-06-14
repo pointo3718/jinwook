@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
-
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -61,15 +59,36 @@ body {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  
+#buttons{
+    border: 1px solid #7fad39;
+	color: #7fad39;  
+	}
 }
 </style>
 
-
-
-
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-
+function fncDeleteRecipe(e) {
+	if (!confirm('상품을 삭제하시겠어요?')) {
+		return false;
+	}
+	
+	console.log(e);
+	const no = $(e).data("value");
+	 $.ajax({
+			url : "/board/deleteRecipe/"+no,
+			dataType : "json",
+			success : function(result){
+				if(result != null){
+					alert("삭제완료");
+					self.location = "/board/getRecipeList";
+				}
+			}
+		
+		});
+	
+}
 
    //=============    검색 / page 두가지 경우 모두  Event  처리 =============   
    function fncGetUserList(currentPage) {
@@ -180,8 +199,8 @@ body {
                   <td align="Center">${ recipe.rcpNo }</td>
                   <td align="left">${recipe.rcpTitle}</td>
                   <td align="left">${recipe.rcpDate}</td>
-                  <td align="left">${recipe.rcpHits}
-                  </td>
+                  <td align="left">${recipe.rcpHits}</td>
+                  <td align="left"><button data-value="${recipe.rcpNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteRecipe(this)">X</button></td>
                </tr>
             </c:forEach>
 
