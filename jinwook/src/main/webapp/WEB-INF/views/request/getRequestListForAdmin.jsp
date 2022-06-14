@@ -433,7 +433,7 @@ color: #7fad39;
 									
 									<c:if test="${request.reqStatus eq '1' and param.reqCode eq '2'}">
 									<td>
-									<button type="button" class="btn btn-outline-success" id="acceptForDelete" value="${request.reqNo}">수락</button>
+									<button type="button" class="btn btn-outline-success" id="acceptForDelete" data-reqno="${request.reqNo}"  data-storeno="${request.store.storeNo}">수락</button>
 									<button type="button" class="btn btn-outline-warning" id="refuseForDelete">거절</button>
 									</td>
 									</c:if>
@@ -447,7 +447,7 @@ color: #7fad39;
 									
 									<c:if test="${request.reqStatus eq '1' and param.reqCode eq '4'}">
 									<td>
-									<button type="button" class="btn btn-outline-success" id="acceptForAd" value="${request.reqNo}">수락</button>
+									<button type="button" class="btn btn-outline-success" id="acceptForAd" data-reqno="${request.reqNo}">수락</button>
 									<button type="button" class="btn btn-outline-warning" id="refuseForAd">거절</button>
 									</td>
 									</c:if>
@@ -479,11 +479,11 @@ color: #7fad39;
 var REQNO;
 
 $(function() {
-	$("#accept").on(
+	$("#acceptAdd").on(
 			"click",
 	function updateBlacklist() {
 
-	var REQNO = $("#accept").val();
+	var REQNO = $("#acceptAdd").val();
 	alert(REQNO);
 
 	var uri = "/request/updateRequestAddStore/" + REQNO;
@@ -513,6 +513,48 @@ $(function() {
 	}); 
 });
 //////////////////상점등록 REST ////////////////////
+
+////////////////// 상점삭제 REST ////////////////////
+var REQNO;
+
+$(function() {
+	$("#acceptForDelete").on(
+			"click",
+	function updateBlacklist() {
+
+	var REQNO = $("#acceptForDelete").data("reqno");
+	var STORENO = $("#acceptForDelete").data("storeno");
+	alert(REQNO);
+	alert(STORENO);
+
+	var uri = "/request/deleteStore/" + REQNO + "/" + STORENO;
+	alert(uri);
+	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
+
+		$.ajax({
+			url: uri,
+			type: "PATCH",
+			headers: headers,
+			dataType: "json",
+			
+			success: function(response) {
+								
+				if (response.result == false) {
+					alert("요청 수락에 실패하였습니다.");
+					return false;
+				}
+				alert(REQNO+"번 요청을 수락했습니다.");
+				location.reload();
+			},
+			error: function(xhr, status, error) {
+				alert("에러가 발생하였습니다.");
+				return false;
+			}
+		});
+	}); 
+});
+//////////////////상점삭제 REST ////////////////////
+
 
 </script>
 

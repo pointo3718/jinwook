@@ -264,7 +264,7 @@
 	<!-- 요청 목록 (관리자용) -->
 	<select id="getRequestListForAdmin" parameterType="Criteria" resultMap="requestSelectMap">
 		SELECT
-			r.req_no, s.store_name, u.user_id, u.user_name, r.ad_title,
+			r.req_no, s.store_no, s.store_name, u.user_id, u.user_name, r.ad_title,
 			r.req_date, r.req_status, r.refund_money 
 		FROM
 			store s, users u, request r
