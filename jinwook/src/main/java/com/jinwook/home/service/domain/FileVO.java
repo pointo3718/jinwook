@@ -10,6 +10,7 @@ import lombok.ToString;
 public class FileVO {
 	 	private int fileNo;
 	    private int boardNo;
+	    private int rcpNo;
 	    private String fileName;     //저장할 파일
 	    private String fileOriName;  //실제 파일
 	    private String fileUrl;

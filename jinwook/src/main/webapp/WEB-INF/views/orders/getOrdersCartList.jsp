@@ -282,6 +282,7 @@
     </section>
     <!-- Hero Section End -->
 
+<<<<<<< HEAD
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="${path}/resources/static/img/breadcrumb.jpg">
         <div class="container">
@@ -455,6 +456,34 @@
     <script src="${path}/resources/static/js/owl.carousel.min.js"></script>
     <script src="${path}/resources/static/js/main.js"></script>
 
+=======
+  <div class="form-group">
+		    <div class="col-sm-offset-4  col-sm-4 text-center">
+		      <a class="btn btn-outline btn" href="#" role="button">더담으러가기</a>
+		      <button class="btn btn-outline" id="button" name="button" >주문하기</button>
+			</div>
+		</div>
+</form>
+		<br><br>
+		<hr>
+		<a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
+		<a href="/board/addBoardInquiryView">1:1문의 등록(파일 업로드)</a> <hr>
+		<a href="/board/addRecipeView">레시피 등록 화면</a> <hr>
+		<a href="/orders/getOrdersList">주문내역</a> <hr>
+		<a href="/orders/getOrdersJpayList">진욱페이내역</a> <hr>
+		<a href="/orders/getOrdersNoticeList">알림내역</a> <hr>
+		<a href="/store/getStore?storeNo=10000" class="primary-btn">SHOP</a><hr>
+		<a href="/orders/addOrdersJpayPassword">진욱페이비밀번호등록창</a> <hr>
+		<a href="/orders/addOrdersJpayCharge">충전창</a> <hr>
+		<a href="/orders/listOrdersJpayCharge">금액설정창</a> <hr>
+		
+     <!--  table End /////////////////////////////////////-->
+      
+    <!--  화면구성 div End /////////////////////////////////////-->  
+    
+    <!-- PageNavigation Start... -->
+   <!--  PageNavigation End... -->    
+>>>>>>> refs/heads/Song
 
 </body>
 

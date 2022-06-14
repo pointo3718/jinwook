@@ -26,7 +26,7 @@ public interface BoardService {
 	//1:1문의 등록v
 	public void addBoardInquiry(Board board) throws Exception;
 	//공지사항 등록v
-	public boolean addBoardAnnouncement(Board board, MultipartFile file);
+	public void addBoardAnnouncement(Board board);
 	//1:1문의 수정v
 	public void updateBoardInquiry(Board board) throws Exception;
 	//공지사항 수정v
