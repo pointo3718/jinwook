@@ -71,6 +71,10 @@ public class StoreController {
 			// TODO => 등록된 상점이 없다는 메세지 전달 후 메인페이지로 이동
 			return "redirect:/../index";
 		}
+	
+		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+		
+		model.addAttribute("storeInfo", storeInfo);
 		
 		List<Store> store = storeService.getStore(storeNo);
 		
@@ -168,7 +172,10 @@ public class StoreController {
 	
 	@GetMapping(value = "getStoreWallet")
 	public String getStoreWallet(@RequestParam("storeNo") int storeNo, Store store, Model model) {
-				
+
+		List<Store> getStoreRefund = storeService.getStoreRefund(storeNo);
+		model.addAttribute("getStoreRefund", getStoreRefund);
+		
 		List<Store> getStoreWallet = storeService.getStoreWallet(store);
 		model.addAttribute("getStoreWallet", getStoreWallet);
 
@@ -177,14 +184,14 @@ public class StoreController {
 	
 	
 	
-	@GetMapping(value = "getStoreRefund")
-	public String getStoreRefund(@RequestParam("storeNo") int storeNo, Model model) {
-		
-		List<Store> getStoreRefund = storeService.getStoreRefund(storeNo);
-		model.addAttribute("getStoreRefund", getStoreRefund);
-
-		return "store/getStoreRefund";
-	}
+//	@GetMapping(value = "getStoreRefund")
+//	public String getStoreRefund(@RequestParam("storeNo") int storeNo, Model model) {
+//		
+//		List<Store> getStoreRefund = storeService.getStoreRefund(storeNo);
+//		model.addAttribute("getStoreRefund", getStoreRefund);
+//
+//		return "store/getStoreRefund";
+//	}
 	
 	
 	@GetMapping(value = "getCouponList")

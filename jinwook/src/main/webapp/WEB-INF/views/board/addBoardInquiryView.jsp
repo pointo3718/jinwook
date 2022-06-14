@@ -22,10 +22,11 @@
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
+	<style type="text/css">
  		body {
             padding-top : 50px;
         }
+        
      </style>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -57,7 +58,7 @@ function fncAddInquiry() {
 		<h1 class="bg-primary text-center">1:1 문의 등 록</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form id="MultiUpload" action="board/addBoardInquiry" method="post" enctype="multipart/form-data">
+		<form action="board/addBoardInquiry" method="post" enctype="multipart/form-data">
 		
 			<div class="form-group">
 		    <label for="boardTitle" class="col-sm-offset-1 col-sm-3 control-label">1:1문의 제목</label>
@@ -76,9 +77,15 @@ function fncAddInquiry() {
 			</div>
  			<hr/><br/>
 			<div class="form-group">
-		    <label for="file" class="col-sm-offset-1 col-sm-3 control-label">다중 파일 업로드</label>
+		    <label for="file" class="col-sm-offset-1 col-sm-3 control-label">파일 업로드</label>
 		    <div class="col-sm-3"><!-- 입력칸 -->
-		      	<input type="file" id="uploadfiles" name="uploadfiles" multiple="multiple" placeholder="파일 선택" class="form-control" >
+		      	<input type="file" id="files" name="files" multiple="multiple" placeholder="파일 선택" class="form-control" >
+		      	<div id="uploadResult">
+		      		<div id="result_card">
+		      			<div class="imgDeleteBtn">x</div><br/>
+		      			<img src="/resources/static/img/logo.png">
+		      		</div>
+		      	</div>
 		      	<input type="submit" value="upload">
 		    </div>
 		  </div>

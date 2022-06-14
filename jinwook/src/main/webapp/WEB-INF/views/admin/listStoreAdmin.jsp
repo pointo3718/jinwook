@@ -66,6 +66,15 @@
 		});
 	});
 	
+	
+	/////////////// 신고접수 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('신고 접수 목록')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/admin/listComplainAdmin");
+		});
+	});
+	
 	/////////////// 상점등록요청 목록 이동 ////////////////
 		$(function() {
 	 	$( ".list-group-item:contains('상점 등록 요청')").on("click" , function() {
@@ -244,6 +253,14 @@
 </script>
 
 <style>
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 10;
+}
+
 .row{
 	display: flex;
  	justify-content: center;
@@ -274,6 +291,10 @@
 
 .blog__sidebar__item {
 	width: 200px;
+}
+
+a{
+color: #7fad39;
 }
 </style>
 

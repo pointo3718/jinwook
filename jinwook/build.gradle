@@ -38,6 +38,8 @@ dependencies {
    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
    implementation 'javax.servlet:jstl'
    compileOnly 'org.projectlombok:lombok'
+   compileOnly 'net.coobird:thumbnailator:0.4.8'
+   compileOnly 'org.imgscalr:imgscalr-lib:4.2'
    implementation 'net.nurigo:javaSDK:2.2'
    developmentOnly 'org.springframework.boot:spring-boot-devtools'
    runtimeOnly 'mysql:mysql-connector-java'

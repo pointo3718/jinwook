@@ -18,7 +18,7 @@
 	<meta name="keywords" content="Ogani, unica, creative, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>로그인</title>
+	<title>아이디 찾기</title>
 	
 	<!-- Google Font -->
 	<link
@@ -50,6 +50,12 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
+
+	input{
+		width:300px;
+		height:50px;
+		font-size: 15px;
+	}
 
 	h3 {
 	font-weight: normal;
@@ -215,7 +221,7 @@ main button {
 						+"</div> "
 					+"</div>";
 	 
-				$("form").html(html);
+				$("body").html(html);
 	 
 			})
 			.fail(function() {
@@ -244,12 +250,14 @@ main button {
 			<br><br>
 		<form class = "ad text-center">
 			<div class="aaa" >
-			<input type="text" name="userName" class="userName">
+			<input type="text" name="userName" class="userName" placeholder="이름을 입력해주세요.">
 			</div>
+			<br>
 			<div class="adad">
-			<input type="email" name="email" class="email">
+			<input type="email" name="email" class="email" placeholder="이메일을 입력해주세요.">
 			</div>
-			<button class="find_btn">확인</button>
+			<br>
+			<button class="find_btn site-btn">전송</button>
 	</form>	
  	<!--  화면구성 div end /////////////////////////////////////-->
 <jsp:include page="../layout/footer.jsp" />

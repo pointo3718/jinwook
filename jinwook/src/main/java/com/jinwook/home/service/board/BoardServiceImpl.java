@@ -35,10 +35,9 @@ public class BoardServiceImpl implements BoardService {
    
    //공지사항 등록v
    @Override
-   public boolean addBoardAnnouncement(Board board, MultipartFile file) {
-      int queryResult = 0;
+   public void addBoardAnnouncement(Board board) {
       
-      return (queryResult > 0);
+	   boardMapper.addBoardAnnouncement(board);
    }
    
    @Override
@@ -303,7 +302,10 @@ public class BoardServiceImpl implements BoardService {
 
    @Override
    public int addRecipeReco(int rcpNo, String userId) {
-      return boardMapper.addRecipeReco(rcpNo, userId);
+	   Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("userId", userId);
+	      map.put("rcpNo", rcpNo);
+   return boardMapper.addRecipeReco(map);
    }
 
    @Override
