@@ -14,9 +14,9 @@
 <title>상점 등록 요청</title>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">	
 
 <!-- Css Styles -->
 <link rel="stylesheet"
@@ -202,6 +202,16 @@
 </script>
 
 <style>
+*{font-family: 'Noto Sans KR', sans-serif;}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 10;
+}
+
 .row{
 	display: flex;
  	justify-content: center;
@@ -237,6 +247,10 @@
 .btn-outline-success{
 color: #7fad39;
 border-color: #7fad39;
+}
+
+a{
+color: #7fad39;
 }
 </style>
 
@@ -381,7 +395,6 @@ border-color: #7fad39;
 						<hr size="10px">
 					</h4>
 
-
 					<table class="table table-hover"
 						style="width: 730px; heigh: 300px;">
 						
@@ -392,7 +405,6 @@ border-color: #7fad39;
 								<th scope="col">이름</th>
 								<th scope="col">전화번호</th>
 								<th scope="col">구분</th>
-								<th scope="col">&nbsp;</th>
 								<th scope="col">&nbsp;</th>
 							</tr>
 						</thead>
@@ -411,10 +423,34 @@ border-color: #7fad39;
 									<td align="left">${request.userId}</td>
 									<td align="left">${request.user.userName}</td>
 									<td align="left">${request.reqDate}</td>
-									<td><button type="button" class="btn btn-outline-success" style="font-size: medium;">수락</button></td>
-									<td><button type="button" class="btn btn-outline-warning">거절</button>
-									</td>
 									
+									<c:if test="${request.reqStatus eq '1' and param.reqCode eq '1'}">
+									<td>
+									<button type="button" class="btn btn-outline-success" id="acceptForAdd" value="${request.reqNo}">수락</button>
+									<button type="button" class="btn btn-outline-warning" id="refuseForAdd">거절</button>
+									</td>
+									</c:if>
+									
+									<c:if test="${request.reqStatus eq '1' and param.reqCode eq '2'}">
+									<td>
+									<button type="button" class="btn btn-outline-success" id="acceptForDelete" value="${request.reqNo}">수락</button>
+									<button type="button" class="btn btn-outline-warning" id="refuseForDelete">거절</button>
+									</td>
+									</c:if>
+									
+									<c:if test="${request.reqStatus eq '1' and param.reqCode eq '3'}">
+									<td>
+									<button type="button" class="btn btn-outline-success" id="acceptForRefund" value="${request.reqNo}">수락</button>
+									<button type="button" class="btn btn-outline-warning" id="refuseForRefund">거절</button>
+									</td>
+									</c:if>
+									
+									<c:if test="${request.reqStatus eq '1' and param.reqCode eq '4'}">
+									<td>
+									<button type="button" class="btn btn-outline-success" id="acceptForAd" value="${request.reqNo}">수락</button>
+									<button type="button" class="btn btn-outline-warning" id="refuseForAd">거절</button>
+									</td>
+									</c:if>
 								</tr>
 							</c:forEach>
 							</tr>
@@ -436,6 +472,50 @@ border-color: #7fad39;
 	<!-- Footer Begin -->
 	<jsp:include page="../layout/footer.jsp" />
 	<!-- Footer End -->
+
+<script type="text/javascript">
+
+////////////////// 상점등록 REST ////////////////////
+var REQNO;
+
+$(function() {
+	$("#accept").on(
+			"click",
+	function updateBlacklist() {
+
+	var REQNO = $("#accept").val();
+	alert(REQNO);
+
+	var uri = "/request/updateRequestAddStore/" + REQNO;
+	alert(uri);
+	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
+
+		$.ajax({
+			url: uri,
+			type: "PATCH",
+			headers: headers,
+			dataType: "json",
+			
+			success: function(response) {
+								
+				if (response.result == false) {
+					alert("요청 수락에 실패하였습니다.");
+					return false;
+				}
+				alert(REQNO+"번 요청을 수락했습니다.");
+				location.reload();
+			},
+			error: function(xhr, status, error) {
+				alert("에러가 발생하였습니다.");
+				return false;
+			}
+		});
+	}); 
+});
+//////////////////상점등록 REST ////////////////////
+
+</script>
+
 
 </body>
 

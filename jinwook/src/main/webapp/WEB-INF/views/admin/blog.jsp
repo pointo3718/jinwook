@@ -14,9 +14,9 @@
 <title>유저/사장/관리자 페이지 </title>
 
 <!-- Google Font -->
-<link
-   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-   rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">	
 
 <!-- Css Styles -->
 <link rel="stylesheet"
@@ -42,12 +42,11 @@
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+   
    /*<![CDATA[*/
-
    function movePage(uri, queryString) {
       location.href = uri + queryString;
    }
-
    /*]]>*/
    
    	/////////////// 회원목록 이동 시작 ////////////////
@@ -66,14 +65,45 @@
 	});
 	//////////////// 상점목록 이동 끝 /////////////////
 	
-	/////////////// 상점등록요청 목록 이동 시작 ////////////////
+	/////////////// 신고접수 목록 이동 ////////////////
 		$(function() {
-	 	$( ".list-group-item:contains('상점 등록 요청')").on("click" , function() {
-			$(self.location).attr("href","/request/getRequestListForAdmin");
+	 	$( ".list-group-item:contains('신고 접수 목록')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/admin/listComplainAdmin");
 		});
 	});
-	//////////////// 상점등록요청 목록 이동 끝 /////////////////
-   
+	
+	/////////////// 상점등록요청 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('상점 등록 요청')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=1");
+		});
+	});
+	
+	/////////////// 상점삭제요청 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('상점 삭제 요청')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=2");
+		});
+	});
+
+	/////////////// 환급요청 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('환급 요청')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=3");
+		});
+	});
+
+	/////////////// 광고 요청 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('광고 등록 요청')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=4");
+		});
+	});
    
     /////////////// 요청대기 COUNT REST 시작 ////////////////
     $(function() {
@@ -168,9 +198,8 @@
    
    
     /////////////// 요청대기 COUNT REST 끝    ////////////////
-    
    
-   
+  
    //////////////// 블랙리스트 목록 REST 시작 /////////////////
    $(function() {
          $("#option3").on(
@@ -224,6 +253,16 @@
 </script>
 
 <style>
+*{font-family: 'Noto Sans KR', sans-serif;}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 10;
+}
+
 .mytop01 {
    padding-left: 20px;
 }
@@ -249,10 +288,15 @@
 .blog__sidebar__item {
    width: 200px;
 }
+
 .row{
    display: flex;
     justify-content: center;
     align-items: center;
+}
+
+a{
+color: #7fad39;
 }
 </style>
 
@@ -370,7 +414,7 @@
                   <p class="text-muted" style="display: inline; font-size: 12px;">
                   회원 목록을 조회할 수 있습니다
                   </p>
-                  <div class="btn-group btn-group-toggle" data-toggle="buttons" style="left:300px;">
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons" style="left:300px; z-index:-1;">
                      
                      <label class="btn btn-light active" style="font-size: 13px;"> 
                      <input type="radio" name="options" id="option1" checked>
@@ -430,11 +474,11 @@
          </div>
       </div>
    </section>
-   <!— Blog Section End —>
+   <!--   Blog Section End -->
 
-   <!— Footer Begin —>
+   <!--  Footer Begin -->
    <jsp:include page="../layout/footer.jsp" />
-   <!— Footer End —>
+   <!-- Footer End -->
 
 </body>
 

@@ -76,8 +76,6 @@ public class RequestServiceImpl implements RequestService {
 		
 		requestMapper.updateRequestStatusToAccept(request.getReqNo()); // 1. reqStatus 변경
 		
-		
-		
 		int queryResult = 0;
 		queryResult = requestMapper.updateRequestRefund(request); // 2. 진욱페이 차감
 
