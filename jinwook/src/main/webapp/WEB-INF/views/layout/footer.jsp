@@ -68,6 +68,7 @@
             </div>
         </div>
     </footer>
+</div>
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->

@@ -36,7 +36,6 @@
 </head>
 
 <body>
-<form action="/board/getBoardInquiry" method="post">
 	<div class="container">
 	
 	<div class="page-header">
@@ -69,7 +68,7 @@
 		<hr/>
 		<div class="row">
 	  		<div class="col-xs-5 col-md-3 "><strong>첨부 사진</strong></div>
-			<div class="col-xs-7 col-md-5">${file.fileName}</div>
+			<div class="col-xs-7 col-md-5">${fileVO.fileName}</div>
 		</div>
 		<hr/>
 		<div class="row">
@@ -98,7 +97,6 @@
                     <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
                </span>
               </div>
-        </form>
     </div>
     
     <div class="container">
