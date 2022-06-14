@@ -108,6 +108,15 @@
 						value="${recipe.rcpInfo}">
 				</div>
 			</div>
+			
+			<div class="form-group">
+				<label for="file" class="col-sm-offset-1 col-sm-3 control-label">레시피 썸네일</label>
+				<div class="col-sm-4">
+					<input type="file" class="form-control" id="files" name="files"
+						value="${files.fileNo}">
+						<input type="submit" value="upload">
+				</div>
+			</div>
 
 			<div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">

@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -32,24 +32,23 @@
 <script type="text/javascript">
 $(function() {
 	$("button.btn.btn-primary").on("click", function() {
-		fncAddBoardInquiry();
+		fncAddBoardAnnouncement();
 	});
 });
 
-//==> Ãß°¡µÈºÎºĞ : "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á
+//==> ì¶”ê°€ëœë¶€ë¶„ : "ì·¨ì†Œ"  Event ì²˜ë¦¬ ë°  ì—°ê²°
 $(function() {
 	$("a[href='#' ]").on("click", function() {
 		$("form")[0].reset();
 	});
 });
 
-function fncAddBoardInquiry() {
+function fncAddBoardAnnouncement() {
 	
-	$("form").attr("method", "POST").attr("action", "/board/addBoardInquiry").submit();
+	$("form").attr("method", "POST").attr("action", "/board/addBoardAnnouncement").submit();
 }
 
-var rcpNo = ${recipe.rcpNo}
-var userId = ${board.user.userId}
+<%-- var rcpNo = ${recipe.rcpNo}
 
 function updateRecipeReco() {
 	$.ajax({
@@ -58,20 +57,20 @@ function updateRecipeReco() {
 		dataType : "json",
 		data : {'rcpNo' : rcpNo, 'userId' : userId},
 		error : function() {
-			alert("Åë½Å ¿¡·¯");
+			alert("í†µì‹  ì—ëŸ¬");
 		},
 		success : function(recoCheck) {
 			if (recoCheck == 0) {
-				alert("ÃßÃµ ¿Ï·á!");
+				alert("ì¶”ì²œ ì™„ë£Œ!");
 				location.reload();
 			}
 			else if (recoCheck == 1) {
-				alert("ÃßÃµ Ãë¼Ò!");
+				alert("ì¶”ì²œ ì·¨ì†Œ!");
 				location.reload();
 			}
 		}
 	});
-}
+}--%>
 
 </script>
 
@@ -80,51 +79,58 @@ function updateRecipeReco() {
 <body>
 	<div class="container">
 		<div class="row">
-			<form method="post" action="board/addBoardAnnouncement">
-				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-					<thead>
-						<tr>
-							<th colspan="2" style="background-color: #eee; text-align: center;">°øÁö»çÇ× µî·Ï</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><input type="text" class="form-control"
-								placeholder="°øÁö»çÇ× Á¦¸ñÀ» ½áÁÖ¼¼¿ä." name="bbsTitle" maxlength="50"></td>
-						</tr>
-						<tr>
-							<td><textarea type="text" class="form-control"
-									placeholder="±Û ³»¿ë" name="bbsContent" maxlength="2048"
-									style="height: 350px;">
-                        </textarea></td>
-						</tr>
-					</tbody>
+			<form action="board/addBoardAnnouncement" method="post" enctype="multipart/form-data">
+						
+			<div class="form-group">
+		    <label for="boardTitle" class="col-sm-offset-1 col-sm-3 control-label">ê³µì§€ì‚¬í•­ ì œëª©</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="boardTitle" name="boardTitle">
+		       <span id="helpBlock" class="help-block"></span>
+		    </div>
+		   </div> 
+			<hr/><br/><br/>
+			
+			<div class="form-group">
+		    <label for="boardContent" class="col-sm-offset-1 col-sm-3 control-label">ê³µì§€ì‚¬í•­ ë‚´ìš©</label>
+		    <div class="col-sm-7">
+		      <input type="text" class="form-control" id="boardContent" name="boardContent">
+		       <span id="helpBlock" class="help-block"></span>
+		    </div>
+			</div>
+ 			<hr/><br/>
+ 			
+						<div class="form-group">
+							<label for="file" class="col-sm-offset-1 col-sm-3 control-label">ë‹¤ì¤‘ íŒŒì¼ ì—…ë¡œë“œ</label>
+							<div class="col-sm-3">
+								<!-- ì…ë ¥ì¹¸ -->
+								<input type="file" id="files" name="files"
+									multiple="multiple" placeholder="íŒŒì¼ ì„ íƒ" class="form-control">
+								<input type="submit" value="upload">
+							</div>
+						</div><br/><br/><br/><br/>
 				
-				</table>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>ÀÛ¼ºÀÚ</strong></div>
-			<div class="col-xs-7 col-md-5">${board.user.userId}</div>
+	  		<div class="col-xs-5 col-md-3"><strong>ì‘ì„±ì</strong></div>
+			<div class="col-xs-7 col-md-5">${user.userId}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>Á¶È¸¼ö</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì¡°íšŒìˆ˜</strong></div>
 			<div class="col-xs-7 col-md-5">${board.boardHits}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>ÀÛ¼ºÀÏ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì‘ì„±ì¼</strong></div>
 			<div class="col-xs-7 col-md-5">${board.writeDate}</div>
 		</div>
 		<hr/>
 		<div class="col-sm-offset-4  col-sm-4 text-center">
-			<!-- <a href="<c:url value='/board/addBoardInquiry'/>" role="button" class="btn btn-outline-info">±Û¾²±â</a> -->
-		    <button type="button" class="btn btn-primary" onclick="fncAddBoardInquiry()">µî &nbsp;·Ï</button>
-			<a class="btn btn-primary btn" href="#" role="button">Ãë&nbsp;¼Ò</a>
+		    <button type="submit" class="btn btn-primary">ë“± &nbsp;ë¡</button>
+			<a class="btn btn-primary btn" href="#" role="button">ì·¨&nbsp;ì†Œ</a>
 		</div>
 		</div>
 			</form>
 		</div>
-	</div>
 
 </body>
 

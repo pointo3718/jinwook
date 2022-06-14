@@ -180,23 +180,51 @@ public class BoardController {
 		
 		//공지사항 등록/수정 + 사진 첨부 처리
 		//페이징 처리 후 로직 추가 필요.
-//		@PostMapping(value = "addBoardAnnouncement")
-//		public String addBoardAnnouncement(final Board board, final MultipartFile[] files, Model model) {
-//			System.out.println("/board/addBoardAnnouncement: POST");
-//			
-//			try {
-//				boolean isAdded = boardService.addBoardAnnouncement(board);
-//				if (isAdded == false) {
-//					// TODO => 게시글 등록에 실패하였다는 메시지를 전달
-//				}
-//			} catch (DataAccessException e) {
-//				// TODO => 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
-//
-//			} catch (Exception e) {
-//				// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
-//			}
-//			return "redirect:/board/getBoardAnnouncementList";
-//		}
+		@PostMapping(value = "addBoardAnnouncement")
+		public String addBoardAnnouncement(Board board, HttpSession session, HttpServletRequest request, @RequestPart MultipartFile files, Model model) throws Exception {
+			System.out.println("/board/addBoardAnnouncement: POST");
+
+			Board boardVO = new Board();
+			FileVO  file  = new FileVO();
+			boardVO.setBoardTitle(request.getParameter("boardTitle"));
+			boardVO.setBoardContent(request.getParameter("boardContent"));
+
+			Map<String, Object> pagingParams = getPagingParams(board);
+			
+			String userId = ((User) session.getAttribute("user")).getUserId();
+			User user = new User();
+			user.setUserId(userId);
+			board.setUser(user);
+			
+			if(files.isEmpty()) { //업로드 할 파일이 없을 시
+				boardService.addBoardAnnouncement(boardVO);
+			} else {
+				String fileName = files.getOriginalFilename();
+				String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
+				File destinationFile; 
+				String destinationFileName;
+				String fileUrl = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img";
+				
+				do { 
+					destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension; 
+					destinationFile = new File(fileUrl + destinationFileName); 
+				} while (destinationFile.exists()); 
+				
+				destinationFile.getParentFile().mkdirs(); 
+				files.transferTo(destinationFile);
+
+				boardService.addBoardAnnouncement(board);//게시글 등록
+				
+				file.setBoardNo(board.getBoardNo());
+				file.setFileName(destinationFileName);
+				file.setFileOriName(fileName);
+				file.setFileUrl(fileUrl);
+				
+				boardService.fileInsert(file); //파일 등록
+			}
+			
+			return "redirect:/board/getBoardAnnouncementList";
+		}
 		
 	//1:1문의 목록 조회
 	@GetMapping(value = "getBoardInquiryList")
@@ -232,39 +260,29 @@ public class BoardController {
 	
 	//공지사항 상세 조회 - 파일첨부
 	@GetMapping(value = "getBoardAnnouncement")
-	public String getBoardAnnouncement(@ModelAttribute("params") Board params, 
-			@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
+	public String getBoardAnnouncement(@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
 		System.out.println("/board/getBoardAnnouncement: GET");
 		// 조회수 카운트
 		boardService.updateBoardAnnouncementHits(boardNo);
 		
-		if (boardNo == null) {
-			// TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
-			return "redirect:/board/getBoardAnnouncementList";
-		}
-		
 		Board board = boardService.getBoardAnnouncement(boardNo);
-//		if (board == null || "Y".equals(board.getDeleteYn())) {
-//			// TODO => 없는 게시글이거나, 이미 삭제된 게시글이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
-//			return "redirect:/board/list.do";
-//		}
 		model.addAttribute("board", board);
 		
 		return "board/getBoardAnnouncement";
 	}
 	
-	//1:1문의 삭제 처리
-	@PostMapping(value = "deleteBoardInquiry")
-	public String deleteBoardInquiry(@RequestParam(value = "boardNo", required = false) Integer boardNo) {
-		if (boardNo == null) {
-			// TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
-			return "redirect:/board/getBoardInquiryList";
-		}
-
-			int isDeleted = boardService.deleteBoardInquiry(boardNo);
-
-		return "redirect:/board/getBoardInquiryList";
-	}
+//	//1:1문의 삭제 처리
+//	@PostMapping(value = "deleteBoardInquiry")
+//	public String deleteBoardInquiry(@RequestParam(value = "boardNo", required = false) Integer boardNo) {
+//		if (boardNo == null) {
+//			// TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
+//			return "redirect:/board/getBoardInquiryList";
+//		}
+//
+//			int isDeleted = boardService.deleteBoardInquiry(boardNo);
+//
+//		return "redirect:/board/getBoardInquiryList";
+//	}
 	
 	//공지사항 삭제 처리
 	@PostMapping(value = "deleteBoardAnnouncement")
@@ -388,25 +406,25 @@ public class BoardController {
 			return "redirect:/board/getRecipeList?rcpNo="+recipe.getRcpNo();
 		}
 		
-		//레시피 삭제 처리
-		@PostMapping(value = "deleteRecipe")
-		public String deleteRecipe(@RequestParam(value = "rcpNo", required = false) Integer rcpNo) {
-			System.out.println("/board/deleteRecipe: POST");
-			boardService.deleteRecipe(rcpNo);
-			return "redirect:/board/getRecipeList";
-		}
+		//레시피 삭제 처리v
+//		@PostMapping(value = "deleteRecipe")
+//		public String deleteRecipe(@RequestParam(value = "rcpNo", required = false) Integer rcpNo) {
+//			System.out.println("/board/deleteRecipe: POST");
+//			boardService.deleteRecipe(rcpNo);
+//			return "redirect:/board/getRecipeList";
+//		}
 		
 		//레시피 목록 조회
-		@GetMapping(value = "getRecipeList")
+		@GetMapping(value = "getRecipeList2")
 		public String getRecipeList(@ModelAttribute("rcp") Recipe rcp, Model model) {
 			List<Recipe> getRecipeList = boardService.getRecipeList(rcp);
 			model.addAttribute("getRecipeList", getRecipeList);
-			return "board/getRecipeList";
+			return "board/getRecipeList2";
 		}
 		
 		//레시피 상세 조회 + 조회수 증가
 		//@RequestParam userId는 레시피 작성자 id
-		@GetMapping(value = "getRecipe")
+		@GetMapping(value = "getRecipe2")
 		public String getRecipe(@RequestParam(value = "rcpNo", required = false) Integer rcpNo, 
 											@RequestParam(value = "userId", required = false) String userId,
 											Model model,HttpSession session) throws Exception {
@@ -425,7 +443,7 @@ public class BoardController {
 			model.addAttribute("user2",user2);
 			model.addAttribute("recipe",recipe);
 			
-			return "board/getRecipe";
+			return "board/getRecipe2";
 		}
 		
 		//레시피 추천수 /board/updateRecipeReco	
@@ -457,8 +475,29 @@ public class BoardController {
 		
 		//상점 후기 등록 화면
 		@GetMapping(value = "addReviewView") 
-		public String addReviewView() {
+		public String addReviewView(@RequestParam(value = "orderNo", required = false) Integer orderNo, 
+				@RequestParam(value = "userId", required = false) String userId, HttpSession session, Model model) throws Exception {
 			System.out.println("/board/addReviewView : GET");
+			
+			if (orderNo == null) {
+				model.addAttribute("board", new Board());
+			} else {
+				Orders orders = boardService.getReview(orderNo);
+				User user = userService.getUser(userId);
+				if (orders == null) {
+					return "redirect:/board/list";
+					//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
+				}
+				String sessionUserId = ((User) session.getAttribute("user")).getUserId();
+			    user.setUserId(sessionUserId);
+			    
+				model.addAttribute("user", user);
+				model.addAttribute("orders", orders);
+				System.out.println(user);
+				System.out.println(orders);
+				
+			}
+			
 			return "redirect:/board/addReviewView";
 		}
 		
