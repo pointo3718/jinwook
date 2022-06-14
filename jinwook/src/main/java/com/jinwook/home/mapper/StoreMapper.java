@@ -38,6 +38,8 @@ public interface StoreMapper {
 	
 	public List<Store> getStore(int storeNo);
 	
+	public List<Store> getStoreInfo(int storeNo);
+	
 	public List<Store> getStoreWallet(Store store);
 	
 	public List<Store> getStoreRefund(int storeNo);
