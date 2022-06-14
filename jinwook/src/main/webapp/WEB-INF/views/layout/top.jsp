@@ -10,7 +10,7 @@
    <div class="humberger__menu__overlay"></div>
    <div class="humberger__menu__wrapper">
       <div class="humberger__menu__logo">
-         <a href="index"><img src="${path}/resources/static/img/logo.png"
+         <a href="#"><img src="${path}/resources/static/img/logo.png"
             alt=""></a>
       </div>
       <div class="humberger__menu__cart">
@@ -38,7 +38,7 @@
       </div>
       <nav class="humberger__menu__nav mobile-menu">
          <ul>
-            <li class="active"><a href="index">Home</a></li>
+            <li class="active"><a href="./index.html">Home</a></li>
             <li><a href="./shop-grid.html">Shop</a></li>
             <li><a href="#">Pages</a>
                <ul class="header__menu__dropdown">
@@ -77,67 +77,39 @@
                      진욱이가 당신의 처음을 응원합니다! &nbsp;>
                   </div>
                </div>
-<<<<<<< HEAD
-               <div class="col-lg-6">
-                  <div class="header__top__right">
-                     <div class="header__top__right__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-                           class="fa fa-twitter"></i></a> <a href="#"><i
-                           class="fa fa-linkedin"></i></a> <a href="#"><i
-                           class="fa fa-pinterest-p"></i></a>
-                     </div>
-                     <div class="header__top__right__language">
-                        <img src="${path}/resources/static/img/language.png" alt="">
-                        <div>English</div>
-                        <span class="arrow_carrot-down"></span>
-                        <ul>
-                           <li><a href="#">Spanis</a></li>
-                           <li><a href="#">English</a></li>
-                        </ul>
-                     </div>
-                     <div class="header__top__right__auth">
-                        <a href="login"><i class="fa fa-user"></i> Login</a>
-                     </div>
-                  </div>
-=======
                <div class="col-lg-3">
                   
->>>>>>> refs/remotes/origin/master
                </div>
             </div>
          </div>
       </div>
       <div class="sub_header" style="height: 50px;">
-      	<div class="container">
-      		<div class="row">
-      		<div class="col-lg-3">
-      			<div class="header__top__left text-left">
-					<button type="button" class="btn btn-outline-success" style="color: #7fad39; border-color: #7fad39" onclick="javascript:void(0);"> 픽업안내 > </button>
+         <div class="container">
+            <div class="row">
+            <div class="col-lg-3">
+               <div class="header__top__left text-left">
+               <button type="button" class="btn btn-outline-success" style="color: #7fad39; border-color: #7fad39" onclick="javascript:void(0);"> 픽업안내 > </button>
                   </div>
-      		</div>
-      		<div class="col-lg-6">
-      		
-      		</div>
-      		<div class="col-lg-3">
-      			<div class="header__top__right text-right">
-      				<div class="header__top__right__auth">
+            </div>
+            <div class="col-lg-6">
+            
+            </div>
+            <div class="col-lg-3">
+               <div class="header__top__right text-right">
+                  <div class="header__top__right__auth">
                         <a href="/user/login" style="word-break: break-all;"><i class="fa fa-user"></i> &nbsp;&nbsp;&nbsp;로그인&nbsp;</a>
-                        <a href="#"> <i class="fa fa-handshake-o" aria-hidden="true"></i> 회원가입</a>
+                        <a href="/user/addUser"> <i class="fa fa-handshake-o" aria-hidden="true"></i> 회원가입</a>
                      </div>
-      			</div>
-      		</div>
-      		</div>
-      	</div>
+               </div>
+            </div>
+            </div>
+         </div>
       </div>
       <div class="container">
          <div class="row">
             <div class="col-lg-3" >
                <div class="header__logo">
-<<<<<<< HEAD
-                  <a href="index"><img
-=======
                   <a href="/"><img
->>>>>>> refs/remotes/origin/master
                      src="${path}/resources/static/img/logo.png" alt="" style="width: 200px"></a>
                </div>
             </div>
