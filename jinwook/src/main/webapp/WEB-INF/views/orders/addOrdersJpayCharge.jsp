@@ -100,8 +100,6 @@
         closeBtn.addEventListener("click", e => {
             modalOff();
         })
-})
-}
     </script>
     
 </body>

@@ -32,15 +32,14 @@ public class AdminController {
 
 		
 	@GetMapping(value = "blog")
-	public String listUserAdmin() {
+	public String listUserAdmin(@ModelAttribute("user") User user, Model model) {
 		
-		/*
-		 * List<User> userList = adminService.getUserListAdmin(user);
-		 * model.addAttribute("userList", userList);
-		 */
+		List<User> userList = adminService.getUserListAdmin(user);
+		model.addAttribute("userList", userList);
 
 		return "/admin/blog";
 	}
+
 
 	
 	@GetMapping(value = "getUserAdmin")
@@ -54,7 +53,7 @@ public class AdminController {
 		User user = adminService.getUserAdmin(userId);
 		System.out.println("userid="+userId);
 		if (user == null || "0".equals(user.getRole())) {
-			// TODO => 없는 사용자이거나, 탈퇴한 사용자라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
+			// TODO => 없는 사용자이거나, 탈퇴한 사용자라는 메시지를 전달하고, 유저 리스트로 리다이렉트
 			return "redirect:/admin/listUserAdmin";
 		}
 		
