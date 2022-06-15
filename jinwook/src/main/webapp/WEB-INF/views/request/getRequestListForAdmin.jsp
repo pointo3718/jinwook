@@ -652,7 +652,18 @@ $(document).ready(function(){
 
 	alert(REQNO);
 	
-	swal("요청을 수락할까요?", "", "warning");
+	swal({
+		text : "텍스트",
+		buttons: ["취소" , "이동"]
+	})
+	.then(function(result){
+		console.log(result);
+        
+        if(result){
+        	location.href = "/";
+        }
+        
+	})
 	
 	var uri = "/request/updateRequestStatusToAccept/" + REQNO;
 	
@@ -688,48 +699,61 @@ $(document).ready(function(){
 	function updateRequestStatusToRefuse(REQNO) {
 
 	alert(REQNO);
-	
-	swal("요청을 거절할까요?", "", "warning");
-	
-	var uri = "/request/updateRequestStatusToRefuse/" + REQNO;
-	
-	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
 
-		$.ajax({
-			url: uri,
-			type: "PATCH",
-			headers: headers,
-			dataType: "json",
-			
-			success: function(response) {
-								
-				if (response.result == true) {
-					swal(REQNO+"번 요청을 거절했습니다.");
-					location.reload();
-					return true;
-				}
-				swal(response.message, "", "error");
-				
-			},
-			error: function(xhr, status, error) {
-				alert("에러가 발생하였습니다.");
-				return false;
-			}
-		});
-		
+	swal({
+		text : "텍스트",
+		buttons: ["취소" , "이동"]
+	})
+	.then(function(result){
+		console.log(result);
 	}
+	
+        if(result){
+        	
+       
+			var uri = "/request/updateRequestStatusToRefuse/" + REQNO;
+	
+			var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
+
+				$.ajax({
+					url: uri,
+					type: "PATCH",
+					headers: headers,
+					dataType: "json",
+					
+					success: function(response) {
+										
+						if (response.result == true) {
+							swal(REQNO+"번 요청을 거절했습니다.");
+							location.reload();
+							return true;
+						}
+						swal(response.message, "", "error");
+						
+					},
+					error: function(xhr, status, error) {
+						alert("에러가 발생하였습니다.");
+						return false;
+					}
+				});
+		
+        }else {
+        
+	)
+	}
+		
+	
 ////////////////// 요청 거절 REST ////////////////////////
 
 ////////////////// 목록 삭제 REST ///////////////////////
 	function deleteRequest(REQNO) {
 
-	alert(REQNO);
-	
-	swal("요청을 삭제할까요?", "", "warning");
-	
+		
 	var uri = "/request/deleteRequest/" + REQNO;
 	
 	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
+
+	swal("정말로 요청을 삭제할까요?",'warning')
 
 		$.ajax({
 			url: uri,
@@ -751,9 +775,9 @@ $(document).ready(function(){
 				alert("에러가 발생하였습니다.");
 				return false;
 			}
-		});
-		
-	}
+		})
+}
+
 ////////////////// 목록 삭제 REST ////////////////////////
 
 
