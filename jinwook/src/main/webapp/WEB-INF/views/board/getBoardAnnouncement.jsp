@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -34,9 +34,11 @@
 $(function(){
 	
 	$("#updateButton").on("click", function() {
-		self.location = "/board/updateBoardAnnouncement?boardNo=${board.boardNo}"
+		self.location = "/board/updateBoardAnnouncementView?boardNo=${board.boardNo}"
 	});
 });	
+
+
 
 
 </script>
@@ -47,41 +49,46 @@ $(function(){
 
 <div class="container">
 <div class="page-header">
-	       <h3 class=" text-info">°øÁö»çÇ× »ó¼¼</h3>
+	       <h3 class=" text-info">ê³µì§€ì‚¬í•­ ìƒì„¸</h3>
 	    </div>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>°øÁö»çÇ× Á¦¸ñ</strong></div>
+	  		<div class="col-xs-5 col-md-3"><strong>ê³µì§€ì‚¬í•­ ë²ˆí˜¸</strong></div>
+			<div class="col-xs-7 col-md-5">${board.boardNo}</div>
+		</div>
+		<hr/>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3"><strong>ê³µì§€ì‚¬í•­ ì œëª©</strong></div>
 			<div class="col-xs-7 col-md-5">${board.boardTitle}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>°øÁö»çÇ× ³»¿ë</strong></div>
+	  		<div class="col-xs-5 col-md-3"><strong>ê³µì§€ì‚¬í•­ ë‚´ìš©</strong></div>
 			<div class="col-xs-7 col-md-5">${board.boardContent}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>ÀÛ¼ºÀÚ</strong></div>
+	  		<div class="col-xs-5 col-md-3"><strong>ì‘ì„±ì</strong></div>
 			<div class="col-xs-7 col-md-5">${user.userId}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>Á¶È¸¼ö</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì¡°íšŒìˆ˜</strong></div>
 			<div class="col-xs-7 col-md-5">${board.boardHits}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>ÀÛ¼ºÀÏ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ì‘ì„±ì¼</strong></div>
 			<div class="col-xs-7 col-md-5">${board.writeDate}</div>
 		</div>
 		<hr/>
 		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>´äº¯»óÅÂ</strong></div>
+	  		<div class="col-xs-5 col-md-3 "><strong>ë‹µë³€ìƒíƒœ</strong></div>
 		<c:choose>
 				<c:when test="${board.boardInqStatus == false}">
-					´äº¯´ë±âÁß
+					ë‹µë³€ëŒ€ê¸°ì¤‘
 				</c:when>
 				<c:otherwise>
-					´äº¯ ¿Ï·á
+					ë‹µë³€ ì™„ë£Œ
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -89,7 +96,7 @@ $(function(){
 	</div>
  	<div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary" id="updateButton">¼ö &nbsp;Á¤</button>
+		      <button type="button" class="btn btn-primary" id="updateButton">ìˆ˜ &nbsp;ì •</button>
 		    </div>
 		  </div>
 

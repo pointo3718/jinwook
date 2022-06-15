@@ -18,8 +18,9 @@
 	</sql>
 	
 <resultMap type="board" id="boardSelectMap">
-   <result property="boardNo"            column="store_no"         jdbcType="INTEGER"/>   
+   <result property="boardNo"            column="board_no"         jdbcType="INTEGER"/>   
    <result property="user.userId"        column="user_id"          jdbcType="VARCHAR"/>   
+   <result property="user.role"          column="role"             jdbcType="VARCHAR"/>   
    <result property="boardTitle"         column="board_title"      jdbcType="VARCHAR"/>   
    <result property="boardContent"       column="board_content"    jdbcType="VARCHAR"/>   
    <result property="boardHits"          column="board_hits"       jdbcType="INTEGER"/>   
@@ -29,10 +30,14 @@
    <result property="boardImg2"          column="board_img2"       jdbcType="VARCHAR"/>   
    <result property="boardImg3"          column="board_img3"       jdbcType="VARCHAR"/>   
    <result property="boardInqStatus"     column="board_inq_status" jdbcType="TINYINT"/>   
+   <result property="comment.commentNo"     	 column="comment_no"       jdbcType="INTEGER"/>   
+   <result property="comment.commentContent"     column="comment_content"  jdbcType="VARCHAR"/>   
+   <result property="comment.commentWriter"      column="comment_writer"   jdbcType="VARCHAR"/>   
+   <result property="comment.commentDate"        column="comment_date"     jdbcType="DATE"/>   
 </resultMap>
 
 <resultMap type="comment" id="commentSelectMap">
-   <result property="commentNo"          column="commen_no"         jdbcType="INTEGER"/>   
+   <result property="commentNo"          column="comment_no"        jdbcType="INTEGER"/>   
    <result property="board.boardNo"      column="board_no"          jdbcType="INTEGER"/>   
    <result property="recipe.rcpNo"       column="rcp_no"      		jdbcType="INTEGER"/>   
    <result property="commentContent"     column="comment_content"   jdbcType="VARCHAR"/>   
@@ -178,7 +183,7 @@
 	<!-- 1:1문의 상세 조회: 답변대기중 또는 답변완료로 출력되어야 함 -->
 	<select id="getBoardInquiry" parameterType="int" resultType="Board" resultMap="boardSelectMap">
 		SELECT
-			b.board_title, b.board_content, b.user_id, b.write_date, b.board_inq_status, b.board_hits, c.comment_content
+			b.board_no, b.board_title, b.board_content, b.user_id, b.write_date, b.board_inq_status, b.board_hits, c.comment_content
 		FROM
 			board b, comment c
 		WHERE b.board_no = c.board_no
@@ -200,7 +205,7 @@
 		<!-- 공지사항 상세 조회: 1 -->
 	<select id="getBoardAnnouncement" parameterType="int" resultType="Board" resultMap="boardSelectMap">
 		SELECT
-			board_title, board_content, user_id, write_date, board_hits
+			board_no, board_title, board_content, user_id, write_date, board_hits
 		FROM
 			board
 		WHERE
@@ -218,7 +223,7 @@
 		WHERE
 			board_code = 0
 		AND
-			board_inq_status = false OR board_inq_status = true
+			(board_inq_status = false OR board_inq_status = true)
 		ORDER BY
 			board_no ASC
 		 LIMIT
@@ -244,9 +249,7 @@
 		DELETE 
 		FROM board
 		WHERE
-			board_code = 0
-		AND
-			board_no = #{boardNo}
+			board_no = #{boardNo} AND board_code = 0
 	</delete>
 	
 	<!--  공지사항 delete -->
@@ -254,9 +257,7 @@
 		DELETE 
 		FROM board
 		WHERE
-			board_code = 1
-		AND
-			board_no = #{boardNo}
+			board_no = #{boardNo} AND board_code = 1
 	</delete>
 	
 	<!-- 1:1문의 목록 개수 -->
@@ -264,9 +265,9 @@
 		SELECT
 			COUNT(*)
 		FROM
-			board
-		WHERE board_code = 0
-		ORDER BY board_no	
+			board b, users u
+		WHERE b.user_id = u.user_id AND (u.role='관리자' || b.user_id=#{user.userId}) AND board_code=0
+		ORDER BY board_no;
 	</select>
 	
 	<!-- 공지사항 목록 개수 -->
@@ -274,9 +275,9 @@
 		SELECT
 			COUNT(*)
 		FROM
-			board
-		WHERE board_code = 1
-		ORDER BY board_no	
+			board b, users u
+		WHERE b.user_id = u.user_id AND (u.role='관리자' || b.user_id=#{user.userId}) AND board_code=1
+		ORDER BY board_no;	
 	</select>
 	<!-- 1:1문의 목록 개수 -->
 	
@@ -429,7 +430,7 @@
 	
 	 <insert id="addComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="commentNo">
 		INSERT INTO comment (
-			<include refid="commentColumns" />
+			comment_no, board_no, rcp_no, comment_content, comment_writer, comment_date
 		) VALUES (
 			  #{commentNo:INTEGER}
 			, #{boardNo:INTEGER}
@@ -438,10 +439,19 @@
 			, #{commentWriter:VARCHAR}
 			, SYSDATE()
 		)
-	</insert> 
+	</insert>
 	
-	<!-- Comment update -->
-	<update id="updateComment" parameterType="Comment">
+	<!-- 댓글 조회 -->
+	<select id="getComment" resultType="Comment" parameterType="int" resultMap="boardSelectMap">
+    	SELECT
+    		  comment_no, comment_content, comment_writer, comment_date
+    	 FROM comment
+    	WHERE board_no = #{boardNo}
+	</select>
+	
+	
+	
+	<!-- <update id="updateComment" parameterType="Comment">
 		UPDATE comment
 		SET
 			comment_content = #{commentContent:VARCHAR}
@@ -450,7 +460,6 @@
 			comment_no = #{commentNo}
 	</update>
 	
-	<!--  Comment delete -->
 	<delete id="deleteComment" parameterType="Integer">
 		DELETE 
 		FROM comment
@@ -477,8 +486,8 @@
 		ORDER BY
 			board_no DESC,
 			comment_date DESC
-	</select>
-
+	</select> -->
+	
 	<insert id="addStoreJjim" parameterType="Jjim" useGeneratedKeys="true" keyProperty="jjimNo">
 		INSERT INTO jjim (store_no, user_id)
 		VALUES(#{storeNo}, #{userId})

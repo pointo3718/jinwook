@@ -10,11 +10,10 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
 public class Board extends CommonDTO {
 
-	private Integer boardNo;
+	private int boardNo;
 	private User user;
 	private String userId;
 	private String boardTitle;
@@ -26,6 +25,7 @@ public class Board extends CommonDTO {
 	private String boardImg2;
 	private String boardImg3;
 	private boolean boardInqStatus;
+	private Comment comment;
 	
 	/** 파일 변경 여부 */
 	private String changeYn;

@@ -20,7 +20,7 @@ public interface BoardService {
 	//공지사항 조회수 증가v
 	public int updateBoardAnnouncementHits(Integer boardNo);
 	
-	//사진 첨부v
+	//다중 사진 첨부v
 	public int fileInsert(FileVO file) throws Exception;
 
 	//1:1문의 등록v
@@ -66,9 +66,16 @@ public interface BoardService {
 	public List<Recipe> getRecipeList(Recipe rcp);
 	
 	//댓글 등록v이면서 수정v, 삭제v, 목록조회v
-	public boolean addComment(Comment comment);
-	public int deleteComment(Integer commentNo);
-	public List<Comment> getCommentList(Comment comment);
+//	public boolean addComment(Comment comment);
+//	public int deleteComment(Integer commentNo);
+//	public List<Comment> getCommentList(Comment comment);
+	
+	//댓글 조회
+	public List<Comment> getComment(int boardNo) throws Exception;
+	//댓글 등록
+	public void addComment(Comment comment) throws Exception;
+	//답변 상태 변화
+	public boolean updateBoardInqStatus(Board board);
 	
 	// 찜
 	public boolean addStoreJjim(Jjim jjim);

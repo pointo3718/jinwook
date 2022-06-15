@@ -128,8 +128,7 @@ $(function(){
 	$("#updateButton").on("click", function() {
 		self.location = "/board/updateRecipeView?rcpNo=${recipe.rcpNo}"
 	});
-});	
-
+});
 
 </script>
 </head>
@@ -473,6 +472,32 @@ $(function(){
 
     <!-- Related Blog Section Begin -->
     <section class="related-blog spad">
+     <div class="comment-box">
+                    
+   		                 <div class="comment-count">댓글 <span id="count">0</span></div>
+
+   		                 	   <!-- <span class="c-icon"><i class="fa-solid fa-user"></i>  -->
+   		                 <div class="comment-name">
+	                        <span class="anonym">작성자 : 
+	                    	    <input type="text" class="form-control" id="com_writer" placeholder="이름" name ="com_writer" value='${login.userId}' readonly  style="width: 100px; border:none;">
+	                        </span>
+	                      </div>   
+	                        	
+	                        <!-- </span> -->
+                     <!--<img src="/익명.jpg" width ="50px" alt="My Image"><!-->
+                    <div class="comment-sbox">
+                        <textarea class="comment-input" id="com_content" cols="80" rows="2" name="com_content" ></textarea>
+                        <!-- <span class="com-function-btn" type="hidden">
+                            
+                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                         </span> -->
+                    </div>
+                    	<div class="regBtn">
+                    		<button id="Comment_regist"> 댓글등록</button>
+                    	 </div>
+    
+    
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

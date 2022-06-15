@@ -46,41 +46,38 @@
    <!--  ///////////////////////// CSS ////////////////////////// -->
    
    <script type="text/javascript">
-	function fncDeleteOrdersCart(e) {
-		if (!confirm('상품을 삭제하시겠어요?')) {
-			return false;
-		}
-		
-		console.log(e);
-		const no = $(e).data("value");
-		 $.ajax({
-				url : "/orders/deleteOrdersCart/"+no,
-				dataType : "json",
-				success : function(result){
-					if(result != null){
-						alert("삭제완료");
-						self.location = "/orders/getOrdersCartList";
-					}
-				}
-			
-			});
-		
-	}
-	
-	/* 	function addOrders(){
-	$("form").attr("method" , "GET").attr("action" , "/orders/addOrders").submit();
-	} */
- 	$(function(){
-		$( "#button" ).on("click" , function() {
-			$("form").attr("method" , "GET").attr("action" , "/orders/addOrders").submit();
-		}); 
-	}); 
-	$(function(){
-		$("a[href='#' ]").on("click" , function() {
-			history.go(-1);
-		});
-	});
-	</script>
+   function fncDeleteOrdersCart(e) {
+      if (!confirm('상품을 삭제하시겠어요?')) {
+         return false;
+      }
+      
+      console.log(e);
+      const no = $(e).data("value");
+       $.ajax({
+            url : "/orders/deleteOrdersCart/"+no,
+            dataType : "json",
+            success : function(result){
+               if(result != null){
+                  alert("삭제완료");
+                  self.location = "/orders/getOrdersCartList";
+               }
+            }
+         
+         });
+      
+   }
+   
+    $(function(){
+      $( "#button" ).on("click" , function() {
+         $("form").attr("method" , "GET").attr("action" , "/orders/addOrders").submit();
+      }); 
+   }); 
+   $(function(){
+      $("a[href='#' ]").on("click" , function() {
+         history.go(-1);
+      });
+   });
+   </script>
    
 </head>
 
@@ -282,7 +279,6 @@
     </section>
     <!-- Hero Section End -->
 
-<<<<<<< HEAD
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="${path}/resources/static/img/breadcrumb.jpg">
         <div class="container">
@@ -320,9 +316,9 @@
                             <tbody>
                             <!--  /////////////////////////////////////////////////// -->
                             <c:set var="i" value="0" />
-                           	 	<c:set var="total" value="0" />
-                           	 	<c:forEach var="cart" items="${getCartList}">
-                           	 	<c:set var="i" value="${ i+1 }" />
+                                  <c:set var="total" value="0" />
+                                  <c:forEach var="cart" items="${getCartList}">
+                                  <c:set var="i" value="${ i+1 }" />
                                 <tr>
                                  <td hidden="cartNo" id="cartNo" name="cartNo" value="${cart.cartNo}">+cart.cartNo</td>
                                     <td class="shoping__cart__item">
@@ -347,9 +343,7 @@
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close" onClick="fncDeleteOrdersCart(this)" data-value="${cart.cartNo}"></span>
                                     </td>
-                                    <td>
                                     <c:set var="total" value="${total + (cart.product.price*cart.prodCount) }" />
-                                    </td>
                                 </tr>
                                </c:forEach>
                         </table>
@@ -368,7 +362,7 @@
                     <div class="shoping__checkout">
                         <h5>주문 총액</h5>
                         <ul>
-                            <li >주문 금액 <span id="orderPrice" name="orderPrice"	>${total}</span></li>
+                            <li >주문 금액 <span id="orderPrice" name="orderPrice"   >${total}</span></li>
                         </ul>
                         <a href="#" class="primary-btn" id="button" >주문하기</a>
                     </div>
@@ -456,35 +450,15 @@
     <script src="${path}/resources/static/js/owl.carousel.min.js"></script>
     <script src="${path}/resources/static/js/main.js"></script>
 
-=======
-  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <a class="btn btn-outline btn" href="#" role="button">더담으러가기</a>
-		      <button class="btn btn-outline" id="button" name="button" >주문하기</button>
-			</div>
-		</div>
-</form>
-		<br><br>
-		<hr>
-		<a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
-		<a href="/board/addBoardInquiryView">1:1문의 등록(파일 업로드)</a> <hr>
-		<a href="/board/addRecipeView">레시피 등록 화면</a> <hr>
-		<a href="/orders/getOrdersList">주문내역</a> <hr>
-		<a href="/orders/getOrdersJpayList">진욱페이내역</a> <hr>
-		<a href="/orders/getOrdersNoticeList">알림내역</a> <hr>
-		<a href="/store/getStore?storeNo=10000" class="primary-btn">SHOP</a><hr>
-		<a href="/orders/addOrdersJpayPassword">진욱페이비밀번호등록창</a> <hr>
-		<a href="/orders/addOrdersJpayCharge">충전창</a> <hr>
-		<a href="/orders/listOrdersJpayCharge">금액설정창</a> <hr>
-		
-     <!--  table End /////////////////////////////////////-->
-      
-    <!--  화면구성 div End /////////////////////////////////////-->  
-    
-    <!-- PageNavigation Start... -->
-   <!--  PageNavigation End... -->    
->>>>>>> refs/heads/Song
-
+      <a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
+      <a href="/board/addBoardInquiryView">1:1문의 등록(파일 업로드)</a> <hr>
+      <a href="/orders/getOrdersList">주문내역</a> <hr>
+      <a href="/orders/getOrdersJpayList">진욱페이내역</a> <hr>
+      <a href="/orders/getOrdersNoticeList">알림내역</a> <hr>
+      <a href="/store/getStore?storeNo=10000" class="primary-btn">SHOP</a><hr>
+      <a href="/orders/addOrdersJpayPassword">진욱페이비밀번호등록창</a> <hr>
+      <a href="/orders/addOrdersJpayCharge">충전창</a> <hr>
+      <a href="/orders/listOrdersJpayCharge">금액설정창</a> <hr>
 </body>
 
 </html>

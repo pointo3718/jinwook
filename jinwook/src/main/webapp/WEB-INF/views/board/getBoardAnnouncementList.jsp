@@ -69,7 +69,26 @@ body {
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-
+function fncDeleteAnnouncement(e) {
+	if (!confirm('상품을 삭제하시겠어요?')) {
+		return false;
+	}
+	
+	console.log(e);
+	const no = $(e).data("value");
+	 $.ajax({
+			url : "/board/deleteBoardAnnouncement/"+no,
+			dataType : "json",
+			success : function(result){
+				if(result != null){
+					alert("삭제완료");
+					self.location = "/board/getBoardAnnouncementList";
+				}
+			}
+		
+		});
+	
+}
 
    //=============    검색 / page 두가지 경우 모두  Event  처리 =============   
    function fncGetUserList(currentPage) {
@@ -187,6 +206,7 @@ body {
                   <td align="Center">${ board.boardNo }</td>
                   <td align="left">${board.boardTitle}</td>
                   <td align="left">${board.writeDate}</td>
+                  <td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteAnnouncement(this)">X</button></td>
                </tr>
             </c:forEach>
 

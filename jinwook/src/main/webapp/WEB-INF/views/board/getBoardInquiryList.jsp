@@ -88,14 +88,6 @@ function fncDeleteInquiry(e) {
 	
 }
 
-/*<![CDATA[*/
-
-function movePage(uri, queryString) {
-   location.href = uri + queryString;
-}
-
-/*]]>*/
-
    //=============    검색 / page 두가지 경우 모두  Event  처리 =============   
    function fncGetUserList(currentPage) {
       $("#currentPage").val(currentPage)
