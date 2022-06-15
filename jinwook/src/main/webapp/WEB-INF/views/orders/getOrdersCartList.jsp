@@ -282,7 +282,7 @@
     </section>
     <!-- Hero Section End -->
 
-<<<<<<< HEAD
+
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="${path}/resources/static/img/breadcrumb.jpg">
         <div class="container">
@@ -456,7 +456,7 @@
     <script src="${path}/resources/static/js/owl.carousel.min.js"></script>
     <script src="${path}/resources/static/js/main.js"></script>
 
-=======
+
   <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <a class="btn btn-outline btn" href="#" role="button">더담으러가기</a>
@@ -483,7 +483,7 @@
     
     <!-- PageNavigation Start... -->
    <!--  PageNavigation End... -->    
->>>>>>> refs/heads/Song
+
 
 </body>
 

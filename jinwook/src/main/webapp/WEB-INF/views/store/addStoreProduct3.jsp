@@ -52,7 +52,7 @@
 <style>
 .row {
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -111,20 +111,23 @@
 	}
 
 	$(function() {
-		$("#soldout").on("click", function fncIsSoldout() {
+		$("#soldout").on("click", 
+				function fncIsSoldout() {
 
 			const btnElement = document.getElementById('soldout');
 			var soldout = $("#soldout").data("soldout");
-
+			
 			alert(soldout)
-
+			
 			if (btnElement.innerText === '매진') {
-				btnElement.innerText = '판매';
+				btnElement.innerText = '매진취소';
 			} else
 				btnElement.innerText = '매진';
 
+			
 			console.log(soldout);
 			var prodNo = $("#soldout").data("value");
+
 
 			$.ajax({
 				url : "isSoldout/" + prodNo + "/" + soldout,
@@ -142,6 +145,8 @@
 	});
 
 	//============= "매진 버튼 변경"  Event 연결 =============
+
+
 
 	//============= "상품 수정"  Event 연결 =============
 
@@ -245,12 +250,12 @@
 	<!-- Blog Section Begin -->
 	<section class="blog spad">
 		<div class="container">
-			<div class="row">
+			<div class="row" style="justify-content: space-around;">
 				<div class="col-xs-4 col-xs-5"
 					style="width: 200px; margin-right: 30px;">
 					<div class="blog__sidebar" style="width: 200px;">
 
-						<div class="blog__sidebar__item" style="padding-bottom: 450px;">
+						<div class="blog__sidebar__item" style="margin-bottom: 925px;">
 
 							<h5 class="text-center" style="margin-bottom: 0px;">
 								<strong>My Page</strong>
@@ -292,104 +297,201 @@
 								<button type="button"
 									class="list-group-item list-group-item-action">1:1
 									문의내역</button>
-
 							</div>
-
-
 
 						</div>
 
 
-
 					</div>
-
 				</div>
 
 				<!-- 상점 정보 수정 -->
-				<!-- 상품등록 Section Begin -->
-				<div class="shoping-cart spad"
-					style="width: 900px; padding-top: 0px;">
-					<div class="container" style="width: 830px;">
-						<div class="row"
-							style="justify-content: space-between; width: 1150px;">
-							<div class="col-lg-9">
-								<div class="shoping__cart__table">
-									<table>
-										<thead>
-											<tr>
-												<th class="shoping__product">상품사진</th>
-												<th class="text-center" style="width: 300px;">이름</th>
-												<th class="text-center" style="width: 700px;">상품설명</th>
-												<th class="text-center" style="width: 400px;">원산지</th>
-												<th class="text-center" style="width: 200px;">가격</th>
-												<th class="text-center" style="width: 200px;"></th>
-												<th class="text-center" style="width: 200px;"></th>
-												<th class="text-center" style="width: 100px;"></th>
-												<th></th>
-											</tr>
-										</thead>
-										<tbody>
-											<!--  /////////////////////////////////////////////////// -->
-											<c:set var="i" value="0" />
-											<c:set var="total" value="0" />
-											<c:forEach var="store" items="${store}">
-												<c:set var="i" value="${ i+1 }" />
-												<tr>
-													<td hidden="prodNo" id="prodNo" name="prodNo"
-														value="${store.product.prodNo}">+store.product.prodNo</td>
-													<td class="shoping__cart__item"><img
-														src="${path}/resources/static/img/cart/cart-1.jpg"></td>
-													<td><strong style="font-size: 20px;">${store.product.prodName}</strong>
-													</td>
-													<td><strong style="font-size: 20px;">${store.product.prodInfo}</strong></td>
-													<td class="shoping__cart__price">${store.product.prodOrign}
-													</td>
-													<td class="shoping__cart__price">${store.product.price}원
-													</td>						
-													<td class="shoping__cart__price">
+				<div id="productTable">
+					<div style="margin-bottom: 880px;">
+						<h4 class="text-left">
+							<strong>상품 등록</strong>
+
+							<hr size="10px">
+						</h4>
+
+
+						<table class="table table-hover"
+							style="width: 730px; heigh: 300px;">
+
+							<form class="form-horizontal" id="profileUpdate">
+
+								</div>
+								<div class="row" style="justify-content: space-between;">
+									<div class="col-lg-8 col-md-6">
+										<c:forEach var="store" items="${store}" begin="0" end="0">
+											<div class="row" style="width: 900px;">
+												<div class="col-lg-2">
+													<div class="checkout__input">
+														<p>
+															<Strong>상품 이름<span>*</span></Strong>
+														</p>
+														<input type="text" value="${store.product.prodName}"
+															id="prodName" placeholder="${store.product.prodName}"
+															style="color: #595959;" readonly>
+													</div>
+												</div>
+												<div class="col-lg-2">
+													<div class="checkout__input">
+														<p>
+															<Strong>상품 가격<span>*</span></Strong>
+														</p>
+														<input type="text" value="${store.product.price}"
+															id="price" placeholder="${store.product.price}"
+															style="color: #595959;">
+													</div>
+												</div>
+												<div class="col-lg-2">
+													<div class="checkout__input">
+														<p>
+															<Strong>상품 설명<span>*</span></Strong>
+														</p>
+														<input type="text" value="${store.product.prodInfo}"
+															id="prodInfo" placeholder="${store.product.prodInfo}"
+															style="color: #595959;">
+													</div>
+												</div>
+												<div class="col-lg-2">
+													<div class="checkout__input">
+														<p>
+															<Strong>상품 사진<span>*</span></Strong>
+														</p>
+														<input type="text" value="${store.product.prodImg}"
+															id="prodImg" placeholder="${store.product.prodImg}"
+															style="color: #595959;">
+													</div>
+												</div>
+												<div class="col-lg-2">
+													<div class="checkout__input">
+														<p>
+															<Strong>상품 원산지<span></span></Strong>
+														</p>
+														<input type="text" value="${store.product.prodOrign}"
+															id="prodOrign" placeholder="${store.product.prodOrign}"
+															style="color: #595959;">
+													</div>
+												</div>
+
+												<button type="button" data-value="${store.product.prodNo}"
+													name="buttons" class="btn btn-primary btn-sm"
+													onClick="fncUpdateStoreProduct(this)">수정</button>
+												&nbsp;&nbsp;&nbsp;
+
+												<button type="button" id="soldout"
+													data-value="${store.product.prodNo}"
+													data-soldout="${store.product.soldout}"
+													class="btn btn-danger btn-sm">매진</button>
+												&nbsp;&nbsp;&nbsp;
+
+												<button type="button" data-value="${store.product.prodNo}"
+													name="buttons" class="btn btn-secondary btn-sm"
+													onClick="fncDeleteStoreProduct(this)">X</button>
+
+
+												<input type="hidden" id="storeNo"
+													data-value="${store.storeNo}" value="${store.storeNo}" />
+
+											</div>
+										</c:forEach>
+
+										<div class="row" style="justify-content: space-between;">
+											<div class="col-lg-8 col-md-6">
+												<c:forEach var="store" items="${store}" begin="1">
+													<div class="row" style="width: 900px;">
+														<div class="col-lg-2">
+															<div class="checkout__input">
+																<p></p>
+																<input type="text" value="${store.product.prodName}"
+																	placeholder="${store.product.prodName}"
+																	style="color: #595959;" name="prodName" name="prodName"
+																	readonly>
+															</div>
+														</div>
+														<div class="col-lg-2">
+															<div class="checkout__input">
+																<p></p>
+																<input type="text" value="${store.product.price}"
+																	id="price" placeholder="${store.product.price}"
+																	style="color: #595959;">
+															</div>
+														</div>
+														<div class="col-lg-2">
+															<div class="checkout__input">
+																<p></p>
+																<input type="text" value="${store.product.prodInfo}"
+																	id="prodInfo" placeholder="${store.product.prodInfo}"
+																	style="color: #595959;">
+															</div>
+														</div>
+														<div class="col-lg-2">
+															<div class="checkout__input">
+																<p></p>
+																<input type="text" value="${store.product.prodImg}"
+																	id="prodImg" placeholder="${store.product.prodImg}"
+																	style="color: #595959;">
+															</div>
+														</div>
+														<div class="col-lg-2">
+															<div class="checkout__input">
+																<p></p>
+																<input type="text" value="${store.product.prodOrign}"
+																	id="prodOrign" placeholder="${store.product.prodOrign}"
+																	style="color: #595959;">
+															</div>
+														</div>
+
+
+
 														<button type="button" data-value="${store.product.prodNo}"
 															name="buttons" class="btn btn-primary btn-sm"
 															onClick="fncUpdateStoreProduct(this)">수정</button>
-													</td>
-													<td class="shoping__cart__price">
+														&nbsp;&nbsp;&nbsp;
+
 														<button type="button" id="soldout"
 															data-value="${store.product.prodNo}"
 															data-soldout="${store.product.soldout}"
 															class="btn btn-danger btn-sm">매진</button>
-													</td>
-													<td class="shoping__cart__price">
+														&nbsp;&nbsp;&nbsp;
+
 														<button type="button" data-value="${store.product.prodNo}"
 															name="buttons" class="btn btn-secondary btn-sm"
-															onClick="fncDeleteStoreProduct(this)">X</button> <input
-														type="hidden" id="storeNo" data-value="${store.storeNo}"
-														value="${store.storeNo}" />
+															onClick="fncDeleteStoreProduct(this)">X</button>
 
-													</td>
 
-												</tr>
-											</c:forEach>
-									</table>
-									<div id="plus">
-										<p class="original"></p>
-									</div>
+														<input type="hidden" id="storeNo"
+															data-value="${store.storeNo}" value="${store.storeNo}" />
 
-									<div class="col-lg-2"
-										style="justify-content: space-around; margin-left: 410px;">
-										<button type="button" id="plus2"
-											class="btn btn-outline-secondary btn-sm"
-											style="border-color: #eeeeee;">+</button>
-									</div>
-									<!--  /////////////////////////////////////////////////// -->
-								</div>
-							</div>
-						</div>
+
+													</div>
+												</c:forEach>
+
+												<!-- 추가 버튼 -->
+
+												<div id="plus">
+													<p class="original"></p>
+												</div>
+
+												<div class="col-lg-2"
+													style="justify-content: space-around; margin-left: 410px;">
+													<button type="button" id="plus2"
+														class="btn btn-outline-secondary btn-sm"
+														style="border-color: #eeeeee;">+</button>
+												</div>
+						</table>
+
+
+
+
+
 					</div>
-					<!-- 상품등록 Section End -->
-
-
+					<div class="text-center"></div>
 				</div>
-
 			</div>
+		</div>
 	</section>
 	<!-- Blog Section End -->
 
