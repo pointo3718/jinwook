@@ -1,221 +1,131 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html>
+<html lang="zxx">
 
-<html lang="ko">
-	
 <head>
-	<meta charset="UTF-8">
-	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	
-	<script type="text/javascript" src="../javascript/calendar.js"></script>
-	
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-       body > div.container{
-        	border: 4px solid #D6CDB7;
-            margin-top: 10px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">   
+   
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
     
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-function fncAddOrders() {
-	
-	const name=$("input[name='buyerName']").val();
-	const phone=$("input[name='buyerPhone']").val();
-	const pick=$("input[name='plusTime']").val();
-	
-	if(name == null || name.length <1){
-		alert("이름은 반드시 입력하셔야 합니다.");
-		return;
+     <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+	<style type="text/css">
+	.checkout__input {
+	width: 550px;
 	}
-	
-	if(phone == null || phone.length <1){
-		alert("전화번호는 반드시 입력하셔야 합니다.");
-		return;
-	}
-	
-	if(pick == null || pick.length <1){
-		alert("픽업시간은 반드시 입력하셔야 합니다.");
-		return;
-	}
-	
-	/* document.addPurchase.submit(); action="/purchase/addPurchase*/
-	$("form").attr("method" , "POST").attr("action" , "/orders/addOrders").submit();
-}
-	$(function(){
-		$( "button" ).on("click" , function() {
-			fncAddOrders();
-		}); 
-	});
-	$(function(){
-		$("a[href='#' ]").on("click" , function() {
-			history.go(-1);
-		});
-	});
-</script>
+	</style>
 </head>
 
 <body>
+   <!-- Header Begin -->
+   <jsp:include page="../layout/top.jsp" />
+   <!-- Header End --> 
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="${path}/resources/static/img/breadcrumb.jpg">
         <div class="container">
-        	<a class="navbar-brand" href="/user/index">진욱이네</a>
-   		</div>
-   	</div>
-   	<!-- ToolBar End /////////////////////////////////////-->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>주문/결제</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>주문/결제</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
 
-<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	
-		<h1 class="bg-primary text-center">상 품 구 매</h1>
-<form class="form-horizontal" name="addOrders">
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="row">
+            </div>
+            <div class="checkout__form">
+                <h4>구매자 정보</h4>
+                <form action="#">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                           <div class="checkout__input">
+                           		<p>구매자 이름<span>*</span></p>
+                            	<input type="text">
+                            </div>
+                            <div class="checkout__input">
+                                <p>구매자 전화번호<span>*</span></p>
+                                <input type="text">
+                            </div>
+                            <div class="checkout__input">
+                                <p>픽업희망시간<span>*</span></p>
+                                <input type="text" placeholder="Street Address" class="checkout__input__add">
+                            </div>
+                            <div class="checkout__input">
+                                <p>요청사항</p>
+                                <input type="text">
+                            </div>
+                            <div class="checkout__input">
+                                <p>쿠폰<span></span></p>
+                                <input type="text">
+                            </div>
+                            <div class="checkout__input">
+                                <p>쿠폰할인율<span></span></p>
+                                <input type="text">
+                            </div>
+                            
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="checkout__order">
+                                <h4>고객님 주문리스트</h4>
+                                <div class="checkout__order__products">상품들 <span >총액</span> <span style="margin-right: 100px;">수량</span></div>
+                                <ul>
+                                <c:forEach var="cart" items="${getCartList}">
+                                    <li>${cart.product.prodName}<span hidden="price" value="${cart.product.price}"></span> <span >${cart.product.price*cart.prodCount}원</span><span style="margin-right: 100px;">${cart.prodCount}</span></li>
+                                	<c:set var="total" value="${total + (cart.product.price*cart.prodCount) }" />
+                                </c:forEach>
+                                </ul>
+                                <div class="checkout__order__subtotal">총상품금액 <span>${total}원</div>
+                                <div class="checkout__order__total">회원등급할인 <spanv id="grade" name="grade" value="${user.grade}"></span></div>
+                                <div class="checkout__order__total">실결제금액 <span>$750.99</span></div>
+                                <button type="submit" class="site-btn">주문하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
 
- <input type="hidden" name="userId" value="${user.userId}" /> 
-		주문자 정보
-		<div class="form-group">
-		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">이 름</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="buyerName" name="buyerName" value="${user.userName}">
-		       <span id="helpBlock" class="help-block">
-		      </span>
-		     </div>
-		</div>
-
-		  <div class="form-group">
-		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">전 화 번 호</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="buyerPhone" name="buyerPhone" value="${user.phone}">
-		       <span id="helpBlock" class="help-block">
-		      </span>
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">픽업희망시간</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="plusTime" name="plusTime">분
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">요청사항</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="orderReq" name="orderReq">
-		    </div>
-		  </div>
-		</br>
-<!-- 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		상품 정보 -->
-		
-<table class="table table-hover table-striped" >
-         
-       <thead>
-          <tr>
-            <th align="center">상품사진</th>
-            <th align="left" >상품이름</th>
-            <th align="left">상품설명</th>
-            <th align="left">상품가격</th>
-            <th align="left">상품수량</th>
-          </tr>
-       </thead>
-        
-   	<tbody>
-        <c:forEach var="cart" items="${getCartList}">
-         <tr>
-           <td align="center">${cart.product.prodImg}</td>
-           <td align="left">${cart.product.prodName}</td>
-           <td align="left">${cart.product.prodInfo}</td>
-           <td align="left">${cart.product.price}</td>
-           <td align="left">${cart.prodCount}</td>
-         </tr>
-          </c:forEach>
-        
-    </tbody>
-     
-</table>
-
-		  </br>
-		 결제 정보 
-
-		 <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">총 상품 금액</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="ct_input_g" id="orderPrice" name="orderPrice" value="${cart.orders.orderPrice}" readonly>
-		    </div>
-		  </div>
-
-		  <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">쿠 폰</label>
-		    <div class="col-sm-4">
-		    <select class="ct_input_g" id="couponType" name="couponType">
-		    
-		    <option>선택안함</option>
-		    <option value="couponType=0">첫가입 이벤트</option>
-		    <option value="couponType=1">첫구매 이벤트</option>
-		    <option value="couponType=2">생일을 축하합니다</option>
-		    <option value="couponType=3">추천인 이벤트</option>
-		    </select>
-		    
-		    </div>
-		  </div>
-	
-			<div class="form-group">
-		     <label for="price" class="col-sm-offset-1 col-sm-3 control-label">회원 등급할인</label>
-		      <div class="col-sm-4">
-		       <input type="text" class="ct_input_g" id="grade" name="grade" value="${user.grade}" readonly>
-		      </div>
-		    </div>
-
-			<div class="form-group">
-		     <label for="price" class="col-sm-offset-1 col-sm-3 control-label">총 결제금액</label>
-		      <div class="col-sm-4">
-		     
-		       <c:choose>
-			       <c:when test="${user.grade=='프랜즈'}">
-			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice"   value="${cart.orders.orderPrice*0.99}" readonly>
-			      </c:when>
-			      <c:when test="${user.grade=='패밀리'}">
-			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice*0.97}" readonly>
-			      </c:when>
-			      <c:when test="${user.grade=='퍼스트'}">
-			      	 <%-- <fmt:parseNumber var= "total" integerOnly= "true" value= " ${cart.orders.orderPrice*0.95} " /> --%>
-			      	 <%-- <fmt:parseNumber type="total" maxFractionDigits="0" value= " ${cart.orders.orderPrice*0.95} " /> --%>
-			      <td align="left"><fmt:formatNumber var="total" pattern="###" value="${cart.orders.orderPrice*0.95}"/></td>
-			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${total}" readonly>
-			      </c:when>
-			     <c:when test="${user.grade=='일반'}">
-			      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice}" readonly>
-			      </c:when>
-		      </c:choose>
-		                 
-		      </div>
-		    </div>
-
-
-		<div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
-		      <button type="button" class="btn btn-primary"  >주&nbsp;문	</button>
-			</div>
-		</div>
-		</form>
+   <!--  Footer Begin -->
+   <jsp:include page="../layout/footer.jsp" />
+   <!-- Footer End -->
 
 </body>
+
 </html>
