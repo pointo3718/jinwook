@@ -142,7 +142,7 @@ public class UserServiceImpl implements UserService{
 //		simpleMailMessage.setSubject("[진욱이네] 아이디 안내를 드립니다.");
 
 		MimeMessage mimeMessage = mailSender.createMimeMessage();
-		
+			System.out.println("==============sendIdEmail================");
 		try {
 	         
 	         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");

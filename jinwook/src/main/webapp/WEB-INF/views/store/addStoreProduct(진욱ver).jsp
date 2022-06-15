@@ -322,6 +322,7 @@
 												<th class="text-center" style="width: 700px;">상품설명</th>
 												<th class="text-center" style="width: 400px;">원산지</th>
 												<th class="text-center" style="width: 200px;">가격</th>
+												<th class="text-center" style="width: 200px;">수량</th>
 												<th class="text-center" style="width: 200px;"></th>
 												<th class="text-center" style="width: 200px;"></th>
 												<th class="text-center" style="width: 100px;"></th>
@@ -345,7 +346,14 @@
 													<td class="shoping__cart__price">${store.product.prodOrign}
 													</td>
 													<td class="shoping__cart__price">${store.product.price}원
-													</td>						
+													</td>
+													<td class="shoping__cart__quantity">
+														<div class="quantity">
+															<div class="pro-qty">
+																<input type="text" value="">
+															</div>
+														</div>
+													</td>
 													<td class="shoping__cart__price">
 														<button type="button" data-value="${store.product.prodNo}"
 															name="buttons" class="btn btn-primary btn-sm"
@@ -360,10 +368,11 @@
 													<td class="shoping__cart__price">
 														<button type="button" data-value="${store.product.prodNo}"
 															name="buttons" class="btn btn-secondary btn-sm"
-															onClick="fncDeleteStoreProduct(this)">X</button> <input
-														type="hidden" id="storeNo" data-value="${store.storeNo}"
-														value="${store.storeNo}" />
-
+															onClick="fncDeleteStoreProduct(this)">X</button>
+															
+															<input type="hidden" id="storeNo"
+															data-value="${store.storeNo}" value="${store.storeNo}" />
+															
 													</td>
 
 												</tr>

@@ -1,5 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+<html lang="ko">	
+<style>
+	.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+	.dropdown-toggle::after { transition: transform 0.15s linear;}
+	.show.dropdown .dropdown-toggle::after {transform: translateY(3px);}
+	.dropdown-menu {margin-top: 0;} /* hover 메뉴때문에 넣음 */
+</style> 
+<!-- Page Preloder -->
+   <div id="preloder">
+      <div class="loader"></div>
+   </div>
 
 
    <!-- Humberger Begin -->
@@ -12,7 +31,7 @@
       <div class="humberger__menu__cart">
          <ul>
             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+            <li><a href="/orders/getOrdersCartList"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
          </ul>
          <div class="header__cart__price">
             item: <span>$150.00</span>
@@ -84,7 +103,9 @@
             <div class="row">
             <div class="col-lg-3">
                <div class="header__top__left text-left">
+               <c:if test="${sessionScope.user.role=='사용자'||sessionScope.user.role=='사장님'}">
                <button type="button" class="btn btn-outline-success" style="color: #7fad39; border-color: #7fad39" onclick="javascript:void(0);"> 픽업안내 > </button>
+               </c:if>
                   </div>
             </div>
             <div class="col-lg-6">
@@ -92,9 +113,44 @@
             </div>
             <div class="col-lg-3">
                <div class="header__top__right text-right">
-                  <div class="header__top__right__auth">
-                        <a href="/user/login" style="word-break: break-all;"><i class="fa fa-user"></i> &nbsp;&nbsp;&nbsp;로그인&nbsp;</a>
-                        <a href="/user/addUser"> <i class="fa fa-handshake-o" aria-hidden="true"></i> 회원가입</a>
+                  <div class="header__top__right__auth" style="display:flex;">
+                  <c:if test="${user == null}">
+                        <a href="/user/login" style="word-break: break-all; margin-right:20px;"><i class="fa fa-sign-in" aria-hidden="true"></i>로그인&nbsp;</a>
+                        <a href="/user/addUser">회원가입 <i class="fa fa-user" aria-hidden="true"></i></a>
+                  </c:if>
+                  <c:if test="${user != null}">
+                  <c:if test="${sessionScope.user.role == '사용자'}">
+					  <div class="dropdown">
+                        <a href="/admin/blog" style="word-break: break-all; margin-right:20px;" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-star" aria-hidden="true"></i >${sessionScope.user.grade } ${sessionScope.user.nickName } 님</a>
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					    <a class="dropdown-item" href="/user/login">마이페이지</a>
+					    <a class="dropdown-item" href="#">xx action</a>
+					    <a class="dropdown-item" href="#">xx else here</a>
+					  </div>
+					    </div>
+                  </c:if>
+                  <c:if test="${sessionScope.user.role == '사장님'}">
+					  <div class="dropdown">
+                        <a href="/admin/blog" style="word-break: break-all; margin-right:20px;" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i >${sessionScope.user.userName } 사장님</a>
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					    <a class="dropdown-item" href="/admin/blog">사장님페이지</a>
+					    <a class="dropdown-item" href="#">xx action</a>
+					    <a class="dropdown-item" href="#">xx else here</a>
+					  </div>
+					    </div>
+                  </c:if>
+                  <c:if test="${sessionScope.user.role == '관리자'}">
+					  <div class="dropdown">
+                        <a href="/admin/blog" style="word-break: break-all; margin-right:20px;" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-heart" aria-hidden="true"></i >${sessionScope.user.userName } 관리자님</a>
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					    <a class="dropdown-item" href="/user/login">관리자페이지</a>
+					    <a class="dropdown-item" href="#">xx action</a>
+					    <a class="dropdown-item" href="#">xx else here</a>
+					  </div>
+					    </div>
+                  </c:if>
+                        <a href="/user/logout">로그아웃  <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                  </c:if>
                      </div>
                </div>
             </div>
@@ -178,7 +234,7 @@
                <div class="header__cart" style="padding-bottom: 0px; margin-top: 10px">
                   <ul>
                      <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>&nbsp;&nbsp;
-                     <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                     <li><a href="/orders/getOrdersCartList"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                   </ul>
                </div>
             </div>

@@ -194,35 +194,35 @@ public class BoardServiceImpl implements BoardService {
       return recipeList;
    }
 
-   //댓글 등록
-   @Override
-   public boolean addComment(Comment comment) {
-      int queryResult = 0;
-
-      if (comment.getCommentNo() == null) {
-         queryResult = boardMapper.addComment(comment);
-      } else {
-         queryResult = boardMapper.updateComment(comment);
-      }
-
-      return (queryResult == 1) ? true : false;
-   }
-
-   @Override
-   public int deleteComment(Integer commentNo) {
-      return boardMapper.deleteComment(commentNo);
-   }
-
-   @Override
-   public List<Comment> getCommentList(Comment comment) {
-      List<Comment> commentList = Collections.emptyList();
-
-      int commentTotalCount = boardMapper.getCommentTotalCount(comment);
-   if (commentTotalCount > 0) {
-         commentList = boardMapper.getCommentList(comment);
-      }
-      return commentList;
-   }
+//   //댓글 등록
+//   @Override
+//   public boolean addComment(Comment comment) {
+//      int queryResult = 0;
+//
+//      if (comment.getCommentNo() == null) {
+//         queryResult = boardMapper.addComment(comment);
+//      } else {
+//         queryResult = boardMapper.updateComment(comment);
+//      }
+//
+//      return (queryResult == 1) ? true : false;
+//   }
+//
+//   @Override
+//   public int deleteComment(Integer commentNo) {
+//      return boardMapper.deleteComment(commentNo);
+//   }
+//
+//   @Override
+//   public List<Comment> getCommentList(Comment comment) {
+//      List<Comment> commentList = Collections.emptyList();
+//
+//      int commentTotalCount = boardMapper.getCommentTotalCount(comment);
+//   if (commentTotalCount > 0) {
+//         commentList = boardMapper.getCommentList(comment);
+//      }
+//      return commentList;
+//   }
    
    @Override
    public boolean addStoreJjim(Jjim jjim) {
@@ -379,6 +379,24 @@ public class BoardServiceImpl implements BoardService {
 	public int fileInsert(FileVO file) throws Exception {
 		return boardMapper.fileInsert(file);
 	}
+
+	//댓글 조회
+	@Override
+	public List<Comment> getComment(int boardNo) throws Exception {
+		return boardMapper.getComment(boardNo);
+	}
+
+	@Override
+	public void addComment(Comment comment) throws Exception {
+		boardMapper.addComment(comment);
+	}
+
+	//답변 상태 변화
+	@Override
+	public boolean updateBoardInqStatus(Board board) {
+		return boardMapper.updateBoardInqStatus(board);
+	}
+
 
 
 }

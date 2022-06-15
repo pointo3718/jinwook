@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.board.BoardService;
@@ -110,8 +111,8 @@ public class BoardController {
 
 		Map<String, Object> pagingParams = getPagingParams(board);
 		
-		String userId = ((User) session.getAttribute("user")).getUserId();
 		User user = new User();
+		String userId = ((User) session.getAttribute("user")).getUserId();
 		user.setUserId(userId);
 		board.setUser(user);
 		
@@ -145,13 +146,41 @@ public class BoardController {
 		return "redirect:/board/getBoardInquiryList";
 	}
 	
+	// 1:1문의 수정 화면v
+	@GetMapping(value = "updateBoardInquiryView")
+	public String updateBoardInquiryView(@RequestParam(value = "boardNo", required = false) Integer boardNo,
+			@RequestParam(value = "userId", required = false) String userId, HttpSession session, Model model)
+					throws Exception {
+		System.out.println("/board/updateBoardInquiryView: GET");
+		
+		if (boardNo == null) {
+			model.addAttribute("board", new Board());
+		} else {
+			Board board = boardService.getBoardInquiry(boardNo);
+//					User user = userService.getUser(userId);
+			if (board == null) {
+				return "redirect:/board/getBoardInquiryList";
+				// getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
+			}
+//					String sessionUserId = ((User) session.getAttribute("user")).getUserId();
+//					user.setUserId(sessionUserId);
+			
+//					model.addAttribute("user", user);
+			model.addAttribute("board", board);
+			
+		}
+		return "board/updateBoardInquiryView"; // 보여줄 화면: .jsp
+	}
+	
 	//1:1문의 수정
 	@PostMapping(value = "updateBoardInquiry")
-	public String updateBoardInquiry(Board board, MultipartFile file) throws Exception {
+	public String updateBoardInquiry(@ModelAttribute("board") Board board, 
+													@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) throws Exception {
+		System.out.println("/board/updateBoardInquiry: POST");
 		
 		boardService.updateBoardInquiry(board);
 		
-		return "redirect:/board/getBoardInquiryList";
+		return "redirect:/board/getBoardInquiryList?boardNo="+board.getBoardNo();
 	}
 	
 	//공지사항 등록 화면
@@ -178,8 +207,7 @@ public class BoardController {
 			return "board/addBoardAnnouncementView"; //보여줄 화면: .jsp
 		}
 		
-		//공지사항 등록/수정 + 사진 첨부 처리
-		//페이징 처리 후 로직 추가 필요.
+		//공지사항 등록 + 사진 첨부 처리
 		@PostMapping(value = "addBoardAnnouncement")
 		public String addBoardAnnouncement(Board board, HttpSession session, HttpServletRequest request, @RequestPart MultipartFile files, Model model) throws Exception {
 			System.out.println("/board/addBoardAnnouncement: POST");
@@ -226,6 +254,41 @@ public class BoardController {
 			return "redirect:/board/getBoardAnnouncementList";
 		}
 		
+		// 공지사항 수정 화면v
+		@GetMapping(value = "updateBoardAnnouncementView")
+		public String updateBoardAnnouncementView(@RequestParam(value = "boardNo", required = false) Integer boardNo,
+				@RequestParam(value = "userId", required = false) String userId, HttpSession session, Model model)
+				throws Exception {
+			System.out.println("/board/updateBoardAnnouncementView: GET");
+			
+			if (boardNo == null) {
+				model.addAttribute("board", new Board());
+			} else {
+				Board board = boardService.getBoardAnnouncement(boardNo);
+//				User user = userService.getUser(userId);
+				if (board == null) {
+					return "redirect:/board/getBoardAnnouncementList";
+					//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
+				}
+//				String sessionUserId = ((User) session.getAttribute("user")).getUserId();
+//				user.setUserId(sessionUserId);
+		    
+//				model.addAttribute("user", user);
+				model.addAttribute("board", board);
+
+			}
+			return "board/updateBoardAnnouncementView"; // 보여줄 화면: .jsp
+		}
+		
+		// 공지사항 수정 처리v
+		@PostMapping(value = "updateBoardAnnouncement")
+		public String updateBoardAnnouncement(@ModelAttribute("board") Board board,
+				@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
+			System.out.println("/board/updateBoardAnnouncement: POST");
+			boardService.updateBoardAnnouncement(board);
+			return "redirect:/board/getBoardAnnouncementList?boardNo=" + board.getBoardNo();
+		}
+		
 	//1:1문의 목록 조회
 	@GetMapping(value = "getBoardInquiryList")
 	public String getBoardInquiryList(@ModelAttribute("board") Board board, Model model) {
@@ -246,7 +309,8 @@ public class BoardController {
 	
 	//1:1문의 상세 조회
 	@GetMapping(value = "getBoardInquiry")
-	public String getBoardInquiry(@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
+	public String getBoardInquiry(
+			@RequestParam(value = "boardNo", required = false) int boardNo, Model model) throws Exception {
 		System.out.println("/board/getBoardInquiry: GET");
 		
 		// 조회수 카운트
@@ -255,17 +319,37 @@ public class BoardController {
 		Board board = boardService.getBoardInquiry(boardNo);
 		model.addAttribute("board", board);
 		
+		List<Comment> commentList = boardService.getComment(board.getBoardNo());
+		model.addAttribute("commentList", commentList);
+		
 		return "board/getBoardInquiry";
+	}
+	
+	// 1:1 문의 답변(댓글) 작성
+	@RequestMapping(value = "/addComment", method = RequestMethod.POST)
+	public String addComment(Comment comment) throws Exception {
+		System.out.println("댓글작성: POST");
+
+		boardService.addComment(comment);
+		
+		return "redirect:/board/getBoardInquiry?boardNo="+comment.getBoardNo();
 	}
 	
 	//공지사항 상세 조회 - 파일첨부
 	@GetMapping(value = "getBoardAnnouncement")
-	public String getBoardAnnouncement(@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
+	public String getBoardAnnouncement(@RequestParam(value = "boardNo", required = false) Integer boardNo, 
+			@RequestParam(value = "userId", required = false) String userId,
+			Model model, HttpSession session) throws Exception {
 		System.out.println("/board/getBoardAnnouncement: GET");
 		// 조회수 카운트
 		boardService.updateBoardAnnouncementHits(boardNo);
-		
+		//공지사항 작성자 id
+		User user1 = userService.getUser(userId);
+		User user2 = userService.getUser(((User) session.getAttribute("user")).getUserId());
 		Board board = boardService.getBoardAnnouncement(boardNo);
+		
+		model.addAttribute("user1",user1);
+		model.addAttribute("user2",user2);
 		model.addAttribute("board", board);
 		
 		return "board/getBoardAnnouncement";

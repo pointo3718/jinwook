@@ -70,8 +70,8 @@ public class UserController {
 
 		System.out.println("/user/addUser : POST");
 		//Business Logic
-		//일반회원, 사장님, 관리자 구분 가입
-		user.setRole("일반");
+		//사용자, 사장님, 관리자 구분 가입
+		user.setRole("사용자");
 		System.out.println("=====================12312312312312312312312");
 		userService.addUser(user);
 		
@@ -79,6 +79,11 @@ public class UserController {
 		return "/user/loginView";
 	}
 	
+	@GetMapping("addUserSelec")
+	public String addUserSelec()throws Exception{
+		
+		return "/user/addUserSelec";
+	}
 
 	@RequestMapping( value="getUser", method=RequestMethod.GET )
 	public String getUser( @RequestParam("userId") String userId , Model model ) throws Exception {
@@ -122,9 +127,13 @@ public class UserController {
 	
 	
 	@GetMapping("login")
-	public String login() throws Exception{
+	public String login(HttpSession session) throws Exception{
 		
 		System.out.println("/user/logon : GET");
+		User user = (User)session.getAttribute("user");
+		if(user != null) {
+			return "redirect:/user/index";
+		}
 
 		return "/user/loginView";
 	}
@@ -137,10 +146,8 @@ public class UserController {
 		//Business Logic
 		User dbUser=userService.getUser(user.getUserId());
 		
-		System.out.println("-=-=-=-=-=-=-=-=-=-"+dbUser+"------------=-=-=-=-=");
 
 		if(dbUser == null) {
-			System.out.println("id null=--------------------------");
 			return "/user/loginView";
 		}
 		
@@ -153,12 +160,14 @@ public class UserController {
 		if( !(user.getPassword().equals(dbUser.getPassword()))){
 			return "/user/loginView";
 		}
-		session.setAttribute("user", dbUser);
-		
+		System.out.println(dbUser+"123123123123123123123123213123");
+		user = dbUser;
+		session.setAttribute("user", user);
+		System.out.println(user+"--------------------------------------------------------");
 //		model.addAttribute("msg", "로그인 성공");
 //		model.addAttribute("url", "login");
 		
-		return "index2";
+		return "index";
 	}
 		
 	
@@ -169,7 +178,7 @@ public class UserController {
 		
 		session.invalidate();
 		
-		return "index2";
+		return "index";
 	}
 	
 	

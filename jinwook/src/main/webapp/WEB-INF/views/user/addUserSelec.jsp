@@ -27,7 +27,10 @@
 	<link
 	   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
 	   rel="stylesheet">
-	
+	 <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+  />
 	<!-- Css Styles -->
 	<link rel="stylesheet"
 	   href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
@@ -341,86 +344,14 @@
 				
 				<div class="form-group">	 
 		<h1 class="ss text-center">회 원 가 입</h1>
+		<hr>
 		<br><br>
 	<!--  	//////////form Start ///////////////////////////////////// -->
-		<form class="form-horizontal" style="font-size:15px;">
-		
-		  <div class="form-group">
-		<hr><br>
-		    <label for="userId" class=" col-sm-3 control-label" >아 이 디</label>
-		    <div class="col-sm-6"   >
-		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required oninput = "checkId()" >
-					<span class="id_ok">사용 가능한 아이디입니다.</span>
-					<span class="id_already">사용 중인 아이디입니다.</span>
-				<!-- <button class="idChk" type="button" id="idChk" onclick="checkId()" style="width:100px; height:50px;" value="N"  >중복확인</button> -->
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="password" class=" col-sm-3 control-label" style="justify-content:center;"><a>비밀번호</a></label>
-		    <div class="col-sm-6" >
-		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" >
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="password2" class="col-sm-offset-0 col-sm-3 control-label"><a>비밀번호 확인</a></label>
-		    <div class="col-sm-6">
-		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" >
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="userName" class="col-sm-offset-0 col-sm-3 control-label"><a>이름</a></label>
-		    <div class="col-sm-6">
-		      <input type="text" maxlength='10' class="userName" id="userName" name="userName" placeholder="회원이름" >
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="birth" class="col-sm-offset-0 col-sm-3 control-label"><a>생년월일</a></label>
-		    <div class="col-sm-6">
-		      <input type="text" maxlength='8' class="birth" id="birth" name="birth" placeholder="생년월일" >
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="nickName" class="col-sm-offset-0 col-sm-3 control-label"><a>닉네임</a></label>
-		    <div class="col-sm-6">
-		      <input type="text" maxlength='20' class="nickName" id="nickName" name="nickName" placeholder="닉네임" style=" display:inline-block">
-		      <button class="nickNameChk" type="button" id="nickNameChk" onclick="checkNickName()" value="N" style=" display:inline-block">중복확인</button>
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="phone" class="col-sm-offset-0 col-sm-3 control-label"><a>휴대전화번호</a></label>
-		     <div class="col-sm-6">
-		      <input type="text" class="phone" id="phone" name="phone" placeholder="번호">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="gender" class=" col-sm-3 control-label">성별</label>
-		    <div class="col-sm-2" style="display:flex;">
-		    	<input type="radio" 	name="gender" value="남" style="margin-right:10px;" /> 남 
-		    	<input type="radio" 	name="gender" value="여"style="margin-left:10px; margin-right:10px;" />여
-		  </div>
-		  </div>
-		   <div class="form-group">
-		    <label for="email" class=" col-sm-3 control-label">이메일</label>
-		    <div class="col-sm-4">
-		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="이메일">
-		      <button class="emailChk" type="button" id="emailChk" onclick="checkEmail()" value="N">중복확인</button> 
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <div class="col-sm-offset-3  col-sm-6 text-center">
-		      <button type="button" class="bts site-btn"  >가입하기</button>
-			<!--   <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a> -->
-		<br><br><br><br><br><br>
-		    </div>
-		  </div>
+		<form class="form-horizontal">
+		<div class="text-center" style="font-size:300px; display:flex; border-right:thick solid;">
+				 <i class="fa fa-user-plus" aria-hidden="true" href="" ></i>
+				 <i class="fa fa-user-plus" aria-hidden="true" ></i>
+		</div>
 		</form>
 		</div>
 	</div>

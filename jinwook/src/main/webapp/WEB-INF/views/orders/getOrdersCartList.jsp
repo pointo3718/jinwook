@@ -12,10 +12,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>진욱이네 | Template</title>
 
-	<!-- Google Font -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">   
+   <!-- Google Font -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">   
    
     <!-- Css Styles -->
     <link rel="stylesheet" href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
@@ -36,20 +36,20 @@
    <style type="text/css">
    *{font-family: 'Noto Sans KR', sans-serif;}
 
-	.sticky {
-	  position: -webkit-sticky;
-	  position: sticky;
-	  top: 0;
-	  background: #ffffff;
-	  z-index: 10;
-	}
-	
-	.row {
-	   display: flex;
-	   justify-content: center;
-	   align-items: center;
-	   
-	}
+   .sticky {
+     position: -webkit-sticky;
+     position: sticky;
+     top: 0;
+     background: #ffffff;
+     z-index: 10;
+   }
+   
+   .row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+   }
    </style>
    <script type="text/javascript">
    function fncDeleteOrdersCart(e) {
