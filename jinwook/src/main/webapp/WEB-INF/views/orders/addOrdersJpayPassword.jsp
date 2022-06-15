@@ -149,10 +149,7 @@
 <input type='button' value='addopen' id='btnOpen'>
 <div id='modal'>
 	<div id='content'>
-		<!-- <input type='button' value='X' class="close" id='btnClose'/> -->
-		<form>
-		<button class="close" id='btnClose'>X</button>
-		</form>
+		<input type='button' value='X' class="close" id='btnClose'/>
 		<div class="title">
 			<h2 class="h3">
 	   		   <span style="color : #7fad39">진욱페이</span>
@@ -232,7 +229,7 @@
 	    </div>
 	</div>
 </div>
-<script>
+ <script>
 var btnOpen  = document.getElementById('btnOpen');
 var btnClose = document.getElementById('btnClose');
 
@@ -421,8 +418,8 @@ function PwCheck1(pw) {
         _this1.handleListener();
         _this1.getPw();
     }();
-}
 let pwCheck = new PwCheck(123456);
+}
 </script>
 
 
