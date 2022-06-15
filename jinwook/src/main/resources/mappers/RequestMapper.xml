@@ -23,6 +23,7 @@
 	   <result property="adTitle"  column="ad_title"    jdbcType="VARCHAR"/>      
 	   <result property="adContent"  column="ad_content"    jdbcType="VARCHAR"/>      
 	   <result property="adImg"  column="ad_img"    jdbcType="VARCHAR"/>      
+	   <result property="reqDeleteYn"  column="req_delete_yn"    jdbcType="BOOLEAN"/>      
 	</resultMap>
 
 
@@ -265,7 +266,7 @@
 	<select id="getRequestListForAdmin" parameterType="Criteria" resultMap="requestSelectMap">
 		SELECT
 			r.req_no, s.store_no, s.store_name, u.user_id, u.user_name, r.ad_title,
-			r.req_date, r.req_status, r.refund_money 
+			r.req_date, r.req_status, r.refund_money, r.req_delete_yn
 		FROM
 			store s, users u, request r
 		WHERE
@@ -274,6 +275,8 @@
 			u.user_id = r.user_id
 			AND 
 			r.req_code = ${reqCode}
+			AND
+			r.req_delete_yn=false
 		LIMIT
 			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
@@ -288,7 +291,9 @@
 		WHERE
 			r.user_id = u.user_id 
 			AND
-			r.req_code = ${reqCode}  
+			r.req_code = ${reqCode}
+			AND
+			r.req_delete_yn = false  
 		
 	</select>
 
@@ -340,5 +345,7 @@
 			req_code = ${reqCode} 
 			AND
 			req_status = 1
+			AND
+			req_delete_yn = false
 	</select>
 </mapper>
