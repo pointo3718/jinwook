@@ -56,18 +56,18 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	 <style>
     	 .row{ 
-        	/* border: 3px solid #D6CDB7; */
             margin-top: 10px;
             justify-content: center;
             align-items: center;
+           
         }
         .find_id{
         	
         }
-       /*  .form-group{
+         .form-group{
        		 justify-content: center;
            	 align-items: center;
-        } */
+        } 
         input{
           width:100px;
 		  height:50px;
@@ -96,13 +96,13 @@
            	  width : 350px;
         }
         .button1{
-			  background-color: #7fad39; /* Green */
+			  background-color: #7fad39; 
 			  border: none;
 			  color: white;
 			  width : 350px;
 			  }
         .button2{
-			  background-color: white; /* Green */
+			  background-color: white; 
 			  width : 350px;
 			  border: 1px solid #7fad39;
 			  color: #7fad39;
@@ -205,20 +205,20 @@
 		  
 					  <div class="form-group">
 					    <label for="userId" class="col-sm-2 control-label"></label>
-					    <div class="col-sm-3">
+					    <div class="col-sm-3" style="font-size:15px;">
 					      <input type=   "text" class="userId" name="userId" id="userId"  placeholder="아이디를 입력해주세요" required="required" >
 					    </div>
 					  </div>
 					  
 					  <div class="form-group">
 					    <label for="password" class="col-sm-2 control-label"></label>
-					    <div class="col-sm-6">
+					    <div class="col-sm-6" style="font-size:15px;">
 					      <input type="password" class="password" name="password" id="password" placeholder="패스워드를 입력해주세요" >
 					    </div>
 					  </div>
 					  	<br/><br/>
 					  <div class="form-group text-center">
-					    <a class="find_id" href="findIdEmail">아이디 찾기</a><a> | </a><a class="find_password" href="findPhone">비밀번호 찾기</a>
+					    <a class="find_id" href="findIdEmail"> &nbsp;아이디 찾기</a><a> | </a><a class="find_password" href="findPhone">비밀번호 찾기</a>
 					  </div>
 					  <div class="form-group" style="text-align: center">
 					    <div class="col-sm-offset-2 col-sm-5 text-center">

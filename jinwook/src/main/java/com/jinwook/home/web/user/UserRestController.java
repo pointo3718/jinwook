@@ -184,8 +184,10 @@ public class UserRestController {
 	@PostMapping("findIdEmail")
 	public ResponseEntity<Object> findIdEmail(@ModelAttribute("user") User user) throws Exception{
 	    System.out.println("=====SEND METHOD=====");
+	    System.out.println(user);
 		User dbUser =userService.findIdEmail(user);
 	    user = dbUser;
+	   
 	    
 	    if(dbUser != null) {
 	        userService.sendIdEmail(user);
