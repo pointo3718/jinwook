@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
 
 <style>
+
 *{font-family: 'Noto Sans KR', sans-serif;}
 
 .sticky {
@@ -46,6 +47,7 @@
     justify-content: center;
     align-items: center;
 }
+
 </style>
 
 </head>

@@ -9,7 +9,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.jsp"><img src="${path}/resources/static/img/logo.png" alt=""></a>
+                            <a href="./index.jsp"><img src="${path}/resources/static/img/footerlogo.png" alt="" style="height:120px;"></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>

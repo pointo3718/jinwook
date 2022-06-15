@@ -64,20 +64,23 @@ public class RequestServiceImpl implements RequestService {
 	public boolean addRequestRefund(Request request) {
 		int queryResult = 0;
 		queryResult = requestMapper.addRequestRefund(request);
-
+		
+		
 		return (queryResult == 1) ? true : false;
 	}
 	
 	
 	// ========== 환급 요청 수락 ===========
-	// 1. reqStatus 변경   2. 상점 등록
+	// 1. 진욱    2. reqStatus 변경
 	@Override
 	public boolean updateRequestRefund(Request request) {
-		
-		requestMapper.updateRequestStatusToAccept(request.getReqNo()); // 1. reqStatus 변경
-		
 		int queryResult = 0;
-		queryResult = requestMapper.updateRequestRefund(request); // 2. 진욱페이 차감
+		
+		queryResult = requestMapper.updateRequestRefund(request); // 1. 진욱페이 차감
+		
+		if(queryResult == 1) {
+			requestMapper.updateRequestStatusToAccept(request.getReqNo()); // 2. reqStatus 변경
+		}
 
 		return (queryResult == 1) ? true : false;
 	}
