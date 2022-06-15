@@ -31,8 +31,8 @@ class StoreServiceTest {
 		store.setStoreIntro("우리상점짱짱이다");
 		store.setStorePhone("010-2222-3333");
 		store.setStoreImage("진욱진욱.jpg");
-		store.setStartTime(LocalDateTime.now());
-		store.setEndTime(LocalDateTime.now());
+//		store.setStartTime(LocalDateTime.now());
+//		store.setEndTime(LocalDateTime.now());
 		store.setHoliday("충청도");
 		store.setBank("신한은행");
 		store.setAccNo("110-111-1111");

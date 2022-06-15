@@ -25,7 +25,7 @@ public class Request extends CommonDTO  {
 	private String adContent;
 	private String adImg;
 	private int countPickup;
-	
+	private boolean reqDeleteYn;
 	
 	
 	public Request() {}

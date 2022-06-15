@@ -64,15 +64,22 @@ public interface BoardMapper {
 	//조인 필요: recipe, comment, recommend
 	public Recipe getRecipe(Integer rcpNo);
 	public List<Recipe> getRecipeList(Recipe rcp);
-	
+
 	//댓글 등록
-	public int addComment(Comment comment);
+//	public int addComment(Comment comment);
 	//댓글 수정
-	public int updateComment(Comment comment);
-	//댓글 삭제
-	public int deleteComment(Integer commentNo);
-	//특정 게시글에 포함된 댓글 목록을 조회하는 SELECT 쿼리를 호출
-	public List<Comment> getCommentList(Comment comment);
+//	public int updateComment(Comment comment);
+//	//댓글 삭제
+//	public int deleteComment(Integer commentNo);
+//	//특정 게시글에 포함된 댓글 목록을 조회하는 SELECT 쿼리를 호출
+//	public List<Comment> getCommentList(Comment comment);
+	
+	//댓글 조회
+	public List<Comment> getComment(int boardNo) throws Exception;
+	//댓글 등록
+	public void addComment(Comment comment) throws Exception;
+	//답변 상태 변화
+	public boolean updateBoardInqStatus(Board board);
 	
 	// 찜 등록 rest test v
 	public int addStoreJjim(Jjim jjim);

@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
     
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,13 +24,19 @@
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
- 		body {
-            padding-top : 50px;
-        }
-     </style>
-
+	 <style type="text/css">
+   
+  </style>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+     
 <script type="text/javascript">
+
+$(function(){
+	
+	$("#updateButton").on("click", function() {
+		self.location = "/board/updateBoardInquiryView?boardNo=${board.boardNo}"
+	});
+});	
 
 </script>
 
@@ -41,6 +48,11 @@
 	<div class="page-header">
 	       <h3 class=" text-info">1:1문의 상세</h3>
 	    </div>
+		<div class="row">
+	  		<div class="col-xs-5 col-md-3"><strong>1:1문의번호</strong></div>
+			<div class="col-xs-7 col-md-5">${board.boardNo}</div>
+		</div>
+		<hr/>
 		<div class="row">
 	  		<div class="col-xs-5 col-md-3"><strong>1:1문의 제목</strong></div>
 			<div class="col-xs-7 col-md-5">${board.boardTitle}</div>
@@ -83,32 +95,44 @@
 			</c:choose>
 			<!-- <div class="col-xs-7 col-md-5">${board.boardInqStatus}</div> -->
 		</div>
-		<hr/>
-		
-		 <!--                     추가                         -->
-    <!--  댓글  -->
-    <div class="container">
-        <label for="content">답변</label>
-        <form name="commentInsertForm">
-            <div class="input-group">
-               <input type="hidden" name="bno" value="${board.boardNo}"/>
-               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
-               <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
-               </span>
-              </div>
-    </div>
-    
-    <div class="container">
-        <div class="commentList"></div>
-    </div>
-</div>
-		<hr/>
+<!-- 댓글 -->
+<div id="comment">
+  <ol class="commentList">
+    <c:forEach items="${commentList}" var="board">
+      <li>
+        <p>
+        작성자 : ${board.comment.commentWriter}<br/></p>
+         <p>
+        작성 날짜 :  <fmt:formatDate value="${board.comment.commentDate}" pattern="yyyy-MM-dd" />
+        </p> 
+
+        <p>${board.comment.commentContent}</p>
+      </li>
+    </c:forEach>   
+  </ol>
+</div>	
+
+<form method="post" action="/board/addComment">
+  <p>
+  	<label>댓글 작성자</label><input type="text" name="writer">
+  </p>
+  <p>
+  	<textarea rows="5" cols="50" name="content"></textarea>
+  </p>
+  <p>
+  	<input type="hidden" name="boardNo" value="${getBoardInquiry.boardNo}">
+  	<button type="submit">댓글 작성</button>
+  </p>
+  
+</form>
+
+<div class="form-group">
+		    <div class="col-sm-offset-4  col-sm-4 text-center">
+		      <button type="button" class="btn btn-primary" id="updateButton">수 &nbsp;정</button>
+		    </div>
+	</div>
 </div>
 
-</div>
-</form>
-	
 </body>
 
 </html>
