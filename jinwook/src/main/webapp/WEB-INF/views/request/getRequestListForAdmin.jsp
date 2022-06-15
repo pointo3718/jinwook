@@ -40,6 +40,12 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+	integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		 crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	/*<![CDATA[*/
@@ -197,7 +203,31 @@
 		}, "json");
 	}
 	/*[- end of function -]*/
-	 /////////////// 요청대기 COUNT REST 끝  ////////////////
+	
+	
+	////////////// 남은 픽업 /////////////
+	$(function() {
+			countPickup();
+		});
+	
+		function countPickup() {
+	
+			var uri = "countPickup/STORENO";
+	
+			$.get(uri, function(response) {
+			
+					var countPickupHtml = "";
+	
+					countPickupHtml += `
+						<a href="#" title="Homzzang.com" data-toggle="popover" data-trigger="hover" data-placement="bottom"  data-content="countPickup(\${response.countPickup});" >남은 픽업</a>
+						`;
+						
+					 $(".countPick").remove();
+					$(".countPickHead").html(countPickupHtml);
+				
+			}, "json");
+		}
+/////////////// 요청대기 COUNT REST 끝  ////////////////
 
 </script>
 
@@ -245,13 +275,19 @@
 }
 
 .btn-outline-success{
-color: #7fad39;
-border-color: #7fad39;
+	color: #7fad39;
+	border-color: #7fad39;
 }
 
 a{
-color: #7fad39;
+	color: #7fad39;
 }
+
+.swal-button{
+	background-color: #7fad39;
+	font-size: 12px;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+				}
 </style>
 
 
@@ -260,7 +296,7 @@ color: #7fad39;
 <body>
 
 	<!-- Header Begin -->
-	<jsp:include page="../layout/top.jsp" />
+	<jsp:include page="../layout/top.jsp" flush="true" />
 	<!-- Header End -->
 
 	<!-- Breadcrumb Section Begin -->
@@ -406,6 +442,8 @@ color: #7fad39;
 								<th scope="col">전화번호</th>
 								<th scope="col">구분</th>
 								<th scope="col">&nbsp;</th>
+								
+								
 							</tr>
 						</thead>
 
@@ -416,40 +454,56 @@ color: #7fad39;
 								<c:set var="request" value="${request}" />
 								<c:set var="i" value="${ i+1 }" />
 								<tr>
+									<c:if test="${request.reqDeleteYn == false}">
+									
 									<th scope="row">${ i }</th>
 									<td align="left"
 										style="color: forestgreen"><a
 										href="/admin/getUserAdmin?userId=${request.reqNo}">${request.reqNo}</a></td>
-									<td align="left">${request.userId}</td>
 									<td align="left">${request.user.userName}</td>
-									<td align="left">${request.reqDate}</td>
+									<td align="left">${request.store.storeNo}</td>
 									
 									<c:if test="${request.reqStatus eq '1' and param.reqCode eq '1'}">
-									<td>
-									<button type="button" class="btn btn-outline-success" id="acceptForAdd" value="${request.reqNo}">수락</button>
-									<button type="button" class="btn btn-outline-warning" id="refuseForAdd">거절</button>
+									<td style="padding-top: 5px; padding-bottom: 5px;">
+									<button type="button" class="btn btn-outline-success" id="acceptForAdd" onClick="updateRequestAddStore(${request.reqNo});">승인</button>
+									<button type="button" class="btn btn-outline-warning" id="refuse" onClick="updateRequestStatusToRefuse(${request.reqNo});">거절</button>
 									</td>
 									</c:if>
 									
 									<c:if test="${request.reqStatus eq '1' and param.reqCode eq '2'}">
-									<td>
-									<button type="button" class="btn btn-outline-success" id="acceptForDelete" value="${request.reqNo}">수락</button>
-									<button type="button" class="btn btn-outline-warning" id="refuseForDelete">거절</button>
+									<td class="countPickHead"style="padding-top: 5px; padding-bottom: 5px;">
+									<button type="button" class="btn btn-outline-success" id="acceptForDelete" onClick="deleteStore(${request.reqNo}, '${request.store.storeNo}');">승인</button>
+									<button type="button" class="btn btn-outline-warning" id="refuse" onClick="updateRequestStatusToRefuse(${request.reqNo});">거절</button>
+									<span class="countPick">
+									남은 픽업
+									</span>
 									</td>
 									</c:if>
 									
 									<c:if test="${request.reqStatus eq '1' and param.reqCode eq '3'}">
-									<td>
-									<button type="button" class="btn btn-outline-success" id="acceptForRefund" value="${request.reqNo}">수락</button>
-									<button type="button" class="btn btn-outline-warning" id="refuseForRefund">거절</button>
+									<td style="padding-top: 5px; padding-bottom: 5px;">
+									<button type="button" class="btn btn-outline-success acceptForRefund" id="acceptForRefund" onClick="updateRequestRefund(${request.reqNo}, '${request.userId}');">승인</button>
+									<button type="button" class="btn btn-outline-warning" id="refuse" onClick="updateRequestStatusToRefuse(${request.reqNo});">거절</button>
 									</td>
 									</c:if>
 									
 									<c:if test="${request.reqStatus eq '1' and param.reqCode eq '4'}">
-									<td>
-									<button type="button" class="btn btn-outline-success" id="acceptForAd" value="${request.reqNo}">수락</button>
-									<button type="button" class="btn btn-outline-warning" id="refuseForAd">거절</button>
+									<td style="padding-top: 5px; padding-bottom: 5px;">
+									<button type="button" class="btn btn-outline-success" id="acceptForAd" onClick="updateRequestStatusToAccept(${request.reqNo});">승인</button>
+									<button type="button" class="btn btn-outline-warning" id="refuse" onClick="updateRequestStatusToRefuse(${request.reqNo});">거절</button>
 									</td>
+									</c:if>
+									
+									<c:if test="${request.reqStatus ne '1'}">
+									<td>
+									&nbsp;
+									</td>
+									</c:if>
+									
+									 <td class="shoping__cart__item__close">
+                                        <span class="icon_close text-center" onClick="deleteRequest(${request.reqNo})"></span>
+                                    </td>
+									
 									</c:if>
 								</tr>
 							</c:forEach>
@@ -468,22 +522,32 @@ color: #7fad39;
 		</div>
 	</section>
 	<!-- Blog Section End -->
+	
+	<div class="container">
 
+	<a href="#" title="Homzzang.com" data-toggle="popover" data-trigger="hover" data-placement="top"  data-content="홈페이지제작관리">홈짱닷컴</a>
+	</div>
+	
 	<!-- Footer Begin -->
 	<jsp:include page="../layout/footer.jsp" />
 	<!-- Footer End -->
 
 <script type="text/javascript">
 
+$(document).ready(function(){
+
+    $('[data-toggle="popover"]').popover();   
+
+});
+
 ////////////////// 상점등록 REST ////////////////////
-var REQNO;
+	
+	var REQNO;
+	var USERID;
+	var STORENO;
+	
+	function updateRequestAddStore(REQNO) {
 
-$(function() {
-	$("#accept").on(
-			"click",
-	function updateBlacklist() {
-
-	var REQNO = $("#accept").val();
 	alert(REQNO);
 
 	var uri = "/request/updateRequestAddStore/" + REQNO;
@@ -510,12 +574,190 @@ $(function() {
 				return false;
 			}
 		});
-	}); 
-});
-//////////////////상점등록 REST ////////////////////
+	} 
+////////////////// 상점 등록 REST ////////////////////
+
+////////////////// 상점 삭제 REST ////////////////////
+	function deleteStore(REQNO, STORENO) {
+
+	alert(REQNO);
+	alert(STORENO);
+
+	var uri = "/request/deleteStore/" + REQNO + "/" + STORENO;
+	alert(uri);
+	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
+
+		$.ajax({
+			url: uri,
+			type: "PATCH",
+			headers: headers,
+			dataType: "json",
+			
+			success: function(response) {
+								
+				if (response.result == false) {
+					alert("요청 수락에 실패하였습니다.");
+					return false;
+				}
+				alert(REQNO+"번 요청을 수락했습니다.");
+				location.reload();
+			},
+			error: function(xhr, status, error) {
+				alert("에러가 발생하였습니다.");
+				return false;
+			}
+		});
+	}
+////////////////// 상점 삭제 REST //////////////////////
+
+//////////////////환급 수락 REST ///////////////////////
+	function updateRequestRefund(REQNO, USERID) {
+
+	alert(REQNO);
+	alert(USERID);
+	
+	swal("요청을 수락할까요?", "", "warning");
+	
+	var uri = "/request/updateRequestRefund/" + REQNO + "/" + USERID;
+	
+	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
+
+		$.ajax({
+			url: uri,
+			type: "PATCH",
+			headers: headers,
+			dataType: "json",
+			
+			success: function(response) {
+								
+				if (response.result == true) {
+					swal(REQNO+"번 요청을 수락했습니다.", "", "success");
+					location.reload();
+					return true;
+				}
+				swal(response.message, "", "error");
+				
+			},
+			error: function(xhr, status, error) {
+				alert("에러가 발생하였습니다.");
+				return false;
+			}
+		});
+		
+	}
+////////////////// 환급 수락 REST ///////////////////////
+
+////////////////// 광고 수락 REST ///////////////////////
+	function updateRequestStatusToAccept(REQNO, USERID) {
+
+	alert(REQNO);
+	
+	swal("요청을 수락할까요?", "", "warning");
+	
+	var uri = "/request/updateRequestStatusToAccept/" + REQNO;
+	
+	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
+
+		$.ajax({
+			url: uri,
+			type: "PATCH",
+			headers: headers,
+			dataType: "json",
+			
+			success: function(response) {
+								
+				if (response.result == true) {
+					swal(REQNO+"번 요청을 수락했습니다.", "", "success");
+					location.reload();
+					return true;
+				}
+				swal(response.message, "", "error");
+				
+			},
+			error: function(xhr, status, error) {
+				alert("에러가 발생하였습니다.");
+				return false;
+			}
+		});
+		
+	}
+////////////////// 광고 수락 REST ///////////////////////
+
+
+////////////////// 요청 거절 REST ///////////////////////
+	function updateRequestStatusToRefuse(REQNO) {
+
+	alert(REQNO);
+	
+	swal("요청을 거절할까요?", "", "warning");
+	
+	var uri = "/request/updateRequestStatusToRefuse/" + REQNO;
+	
+	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
+
+		$.ajax({
+			url: uri,
+			type: "PATCH",
+			headers: headers,
+			dataType: "json",
+			
+			success: function(response) {
+								
+				if (response.result == true) {
+					swal(REQNO+"번 요청을 거절했습니다.");
+					location.reload();
+					return true;
+				}
+				swal(response.message, "", "error");
+				
+			},
+			error: function(xhr, status, error) {
+				alert("에러가 발생하였습니다.");
+				return false;
+			}
+		});
+		
+	}
+////////////////// 요청 거절 REST ////////////////////////
+
+////////////////// 목록 삭제 REST ///////////////////////
+	function deleteRequest(REQNO) {
+
+	alert(REQNO);
+	
+	swal("요청을 삭제할까요?", "", "warning");
+	
+	var uri = "/request/deleteRequest/" + REQNO;
+	
+	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
+
+		$.ajax({
+			url: uri,
+			type: "DELETE",
+			headers: headers,
+			dataType: "json",
+			
+			success: function(response) {
+								
+				if (response.result == true) {
+					swal(REQNO+"번 요청을 삭제했습니다.");
+					location.reload();
+					return true;
+				}
+				swal(response.message, "", "error");
+				
+			},
+			error: function(xhr, status, error) {
+				alert("에러가 발생하였습니다.");
+				return false;
+			}
+		});
+		
+	}
+////////////////// 목록 삭제 REST ////////////////////////
+
 
 </script>
-
 
 </body>
 

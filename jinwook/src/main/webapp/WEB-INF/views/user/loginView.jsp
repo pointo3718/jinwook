@@ -23,6 +23,9 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>로그인</title>
 
+<!-- sweet alert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- Google Font -->
 <link
    href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
@@ -78,20 +81,19 @@
         color:black;
         text-indent:-1em;
         }
-        h1{
+        .zz{
         justify-content: center;
+        font-size:"30px";
         }
         .userId{
        		 justify-content: center;
            	 align-items: center;
            	  width : 350px;
-           	  hight : 100%;
         }
         .password{
        		 justify-content: center;
            	 align-items: center;
            	  width : 350px;
-           	   hight : 100px;
         }
         .button1{
 			  background-color: #7fad39; /* Green */
@@ -105,6 +107,12 @@
 			  border: 1px solid #7fad39;
 			  color: #7fad39;
 			  }
+		.swal-button 
+				{
+					background-color: #7fad39;
+					font-size: 12px;
+					text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+				}
     </style> 
     <!-- 카카오 로그인 -->
 	<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
@@ -135,13 +143,13 @@
 				
 				
 				if(id == null || id.length <1) {
-					alert('ID 를 입력하지 않으셨습니다.');
+					swal("진욱이네", "ID를 입력해주세요.");
 					$(".userId").focus();
 					return;
 				}
 				
 				if(pw == null || pw.length <1) {
-					alert('패스워드를 입력하지 않으셨습니다.');
+					swal("진욱이네", "비밀번호를 입력해주세요.");
 					$(".password").focus();
 					return;
 				}
@@ -152,8 +160,8 @@
 				alert(messege);
 				document.location.href= url;
 				 */
-				 alert("로그인 성공");
-				 alert(id);
+				 
+				 
  			 
 				$(".form-horizontal").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 			});
@@ -190,7 +198,7 @@
 		 	 	<br/><br/>
 				
 				<div class="form-group">	 	 	
-		 	 		<h1 class="text-center">로 &nbsp;&nbsp;그 &nbsp;&nbsp;인</h1>
+		 	 		<h1 class="zz text-center" >로 &nbsp;&nbsp;그 &nbsp;&nbsp;인</h1>
 					<br/><br/>
 					
 			        <form class="form-horizontal">

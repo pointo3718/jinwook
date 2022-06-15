@@ -12,9 +12,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>진욱이네 | Template</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
+   <!-- Google Font -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">   
+   
     <!-- Css Styles -->
     <link rel="stylesheet" href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="${path}/resources/static/css/font-awesome.min.css" type="text/css">
@@ -25,26 +27,30 @@
     <link rel="stylesheet" href="${path}/resources/static/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
     
-           <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+   <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-   
-   <!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-   
-   <!-- jQuery UI toolTip 사용 CSS-->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <!-- jQuery UI toolTip 사용 JS-->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   
    <!--  ///////////////////////// CSS ////////////////////////// -->
+   <style type="text/css">
+   *{font-family: 'Noto Sans KR', sans-serif;}
+
+   .sticky {
+     position: -webkit-sticky;
+     position: sticky;
+     top: 0;
+     background: #ffffff;
+     z-index: 10;
+   }
    
+   .row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+   }
+   </style>
    <script type="text/javascript">
    function fncDeleteOrdersCart(e) {
       if (!confirm('상품을 삭제하시겠어요?')) {
@@ -82,6 +88,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -279,6 +286,11 @@
     </section>
     <!-- Hero Section End -->
 
+=======
+   <!-- Header Begin -->
+   <jsp:include page="../layout/top.jsp" />
+   <!-- Header End -->
+>>>>>>> refs/remotes/origin/master
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="${path}/resources/static/img/breadcrumb.jpg">
         <div class="container">
@@ -298,6 +310,7 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Shoping Cart Section Begin -->
+    <form class="form-horizontal">
     <section class="shoping-cart spad">
         <div class="container">
             <div class="row">
@@ -306,10 +319,11 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product">상 품</th>
-                                    <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가 격</th>
-                                    <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상 품 수 량</th>
-                                    <th> 상품별총액</th>
+                                    <th class="shoping__product " >상 품</th>
+                                    <th class="text-center" style="width: 700px;">상 품 설 명</th>
+                                    <th class="text-center" style="width: 300px;">가 격</th>
+                                    <th class="text-center" style="width: 200px;">상 품 수 량</th>
+                                    <th class="text-center" style="width: 300px;">상 품 별 총 액</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -322,18 +336,17 @@
                                 <tr>
                                  <td hidden="cartNo" id="cartNo" name="cartNo" value="${cart.cartNo}">+cart.cartNo</td>
                                     <td class="shoping__cart__item">
-                                        <img src="${path}/resources/static/img/cart/cart-1.jpg" alt="">
-                                        <h5><strong style="font-size: 20px;">${cart.product.prodName}</strong></h5>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <h5 style="font-size: 20px;">${cart.product.prodInfo}</h5>
+                                        <img src="${path}/resources/static/img/cart/cart-1.jpg" style="margin-right: 30px;">
+                                        <strong style="font-size: 20px;">${cart.product.prodName}</strong>
                                     </td>
+                                    <td> <strong style="font-size: 20px;">${cart.product.prodInfo}</strong> </td>
                                     <td class="shoping__cart__price">
                                         ${cart.product.price} 원
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="${cart.prodCount}">
+                                                <input type="text"onchange="changeCount(this)" value="${cart.prodCount}" >
                                             </div>
                                         </div>
                                     </td>
@@ -362,84 +375,28 @@
                     <div class="shoping__checkout">
                         <h5>주문 총액</h5>
                         <ul>
+<<<<<<< HEAD
                             <li >주문 금액 <span id="orderPrice" name="orderPrice"   >${total}</span></li>
+=======
+                            <li >주문 금액 <span>${total}</span></li>
+>>>>>>> refs/remotes/origin/master
                         </ul>
-                        <a href="#" class="primary-btn" id="button" >주문하기</a>
+                        <a><button class="primary-btn" style="max-width: 100%; width: 477px;" 
+                        " id="button" name="orderPrice" value="${total}">주문하기</button></a>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    </form>
     <!-- Shoping Cart Section End -->
 
-    <!-- Footer Section Begin -->
-    <footer class="footer spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="./index.html"><img src="${path}/resources/static/img/logo.png" alt=""></a>
-                        </div>
-                        <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                    <div class="footer__widget">
-                        <h6>Useful Links</h6>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <div class="footer__copyright__payment"><img src="${path}/resources/static/img/payment-item.png" alt=""></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
+    <!--  Footer Begin -->
+   <jsp:include page="../layout/footer.jsp" />
+   <!-- Footer End -->
 
+<<<<<<< HEAD
     <!-- Js Plugins -->
     <script src="${path}/resources/static/js/jquery-3.3.1.min.js"></script>
     <script src="${path}/resources/static/js/bootstrap.min.js"></script>
@@ -450,6 +407,8 @@
     <script src="${path}/resources/static/js/owl.carousel.min.js"></script>
     <script src="${path}/resources/static/js/main.js"></script>
 
+=======
+>>>>>>> refs/remotes/origin/master
       <a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
       <a href="/board/addBoardInquiryView">1:1문의 등록(파일 업로드)</a> <hr>
       <a href="/orders/getOrdersList">주문내역</a> <hr>

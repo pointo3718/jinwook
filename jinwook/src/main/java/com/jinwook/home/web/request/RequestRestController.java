@@ -92,7 +92,7 @@ public class RequestRestController {
 			jsonObj.addProperty("result", result);
 
 		} catch (DataAccessException e) {
-			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+			jsonObj.addProperty("message", "해당 사장님의 진욱페이 잔액을 확인해주세요.");
 
 		} catch (Exception e) {
 			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
@@ -218,7 +218,7 @@ public class RequestRestController {
 	 
 	 
 	// ================= 요청 목록 삭제 ===================
-	 @DeleteMapping(value = "/deleteRequest/{reqNo}")
+	 @DeleteMapping(value = "deleteRequest/{reqNo}")
 		public JsonObject deleteRequest(@PathVariable(value="reqNo",required = false) int reqNo) {
 
 			JsonObject jsonObj = new JsonObject();

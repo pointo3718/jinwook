@@ -55,6 +55,10 @@ public class StoreController {
 			return "redirect:/../index";
 		}
 		
+		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+		
+		model.addAttribute("storeInfo", storeInfo);
+		
 		List<Store> store = storeService.getStore(storeNo);
 		
 		model.addAttribute("store", store);

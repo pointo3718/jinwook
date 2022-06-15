@@ -42,7 +42,7 @@ public class OrdersRestController {
 		System.out.println(this.getClass());
 	}
 	
-	@PostMapping(value = "updateOrdersCart")
+	@PostMapping(value = "updateOrdersCart/{cartNo}")
 	public int updateOrdersCart(@RequestBody Cart cart) throws Exception {
 		
 		System.out.println("/orders/updateOrdersCart : POST");

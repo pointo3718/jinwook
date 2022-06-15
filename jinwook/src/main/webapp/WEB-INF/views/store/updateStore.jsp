@@ -41,6 +41,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
 <script type="text/javascript">
 	/*<![CDATA[*/
 </script>
@@ -70,7 +71,93 @@
 
 .blog__sidebar__item {
 	width: 200px;
-	
+	/*  body > div.container{
+        	border: 3px solid #D6CDB7;
+            margin-top: 10px;
+        }  */ / . row { margin-top : 10px;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.id_ok {
+	color: #7fad39;
+	display: none;
+	font-size: 10px;
+}
+
+.id_already {
+	color: red;
+	display: none;
+	font-size: 10px;
+	text-align: left;
+}
+
+.control-label {
+	whidth: 250px;
+	text-align: center;
+	justify-content: center;
+}
+
+.site-btn {
+	background-color: #7fad39; /* Green */
+	border: none;
+	color: white;
+	width: 200px;
+	text-align: center;
+	font-size: 20px;
+}
+
+.userId {
+	width: 300px;
+	text-indent: 1em;
+}
+
+.ss {
+	font-size: 30px;
+	justify-content: center;
+}
+
+input {
+	width: 300px;
+	height: 50px;
+	text-indent: 1em;
+	font-size: 15px;
+}
+
+div {
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+}
+
+label {
+	font-size: 15px;
+	justify-content: top;
+	text-align: left;
+	display: flex;
+	align-items: left;
+}
+
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
+
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity = 0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
 }
 </style>
 
@@ -88,9 +175,6 @@
 		$("form").attr("method", "POST").attr("action",
 				"/store/updateStore?storeNo=${store[0].storeNo}").submit();
 	}
-	
-
-	
 </script>
 
 
@@ -110,40 +194,44 @@
 
 
 		<div class="container">
-			<div class="row my-1">
+			<c:forEach var="store" items="${storeInfo}" begin="0" end="0">
+				<input type="hidden" id="storeNo" data-value="${store.storeNo}"
+					value="${store.storeNo}" />
+				<div class="row my-1">
 
-				<div class="col-4">
-					<div class="bg-white text-black mx-3">
+					<div class="col-4">
+						<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01"><h5>${store[0].user.userName}
-								사장님</h5></strong> </br> </br> </br> </br>
+							</br> <strong class="mytop01"><h5>${store.user.userName}
+									사장님</h5></strong> </br> </br> </br> </br>
 
+						</div>
 					</div>
-				</div>
 
-				<div class="col-4">
-					<div class="bg-white text-black mx-3">
+					<div class="col-4">
+						<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">진욱페이 ></strong> </br> </br>
-						<h1 class="mytop01-content">${store[0].user.jpBalance}</h1>
-						원 </br> </br>
+							</br> <strong class="mytop01">진욱페이 ></strong> </br> </br>
+							<h1 class="mytop01-content">${store.user.jpBalance}</h1>
+							원 </br> </br>
 
 
+						</div>
 					</div>
-				</div>
 
-				<div class="col-4">
-					<div class="bg-white text-black mx-3">
+					<div class="col-4">
+						<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">${store[0].storeName}</strong> </br> </br>
-						<h1 class="mytop01-content"></h1>
-						</br> </br>
+							</br> <strong class="mytop01">${store.storeName}</strong> </br> </br>
+							<h1 class="mytop01-content"></h1>
+							</br> </br>
 
 
+						</div>
 					</div>
-				</div>
 
-			</div>
+				</div>
+			</c:forEach>
 		</div>
 		<!-- /container -->
 	</section>
@@ -163,7 +251,6 @@
 								<strong>My Page</strong>
 							</h5>
 
-							</br>
 
 
 							<div class="list-group text-center" style="font-size: 15px;">
@@ -215,205 +302,177 @@
 						<hr size="10px">
 					</h4>
 
+					<c:forEach var="store" items="${storeInfo}" begin="0" end="0">
+						<table class="table table-hover"
+							style="width: 730px; heigh: 300px;">
 
-					<table class="table table-hover"
-						style="width: 730px; heigh: 300px;">
-
-						<form class="form-horizontal" id="profileUpdate">
+							<form class="form-horizontal" id="profileUpdate">
 
 
-							<div class="form-group">
-								<label for="storeName"
-									class="col-sm-offset-1 col-sm-3 control-label">상점 이름</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="text" class="form-control" id="storeName"
-										name="storeName" value="${store[0].storeName}"
-										placeholder="${store[0].storeName}" readonly><span
-										id="helpBlock" class="help-block"> </span>
+								<div class="form-group row">
+									<label for="colFormLabel"
+										class="col-sm-2 col-form-label col-form-label">상점이름</label>
+									<div class="col-sm-6">
+										<input type="text" class="form-control form-control"
+											id="storeName" value="${store.storeName}" placeholder="상점이름"
+											readonly>
+									</div>
 								</div>
-							</div>
+
+
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">상점업종</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg"
+											value="
+											
+											<c:if test="${store.storeType.trim()=='1'}">
+                								종합         
+            								</c:if>"
+											placeholder="상점업종" readonly>
+									</div>
+								</div>
 
 
 
-							<div class="form-group">
-								<label for="storeType"
-									class="col-sm-offset-1 col-sm-3 control-label">상점 업종</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="text" class="form-control" id="storeType"
-										name="storeType" value="${store[0].storeType}"
-										placeholder="
-										<c:if test="${store[0].storeType.trim()=='1'}">
-										과일
-										</c:if>
-										<c:if test="${store[0].storeType.trim()=='2'}">
-										기억안남
-										</c:if>
-										<c:if test="${store[0].storeType.trim()=='3'}">
-										수산
-										</c:if>
-										<c:if test="${store[0].storeType.trim()=='4'}">
-										정육
-										</c:if>
-										<c:if test="${store[0].storeType.trim()=='5'}">
-										종합
-										</c:if>"
-										readonly> <span id="helpBlock" class="help-block">
-									</span>
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">상점주소</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.storeAddr}"
+											placeholder="상점주소" readonly>
+									</div>
 								</div>
-							</div>
 
 
-							<div class="form-group">
-								<label for="storeAddr"
-									class="col-sm-offset-1 col-sm-3 control-label">상점 주소</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="text" class="form-control" id="storeAddr"
-										name="storeAddr" value="${store[0].storeAddr}"
-										placeholder="${store[0].storeAddr}" readonly> <span
-										id="helpBlock" class="help-block"> </span>
-								</div>
-							</div>
-							<!-- 
-							<div class="form-group">
-								<label for="storeStart"
-									class="col-sm-offset-1 col-sm-3 control-label">상점 시작 날짜</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="text" class="form-control" id="storeStart"
-										name="storeStart" value="${store[0].storeStart}"
-										placeholder="${store[0].storeStart}" readonly> <span
-										id="helpBlock" class="help-block"> </span>
-								</div>
-							</div>
- -->
-							<div class="form-group">
-								<label for="storeIntro"
-									class="col-sm-offset-1 col-sm-3 control-label">상점 소개</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="text" class="form-control" id="storeIntro"
-										name="storeIntro" value="${store[0].storeIntro}"
-										placeholder="${store[0].storeIntro}">
-								</div>
-							</div>
 
-							<div class="form-group">
-								<label for="storePhone"
-									class="col-sm-offset-1 col-sm-3 control-label">상점 전화번호</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="text" class="form-control" id="storePhone"
-										name="storePhone" value="${store[0].storePhone}"
-										placeholder="${store[0].storePhone}">
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">상점시작날짜</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.storeStart}"
+											placeholder="상점시작날짜" readonly>
+									</div>
 								</div>
-							</div>
 
-							<div class="form-group">
-								<label for="storeImage"
-									class="col-sm-offset-1 col-sm-3 control-label">상점 사진</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="text" class="form-control" id="storeImage"
-										name="storeImage" value="${store[0].storeImage}"
-										placeholder="${store[0].storeImage}">
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">상점소개</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.storeIntro}"
+											placeholder="상점소개">
+									</div>
 								</div>
-							</div>
-							<!-- 
-							<div class="form-group">
-								<label for="startTime"
-									class="col-sm-offset-1 col-sm-3 control-label">영업 시작 시간</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="time" class="form-control" id="startTime"
-										name="startTime" value="${store[0].startTime}"
-										placeholder="${store[0].startTime}">
-								</div>
-							</div>
 
-							<div class="form-group">
-								<label for="endTime"
-									class="col-sm-offset-1 col-sm-3 control-label">영업 종료 시간</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="time" class="form-control" id="endTime"
-										name="endTime" value="${store[0].endTime}"
-										placeholder="${store[0].endTime}">
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">상점전화번호</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.storePhone}"
+											placeholder="상점전화번호">
+									</div>
 								</div>
-							</div>
- -->
-							<div class="form-group">
-								<label for="holiday"
-									class="col-sm-offset-1 col-sm-3 control-label">상점 휴무일</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="text" class="form-control" id="holiday"
-										name="holiday" value="${store[0].holiday}"
-										placeholder="${store[0].holiday}">
-								</div>
-							</div>
 
-							<div class="form-group">
-								<label for="businessNo"
-									class="col-sm-offset-1 col-sm-3 control-label">사업자등록번호</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="text" class="form-control" id="businessNo"
-										name="businessNo" value="${store[0].user.businessNo}"
-										placeholder="${store[0].user.businessNo}" readonly> <span
-										id="helpBlock" class="help-block">
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">상점사진</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.storeImage}"
+											placeholder="상점사진">
+									</div>
 								</div>
-							</div>
 
-							<div class="form-group">
-								<label for="businessCard"
-									class="col-sm-offset-1 col-sm-3 control-label">영업신고증</label>
-								<div class="col-sm-4" style="float:right;">
-									<input type="text" class="form-control" id="businessCard"
-										name="businessCard" value="${store[0].businessCard}"
-										placeholder="${store[0].businessCard}" readonly> <span
-										id="helpBlock" class="help-block">
-								</div>
-							</div>
+								<span class="btn btn-default btn-file"
+									style="padding-left: 125px; padding-bottom: 15px;"> 사진변경
+									<input type="file">
+								</span>
 
-							<div class="form-group">
-								<label for="accNo"
-									class="col-sm-offset-1 col-sm-3 control-label">계좌번호</label>
-								<div class="col-sm-4" style="float:right;">
-									<select name="bank" class="ct_input_g"
-										style="width: 100px; height: 19px" maxLength="20">
-										<option value="1" selected="selected">카카오뱅크</option>
-										<option value="2">농협</option>
-										<option value="3">신한</option>
-										<option value="4">IBK기업</option>
-										<option value="5">하나</option>
-										<option value="6">우리</option>
-										<option value="7">국민</option>
-										<option value="8">SC제일</option>
-										<option value="9">대구</option>
-										<option value="10">부산</option>
-										<option value="11">광주</option>
-										<option value="12">새마을금고</option>
-										<option value="13">경남</option>
-										<option value="14">전북</option>
-										<option value="15">제주</option>
-										<option value="16">산업</option>
-										<option value="17">우체국</option>
-										<option value="18">신협</option>
-										<option value="19">수협</option>
-										<option value="20">씨티</option>
-										<option value="21">케이뱅크</option>
-										<option value="22">토스뱅크</option>
-										<option value="23">산림조합</option>
-										<option value="24">저축은행</option>
-									</select>
-									
-									<button type="button" class="btn btn-light">실명조회</button>
-									
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">영업시작시간</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.startTime}"
+											placeholder="영업시작시간">
+									</div>
 								</div>
-							</div>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="accNo" name="accNo"
-									value="${store[0].accNo}" placeholder="${store[0].accNo}">
-							</div>
-							</div>
-					</table>
+
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">영업종료시간</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.endTime}"
+											placeholder="영업종료시간">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">상점휴무일</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.holiday}"
+											placeholder="상점휴무일">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">사업자등록번호</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.user.businessNo}"
+											placeholder="사업자등록번호" readonly>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">영업신고증</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.businessCard}"
+											placeholder="영업신고증" readonly>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">계좌번호</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.accNo}" placeholder="계좌번호">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="colFormLabelLg"
+										class="col-sm-2 col-form-label col-form-label">은행</label>
+									<div class="col-sm-6">
+										<input type="email" class="form-control form-control"
+											id="colFormLabelLg" value="${store.bank}" placeholder="은행">
+									</div>
+								</div>
+							</form>
+						</table>
+
+					</c:forEach>
+
 
 
 					<div class="form-group">
 						<div class="col-sm-offset-4  col-sm-4 text-center">
-							<button type="button" class="btn btn-outline-light" style="border-color: #7fad39; background-color: white;" style="color: #ffffff;">수 &nbsp;정</button>
+							<button type="button" class="btn btn-outline-light"
+								style="border-color: #7fad39; background-color: white;"
+								style="color: #ffffff;">수 &nbsp;정</button>
 							<a class="btn btn-primary btn" href="#" role="button">상점 삭제
 								신청</a>
 						</div>
