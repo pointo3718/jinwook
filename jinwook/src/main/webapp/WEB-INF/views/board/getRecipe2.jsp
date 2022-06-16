@@ -422,7 +422,13 @@ $(function(){
                     <div class="blog__details__text">
                         <p>No: ${recipe.rcpNo}</p>
                         <p>레시피 제목: ${recipe.rcpTitle}</p>
-                        <img rcpNo="${ recipe.rcpNo }" width="400" height="400" src="${path}/resources/static/img/${fileVO.fileOriName}" alt="..." 
+                      <%-- <div class="result-images">
+                        	<c:forEach var="imageFileName" items="${map.fileList}">
+                        		<img src="${pageContext.request.contextPath}/download?imageFileName=${imageFileName}">
+                        		<br><br>
+                        	</c:forEach>
+                        </div> --%>
+                         <img rcpNo="${ recipe.rcpNo }" width="400" height="400" src="${path}/resources/static/img/${fileVO.fileOriName}" alt="..." 
                							onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"/>
                         <p>레시피 소개: ${recipe.rcpInfo}</p>
                         <p>레시피 재료: ${recipe.rcpIngredient}</p>
