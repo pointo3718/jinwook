@@ -1,7 +1,10 @@
 package com.jinwook.home.service.board;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
@@ -20,15 +23,20 @@ public interface BoardService {
 	//공지사항 조회수 증가v
 	public int updateBoardAnnouncementHits(Integer boardNo);
 	
-	//다중 사진 첨부v
-	public int fileInsert(FileVO file) throws Exception;
-
+//	//게시판 사진 첨부v
+//	public int fileBoardInsert(FileVO file) throws Exception;
+//	//레시피 사진 첨부v
+//	public int fileRecipeInsert(FileVO file) throws Exception;
+	// 첨부파일 조회
+	public List<Map<String, Object>> selectAttachList(int boardNo) throws Exception;
+	// 첨부파일 다운
+	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
 	//1:1문의 등록v
-	public void addBoardInquiry(Board board) throws Exception;
+	public void addBoardInquiry(Board board, MultipartHttpServletRequest mpRequest) throws Exception;
 	//공지사항 등록v
 	public void addBoardAnnouncement(Board board);
 	//1:1문의 수정v
-	public void updateBoardInquiry(Board board) throws Exception;
+	public void updateBoardInquiry(Board board, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
 	//공지사항 수정v
 	public int updateBoardAnnouncement(Board board);
 	//1:1문의 삭제v

@@ -342,10 +342,13 @@
 		FROM
 			request 
 		WHERE
+		<if test= 'reqCode != 0'>
 			req_code = ${reqCode} 
 			AND
+		</if>
 			req_status = 1
 			AND
 			req_delete_yn = false
 	</select>
+
 </mapper>

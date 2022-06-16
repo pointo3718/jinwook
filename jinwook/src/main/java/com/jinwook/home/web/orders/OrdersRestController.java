@@ -42,14 +42,25 @@ public class OrdersRestController {
 		System.out.println(this.getClass());
 	}
 	
-	@PostMapping(value = "updateOrdersCart/{cartNo}")
-	public int updateOrdersCart(@RequestBody Cart cart) throws Exception {
+	@GetMapping(value = "updateOrdersCart/{cartNo}/{prodCount}")
+	public int updateOrdersCart(@RequestBody Cart cart,HttpSession session,@PathVariable(value="cartNo", required=false) int cartNo,
+			@PathVariable(value="prodCount",required=false) int prodCount) {
 		
 		System.out.println("/orders/updateOrdersCart : POST");
+		String userid = ((User) session.getAttribute("user")).getUserId();
 		
+		int count = cart.getProdCount();
+		cart.setProdCount(count+1);
+		cart.setUserId(userid);
+		cart.setCartNo(cartNo);
+		cart.setProdCount(prodCount);
 		int result = ordersService.updateOrdersCart(cart);
+		System.out.println(cart);
+		System.out.println(result);
 		
 		return result;
+
+		
 	}
 	
 	@GetMapping(value = "deleteOrdersCart/{cartNo}")
@@ -67,7 +78,6 @@ public class OrdersRestController {
 
 		} catch (DataAccessException e) {
 			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
-
 		} catch (Exception e) {
 			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
 		}

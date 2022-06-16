@@ -23,8 +23,20 @@ public interface BoardMapper {
 	public int updateBoardInquiryHits(Integer boardNo);
 	//공지사항 조회수 증가
 	public int updateBoardAnnouncementHits(Integer boardNo);
-	//사진 업로드
-	public int fileInsert(FileVO file) throws Exception;
+	
+	//게시판 사진 업로드
+	public void insertBoardFile(Map<String, Object> map) throws Exception;
+	// 첨부파일 조회
+	public List<Map<String, Object>> selectAttachList(int boardNo) throws Exception;
+	// 첨부파일 다운
+	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
+	// 첨부파일 수정
+	public void updateAttach(Map<String, Object> map) throws Exception;
+//	//게시판 사진 업로드
+//	public int fileBoardInsert(FileVO file) throws Exception;
+//	//레시피 사진 업로드
+//	public int fileRecipeInsert(FileVO file) throws Exception;
+	
 	//1:1문의 등록
 	public int addBoardInquiry(Board board);
 	//공지사항 등록

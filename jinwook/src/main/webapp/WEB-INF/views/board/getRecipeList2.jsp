@@ -26,8 +26,13 @@
     <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
     <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+   
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
 <script type="text/javascript">
    /*<![CDATA[*/
 
@@ -39,6 +44,8 @@
 </script>
 
 <style>
+p { margin:20px 0px; }
+
 .mytop01 {
    padding-left: 20px;
 }
@@ -446,108 +453,105 @@ function fncDeleteRecipe(e) {
                 <!-- 레시피 이미지 목록 -->
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${path}/resources/static/img/blog/blog-2.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${path}/resources/static/img/blog/blog-3.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="#">Visit the clean farm in the US</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${path}/resources/static/img/blog/blog-1.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${path}/resources/static/img/blog/blog-4.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${path}/resources/static/img/blog/blog-4.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="#">The Moment You Need To Remove Garlic From The Menu</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${path}/resources/static/img/blog/blog-6.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card">
+ <div class="container">
+      <div class="row" align="center">
+        <div class="col-6">
+          <p>${ i }</p>
+          <div class="card">
+            <div class="card-header">
+              My Card
+            </div>
+            <img src="images/card-image.png" alt="" />
+            <div class="card-body">
+              <h5 class="card-title">${recipe.rcpTitle}</h5>
+              <p class="card-text">${recipe.rcpInfo}</p>
+              <a href="#" class="btn btn-primary">레시피 더보기</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <p>Card</p>
+          <div class="card">
+            <div class="card-header">
+              My Card
+            </div>
+            <img src="images/card-image.png" alt="" />
+            <div class="card-body">
+              <h5 class="card-title">Lorem</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
+              <a href="#" class="btn btn-primary">More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+ <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <p>Card</p>
+          <div class="card">
+            <div class="card-header">
+              My Card
+            </div>
+            <img src="images/card-image.png" alt="" />
+            <div class="card-body">
+              <h5 class="card-title">Lorem</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
+              <a href="#" class="btn btn-primary">More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <p>Card</p>
+          <div class="card">
+            <div class="card-header">
+              My Card
+            </div>
+            <img src="images/card-image.png" alt="" />
+            <div class="card-body">
+              <h5 class="card-title">Lorem</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
+              <a href="#" class="btn btn-primary">More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+ <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <p>Card</p>
+          <div class="card">
+            <div class="card-header">
+              My Card
+            </div>
+            <img src="images/card-image.png" alt="" />
+            <div class="card-body">
+              <h5 class="card-title">Lorem</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
+              <a href="#" class="btn btn-primary">More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <p>Card</p>
+          <div class="card">
+            <div class="card-header">
+              My Card
+            </div>
+            <img src="images/card-image.png" alt="" />
+            <div class="card-body">
+              <h5 class="card-title">Lorem</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
+              <a href="#" class="btn btn-primary">More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
                         <div class="col-lg-12">
                             <div class="product__pagination blog__pagination">
                                 <a href="#">1</a>

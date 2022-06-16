@@ -24,7 +24,8 @@
    <result property="isOpen"             column="is_open"        jdbcType="TINYINT"/>   
    <result property="user.jpBalance"     column="jp_balance"     jdbcType="INTEGER"/>
    <result property="user.userName"     column="user_name"     jdbcType="VARCHAR"/>   
-   <result property="user.businessNo"     column="business_no"     jdbcType="VARCHAR"/>      
+   <result property="user.businessNo"     column="business_no"     jdbcType="VARCHAR"/>  
+   <result property="user.regDate"     column="reg_date"     jdbcType="DATE"/>     
    <result property="orders.reviewStar"  column="review_star"    jdbcType="INTEGER"/>
    <result property="orderDateStart"  column="order_date_start"    jdbcType="DATE"/>
    <result property="orderDateEnd"  column="order_date_end"    jdbcType="DATE"/>
@@ -132,24 +133,23 @@
    </select>
    
    <select id="getStore" parameterType="int" resultMap="storeSelectMap">
-		SELECT
-		s.store_no, s.store_phone, s.store_name, s.store_type, s.store_addr, s.start_time, s.end_time, s.holiday,
-		s.store_intro, vt.별점 reivewStar, p.prod_no, p.prod_name, p.prod_img, p.price, p.prod_orign, p.prod_info		
-		FROM store s, product p, orders o,(SELECT ROUND(AVG(review_star),1) 별점 
-						FROM orders
-						WHERE store_no=#{storeNo})vt
-		WHERE 	s.store_no=p.store_no AND
-			s.store_no=o.store_no AND
-            		p.store_no=s.store_no AND
-			  s.store_no =#{storeNo}
-		GROUP BY s.store_no, s.store_name, s.store_type, s.store_addr, s.start_time, s.end_time, s.holiday,
-		s.store_intro, vt.별점, p.prod_no, p.prod_name, p.price, p.prod_orign, p.prod_info;
+        SELECT
+      s.store_phone, s.store_name, s.store_type, s.store_addr, s.start_time, s.end_time, s.holiday,
+      s.store_intro, vt.review_star, p.prod_no, p.prod_name, p.prod_img, p.price, p.prod_orign, p.prod_info, p.is_soldout      
+      FROM store s, product p, orders o,(SELECT ROUND(AVG(review_star),1) review_star 
+                  FROM orders
+                  WHERE store_no=#{storeNo})vt
+      WHERE    s.store_no=p.store_no AND
+         s.store_no=o.store_no AND
+                  p.store_no=s.store_no AND
+           s.store_no = #{storeNo}
+      GROUP BY  p.prod_no
    </select>
    
    <select id="getStoreInfo" parameterType="int" resultMap="storeSelectMap">   
 	SELECT
 	u.user_name, u.jp_balance, s. store_name, s. store_addr, s. total_earn, s.store_no, s.store_intro,s.store_image, s.holiday,
-	u.business_no, s.business_card,s.bank, s.acc_no, s.start_time, s.end_time, s.store_type, s.store_phone
+	u.business_no, s.business_card,s.bank, s.acc_no, s.start_time, s.end_time, s.store_type, s.store_phone, s.store_start, s.store_status, u.reg_date
 	FROM users u, store s
 	WHERE u.user_id=s.user_id AND
 	s.store_no = #{storeNo}

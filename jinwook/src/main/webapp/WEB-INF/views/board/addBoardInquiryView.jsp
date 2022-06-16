@@ -48,6 +48,17 @@ function fncAddInquiry() {
 	$("form").attr("method", "POST").attr("action", "/board/addBoardInquiry").submit();
 }
 
+function fn_addFile(){
+	var fileIndex = 1;
+	//$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"<button type='button' style='float:right;' id='fileAddBtn'>"+"추가"+"</button></div>");
+	$(".fileAdd_btn").on("click", function(){
+		$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>");
+	});
+	$(document).on("click","#fileDelBtn", function(){
+		$(this).parent().remove();
+		
+	});
+}
 
 </script>
 
@@ -58,8 +69,7 @@ function fncAddInquiry() {
 		<h1 class="bg-primary text-center">1:1 문의 등 록</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form action="board/addBoardInquiry" method="post" enctype="multipart/form-data">
-		
+		<form name=addBoardInquiryForm method="post" action="board/addBoardInquiry" enctype="multipart/form-data">
 			<div class="form-group">
 		    <label for="boardTitle" class="col-sm-offset-1 col-sm-3 control-label">1:1문의 제목</label>
 		    <div class="col-sm-3">
@@ -79,14 +89,8 @@ function fncAddInquiry() {
 			<div class="form-group">
 		    <label for="file" class="col-sm-offset-1 col-sm-3 control-label">파일 업로드</label>
 		    <div class="col-sm-3"><!-- 입력칸 -->
-		      	<input type="file" id="files" name="files" multiple="multiple" placeholder="파일 선택" class="form-control" >
-		      	<div id="uploadResult">
-		      		<div id="result_card">
-		      			<div class="imgDeleteBtn">x</div><br/>
-		      			<img src="/resources/static/img/logo.png">
-		      		</div>
-		      	</div>
-		      	<input type="submit" value="upload">
+		      	<button class="fileAdd_btn" type="button">파일추가</button>	
+		      	<input type="file" id="file" name="file" placeholder="파일 선택" class="form-control" >
 		    </div>
 		  </div>
  			

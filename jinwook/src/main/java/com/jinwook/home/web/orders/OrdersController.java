@@ -229,12 +229,12 @@ public class OrdersController {
       return "orders/getOrdersNoticeList";
    }
    
-   @GetMapping(value="getOrdersJpayCharge")
-   public String getOrdersJpayCharge() throws Exception{
+   @GetMapping(value="getOrdersJpayChargeList")
+   public String getOrdersJpayChargeList() throws Exception{
 	   
-	   System.out.println("/orders/getOrdersJpayCharge : GET");
+	   System.out.println("/orders/getOrdersJpayChargeList : GET");
 	   
-	return "orders/getOrdersJpayCharge";
+	return "orders/getOrdersJpayChargeList";
    }
    
 }
