@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * package com.jinwook.home;
  * 
@@ -36,7 +35,6 @@
  * 
  * }//class
  */
-=======
 //package com.jinwook.home;
 //
 //import java.time.LocalDate;
@@ -88,4 +86,3 @@
 ////	}
 //	
 //}//class
->>>>>>> refs/heads/Song
