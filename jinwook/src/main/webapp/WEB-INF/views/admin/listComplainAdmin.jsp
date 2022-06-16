@@ -419,8 +419,6 @@ $(function() {
 	<jsp:include page="../layout/footer.jsp" />
 	<!-- Footer End -->
 
-
-
 	<script type="text/javascript">
 	/*<![CDATA[*/
 
@@ -442,6 +440,7 @@ $(function() {
 		var uri = "../admin/getWatingInquiryCount";
 
 		$.get(uri, function(response) {
+			alert($(reponse.getWatingInquiryCount));
 		
 				var countInquiryHtml = "";
 

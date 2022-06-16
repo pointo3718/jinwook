@@ -333,53 +333,53 @@
          <div class="col-md-10 order-md-1">
           <div class="col-md-12 mb-3">
             <label for="Name">아이디</label>
-            <input type="text" class="form-control" id="userid" placeholder="" value="" readonly>
+            <input type="text" class="form-control" name="userid" placeholder="" value="" readonly>
           </div>
           
          <div class="container">  
          	<div class="row forModal">
           	<div class="col-md-6 mb-3">
             	<label for="userId">이름</label>
-            	<input type="text" class="form-control" id="username" placeholder="" value="" readonly>
+            	<input type="text" class="form-control" name="username" placeholder="" value="" readonly>
          	 </div>
           <div class="col-md-6 mb-3">
            	 	<label for="userId">닉네임</label>
-           	 	<input type="text" class="form-control" id="nickname" placeholder="" value="" readonly>
+           	 	<input type="text" class="form-control" name="nickname" placeholder="" value="" readonly>
           </div>
 			</div>
         </div>
 
         <div class="col-md-12 mb-3">
             <label for="Name">이메일</label>
-            <input type="text" class="form-control" id="email" placeholder="" value="홍길동" readonly>
+            <input type="text" class="form-control" name="email" placeholder="" value="" readonly>
           </div>
 
         <div class="container">  
          	<div class="row forModal">
           	<div class="col-md-6 mb-3">
             	<label for="userId">생년월일</label>
-            	<input type="text" class="form-control" id="birth" placeholder="" value="" readonly>
+            	<input type="text" class="form-control" name="birth" placeholder="" value="" readonly>
          	 </div>
           <div class="col-md-6 mb-3">
            	 	<label for="userId">성별</label>
-           	 	<input type="text" class="form-control" id="gender" placeholder="" value="" readonly>
+           	 	<input type="text" class="form-control" name="gender" placeholder="" value="" readonly>
           </div>
 			</div>
         </div>
 
         <div class="col-md-12 mb-3">
             <label for="Name">전화번호</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" readonly>
+            <input type="text" class="form-control" name="phone" placeholder="" value="" readonly>
           </div>
 
 	 	<div class="col-md-12 mb-3">
             <label for="Name">구분</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" readonly>
+            <input type="text" class="form-control" name="role" placeholder="" value="" readonly>
          </div>
             
          <div class="col-md-12 mb-3">
             <label for="Name">가입일자</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" readonly>
+            <input type="text" class="form-control" name="regdate" placeholder="" value="" readonly>
          </div>
            
             <div class="modal-footer">
@@ -576,9 +576,8 @@
                         <c:set var="i" value="${ i+1 }" />
                         <tr>
                            <th scope="row">${ i }</th>
-                           <td align="left"
-                              style="color: #7fad39;"><a
-                              href="/admin/getUserAdmin?userId=${user.userId}">${user.userId}</a></td>
+                           <td align="left"><a
+                              data-toggle="modal" href="#myModal2" data-userid="${user.userId}">${user.userId}</a></td>
                            <td align="left">${user.userName}</td>
                            <td align="left">${user.phone}</td>
                            <td align="left">${user.role}</td>
@@ -655,34 +654,34 @@ $(function() {
 //////////////// 블랙리스트 목록 REST 끝   /////////////////
 
 
+//////////////// 유저 상세 REST 시작 /////////////////
+var USERID="";
+
 function getUser(){
         	
 	  var uri = "/admin/getUserRest/"+USERID;
-	  		alert(uri);
 		   $.get(uri, function(response) { 
-			alert('\${response.userObj.gender}');
+			 $('input[name=userid]').attr('value',`\${response.userId}`);
+			 $('input[name=username]').attr('value',`\${response.userName}`);
+			 $('input[name=nickname]').attr('value',`\${response.nickName}`);
+			 $('input[name=email]').attr('value',`\${response.email}`);
+			 $('input[name=birth]').attr('value',`\${response.birth}`);
+			 $('input[name=gender]').attr('value',`\${response.gender}`);
+			 $('input[name=phone]').attr('value',`\${response.phone}`);
+			 $('input[name=role]').attr('value',`\${response.role}`);
+			 $('input[name=regdate]').attr('value',`\${response.regDate}`);
 		   }, "json");
-}
+		}
 
-
-
-var USERID="";
-
+// 모달 창 오픈할 때 해당 유저아이디 전달 //
 $(document).ready(function() {     
 
 	$('#myModal2').on('show.bs.modal', function(event) {          
 		USERID = $(event.relatedTarget).data('userid');
-		alert(USERID);
-	    alert("아마 이게 실행되는듯");
-	    
 	    getUser();
 
 	 });
 });
-//////////////// 유저 상세 REST 시작 /////////////////
-
-  
-
 //////////////// 유저 상세 REST 끝   /////////////////
 
 </script>
