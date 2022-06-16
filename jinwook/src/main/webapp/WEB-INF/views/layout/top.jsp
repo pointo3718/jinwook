@@ -4,7 +4,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
-<html lang="ko">	
+<html lang="ko">   
 <style>
 *{font-family: 'Noto Sans KR', sans-serif;}
 
@@ -24,15 +24,15 @@
 .dropdown-toggle::after { transition: transform 0.15s linear;}
 .show.dropdown .dropdown-toggle::after {transform: translateY(3px);}
 .dropdown-menu {margin-top: 0;} /* hover 메뉴때문에 넣음 */
-	
+   
 a{
-	color: #7fad39;
+   color: #7fad39;
 }
-	
+   
 .row.navbar{
- 	display: flex;
-   	justify-content: center;
-	align-items: center;
+    display: flex;
+      justify-content: center;
+   align-items: center;
 }
 
 </style> 
@@ -136,34 +136,34 @@ a{
                   </c:if>
                   <c:if test="${user != null}">
                   <c:if test="${sessionScope.user.role == '사용자'}">
-					  <div class="dropdown">
+                 <div class="dropdown">
                         <a href="/admin/blog" style="word-break: break-all; margin-right:20px;" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-star" aria-hidden="true"></i >${sessionScope.user.grade } ${sessionScope.user.nickName } 님</a>
-					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					    <a class="dropdown-item" href="/user/login">마이페이지</a>
-					    <a class="dropdown-item" href="#">xx action</a>
-					    <a class="dropdown-item" href="#">xx else here</a>
-					  </div>
-					    </div>
+                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                   <a class="dropdown-item" href="/user/login">마이페이지</a>
+                   <a class="dropdown-item" href="#">xx action</a>
+                   <a class="dropdown-item" href="#">xx else here</a>
+                 </div>
+                   </div>
                   </c:if>
                   <c:if test="${sessionScope.user.role == '사장님'}">
-					  <div class="dropdown">
+                 <div class="dropdown">
                         <a href="/admin/blog" style="word-break: break-all; margin-right:20px;" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i >${sessionScope.user.userName } 사장님</a>
-					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					    <a class="dropdown-item" href="/admin/blog">사장님페이지</a>
-					    <a class="dropdown-item" href="#">xx action</a>
-					    <a class="dropdown-item" href="#">xx else here</a>
-					  </div>
-					    </div>
+                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                   <a class="dropdown-item" href="/admin/blog">사장님페이지</a>
+                   <a class="dropdown-item" href="#">xx action</a>
+                   <a class="dropdown-item" href="#">xx else here</a>
+                 </div>
+                   </div>
                   </c:if>
                   <c:if test="${sessionScope.user.role == '관리자'}">
-					  <div class="dropdown">
+                 <div class="dropdown">
                         <a href="/admin/blog" style="word-break: break-all; margin-right:20px;" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-heart" aria-hidden="true"></i >${sessionScope.user.userName } 관리자님</a>
-					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					    <a class="dropdown-item" href="/user/login">관리자페이지</a>
-					    <a class="dropdown-item" href="#">xx action</a>
-					    <a class="dropdown-item" href="#">xx else here</a>
-					  </div>
-					    </div>
+                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                   <a class="dropdown-item" href="/user/login">관리자페이지</a>
+                   <a class="dropdown-item" href="#">xx action</a>
+                   <a class="dropdown-item" href="#">xx else here</a>
+                 </div>
+                   </div>
                   </c:if>
                         <a href="/user/logout">로그아웃  <i class="fa fa-sign-out" aria-hidden="true"></i></a>
                   </c:if>

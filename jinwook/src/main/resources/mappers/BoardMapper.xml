@@ -90,6 +90,18 @@
    <result property="recoDate"          column="recodate"        jdbcType="DATE"/>   
    <result property="recommendCount"    column="recommend_count" jdbcType="INTEGER"/>   
 </resultMap>
+
+<resultMap type="attach" id="attachSelectMap">
+   <result property="attachNo"       column="attach_no"         jdbcType="INTEGER"/>   
+   <result property="boardNo"        column="board_no"          jdbcType="INTEGER"/>   
+   <result property="rcpNo"        	 column="rcp_no"            jdbcType="INTEGER"/>   
+   <result property="orderNo"        column="order_no"          jdbcType="INTEGER"/>   
+   <result property="orgFileName"    column="org_file_name"     jdbcType="VARCHAR"/>   
+   <result property="storedFileName" column="stored_file_name"  jdbcType="VARCHAR"/>   
+   <result property="fileSize"       column="file_size"         jdbcType="INTEGER"/>   
+   <result property="regDate"        column="reg_date"          jdbcType="DATE"/>   
+   <result property="delGb"          column="del_gb"            jdbcType="VARCHAR"/>   
+</resultMap>
 	
 	<!-- 1:1문의 조회수 올리기v -->
 	<update id="updateBoardInquiryHits">
@@ -133,11 +145,55 @@
 		)
 	</insert>
 	
-	<insert id="fileInsert" parameterType="FileVO">
+	<insert id="insertBoardFile" parameterType="hashMap">
+		INSERT INTO attach(
+			attach_no,
+			board_no,
+			org_file_name,
+			stored_file_name,
+			file_size
+		)VALUES(
+			#{attachNo},
+			#{boardNo},
+			#{orgFileName},
+			#{storedFileName},
+			#{fileSize}
+		)
+    </insert>
+    
+    <!-- 첨부파일 조회 key가 대문자로 조회됨 -> 카멜 케이스 써야 함 ㅠㅠ -->
+	<select id="selectAttachList" parameterType="int" resultType="hashMap">
+		SELECT attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
+	  	FROM attach
+	 	WHERE board_no = #{boardNo}
+	   	AND del_gb = 'N'
+	   	ORDER BY attach_no ASC
+	</select>
+
+	<!--  첨부파일 다운 
+	<select id="selectAttachInfo" parameterType="hashMap" resultType="hashMap">
+		SELECT STORED_FILE_NAME, ORG_FILE_NAME
+		FROM attach
+		WHERE attach_no = #{attachNo}
+	</select> -->
+	
+	<update id="updateAttach" parameterType="hashMap">
+    	UPDATE attach SET
+    	del_gb = 'Y'
+    	WHERE attach_no = #{attachNo}
+    </update>
+	
+	<!-- <insert id="fileBoardInsert" parameterType="FileVO">
        INSERT INTO files (
        FILE_NO, BOARD_NO, FILENAME, FILEORINAME, FILEURL
        ) VALUES (#{fileNo},#{boardNo},#{fileName},#{fileOriName},#{fileUrl})
 	</insert>
+	
+	<insert id="fileRecipeInsert" parameterType="FileVO">
+       INSERT INTO files (
+       FILE_NO, RCP_NO, FILENAME, FILEORINAME, FILEURL
+       ) VALUES (#{fileNo},#{rcpNo},#{fileName},#{fileOriName},#{fileUrl})
+	</insert> -->
 	
 	
 	<insert id="addBoardAnnouncement" parameterType="Board" useGeneratedKeys="true" keyProperty="boardNo">
@@ -183,6 +239,16 @@
 	<!-- 1:1문의 상세 조회: 답변대기중 또는 답변완료로 출력되어야 함 -->
 	<select id="getBoardInquiry" parameterType="int" resultType="Board" resultMap="boardSelectMap">
 		SELECT
+			board_no, board_title, board_content, user_id, write_date, board_inq_status, board_hits
+		FROM
+			board b
+		WHERE board_no = #{boardNo}
+		AND board_code = 0
+		AND (board_inq_status = false OR board_inq_status = true)
+	</select>
+	<!-- 1:1문의 상세 조회: 답변대기중 또는 답변완료로 출력되어야 함 -->
+	<!-- <select id="getBoardInquiry" parameterType="int" resultType="Board" resultMap="boardSelectMap">
+		SELECT
 			b.board_no, b.board_title, b.board_content, b.user_id, b.write_date, b.board_inq_status, b.board_hits, c.comment_content
 		FROM
 			board b, comment c
@@ -191,7 +257,7 @@
 		AND b.board_no = #{boardNo}
 		AND board_code = 0
 		AND (board_inq_status = false OR board_inq_status = true)
-	</select>
+	</select> -->
 	
 	<!-- 1:1문의 답변대기중 -> 답변완료 -->
 	<update id="updateBoardInqStatus" parameterType="Board">

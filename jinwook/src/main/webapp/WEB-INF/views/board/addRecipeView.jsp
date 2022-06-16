@@ -49,6 +49,11 @@ function fncAddRecipe() {
 	$("form").attr("method", "POST").attr("action", "/board/addRecipe").submit();
 }
 
+var cnt = 1;
+function fn_addFile() {
+	$("#d_file").append("<br>" + "<input type='file' name='file'" + cnt +"' />");
+}
+
 </script>
 
 </head>
@@ -93,8 +98,12 @@ function fncAddRecipe() {
 		<hr/><br/>
 		
 		<div class="form-group">
-		    <label for="file" class="col-sm-offset-1 col-sm-3 control-label">다중 파일 업로드</label>
+		    <label for="file" class="col-sm-offset-1 col-sm-3 control-label">파일 업로드</label>
 		    <div class="col-sm-3"><!-- 입력칸 -->
+		    <input type="button" class="form-control" value="파일 추가" onclick="fn_addFile()"><br>
+		      	<div id="d_file">
+		      	
+		      	</div>
 		      	<input type="file" id="files" name="files" multiple="multiple" placeholder="파일 선택" class="form-control" >
 		      	<input type="submit" value="upload">
 		    </div>
@@ -108,21 +117,6 @@ function fncAddRecipe() {
 		  </div>
 		  </form>
 		<hr/><br/><br/><br/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>조회수</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.rcpHits}</div>
-		</div>
-		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>작성일</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.rcpDate}</div>
-		</div>
-		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3"><strong>작성자</strong></div>
-			<div class="col-xs-7 col-md-5">${recipe.user.userId}</div>
-		</div>
-		<hr/>
 </div>
 	
 </body>

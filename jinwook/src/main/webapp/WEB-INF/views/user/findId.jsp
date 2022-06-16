@@ -1,6 +1,9 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
 <html lang="ko">
 	
 <head>
@@ -81,18 +84,18 @@
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-	//비밀번호 찾기 문자 인증 
+	//아이디 찾기 문자 인증 
 	$(document).ready(function() {
 	$("#snedA").click(function(){
 		swal("진욱이네", "인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
 	var phone = $("#phone").val();
-	var userId = $(".userId").val();
+	var userName = $(".userName").val();
 	$.ajax({
         type:"GET",
-        url:"findPasswordPhoneSend?phone=" + phone+"&userId="+userId,
+        url:"findIdPhoneSend?phone=" + phone+"&userName="+userName,
         cache : false,
         success:function(data){
-        	/* alert("asdas"+data) */
+        	alert("asdas"+data)
         	if(data == "error"){
 				swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
         		
@@ -118,23 +121,17 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 	const data = $("#phoneDoubleChk").val();
     console.log(data);
     if(phone2 == null || phone2 == ""){
-    	swal("진욱이네", "휴대폰으로 발송된 인증번호를 입력해주세요.");
+		swal("진욱이네", "휴대폰으로 발송된 인증번호를 입력해주세요.");
     } else{     
        if(phone2 == data){
-		swal({
-			   title: '진욱이네',
-			   text: '인증 완료',
-			   
-			}).then(function(){
-			
-		self.location = "updatePassword";
-		})
+		swal("진욱이네", "인증 완료");
+           $("#findId").hide();
+   		   $("#poem").show().html();
         }
         else {
            alert("실패");
-        }
+        }    
     }
-    
         
  });
  });
@@ -144,11 +141,11 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 	
 	
 	
-	//비밀번호 찾기 이메일 인증		
+	//아이디 찾기 이메일 인증		
 	$(document).ready(function() {
 		$("#snedE").click(function() {
 			const email = $("#email").val();
-			const userId = $(".userId").val();
+			const userName = $(".userName").val();
 			/* if (!emailCheck(email)) {
 				swal("이메일을 정확히 입력해주세요");
 				return;
@@ -160,13 +157,13 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 			}
 			
 			$.ajax({
-				url: "/user/findPasswordEmail",
+				url: "/user/findIdEmail",
 				type: "POST",
 				data: {email: email,
-						userId : userId}
+						userName : userName}
 	
 			})
-			.then(function() {
+			.done(function() {
 				location.href = "/user/login";
 				/* const html =
 					"<div class='send_email'> "
@@ -215,13 +212,13 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 	</script>		
 	
 </head>
-<body>
 
+<body>
 <jsp:include page="../layout/top.jsp" />
 	
-	<form class="find_password_page text-center" id="findPassword">
+	<form class="find_id_page text-center" id="findId">
 		<div class="find_info">
-			<h1 class="">비밀번호 찾기</h1>
+			<h1 class="">아이디 찾기</h1>
 			<br><br>
 		</div>
 		<div class="auth">
@@ -232,10 +229,10 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 		<form class = "container text-center">
 		<div class="text-center " style="margin-right:270px;">
 		
-		<label for="userId " style="font-size:15px;" >아이디</label>	
+		<label for="userName " style="font-size:15px;" >이름</label>	
 		</div>
 			<div class="aaa " style="font-size:15px;">
-			<input type="text" name="userId" class="userId" placeholder="이름을 입력해주세요.">
+			<input type="text" name="userName" class="userName" placeholder="이름을 입력해주세요.">
 			</div>
 			<br>
 			
@@ -277,28 +274,21 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 		</form>	
 			<br><br>
 			
+			
+		<form class="text-center" id="poem" style="display:none;">
+			<h3>고객님의 진욱이네 계정을 찾았습니다.</h3>
+			<h4>아이디 확인 후 로그인해주세요.</h4>
+			<a class="fa fa-user">	${user.userName}</a>
+			<br><br><br>
+			<button type="button" onclick="location.href='/user/login' " class="button1 site-btn" style="width:300px;" >로 &nbsp;그 &nbsp;인</button>
+			<br>
+			<br>
+			<button type="button" onclick="location.href='/user/findPassword' " class="button2 site-btn" style="width:300px; background-color:gray;" >비밀번호 찾기</button>
+			<br><br><br>
+			
+		</form>
  	<!--  화면구성 div end /////////////////////////////////////-->
 <jsp:include page="../layout/footer.jsp" />
-
-
-
-
-	<!-- <form class="form-horizontal">
-		<label for="phone">휴대폰 번호</label>
-		<p>
-			<input type="text" name="userId" class="userId"><br>
-			<input id="phone" type="text" name="phone" title="전화번호 입력" required/>
-			<span id="phoneChk" class="doubleChk">인증번호 보내기</span><br/>
-			<input id="phone2" type="text" name="phone2" title="인증번호 입력" disabled required/>
-			<span id="phoneChk2" class="doubleChk">본인인증</span>
-			<span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span>
-			<input type="hidden" id="phoneDoubleChk"/>
-		</p>
-		<p class="tip">
-			최초 가입 시에만 사용하고 있습니다. 따로 저장되지 않습니다.(번호만 입력해주세요.)
-		</p>
-</form> -->
 </body>
-
 
 </html>

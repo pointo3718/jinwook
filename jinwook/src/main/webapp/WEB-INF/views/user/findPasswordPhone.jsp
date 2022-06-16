@@ -1,13 +1,80 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-<meta http-equiv="X-UA-Compatible" content="ie=edge" /> 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<title>문자인증</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<meta name="description" content="Ogani Template">
+	<meta name="keywords" content="Ogani, unica, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>비밀번호 찾기</title>
+	
+	<!-- Google Font -->
+	<link
+	   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+	   rel="stylesheet">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- Css Styles -->
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/font-awesome.min.css"
+	   type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/elegant-icons.css" type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/nice-select.css" type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/owl.carousel.min.css"
+	   type="text/css">
+	<link rel="stylesheet"
+	   href="${path}/resources/static/css/slicknav.min.css" type="text/css">
+	<link rel="stylesheet" href="${path}/resources/static/css/style.css"
+	   type="text/css">
+	<link rel="stylesheet"
+	   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!--  ///////////////////////// CSS ////////////////////////// -->
+	<style>
+
+	input{
+		width:300px;
+		height:50px;
+		font-size: 15px;
+		text-indent: 1em;
+	}
+
+	h3 {
+	font-weight: normal;
+}
+ 
+
+ 
+.auth input {
+	border: 1px solid #ddd;
+	padding: 0 5px;
+	height: 30px;
+	margin-bottom: 10px;
+}
+ .swal-button 
+				{
+					background-color: #7fad39;
+					font-size: 12px;
+					text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+				}
+}
+ 
+
+    </style>
 </head>
 <body>
 	<form class="form-horizontal">
@@ -37,7 +104,7 @@ $("#phoneChk").click(function(){
 	var userId = $(".userId").val();
 	$.ajax({
         type:"GET",
-        url:"sendPasswordPhone?phone=" + phone+"&userId="+userId,
+        url:"findPasswordPhoneSend?phone=" + phone+"&userId="+userId,
         cache : false,
         success:function(data){
         	alert("asdas"+data)

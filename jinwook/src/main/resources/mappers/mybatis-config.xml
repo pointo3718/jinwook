@@ -29,6 +29,7 @@
       <typeAlias type="com.jinwook.home.service.domain.Request" alias="request"/>
       <typeAlias type="com.jinwook.home.service.domain.Coupon" alias="coupon"/>
       <typeAlias type="com.jinwook.home.service.domain.FileVO" alias="filevo"/>
+      <typeAlias type="com.jinwook.home.service.domain.Attach" alias="attach"/>
       
       <typeAlias type="com.jinwook.home.common.Criteria" alias="criteria"/>
    </typeAliases>

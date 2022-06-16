@@ -36,7 +36,14 @@ $(function(){
 	$("#updateButton").on("click", function() {
 		self.location = "/board/updateBoardInquiryView?boardNo=${board.boardNo}"
 	});
-});	
+});
+
+function fn_fileDown(attachNo) {
+	var formObj = $("form[name='readForm']");
+	$("#attach_no").attr("value", attachNo);
+	formObj.attr("action", "/board/fileDown");
+	formObj.submit();
+}
 
 </script>
 
@@ -44,7 +51,7 @@ $(function(){
 
 <body>
 	<div class="container">
-	
+	<form name="readForm" role="form" method="post">
 	<div class="page-header">
 	       <h3 class=" text-info">1:1문의 상세</h3>
 	    </div>
@@ -75,13 +82,20 @@ $(function(){
 		<hr/>
 		<div class="row">
 	  		<div class="col-xs-5 col-md-3 "><strong>작성일</strong></div>
-			<div class="col-xs-7 col-md-5">${board.writeDate}</div>
+			<div class="col-xs-7 col-md-5">
+			<fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd"/>
+			</div>
 		</div>
 		<hr/>
-		<div class="row">
-	  		<div class="col-xs-5 col-md-3 "><strong>첨부 사진</strong></div>
-			<div class="col-xs-7 col-md-5">${fileVO.fileName}</div>
-		</div>
+		<span>파일 목록</span>
+			
+ 			<div class="form-group">
+ 				<c:forEach var="file" items="${file}">
+ 				<input type="hidden" id="attach_no" name="attach_no" value="">
+ 					<a href="#" onclick="fn_fileDown('${file.attach_no}'); return false;">${file.org_file_name}</a>(${file.file_size}kb)<br>
+ 				</c:forEach>
+ 			</div>
+ 			</form>
 		<hr/>
 		<div class="row">
 	  		<div class="col-xs-5 col-md-3 "><strong>답변상태</strong></div>
@@ -95,7 +109,7 @@ $(function(){
 			</c:choose>
 			<!-- <div class="col-xs-7 col-md-5">${board.boardInqStatus}</div> -->
 		</div>
-<!-- 댓글 -->
+<%-- <!-- 댓글 -->
 <div id="comment">
   <ol class="commentList">
     <c:forEach items="${commentList}" var="board">
@@ -124,7 +138,7 @@ $(function(){
   	<button type="submit">댓글 작성</button>
   </p>
   
-</form>
+</form> --%>
 
 <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">

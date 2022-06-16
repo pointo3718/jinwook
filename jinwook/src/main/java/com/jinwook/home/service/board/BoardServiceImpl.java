@@ -9,7 +9,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.jinwook.home.common.FileUtils;
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.BoardMapper;
 import com.jinwook.home.service.domain.Board;
@@ -24,13 +26,19 @@ public class BoardServiceImpl implements BoardService {
    @Autowired
    private BoardMapper boardMapper;
    
-    
+   @Autowired
+    private FileUtils fileUtils;
      
    //1:1문의 등록
    @Override
-   public void addBoardInquiry(Board board) throws Exception {
-	   
+   public void addBoardInquiry(Board board, MultipartHttpServletRequest mpRequest) throws Exception {
 	   boardMapper.addBoardInquiry(board);
+	   
+	   List<Map<String,Object>> list = fileUtils.parseInsertBoardFileInfo(board, mpRequest); 
+		int size = list.size();
+		for(int i=0; i<size; i++){ 
+			boardMapper.insertBoardFile(list.get(i)); 
+		}
    }
    
    //공지사항 등록v
@@ -41,8 +49,21 @@ public class BoardServiceImpl implements BoardService {
    }
    
    @Override
-   public void updateBoardInquiry(Board board) throws Exception {
+   public void updateBoardInquiry(Board board, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception {
+	   
 	   boardMapper.updateBoardInquiry(board);
+	   
+	   List<Map<String, Object>> list = fileUtils.parseUpdateFileInfo(board, files, fileNames, mpRequest);
+		Map<String, Object> tempMap = null;
+		int size = list.size();
+		for(int i = 0; i<size; i++) {
+			tempMap = list.get(i);
+			if(tempMap.get("IS_NEW").equals("Y")) {
+				boardMapper.insertBoardFile(tempMap);
+			}else {
+				boardMapper.updateAttach(tempMap);
+			}
+		}
    }
    
    //공지사항 수정v
@@ -374,11 +395,18 @@ public class BoardServiceImpl implements BoardService {
 	public int updateBoardRecipeHits(Integer rcpNo) {
 		return boardMapper.updateBoardRecipeHits(rcpNo);
 	}
-
-	@Override
-	public int fileInsert(FileVO file) throws Exception {
-		return boardMapper.fileInsert(file);
-	}
+	
+//	//게시판 사진 업로드
+//	@Override
+//	public int fileBoardInsert(FileVO file) throws Exception {
+//		return boardMapper.fileBoardInsert(file);
+//	}
+//	
+//	//레시피 사진 업로드
+//	@Override
+//	public int fileRecipeInsert(FileVO file) throws Exception {
+//		return boardMapper.fileRecipeInsert(file);
+//	}
 
 	//댓글 조회
 	@Override
@@ -396,6 +424,19 @@ public class BoardServiceImpl implements BoardService {
 	public boolean updateBoardInqStatus(Board board) {
 		return boardMapper.updateBoardInqStatus(board);
 	}
+
+	//파일 첨부 조회
+	@Override
+	public List<Map<String, Object>> selectAttachList(int boardNo) throws Exception {
+		return boardMapper.selectAttachList(boardNo);
+	}
+
+	//파일 다운로드
+	@Override
+	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception {
+		return boardMapper.selectAttachInfo(map);
+	}
+
 
 
 

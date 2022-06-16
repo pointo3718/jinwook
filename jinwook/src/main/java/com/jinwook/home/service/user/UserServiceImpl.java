@@ -199,32 +199,47 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void sendPasswordEmail(User user) throws Exception{
-		SimpleMailMessage simpleMailMessage = new  SimpleMailMessage();
-		simpleMailMessage.setTo(user.getEmail());
-		simpleMailMessage.setSubject("[진욱이네] 비밀번호 재설정 안내를 드립니다.");
+		MimeMessage mimeMessage = mailSender.createMimeMessage();
 		
-		StringBuffer sb = new StringBuffer();
-		sb.append("강진욱님 안녕하세요 마켓컬리입니다.\n"
-				+ "\n"
-				+ "아래 버튼을 눌러 비밀번호를 재설정 해주세요.\n"
-				+ "\n"
-				+ "<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n "
-				+ "유효 시간 : "+LocalDateTime.now()+"\n"
-				+ "유효 시간 내에 비밀번호 재설정을 완료해 주세요.\n"
-				+ "");
-//		sb.append(System.lineSeparator());
-		
-//		for(int i=0;i<usernames.size()-1;i++) {
-//			sb.append(usernames.get(i));
-//			sb.append(System.lineSeparator());
-//		}
-		
-//		simpleMailMessage.setText(sb.toString()+"\n"+msg);
-		
+		try {
+	         
+	         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
+	         mimeMessageHelper.setTo(user.getEmail());
+	         
+	         mimeMessageHelper.setSubject("[진욱이네] 비밀번호 재설정 안내를 드립니다.");
+	         String content= " ";
+	         content = user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r ";
+	         content += "<br> <br> ";
+	        content += "아래 버튼을 눌러 비밀번호를 재설정 해주세요. ";
+	        content += "<br><br>  ";
+	        content += "<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n ";
+	        content += "<br><br>  ";
+	        content += "유효 시간 : "+LocalDateTime.now()+"\n ";
+	        content += "<br> ";
+	        content += "유효 시간 내에 비밀번호 재설정을 완료해 주세요.\n ";
+//	         StringBuffer sb = new StringBuffer();
+//			 sb.append(user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n"
+//					+ "\n"
+//					+ "요청하신 아이디를 안내드립니다.\n"
+//					+ "\n"
+//					+ user.getUserId()
+//					+ " \n"
+//					+ "<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n ");
+//			 sb.append(System.lineSeparator());
+	         
+	         
+	         mimeMessageHelper.setText(content, true);
+//	         mailSender.send(mimeMessage);
+	         System.out.println("성공");
+	      } catch (Exception e) {
+	         // TODO: handle exception
+	         System.out.println("실패");
+	         throw new RuntimeException(e);
+	      }
 		
 		new Thread(new Runnable() {
 			public void run() {
-				mailSender.send(simpleMailMessage);
+				mailSender.send(mimeMessage);
 			}
 		}).start();
 	}

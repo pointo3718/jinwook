@@ -349,15 +349,15 @@
 		<hr><br>
 		    <label for="userId" class=" col-sm-3 control-label" >아 이 디</label>
 		    <div class="col-sm-6"   >
-		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required oninput = "checkId()" >
-					<span class="id_ok">사용 가능한 아이디입니다.</span>
+		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required oninput = "checkId()"  >
+					<span class="id_ok" >사용 가능한 아이디입니다.</span>
 					<span class="id_already">사용 중인 아이디입니다.</span>
 				<!-- <button class="idChk" type="button" id="idChk" onclick="checkId()" style="width:100px; height:50px;" value="N"  >중복확인</button> -->
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password" class=" col-sm-3 control-label" style="justify-content:center;"><a>비밀번호</a></label>
+		    <label for="password" class=" col-sm-3 control-label"><a>비밀번호</a></label>
 		    <div class="col-sm-6" >
 		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" >
 		    </div>
@@ -401,11 +401,21 @@
 		  
 		  <div class="form-group">
 		    <label for="gender" class=" col-sm-3 control-label">성별</label>
-		    <div class="col-sm-2" style="display:flex;">
-		    	<input type="radio" 	name="gender" value="남" style="margin-right:10px;" /> 남 
-		    	<input type="radio" 	name="gender" value="여"style="margin-left:10px; margin-right:10px;" />여
+		    <div class="col-sm-2" style="display:flex; ">
+		    	<input type="radio" 	name="gender" value="남"/> 남        
+		    	<input type="radio" 	name="gender" value="여" /> 여
 		  </div>
 		  </div>
+		  
+		  <!-- <div class="custom-control custom-radio" >
+						<input type="radio" name="jb-radio" id="jb-radio-1" class="custom-control-input">
+						<label class="custom-control-label" for="jb-radio-1">남</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" name="jb-radio" id="jb-radio-2" class="custom-control-input">
+						<label class="custom-control-label" for="jb-radio-2">여</label>
+					</div> -->
+		  
 		   <div class="form-group">
 		    <label for="email" class=" col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">

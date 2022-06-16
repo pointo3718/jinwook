@@ -169,6 +169,10 @@ public class StoreController {
 		List<Store> getStore = storeService.getStore(storeNo);
 		model.addAttribute("getStore", getStore);
 		
+		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+		
+		model.addAttribute("storeInfo", storeInfo);
+		
 		return "store/getStore";
 	}
 
@@ -182,6 +186,10 @@ public class StoreController {
 		
 		List<Store> getStoreWallet = storeService.getStoreWallet(store);
 		model.addAttribute("getStoreWallet", getStoreWallet);
+		
+		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+		
+		model.addAttribute("storeInfo", storeInfo);
 
 		return "store/getStoreWallet";
 	}
