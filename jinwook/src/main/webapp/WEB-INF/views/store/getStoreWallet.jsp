@@ -11,15 +11,13 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>지갑 조회</title>
+<title>상품등록</title>
 
 <!-- Google Font -->
-
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
-	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap"
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
 
 <!-- Css Styles -->
@@ -43,17 +41,48 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<!-- date picker -->
+
+
 <script type="text/javascript">
 	/*<![CDATA[*/
 </script>
 
 <style>
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	background: #ffffff;
+	z-index: 10;
+}
+
 .row {
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 }
 
 .mytop01 {
@@ -78,13 +107,128 @@
 	padding-top: 0px;
 }
 
+.blog__sidebar {
+	padding-bottom: 430px;
+}
+
 .blog__sidebar__item {
 	width: 200px;
+	/*  body > div.container{
+        	border: 3px solid #D6CDB7;
+            margin-top: 10px;
+        }  */ / . row { margin-top : 10px;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.id_ok {
+	color: #7fad39;
+	display: none;
+	font-size: 10px;
+}
+
+.id_already {
+	color: red;
+	display: none;
+	font-size: 10px;
+	text-align: left;
+}
+
+.control-label {
+	whidth: 250px;
+	text-align: center;
+	justify-content: center;
+}
+
+.site-btn {
+	background-color: #7fad39; /* Green */
+	border: none;
+	color: white;
+	width: 200px;
+	text-align: center;
+	font-size: 20px;
+}
+
+.userId {
+	width: 300px;
+	text-indent: 1em;
+}
+
+.ss {
+	font-size: 30px;
+	justify-content: center;
+}
+
+input {
+	width: 300px;
+	height: 50px;
+	text-indent: 1em;
+	font-size: 15px;
+}
+
+div {
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+}
+
+label {
+	font-size: 15px;
+	justify-content: top;
+	text-align: left;
+	display: flex;
+	align-items: left;
+}
+
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
+
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity = 0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
 }
 </style>
 
 
 <script type="text/javascript">
+
+	function fncaddOrdersCart(e) {
+		const prodNo = $(e).data("value");
+		const storeName = $("#stoName").data("values");
+
+		const passdata = {
+			'prodNo' : prodNo,
+			'storeName' : storeName
+		};
+		console.log(storeName);
+		console.log(prodNo);
+		$.ajax({
+			anyne : true,
+			url : "/orders/addOrdersCart/" + prodNo,
+			contentType : 'application/json',
+			data : JSON.stringify(passdata).e,
+			dataType : "text",
+			success : function(result) {
+				if (result != null) {
+					alert("담기완료");
+				}
+			}
+		});
+	}
 	
 </script>
 
@@ -101,46 +245,52 @@
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-section set-bg"
 		style="background-color: #F2F2F2">
+		<c:forEach var="store" items="${storeInfo}" begin="0" end="0">
+			<div class="container">
+				<div class="row my-1">
+					<div class="col-4">
+						<div class="bg-white text-black mx-3">
 
+							</br> <strong class="mytop01">${store.user.userName} 사장님</strong> </br> </br>
+							<h6 class="mytop01">진욱이네와 처음 만난 날</h6>
+							<h3 class="mytop01-content">${store.user.regDate}</h3>
+							</br> </br>
 
-
-		<div class="container">
-			<div class="row my-1">
-
-				<div class="col-4">
-					<div class="bg-white text-black mx-3">
-
-						</br> <strong class="mytop01"><h5>${store.user.userName}
-								사장님</h5></strong> </br> </br> </br> </br>
-
+						</div>
 					</div>
-				</div>
 
-				<div class="col-4">
-					<div class="bg-white text-black mx-3">
+					<div class="col-4">
+						<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">진욱페이 ></strong> </br> </br>
-						<h1 class="mytop01-content">${store.user.jpBalance}</h1>
-						원 </br> </br>
+							</br> <strong class="mytop01">진욱페이</strong> </br> </br>
+							<h1 class="mytop01-content">${store.user.jpBalance}원</h1>
+							</br> </br>
 
-
+						</div>
 					</div>
-				</div>
 
-				<div class="col-4">
-					<div class="bg-white text-black mx-3">
+					<div class="col-4">
+						<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">${store.storeName}</strong> </br> </br>
-						<h1 class="mytop01-content"></h1>
-						</br> </br>
+							</br> <strong class="mytop01">${store.storeName}</strong> </br> </br>
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-success btn-sm active"> <input
+									type="radio" name="options" id="option1" checked> 오픈
+								</label> <label class="btn btn-danger btn-sm"> <input
+									type="radio" name="options" id="option2"> 마감
+								</label>
+							</div>
+							<h6 class="mytop01-content">${store.storeAddr}</h6>
 
+							</br> </br>
 
+						</div>
 					</div>
 				</div>
 
 			</div>
-		</div>
-		<!-- /container -->
+			<!-- /container -->
+		</c:forEach>
 	</section>
 	<!-- Breadcrumb Section End -->
 
@@ -152,13 +302,13 @@
 					style="width: 200px; margin-right: 30px;">
 					<div class="blog__sidebar" style="width: 200px;">
 
-						<div class="blog__sidebar__item" style="margin-bottom: 925px;">
+						<div class="blog__sidebar__item">
 
 							<h5 class="text-center" style="margin-bottom: 0px;">
-								<strong>My Page</strong>
+								<strong>사장님 페이지</strong>
 							</h5>
+							<br />
 
-							</br>
 
 
 							<div class="list-group text-center" style="font-size: 15px;">
@@ -210,27 +360,35 @@
 						<hr size="10px">
 					</h4>
 
-					<c:forEach var="store" items="${getStoreWallet}" begin="0" end="0">
-						<div class="row">
-							<div class="col-xs-4 col-md-2">
-								<strong>상점 매출액</strong>
-							</div>
-							<div class="col-xs-8 col-md-4">${store.totalEarn}</div>
-							<div class="col-xs-4 col-md-2 ">
-								<strong>진욱페이 잔액</strong>
-							</div>
-							<div class="col-xs-8 col-md-4" id="stoName"
-								data-values="${store.user.jpBalance}">${store.user.jpBalance}
+					<table class="table table-borderless">
+						<c:forEach var="store" items="${getStoreWallet}" begin='0' end='0'>
+							<tbody>
+								<tr>
+									<th scope="row">기간별 상점매출액</th>
+									<td>${store.totalEarn}원</td>
+									<td><input id="fromDate" type="date"> <input
+										id="toDate" type="date">&nbsp;&nbsp;
+										<button type="button" class="btn btn-outline-success btn-sm">조회</button></td>
+								</tr>
+								<tr>
+									<th scope="row">진욱페이 잔액</th>
+									<td>${store.user.jpBalance}원</td>
+									<td><button type="button"
+											class="btn btn-outline-success btn-sm">환급신청</button></td>
+								</tr>
+							</tbody>
+						</c:forEach>
+					</table>
 
-							</div>
-						</div>
 
-						<hr />
-					</c:forEach>
 
 					<!--  table Start /////////////////////////////////////-->
 
-
+					<h6 class="text-left">
+						<strong>기간별 주문내역</strong>&nbsp; <span
+							style="color: #6E6E6E; font-size: 13px">설정하지 않을시 오늘 날짜로
+							조회됩니다.</span>
+					</h6>
 					<table class="table table-hover table-striped">
 
 						<thead>
@@ -290,7 +448,14 @@
 									<td align="left">${store.request.reqDate}</td>
 									<td align="left">${store.request.resDate}</td>
 									<td align="left">${store.request.refundMoney}</td>
-									<td align="left">${store.request.reqStatus}</td>
+									<td align="left"><c:if
+											test="${store.request.reqStatus.trim()=='1'}">
+                								요청중         
+            						</c:if> <c:if test="${store.request.reqStatus.trim()=='2'}">
+                								수락완료         
+            						</c:if> <c:if test="${store.request.reqStatus.trim()=='3'}">
+                								거절         
+            						</c:if></td>
 
 
 								</tr>
