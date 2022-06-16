@@ -217,8 +217,8 @@
 					    </div>
 					  </div>
 					  	<br/><br/>
-					  <div class="form-group text-center">
-					    <a class="find_id" href="findIdEmail"> &nbsp;아이디 찾기</a><a> | </a><a class="find_password" href="findPhone">비밀번호 찾기</a>
+					  <div class="form-group text-center" >
+					    <a class="find_id" href="findId" style="color:black;"> &nbsp;아이디 찾기</a><a> | </a><a class="find_password" href="findPassword" style="color:black;">비밀번호 찾기</a>
 					  </div>
 					  <div class="form-group" style="text-align: center">
 					    <div class="col-sm-offset-2 col-sm-5 text-center">
@@ -237,6 +237,14 @@
                      <a href="#">
                      <img width="350" height="50" 
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs_esG5vNalcfhJ7BalYK2Uk06Dkp9JIK_KA&usqp=CAU" /></a>
+       				 </div>	<br>
+					  <div id="naver_login" style="text-align: center">
+                     <a href="#">
+                     <img width="350" height="50" src="${path}/resources/static/naverlogin.png" /></a>
+       				 </div>	<br>
+					  <div id="google_login" style="text-align: center">
+                     <a href="#">
+                     <img width="350" height="50" src="${path}/resources/static/googlelogin.png" /></a>
        				 </div>	
 						 <!--  <div class="form-group row">
 							<div class="or-seperator"><b>or</b></div>

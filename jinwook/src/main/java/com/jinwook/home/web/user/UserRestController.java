@@ -169,7 +169,7 @@ public class UserRestController {
 		return cnt;
 	}
 	
-	//이메일 중복 확
+	//이메일 중복 확인
 	@PostMapping("checkEmail")
 	public int checkEmail(@RequestParam("email") String email) throws Exception{
 		int cnt = userService.checkEmail(email); 
@@ -180,7 +180,7 @@ public class UserRestController {
 		return cnt;
 	}
 	
-	//아이디 찾기 - 이메일 
+	//아이디 찾기 - 이메일 인증 보내기
 	@PostMapping("findIdEmail")
 	public ResponseEntity<Object> findIdEmail(@ModelAttribute("user") User user) throws Exception{
 	    System.out.println("=====SEND METHOD=====");
@@ -196,9 +196,9 @@ public class UserRestController {
 	    return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
-	//비밀번호 찾기 - 이메일 
+	//비밀번호 찾기 - 이메일 인증 보내기
 	@PostMapping("findPasswordEmail")
-	public ResponseEntity<Object> sendPasswordEmail(@ModelAttribute("user") User user, HttpSession session) throws Exception{
+	public ResponseEntity<Object> findPasswordEmail(@ModelAttribute("user") User user, HttpSession session) throws Exception{
 		System.out.println("=====SEND METHOD=====");
 		User dbUser =userService.findPasswordEmail(user);
 		user = dbUser;
@@ -206,6 +206,7 @@ public class UserRestController {
 	    
 	    session.setMaxInactiveInterval(300);
 	    session.setAttribute("userId", user.getUserId());
+	    session.setAttribute("phone", user.getPhone());
 		
 		if(dbUser != null) {
 			userService.sendPasswordEmail(user);
@@ -229,13 +230,14 @@ public class UserRestController {
 		
 		@PostMapping("updatePassword")
 		public String updatePassword(@RequestBody User user, HttpSession session) throws Exception {
-			
+			session.setAttribute("user", user.getUserId());	
+			session.setAttribute("user", user.getPhone());	
+			System.out.println(user+"1123312132123132321312435545667878990");
 			userService.updatePassword(user);
 				
-			session.setAttribute("user", user.getUserId());	
 			
 				
-			return "login";
+			return "redirect:/user/login";
 		}
 	
 	// 인증번호 보내기
@@ -276,10 +278,35 @@ public class UserRestController {
 	}
 	
 	
-	//비밀번호 찾기 - 휴대폰 인증 문자 보내기
-	@GetMapping("sendPasswordPhone")
+	//아이디 찾기 - 휴대폰 인증 문자 보내기
+	@GetMapping("findIdPhoneSend")
 	@ResponseBody
-	public String sendPasswordPhone(@RequestParam("phone") String phone, @RequestParam ("userId") String userId, HttpSession session) throws Exception { // 휴대폰 문자보내기
+	public String findIdPhoneSend(@RequestParam("phone") String phone, @RequestParam ("userName") String userName, HttpSession session) throws Exception { // 휴대폰 문자보내기
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+		User user = new User();
+		
+		user.setUserName(userName);
+		user.setPhone(phone);
+		
+		User dbUser = userService.findIdPhone(user);
+		
+		if(dbUser.getUserName()== userName && dbUser.getPhone()==phone) {
+			
+			userService.certifiedPhoneNumber(phone,randomNumber);
+		}
+		session.setAttribute("userName", userName);
+		session.setAttribute("phone", phone);
+		System.out.println(session.getAttribute("userName")+"-=-=-=-=-=-=-=-=-=-=-=-1=-21=-2=1");
+		System.out.println(userName+"----=-=-=-=-=-=-=-=-=-=-=-=-=");
+		
+		System.out.println("-------------"+randomNumber+"------------");
+		return Integer.toString(randomNumber);
+	}
+	
+	//비밀번호 찾기 - 휴대폰 인증 문자 보내기
+	@GetMapping("findPasswordPhoneSend")
+	@ResponseBody
+	public String findPasswordPhoneSend(@RequestParam("phone") String phone, @RequestParam ("userId") String userId, HttpSession session) throws Exception { // 휴대폰 문자보내기
 		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
 		User user = new User();
 		
@@ -293,6 +320,7 @@ public class UserRestController {
 			userService.certifiedPhoneNumber(phone,randomNumber);
 		}
 		session.setAttribute("userId", userId);
+		session.setAttribute("phone", phone);
 		System.out.println(session.getAttribute("userId")+"-=-=-=-=-=-=-=-=-=-=-=-1=-21=-2=1");
 		System.out.println(userId+"----=-=-=-=-=-=-=-=-=-=-=-=-=");
 		

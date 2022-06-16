@@ -78,7 +78,7 @@
 		WHERE user_Id = #{userId} AND password = #{password}
 	 </select>
 	 
-	 <select 	id="findIdPhone"	parameterType="user"	resultType="int">
+	 <select 	id="findIdPhone"	parameterType="user"	resultType="user">
 		SELECT
 		*	
 		FROM users 
@@ -135,7 +135,7 @@
 		<set>
 			password = #{password}
 		</set>
-		WHERE user_id = #{userId} AND phone = ${phone}
+		WHERE user_id = #{userId} 
 	 </update>
 	 
 </mapper>

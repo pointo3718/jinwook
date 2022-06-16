@@ -233,11 +233,11 @@ public class UserController {
 		return "/user/updateUser";
 	}
 	
-	@GetMapping("findIdEmail")
+	@GetMapping("findId")
 	public String findId() {
 		
 		System.out.println("============FIND ID PAGE============");
-		return "/user/findIdEmail";
+		return "/user/findId";
 	}
 	
 	@GetMapping("findPasswordEmail")
@@ -287,7 +287,7 @@ public class UserController {
 
 
 	//---------------------------------------
-	// 비밀번호 재설정 페이지
+		// 비밀번호 재설정 페이지로 이동
 		@GetMapping("updatePassword")
 		public String updatePassword(User user, HttpSession session) {
 //		    Map<String, Object> authStatus = (Map<String, Object>) session.getAttribute("authStatus");
@@ -295,6 +295,7 @@ public class UserController {
 //		    if(authStatus == null || !username.equals(authStatus.get("userId"))) {
 //		        return "/user/findPassword";
 //		    }
+			System.out.println(user);
 		    session.setAttribute("userId", user.getUserId());
 //		    // 페이지에 왔을때 인증이 안되있다면
 //		    if(!(boolean) authStatus.get("status")) {
@@ -302,11 +303,12 @@ public class UserController {
 //		    }
 		    return "/user/updatePassword";
 		}
-		@GetMapping("/findPasswordPhone")
-		public String findPasswordPhone(@ModelAttribute("user") User user) {
-			user.setUserId("user");
-			System.out.println(user+"11111111111111111111122222222222233333333333333");
-			return "/user/findPasswordPhone";
+		
+		//비밀번호 찾기 페이지로 이동
+		@GetMapping("findPassword")
+		public String findPasswordPhone() {
+//			user.setUserId("user");
+			return "/user/findPassword";
 		}
 		
 		
