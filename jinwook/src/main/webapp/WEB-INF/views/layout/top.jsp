@@ -36,9 +36,6 @@ a{
 }
 
 </style> 
-<!-- Page Preloder -->
-
-
 
    <!-- Humberger Begin -->
    <div class="humberger__menu__overlay"></div>

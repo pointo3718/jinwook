@@ -36,6 +36,7 @@
 	<style type="text/css">
 	.checkout__input {
 	width: 550px;
+	
 	}
 	</style>
 </head>
