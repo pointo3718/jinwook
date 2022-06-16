@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -11,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>진욱이네 | Template</title>
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
    <!-- Google Font -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,6 +51,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+   
       
    }
    </style>
@@ -83,6 +87,8 @@
          history.go(-1);
       });
    });
+   
+	
    </script>
    
 </head>
@@ -119,7 +125,7 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product " >상 품</th>
+                                    <th class="shoping__product " style="width: 400px;" >상 품</th>
                                     <th class="text-center" style="width: 700px;">상 품 설 명</th>
                                     <th class="text-center" style="width: 300px;">가 격</th>
                                     <th class="text-center" style="width: 200px;">상 품 수 량</th>
@@ -141,17 +147,24 @@
                                     </td>
                                     <td> <strong style="font-size: 20px;">${cart.product.prodInfo}</strong> </td>
                                     <td class="shoping__cart__price">
-                                        ${cart.product.price} 원
+                                        <fmt:formatNumber value="${cart.product.price}"/> 원
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
-                                            <div class="pro-qty">
+                                        	<div class="btn-group" style="text-align:center; ">
+						                        <button type="button" class="btn btn-outline-success btn minus" id="minus" style="width: 30px;">-</button>
+						                        <!-- <span type="button" class="btn minus" >-</span> -->
+						                        <input type="number" class="btn btn-outline-success" id="numBox" style="width: 60px;height: 32px;padding-left: 13px;padding-top: 0px;padding-right: 0px;padding-bottom: 0px; font-size:15px" value="${cart.prodCount}" readonly>
+						                        <!-- <span type="button" class="btn plus">+</span> -->
+						                        <button type="button" class="btn btn-outline-success btn plus" onClick="updateOrdersCart(this)" data-carNo="${cart.cartNo}" id="plus" style="width: 30px;">+</button>
+						                    </div>
+                                            <%-- <div class="pro-qty">
                                                 <input type="text"onchange="changeCount(this)" value="${cart.prodCount}" >
-                                            </div>
+                                            </div> --%>
                                         </div>
                                     </td>
-                                    <td class="shoping__cart__total">
-                                        ${cart.product.price*cart.prodCount} 원
+                                    <td class="shoping__cart__total" >
+                                    <fmt:formatNumber value="${cart.product.price*cart.prodCount}"/> 원
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close" onClick="fncDeleteOrdersCart(this)" data-value="${cart.cartNo}"></span>
@@ -167,7 +180,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn" role="button">더 담으로 가기</a>
+                        <a href="#" class="primary-btn cart-btn" role="button">더 담으러 가기</a>
                         <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                             Upadate Cart</a>
                     </div>
@@ -175,10 +188,10 @@
                     <div class="shoping__checkout">
                         <h5>주문 총액</h5>
                         <ul>
-                            <li >주문 금액 <span>${total}</span></li>
+                            <li >주문 금액 <span><fmt:formatNumber value="${total}"/> 원</span></li>
                         </ul>
                         <a><button class="primary-btn" style="max-width: 100%; width: 477px;" 
-                        " id="button" name="orderPrice" value="${total}">주문하기</button></a>
+                         id="button" name="orderPrice" value="${total}">주문하기</button></a>
                         
                     </div>
                 </div>
@@ -192,6 +205,61 @@
    <jsp:include page="../layout/footer.jsp" />
    <!-- Footer End -->
 
+	<script type="text/javascript">
+/* 	$("#minus").on("click",function(){
+		   var num = $("#numBox").val();
+		   var minusNum = Number(num) - 1;
+		   
+		   if(minusNum <= 0) {
+		    $("#numBox").val(num);
+		    swal("진욱이네","상품수량은 1보다 작아질수 없습니다.");
+		   } else {
+		    $("#numBox").val(minusNum);
+		   }
+		  
+	});
+	$("#plus").on("click",function(){
+		var num = $("#numBox").val();
+		var plusNum = Number(num) + 1;
+		   
+	   	$("#numBox").val(plusNum);    
+	}); */
+	
+
+	
+			/*  url:"/orders/updateOrdersCart/"+carNo,
+			type:"POST"
+			/* headers: */
+			/*dataType:"json",
+			success: function(result){
+				if(result != null){
+					self.location = "/orders/getOrdersCartList";
+				}
+			error 	 */
+			function updateOrdersCart(e) {
+				console.log(e);
+			
+				const carNo = $(e).data("carNo");
+				
+				$.ajax({
+					url : "/orders/updateOrdersCart/"+carNo+"/"+prodCount,
+					method: "GET",
+					dataType: "json",
+					contentType : 'application/json',
+					success: function(result){
+						if(result != null){
+							self.location = "/orders/getOrdersCartList";
+						}
+					}
+				}); 
+			}
+			
+	/* 	})
+		 
+               
+	} */
+	</script>
+	
       <a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
       <a href="/board/addBoardInquiryView">1:1문의 등록(파일 업로드)</a> <hr>
       <a href="/orders/getOrdersList">주문내역</a> <hr>
@@ -200,7 +268,7 @@
       <a href="/store/getStore?storeNo=10000" class="primary-btn">SHOP</a><hr>
       <a href="/orders/addOrdersJpayPassword">진욱페이비밀번호등록창</a> <hr>
       <a href="/orders/addOrdersJpayCharge">충전창</a> <hr>
-      <a href="/orders/listOrdersJpayCharge">금액설정창</a> <hr>
+      <a href="/orders/getOrdersJpayChargeList">금액설정창</a> <hr>
 </body>
 
 </html>

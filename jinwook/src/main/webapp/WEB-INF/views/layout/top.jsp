@@ -16,9 +16,6 @@
 	.dropdown-menu {margin-top: 0;} /* hover 메뉴때문에 넣음 */
 </style> 
 <!-- Page Preloder -->
-   <div id="preloder">
-      <div class="loader"></div>
-   </div>
 
 
    <!-- Humberger Begin -->
