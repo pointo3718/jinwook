@@ -21,13 +21,6 @@
     margin-top: 0;
 }
 
-<<<<<<< HEAD
-	.dropdown-toggle::after { transition: transform 0.15s linear;}
-	.show.dropdown .dropdown-toggle::after {transform: translateY(3px);}
-	.dropdown-menu {margin-top: 0;} /* hover 메뉴때문에 넣음 */
-</style> 
-<!-- Page Preloder -->
-=======
 .dropdown-toggle::after { transition: transform 0.15s linear;}
 .show.dropdown .dropdown-toggle::after {transform: translateY(3px);}
 .dropdown-menu {margin-top: 0;} /* hover 메뉴때문에 넣음 */
@@ -41,16 +34,15 @@ a{
       justify-content: center;
    align-items: center;
 }
->>>>>>> refs/remotes/origin/master
 
 </style> 
 
    <!-- Humberger Begin -->
    <div class="humberger__menu__overlay"></div>
    <div class="humberger__menu__wrapper">
-      <div class="humberger__menu__logo ">
-         <a href="#" ><img src="${path}/resources/static/img/logo.png"
-            alt="" ></a>
+      <div class="humberger__menu__logo">
+         <a href="#"><img src="${path}/resources/static/img/logo.png"
+            alt=""></a>
       </div>
       <div class="humberger__menu__cart">
          <ul>
@@ -77,7 +69,7 @@ a{
       </div>
       <nav class="humberger__menu__nav mobile-menu">
          <ul>
-            <li class="active"><a href="index">Home</a></li>
+            <li class="active"><a href="./index.html">Home</a></li>
             <li><a href="./shop-grid.html">Shop</a></li>
             <li><a href="#">Pages</a>
                <ul class="header__menu__dropdown">
@@ -113,7 +105,7 @@ a{
             <div class="col-lg-3"></div>
                <div class="col-lg-6">
                   <div class="header__top__left text-center" style="padding-top:5px; margin-bottom:5px; font-size: 13px; color: white">
-                     진욱이네가 당신의 처음을 응원합니다! &nbsp;>
+                     진욱이가 당신의 처음을 응원합니다! &nbsp;>
                   </div>
                </div>
                <div class="col-lg-3">
@@ -146,21 +138,12 @@ a{
                   <c:if test="${sessionScope.user.role == '사용자'}">
                  <div class="dropdown">
                         <a href="/admin/blog" style="word-break: break-all; margin-right:20px;" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-star" aria-hidden="true"></i >${sessionScope.user.grade } ${sessionScope.user.nickName } 님</a>
-<<<<<<< HEAD
-					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" >
-					    <a class="dropdown-item" href="/user/login">마이페이지</a>
-					    <a class="dropdown-item" href="#">xx action</a>
-					    <a class="dropdown-item" href="#">xx else here</a>
-					  </div>
-					    </div>
-=======
                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                    <a class="dropdown-item" href="/user/login">마이페이지</a>
                    <a class="dropdown-item" href="#">xx action</a>
                    <a class="dropdown-item" href="#">xx else here</a>
                  </div>
                    </div>
->>>>>>> refs/remotes/origin/master
                   </c:if>
                   <c:if test="${sessionScope.user.role == '사장님'}">
                  <div class="dropdown">
@@ -256,7 +239,7 @@ a{
                   <div class="hero__search__form" style="width: 232px; bottom: 5px">
                      <form action="#" style="width: 230px; font-size: small; ">
                         
-                        <input type="text" style="font-size: x-small;" placeholder="재료를 검색해보세요!">
+                        <input type="text" style="font-size: x-small; padding-left: 10px;" placeholder="재료를 검색해보세요!">
                         <button type="submit" class="site-btn" style="width: 80px; font-size: x-small; left:120px;">검색</button>
                      </form>
                   </div>

@@ -59,9 +59,9 @@ public class BoardServiceImpl implements BoardService {
 		for(int i = 0; i<size; i++) {
 			tempMap = list.get(i);
 			if(tempMap.get("IS_NEW").equals("Y")) {
-				boardMapper.insertFile(tempMap);
+				boardMapper.insertBoardFile(tempMap);
 			}else {
-				boardMapper.updateFile(tempMap);
+				boardMapper.updateAttach(tempMap);
 			}
 		}
    }
