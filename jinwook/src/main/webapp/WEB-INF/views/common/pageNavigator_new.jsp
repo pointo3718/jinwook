@@ -28,10 +28,12 @@
 <c:if test="${params == null}">
 <c:set var="params" value="${board}"/>
 </c:if>      
-
+<c:if test="${params == null}">
+<c:set var="params" value="${complain}"/>
+</c:if> 
 
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
-      <div class="product__pagination blog__pagination" style="padding-top: 0px;">
+      <div class="product__pagination blog__pagination" style="padding-top: 0px; bottom: 100px;">
             <!--  <<== ÁÂÃø nav -->
            <%--  <c:if test="${ params.paginationInfo.hasPreviousPage == false }">
                <li>

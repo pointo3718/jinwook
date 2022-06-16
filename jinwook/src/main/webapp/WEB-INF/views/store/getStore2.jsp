@@ -164,6 +164,7 @@ body {
    function fncaddOrdersCart(e) {
       const prodNo = $(e).data("value");
       const storeName = $("#stoName").data("values");
+      const prodCount = $()
 
       const passdata = {
          'prodNo' : prodNo,

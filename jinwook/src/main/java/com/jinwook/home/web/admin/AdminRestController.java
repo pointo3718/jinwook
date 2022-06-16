@@ -66,6 +66,34 @@ public class AdminRestController {
    }
    
    
+	///////////////// 유저 상세 //////////////////
+   @GetMapping( value={"/getUserRest/{userId}"} )
+   public JsonObject countPickup(@PathVariable(value = "userId", required = false) String userId) throws Exception{
+      
+      System.out.println("/admin/getUserRest : GET ");
+  
+      JsonObject jsonObj = new JsonObject();
+      
+      try { 
+			
+			User user = adminService.getUserAdmin(userId);
+			
+			String userObj = new Gson().toJson(user);
+			jsonObj.addProperty("userObj", userObj);
+
+		} catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+		
+        System.out.println("픽업 개수 컨트롤러 통과");
+        
+		return jsonObj;
+   }
+   
+   
    
 	///////////////// 블랙리스트 목록 //////////////////
    @GetMapping( value="/listBlacklistAdmin" )
@@ -143,12 +171,68 @@ public class AdminRestController {
 				jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
 			}
 			
-	     System.out.println("픽업 개수 컨트롤러 통과");
+	     System.out.println("요청대기 개수 컨트롤러 통과");
 	     
 			return jsonObj;
 		}
-	}
+
 	
+	//////////////// 대기중인 신고 목록 개수 ////////////////
+@GetMapping( value={"/getComplainTotalCount"} )
+public JsonObject getComplainTotalCount()throws Exception{
    
+   System.out.println("/admin/getComplainTotalCount : GET ");
+
+   JsonObject jsonObj = new JsonObject();
+   
+   try { 	
+		int countWaitingComplain= adminService.getComplainTotalCount();
+		System.out.println("   ::  "+countWaitingComplain);
+		jsonObj.addProperty("countWaitingComplain", countWaitingComplain);
+
+		} catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+		
+     System.out.println("신고대기 개수 컨트롤러 통과");
+     
+		return jsonObj;
+	}
+
+   
+	//////////////// 대기중인 문의 목록 개수 ////////////////
+	@GetMapping( value={"/getWatingInquiryCount"} )
+	public JsonObject getWatingInquiryCount()throws Exception{
+	
+	System.out.println("/admin/getWatingInquiryCount : GET ");
+	
+	JsonObject jsonObj = new JsonObject();
+	
+	try { 	
+		int getWatingInquiryCount= adminService.getWatingInquiryCount();
+		System.out.println("   ::  "+getWatingInquiryCount);
+		jsonObj.addProperty("getWatingInquiryCount", getWatingInquiryCount);
+	
+		} catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+	
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+		
+	 System.out.println("문의대기 개수 컨트롤러 통과");
+	 
+		return jsonObj;
+	}
+	}
+
+
+
    ///////////////// 신고 등록  //////////////////	
+
+
+
    

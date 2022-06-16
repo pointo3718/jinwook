@@ -20,5 +20,9 @@ public interface AdminService {
 		public List<User> getBlacklistAdmin(User user);	// 블랙리스트 목록 
 		
 		public boolean	updateBlacklist(Complain complain);	// 블랙리스트 등록 
+		
+		public int	getComplainTotalCount();	// 대기중인 신고목록 개수 
+		
+		public int	getWatingInquiryCount();	// 대기중인 문의목록 개수 
 
 }

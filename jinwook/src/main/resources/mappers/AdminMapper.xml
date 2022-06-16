@@ -130,6 +130,16 @@
 			complain
 	</select>
 	
+	<!-- 대기중인 신고 목록 개수 -->
+	<select id="getComplainTotalCountAll"  resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			complain
+		WHERE
+			complain_status = 0
+	</select>
+	
 	
 	<!-- 블랙리스트 등록 -->
 	<update id="updateBlacklist" parameterType="Complain">
@@ -167,24 +177,22 @@
 	
 	
 	<!-- 블랙리스트 목록 -->
-	<select id="getBlacklistAdmin" parameterType="Criteria" resultType="User">
+	<select id="getBlacklistAdmin" parameterType="User" resultType="User">
 		SELECT
 			u.user_id, u.user_name, u.nick_name, u.birth, u.gender, u.email, u.phone, u.blacklist_reg_date, u.blacklist_end_date, c.complain_code 
 		FROM
 			users u, complain c
 		WHERE
-			u.user_id = c.complain_id
+			u.user_id = c.user_id
 			AND
 			user_bye_status = 0
 			AND 
 			u.blacklist_status = true
-		LIMIT
-			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 	
 	
 	<!-- 블랙리스트 목록 개수 -->
-	<select id="getBlacklistTotalCount" parameterType="Criteria" resultType="int">
+	<select id="getBlacklistTotalCount" parameterType="User" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
@@ -196,6 +204,15 @@
 	</select>
 	
 	
+	<!-- 대기중인 문의 목록 개수 -->
+	<select id="getWatingInquiryCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			board
+		WHERE
+			board_inq_status = 0
+	</select>
 	
 
 </mapper>

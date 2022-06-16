@@ -35,6 +35,9 @@ public interface AdminMapper {
 	
 	public int getComplainTotalCount(Complain complain);			// 신고 목록 개수
 	
+	public int getComplainTotalCountAll();							// 대기중인 신고 목록 개수
+	public int getWatingInquiryCount();	// 대기중인 문의 목록 개수
+	
 	public int getBlacklistTotalCount(User user);					// 블랙리스트 목록 개수
 
 
