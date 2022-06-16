@@ -14,15 +14,13 @@ public class LoggerInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		logger.debug("===============================================");
-		logger.debug("==================== BEGIN ====================");
+
 		logger.debug("Request URI ===> " + request.getRequestURI());
 		return true;
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		logger.debug("==================== END ======================");
-		logger.debug("===============================================");
+
 	}
 }

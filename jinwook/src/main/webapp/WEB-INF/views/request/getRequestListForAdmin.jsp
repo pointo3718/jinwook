@@ -114,6 +114,79 @@
 
 	
 	 /////////////// 요청대기 COUNT REST 시작 ////////////////
+	 
+        //////////// 문의 대기 ////////////
+	  $(function() {
+		countInquiry();
+	});
+
+	function countInquiry() {
+
+		var uri = "../admin/getWatingInquiryCount";
+
+		$.get(uri, function(response) {
+		
+				var countInquiryHtml = "";
+
+				countInquiryHtml += `
+						<span>\${response.getWatingInquiryCount}</span>
+					`;
+
+				$(".countinq").html(countInquiryHtml);
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
+	 
+	 //////////// 신고 대기 ////////////
+	  $(function() {
+		countCompain();
+	});
+
+	function countCompain() {
+
+		var uri = "../admin/getComplainTotalCount";
+
+		$.get(uri, function(response) {
+		
+				var countComplainHtml = "";
+
+				countComplainHtml += `
+						<span>\${response.countWaitingComplain}</span>
+					`;
+
+				$(".countcompl").html(countComplainHtml);
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
+	 
+	
+	 //////////// 요청 all ////////////
+	  $(function() {
+		countAll();
+	});
+
+	function countAll() {
+
+		var uri = "../admin/CountRequestWaiting/0";
+
+		$.get(uri, function(response) {
+		
+				var countAllHtml = "";
+
+					countAllHtml += `
+						<span>\${response.CountRequestWaiting}</span>
+					`;
+
+				$(".countall").html(countAllHtml);
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
+	 
+	 
+	 
 	 $(function() {
 		countAddRequest();
 	});
@@ -127,7 +200,7 @@
 				var countAddHtml = "";
 
 					countAddHtml += `
-						상점 등록 요청 &nbsp;<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						상점 등록 요청 &nbsp;<span class="badge badge-danger" id="addStore" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".addStore").html(countAddHtml);
@@ -150,7 +223,7 @@
 				var countDeleteHtml = "";
 
 				countDeleteHtml += `
-						상점 삭제 요청 &nbsp;<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						상점 삭제 요청 &nbsp;<span class="badge badge-danger" id="delete" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 				
 				$(".deleteStore").html(countDeleteHtml); 
@@ -172,7 +245,7 @@
 				var countRefundHtml = "";
 
 				countRefundHtml += `
-						환급 요청 &nbsp;<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						환급 요청 &nbsp;<span class="badge badge-danger" id="refund" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".refundStore").html(countRefundHtml);
@@ -195,7 +268,7 @@
 				var countAdHtml = "";
 
 				countAdHtml += `
-						광고 등록 요청 &nbsp;<span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						광고 등록 요청 &nbsp;<span class="badge badge-danger" id="refund" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".adStore").html(countAdHtml);
@@ -227,7 +300,11 @@
 				
 			}, "json");
 		}
+		
 /////////////// 요청대기 COUNT REST 끝  ////////////////
+
+
+
 
 </script>
 
@@ -245,7 +322,7 @@
 .row{
 	display: flex;
  	justify-content: center;
- 	align-items: center;
+	align-items: flex-start;
 }
 
 .mytop01 {
@@ -308,7 +385,7 @@ a{
 					<div class="bg-white text-black mx-3">
 
 						</br> <strong class="mytop01">새로운 문의내역</strong> </br> </br>
-						<h1 class="mytop01-content">5</h1>
+						<h1 class="mytop01-content " id="inquiry"><span class="countinq"></span></h1>
 						건 </br> </br>
 
 					</div>
@@ -317,10 +394,9 @@ a{
 				<div class="col-4">
 					<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">새로운 요청접수</strong> </br> </br>
-						<h1 class="mytop01-content">13</h1>
+						</br> <strong class="mytop01">새로운 요청접수</strong></br> </br>
+						<h1 class="mytop01-content " id="request"><span class="countall"></span></h1>
 						건 </br> </br>
-
 					</div>
 				</div>
 
@@ -328,7 +404,7 @@ a{
 					<div class="bg-white text-black mx-3">
 
 						</br> <strong class="mytop01">새로운 신고접수</strong> </br> </br>
-						<h1 class="mytop01-content">7</h1>
+						<h1 class="mytop01-content" id="compl"><span class="countcompl"></span></h1>
 						건 </br> </br>
 
 					</div>
@@ -652,19 +728,6 @@ $(document).ready(function(){
 
 	alert(REQNO);
 	
-	swal({
-		text : "텍스트",
-		buttons: ["취소" , "이동"]
-	})
-	.then(function(result){
-		console.log(result);
-        
-        if(result){
-        	location.href = "/";
-        }
-        
-	})
-	
 	var uri = "/request/updateRequestStatusToAccept/" + REQNO;
 	
 	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
@@ -700,16 +763,6 @@ $(document).ready(function(){
 
 	alert(REQNO);
 
-	swal({
-		text : "텍스트",
-		buttons: ["취소" , "이동"]
-	})
-	.then(function(result){
-		console.log(result);
-	}
-	
-        if(result){
-        	
        
 			var uri = "/request/updateRequestStatusToRefuse/" + REQNO;
 	
@@ -735,11 +788,8 @@ $(document).ready(function(){
 						alert("에러가 발생하였습니다.");
 						return false;
 					}
+				
 				});
-		
-        }else {
-        
-	)
 	}
 		
 	
@@ -748,12 +798,11 @@ $(document).ready(function(){
 ////////////////// 목록 삭제 REST ///////////////////////
 	function deleteRequest(REQNO) {
 
-		
+
 	var uri = "/request/deleteRequest/" + REQNO;
 	
 	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
 
-	swal("정말로 요청을 삭제할까요?",'warning')
 
 		$.ajax({
 			url: uri,
@@ -779,7 +828,22 @@ $(document).ready(function(){
 }
 
 ////////////////// 목록 삭제 REST ////////////////////////
+/* var ADD = $("span#add").val();
+var DELETE = $("#delete").val;
+var REFUND = $("#refund").val;
+var AD = $("#ad").val;
 
+var ALL = ADD + DELETE + REFUND + AD;
+
+	$(function() {
+			countAll();
+		});
+	
+		function countAll() {
+			console.log(ADD);
+			console.log(DELETE);
+			$("#request").text(ADD);
+		} */
 
 </script>
 

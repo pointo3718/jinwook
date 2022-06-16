@@ -6,19 +6,38 @@
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
 <html lang="ko">	
 <style>
-	.dropdown:hover .dropdown-menu {
+*{font-family: 'Noto Sans KR', sans-serif;}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 10;
+}
+
+.dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
 }
 
-	.dropdown-toggle::after { transition: transform 0.15s linear;}
-	.show.dropdown .dropdown-toggle::after {transform: translateY(3px);}
-	.dropdown-menu {margin-top: 0;} /* hover 메뉴때문에 넣음 */
+.dropdown-toggle::after { transition: transform 0.15s linear;}
+.show.dropdown .dropdown-toggle::after {transform: translateY(3px);}
+.dropdown-menu {margin-top: 0;} /* hover 메뉴때문에 넣음 */
+	
+a{
+	color: #7fad39;
+}
+	
+.row.navbar{
+ 	display: flex;
+   	justify-content: center;
+	align-items: center;
+}
+
 </style> 
 <!-- Page Preloder -->
-   <div id="preloder">
-      <div class="loader"></div>
-   </div>
+
 
 
    <!-- Humberger Begin -->
@@ -176,9 +195,9 @@
 
    <!-- Hero Section Begin -->
   <div>
-   <section class="hero hero-normal sticky" style="padding-bottom: 0px; margin-top: 0px;">
+   <section class="hero hero-normal sticky" style="padding-bottom: 0px; margin-top: 0px; height: 80px;">
       <div class="container" style="top: 0;">
-         <div class="row">
+         <div class="row navbar">
             <div class="col-lg-3">
                <div class="hero__categories">
                   <div class="hero__categories__all">

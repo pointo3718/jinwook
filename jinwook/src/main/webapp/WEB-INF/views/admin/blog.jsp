@@ -106,6 +106,77 @@
 	});
    
     /////////////// 요청대기 COUNT REST 시작 ////////////////
+    
+        //////////// 문의 대기 ////////////
+	  $(function() {
+		countInquiry();
+	});
+
+	function countInquiry() {
+
+		var uri = "../admin/getWatingInquiryCount";
+
+		$.get(uri, function(response) {
+		
+				var countInquiryHtml = "";
+
+				countInquiryHtml += `
+						<span>\${response.getWatingInquiryCount}</span>
+					`;
+
+				$(".countinq").html(countInquiryHtml);
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
+    
+    	 //////////// 신고 대기 ////////////
+	  $(function() {
+		countCompain();
+	});
+
+	function countCompain() {
+
+		var uri = "../admin/getComplainTotalCount";
+
+		$.get(uri, function(response) {
+		
+				var countComplainHtml = "";
+
+				countComplainHtml += `
+						<span>\${response.countWaitingComplain}</span>
+					`;
+
+				$(".countcompl").html(countComplainHtml);
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
+	 
+	
+	 //////////// 요청 all ////////////
+	  $(function() {
+		countAll();
+	});
+
+	function countAll() {
+
+		var uri = "../admin/CountRequestWaiting/0";
+
+		$.get(uri, function(response) {
+		
+				var countAllHtml = "";
+
+					countAllHtml += `
+						<span>\${response.CountRequestWaiting}</span>
+					`;
+
+				$(".countall").html(countAllHtml);
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
+    
     $(function() {
       countAddRequest();
    });
@@ -196,72 +267,14 @@
    }
    /*[- end of function -]*/
    
-   
     /////////////// 요청대기 COUNT REST 끝    ////////////////
-   
-  
-   //////////////// 블랙리스트 목록 REST 시작 /////////////////
-   $(function() {
-         $("#option3").on(
-               "click",
-               function() {
 
-      var uri = "/admin/listBlacklistAdmin"
-
-      $.get(uri, function(response) {
-         // ë¹ ì ´ì  ì§  ì  ë ¤ë©´ ì ¤í  
-            var blacklistHtmlHead = "";
-            blacklistHtmlHead += `
-                  <tr class="userinfohead">
-                     
-                     <th scope="col">#</th>
-                     <th scope="col">ID</th>
-                     <th scope="col">전화번호</th>
-                     <th scope="col">지정기간</th>
-                     <th scope="col">어쩌구</th>
-                  </tr>
-            `;
-         
-            var blacklistHtmlBody = "";
-
-            $(response.blacklist).each(function(idx, user) {
-               blacklistHtmlBody += `
-                  <tr class="userinfobody">
-                     <td scope="row">\${idx}</td>
-                     <td align="left"
-                        style="color: forestgreen"><a
-                        href="/admin/getUserAdmin?userId=${user.userId}">\${user.userId}</a></td>
-                     <td align="left">\${user.phone}</td>
-                     <td align="left">\${user.blacklistEndDate}</td>
-                     <td align="left">\${user.role}</td>
-                  </tr>
-               `;
-            });
-            $(".userinfohead").remove();
-            $(".userinfobody").remove();
-            
-            $(".userlisthead").html(blacklistHtmlHead);
-            $(".userlistbody").html(blacklistHtmlBody);
-            //$(".userlisthead").html(blacklistHtmlBody);
-         
-      }, "json");
-   })
-   })
-   //////////////// 블랙리스트 목록 REST 끝   /////////////////
 
    
 </script>
 
 <style>
-*{font-family: 'Noto Sans KR', sans-serif;}
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  z-index: 10;
-}
 
 .mytop01 {
    padding-left: 20px;
@@ -292,14 +305,10 @@
 .row{
    display: flex;
     justify-content: center;
-    align-items: center;
+	align-items: flex-start;
 }
 
-a{
-color: #7fad39;
-}
 </style>
-
 
 </head>
 
@@ -309,46 +318,159 @@ color: #7fad39;
    <jsp:include page="../layout/top.jsp" />
    <!-- Header End -->
 
-   <!-- Breadcrumb Section Begin -->
-   <section class="breadcrumb-section set-bg"
-      style="background-color: #F2F2F2">
-      <div class="container">
-         <div class="row my-1">
-            <div class="col-4">
-               <div class="bg-white text-black mx-3">
 
-                  </br> <strong class="mytop01">새로운 문의내역</strong> </br> </br>
-                  <h1 class="mytop01-content">5</h1>
-                  건 </br> </br>
+<!-- modal TEST -->
+    <!-- 회원 상세 modal -->
+    <div class="modal" id="myModal2" aria-hidden="true" style="display: none; z-index: 1060;">
+    	<div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismis style="margin-left: 0px; text-align: center;">회원 상세<s="modal" aria-label="Close">
+	        </button>
+            </div><div class="container"></div>
+            <div class="modal-body">
+          
+         <div class="col-md-10 order-md-1">
+          <div class="col-md-12 mb-3">
+            <label for="Name">아이디</label>
+            <input type="text" class="form-control" id="userid" placeholder="" value="" readonly>
+          </div>
+          
+         <div class="container">  
+         	<div class="row forModal">
+          	<div class="col-md-6 mb-3">
+            	<label for="userId">이름</label>
+            	<input type="text" class="form-control" id="username" placeholder="" value="" readonly>
+         	 </div>
+          <div class="col-md-6 mb-3">
+           	 	<label for="userId">닉네임</label>
+           	 	<input type="text" class="form-control" id="nickname" placeholder="" value="" readonly>
+          </div>
+			</div>
+        </div>
 
-               </div>
-            </div>
+        <div class="col-md-12 mb-3">
+            <label for="Name">이메일</label>
+            <input type="text" class="form-control" id="email" placeholder="" value="홍길동" readonly>
+          </div>
 
-            <div class="col-4">
-               <div class="bg-white text-black mx-3">
+        <div class="container">  
+         	<div class="row forModal">
+          	<div class="col-md-6 mb-3">
+            	<label for="userId">생년월일</label>
+            	<input type="text" class="form-control" id="birth" placeholder="" value="" readonly>
+         	 </div>
+          <div class="col-md-6 mb-3">
+           	 	<label for="userId">성별</label>
+           	 	<input type="text" class="form-control" id="gender" placeholder="" value="" readonly>
+          </div>
+			</div>
+        </div>
 
-                  </br> <strong class="mytop01">새로운 요청접수</strong> </br> </br>
-                  <h1 class="mytop01-content">13</h1>
-                  건 </br> </br>
+        <div class="col-md-12 mb-3">
+            <label for="Name">전화번호</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" readonly>
+          </div>
 
-               </div>
-            </div>
-
-            <div class="col-4">
-               <div class="bg-white text-black mx-3">
-
-                  </br> <strong class="mytop01">새로운 신고접수</strong> </br> </br>
-                  <h1 class="mytop01-content">7</h1>
-                  건 </br> </br>
-
-               </div>
-            </div>
+	 	<div class="col-md-12 mb-3">
+            <label for="Name">구분</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" readonly>
          </div>
+            
+         <div class="col-md-12 mb-3">
+            <label for="Name">가입일자</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" readonly>
+         </div>
+           
+            <div class="modal-footer">
+              <a href="#" data-dismiss="modal" class="btn">닫기</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    </div>
+<!-- modal TEST -->
 
-      </div>
-      <!-- /container -->
-   </section>
-   <!-- Breadcrumb Section End -->
+
+	<!-- Modal Begin -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel"/h5>
+	        <button type="button" class="close" data-dismis>블랙리스트 목록<s="modal" aria-label="Close">
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        
+	         <table class="table table-hover"
+                  style="width: 730px; heigh: 300px;">
+                  
+                  <thead class="userlisthead">
+                     <tr class="userinfohead">
+                        <th scope="col"></th>
+                     </tr>
+                  </thead>
+
+                  <tbody class="userlistbody">   
+                     <tr class="userinfobody">
+                        <tr>
+                           <th scope="row"></th>
+                        </tr>
+                    </tr>      
+                  </tbody>
+                  
+             </table>
+	        	        
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Breadcrumb Section Begin -->
+	<section class="breadcrumb-section set-bg"
+		style="background-color: #F2F2F2">
+		<div class="container">
+			<div class="row my-1">
+				<div class="col-4">
+					<div class="bg-white text-black mx-3">
+
+						</br> <strong class="mytop01">새로운 문의내역</strong> </br> </br>
+						<h1 class="mytop01-content " id="inquiry"><span class="countinq"></span></h1>
+						건 </br> </br>
+
+					</div>
+				</div>
+
+				<div class="col-4">
+					<div class="bg-white text-black mx-3">
+
+						</br> <strong class="mytop01">새로운 요청접수</strong></br> </br>
+						<h1 class="mytop01-content " id="request"><span class="countall"></span></h1>
+						건 </br> </br>
+					</div>
+				</div>
+
+				<div class="col-4">
+					<div class="bg-white text-black mx-3">
+
+						</br> <strong class="mytop01">새로운 신고접수</strong> </br> </br>
+						<h1 class="mytop01-content" id="compl"><span class="countcompl"></span></h1>
+						건 </br> </br>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /container -->
+	</section>
+	<!-- Breadcrumb Section End -->
 
    <!-- Blog Section Begin -->
    <section class="blog spad">
@@ -414,19 +536,21 @@ color: #7fad39;
                   <p class="text-muted" style="display: inline; font-size: 12px;">
                   회원 목록을 조회할 수 있습니다
                   </p>
-                  <div class="btn-group btn-group-toggle" data-toggle="buttons" style="left:300px; z-index:-1;">
                      
-                     <label class="btn btn-light active" style="font-size: 13px;"> 
+                   <!--   <label class="btn btn-light active" style="font-size: 13px;"> 
                      <input type="radio" name="options" id="option1" checked>
                       &nbsp; &nbsp; &nbsp; 일반 &nbsp; &nbsp; &nbsp;    
-                     </label> 
+                     </label>  -->
                      
-                     <label class="btn btn-light" style="font-size: 13px;" >
+                     <button type="button" class="btn btn-secondary" id="option3" style="font-size: 13px; margin-left: 355px;" data-toggle="modal" data-target="#exampleModal">
+						블랙리스트
+					</button>
+                     
+                    <!--  <label class="btn btn-light" style="font-size: 13px;" >
                       <input type="radio" name="options" id="option3">
                        블랙리스트
-                     </label>
+                     </label> -->
                      
-                  </div>
                   <hr size="10px">
                </h4>
 
@@ -434,8 +558,8 @@ color: #7fad39;
                <table class="table table-hover"
                   style="width: 730px; heigh: 300px;">
                   
-                  <thead class="userlisthead">
-                     <tr class="userinfohead">
+                  <thead>
+                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">ID</th>
                         <th scope="col">이름</th>
@@ -444,8 +568,8 @@ color: #7fad39;
                      </tr>
                   </thead>
 
-                  <tbody class="userlistbody">   
-                     <tr class="userinfobody">
+                  <tbody>   
+                     <tr>
                      <c:set var="i" value="0" />
                      <c:forEach var="user" items="${userList}">
                         <c:set var="user" value="${user}" />
@@ -453,7 +577,7 @@ color: #7fad39;
                         <tr>
                            <th scope="row">${ i }</th>
                            <td align="left"
-                              style="color: forestgreen"><a
+                              style="color: #7fad39;"><a
                               href="/admin/getUserAdmin?userId=${user.userId}">${user.userId}</a></td>
                            <td align="left">${user.userName}</td>
                            <td align="left">${user.phone}</td>
@@ -479,7 +603,89 @@ color: #7fad39;
    <!--  Footer Begin -->
    <jsp:include page="../layout/footer.jsp" />
    <!-- Footer End -->
+<script>
 
+//////////////// 블랙리스트 목록 REST 시작 /////////////////
+$(function() {
+      $("#option3").on(
+            "click",
+            function() {
+
+   var uri = "/admin/listBlacklistAdmin"
+
+   $.get(uri, function(response) { 
+         var blacklistHtmlHead = "";
+         blacklistHtmlHead += `
+               <tr class="userinfohead">
+                  
+                  <th scope="col">#</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">전화번호</th>
+                  <th scope="col">지정기간</th>
+                  <th scope="col">어쩌구</th>
+               </tr>
+         `;
+      
+         var blacklistHtmlBody = "";
+
+         $(response.blacklist).each(function(idx, user) {
+            blacklistHtmlBody += `
+               <tr class="userinfobody">
+                  <td scope="row">\${idx}</td>
+                  <td align="left" id="option4">
+			        <a id="userdetail" data-toggle="modal" href="#myModal2" data-userid="\${user.userId}">\${user.userId}</a>
+			      </td>
+                  <td align="left">\${user.phone}</td>
+                  <td align="left">\${user.blacklistEndDate}</td>
+                  <td align="left">\${user.role}</td>
+               </tr>
+            `;
+         });
+         
+         $(".userinfohead").remove();
+         $(".userinfobody").remove();
+         
+         $(".userlisthead").html(blacklistHtmlHead);
+         $(".userlistbody").html(blacklistHtmlBody);
+         //$(".userlisthead").html(blacklistHtmlBody);
+      
+   }, "json");
+})
+})
+//////////////// 블랙리스트 목록 REST 끝   /////////////////
+
+
+function getUser(){
+        	
+	  var uri = "/admin/getUserRest/"+USERID;
+	  		alert(uri);
+		   $.get(uri, function(response) { 
+			alert('\${response.userObj.gender}');
+		   }, "json");
+}
+
+
+
+var USERID="";
+
+$(document).ready(function() {     
+
+	$('#myModal2').on('show.bs.modal', function(event) {          
+		USERID = $(event.relatedTarget).data('userid');
+		alert(USERID);
+	    alert("아마 이게 실행되는듯");
+	    
+	    getUser();
+
+	 });
+});
+//////////////// 유저 상세 REST 시작 /////////////////
+
+  
+
+//////////////// 유저 상세 REST 끝   /////////////////
+
+</script>
 </body>
 
 </html>

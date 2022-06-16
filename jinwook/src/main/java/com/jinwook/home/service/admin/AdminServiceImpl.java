@@ -123,6 +123,18 @@ public class AdminServiceImpl implements AdminService{
 		return (queryResult == 1) ? true : false;
 	}
 	
-}
+	
+	//=============== 대기중인 신고 목록 개수 =================
+	@Override
+	public int getComplainTotalCount() {
+		return adminMapper.getComplainTotalCountAll();
+	}
+	
+	//=============== 대기중인 신고 목록 개수 =================
+	@Override
+	public int getWatingInquiryCount() {
+		return adminMapper.getWatingInquiryCount();
+	}
 
+}
 

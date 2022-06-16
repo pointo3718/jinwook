@@ -109,6 +109,77 @@
 
 	
 	 /////////////// 요청대기 COUNT REST 시작 ////////////////
+
+        //////////// 문의 대기 ////////////
+	  $(function() {
+		countInquiry();
+	});
+
+	function countInquiry() {
+
+		var uri = "../admin/getWatingInquiryCount";
+
+		$.get(uri, function(response) {
+		
+				var countInquiryHtml = "";
+
+				countInquiryHtml += `
+						<span>\${response.getWatingInquiryCount}</span>
+					`;
+
+				$(".countinq").html(countInquiryHtml);
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
+	 
+	 	 	 //////////// 신고 대기 ////////////
+	  $(function() {
+		countCompain();
+	});
+
+	function countCompain() {
+
+		var uri = "../admin/getComplainTotalCount";
+
+		$.get(uri, function(response) {
+		
+				var countComplainHtml = "";
+
+				countComplainHtml += `
+						<span>\${response.countWaitingComplain}</span>
+					`;
+
+				$(".countcompl").html(countComplainHtml);
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
+	 
+	
+	 //////////// 요청 all ////////////
+	  $(function() {
+		countAll();
+	});
+
+	function countAll() {
+
+		var uri = "../admin/CountRequestWaiting/0";
+
+		$.get(uri, function(response) {
+		
+				var countAllHtml = "";
+
+					countAllHtml += `
+						<span>\${response.CountRequestWaiting}</span>
+					`;
+
+				$(".countall").html(countAllHtml);
+			
+		}, "json");
+	}
+	/*[- end of function -]*/
+	 
 	 $(function() {
 		countAddRequest();
 	});
@@ -264,7 +335,7 @@
 .row{
 	display: flex;
  	justify-content: center;
- 	align-items: center;
+	align-items: flex-start;
 }
 
 .mytop01 {
@@ -316,7 +387,7 @@ color: #7fad39;
 					<div class="bg-white text-black mx-3">
 
 						</br> <strong class="mytop01">새로운 문의내역</strong> </br> </br>
-						<h1 class="mytop01-content">5</h1>
+						<h1 class="mytop01-content " id="inquiry"><span class="countinq"></span></h1>
 						건 </br> </br>
 
 					</div>
@@ -325,10 +396,9 @@ color: #7fad39;
 				<div class="col-4">
 					<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">새로운 요청접수</strong> </br> </br>
-						<h1 class="mytop01-content">13</h1>
+						</br> <strong class="mytop01">새로운 요청접수</strong></br> </br>
+						<h1 class="mytop01-content " id="request"><span class="countall"></span></h1>
 						건 </br> </br>
-
 					</div>
 				</div>
 
@@ -336,7 +406,7 @@ color: #7fad39;
 					<div class="bg-white text-black mx-3">
 
 						</br> <strong class="mytop01">새로운 신고접수</strong> </br> </br>
-						<h1 class="mytop01-content">7</h1>
+						<h1 class="mytop01-content" id="compl"><span class="countcompl"></span></h1>
 						건 </br> </br>
 
 					</div>
