@@ -174,8 +174,14 @@ public class BoardServiceImpl implements BoardService {
 
    //레시피 등록
    @Override
-   public int addRecipe(Recipe rcp) {
-      return boardMapper.addRecipe(rcp);
+   public void addRecipe(Recipe rcp, MultipartHttpServletRequest mpRequest) throws Exception {
+      boardMapper.addRecipe(rcp);
+      
+      List<Map<String,Object>> list = fileUtils.parseInsertRecipeFileInfo(rcp, mpRequest); 
+		int size = list.size();
+		for(int i=0; i<size; i++){ 
+			boardMapper.insertRecipeFile(list.get(i)); 
+		}
    }
 
    //레시피 수정
@@ -435,6 +441,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception {
 		return boardMapper.selectAttachInfo(map);
+	}
+
+	@Override
+	public int updateBoardInqStatus(Integer boardNo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 
