@@ -27,9 +27,10 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- Google Font -->
-<link
-   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-   rel="stylesheet">
+ <!-- Google Font -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">  
 
 <!-- Css Styles -->
 <link rel="stylesheet"
@@ -55,14 +56,12 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	 <style>
+	 
     	 .row{ 
-            margin-top: 10px;
+    	 	display:flex;
             justify-content: center;
             align-items: center;
            
-        }
-        .find_id{
-        	
         }
          .form-group{
        		 justify-content: center;
@@ -74,13 +73,13 @@
 		  font-size:15px;
 		  text-indent: 1em;
         }
-        a{
+         #alal{
         justify-content: center;
         align-items: center;
         font-size:15px;
         color:black;
         text-indent:-1em;
-        }
+        } 
         .zz{
         justify-content: center;
         font-size:"30px";
@@ -206,19 +205,19 @@
 					  <div class="form-group">
 					    <label for="userId" class="col-sm-2 control-label"></label>
 					    <div class="col-sm-3" style="font-size:15px;">
-					      <input type=   "text" class="userId" name="userId" id="userId"  placeholder="아이디를 입력해주세요" required="required" >
+					      <input type=   "text" class="userId" name="userId" id="userId"  placeholder="아이디를 입력해주세요." required="required" >
 					    </div>
 					  </div>
 					  
 					  <div class="form-group">
 					    <label for="password" class="col-sm-2 control-label"></label>
 					    <div class="col-sm-6" style="font-size:15px;">
-					      <input type="password" class="password" name="password" id="password" placeholder="패스워드를 입력해주세요" >
+					      <input type="password" class="password" name="password" id="password" placeholder="패스워드를 입력해주세요." >
 					    </div>
 					  </div>
 					  	<br/><br/>
 					  <div class="form-group text-center" >
-					    <a class="find_id" href="findId" style="color:black;"> &nbsp;아이디 찾기</a><a> | </a><a class="find_password" href="findPassword" style="color:black;">비밀번호 찾기</a>
+					    <a class="find_id" id="alal" href="findId" style="color:black; " > &nbsp;아이디 찾기</a><a> | </a><a class="find_password" id="alal"href="findPassword" style="color:black;">비밀번호 찾기</a>
 					  </div>
 					  <div class="form-group" style="text-align: center">
 					    <div class="col-sm-offset-2 col-sm-5 text-center">

@@ -22,14 +22,15 @@ public interface BoardService {
 	public int updateBoardInquiryHits(Integer boardNo);
 	//공지사항 조회수 증가v
 	public int updateBoardAnnouncementHits(Integer boardNo);
+	public int updateBoardInqStatus(Integer boardNo);
 	
 //	//게시판 사진 첨부v
 //	public int fileBoardInsert(FileVO file) throws Exception;
 //	//레시피 사진 첨부v
 //	public int fileRecipeInsert(FileVO file) throws Exception;
-	// 첨부파일 조회
+	// 게시판 첨부파일 조회
 	public List<Map<String, Object>> selectAttachList(int boardNo) throws Exception;
-	// 첨부파일 다운
+	// 게시판 첨부파일 다운
 	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
 	//1:1문의 등록v
 	public void addBoardInquiry(Board board, MultipartHttpServletRequest mpRequest) throws Exception;
@@ -63,7 +64,7 @@ public interface BoardService {
 	public List<Orders> getReviewList(Board board);
 	
 	//레시피 등록v
-	public int addRecipe(Recipe rcp);
+	public void addRecipe(Recipe rcp, MultipartHttpServletRequest mpRequest) throws Exception;
 	//레시피 수정v
 	public void updateRecipe(Recipe rcp);
 	//레시피 삭제v

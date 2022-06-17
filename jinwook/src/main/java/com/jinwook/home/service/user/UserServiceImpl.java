@@ -126,11 +126,10 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public int updatePassword(User user) throws Exception {
-		userMapper.updateUser(user);
+	public User updatePassword(User user) throws Exception {
+		return userMapper.updatePassword(user);
 //		int result =  userMapper.updatePassword(user);
 		
-		return 0;
 	}
 	
 	@Override
@@ -151,14 +150,13 @@ public class UserServiceImpl implements UserService{
 	         mimeMessageHelper.setSubject("[진욱이네] 아이디 안내를 드립니다.");
 	         String content= " ";
 	         content = user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r ";
-	         content += "<br> ";
+	         content += "<br><br> ";
 	        content += "요청하신 아이디를 안내드립니다.\n ";
-	        content += "<br> ";
+	        content += "<br><br> ";
 	        content += user.getUserId();
-	        content += "<br> ";
+	        content += "<br><br> ";
 	        content += "가입일 "+user.getRegDate()+"\n ";
-	        content += "<br> ";
-	        content += "<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n ";
+	        content += "<br><br> ";
 //	         StringBuffer sb = new StringBuffer();
 //			 sb.append(user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n"
 //					+ "\n"

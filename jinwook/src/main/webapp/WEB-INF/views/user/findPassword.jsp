@@ -18,9 +18,12 @@
 	<title>아이디 찾기</title>
 	
 	<!-- Google Font -->
-	<link
-	   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	   rel="stylesheet">
+	   
+	   <!-- Google Font -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">  
+	   
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<!-- Css Styles -->
 	<link rel="stylesheet"
@@ -47,7 +50,12 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-
+	*{font-family: 'Noto Sans KR', sans-serif;}
+.row{
+   display: flex;
+    justify-content: center;
+    align-items: center;
+}
 	input{
 		width:300px;
 		height:50px;
@@ -73,8 +81,12 @@
 					font-size: 12px;
 					text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
 				}
-}
- 
+#phoneBt{
+ 	outline:none;
+ }
+ #emailBt{
+ 	outline:none;
+ } 
 
     </style>
     
@@ -196,12 +208,30 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 		$("#fPhone").hide();
 		$("#fEmail").show();
 		$("#authNo").hide();
+		$("#emailBt").css({
+			'border-bottom': '3px solid #7fad39',
+			'color' : '#7fad39'
+		});
+		
+		$("#phoneBt").css({
+			'border-bottom': '3px solid #E6E6E6',
+			'color' : 'gray'
+		});
 	}
 
 	// 버튼 클릭 이벤트 - 휴대폰 번호 인증 버튼	
 	function phoneAuth(){
 		$("#fEmail").hide();
 		$("#fPhone").show();
+		$("#phoneBt").css({
+			'border-bottom': '3px solid #7fad39',
+			'color' : '#7fad39'
+		});
+		
+		$("#emailBt").css({
+			'border-bottom': '3px solid #E6E6E6',
+			'color' : 'gray'
+		});
 		
 	}
 	
@@ -224,9 +254,9 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 			<h1 class="">비밀번호 찾기</h1>
 			<br><br>
 		</div>
-		<div class="auth">
-			<button  type="button" class="phone site-btn" onclick="phoneAuth()"  style="width:145px; border-bottom: 3px solid #7fad39; background-color:gray;">휴대폰 인증</button>
-			<button  type="button" class="email site-btn" onclick="emailAuth()" style="width:145px;">이메일 인증</button>
+		<div class="auth" style="display:flex; justify-content: center;">
+			<button  type="button" class="phone site-btn" id="phoneBt" onclick="phoneAuth()"  style="width:150px; border-bottom: 3px solid #7fad39; background-color:white; color:#7fad39;">휴대폰 인증</button>
+			<button  type="button" class="email site-btn" id="emailBt" onclick="emailAuth()" style="width:150px; border-bottom: 3px solid #E6E6E6; background-color:white; color:gray; ">이메일 인증</button>
 		</div>
 			<br><br>
 		<form class = "container text-center">

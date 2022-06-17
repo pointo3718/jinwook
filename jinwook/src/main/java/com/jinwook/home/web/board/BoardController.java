@@ -191,12 +191,14 @@ public class BoardController {
 	
 	// 1:1문의 수정 화면v
 	@GetMapping(value = "updateBoardInquiryView")
-	public String updateBoardInquiryView(Board board, @RequestParam(value = "boardNo", required = false) Integer boardNo,
+	public String updateBoardInquiryView(@RequestParam(value = "boardNo", required = false) Integer boardNo,
 			@RequestParam(value = "userId", required = false) String userId, HttpSession session, Model model)
 					throws Exception {
 		System.out.println("/board/updateBoardInquiryView: GET");
 		
-		model.addAttribute("updateBoardInquiryView", boardService.getBoardInquiry(board.getBoardNo()));
+		Board board = boardService.getBoardInquiry(boardNo);
+		
+		model.addAttribute("board", boardService.getBoardInquiry(boardNo));
 		List<Map<String, Object>> fileList = boardService.selectAttachList(board.getBoardNo());
 		model.addAttribute("file", fileList);
 			
@@ -341,7 +343,7 @@ public class BoardController {
 	}
 	
 	//1:1문의 상세 조회
-	@GetMapping(value = "getBoardInquiry")
+	@GetMapping(value = "getBoardInquiry2")
 	public String getBoardInquiry(Board board, @RequestParam(value = "boardNo", required = false) int boardNo, Model model) throws Exception {
 		System.out.println("/board/getBoardInquiry: GET");
 		
@@ -357,7 +359,7 @@ public class BoardController {
 //		List<Comment> commentList = boardService.getComment(board.getBoardNo());
 //		model.addAttribute("commentList", commentList);
 		
-		return "board/getBoardInquiry";
+		return "board/getBoardInquiry2";
 	}
 	
 	// 1:1 문의 답변(댓글) 작성
@@ -440,55 +442,21 @@ public class BoardController {
 	}
 	
 	
-//		//레시피 등록 처리v
-//		//페이징 처리 후 로직 추가 필요.
-//		@PostMapping(value = "addRecipe")//MultipartFile files = <input type name="files">
-//		public String addRecipe(Recipe recipe,  HttpSession session, HttpServletRequest request, 
-//										@RequestPart MultipartFile files, Model model) throws Exception {
-//			System.out.println("/board/addRecipe: POST");
-//			
-//			Recipe recipeVO = new Recipe();
-//			FileVO file = new FileVO();
-//			
-//			recipeVO.setRcpTitle(request.getParameter("rcpTitle"));
-//			recipeVO.setRcpContent(request.getParameter("rcpContent"));
-//			recipeVO.setRcpIngredient(request.getParameter("rcpIngredient"));
-//			recipeVO.setRcpInfo(request.getParameter("rcpInfo"));
-//			
-//			String userId = ((User) session.getAttribute("user")).getUserId();
-//			User user = new User();
-//			user.setUserId(userId);
-//			recipe.setUser(user);
-//			
-//			if(files.isEmpty()) { //업로드 할 파일이 없을 시
-//				boardService.addRecipe(recipe);
-//			} else {
-//				String fileName = files.getOriginalFilename();
-//				String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
-//				File destinationFile; 
-//				String destinationFileName;
-//				String fileUrl = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img";
-//				
-//				do { 
-//					destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension; 
-//					destinationFile = new File(fileUrl + destinationFileName); 
-//				} while (destinationFile.exists()); 
-//				
-//				destinationFile.getParentFile().mkdirs(); 
-//				files.transferTo(destinationFile);
-//
-//				boardService.addRecipe(recipe);//레시피 등록
-//				
-//				file.setRcpNo(recipe.getRcpNo());
-//				file.setFileName(destinationFileName);
-//				file.setFileOriName(fileName);
-//				file.setFileUrl(fileUrl);
-//				
-//				boardService.fileRecipeInsert(file); //파일 등록
-//			}
-//			
-//			return "redirect:/board/getRecipeList";
-//		}
+		//레시피 등록 처리v
+		//페이징 처리 후 로직 추가 필요.
+		@PostMapping(value = "addRecipe")//MultipartFile files = <input type name="files">
+		public String addRecipe(Recipe recipe,  HttpSession session, MultipartHttpServletRequest mpRequest, Model model) throws Exception {
+			System.out.println("/board/addRecipe: POST");
+			
+			String userId = ((User) session.getAttribute("user")).getUserId();
+			User user = new User();
+			user.setUserId(userId);
+			recipe.setUser(user);
+			
+			boardService.addRecipe(recipe, mpRequest);//레시피 등록
+
+			return "redirect:/board/getRecipeList";
+		}
 		
 		// 레시피 수정 화면v
 		@GetMapping(value = "updateRecipeView")
@@ -599,12 +567,12 @@ public class BoardController {
 			System.out.println("/board/addReviewView : GET");
 			
 			if (orderNo == null) {
-				model.addAttribute("board", new Board());
+				model.addAttribute("orders", new Orders());
 			} else {
 				Orders orders = boardService.getReview(orderNo);
 				User user = userService.getUser(userId);
 				if (orders == null) {
-					return "redirect:/board/list";
+					return "redirect:/board/getReviewList";
 					//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
 				}
 				String sessionUserId = ((User) session.getAttribute("user")).getUserId();

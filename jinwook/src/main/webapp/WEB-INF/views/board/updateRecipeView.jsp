@@ -29,6 +29,16 @@
 		body {
             padding-top : 50px;
         }
+        
+        .text-info {
+        	background-color: green;
+			font-size: 20pt;
+        }
+        h3 { color: white; text-decoration: underline; }
+        
+        .container {
+        
+        }
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -64,7 +74,7 @@
 	<div class="container">
 
 		<div class="page-header text-center">
-			<h3 class=" text-info">레시피 정보수정</h3>
+			<h3 class="text-info">레시피 정보수정</h3>
 		</div>
 
 		<!-- form Start /////////////////////////////////////-->
