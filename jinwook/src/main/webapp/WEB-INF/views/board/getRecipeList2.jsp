@@ -83,15 +83,15 @@ a {
     background-size: cover;
 }
 
-.list_wrap .item1 .image { background-image: url(../img/img1.png); }
-.list_wrap .item2 .image { background-image: url(../img/img2.png); }
-.list_wrap .item3 .image { background-image: url(../img/img3.png); }
-.list_wrap .item4 .image { background-image: url(../img/img4.png); }
-.list_wrap .item5 .image { background-image: url(../img/img5.png); }
-.list_wrap .item6 .image { background-image: url(../img/img6.png); }
-.list_wrap .item7 .image { background-image: url(../img/img7.png); }
-.list_wrap .item8 .image { background-image: url(../img/img8.png); }
-.list_wrap .item9 .image { background-image: url(../img/img9.png); }
+.list_wrap .item1 .image { background-image: url(../rcpImg/img1.png); }
+.list_wrap .item2 .image { background-image: url(../rcpImg/img2.png); }
+.list_wrap .item3 .image { background-image: url(../rcpImg/img3.png); }
+.list_wrap .item4 .image { background-image: url(../rcpImg/img4.png); }
+.list_wrap .item5 .image { background-image: url(../rcpImg/img5.png); }
+.list_wrap .item6 .image { background-image: url(../rcpImg/img6.png); }
+.list_wrap .item7 .image { background-image: url(../rcpImg/img7.png); }
+.list_wrap .item8 .image { background-image: url(../rcpImg/img8.png); }
+.list_wrap .item9 .image { background-image: url(../rcpImg/img9.png); }
 
 .list_wrap .item .cont {
     padding: 20px;
@@ -532,7 +532,7 @@ function fncDeleteRecipe(e) {
                 <li class="item item1">
                     <div class="image">사진</div>
                     <div class="cont">
-                        <strong>제목이 들어갑니다.</strong>
+                        <strong>제육볶음</strong>
                         <p>내용이 들어갑니다.</p>
                         <a href="#">바로가기</a>
                     </div>

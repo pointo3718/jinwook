@@ -43,9 +43,14 @@ public class BoardServiceImpl implements BoardService {
    
    //공지사항 등록v
    @Override
-   public void addBoardAnnouncement(Board board) {
-      
+   public void addBoardAnnouncement(Board board, MultipartHttpServletRequest mpRequest) throws Exception {
 	   boardMapper.addBoardAnnouncement(board);
+	   
+	   List<Map<String,Object>> list = fileUtils.parseInsertBoardFileInfo(board, mpRequest); 
+		int size = list.size();
+		for(int i=0; i<size; i++){ 
+			boardMapper.insertBoardFile(list.get(i)); 
+		}
    }
    
    @Override

@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
+
+<!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 
 <!DOCTYPE html>
@@ -60,6 +62,10 @@ body {
   margin-right: auto;
   text-align: center;
 }
+
+.container {
+	font-family: arial;
+}
 </style>
 
 
@@ -67,7 +73,7 @@ body {
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-function fncDeleteInquiry(e) {
+function fncDeleteAnnouncement(e) {
 	if (!confirm('상품을 삭제하시겠어요?')) {
 		return false;
 	}
@@ -75,12 +81,12 @@ function fncDeleteInquiry(e) {
 	console.log(e);
 	const no = $(e).data("value");
 	 $.ajax({
-			url : "/board/deleteBoardInquiry/"+no,
+			url : "/board/deleteBoardAnnouncement/"+no,
 			dataType : "json",
 			success : function(result){
 				if(result != null){
 					alert("삭제완료");
-					self.location = "/board/getBoardInquiryList";
+					self.location = "/board/getBoardAnnouncementList";
 				}
 			}
 		
@@ -139,7 +145,13 @@ function fncDeleteInquiry(e) {
       $(".ct_list_pop:nth-child(4n+6)").css("background-color", "whitesmoke");
    });
    
+   /*<![CDATA[*/
 
+   function movePage(uri, queryString) {
+      location.href = uri + queryString;
+   }
+
+   /*]]>*/
    
 </script>
 
@@ -154,7 +166,7 @@ function fncDeleteInquiry(e) {
    <div class="container">
 
       <div class="page-header text-info">
-         <h3>1:1문의 목록</h3>
+         <h3>공지사항 목록</h3>
       </div>
 
 
@@ -162,8 +174,8 @@ function fncDeleteInquiry(e) {
       <div class="row">
 
          <div class="col-md-6 text-left">
-            <p class="text-primary">${resultPage.totalCount }
-               ${resultPage.currentPage}</p>
+            <p class="text-primary">전체 ${resultPage.totalCount } 건수, 현재
+               ${resultPage.currentPage} 페이지</p>
          </div>
 
          <div class="col-md-6 text-right">
@@ -184,7 +196,7 @@ function fncDeleteInquiry(e) {
          <thead>
             <tr>
                <th align="center">No</th>
-               <th align="left">문의 제목</th>
+               <th align="left">공지사항 제목</th>
                <th align="left">작성일</th>
             </tr>
          </thead>
@@ -192,21 +204,13 @@ function fncDeleteInquiry(e) {
          <tbody>
 
             <c:set var="i" value="0" />
-            <c:forEach var="board" items="${getBoardInquiryList}">
+            <c:forEach var="board" items="${getBoardAnnouncementList}">
                <c:set var="i" value="${ i+1 }" />
                <tr>
                   <td align="Center">${ board.boardNo }</td>
                   <td align="left">${board.boardTitle}</td>
                   <td align="left">${board.writeDate}</td>
-                  <td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteInquiry(this)">X</button></td>
-             <%-- <c:choose>
-				<c:when test="${board.boardInqStatus == false}">
-					답변대기중
-				</c:when>
-				<c:otherwise>
-					답변 완료
-				</c:otherwise>
-			</c:choose> --%>
+                  <td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteAnnouncement(this)">X</button></td>
                </tr>
             </c:forEach>
 
@@ -220,8 +224,9 @@ function fncDeleteInquiry(e) {
 
 
    <!-- PageNavigation Start... -->
- <jsp:include page="../common/pageNavigator_new.jsp"/>
+    <jsp:include page="../common/pageNavigator_new.jsp"/>
    <!-- PageNavigation End... -->
+
 </body>
 
 </html>
