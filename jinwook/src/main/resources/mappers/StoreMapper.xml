@@ -27,8 +27,6 @@
    <result property="user.businessNo"     column="business_no"     jdbcType="VARCHAR"/>  
    <result property="user.regDate"     column="reg_date"     jdbcType="DATE"/>     
    <result property="orders.reviewStar"  column="review_star"    jdbcType="INTEGER"/>
-   <result property="orderDateStart"  column="order_date_start"    jdbcType="DATE"/>
-   <result property="orderDateEnd"  column="order_date_end"    jdbcType="DATE"/>
    <result property="orders.orderPrice"  column="order_price"    jdbcType="DATE"/>
    <result property="orders.orderNo"  column="order_no"    jdbcType="INTEGER"/>
    <result property="orders.orderDate"  column="order_date"    jdbcType="DATE"/>
@@ -182,7 +180,7 @@
       resultMap="storeSelectMap">
 		SELECT
 		vt.total_earn, u.jp_balance, o.order_no, o.order_date,
-		o.order_price, o.buyer_name
+		o.order_price, o.buyer_name, o.store_no
 		FROM users u,orders o, (SELECT
 		SUM(order_price) total_earn
 		FROM orders

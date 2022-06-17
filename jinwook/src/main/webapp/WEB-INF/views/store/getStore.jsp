@@ -57,6 +57,8 @@
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<!-- 수량 버튼 -->
+
 <script type="text/javascript">
 	/*<![CDATA[*/
 </script>
@@ -286,6 +288,21 @@ label {
 			}
 		});
 	});
+
+	//===url 공유====//
+
+	function clip() {
+
+		var url = '';
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		alert("URL이 복사되었습니다.")
+	}
 </script>
 
 
@@ -298,14 +315,13 @@ label {
 	<jsp:include page="../layout/top.jsp" />
 	<!-- Header End -->
 
-	<!-- Breadcrumb Section Begin -->
+	<!-- 상점 상세 Begin -->
 
 	<div class="container">
+
+		<!--상점 정보 Begin-->
+		<hr>
 		<c:forEach var="store" items="${getStore}" begin="0" end="0">
-
-			<hr>
-
-			<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
 			<div class="row">
 
@@ -317,13 +333,14 @@ label {
 
 
 
-				<table class="table table-borderless" style="width: 500px;">
+				<table class="table table-borderless" style="width: 600px;">
 					<thead>
 
 						<tr>
 							<td></td>
 							<td></td>
-							<th scope="row"><span style="color: blsck; font-size: 20px">상점이름</span></th>
+							<th scope="row" style="width: 108px;"><span
+								style="color: blsck; font-size: 20px">상점이름</span></th>
 							<td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storeName}</strong></span></td>
 							<td></td>
 							<td></td>
@@ -335,7 +352,8 @@ label {
 							<th scope="row"><span style="color: red; font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
 									class="bi bi-telephone-fill"></i></span></th>
 							<td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storePhone}</strong></span></td>
-							<td><span style="color: #FACC2E; font-size: 20px"><i
+							<td style="width: 94px;"><span
+								style="color: #FACC2E; font-size: 20px"><i
 									class="bi bi-star-fill"></i></span>&nbsp;&nbsp;&nbsp;<span
 								style="color: #2E2E2E; font-size: 20px"><strong>${store.orders.reviewStar}</strong></span></td>
 							<td><span style="color: #FF0080; font-size: 20px"><i
@@ -400,14 +418,34 @@ label {
 							<th scope="row"><span style="color: blsck; font-size: 20px">상점소개</span></th>
 							<td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storeIntro}</strong></span></td>
 						</tr>
+
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td></td>
+							<td></td>
+							<th scope="row"><span style="color: blsck; font-size: 20px"></span></th>
+							<td><span style="color: #2E2E2E; font-size: 15px"><strong></strong></span></td>
+							<td></td>
+							<td><span class="button gray medium"><a href="#"
+									onclick="clip(); return false;"><i class="bi bi-share"></i>&nbsp;&nbsp;공유</a></span></td>
+						</tr>
+
 					</tbody>
 				</table>
 			</div>
-			<hr />
+
 		</c:forEach>
+		<!--상점 정보 End-->
 
+		<hr />
 
-		<!--  table Start /////////////////////////////////////-->
+		<!--  상품 목록 Begin-->
 		<div class="row">
 			<c:forEach var="store" items="${getStore}">
 
@@ -427,7 +465,7 @@ label {
 								<a href="#">${store.product.prodName}
 									(${store.product.prodInfo}) 원산지: ${store.product.prodOrign}</a>
 							</h6>
-							<h5>${store.product.price}
+							<h5>${store.product.price}원
 								<div class="qty mt-5">
 									<span class="minus bg-dark">-</span> <input type="number"
 										class="count" name="qty" value="1"> <span
@@ -442,10 +480,9 @@ label {
 
 			</c:forEach>
 		</div>
-		<!--  table End /////////////////////////////////////-->
+		<!--  상품 목록 End-->
 	</div>
-
-	<!-- Blog Section End -->
+	<!-- 상점 상세 End -->
 
 	<!-- Footer Begin -->
 	<jsp:include page="../layout/footer.jsp" />
