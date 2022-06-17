@@ -20,6 +20,7 @@
 	   <result property="store.accNo"  column="acc_no"    jdbcType="VARCHAR"/>      
 	   <result property="store.bank"  column="bank"    jdbcType="VARCHAR"/>      
 	   <result property="reqDate"  column="req_date"    jdbcType="DATE"/>      
+	   <result property="resDate"  column="res_date"    jdbcType="DATE"/>      
 	   <result property="adTitle"  column="ad_title"    jdbcType="VARCHAR"/>      
 	   <result property="adContent"  column="ad_content"    jdbcType="VARCHAR"/>      
 	   <result property="adImg"  column="ad_img"    jdbcType="VARCHAR"/>      
@@ -266,7 +267,7 @@
 	<select id="getRequestListForAdmin" parameterType="Criteria" resultMap="requestSelectMap">
 		SELECT
 			r.req_no, s.store_no, s.store_name, u.user_id, u.user_name, r.ad_title,
-			r.req_date, r.req_status, r.refund_money, r.req_delete_yn
+			r.req_date, r.res_date, r.req_status, r.refund_money, r.req_delete_yn
 		FROM
 			store s, users u, request r
 		WHERE

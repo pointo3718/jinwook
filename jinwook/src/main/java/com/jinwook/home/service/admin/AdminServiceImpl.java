@@ -85,8 +85,21 @@ public class AdminServiceImpl implements AdminService{
 		return complainList;
 	}
 	
+	
+	///////////////// 신고 목록 삭제 //////////////////	
+	@Override
+	public boolean deleteComplain(int complainNo) {
+		int queryResult = 0;
+		
+		queryResult = adminMapper.deleteComplain(complainNo);
+		System.out.println("신고 목록 삭제 컨트롤러 통과");
 
+		return (queryResult == 1) ? true : false;
+	}
+	
+	
 	///////////////// 블랙리스트 목록 //////////////////
+	
 	@Override
 	public List<User> getBlacklistAdmin(User user) {
 		List<User> blacklist = Collections.emptyList();

@@ -378,6 +378,79 @@ color: #7fad39;
 	<jsp:include page="../layout/top.jsp" />
 	<!-- Header End -->
 
+	<!-- Modal2 Begin -->
+    <!-- 회원 상세 modal -->
+    <div class="modal" id="myModal2" aria-hidden="true" style="display: none; z-index: 1060;">
+    	<div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismis style="margin-left: 0px; text-align: center;">회원 상세<s="modal" aria-label="Close">
+	        </button>
+            </div><div class="container"></div>
+            <div class="modal-body">
+          
+         <div class="col-md-10 order-md-1">
+          <div class="col-md-12 mb-3">
+            <label for="Name">아이디</label>
+            <input type="text" class="form-control" name="userid" placeholder="" value="" readonly>
+          </div>
+          
+         <div class="container">  
+         	<div class="row forModal">
+          	<div class="col-md-6 mb-3">
+            	<label for="userId">이름</label>
+            	<input type="text" class="form-control" name="username" placeholder="" value="" readonly>
+         	 </div>
+          <div class="col-md-6 mb-3">
+           	 	<label for="userId">닉네임</label>
+           	 	<input type="text" class="form-control" name="nickname" placeholder="" value="" readonly>
+          </div>
+			</div>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label for="Name">이메일</label>
+            <input type="text" class="form-control" name="email" placeholder="" value="" readonly>
+          </div>
+
+        <div class="container">  
+         	<div class="row forModal">
+          	<div class="col-md-6 mb-3">
+            	<label for="userId">생년월일</label>
+            	<input type="text" class="form-control" name="birth" placeholder="" value="" readonly>
+         	 </div>
+          <div class="col-md-6 mb-3">
+           	 	<label for="userId">성별</label>
+           	 	<input type="text" class="form-control" name="gender" placeholder="" value="" readonly>
+          </div>
+			</div>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label for="Name">전화번호</label>
+            <input type="text" class="form-control" name="phone" placeholder="" value="" readonly>
+          </div>
+
+	 	<div class="col-md-12 mb-3">
+            <label for="Name">구분</label>
+            <input type="text" class="form-control" name="role" placeholder="" value="" readonly>
+         </div>
+            
+         <div class="col-md-12 mb-3">
+            <label for="Name">가입일자</label>
+            <input type="text" class="form-control" name="regdate" placeholder="" value="" readonly>
+         </div>
+           
+            <div class="modal-footer">
+              <a href="#" data-dismiss="modal" class="btn">닫기</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    </div>
+	<!-- Modal2 End -->
+
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-section set-bg"
 		style="background-color: #F2F2F2">
@@ -387,7 +460,7 @@ color: #7fad39;
 					<div class="bg-white text-black mx-3">
 
 						</br> <strong class="mytop01">새로운 문의내역</strong> </br> </br>
-						<h1 class="mytop01-content " id="inquiry"><span class="countinq"></span></h1>
+						<h1 class="mytop01-content" id="inquiry"><span class="countinq"></span></h1>
 						건 </br> </br>
 
 					</div>
@@ -503,11 +576,11 @@ color: #7fad39;
 						
 						<thead class="userlisthead">
 							<tr class="userinfohead">
-								<th scope="col">#</th>
-								<th scope="col">ID</th>
-								<th scope="col">이름</th>
+								<th scope="col">상점이름</th>							
+								<th scope="col">사장님</th>
+								<th scope="col">업종</th>
+								<th scope="col">상점 주소</th>
 								<th scope="col">전화번호</th>
-								<th scope="col">구분</th>
 							</tr>
 						</thead>
 
@@ -518,13 +591,29 @@ color: #7fad39;
 								<c:set var="store" value="${store}" />
 								<c:set var="i" value="${ i+1 }" />
 								<tr>
-									<th scope="row">${ i }</th>
-									<td align="left"
-										style="color: forestgreen"><a
-										href="/admin/getUserAdmin?userId=${store.storeNo}">${store.storeNo}</a></td>
-									<td align="left">${store.storeName}</td>
-									<td align="left">${store.user.userName}</td>
-									<td align="left">${store.storeType}</td>
+									<td align="left">${store.storeName}</td>									
+									<td align="left"><a
+										id="userdetail" data-toggle="modal" href="#myModal2" data-userid="${store.userId}">${store.user.userName}</a></td>
+									<c:choose>
+										<c:when test= "${store.storeType eq '1'}">
+											<td align="left">정육</td>
+										</c:when>
+										<c:when test= "${store.storeType eq '2'}">
+											<td align="left">수산</td>
+										</c:when>
+										<c:when test= "${store.storeType eq '3'}">
+											<td align="left">채소</td>
+										</c:when>
+										<c:when test= "${store.storeType eq '4'}">
+											<td align="left">과일</td>
+										</c:when>
+										<c:when test= "${store.storeType eq '5'}">
+											<td align="left">종합</td>
+										</c:when>
+									</c:choose>
+									<td align="left">${store.storeAddr}</td>
+									<td align="left">${store.storePhone}</td>
+									
 								</tr>
 							</c:forEach>
 							</tr>
@@ -546,6 +635,38 @@ color: #7fad39;
 	<!-- Footer Begin -->
 	<jsp:include page="../layout/footer.jsp" />
 	<!-- Footer End -->
+
+<script>
+////////////////유저 상세 REST 시작 /////////////////
+var USERID="";
+
+function getUser(){
+        	
+	  var uri = "/admin/getUserRest/"+USERID;
+		   $.get(uri, function(response) { 
+			 $('input[name=userid]').attr('value',`\${response.userId}`);
+			 $('input[name=username]').attr('value',`\${response.userName}`);
+			 $('input[name=nickname]').attr('value',`\${response.nickName}`);
+			 $('input[name=email]').attr('value',`\${response.email}`);
+			 $('input[name=birth]').attr('value',`\${response.birth}`);
+			 $('input[name=gender]').attr('value',`\${response.gender}`);
+			 $('input[name=phone]').attr('value',`\${response.phone}`);
+			 $('input[name=role]').attr('value',`\${response.role}`);
+			 $('input[name=regdate]').attr('value',`\${response.regDate}`);
+		   }, "json");
+		}
+
+//모달 창 오픈할 때 해당 유저아이디 전달 //
+$(document).ready(function() {     
+
+	$('#myModal2').on('show.bs.modal', function(event) {          
+		USERID = $(event.relatedTarget).data('userid');
+	    getUser();
+
+	 });
+});
+//////////////// 유저 상세 REST 끝   /////////////////
+</script>
 
 </body>
 

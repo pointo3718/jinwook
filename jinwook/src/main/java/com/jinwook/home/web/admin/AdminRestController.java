@@ -2,10 +2,13 @@ package com.jinwook.home.web.admin;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -68,31 +71,42 @@ public class AdminRestController {
    
 	///////////////// 유저 상세 //////////////////
    @GetMapping( value={"/getUserRest/{userId}"} )
-   public JsonObject countPickup(@PathVariable(value = "userId", required = false) String userId) throws Exception{
+   public JSONObject countPickup(@PathVariable(value = "userId", required = false) String userId, @ModelAttribute("user") User user) throws Exception{
       
       System.out.println("/admin/getUserRest : GET ");
-  
-      JsonObject jsonObj = new JsonObject();
-      
-      try { 
+      Gson gson = new Gson();      
+      user = adminService.getUserAdmin(userId);
 			
-			User user = adminService.getUserAdmin(userId);
-			
-			String userObj = new Gson().toJson(user);
-			jsonObj.addProperty("userObj", userObj);
-
-		} catch (DataAccessException e) {
-			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
-
-		} catch (Exception e) {
-			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
-		}
+      String userObj = gson.toJson(user);
+      JSONParser parser = new JSONParser();
+      JSONObject jsonObj = (JSONObject)parser.parse(userObj);
 		
-        System.out.println("픽업 개수 컨트롤러 통과");
+      System.out.println("픽업 개수 컨트롤러 통과");
+        
+      return jsonObj;
+   }
+   
+	///////////////// 신고목록 삭제 //////////////////
+   @DeleteMapping(value = { "deleteComplain/{complainNo}" })
+   public JsonObject deleteComplain(@PathVariable(value = "complainNo", required = false) int complainNo) {
+	   
+	    System.out.println("/admin/deleteComplain : DELETE ");
+	  	JsonObject jsonObj = new JsonObject();
+
+		try { 	
+			boolean deleteComplain = adminService.deleteComplain(complainNo);
+			jsonObj.addProperty("result", deleteComplain);
+		
+			} catch (DataAccessException e) {
+				jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+		
+			} catch (Exception e) {
+				jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+			}
+        System.out.println("신고목록 삭제 컨트롤러 통과");
         
 		return jsonObj;
    }
-   
    
    
 	///////////////// 블랙리스트 목록 //////////////////
@@ -142,8 +156,6 @@ public class AdminRestController {
 
 			boolean result = adminService.updateBlacklist(complain);
 			jsonObj.addProperty("result", result);
-
-		
 		
         System.out.println("블랙리스트 등록 컨트롤러 통과");
         
@@ -178,27 +190,26 @@ public class AdminRestController {
 
 	
 	//////////////// 대기중인 신고 목록 개수 ////////////////
-@GetMapping( value={"/getComplainTotalCount"} )
-public JsonObject getComplainTotalCount()throws Exception{
+	@GetMapping( value={"/getComplainTotalCount"} )
+	public JsonObject getComplainTotalCount()throws Exception{
    
-   System.out.println("/admin/getComplainTotalCount : GET ");
-
-   JsonObject jsonObj = new JsonObject();
+	   System.out.println("/admin/getComplainTotalCount : GET ");
+	
+	   JsonObject jsonObj = new JsonObject();
    
-   try { 	
-		int countWaitingComplain= adminService.getComplainTotalCount();
-		System.out.println("   ::  "+countWaitingComplain);
-		jsonObj.addProperty("countWaitingComplain", countWaitingComplain);
-
+	   try { 	
+			int countWaitingComplain= adminService.getComplainTotalCount();
+			System.out.println("   ::  "+countWaitingComplain);
+			jsonObj.addProperty("countWaitingComplain", countWaitingComplain);
+	
 		} catch (DataAccessException e) {
-			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
-
+				jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+	
 		} catch (Exception e) {
-			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+				jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
 		}
 		
-     System.out.println("신고대기 개수 컨트롤러 통과");
-     
+	   System.out.println("신고대기 개수 컨트롤러 통과");
 		return jsonObj;
 	}
 
