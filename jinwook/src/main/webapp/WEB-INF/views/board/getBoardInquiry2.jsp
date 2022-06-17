@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<!DOCTYPE html>
-<html lang="ko">
-
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
@@ -26,6 +24,27 @@
     <link rel="stylesheet" href="${path}/resources/static/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	<!-- Bootstrap Dropdown Hover CSS -->
+   <link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+   
+    <!-- Bootstrap Dropdown Hover JS -->
+   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+	
+	<!--  ///////////////////////// CSS ////////////////////////// -->
+	 <style type="text/css">
+   
+  </style>
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -329,6 +348,7 @@ $(function(){
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7 order-md-1 order-1">
+                <form name="readForm" role="form" method="post">
                     <div class="blog__details__text">
                     <p>문의번호: {board.boardNo}</p>
                     <p>문의제목: {board.boardTitle}</p>
@@ -361,6 +381,7 @@ $(function(){
                                         <h6>작성자: {user.userId}</h6>
                                         <span>Admin</span>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-lg-6">

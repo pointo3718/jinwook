@@ -241,52 +241,23 @@ public class BoardController {
 			return "board/addBoardAnnouncementView"; //보여줄 화면: .jsp
 		}
 		
-//		//공지사항 등록 + 사진 첨부 처리
-//		@PostMapping(value = "addBoardAnnouncement")
-//		public String addBoardAnnouncement(Board board, HttpSession session, HttpServletRequest request, @RequestPart MultipartFile files, Model model) throws Exception {
-//			System.out.println("/board/addBoardAnnouncement: POST");
-//
-//			Board boardVO = new Board();
-//			FileVO  file  = new FileVO();
-//			boardVO.setBoardTitle(request.getParameter("boardTitle"));
-//			boardVO.setBoardContent(request.getParameter("boardContent"));
-//
-//			Map<String, Object> pagingParams = getPagingParams(board);
-//			
-//			String userId = ((User) session.getAttribute("user")).getUserId();
-//			User user = new User();
-//			user.setUserId(userId);
-//			board.setUser(user);
-//			
-//			if(files.isEmpty()) { //업로드 할 파일이 없을 시
-//				boardService.addBoardAnnouncement(boardVO);
-//			} else {
-//				String fileName = files.getOriginalFilename();
-//				String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
-//				File destinationFile; 
-//				String destinationFileName;
-//				String fileUrl = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img";
-//				
-//				do { 
-//					destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension; 
-//					destinationFile = new File(fileUrl + destinationFileName); 
-//				} while (destinationFile.exists()); 
-//				
-//				destinationFile.getParentFile().mkdirs(); 
-//				files.transferTo(destinationFile);
-//
-//				boardService.addBoardAnnouncement(board);//게시글 등록
-//				
-//				file.setBoardNo(board.getBoardNo());
-//				file.setFileName(destinationFileName);
-//				file.setFileOriName(fileName);
-//				file.setFileUrl(fileUrl);
-//				
-//				boardService.fileBoardInsert(file); //파일 등록
-//			}
-//			
-//			return "redirect:/board/getBoardAnnouncementList";
-//		}
+		//공지사항 등록 + 사진 첨부 처리
+		@PostMapping(value = "addBoardAnnouncement")
+		public String addBoardAnnouncement(Board board, HttpSession session, HttpServletRequest request, 
+				MultipartHttpServletRequest mpRequest, Model model) throws Exception {
+			System.out.println("/board/addBoardAnnouncement: POST");
+
+			Map<String, Object> pagingParams = getPagingParams(board);
+			
+			String userId = ((User) session.getAttribute("user")).getUserId();
+			User user = new User();
+			user.setUserId(userId);
+			board.setUser(user);
+			
+			boardService.addBoardAnnouncement(board, mpRequest);
+			
+			return "redirect:/board/getBoardAnnouncementList";
+		}
 		
 		// 공지사항 수정 화면v
 		@GetMapping(value = "updateBoardAnnouncementView")
@@ -335,7 +306,7 @@ public class BoardController {
 	
 	//공지사항 목록 조회
 	@GetMapping(value = "getBoardAnnouncementList")
-	public String getBoardAnnouncementList(@ModelAttribute("board") Board board, Model model) {
+	public String getBoardAnnouncementList(@ModelAttribute("board") Board board, Model model) throws Exception {
 		List<Board> getBoardAnnouncementList = boardService.getBoardAnnouncementList(board);
 		model.addAttribute("getBoardAnnouncementList", getBoardAnnouncementList);
 		
