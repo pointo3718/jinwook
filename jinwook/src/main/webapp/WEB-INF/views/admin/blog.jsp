@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -319,7 +320,7 @@
    <!-- Header End -->
 
 
-<!-- modal TEST -->
+	<!-- Modal2 Begin -->
     <!-- 회원 상세 modal -->
     <div class="modal" id="myModal2" aria-hidden="true" style="display: none; z-index: 1060;">
     	<div class="modal-dialog">
@@ -390,7 +391,7 @@
     </div>
     </div>
     </div>
-<!-- modal TEST -->
+	<!-- Modal2 End -->
 
 
 	<!-- Modal Begin -->
@@ -405,7 +406,7 @@
 	      <div class="modal-body">
 	        
 	         <table class="table table-hover"
-                  style="width: 730px; heigh: 300px;">
+                  style="width: 730px; heigh: 300px; font-size: 13px;">
                   
                   <thead class="userlisthead">
                      <tr class="userinfohead">
@@ -440,7 +441,7 @@
 				<div class="col-4">
 					<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">새로운 문의내역</strong> </br> </br>
+						</br> <strong class="mytop01">새로운 문의내역 &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></strong> </br> </br>
 						<h1 class="mytop01-content " id="inquiry"><span class="countinq"></span></h1>
 						건 </br> </br>
 
@@ -450,7 +451,7 @@
 				<div class="col-4">
 					<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">새로운 요청접수</strong></br> </br>
+						</br> <strong class="mytop01">새로운 요청접수 &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></strong></br> </br>
 						<h1 class="mytop01-content " id="request"><span class="countall"></span></h1>
 						건 </br> </br>
 					</div>
@@ -459,7 +460,7 @@
 				<div class="col-4">
 					<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">새로운 신고접수</strong> </br> </br>
+						</br> <strong class="mytop01">새로운 신고접수 &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></strong> </br> </br>
 						<h1 class="mytop01-content" id="compl"><span class="countcompl"></span></h1>
 						건 </br> </br>
 
@@ -616,12 +617,13 @@ $(function() {
          var blacklistHtmlHead = "";
          blacklistHtmlHead += `
                <tr class="userinfohead">
-                  
-                  <th scope="col">#</th>
                   <th scope="col">ID</th>
-                  <th scope="col">전화번호</th>
-                  <th scope="col">지정기간</th>
-                  <th scope="col">어쩌구</th>
+                  <th scope="col">이름</th>
+                  <th scope="col">생년월일</th>
+                  <th scope="col">이메일</th>
+                  <th scope="col">휴대전화번호</th>
+                  <th scope="col">기간</th>
+                  <th scope="col">사유</th>
                </tr>
          `;
       
@@ -630,13 +632,15 @@ $(function() {
          $(response.blacklist).each(function(idx, user) {
             blacklistHtmlBody += `
                <tr class="userinfobody">
-                  <td scope="row">\${idx}</td>
                   <td align="left" id="option4">
 			        <a id="userdetail" data-toggle="modal" href="#myModal2" data-userid="\${user.userId}">\${user.userId}</a>
 			      </td>
+                  <td align="left">\${user.userName}</td>
+                  <td align="left">\${user.birth}</td>
+                  <td align="left">\${user.email}</td>
                   <td align="left">\${user.phone}</td>
-                  <td align="left">\${user.blacklistEndDate}</td>
-                  <td align="left">\${user.role}</td>
+                  <td align="left">~ &nbsp;\${user.blacklistEndDate}</td>
+                  <td align="left">\${user.complainCode}</td>
                </tr>
             `;
          });
@@ -678,6 +682,7 @@ $(document).ready(function() {
 
 	$('#myModal2').on('show.bs.modal', function(event) {          
 		USERID = $(event.relatedTarget).data('userid');
+		alert(USERID);
 	    getUser();
 
 	 });

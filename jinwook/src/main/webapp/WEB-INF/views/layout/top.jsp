@@ -104,7 +104,7 @@ a{
             <div class="row" >
             <div class="col-lg-3"></div>
                <div class="col-lg-6">
-                  <div class="header__top__left text-center" style="padding-top:5px; margin-bottom:5px; font-size: 13px; color: white">
+                  <div class="header__top__left text-center" style="padding-top:5px; margin-left: 20px; margin-bottom:5px; font-size: 13px; color: white">
                      진욱이가 당신의 처음을 응원합니다! &nbsp;>
                   </div>
                </div>
@@ -178,7 +178,7 @@ a{
             <div class="col-lg-3" >
                <div class="header__logo">
                   <a href="/"><img
-                     src="${path}/resources/static/img/logo.png" alt="" style="width: 200px"></a>
+                     src="${path}/resources/static/img/logo.png" alt="" style="width: 200px; margin-left: 27px;"></a>
                </div>
             </div>
 
