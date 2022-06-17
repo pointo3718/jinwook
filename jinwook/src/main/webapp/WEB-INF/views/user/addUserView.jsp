@@ -27,7 +27,10 @@
 	<link
 	   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
 	   rel="stylesheet">
-	
+	<!-- Google Font -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">  
 	<!-- Css Styles -->
 	<link rel="stylesheet"
 	   href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
@@ -57,8 +60,10 @@
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
         }  */
-      /   .row{ 
-            margin-top: 10px;
+        
+        *{font-family: 'Noto Sans KR', sans-serif;}
+        
+         .row{ 
             justify-content: center;
             align-items: center;
             text-align: center;
@@ -79,13 +84,13 @@
 			 justify-content: center;
 		}
         .site-btn{
-			 background-color: #7fad39; /* Green */
+			 background-color: #7fad39; 
 			 border: none;
 			 color: white;
 	       	 width : 200px;
 	       	 text-align: center;
 	       	 font-size:20px;
-		}
+		} 
 		.userId{
           width:300px;
 		  text-indent: 1em;
@@ -274,7 +279,7 @@
 		
 	   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	   //==> 주민번호 유효성 check 는 이해정도로....
-		function checkSsn() {
+		/* function checkSsn() {
 			var ssn1, ssn2; 
 			var nByear, nTyear; 
 			var today; 
@@ -285,7 +290,7 @@
 				alert("잘못된 주민번호입니다.");
 				return false;
 			}
-		}
+		} */
 	
 		function PortalJuminCheck(fieldValue){
 		    var pattern = /^([0-9]{6})-?([0-9]{7})$/; 
@@ -401,7 +406,7 @@
 		  
 		  <div class="form-group">
 		    <label for="gender" class=" col-sm-3 control-label">성별</label>
-		    <div class="col-sm-2" style="display:flex; ">
+		    <div class="col-sm-2" style="display:flex; justify-center;">
 		    	<input type="radio" 	name="gender" value="남"/> 남        
 		    	<input type="radio" 	name="gender" value="여" /> 여
 		  </div>

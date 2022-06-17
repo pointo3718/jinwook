@@ -240,12 +240,6 @@ public class UserController {
 		return "/user/findId";
 	}
 	
-	@GetMapping("findPasswordEmail")
-	public String findPassword() {
-		
-		System.out.println("============FIND ID PAGE============");
-		return "/user/findPasswordEmail";
-	}
 	//---------------------------------------
 	// 5분동안 유저확인 세션생성 (인증완료 X)
 	@PostMapping("auth")
@@ -289,19 +283,39 @@ public class UserController {
 	//---------------------------------------
 		// 비밀번호 재설정 페이지로 이동
 		@GetMapping("updatePassword")
-		public String updatePassword(User user, HttpSession session) {
+		public String updatePasswordView(User user, HttpSession session) {
 //		    Map<String, Object> authStatus = (Map<String, Object>) session.getAttribute("authStatus");
 		    
 //		    if(authStatus == null || !username.equals(authStatus.get("userId"))) {
 //		        return "/user/findPassword";
 //		    }
-			System.out.println(user);
-		    session.setAttribute("userId", user.getUserId());
+			System.out.println(session.getAttribute("user"));
+			System.out.println(session.getAttribute(user.getUserId()));
+			System.out.println(session.getAttribute(user.getUserName()));
+			System.out.println(session.getAttribute(user.getPhone()));
+//		    session.setAttribute("userId", user.getUserId());
 //		    // 페이지에 왔을때 인증이 안되있다면
 //		    if(!(boolean) authStatus.get("status")) {
 //		        return "/user/findPassword";
 //		    }
 		    return "/user/updatePassword";
+		}
+		
+		@PostMapping("updatePassword")
+		public String updatePassword(@ModelAttribute("user") User user , HttpSession session) throws Exception {
+			session.setAttribute("user", user.getUserId());	
+			session.setAttribute("user", user.getPhone());	
+			
+			System.out.println(session.getAttribute("user"));
+			
+			userService.updatePassword(user);
+			String sessionId=((User)session.getAttribute("user")).getUserId();
+			if(sessionId.equals(user.getUserId())){
+				session.setAttribute("user", user);
+				System.out.println(user+"1123312132123132321312435545667878990");
+			}
+				
+			return "/user/login";
 		}
 		
 		//비밀번호 찾기 페이지로 이동
