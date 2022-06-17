@@ -426,7 +426,6 @@ $(function(){
                							onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"/>
                         <p>후기 제목: ${orders.reviewTitle}</p>
                         <p>후기 내용: ${orders.reviewContent}</p>
-                        <p>레시피 내용: ${recipe.rcpContent}</p>
                     </div>
                     <div class="blog__details__content">
                         <div class="row">

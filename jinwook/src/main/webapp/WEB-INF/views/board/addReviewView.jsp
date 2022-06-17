@@ -80,7 +80,7 @@ function updateRecipeReco() {
 <body>
 	<div class="container">
 		<div class="row">
-			<form method="post" action="board/addBoardInquiry">
+			<form method="post" action="board/addReviewView">
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>

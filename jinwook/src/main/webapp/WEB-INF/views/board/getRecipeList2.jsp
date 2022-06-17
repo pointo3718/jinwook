@@ -26,13 +26,8 @@
     <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
     <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-   
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
    /*<![CDATA[*/
 
@@ -44,7 +39,86 @@
 </script>
 
 <style>
-p { margin:20px 0px; }
+
+/* 카드형 start*/
+{
+    margin: 0;
+    padding: 0;
+}
+ul, li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.list_wrap {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 100px;
+}
+
+.list_wrap ul {
+    font-size: 0;
+}
+.list_wrap .item {
+    display: inline-block;
+    width: 30%;
+    margin-top: 40px;
+    margin-left: 5%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+.list_wrap .item:nth-child(-n+3) {
+    margin-top: 0;
+}
+.list_wrap .item:nth-child(3n-2) {
+    margin-left: 0;
+}
+.list_wrap .item .image {
+    width: 100%;
+    height: 160px;
+    background-color: #ddd;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+}
+
+.list_wrap .item1 .image { background-image: url(../img/img1.png); }
+.list_wrap .item2 .image { background-image: url(../img/img2.png); }
+.list_wrap .item3 .image { background-image: url(../img/img3.png); }
+.list_wrap .item4 .image { background-image: url(../img/img4.png); }
+.list_wrap .item5 .image { background-image: url(../img/img5.png); }
+.list_wrap .item6 .image { background-image: url(../img/img6.png); }
+.list_wrap .item7 .image { background-image: url(../img/img7.png); }
+.list_wrap .item8 .image { background-image: url(../img/img8.png); }
+.list_wrap .item9 .image { background-image: url(../img/img9.png); }
+
+.list_wrap .item .cont {
+    padding: 20px;
+}
+.list_wrap .item strong {
+    display: block;
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    letter-spacing: -1px;
+}
+.list_wrap .item p {
+    font-size: 13px;
+    letter-spacing: -1px;
+}
+.list_wrap .item a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: #eee;
+    font-size: 13px;
+    letter-spacing: -1px;
+}
+.list_wrap .item a:hover {
+    background: #325cb2;
+    color: #fff;
+}
+/* 카드형 end*/
 
 .mytop01 {
    padding-left: 20px;
@@ -440,12 +514,12 @@ function fncDeleteRecipe(e) {
                         <div class="blog__sidebar__item">
                             <h4>Search By</h4>
                             <div class="blog__sidebar__item__tags">
-                                <a href="#">Apple</a>
-                                <a href="#">Beauty</a>
-                                <a href="#">Vegetables</a>
-                                <a href="#">Fruit</a>
-                                <a href="#">Healthy Food</a>
-                                <a href="#">Lifestyle</a>
+                                <a href="#">제육볶음</a>
+                                <a href="#">소불고기</a>
+                                <a href="#">연어 샐러드</a>
+                                <a href="#">옥수수전</a>
+                                <a href="#">샌드위치</a>
+                                <a href="#">파스타</a>
                             </div>
                         </div>
                     </div>
@@ -453,105 +527,190 @@ function fncDeleteRecipe(e) {
                 <!-- 레시피 이미지 목록 -->
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
-                    <div class="card">
- <div class="container">
-      <div class="row" align="center">
-        <div class="col-6">
-          <p>${ i }</p>
-          <div class="card">
-            <div class="card-header">
-              My Card
-            </div>
-            <img src="images/card-image.png" alt="" />
-            <div class="card-body">
-              <h5 class="card-title">${recipe.rcpTitle}</h5>
-              <p class="card-text">${recipe.rcpInfo}</p>
-              <a href="#" class="btn btn-primary">레시피 더보기</a>
-            </div>
-          </div>
+                <div class="list_wrap">
+            <ul>
+                <li class="item item1">
+                    <div class="image">사진</div>
+                    <div class="cont">
+                        <strong>제목이 들어갑니다.</strong>
+                        <p>내용이 들어갑니다.</p>
+                        <a href="#">바로가기</a>
+                    </div>
+                </li>
+                <li class="item item2">
+                    <div class="image">사진</div>
+                    <div class="cont">
+                        <strong>제목이 들어갑니다.</strong>
+                        <p>내용이 들어갑니다.</p>
+                        <a href="#">바로가기</a>
+                    </div>
+                </li>
+                <li class="item item3">
+                    <div class="image">사진</div>
+                    <div class="cont">
+                        <strong>제목이 들어갑니다.</strong>
+                        <p>내용이 들어갑니다.</p>
+                        <a href="#">바로가기</a>
+                    </div>
+                </li>
+                <li class="item item4">
+                    <div class="image">사진</div>
+                    <div class="cont">
+                        <strong>제목이 들어갑니다.</strong>
+                        <p>내용이 들어갑니다.</p>
+                        <a href="#">바로가기</a>
+                    </div>
+                </li>
+                <li class="item item5">
+                    <div class="image">사진</div>
+                    <div class="cont">
+                        <strong>제목이 들어갑니다.</strong>
+                        <p>내용이 들어갑니다.</p>
+                        <a href="#">바로가기</a>
+                    </div>
+                </li>
+                <li class="item item6">
+                    <div class="image">사진</div>
+                    <div class="cont">
+                        <strong>제목이 들어갑니다.</strong>
+                        <p>내용이 들어갑니다.</p>
+                        <a href="#">바로가기</a>
+                    </div>
+                </li>
+                <li class="item item7">
+                    <div class="image">사진</div>
+                    <div class="cont">
+                        <strong>제목이 들어갑니다.</strong>
+                        <p>내용이 들어갑니다.</p>
+                        <a href="#">바로가기</a>
+                    </div>
+                </li>
+                <li class="item item8">
+                    <div class="image">사진</div>
+                    <div class="cont">
+                        <strong>제목이 들어갑니다.</strong>
+                        <p>내용이 들어갑니다.</p>
+                        <a href="#">바로가기</a>
+                    </div>
+                </li>
+                <li class="item item9">
+                    <div class="image">사진</div>
+                    <div class="cont">
+                        <strong>제목이 들어갑니다.</strong>
+                        <p>내용이 들어갑니다.</p>
+                        <a href="#">바로가기</a>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="col-6">
-          <p>Card</p>
-          <div class="card">
-            <div class="card-header">
-              My Card
-            </div>
-            <img src="images/card-image.png" alt="" />
-            <div class="card-body">
-              <h5 class="card-title">Lorem</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
-              <a href="#" class="btn btn-primary">More</a>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-    
- <div class="container">
-      <div class="row">
-        <div class="col-6">
-          <p>Card</p>
-          <div class="card">
-            <div class="card-header">
-              My Card
-            </div>
-            <img src="images/card-image.png" alt="" />
-            <div class="card-body">
-              <h5 class="card-title">Lorem</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
-              <a href="#" class="btn btn-primary">More</a>
-            </div>
-          </div>
         </div>
-        <div class="col-6">
-          <p>Card</p>
-          <div class="card">
-            <div class="card-header">
-              My Card
-            </div>
-            <img src="images/card-image.png" alt="" />
-            <div class="card-body">
-              <h5 class="card-title">Lorem</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
-              <a href="#" class="btn btn-primary">More</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
- <div class="container">
-      <div class="row">
-        <div class="col-6">
-          <p>Card</p>
-          <div class="card">
-            <div class="card-header">
-              My Card
-            </div>
-            <img src="images/card-image.png" alt="" />
-            <div class="card-body">
-              <h5 class="card-title">Lorem</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
-              <a href="#" class="btn btn-primary">More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <p>Card</p>
-          <div class="card">
-            <div class="card-header">
-              My Card
-            </div>
-            <img src="images/card-image.png" alt="" />
-            <div class="card-body">
-              <h5 class="card-title">Lorem</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
-              <a href="#" class="btn btn-primary">More</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                
+                
+                <%-- <div class="col-lg-8 col-md-7">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-2.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
+                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                        quaerat </p>
+                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-3.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="#">Visit the clean farm in the US</a></h5>
+                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                        quaerat </p>
+                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-1.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
+                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                        quaerat </p>
+                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-4.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
+                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                        quaerat </p>
+                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-4.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="#">The Moment You Need To Remove Garlic From The Menu</a></h5>
+                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                        quaerat </p>
+                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-6.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
+                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                        quaerat </p>
+                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div> --%>
                         <div class="col-lg-12">
                             <div class="product__pagination blog__pagination">
                                 <a href="#">1</a>
