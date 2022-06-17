@@ -146,31 +146,30 @@
                                         <strong style="font-size: 20px;">${cart.product.prodName}</strong>
                                     </td>
                                     <td> <strong style="font-size: 20px;">${cart.product.prodInfo}</strong> </td>
-                                    <td class="shoping__cart__price">
-                                        <fmt:formatNumber value="${cart.product.price}"/> 원
+                                    <td class="shoping__cart__price" >
+                                        <span id="prodPrice"><fmt:formatNumber value="${cart.product.price}"/></span> 원
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                         	<div class="btn-group" style="text-align:center; ">
-						                        <button type="button" class="btn btn-outline-success btn minus" id="minus" style="width: 30px;">-</button>
+						                        <button type="button" class="btn btn-outline-success btn minus" id="minus" onClick="updateOrdersCart(this,'minus')" data-cartno="${cart.cartNo}" style="width: 30px;">-</button>
 						                        <!-- <span type="button" class="btn minus" >-</span> -->
-						                        <input type="number" class="btn btn-outline-success" id="numBox" style="width: 60px;height: 32px;padding-left: 13px;padding-top: 0px;padding-right: 0px;padding-bottom: 0px; font-size:15px" value="${cart.prodCount}" readonly>
+						                        <input type="number" class="btn btn-outline-success" id="numBox" name="prodCount" style="width: 60px;height: 32px;padding-left: 13px;padding-top: 0px;padding-right: 0px;padding-bottom: 0px; font-size:15px" value="${cart.prodCount}" readonly>
 						                        <!-- <span type="button" class="btn plus">+</span> -->
-						                        <button type="button" class="btn btn-outline-success btn plus" onClick="updateOrdersCart(this)" data-carNo="${cart.cartNo}" id="plus" style="width: 30px;">+</button>
+						                        <button type="button" class="btn btn-outline-success btn plus" onClick="updateOrdersCart(this,'plus')" data-cartno="${cart.cartNo}" id="plus" style="width: 30px;">+</button>
 						                    </div>
                                             <%-- <div class="pro-qty">
                                                 <input type="text"onchange="changeCount(this)" value="${cart.prodCount}" >
                                             </div> --%>
                                         </div>
                                     </td>
-                                    <td class="shoping__cart__total" >
+                                    <td class="shoping__cart__total totalPrice" id="carttotal" >
                                     <fmt:formatNumber value="${cart.product.price*cart.prodCount}"/> 원
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close" onClick="fncDeleteOrdersCart(this)" data-value="${cart.cartNo}"></span>
                                     </td>
-                                    <c:set var="total" value="${total + (cart.product.price*cart.prodCount) }" />
-                                </tr>
+                                  <c:set var="total" value="${total + (cart.product.price*cart.prodCount) }" />
                                </c:forEach>
                         </table>
                         <!--  /////////////////////////////////////////////////// -->
@@ -188,7 +187,7 @@
                     <div class="shoping__checkout">
                         <h5>주문 총액</h5>
                         <ul>
-                            <li >주문 금액 <span><fmt:formatNumber value="${total}"/> 원</span></li>
+                            <li>주문 금액 <span id="orderPrices"><fmt:formatNumber value="${total}"/> </span>원</li>
                         </ul>
                         <a><button class="primary-btn" style="max-width: 100%; width: 477px;" 
                          id="button" name="orderPrice" value="${total}">주문하기</button></a>
@@ -196,6 +195,8 @@
                     </div>
                 </div>
             </div>
+            
+        </div>
         </div>
     </section>
     </form>
@@ -206,58 +207,46 @@
    <!-- Footer End -->
 
 	<script type="text/javascript">
-/* 	$("#minus").on("click",function(){
-		   var num = $("#numBox").val();
-		   var minusNum = Number(num) - 1;
-		   
-		   if(minusNum <= 0) {
-		    $("#numBox").val(num);
-		    swal("진욱이네","상품수량은 1보다 작아질수 없습니다.");
-		   } else {
-		    $("#numBox").val(minusNum);
-		   }
-		  
-	});
-	$("#plus").on("click",function(){
-		var num = $("#numBox").val();
-		var plusNum = Number(num) + 1;
-		   
-	   	$("#numBox").val(plusNum);    
-	}); */
-	
-
-	
-			/*  url:"/orders/updateOrdersCart/"+carNo,
-			type:"POST"
-			/* headers: */
-			/*dataType:"json",
-			success: function(result){
-				if(result != null){
-					self.location = "/orders/getOrdersCartList";
-				}
-			error 	 */
-			function updateOrdersCart(e) {
+			function updateOrdersCart(e,bt) {
 				console.log(e);
-			
-				const carNo = $(e).data("carNo");
+				var cartNo = $(e).data("cartno");
+				var prodCount = $(e).parent("div").find("input[name='prodCount']").val();
+				var prodPrice = parseInt(($(e).parent().parent().parent().parent().find("#prodPrice").text()).replaceAll(",",""));
+				var orderPrice = parseInt(($(e).parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().find("#orderPrices").text()).replaceAll(",",""));
+				if(bt == 'plus'){
+					prodCount++;
+					$(e).parent("div").find("input[name='prodCount']").val(prodCount);
+					orderPrice = orderPrice + prodPrice;
+				}else{
+					prodCount--;
+					if(prodCount<1){
+						swal("진욱이네","상품수량은 1보다 작아질수 없습니다.");
+						return;
+					}
+					$(e).parent("div").find("input[name='prodCount']").val(prodCount);
+					orderPrice = orderPrice - prodPrice;
+				}
+				const ordertotal = orderPrice;
+				const ptotal = prodCount * prodPrice;
 				
+				console.log($(e).parent().parent().parent().parent().find(".totalPrice").text(`\${ptotal}원`));
+				console.log($(e).parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().find("#orderPrices").text(`\${ordertotal}원`));
 				$.ajax({
-					url : "/orders/updateOrdersCart/"+carNo+"/"+prodCount,
-					method: "GET",
+					url : "/orders/updateOrdersCart/"+cartNo+"/"+prodCount,
+					method : "GET" ,
 					dataType: "json",
-					contentType : 'application/json',
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
 					success: function(result){
-						if(result != null){
-							self.location = "/orders/getOrdersCartList";
-						}
+						/* self.location = "/orders/getOrdersCartList"; */
 					}
 				}); 
+				
 			}
 			
-	/* 	})
-		 
                
-	} */
 	</script>
 	
       <a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
