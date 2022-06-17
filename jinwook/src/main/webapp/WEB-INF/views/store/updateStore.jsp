@@ -360,8 +360,7 @@ var storeNo = $("input[id='storeNo']").val();
 									class="list-group-item list-group-item-action"
 									aria-current="true">주문 내역</button>
 								<button type="button"
-									class="list-group-item list-group-item-action">상점 정보
-									수정</button>
+									class="list-group-item list-group-item-action">상점 정보 수정</button>
 								<button type="button"
 									class="list-group-item list-group-item-action" class="addStore">
 									<span class="addStore">개인 정보 수정</span>
