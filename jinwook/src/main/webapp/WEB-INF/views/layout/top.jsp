@@ -160,8 +160,14 @@ a{
                         <a href="/admin/blog" style="word-break: break-all; margin-right:20px;" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-heart" aria-hidden="true"></i >${sessionScope.user.userName } 관리자님</a>
                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                    <a class="dropdown-item" href="/user/login">관리자페이지</a>
-                   <a class="dropdown-item" href="#">xx action</a>
-                   <a class="dropdown-item" href="#">xx else here</a>
+                   <a class="dropdown-item" href="/admin/blog">회원 목록</a>
+                   <a class="dropdown-item" href="/admin/listStoreAdmin">상점 목록</a>
+                   <a class="dropdown-item" href="/admin/listComplainAdmin">신고 접수 목록</a>
+                   <a class="dropdown-item" href="/request/getRequestListForAdmin?reqCode=1">상점 등록 요청</a>
+                   <a class="dropdown-item" href="/request/getRequestListForAdmin?reqCode=2">상점 삭제 요청</a>
+                   <a class="dropdown-item" href="/request/getRequestListForAdmin?reqCode=3">환급 요청</a>
+                   <a class="dropdown-item" href="/request/getRequestListForAdmin?reqCode=4">광고 등록 요청</a>
+                   <a class="dropdown-item" href="/request/getRequestListForAdmin?reqCode=4">문의 내역</a>
                  </div>
                    </div>
                   </c:if>
