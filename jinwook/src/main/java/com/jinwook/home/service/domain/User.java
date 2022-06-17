@@ -32,5 +32,5 @@ public class User extends CommonDTO {
 	private boolean userByeStatus;
 	private String gender;
 	private String blackPeriod;
-	
+	private String complainCode;
 }

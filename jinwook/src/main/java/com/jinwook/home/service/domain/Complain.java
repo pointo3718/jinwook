@@ -19,6 +19,7 @@ public class Complain extends CommonDTO {
 	private String complainCode;
 	private String complainTarget;
 	private boolean complainStatus;
+	private boolean complainDeleteYn;
 	
 	
 }

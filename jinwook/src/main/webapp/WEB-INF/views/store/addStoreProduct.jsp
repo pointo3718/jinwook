@@ -65,8 +65,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: flex-start
-
-	
 }
 
 .mytop01 {
@@ -83,13 +81,12 @@
 	padding-top: 50px;
 }
 
-
 .list-group {
 	padding-top: 0px;
 }
 
 .blog__sidebar {
-align-items: flex-start;
+	align-items: flex-start;
 }
 
 .blog__sidebar__item {
@@ -186,6 +183,68 @@ label {
 
 
 <script type="text/javascript">
+
+
+/*<![CDATA[*/
+function movePage(uri, queryString) {
+   location.href = uri + queryString;
+}
+
+var storeNo = $("input[id='storeNo']").val();
+/*]]>*/
+
+
+		$(function() {
+	 	$( ".list-group-item:contains('주문 내역')").on("click" , function() {
+			$(self.location).attr("href","/admin/blog");
+		});
+	});
+
+		$(function() {
+	 	$( ".list-group-item:contains('상점 정보 수정')").on("click" , function() {
+			$(self.location).attr("href","/store/updateStore?storeNo=10000");
+		});
+	});
+
+		$(function() {
+	 	$( ".list-group-item:contains('개인 정보 수정')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/admin/listComplainAdmin");
+		});
+	});
+	
+
+		$(function() {
+	 	$( ".list-group-item:contains('상품 등록')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/store/addStoreProduct?storeNo=10000");
+		});
+	});
+	
+		$(function() {
+		 	$( ".list-group-item:contains('광고 등록')").on("click" , function() {
+		 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+				$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=1");
+			});
+		});
+		
+		$(function() {
+		 	$( ".list-group-item:contains('지갑')").on("click" , function() {
+		 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+				$(self.location).attr("href","/store/getStoreWallet?storeNo=10000");
+			});
+		});
+	
+
+		$(function() {
+	 	$( ".list-group-item:contains('1:1 문의내역')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=2");
+		});
+	});
+
+
+	
 	//============= "상품 삭제"  Event 연결 =============
 	function fncDeleteStoreProduct(e) {
 		if (!confirm('상품을 삭제하시겠습니까?')) {
@@ -203,7 +262,7 @@ label {
 			success : function(result) {
 				if (result != null) {
 					alert("삭제완료");
-					self.location = "addStoreProduct?storeNo=" + STORENO;
+					self.location = "addStoreProduct?storeNo=10000" 
 				}
 			}
 
@@ -276,7 +335,7 @@ label {
 			success : function(result) {
 				if (result != null) {
 					alert("수정 완료");
-					self.location = "addStoreProduct?storeNo=" + STORENO;
+					self.location = "addStoreProduct?storeNo=10000" 
 				}
 			}
 
@@ -285,16 +344,17 @@ label {
 	}
 
 	//====입력창 추가=====//
-	$(document).ready(
-function() {
-	$('.btn.btn-outline-success')
-							.click(
-	function() {
-		$('#plus')
-					.append(
-	'<form id="inputitem"><div class="form-row"><div class="col-md-3 mb-3"><label for="validationDefault01">상품사진</label> <span class="btn btn-default btn-file"> <input type="file"></span></div><div class="col-md-2 mb-3"><label for="validationDefault02">이름</label> <input type="text" class="form-control" id="validationDefault02" placeholder="이름" required></div><div class="col-md-3 mb-3"><label for="validationDefault01">상품설명</label> <input type="text" class="form-control" id="validationDefault01" placeholder="상품설명" required></div><div class="col-md-2 mb-3"><label for="validationDefault01">원산지</label> <input type="text" class="form-control" id="validationDefault01" placeholder="원산지" required></div><div class="col-md-2 mb-3"></div></div></form>'); // end append                            
-				}); // end click                                            
-		}); // end ready
+	$(document)
+			.ready(
+					function() {
+						$('.btn.btn-outline-success')
+								.click(
+										function() {
+											$('#plus')
+													.append(
+															'<form id="inputitem"><div class="form-row"><div class="col-md-3 mb-3"><label for="validationDefault01"></label> <span class="btn btn-default btn-file"> <input type="file"></span></div><div class="col-md-2 mb-3"><label for="validationDefault02"></label><input type="text" class="form-control" id="validationDefault02" placeholder="이름" required></div><div class="col-md-3 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="validationDefault01" placeholder="상품설명" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="validationDefault01" placeholder="원산지" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label><br><button type="button" id="validationDefault01" class="btn btn-warning">상품등록</button></div></div></div></form>'); // end append                            
+										}); // end click                                            
+					}); // end ready
 </script>
 
 
@@ -307,73 +367,25 @@ function() {
 	<jsp:include page="../layout/top.jsp" />
 	<!-- Header End -->
 
-	<!-- Breadcrumb Section Begin -->
-	<section class="breadcrumb-section set-bg"
-		style="background-color: #F2F2F2">
-		<c:forEach var="store" items="${storeInfo}" begin="0" end="0">
-			<div class="container">
-				<div class="row my-1">
-					<div class="col-4">
-						<div class="bg-white text-black mx-3">
+	<!-- ceoTop Section Begin -->
+	<jsp:include page="../layout/ceoTop.jsp" />	
+	<!-- ceoTop Section End -->
 
-							</br> <strong class="mytop01">${store.user.userName} 사장님</strong> </br> </br>
-							<h6 class="mytop01">진욱이네와 처음 만난 날</h6>
-							<h3 class="mytop01-content">${store.user.regDate}</h3>
-							</br> </br>
-
-						</div>
-					</div>
-
-					<div class="col-4">
-						<div class="bg-white text-black mx-3">
-
-							</br> <strong class="mytop01">진욱페이</strong> </br> </br>
-							<h1 class="mytop01-content">${store.user.jpBalance}원</h1>
-							</br> </br>
-
-						</div>
-					</div>
-
-					<div class="col-4">
-						<div class="bg-white text-black mx-3">
-
-							</br> <strong class="mytop01">${store.storeName}</strong> </br> </br>
-							<div class="btn-group btn-group-toggle" data-toggle="buttons">
-								<label class="btn btn-success btn-sm active"> <input
-									type="radio" name="options" id="option1" checked> 오픈
-								</label> <label class="btn btn-danger btn-sm"> <input
-									type="radio" name="options" id="option2"> 마감
-								</label>
-							</div>
-							<h6 class="mytop01-content">${store.storeAddr}</h6>
-
-							</br> </br>
-
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<!-- /container -->
-		</c:forEach>
-	</section>
-	<!-- Breadcrumb Section End -->
-
-	<!-- Blog Section Begin -->
+	<!-- ceoLeft Section Begin -->
 	<section class="blog spad">
 		<div class="container">
 			<div class="row" style="justify-content: space-around;">
 				<div class="col-xs-4 col-xs-5"
 					style="width: 200px; margin-right: 30px;">
-					<div class="blog__sidebar" style="width: 200px;padding-top: 0px;">
+					<div class="blog__sidebar" style="width: 200px; padding-top: 0px;">
 
 						<div class="blog__sidebar__item">
 
 							<h5 class="text-center" style="margin-bottom: 0px;">
 								<strong>사장님 페이지</strong>
 							</h5>
-							
-							<br/>
+
+							<br />
 
 
 
@@ -382,11 +394,7 @@ function() {
 									class="list-group-item list-group-item-action"
 									aria-current="true">주문 내역</button>
 								<button type="button"
-									class="list-group-item list-group-item-action">상점 정보
-									수정</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">신고 접수
-									목록</button>
+									class="list-group-item list-group-item-action">상점 정보 수정</button>
 								<button type="button"
 									class="list-group-item list-group-item-action" class="addStore">
 									<span class="addStore">개인 정보 수정</span>
@@ -417,7 +425,7 @@ function() {
 
 					</div>
 				</div>
-				<!-- 상품등록 Section Begin -->
+				<!-- 상품등록  Begin -->
 				<div class="shoping-cart spad"
 					style="width: 900px; padding-top: 0px;">
 					<div class="container" style="width: 830px;">
@@ -484,7 +492,7 @@ function() {
 														<button type="button" data-value="${store.product.prodNo}"
 															name="buttons" class="btn btn-light btn-sm"
 															onClick="fncDeleteStoreProduct(this)">X</button> <input
-														type="hidden" id="storeNo" data-value="${store.storeNo}"
+														type="hidden" id="storeNo" name="storeNo" data-store="${store.storeNo}"
 														value="${store.storeNo}" />
 
 													</td>
@@ -508,15 +516,16 @@ function() {
 							</div>
 						</div>
 					</div>
-					<!-- 상품등록 Section End -->
+				
 
-
-
-				</div>
 
 			</div>
+			
+				<!-- 상품등록 End -->
+
+		</div>
 	</section>
-	<!-- Blog Section End -->
+	<!-- ceoLeft Section End -->
 
 	<!-- Footer Begin -->
 	<jsp:include page="../layout/footer.jsp" />

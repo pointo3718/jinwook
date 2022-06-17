@@ -17,6 +17,8 @@ public interface AdminService {
 		
 		public List<Complain> getComplainListAdmin(Complain complain);	// 신고 목록
 		
+		public boolean deleteComplain(int complainNo);	// 신고 목록 삭제
+		
 		public List<User> getBlacklistAdmin(User user);	// 블랙리스트 목록 
 		
 		public boolean	updateBlacklist(Complain complain);	// 블랙리스트 등록 

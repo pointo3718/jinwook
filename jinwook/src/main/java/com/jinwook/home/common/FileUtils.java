@@ -127,10 +127,10 @@ public class FileUtils {
 				file = new File(filePath + storedFileName);
 				multipartFile.transferTo(file);
 				listMap = new HashMap<String, Object>();
-				listMap.put("rcp_no", rcpNo);
-				listMap.put("org_file_name", originalFileName);
-				listMap.put("stored_file_name", storedFileName);
-				listMap.put("file_size", multipartFile.getSize());
+				listMap.put("rcpNo", rcpNo);
+				listMap.put("orgFileName", originalFileName);
+				listMap.put("storedFileName", storedFileName);
+				listMap.put("fileSize", multipartFile.getSize());
 				list.add(listMap);
 			}
 		}
@@ -168,10 +168,10 @@ public class FileUtils {
 				file = new File(filePath + storedFileName);
 				multipartFile.transferTo(file);
 				listMap = new HashMap<String, Object>();
-				listMap.put("order_no", orderNo);
-				listMap.put("org_file_name", originalFileName);
-				listMap.put("stored_file_name", storedFileName);
-				listMap.put("file_size", multipartFile.getSize());
+				listMap.put("orderNo", orderNo);
+				listMap.put("orgFileName", originalFileName);
+				listMap.put("storedFileName", storedFileName);
+				listMap.put("fileSize", multipartFile.getSize());
 				list.add(listMap);
 			}
 		}

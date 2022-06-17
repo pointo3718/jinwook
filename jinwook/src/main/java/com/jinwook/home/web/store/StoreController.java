@@ -21,6 +21,7 @@ import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
+import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.store.StoreService;
 
 
@@ -46,7 +47,9 @@ public class StoreController {
 //	}
 	
 	@GetMapping(value = "updateStore")
-	public String updateStore(@RequestParam("storeNo") int storeNo, Model model) {
+	public String updateStore(@RequestParam("storeNo") int storeNo, Model model, HttpSession session) {
+		
+		User user = (User) session.getAttribute("user");
 		
 		Store store1 = new Store();
 		
@@ -67,7 +70,11 @@ public class StoreController {
 	}
 	
 	@GetMapping(value = "addStoreProduct")
-	public String addStoreProduct(@RequestParam("storeNo") int storeNo, Model model) {
+	public String addStoreProduct(@RequestParam("storeNo") int storeNo, Model model, HttpSession session) {
+
+		
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("user", user);
 		
 		Store store1 = new Store();
 		
@@ -179,8 +186,10 @@ public class StoreController {
 	
 	
 	@GetMapping(value = "getStoreWallet")
-	public String getStoreWallet(@RequestParam("storeNo") int storeNo, Store store, Model model) {
+	public String getStoreWallet(@RequestParam("storeNo") int storeNo, Store store, Model model, HttpSession session) {
 
+		User user = (User) session.getAttribute("user");
+		
 		List<Store> getStoreRefund = storeService.getStoreRefund(storeNo);
 		model.addAttribute("getStoreRefund", getStoreRefund);
 		
@@ -207,7 +216,9 @@ public class StoreController {
 	
 	
 	@GetMapping(value = "getCouponList")
-	public String getCouponList(@RequestParam("userId") String userId, Model model) {
+	public String getCouponList(@RequestParam("userId") String userId, Model model, HttpSession session) {
+		
+		User user = (User) session.getAttribute("user");
 		
 		List<Coupon> couponList = storeService.getCouponList(userId);
 		model.addAttribute("couponList", couponList);

@@ -5,10 +5,19 @@
 	<resultMap type="store" id="storeSelectMap">
 	   <result property="storeNo"  column="store_no"    jdbcType="INTEGER"/>
 	   <result property="storeName"  column="store_name"    jdbcType="CHAR"/>
-	   <result property="userId"  column="user_id"    jdbcType="CHAR"/>
+	   <result property="storeType"  column="store_type"    jdbcType="CHAR"/>
+	   <result property="userId"  column="user_id"    jdbcType="VARCHAR"/>
 	   <result property="storeAddr"  column="store_addr"    jdbcType="VARCHAR"/>
 	   <result property="storePhone"  column="store_phone"    jdbcType="VARCHAR"/>   
 	   <result property="user.userName"  column="user_name"    jdbcType="CHAR"/>      
+	</resultMap>
+	
+	<resultMap type="user" id="userSelectMap">
+	   <result property="storeNo"  column="store_no"    jdbcType="INTEGER"/>	
+	   <result property="storeNo"  column="store_no"    jdbcType="INTEGER"/>	
+	   <result property="storeNo"  column="store_no"    jdbcType="INTEGER"/>	
+	   <result property="storeNo"  column="store_no"    jdbcType="INTEGER"/>	
+	
 	</resultMap>
 
 	<sql id="usersColumns">
@@ -71,7 +80,7 @@
 	<!-- 상점 목록 -->
 	<select id="getStoreListAdmin" parameterType="Criteria" resultMap="storeSelectMap">
 		SELECT
-			 s.store_no, u.user_name, s.store_name, s.user_id, s.store_addr, s.store_phone
+			 s.store_no, u.user_name, s.store_name, s.user_id, s.store_addr, s.store_phone, s.store_type
 		FROM
 			store s, users u
 		WHERE 
@@ -89,6 +98,8 @@
 			COUNT(*)
 		FROM
 			store
+		WHERE 
+			store_status = true
 	</select>
 	
 	
@@ -97,14 +108,15 @@
 			INSERT INTO complain 
 			VALUES (
 				  NULL
-				, #{userId} <!-- 세션으로 받기 -->
-				, #{complainId} <!-- 해당 게시글 통해 받기 -->
+				, #{userId} <!-- 신고당한 아이디 -->
+				, #{complainId} <!-- 신고한 아이디 (세션)-->
 				, SYSDATE()
 				, #{complainCode}
 				, #{complainTarget} <!-- reqNo, commentNo,  -->
 				, #{complainTargetNo} <!-- 컬럼 추가해야 할듯 ... reqNo, commentNo, reviewNo 받는 -->
+				, false
+				, false
 			)
-			
 			<!-- 해당 게시글로 넘어갈 수 있는 메서드 필요... board에 있을듯 ... -->
 	</insert>
 
@@ -115,6 +127,8 @@
 			 *
 		FROM
 			complain
+		WHERE
+			complain_delete_yn = false
 		ORDER BY 
 			complain_no
 		LIMIT
@@ -128,6 +142,8 @@
 			COUNT(*)
 		FROM
 			complain
+		WHERE
+			complain_delete_yn = false
 	</select>
 	
 	<!-- 대기중인 신고 목록 개수 -->
@@ -138,8 +154,19 @@
 			complain
 		WHERE
 			complain_status = 0
+			AND
+			complain_delete_yn = false
 	</select>
 	
+	<!-- 신고 목록 삭제 -->
+	<update id="deleteComplain" parameterType="int">
+		UPDATE
+			complain
+		SET
+			complain_delete_yn = true
+		WHERE 
+			complain_no = ${complainNo}
+	</update>
 	
 	<!-- 블랙리스트 등록 -->
 	<update id="updateBlacklist" parameterType="Complain">
@@ -188,6 +215,8 @@
 			user_bye_status = 0
 			AND 
 			u.blacklist_status = true
+		GROUP BY
+			u.user_id
 	</select>
 	
 	
