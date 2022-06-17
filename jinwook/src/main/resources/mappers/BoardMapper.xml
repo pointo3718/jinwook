@@ -145,6 +145,22 @@
 		)
 	</insert>
 	
+	<insert id="insertRecipeFile" parameterType="hashMap">
+		INSERT INTO attach(
+			attach_no,
+			rcp_no,
+			org_file_name,
+			stored_file_name,
+			file_size
+		)VALUES(
+			#{attachNo},
+			#{rcpNo},
+			#{orgFileName},
+			#{storedFileName},
+			#{fileSize}
+		)
+    </insert>
+	
 	<insert id="insertBoardFile" parameterType="hashMap">
 		INSERT INTO attach(
 			attach_no,
@@ -259,7 +275,7 @@
 		AND (board_inq_status = false OR board_inq_status = true)
 	</select> -->
 	
-	<!-- 1:1문의 답변대기중 -> 답변완료 -->
+	<!-- 1:1문의 답변(댓글)대기중 -> 답변(댓글)완료 -->
 	<update id="updateBoardInqStatus" parameterType="Board">
 		UPDATE board
 		SET

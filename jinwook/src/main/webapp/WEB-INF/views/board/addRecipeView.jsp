@@ -24,17 +24,22 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
- 		body {
-            padding-top : 50px;
-        }
-        .select_img img { margin:20px 0; }
+		body {
+      min-height: 100vh;
+
+      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
+      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
+    }
      </style>
      
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
 $(function() {
-	$("button.btn.btn-primary").on("click", function() {
+	$("button.btn.btn-sucess").on("click", function() {
 		fncAddRecipe();
 	});
 });
@@ -59,8 +64,8 @@ function fn_addFile() {
 </head>
 
 <body>
-	<div class="container">
-		<h1 class="bg-primary text-center">레시피 등록</h1>
+	<div class="container" style="height: auto; width: 100%;">
+		<h1 class="bg-success text-center">레시피 등록</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form id="MultiUpload" action="addRecipe" method="post" enctype="multipart/form-data">
@@ -74,12 +79,15 @@ function fn_addFile() {
 		<hr/><br/><br/>    
 		<div class="form-group">
 			<label for="rcpContent" class="col-sm-offset-1 col-sm-3 control-label">레시피 내용</label>
-		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="rcpContent" name="rcpContent">
+		    <div class="col-sm-5">
+		    <textarea id="summernote" class="form-control" rows="5" id="rcpContent" name="rcpContent"></textarea>
 		       <span id="helpBlock" class="help-block"></span>
 		    </div>
 		   </div>
 		<hr/><br/>
+		<hr/><br/>
+		<hr/><br/>
+		
 		<div class="form-group">
 			<label for="rcpIngredient" class="col-sm-offset-1 col-sm-3 control-label">레시피 재료</label>
 		    <div class="col-sm-3">
@@ -104,14 +112,13 @@ function fn_addFile() {
 		      	<div id="d_file">
 		      	
 		      	</div>
-		      	<input type="file" id="files" name="files" multiple="multiple" placeholder="파일 선택" class="form-control" >
-		      	<input type="submit" value="upload">
+		      	<input type="file" id="file" name="file" placeholder="파일 선택" class="form-control" >
 		    </div>
 		  </div>
 		<hr/><br/><br/><br/>
 		<div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="submit" class="btn btn-primary">등 &nbsp;록</button>
+		      <button type="submit" class="btn btn-success">등 &nbsp;록</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
 		    </div>
 		  </div>

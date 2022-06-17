@@ -89,7 +89,7 @@ function fn_addFile(){
 		</div>
 
 		<!-- form Start /////////////////////////////////////-->
-		<form action="board/updateBoardInquiry" method="post" class="form-horizontal">
+		<form action="board/updateBoardInquiry" method="post" class="form-horizontal" enctype="multipart/form-data">
 			<input type="hidden" id="fileNoDel" name="fileNoDel[]" value=""> 
 			<input type="hidden" id="fileNameDel" name="fileNameDel[]" value="">
 					
@@ -115,13 +115,13 @@ function fn_addFile(){
 						
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="file" class="col-sm-offset-1 col-sm-3 control-label">1:1문의 사진 수정</label>
 			<tr>
-				<td id="fileIndex"><c:forEach var="file" items="${file}"
-						varStatus="var">
+				<td id="fileIndex"><c:forEach var="file" items="${file}" varStatus="var">
 						<div>
-							<input type="hidden" id="attach_no" name="attach_no_${var.index}"
-								value="${file.attach_no }"> <input type="hidden"
-								id="FILE_NAME" name="FILE_NAME" value="attach_no_${var.index}">
+							<input type="hidden" id="attach_no" name="attach_no_${var.index}"value="${file.attach_no}"> 
+							<input type="hidden" id="FILE_NAME" name="FILE_NAME" value="attach_no_${var.index}">
 							<a href="#" id="fileName" onclick="return false;">${file.org_file_name}</a>(${file.file_size}kb)
 							<button id="fileDel"
 								onclick="fn_del('${file.attach_no}','attach_no_${var.index}');"
@@ -130,8 +130,6 @@ function fn_addFile(){
 						</div>
 					</c:forEach></td>
 			</tr>
-			<div class="form-group">
-				<label for="file" class="col-sm-offset-1 col-sm-3 control-label">1:1문의 사진 수정</label>
 				<div class="col-sm-4">
 					<button type="button" class="fileAdd_btn">파일추가</button>
 				</div>

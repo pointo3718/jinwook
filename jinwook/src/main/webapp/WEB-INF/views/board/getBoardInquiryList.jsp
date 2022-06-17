@@ -162,8 +162,8 @@ function fncDeleteInquiry(e) {
       <div class="row">
 
          <div class="col-md-6 text-left">
-            <p class="text-primary">전체 ${resultPage.totalCount } 건수, 현재
-               ${resultPage.currentPage} 페이지</p>
+            <p class="text-primary">${resultPage.totalCount }
+               ${resultPage.currentPage}</p>
          </div>
 
          <div class="col-md-6 text-right">

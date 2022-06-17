@@ -1,17 +1,22 @@
 package com.jinwook.home.web.store;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
+import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
 import com.jinwook.home.service.store.StoreService;
 
@@ -70,15 +76,34 @@ public class StoreRestController {
 			
 	  }
 	  
-		@GetMapping(value = "updateStore/{storeNo}")
-		public JsonObject updateStore(@PathVariable(value = "storeNo", required = false) int storeNo ,@RequestBody Store store) {
+		@PostMapping(value = "updateStore/{storeNo}/{storeIntro}/{storePhone}/{storeImage}/{startTime}/{endTime}/{holiday}/{bank}/{accNo}")
+		public JsonObject updateStore(@PathVariable(value = "storeNo", required = false) int storeNo,
+									@PathVariable(value = "storeIntro", required = false) String storeIntro,
+									@PathVariable(value = "storePhone", required = false) String storePhone,
+									@PathVariable(value = "storeImage", required = false) String storeImage,
+									@PathVariable(value = "startTime", required = false) Time startTime,
+									@PathVariable(value = "endTime", required = false) Time endTime,
+									@PathVariable(value = "holiday", required = false) String holiday,
+									@PathVariable(value = "bank", required = false) String bank,
+									@PathVariable(value = "accNo", required = false) String accNo) {
 			
 			JsonObject jsonObj = new JsonObject();
+			
+			Store store = new Store();
 
 			try {
 				if (store != null) {
 					System.out.println("product 객체에 값 넣어줌");
 					store.setStoreNo(storeNo);
+					store.setStoreIntro(storeIntro);
+					store.setStorePhone(storePhone);
+					store.setStoreImage(storeImage);
+					store.setStartTime(startTime);
+					store.setEndTime(endTime);
+					store.setHoliday(holiday);
+					store.setBank(bank);
+					store.setAccNo(accNo);
+					
 				}
 				
 				System.out.println("컨트롤러에서의 store :: "+store);
@@ -257,15 +282,19 @@ public class StoreRestController {
 		return jsonObj;
 	}
 	
-	   @PostMapping( value="/getStoreWallet/{storeNo}")
+	   @GetMapping( value="/getStoreWallet/{storeNo}/{orderDateStart}/{orderDateEnd}")
 	   public JsonObject getStoreWallet(@PathVariable(value="storeNo",required = false) int storeNo,
-			   							@PathVariable(value="orderDateStart",required = false) Date orderDateStart,
-			   							@PathVariable(value="orderDateEnd",required = false) Date orderDateEnd) throws Exception{
+			   							@PathVariable(value="orderDateStart",required = false) String orderDateStart,
+			   							@PathVariable(value="orderDateEnd",required = false) String orderDateEnd, HttpSession session) throws Exception{
 	      
-		   	  Store store = new Store();
+			  User user = (User) session.getAttribute("user");
+			  
+			  Store store= new Store();
+
 		   	  store.setStoreNo(storeNo);
 		   	  store.setOrderDateStart(orderDateStart);
 		   	  store.setOrderDateEnd(orderDateEnd);
+		   	  
 		   
 		      System.out.println("/store/getStoreWallet : GET ");
 		      
@@ -282,6 +311,20 @@ public class StoreRestController {
 
 		      return jsonObj;
 		   }
+	
+//	@RequestMapping( value="json/getStoreWallet/{storeNo}/{orderDateStart}/{orderDateEnd}/", method=RequestMethod.GET )
+//	public Store getStoreWallet( @PathVariable int storeNo,  @PathVariable String ororderDateStart,  @PathVariable String orderDateEnd ) throws Exception{
+//		
+//		System.out.println("/store/json/getStoreWallet : GET");
+//		
+//		Store store= new Store();
+//	   	  store.setStoreNo(storeNo);
+//	   	  store.setOrderDateStart(Date.valueOf(orderDateStart));
+//	   	  store.setOrderDateEnd(Date.valueOf(orderDateEnd));
+//		
+//		//Business Logic
+//		return storeService.getStoreWallet(storeNo);
+//	}
 	   
 	   
 //		@PostMapping(value = "addOrdersCart/{prodNo}")

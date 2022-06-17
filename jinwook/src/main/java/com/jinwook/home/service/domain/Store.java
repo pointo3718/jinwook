@@ -35,8 +35,8 @@ public class Store extends CommonDTO {
    private String bank;
    private int totalEarn;
    private boolean isOpen;
-   private Date orderDateStart;
-   private Date orderDateEnd;
+   private String orderDateStart;
+   private String orderDateEnd;
    
    
    public Store(){
