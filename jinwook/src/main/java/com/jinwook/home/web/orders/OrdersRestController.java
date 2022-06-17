@@ -43,24 +43,21 @@ public class OrdersRestController {
 	}
 	
 	@GetMapping(value = "updateOrdersCart/{cartNo}/{prodCount}")
-	public int updateOrdersCart(@RequestBody Cart cart,HttpSession session,@PathVariable(value="cartNo", required=false) int cartNo,
-			@PathVariable(value="prodCount",required=false) int prodCount) {
+	public int updateOrdersCart(HttpSession session,@PathVariable(value="cartNo", required=false) int cartNo,
+			@PathVariable(value="prodCount",required=false) int prodCount) throws Exception{
 		
-		System.out.println("/orders/updateOrdersCart : POST");
+		System.out.println("/orders/updateOrdersCart : GET");
+		
+		Cart cart = new Cart();
 		String userid = ((User) session.getAttribute("user")).getUserId();
 		
-		int count = cart.getProdCount();
-		cart.setProdCount(count+1);
 		cart.setUserId(userid);
 		cart.setCartNo(cartNo);
 		cart.setProdCount(prodCount);
 		int result = ordersService.updateOrdersCart(cart);
-		System.out.println(cart);
-		System.out.println(result);
+		System.out.println(result+"update cart");
 		
 		return result;
-
-		
 	}
 	
 	@GetMapping(value = "deleteOrdersCart/{cartNo}")
