@@ -364,7 +364,7 @@ a{
 	background-color: #7fad39;
 	font-size: 12px;
 	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
-				}
+}
 </style>
 
 
@@ -375,6 +375,135 @@ a{
 	<!-- Header Begin -->
 	<jsp:include page="../layout/top.jsp" flush="true" />
 	<!-- Header End -->
+	
+	<!-- Modal2 Begin -->
+    <!-- 회원 상세 modal -->
+    <div class="modal" id="myModal2" aria-hidden="true" style="display: none; z-index: 1060;">
+    	<div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismis style="margin-left: 0px; text-align: center;">회원 상세<s="modal" aria-label="Close">
+	        </button>
+            </div><div class="container"></div>
+            <div class="modal-body">
+          
+         <div class="col-md-10 order-md-1">
+          <div class="col-md-12 mb-3">
+            <label for="Name">아이디</label>
+            <input type="text" class="form-control" name="userid" placeholder="" value="" readonly>
+          </div>
+          
+         <div class="container">  
+         	<div class="row forModal">
+          	<div class="col-md-6 mb-3">
+            	<label for="userId">이름</label>
+            	<input type="text" class="form-control" name="username" placeholder="" value="" readonly>
+         	 </div>
+          <div class="col-md-6 mb-3">
+           	 	<label for="userId">닉네임</label>
+           	 	<input type="text" class="form-control" name="nickname" placeholder="" value="" readonly>
+          </div>
+			</div>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label for="Name">이메일</label>
+            <input type="text" class="form-control" name="email" placeholder="" value="" readonly>
+          </div>
+
+        <div class="container">  
+         	<div class="row forModal">
+          	<div class="col-md-6 mb-3">
+            	<label for="userId">생년월일</label>
+            	<input type="text" class="form-control" name="birth" placeholder="" value="" readonly>
+         	 </div>
+          <div class="col-md-6 mb-3">
+           	 	<label for="userId">성별</label>
+           	 	<input type="text" class="form-control" name="gender" placeholder="" value="" readonly>
+          </div>
+			</div>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label for="Name">전화번호</label>
+            <input type="text" class="form-control" name="phone" placeholder="" value="" readonly>
+          </div>
+
+	 	<div class="col-md-12 mb-3">
+            <label for="Name">구분</label>
+            <input type="text" class="form-control" name="role" placeholder="" value="" readonly>
+         </div>
+            
+         <div class="col-md-12 mb-3">
+            <label for="Name">가입일자</label>
+            <input type="text" class="form-control" name="regdate" placeholder="" value="" readonly>
+         </div>
+           
+            <div class="modal-footer">
+              <a href="#" data-dismiss="modal" class="btn">닫기</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    </div>
+	<!-- Modal2 End -->
+	
+
+	<!-- Modal3 Begin -->
+    <!-- 광고 요청 상세 modal -->
+    <div class="modal" id="myModal3" aria-hidden="true" style="display: none; z-index: 1060;">
+    	<div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismis style="margin-left: 0px; text-align: center;">광고 요청<s="modal" aria-label="Close">
+	        </button>
+            </div><div class="container"></div>
+            <div class="modal-body">
+          
+         <div class="col-md-10 order-md-1">
+          <div class="col-md-12 mb-3">
+            <label for="Name">제목</label>
+            <input type="text" class="form-control" name="userid" placeholder="" value="" readonly>
+          </div>
+          
+         <div class="container">  
+         	<div class="row forModal">
+          	<div class="col-md-6 mb-3">
+            	<label for="userId">상점 이름</label>
+            	<input type="text" class="form-control" name="username" placeholder="" value="" readonly>
+         	 </div>
+          <div class="col-md-6 mb-3">
+           	 	<label for="userId">사장님 이름</label>
+           	 	<input type="text" class="form-control" name="nickname" placeholder="" value="" readonly>
+          </div>
+			</div>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label for="Name">사진</label>
+			<img src="${path}/resources/static/img/footerlogo.png" class="img-thumbnail" alt="...">          
+		</div>
+
+        <div class="container">  
+         	<div class="row forModal">
+          	<div class="col-md-6 mb-3">
+            	<label for="userId">내용</label>
+            	<input type="text" class="form-control" name="birth" placeholder="" value="" readonly>
+         	 </div>
+			</div>
+        </div>
+
+            <div class="modal-footer">
+              <a href="#" data-dismiss="modal" class="btn">닫기</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    </div>
+	<!-- Modal3 End -->
+
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-section set-bg"
@@ -384,7 +513,7 @@ a{
 				<div class="col-4">
 					<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">새로운 문의내역</strong> </br> </br>
+						</br> <strong class="mytop01">새로운 문의내역 &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></strong> </br> </br>
 						<h1 class="mytop01-content " id="inquiry"><span class="countinq"></span></h1>
 						건 </br> </br>
 
@@ -394,7 +523,7 @@ a{
 				<div class="col-4">
 					<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">새로운 요청접수</strong></br> </br>
+						</br> <strong class="mytop01">새로운 요청접수 &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></strong></br> </br>
 						<h1 class="mytop01-content " id="request"><span class="countall"></span></h1>
 						건 </br> </br>
 					</div>
@@ -403,7 +532,7 @@ a{
 				<div class="col-4">
 					<div class="bg-white text-black mx-3">
 
-						</br> <strong class="mytop01">새로운 신고접수</strong> </br> </br>
+						</br> <strong class="mytop01">새로운 신고접수 &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></strong> </br> </br>
 						<h1 class="mytop01-content" id="compl"><span class="countcompl"></span></h1>
 						건 </br> </br>
 
@@ -508,18 +637,22 @@ a{
 					</h4>
 
 					<table class="table table-hover"
-						style="width: 730px; heigh: 300px;">
+						style="width: 730px; heigh: 300px; font-size: small;">
 						
 						<thead class="userlisthead">
 							<tr class="userinfohead">
-								<th scope="col">#</th>
-								<th scope="col">ID</th>
+								<th scope="col">상점이름</th>
+								<th scope="col">사장님 ID</th>
 								<th scope="col">이름</th>
-								<th scope="col">전화번호</th>
-								<th scope="col">구분</th>
-								<th scope="col">&nbsp;</th>
-								
-								
+								<c:if test="${param.reqCode eq 3}">
+								<th scope="col">환급 금액</th>
+								</c:if>
+								<c:if test="${param.reqCode eq 4}">
+								<th scope="col">요청 제목</th>
+								</c:if>
+								<th scope="col">날짜</th>
+								<th scope="col">승인여부</th>
+								<th scope="col">&nbsp;</th>							
 							</tr>
 						</thead>
 
@@ -532,12 +665,20 @@ a{
 								<tr>
 									<c:if test="${request.reqDeleteYn == false}">
 									
-									<th scope="row">${ i }</th>
+									<th scope="row">${request.store.storeName}</th>
 									<td align="left"
 										style="color: forestgreen"><a
-										href="/admin/getUserAdmin?userId=${request.reqNo}">${request.reqNo}</a></td>
+										id="userdetail" data-toggle="modal" href="#myModal2" data-userid="${request.userId}">${request.userId}</a></td>
 									<td align="left">${request.user.userName}</td>
-									<td align="left">${request.store.storeNo}</td>
+									
+									<c:if test="${param.reqCode eq 3}">
+									<td align="left"><strong style="color: red;">${request.refundMoney}</strong></td>
+									</c:if>
+									<c:if test="${param.reqCode eq 4}">
+									<td align="left"><a style="color: black;" id="addetail" data-toggle="modal" href="#myModal3" data-userid="${request.userId}"><strong>${request.adTitle}</strong></a></td>
+									</c:if>
+									
+									<td align="left">${request.reqDate}</td>
 									
 									<c:if test="${request.reqStatus eq '1' and param.reqCode eq '1'}">
 									<td style="padding-top: 5px; padding-bottom: 5px;">
@@ -570,9 +711,15 @@ a{
 									</td>
 									</c:if>
 									
-									<c:if test="${request.reqStatus ne '1'}">
+									<c:if test="${request.reqStatus eq '2'}">
 									<td>
-									&nbsp;
+									<span style="color: blue;">승인</span> &nbsp;(${request.resDate})
+									</td>
+									</c:if>
+									
+									<c:if test="${request.reqStatus eq '3'}">
+									<td>
+									<span style="color: red;">거절</span> &nbsp;(${request.resDate})
 									</td>
 									</c:if>
 									
@@ -797,12 +944,10 @@ $(document).ready(function(){
 
 ////////////////// 목록 삭제 REST ///////////////////////
 	function deleteRequest(REQNO) {
-
-
+	swal("요청을 삭제하시겠습니까?","","warning");
 	var uri = "/request/deleteRequest/" + REQNO;
 	
 	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
-
 
 		$.ajax({
 			url: uri,
@@ -827,23 +972,35 @@ $(document).ready(function(){
 		})
 }
 
-////////////////// 목록 삭제 REST ////////////////////////
-/* var ADD = $("span#add").val();
-var DELETE = $("#delete").val;
-var REFUND = $("#refund").val;
-var AD = $("#ad").val;
+////////////////유저 상세 REST 시작 /////////////////
+	var USERID="";
 
-var ALL = ADD + DELETE + REFUND + AD;
+	function getUser(){
+	        	
+		  var uri = "/admin/getUserRest/"+USERID;
+			   $.get(uri, function(response) { 
+				 $('input[name=userid]').attr('value',`\${response.userId}`);
+				 $('input[name=username]').attr('value',`\${response.userName}`);
+				 $('input[name=nickname]').attr('value',`\${response.nickName}`);
+				 $('input[name=email]').attr('value',`\${response.email}`);
+				 $('input[name=birth]').attr('value',`\${response.birth}`);
+				 $('input[name=gender]').attr('value',`\${response.gender}`);
+				 $('input[name=phone]').attr('value',`\${response.phone}`);
+				 $('input[name=role]').attr('value',`\${response.role}`);
+				 $('input[name=regdate]').attr('value',`\${response.regDate}`);
+			   }, "json");
+			}
 
-	$(function() {
-			countAll();
-		});
-	
-		function countAll() {
-			console.log(ADD);
-			console.log(DELETE);
-			$("#request").text(ADD);
-		} */
+	//모달 창 오픈할 때 해당 유저아이디 전달 //
+	$(document).ready(function() {     
+
+		$('#myModal2').on('show.bs.modal', function(event) {          
+			USERID = $(event.relatedTarget).data('userid');
+		    getUser();
+
+		 });
+	});
+	//////////////// 유저 상세 REST 끝   /////////////////
 
 </script>
 
