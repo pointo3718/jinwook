@@ -213,7 +213,7 @@ $(".modify_btn").click(function(){
 		</div>
 			<br><br>
 		<div class="text-center " style="margin-right:190px; ">
-		
+		 <input id='userId' type='hidden' name='userId' value='${param.userId}'>
 		<label for="password " style="font-size:15px; " >새 비밀번호 등록</label>	
 		</div>
 			<div class="aaa " style="font-size:15px;">

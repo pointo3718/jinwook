@@ -104,7 +104,7 @@
         url:"findPasswordPhoneSend?phone=" + phone+"&userId="+userId,
         cache : false,
         success:function(data){
-        	/* alert("asdas"+data) */
+        	alert("asdas"+data) 
         	if(data == "error"){
 				swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
         		
@@ -139,7 +139,7 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 			   
 			}).then(function(){
 			
-		self.location = "updatePassword";
+		self.location = "updatePasswordView";
 		})
         }
         else {
