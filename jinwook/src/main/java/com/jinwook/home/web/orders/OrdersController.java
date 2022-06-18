@@ -1,5 +1,6 @@
 package com.jinwook.home.web.orders;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -47,7 +48,7 @@ public class OrdersController {
       cart.setUserId(userid);
       cart.setOrders(orders);
       List<Cart> getCartList = ordersService.getOrdersCartList(cart);
-      
+      System.out.println(getCartList);
       model.addAttribute("getCartList", getCartList);
       System.out.println();
       return "orders/addOrders";
@@ -64,8 +65,8 @@ public class OrdersController {
      
       orders.setCart(cart);
       orders.setUser(user);
-      ZoneId zoneId = ZoneId.of("Asia/Seoul");
-      orders.setPickupTime(LocalDateTime.now(zoneId).plusMinutes(plusTime));
+//      ZoneId zoneId = ZoneId.of("Asia/Seoul");
+//      orders.setPickupTime(LocalDateTime.now(zoneId).plusMinutes(plusTime));
       
       System.out.println(orders);
       ordersService.addOrders(orders);
