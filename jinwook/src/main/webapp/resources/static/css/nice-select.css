@@ -87,6 +87,7 @@
       line-height: 34px;
       min-height: 34px; }
   .nice-select .list {
+  	height: 150px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 0 1px rgba(68, 68, 68, 0.11);
@@ -136,3 +137,7 @@
 
 .no-csspointerevents .nice-select.open .list {
   display: block; }
+
+  
+  .list{overflow-y: auto !important; -ms-overflow-style: none; scrollbar-width: none; }
+.list::-webkit-scrollbar {display: none; }

@@ -184,6 +184,7 @@ label {
 	display: block;
 }
 
+<<<<<<< HEAD
 .img_wrap {
 	width: 300px;
 	margin-top: 50px;
@@ -192,6 +193,8 @@ label {
 .img_wrap img {
 	max-width: 100%;
 }
+=======
+>>>>>>> refs/remotes/origin/master
 </style>
 
 <script type="text/javascript">

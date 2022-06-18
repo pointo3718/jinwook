@@ -1,6 +1,7 @@
 package com.jinwook.home.service.domain;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,7 +13,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Orders extends CommonDTO 	{
+public class Orders extends CommonDTO{
 
 	private Store store;			//상점
 	private User user;				//유저		|유저(세트로 위 주석 받아사용 예정)
@@ -24,7 +25,7 @@ public class Orders extends CommonDTO 	{
 	private int orderNo;			//주문번호		|주문
 	private Date orderDate;			//주문날짜		|주문
 	private int plusTime;			//픽업시간인int	|주문
-	private LocalDateTime pickupTime;	//픽업시간형식	|주문
+	//private LocalDateTime pickupTime;	//픽업시간형식	|주문
 	private String orderReq;		//주문요청		|주문
  	private String orderStatus;		//주문상태		|주문
  	private int finalPrice;			//실결제금액	|주문(회원주문시 쿠폰dc,등급dc 차감액)
@@ -32,7 +33,7 @@ public class Orders extends CommonDTO 	{
 	private int orderPrice;			//주문금액		|장바구니
 	private String reviewTitle;		//리뷰제목		|주문리뷰
 	private String reviewContent;	//리뷰내용		|주문리뷰
-	private LocalDate reviewDate;	//리뷰날짜		|주문리뷰
+	//private LocalDate reviewDate;	//리뷰날짜		|주문리뷰
 	private double reviewStar;			//별점		|주문리뷰
 	private String reviewImg1;		//리뷰사진 1	|주문리뷰
 	private String reviewImg2;		//리뷰사진 2	|주문리뷰
@@ -43,5 +44,4 @@ public class Orders extends CommonDTO 	{
 	public Orders() {
 		// TODO Auto-generated constructor stub
 	}
-
 }

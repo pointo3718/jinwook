@@ -87,7 +87,7 @@
     </tbody>
       
 </table>
-
+</form>
 
 <jsp:include page="../common/pageNavigator_new.jsp"/>
 </body>
