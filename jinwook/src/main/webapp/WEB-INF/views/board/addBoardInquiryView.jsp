@@ -59,8 +59,19 @@ function fncAddInquiry() {
 var cnt = 1;
 function fn_addFile() {
 	$("#d_file").append("<br>" + "<input type='file' name='file'" + cnt +"' />");
-}
+} 
 
+/* function fn_addFile(){
+	var fileIndex = 1;
+	//$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"<button type='button' style='float:right;' id='fileAddBtn'>"+"추가"+"</button></div>");
+	$(".fileAdd_btn").on("click", function(){
+		$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>");
+	});
+	$(document).on("click","#fileDelBtn", function(){
+		$(this).parent().remove();
+		
+	});
+} */
 
 
 </script>
@@ -120,7 +131,7 @@ function fn_addFile() {
 								</div>
 							</div>
 							<br>
-			<tr>
+<%-- 			<tr>
 							<td id="fileIndex"><c:forEach var="file" items="${file}" varStatus="var">
 							<div>
 							<input type="hidden" id="attach_no" name="attach_no_${var.index}"value="${file.attach_no}"> 
@@ -132,13 +143,13 @@ function fn_addFile() {
 							<br>
 						</div>
 					</c:forEach></td>
-			</tr>
+			</tr> --%>
 							<div class="form-group">
 								<label for="file" class="col-sm-offset-1 col-sm-3 control-label">파일 업로드</label>
 								<div class="col-sm-3">
-									<input type="file" id="file" name="file" placeholder="파일 선택"
+									<input multiple="multiple" type="file" id="file" name="file" placeholder="파일 선택"
 										class="form-control">
-									 <input type="button" class="form-control" value="파일 추가" onclick="fn_addFile()"><br>
+									<button class="fileAdd_btn" type="button" onclick="fn_addFile()">파일추가</button>		
 		      						<div id="d_file">
 		      	
 		      						</div>

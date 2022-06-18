@@ -452,7 +452,7 @@ a{
 
 	<!-- Modal3 Begin -->
     <!-- 광고 요청 상세 modal -->
-    <div class="modal" id="myModal3" aria-hidden="true" style="display: none; z-index: 1060;">
+    <div class="modal" id="myModal4" aria-hidden="true" style="display: none; z-index: 1060;">
     	<div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -503,6 +503,60 @@ a{
     </div>
     </div>
 	<!-- Modal3 End -->
+	
+	<!-- Modal4 Begin -->
+    <!-- 상점등록 상세 modal -->
+    <div class="modal" id="myModal3" aria-hidden="true" style="display: none; z-index: 1060;">
+    	<div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismis style="margin-left: 0px; text-align: center;">광고 요청<s="modal" aria-label="Close">
+	        </button>
+            </div><div class="container"></div>
+            <div class="modal-body">
+          
+         <div class="col-md-10 order-md-1">
+          <div class="col-md-12 mb-3">
+            <label for="Name">제목</label>
+            <input type="text" class="form-control" name="userid" placeholder="" value="" readonly>
+          </div>
+          
+         <div class="container">  
+         	<div class="row forModal">
+          	<div class="col-md-6 mb-3">
+            	<label for="userId">상점 이름</label>
+            	<input type="text" class="form-control" name="username" placeholder="" value="" readonly>
+         	 </div>
+          <div class="col-md-6 mb-3">
+           	 	<label for="userId">사장님 이름</label>
+           	 	<input type="text" class="form-control" name="nickname" placeholder="" value="" readonly>
+          </div>
+			</div>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label for="Name">사진</label>
+			<img src="${path}/resources/static/img/footerlogo.png" class="img-thumbnail" alt="...">          
+		</div>
+
+        <div class="container">  
+         	<div class="row forModal">
+          	<div class="col-md-6 mb-3">
+            	<label for="userId">내용</label>
+            	<input type="text" class="form-control" name="birth" placeholder="" value="" readonly>
+         	 </div>
+			</div>
+        </div>
+
+            <div class="modal-footer">
+              <a href="#" data-dismiss="modal" class="btn">닫기</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    </div>
+	<!-- Modal4 End -->
 
 
 	<!-- Breadcrumb Section Begin -->
@@ -664,8 +718,12 @@ a{
 								<c:set var="i" value="${ i+1 }" />
 								<tr>
 									<c:if test="${request.reqDeleteYn == false}">
-									
-									<th scope="row">${request.store.storeName}</th>
+									<c:if test="${param.reqCode eq 1}">
+									<th scope="row"><a id="userdetail" data-toggle="modal" href="#myModal4" data-userid="${request.userId}"> ${request.store.storeName} </a></th>
+									</c:if>
+									<c:if test="${param.reqCode ne 1}">
+									<th scope="row">${request.store.storeName} </th>
+									</c:if>
 									<td align="left"
 										style="color: forestgreen"><a
 										id="userdetail" data-toggle="modal" href="#myModal2" data-userid="${request.userId}">${request.userId}</a></td>
@@ -1000,7 +1058,7 @@ $(document).ready(function(){
 
 		 });
 	});
-	//////////////// 유저 상세 REST 끝   /////////////////
+//////////////// 유저 상세 REST 끝   /////////////////
 
 </script>
 

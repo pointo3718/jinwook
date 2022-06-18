@@ -145,13 +145,13 @@
    </select>
    
    <select id="getStoreInfo" parameterType="int" resultMap="storeSelectMap">   
-	SELECT
-	u.user_name, u.jp_balance, s. store_name, s. store_addr, s. total_earn, s.store_no, s.store_intro,s.store_image, s.holiday,
-	u.business_no, s.business_card,s.bank, s.acc_no, s.start_time, s.end_time, s.store_type, s.store_phone, s.store_start, s.store_status, u.reg_date
-	FROM users u, store s
-	WHERE u.user_id=s.user_id AND
-	s.store_no = #{storeNo}
-	</select>
+   SELECT
+   u.user_name, u.jp_balance, s. store_name, s. store_addr, s. total_earn, s.store_no, s.store_intro,s.store_image, s.holiday,
+   u.business_no, s.business_card,s.bank, s.acc_no, s.start_time, s.end_time, s.store_type, s.store_phone, s.store_start, s.store_status, u.reg_date
+   FROM users u, store s
+   WHERE u.user_id=s.user_id AND
+   s.store_no = #{storeNo}
+   </select>
 
    <!-- <select id="getStoreWallet" parameterType="int"
       resultMap="storeSelectMap">
@@ -171,41 +171,41 @@
      r.res_date, r.req_date, r.refund_money, r.req_status, r.store_no
       FROM request r, store s
       WHERE r.user_id = s.user_id AND
-      		r.store_no = s.store_no AND 
-      		refund_money is not null AND 
+            r.store_no = s.store_no AND 
+            refund_money is not null AND 
             r.store_no=#{storeNo}
    </select>
    
     <select id="getStoreWallet" parameterType="Store"
       resultMap="storeSelectMap">
-		SELECT
-		vt.total_earn, u.jp_balance, o.order_no, o.order_date,
-		o.order_price, o.buyer_name, o.store_no
-		FROM users u,orders o, (SELECT
-		SUM(order_price) total_earn
-		FROM orders
-		WHERE order_status=5 AND
-		<if test="orderDateStart and orderDateEnd != null">
-			DATE(order_date) between #{orderDateStart} and
-			#{orderDateEnd}
-		</if>
-		<if test="orderDateStart || orderDateEnd == null">
-			DATE(order_date) between DATE(sysdate()) and DATE(sysdate())
-		</if>
-		AND
-		store_no=#{storeNo})vt
-		WHERE u.user_id=o.user_id AND
-		o.order_status=5 AND
-		<if test="orderDateStart and orderDateEnd != null">
-			DATE(o.order_date) between #{orderDateStart} and
-			#{orderDateEnd}
-		</if>
-		<if test="orderDateStart || orderDateEnd == null">
-			DATE(o.order_date) between DATE(sysdate()) and DATE(sysdate())
-		</if>
-		AND
-		o.store_no=#{storeNo}
-		ORDER BY order_no
+      SELECT
+      vt.total_earn, u.jp_balance, o.order_no, o.order_date,
+      o.order_price, o.buyer_name, o.store_no
+      FROM users u,orders o, (SELECT
+      SUM(order_price) total_earn
+      FROM orders
+      WHERE order_status=5 AND
+      <if test="orderDateStart and orderDateEnd != null">
+         DATE(order_date) between #{orderDateStart} and
+         #{orderDateEnd}
+      </if>
+      <if test="orderDateStart || orderDateEnd == null">
+         DATE(order_date) between DATE(sysdate()) and DATE(sysdate())
+      </if>
+      AND
+      store_no=#{storeNo})vt
+      WHERE u.user_id=o.user_id AND
+      o.order_status=5 AND
+      <if test="orderDateStart and orderDateEnd != null">
+         DATE(o.order_date) between #{orderDateStart} and
+         #{orderDateEnd}
+      </if>
+      <if test="orderDateStart || orderDateEnd == null">
+         DATE(o.order_date) between DATE(sysdate()) and DATE(sysdate())
+      </if>
+      AND
+      o.store_no=#{storeNo}
+      ORDER BY order_no
    </select>
     
     

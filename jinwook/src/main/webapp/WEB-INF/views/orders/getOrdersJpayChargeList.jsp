@@ -13,56 +13,88 @@ $('#myModal').on('shown.bs.modal', function () {
 	})
 
 </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+  <style>
+  .modal-header{
+  	text-align: center;
+  }
+  .buttonType{
+ 	border: 1px solid #7fad39;
+    cursor:pointer; cursor:hand;
+  	background-color: #7fad39;
+  	color: white;
+  	padding: 6px;
+  	border-radius: 1em;
+  }
+  </style>
 </head>
 <body>
-<div class="modal fade" id="exampleModal" data-toggle="modal"
+<div class="modal fade" id="exampleModal" data-toggle="modal" 
 		tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">
-						블랙리스트 지정기간을</br>선택해주세요
-					</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+		<div class="modal-dialog " style="width: 530px; heigh: 300px;">
+			<div class="modal-content" >
+				<div class="modal-header" >
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
+					</br>
+					<h3 class="modal-title" id="exampleModalLabel" style="color : #7fad39">
+						 <strong> 페이충전 </strong>
+					</h3>
+					<h4>
+						<strong>충전하실 금액을 선택해주세요.</strong>					
+					</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" style="font-size : 20px; margin-left : 20px; ">
+				<h3 class="h4" style="text-align: center; color: #F05441; font-weight:bold;"> 진욱페이는 결제금액에 10% 추가지급합니다. </br>
+				</h3>
 					</br>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="blackPeriod"
-							id="blackPeriod" value="7days" checked> <label
-							class="form-check-label" for="exampleRadios1"> 일주일 </label>
+						<i class="bi bi-coin"></i>
+						<span class="form-check-label" style="margin-right : 85px;">진욱페이 </span>
+						<strong style="margin-right : 70px;"> 5,500 원</strong>
+						<button type="button" class="buttonType" style=" width: 110px;">5,000원</button>
 					</div>
 					</br>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="blackPeriod"
-							id="exampleRadios2" value="1month"> <label
-							class="form-check-label" for="exampleRadios2"> 한 달 </label>
+						<i class="bi bi-coin"></i>
+						<span class="form-check-label" style="margin-right : 75px;">진욱페이 </span>
+						<strong style="margin-right : 70px;"> 11,000 원</strong>
+						<button type="button" class="buttonType" style=" width: 110px;">10,000원</button>
 					</div>
 					</br>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="blackPeriod"
-							id="exampleRadios1" value="6month"> <label
-							class="form-check-label" for="exampleRadios1"> 6개월 </label>
+						<i class="bi bi-coin"></i>
+						<span class="form-check-label" style="margin-right : 75px;">진욱페이 </span>
+						<strong style="margin-right : 70px;"> 33,000 원</strong>
+						<button type="button" class="buttonType" style=" width: 110px;">30,000원</button>
 					</div>
 					</br>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="blackPeriod"
-							id="exampleRadios1" value="1year"> <label
-							class="form-check-label" for="exampleRadios1"> 1년 </label>
+						<i class="bi bi-coin"></i>
+						<span class="form-check-label" style="margin-right : 75px;">진욱페이 </span>
+						<strong style="margin-right : 70px;"> 55,000 원</strong>
+						<button type="button" class="buttonType" style=" width: 110px;">50,000원</button>
 					</div>
 					</br>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary" id="register">등록</button>
+					<div class="form-check">
+						<i class="bi bi-coin"></i>
+						<span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
+						<strong style="margin-right : 65px;"> 110,000 원</strong>
+						<button type="button" class="buttonType" style=" width: 110px;">100,000원</button>
+					</div>
+					</br>
+					<div class="form-check">
+						<i class="bi bi-coin"></i>
+						<span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
+						<strong style="margin-right : 65px;"> 330,000 원</strong>
+						<button type="button" class="buttonType" style=" width: 110px;">300,000원</button>
+						</br></br>
+					</div>
 				</div>
 			</div>
 		</div>
