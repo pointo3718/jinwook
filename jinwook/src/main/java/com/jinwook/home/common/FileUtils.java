@@ -89,7 +89,7 @@ public class FileUtils {
 			for(int i = 0; i<fileNames.length; i++) {
 					listMap = new HashMap<String,Object>();
                     listMap.put("IS_NEW", "N");
-					listMap.put("attach_no", files[i]);//v 
+					listMap.put("attachNo", files[i]);//v 
 					list.add(listMap); 
 			}
 		}

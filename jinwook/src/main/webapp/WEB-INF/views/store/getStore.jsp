@@ -152,7 +152,8 @@ input:disabled {
 
 .row {
 	display: flex;
-	align-items: flex-start
+	align-items: flex-start;
+	justify-content: center;
 }
 
 .mytop01 {
@@ -323,7 +324,7 @@ label {
 		<hr>
 		<c:forEach var="store" items="${getStore}" begin="0" end="0">
 
-			<div class="row">
+			<div class="row store">
 
 				<div class="imgborder">
 					<img
@@ -446,7 +447,7 @@ label {
 		<hr />
 
 		<!--  상품 목록 Begin-->
-		<div class="row">
+		<div class="row store" style="display: flex; align-items: flex-start; justify-content: flex-start">
 			<c:forEach var="store" items="${getStore}">
 
 

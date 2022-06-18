@@ -83,15 +83,15 @@ a {
     background-size: cover;
 }
 
-.list_wrap .item1 .image { background-image: url(../img/img1.png); }
-.list_wrap .item2 .image { background-image: url(../img/img2.png); }
-.list_wrap .item3 .image { background-image: url(../img/img3.png); }
-.list_wrap .item4 .image { background-image: url(../img/img4.png); }
-.list_wrap .item5 .image { background-image: url(../img/img5.png); }
-.list_wrap .item6 .image { background-image: url(../img/img6.png); }
-.list_wrap .item7 .image { background-image: url(../img/img7.png); }
-.list_wrap .item8 .image { background-image: url(../img/img8.png); }
-.list_wrap .item9 .image { background-image: url(../img/img9.png); }
+.list_wrap .item1 .image { background-image: url(../rcpImg/img1.png); }
+.list_wrap .item2 .image { background-image: url(../rcpImg/img2.png); }
+.list_wrap .item3 .image { background-image: url(../rcpImg/img3.png); }
+.list_wrap .item4 .image { background-image: url(../rcpImg/img4.png); }
+.list_wrap .item5 .image { background-image: url(../rcpImg/img5.png); }
+.list_wrap .item6 .image { background-image: url(../rcpImg/img6.png); }
+.list_wrap .item7 .image { background-image: url(../rcpImg/img7.png); }
+.list_wrap .item8 .image { background-image: url(../rcpImg/img8.png); }
+.list_wrap .item9 .image { background-image: url(../rcpImg/img9.png); }
 
 .list_wrap .item .cont {
     padding: 20px;
@@ -525,86 +525,50 @@ function fncDeleteRecipe(e) {
                     </div>
                 </div>
                 <!-- 레시피 이미지 목록 -->
-                <div class="col-lg-8 col-md-7">
+                 <table class="table table-hover table-striped">
+                 <thead>
+            <tr>
+               <th align="center">No</th>
+               <th align="left">레시피 제목</th>
+               <th align="left">작성일</th>
+               <th align="left">조회수</th>
+            </tr>
+         </thead>
+
+         <tbody>
+
+            <c:set var="i" value="0" />
+            <c:forEach var="recipe" items="${getRecipeList}">
+               <c:set var="i" value="${ i+1 }" />
+               <tr>
+                  <td align="Center">${ recipe.rcpNo }</td>
+                  <td align="left">${recipe.rcpTitle}</td>
+                  <td align="left">${recipe.rcpDate}</td>
+                  <td align="left">${recipe.rcpHits}</td>
+                  <td align="left"><button data-value="${recipe.rcpNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteRecipe(this)">X</button></td>
+               </tr>
+            </c:forEach>
+            </tbody>
+      </table>
+                
+               <%--  <div class="col-lg-8 col-md-7">
                     <div class="row">
                 <div class="list_wrap">
             <ul>
                 <li class="item item1">
                     <div class="image">사진</div>
                     <div class="cont">
-                        <strong>제목이 들어갑니다.</strong>
-                        <p>내용이 들어갑니다.</p>
-                        <a href="#">바로가기</a>
-                    </div>
-                </li>
-                <li class="item item2">
-                    <div class="image">사진</div>
-                    <div class="cont">
-                        <strong>제목이 들어갑니다.</strong>
-                        <p>내용이 들어갑니다.</p>
-                        <a href="#">바로가기</a>
-                    </div>
-                </li>
-                <li class="item item3">
-                    <div class="image">사진</div>
-                    <div class="cont">
-                        <strong>제목이 들어갑니다.</strong>
-                        <p>내용이 들어갑니다.</p>
-                        <a href="#">바로가기</a>
-                    </div>
-                </li>
-                <li class="item item4">
-                    <div class="image">사진</div>
-                    <div class="cont">
-                        <strong>제목이 들어갑니다.</strong>
-                        <p>내용이 들어갑니다.</p>
-                        <a href="#">바로가기</a>
-                    </div>
-                </li>
-                <li class="item item5">
-                    <div class="image">사진</div>
-                    <div class="cont">
-                        <strong>제목이 들어갑니다.</strong>
-                        <p>내용이 들어갑니다.</p>
-                        <a href="#">바로가기</a>
-                    </div>
-                </li>
-                <li class="item item6">
-                    <div class="image">사진</div>
-                    <div class="cont">
-                        <strong>제목이 들어갑니다.</strong>
-                        <p>내용이 들어갑니다.</p>
-                        <a href="#">바로가기</a>
-                    </div>
-                </li>
-                <li class="item item7">
-                    <div class="image">사진</div>
-                    <div class="cont">
-                        <strong>제목이 들어갑니다.</strong>
-                        <p>내용이 들어갑니다.</p>
-                        <a href="#">바로가기</a>
-                    </div>
-                </li>
-                <li class="item item8">
-                    <div class="image">사진</div>
-                    <div class="cont">
-                        <strong>제목이 들어갑니다.</strong>
-                        <p>내용이 들어갑니다.</p>
-                        <a href="#">바로가기</a>
-                    </div>
-                </li>
-                <li class="item item9">
-                    <div class="image">사진</div>
-                    <div class="cont">
-                        <strong>제목이 들어갑니다.</strong>
-                        <p>내용이 들어갑니다.</p>
-                        <a href="#">바로가기</a>
+                        <strong>레시피: ${recipe.rcpTitle}</strong>
+                        <p>레시피 소개: ${recipe.rcpInfo}</p>
+                        <p>작성일: ${recipe.rcpDate}</p>
+                        <p>조회수: ${recipe.rcpInfo}</p>
+                        <a href="#">더보기</a>
                     </div>
                 </li>
             </ul>
         </div>
-        </div>
-        </div>
+       </div>
+      </div> --%>
                 
                 
                 <%-- <div class="col-lg-8 col-md-7">

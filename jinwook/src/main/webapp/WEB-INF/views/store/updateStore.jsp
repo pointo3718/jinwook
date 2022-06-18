@@ -184,67 +184,85 @@ label {
 	display: block;
 }
 
+<<<<<<< HEAD
+.img_wrap {
+	width: 300px;
+	margin-top: 50px;
+}
+
+.img_wrap img {
+	max-width: 100%;
+}
+=======
+>>>>>>> refs/remotes/origin/master
 </style>
 
 <script type="text/javascript">
+	/*<![CDATA[*/
+	function movePage(uri, queryString) {
+		location.href = uri + queryString;
+	}
 
+	var storeNo = $("input[id='storeNo']").val();
+	/*]]>*/
 
-/*<![CDATA[*/
-function movePage(uri, queryString) {
-   location.href = uri + queryString;
-}
-
-var storeNo = $("input[id='storeNo']").val();
-/*]]>*/
-
-
-		$(function() {
-	 	$( ".list-group-item:contains('주문 내역')").on("click" , function() {
-			$(self.location).attr("href","/admin/blog");
+	$(function() {
+		$(".list-group-item:contains('주문 내역')").on("click", function() {
+			$(self.location).attr("href", "/admin/blog");
 		});
 	});
 
-		$(function() {
-	 	$( ".list-group-item:contains('상점 정보 수정')").on("click" , function() {
-			$(self.location).attr("href","/store/updateStore?storeNo=10000");
+	$(function() {
+		$(".list-group-item:contains('상점 정보 수정')").on("click", function() {
+			$(self.location).attr("href", "/store/updateStore?storeNo=10000");
 		});
 	});
 
-		$(function() {
-	 	$( ".list-group-item:contains('개인 정보 수정')").on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/admin/listComplainAdmin");
+	$(function() {
+		$(".list-group-item:contains('개인 정보 수정')").on("click", function() {
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href", "/admin/listComplainAdmin");
 		});
 	});
-	
 
-		$(function() {
-	 	$( ".list-group-item:contains('상품 등록')").on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/store/addStoreProduct?storeNo=10000");
-		});
+	$(function() {
+		$(".list-group-item:contains('상품 등록')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/store/addStoreProduct?storeNo=10000");
+				});
 	});
-	
-		$(function() {
-		 	$( ".list-group-item:contains('광고 등록')").on("click" , function() {
-		 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-				$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=1");
-			});
-		});
-		
-		$(function() {
-		 	$( ".list-group-item:contains('지갑')").on("click" , function() {
-		 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-				$(self.location).attr("href","/store/getStoreWallet?storeNo=10000");
-			});
-		});
-	
 
-		$(function() {
-	 	$( ".list-group-item:contains('1:1 문의내역')").on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=2");
-		});
+	$(function() {
+		$(".list-group-item:contains('광고 등록')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/request/getRequestListForAdmin?reqCode=1");
+				});
+	});
+
+	$(function() {
+		$(".list-group-item:contains('지갑')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/store/getStoreWallet?storeNo=10000");
+				});
+	});
+
+	$(function() {
+		$(".list-group-item:contains('1:1 문의내역')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/request/getRequestListForAdmin?reqCode=2");
+				});
 	});
 
 	//============= "수정"  Event 연결 =============
@@ -259,7 +277,7 @@ var storeNo = $("input[id='storeNo']").val();
 		var storeImage = $("input[id='storeImage']").val();
 		var startTime = $("input[id='startTime']").val();
 		var endTime = $("input[id='endTime']").val();
-		var bank = $("input[id='bank']").val();
+		var bank = $("#bank option:selected").val();
 		var holiday = $("input[id='holiday']").val();
 		var accNo = $("input[id='accNo']").val();
 
@@ -303,11 +321,10 @@ var storeNo = $("input[id='storeNo']").val();
 			return;
 		}
 
-
 		$.ajax({
 			url : "updateStore/" + storeNo + "/" + storeIntro + "/"
 					+ storePhone + "/" + storeImage + "/" + startTime + "/"
-					+ endTime + "/" + bank + "/" + holiday + "/" + accNo,
+					+ endTime + "/" + holiday + "/" + bank + "/" + accNo,
 			dataType : "json",
 			method : "POST",
 			data : {
@@ -325,6 +342,35 @@ var storeNo = $("input[id='storeNo']").val();
 	}
 </script>
 
+<script type="text/javascript" src="./js/jquery-3.1.0.min.js"
+	charset="utf-8"></script>
+<script type="text/javascript">
+	var sel_file;
+
+	$(document).ready(function() {
+		$("#input_img").on("change", handleImgFileSelect);
+	});
+
+	function handleImgFileSelect(e) {
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+
+		filesArr.forEach(function(f) {
+			if (!f.type.match("image.*")) {
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return;
+			}
+
+			sel_file = f;
+
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$("#img").attr("src", e.target.result);
+			}
+			reader.readAsDataURL(f);
+		});
+	}
+</script>
 
 </head>
 
@@ -497,16 +543,24 @@ var storeNo = $("input[id='storeNo']").val();
 									<label for="colFormLabelLg"
 										class="col-sm-2 col-form-label col-form-label">상점사진</label>
 									<div class="col-sm-6">
-										<input type="text" name="storeImage"
-											class="form-control form-control" id="storeImage"
-											value="${store.storeImage}" placeholder="상점사진">
+										<div>
+											<input type="file" id="input_img"  />
+										</div>
+
+										<div>
+											<div class="img_wrap">
+												<img id="img" style="width: 350px; height: 350px;" img
+														src="${path}/resources/static/img/cart/cart-1.jpg"/>
+											</div>
+										</div>
+
 									</div>
 								</div>
 
-								<span class="btn btn-default btn-file"
-									style="padding-left: 260px; padding-bottom: 15px;"> 사진변경
-									<input type="file">
-								</span>
+								<!-- 사진 연습 -->
+
+
+
 
 								<div class="form-group row">
 									<label for="colFormLabelLg"
@@ -562,47 +616,44 @@ var storeNo = $("input[id='storeNo']").val();
 
 								<div class="form-group row">
 									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">계좌번호</label>
+										class="col-sm-2 col-form-label col-form-label">은행명</label>
 									<div class="col-sm-6" style="padding-left: 0px;">
 										<div class="col-sm-6">
-										<div class="wrapper">
-											<select name="bank" value="${store.bank}" id="bank" class="ct_input_g"
-												style="width: 100px; height: 19px" maxLength="20">
-												
-												
-												<option value="1">카카오뱅크</option>
-												<option value="2">농협</option>
-												<option value="3">신한</option>
-												<option value="4">IBK기업</option>
-												<option value="5">하나</option>
-												<option value="6">우리</option>
-												<option value="7">국민</option>
-												<option value="8">SC제일</option>
-												<option value="9">대구</option>
-												<option value="10">부산</option>
-												<option value="11">광주</option>
-												<option value="12">새마을금고</option>
-												<option value="13">경남</option>
-												<option value="14">전북</option>
-												<option value="15">제주</option>
-												<option value="16">산업</option>
-												<option value="17">우체국</option>
-												<option value="18">신협</option>
-												<option value="19">수협</option>
-												<option value="20">씨티</option>
-												<option value="21">케이뱅크</option>
-												<option value="22">토스뱅크</option>
-												<option value="23">산림조합</option>
-												<option value="24">저축은행</option>
+											<select id="bank">
+												<option>${store.bank}</option>
+												<option>카카오뱅크</option>
+												<option>농협</option>
+												<option>신한</option>
+												<option>IBK기업</option>
+												<option>하나</option>
+												<option>우리</option>
+												<option>국민</option>
+												<option>SC제일</option>
+												<option>대구</option>
+												<option>부산</option>
+												<option>광주</option>
+												<option>새마을금고</option>
+												<option>경남</option>
+												<option>전북</option>
+												<option>제주</option>
+												<option>산업</option>
+												<option>우체국</option>
+												<option>신협</option>
+												<option>수협</option>
+												<option>씨티</option>
+												<option>케이뱅크</option>
+												<option>토스뱅크</option>
+												<option>산림조합</option>
+												<option>저축은행</option>
 											</select>
-											</div>
 										</div>
 									</div>
 								</div>
 
+
 								<div class="form-group row">
 									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label"></label>
+										class="col-sm-2 col-form-label col-form-label">계좌번호</label>
 									<div class="col-sm-6">
 										<input type="text" name="accNo"
 											class="form-control form-control" id="accNo"

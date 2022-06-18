@@ -35,7 +35,7 @@ public interface BoardService {
 	//1:1문의 등록v
 	public void addBoardInquiry(Board board, MultipartHttpServletRequest mpRequest) throws Exception;
 	//공지사항 등록v
-	public void addBoardAnnouncement(Board board);
+	public void addBoardAnnouncement(Board board, MultipartHttpServletRequest mpRequest) throws Exception;
 	//1:1문의 수정v
 	public void updateBoardInquiry(Board board, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
 	//공지사항 수정v

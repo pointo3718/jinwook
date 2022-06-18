@@ -71,6 +71,8 @@
    font-family: 'Noto Sans KR', sans-serif;
 }
 
+<<<<<<< HEAD
+=======
 .sticky {
    position: -webkit-sticky;
    position: sticky;
@@ -79,12 +81,15 @@
    z-index: 10;
 }
 
+>>>>>>> refs/remotes/origin/master
 .row {
    display: flex;
    justify-content: center;
    align-items: flex-start;
 }
 
+<<<<<<< HEAD
+=======
 .mytop01 {
    padding-left: 20px;
 }
@@ -95,6 +100,7 @@
    display: inline;
 }
 
+>>>>>>> refs/remotes/origin/master
 .blog {
    padding-top: 50px;
 }
@@ -122,6 +128,8 @@
    text-align: center;
 }
 
+<<<<<<< HEAD
+=======
 .id_ok {
    color: #7fad39;
    display: none;
@@ -160,6 +168,7 @@
    justify-content: center;
 }
 
+>>>>>>> refs/remotes/origin/master
 input {
    width: 300px;
    height: 50px;
@@ -412,11 +421,19 @@ label {
 
                <!--지갑조회 주문내역 테이블 start-->
 
+<<<<<<< HEAD
+					<h6 class="text-left">
+
+						<strong>기간별 주문내역</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+							style="color: #6E6E6E; font-size: 13px">${store.orderDateStart}~${store.orderDateEnd}</span>
+					</h6>
+=======
                <h6 class="text-left">
                
                   <strong>기간별 주문내역</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
                      style="color: #6E6E6E; font-size: 13px">${store.orderDateStart}~${store.orderDateEnd}</span>
                </h6>
+>>>>>>> refs/remotes/origin/master
 
                <table class="table table-hover table-striped">
 

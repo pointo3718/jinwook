@@ -210,7 +210,7 @@ public class UserServiceImpl implements UserService{
 	         content += "<br> <br> ";
 	        content += "아래 버튼을 눌러 비밀번호를 재설정 해주세요. ";
 	        content += "<br><br>  ";
-	        content += "<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n ";
+	        content += "<a href='http://localhost:8082/user/updatePasswordView'>진욱이네</a><br/>\n ";
 	        content += "<br><br>  ";
 	        content += "유효 시간 : "+LocalDateTime.now()+"\n ";
 	        content += "<br> ";

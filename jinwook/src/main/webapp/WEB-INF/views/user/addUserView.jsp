@@ -292,7 +292,7 @@
 			}
 		} */
 	
-		function PortalJuminCheck(fieldValue){
+		/* function PortalJuminCheck(fieldValue){
 		    var pattern = /^([0-9]{6})-?([0-9]{7})$/; 
 			var num = fieldValue;
 		    if (!pattern.test(num)) return false; 
@@ -307,12 +307,12 @@
 			}
 			var mod = sum % 11;
 			return ((11 - mod) % 10 == last) ? true : false;
-		}
+		} */
 		 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 		 
 		//==>"ID중복확인" Event 처리 및 연결
-		 $(function() {
+		/*  $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			 $("button.btn.btn-info").on("click" , function() {
 				popWin 
@@ -321,7 +321,7 @@
 											"left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
 											"scrollbars=no,scrolling=no,menubar=no,resizable=no");
 			});
-		});	
+		});	 */
 
 	</script>		
     

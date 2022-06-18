@@ -4,7 +4,6 @@ package com.jinwook.home.service.user;
 
 import com.jinwook.home.service.domain.User;
 
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 public interface UserService {
 

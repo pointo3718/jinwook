@@ -30,6 +30,7 @@ public class Comment {
 	private Board board;//게시판 번호
 	private int boardNo;
 	private Recipe recipe;
+	private Orders orders;
 	private int rcpNo;//레시피 번호
 	private int orderNo;//주문 번호
 	private String commentContent;//댓글 내용
