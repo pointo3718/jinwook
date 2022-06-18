@@ -1,6 +1,5 @@
 package com.jinwook.home.web.user;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.user.UserService;
-import com.mysql.cj.Session;
 
 
 
@@ -207,13 +204,13 @@ public class UserRestController {
 		user = dbUser;
 		
 	    
-	    session.setMaxInactiveInterval(300);
-	    session.setAttribute("userId", user.getUserId());
-	    session.setAttribute("phone", user.getPhone());
 		
 		if(dbUser != null) {
 			userService.sendPasswordEmail(user);
 		}
+		session.setMaxInactiveInterval(300);
+		session.setAttribute("userId", user.getUserId());
+		session.setAttribute("phone", user.getPhone());
 		
 		Map<String, Object> authNumMap = new HashMap<>();
 	    long createTime = System.currentTimeMillis(); // 인증번호 생성시간
@@ -273,27 +270,27 @@ public class UserRestController {
 	//아이디 찾기 - 휴대폰 인증 문자 보내기
 	@GetMapping("findIdPhoneSend")
 	@ResponseBody
-	public String findIdPhoneSend(@RequestParam("phone") String phone, HttpSession session, @RequestParam ("userName") String userName) throws Exception { // 휴대폰 문자보내기
+	public String findIdPhoneSend(@RequestParam("phone") String phone, @RequestParam ("userName") String userName, HttpSession session) throws Exception { // 휴대폰 문자보내기
 		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
 		User user = new User();
+		
 		user.setUserName(userName);
 		user.setPhone(phone);
 		
 		User dbUser = userService.findIdPhone(user);
 		
-		
 		if(dbUser.getUserName()== userName && dbUser.getPhone()==phone) {
 			
 			userService.certifiedPhoneNumber(phone,randomNumber);
-			
 		}
-		System.out.println(dbUser.getUserId()+"mlmlmlmlmlmlmlmllmlml");
-		System.out.println(dbUser.getRegDate()+"mlmlmlmlmlmlmlmllmlml");
-		user = dbUser;
-//		model.addAttribute("userId", user);
-//		model.addAttribute("regDate", regDate);
-//		model.addAttribute("regDate", user.getRegDate());
-		session.setAttribute("regDate", user.getRegDate());
+		session.setAttribute("userName", dbUser.getUserId());
+		session.setAttribute("phone", phone);
+		System.out.println(dbUser.getRegDate()+"fdsjkhadslkhjdshkjladsfklhjfda");
+		session.setAttribute("regDate", dbUser.getRegDate());
+		System.out.println(session.getAttribute("userName")+"-=-=-=-=-=-=-=-=-=-=-=-1=-21=-2=1");
+		System.out.println(userName+"----=-=-=-=-=-=-=-=-=-=-=-=-=");
+		
+		System.out.println("-------------"+randomNumber+"------------");
 		return Integer.toString(randomNumber);
 	}
 	

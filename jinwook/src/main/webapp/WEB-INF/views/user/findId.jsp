@@ -319,7 +319,7 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 			<h3>고객님의 진욱이네 계정을 찾았습니다.</h3>
 			<h4>아이디 확인 후 로그인해주세요.</h4>
 			<br>
-			<h4><a class="fa fa-user">	: ${userId}</a></h4>
+			<h4><a class="fa fa-user">	: ${userName}</a></h4>
 			<br>
 			<h4><a class="fa fa-calendar-o" aria-hidden="true"> 가입 날짜 : ${regDate}</a></h4>
 			<br><br><br>

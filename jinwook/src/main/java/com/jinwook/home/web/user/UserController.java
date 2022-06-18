@@ -148,16 +148,19 @@ public class UserController {
 		
 
 		if(dbUser == null) {
+			model.addAttribute("msg", "아이디나 비밀번호를 확인해주세요.");
 			return "/user/loginView";
 		}
 		
 		System.out.println(dbUser.isUserByeStatus());
 
 		if(dbUser.isUserByeStatus()==true) {
+			model.addAttribute("msg", "탈퇴한 계정입니다.");
 			return "/user/loginView";
 		}
 		
 		if( !(user.getPassword().equals(dbUser.getPassword()))){
+			model.addAttribute("msg", "비밀번호가 맞지 않습니다.");
 			return "/user/loginView";
 		}
 		System.out.println(dbUser+"123123123123123123123123213123");
@@ -282,17 +285,24 @@ public class UserController {
 
 	//---------------------------------------
 		// 비밀번호 재설정 페이지로 이동
-		@GetMapping("updatePassword")
-		public String updatePasswordView(User user, HttpSession session) {
+		@GetMapping("updatePasswordView")
+		public String updatePasswordView( User user, HttpSession session) throws Exception{
 //		    Map<String, Object> authStatus = (Map<String, Object>) session.getAttribute("authStatus");
 		    
 //		    if(authStatus == null || !username.equals(authStatus.get("userId"))) {
 //		        return "/user/findPassword";
 //		    }
+			session.setAttribute("user", user);
 			System.out.println(session.getAttribute("user"));
-			System.out.println(session.getAttribute(user.getUserId()));
-			System.out.println(session.getAttribute(user.getUserName()));
-			System.out.println(session.getAttribute(user.getPhone()));
+			user = userService.getUser(user.getUserId());
+//			// Model 과 View 연결
+//			model.addAttribute("user", user);
+			System.out.println(user);
+//			session.setAttribute("user", user.getUserId());
+//			System.out.println(session.getAttribute("user"));
+//			System.out.println(session.getAttribute(user.getUserId()));
+//			System.out.println(session.getAttribute(user.getUserName()));
+//			System.out.println(session.getAttribute(user.getPhone()));
 //		    session.setAttribute("userId", user.getUserId());
 //		    // 페이지에 왔을때 인증이 안되있다면
 //		    if(!(boolean) authStatus.get("status")) {
@@ -302,11 +312,11 @@ public class UserController {
 		}
 		
 		@PostMapping("updatePassword")
-		public String updatePassword(@ModelAttribute("user") User user , HttpSession session) throws Exception {
+		public String updatePassword(@ModelAttribute("user") User user ,String userId, HttpSession session) throws Exception {
 			session.setAttribute("user", user.getUserId());	
-			session.setAttribute("user", user.getPhone());	
-			
-			System.out.println(session.getAttribute("user"));
+			session.setAttribute("user", user.getPhone());
+			System.out.println(userId+"mmmmmmmmmmmmmm");
+			user.setUserId( ((User)session.getAttribute("user")).getUserId());
 			
 			userService.updatePassword(user);
 			String sessionId=((User)session.getAttribute("user")).getUserId();

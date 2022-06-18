@@ -25,7 +25,8 @@
 
 <!-- sweet alert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+ -->
 <!-- Google Font -->
  <!-- Google Font -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -163,6 +164,15 @@
 				 
  			 
 				$(".form-horizontal").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+				 
+				 // 로그인할 때 검증 메세지
+				 const msg = "${msg}";
+				 if(msg.length() > 5){
+				 swal("[진욱이네]",msg);
+					 
+				 }
+					 
+				 
 			});
 		});	
 		
