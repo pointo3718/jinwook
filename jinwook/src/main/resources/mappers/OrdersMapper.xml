@@ -29,6 +29,7 @@
 	<resultMap type="cart" id="cartSelectMap">
 			<result property="cartNo"				column="cart_no"		jdbcType="INTEGER"/>
 			<result property="userId"				column="user_id"		jdbcType="VARCHAR"/>
+			<result property="user.grade"			column="grade"			jdbcType="VARCHAR"/>
 			<result property="orders.orderNo"		column="order_no"		jdbcType="INTEGER"/>
 			<result property="orders.orderPrice"	column="order_price"	jdbcType="INTEGER"/>
 			<result property="storeName"			column="store_name"		jdbcType="VARCHAR"/>
@@ -43,6 +44,7 @@
 	
 	<resultMap type="user" id="userSelectMap">
 			<result property="userId"				column="user_id"		jdbcType="VARCHAR"/>
+			<result property="grade"				column="grade"			jdbcType="VARCHAR"/>
 			<result property="jpBalance"			column="jp_-balance"	jdbcType="INTEGER"/>
 	</resultMap>
 	

@@ -38,6 +38,12 @@
 	width: 550px;
 	
 	}
+	
+	.row{
+   display: flex;
+    justify-content: center;
+   align-items: flex-start;
+}
 	</style>
 </head>
 
@@ -76,27 +82,27 @@
                         <div class="col-lg-6 col-md-6">
                            <div class="checkout__input">
                            		<p>구매자 이름<span>*</span></p>
-                            	<input type="text">
+                            	<input type="text" name="" value="${user.userId}">
                             </div>
                             <div class="checkout__input">
                                 <p>구매자 전화번호<span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="${orders.buyerPhone}" value="${user.phone}">
                             </div>
                             <div class="checkout__input">
                                 <p>픽업희망시간<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
+                                <input type="text" name="plusTime" placeholder="분으로 숫자만 입력해주세요" class="checkout__input__add">
                             </div>
                             <div class="checkout__input">
                                 <p>요청사항</p>
-                                <input type="text">
+                                <input type="text" name="orderReq" placeholder="예)감자 10개를 5개씩 나눠 담아주세요.">
                             </div>
                             <div class="checkout__input">
                                 <p>쿠폰<span></span></p>
-                                <input type="text">
+                                <input type="text" value="${user.grade}">
                             </div>
                             <div class="checkout__input">
                                 <p>쿠폰할인율<span></span></p>
-                                <input type="text">
+                                <input type="text" name="coupon.couponDc" value="${orders.coupon.couponDc}" placeholder="쿠폰을 입력하시면 자동입력됩니다." readonly>
                             </div>
                             
                         </div>
@@ -111,8 +117,24 @@
                                 </c:forEach>
                                 </ul>
                                 <div class="checkout__order__subtotal">총상품금액 <span>${total}원</div>
-                                <div class="checkout__order__total">회원등급할인 <spanv id="grade" name="grade" value="${user.grade}"></span></div>
-                                <div class="checkout__order__total">실결제금액 <span>$750.99</span></div>
+                                <div class="checkout__order__total">회원등급할인 <span id="grade" name="grade" value="${user.grade}">${user.grade}</span></div>
+
+                                <div class="checkout__order__total">실결제금액 <span>${orders.finalPrice} </span></div>
+                                	<c:choose>
+										<c:when test="${user.grade=='프랜즈'}">
+											<input type="text" class="ct_input_g" id="finalPrice" name="finalPrice"   value="${cart.orders.orderPrice*0.99}" readonly>
+										</c:when>
+									    <c:when test="${user.grade=='패밀리'}">
+											<input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice*0.97}" readonly>
+									    </c:when>
+									    <c:when test="${user.grade=='퍼스트'}">
+									    <td align="left"><fmt:formatNumber var="total" pattern="###" value="${cart.orders.orderPrice*0.95}"/></td>
+									      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${total}" readonly>
+									    </c:when>
+										<c:when test="${user.grade=='일반'}">
+									    	<input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice}" readonly>
+									    </c:when>
+								     </c:choose>
                                 <button type="submit" class="site-btn">주문하기</button>
                             </div>
                         </div>

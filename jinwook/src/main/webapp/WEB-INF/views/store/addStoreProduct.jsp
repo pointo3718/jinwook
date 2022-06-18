@@ -183,68 +183,73 @@ label {
 
 
 <script type="text/javascript">
+	/*<![CDATA[*/
+	function movePage(uri, queryString) {
+		location.href = uri + queryString;
+	}
 
+	var storeNo = $("input[id='storeNo']").val();
+	/*]]>*/
 
-/*<![CDATA[*/
-function movePage(uri, queryString) {
-   location.href = uri + queryString;
-}
-
-var storeNo = $("input[id='storeNo']").val();
-/*]]>*/
-
-
-		$(function() {
-	 	$( ".list-group-item:contains('주문 내역')").on("click" , function() {
-			$(self.location).attr("href","/admin/blog");
+	$(function() {
+		$(".list-group-item:contains('주문 내역')").on("click", function() {
+			$(self.location).attr("href", "/admin/blog");
 		});
 	});
 
-		$(function() {
-	 	$( ".list-group-item:contains('상점 정보 수정')").on("click" , function() {
-			$(self.location).attr("href","/store/updateStore?storeNo=10000");
+	$(function() {
+		$(".list-group-item:contains('상점 정보 수정')").on("click", function() {
+			$(self.location).attr("href", "/store/updateStore?storeNo=10000");
 		});
 	});
 
-		$(function() {
-	 	$( ".list-group-item:contains('개인 정보 수정')").on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/admin/listComplainAdmin");
-		});
-	});
-	
-
-		$(function() {
-	 	$( ".list-group-item:contains('상품 등록')").on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/store/addStoreProduct?storeNo=10000");
-		});
-	});
-	
-		$(function() {
-		 	$( ".list-group-item:contains('광고 등록')").on("click" , function() {
-		 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-				$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=1");
-			});
-		});
-		
-		$(function() {
-		 	$( ".list-group-item:contains('지갑')").on("click" , function() {
-		 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-				$(self.location).attr("href","/store/getStoreWallet?storeNo=10000");
-			});
-		});
-	
-
-		$(function() {
-	 	$( ".list-group-item:contains('1:1 문의내역')").on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=2");
+	$(function() {
+		$(".list-group-item:contains('개인 정보 수정')").on("click", function() {
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href", "/admin/listComplainAdmin");
 		});
 	});
 
+	$(function() {
+		$(".list-group-item:contains('상품 등록')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/store/addStoreProduct?storeNo=10000");
+				});
+	});
 
-	
+	$(function() {
+		$(".list-group-item:contains('광고 등록')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/request/getRequestListForAdmin?reqCode=1");
+				});
+	});
+
+	$(function() {
+		$(".list-group-item:contains('지갑')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/store/getStoreWallet?storeNo=10000");
+				});
+	});
+
+	$(function() {
+		$(".list-group-item:contains('1:1 문의내역')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/request/getRequestListForAdmin?reqCode=2");
+				});
+	});
+
 	//============= "상품 삭제"  Event 연결 =============
 	function fncDeleteStoreProduct(e) {
 		if (!confirm('상품을 삭제하시겠습니까?')) {
@@ -262,7 +267,7 @@ var storeNo = $("input[id='storeNo']").val();
 			success : function(result) {
 				if (result != null) {
 					alert("삭제완료");
-					self.location = "addStoreProduct?storeNo=10000" 
+					self.location = "addStoreProduct?storeNo=10000"
 				}
 			}
 
@@ -310,7 +315,6 @@ var storeNo = $("input[id='storeNo']").val();
 		console.log(e);
 
 		var STORENO = $("input[id='storeNo']").val();
-		var prodNo = $(e).data("value");
 
 		var PRICE = $("input[id='price']").val();
 		var PRODINFO = $("input[id='prodInfo']").val();
@@ -335,7 +339,7 @@ var storeNo = $("input[id='storeNo']").val();
 			success : function(result) {
 				if (result != null) {
 					alert("수정 완료");
-					self.location = "addStoreProduct?storeNo=10000" 
+					self.location = "addStoreProduct?storeNo=10000"
 				}
 			}
 
@@ -352,9 +356,48 @@ var storeNo = $("input[id='storeNo']").val();
 										function() {
 											$('#plus')
 													.append(
-															'<form id="inputitem"><div class="form-row"><div class="col-md-3 mb-3"><label for="validationDefault01"></label> <span class="btn btn-default btn-file"> <input type="file"></span></div><div class="col-md-2 mb-3"><label for="validationDefault02"></label><input type="text" class="form-control" id="validationDefault02" placeholder="이름" required></div><div class="col-md-3 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="validationDefault01" placeholder="상품설명" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="validationDefault01" placeholder="원산지" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label><br><button type="button" id="validationDefault01" class="btn btn-warning">상품등록</button></div></div></div></form>'); // end append                            
+															'<form id="inputitem"><div class="form-row"><div class="col-md-3 mb-3"><label for="validationDefault01"></label> <span class="btn btn-default btn-file"> <input type="file"></span></div><div class="col-md-2 mb-3"><label for="validationDefault02"></label><input type="text" class="form-control" name="addProdName" placeholder="이름" required></div><div class="col-md-3 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addProdInfo" placeholder="상품설명" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addProdOrign" placeholder="원산지" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addPrice" placeholder="가격" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label><br><button type="button" id="validationDefault01" class="btn btn-warning" onClick="fncAddStoreProduct(this)">상품등록</button></div></div></div></form>'); // end append                            
 										}); // end click                                            
 					}); // end ready
+
+	//상품 등록//
+
+	function fncAddStoreProduct(e) {
+
+		console.log(e);
+
+		var STORENO = $("input[id='storeNo']").val();
+		var PRODNAME = $("input[id='addProdName']").val();
+		var PRICE = $("input[id='addPrice']").val();
+		var PRODINFO = $("input[id='addProdInfo']").val();
+		var PRODIMG = $("input[id='addProdImg']").val();
+		var PRODORIGN = $("input[id='addProdOrign']").val();
+
+		alert(STORENO+PRICE+PRODINFO+PRODIMG+PRODORIGN);
+
+		$.ajax({
+			url : "addStoreProduct/" + PRICE + "/" + PRODORIGN + "/" + PRODINFO
+					+ "/" + PRODIMG,
+			dataType : "json",
+			method : "POST",
+			data : {
+
+				"PRICE" : PRICE,
+				"PRODINFO" : PRODINFO,
+				"PRODIMG" : PRODIMG,
+				"PRODORIGN" : PRODORIGN
+
+			},
+			success : function(result) {
+				if (result != null) {
+					alert("등록 완료");
+					self.location = "addStoreProduct?storeNo=10000"
+				}
+			}
+
+		});
+
+	}
 </script>
 
 
@@ -368,7 +411,7 @@ var storeNo = $("input[id='storeNo']").val();
 	<!-- Header End -->
 
 	<!-- ceoTop Section Begin -->
-	<jsp:include page="../layout/ceoTop.jsp" />	
+	<jsp:include page="../layout/ceoTop.jsp" />
 	<!-- ceoTop Section End -->
 
 	<!-- ceoLeft Section Begin -->
@@ -394,7 +437,8 @@ var storeNo = $("input[id='storeNo']").val();
 									class="list-group-item list-group-item-action"
 									aria-current="true">주문 내역</button>
 								<button type="button"
-									class="list-group-item list-group-item-action">상점 정보 수정</button>
+									class="list-group-item list-group-item-action">상점 정보
+									수정</button>
 								<button type="button"
 									class="list-group-item list-group-item-action" class="addStore">
 									<span class="addStore">개인 정보 수정</span>
@@ -492,8 +536,8 @@ var storeNo = $("input[id='storeNo']").val();
 														<button type="button" data-value="${store.product.prodNo}"
 															name="buttons" class="btn btn-light btn-sm"
 															onClick="fncDeleteStoreProduct(this)">X</button> <input
-														type="hidden" id="storeNo" name="storeNo" data-store="${store.storeNo}"
-														value="${store.storeNo}" />
+														type="hidden" id="storeNo" name="storeNo"
+														data-store="${store.storeNo}" value="${store.storeNo}" />
 
 													</td>
 
@@ -516,12 +560,17 @@ var storeNo = $("input[id='storeNo']").val();
 							</div>
 						</div>
 					</div>
-				
+				</div>
+
+	
 
 
-			</div>
-			
-				<!-- 상품등록 End -->
+
+
+
+
+
+			<!-- 상품등록 End -->
 
 		</div>
 	</section>

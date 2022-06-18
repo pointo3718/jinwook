@@ -9,18 +9,17 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 public class LoggerInterceptor implements HandlerInterceptor {
-	
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+   
+   private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+   @Override
+   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+      
+      return true;
+   }
 
-		logger.debug("Request URI ===> " + request.getRequestURI());
-		return true;
-	}
+   @Override
+   public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
-	}
+   }
 }
