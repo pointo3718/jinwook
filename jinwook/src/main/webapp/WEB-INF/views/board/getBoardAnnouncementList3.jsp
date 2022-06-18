@@ -67,10 +67,6 @@ body {
 	font-family: arial;
 }
 </style>
-
-
-
-
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 function fncDeleteAnnouncement(e) {
@@ -121,7 +117,7 @@ function fncDeleteAnnouncement(e) {
             });
 
       //==> userId LINK Event End User 에게 보일수 있도록 
-      $("td:nth-child(2)").css("color", "red");
+      $("td:nth-child(2)").css("color", "green");
 
    });
 
@@ -198,6 +194,8 @@ function fncDeleteAnnouncement(e) {
                <th align="center">No</th>
                <th align="left">공지사항 제목</th>
                <th align="left">작성일</th>
+               <th align="left">조회수</th>
+               <th align="left">삭제</th>
             </tr>
          </thead>
 
@@ -207,9 +205,10 @@ function fncDeleteAnnouncement(e) {
             <c:forEach var="board" items="${getBoardAnnouncementList}">
                <c:set var="i" value="${ i+1 }" />
                <tr>
-                  <td align="Center">${ board.boardNo }</td>
+                  <td align="Center">${board.boardNo}</td>
                   <td align="left">${board.boardTitle}</td>
                   <td align="left">${board.writeDate}</td>
+                  <td align="Center">${board.boardHits}</td>
                   <td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteAnnouncement(this)">X</button></td>
                </tr>
             </c:forEach>

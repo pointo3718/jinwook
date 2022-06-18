@@ -38,13 +38,11 @@ $(function(){
 	});
 });
 
-function fn_fileDown(attachNo) {
-	var formObj = $("form[name='readForm']");
-	$("#attach_no").attr("value", attachNo);
-	formObj.attr("action", "/board/fileDown");
-	formObj.submit();
-}
-
+$("#replyWriteBtn").on("click", function(){
+	  var formObj = $("form[name='replyForm']");
+	  formObj.attr("action", "/board/addComment");
+	  formObj.submit();
+	});
 </script>
 
 </head>
@@ -109,7 +107,9 @@ function fn_fileDown(attachNo) {
 			</c:choose>
 			<!-- <div class="col-xs-7 col-md-5">${board.boardInqStatus}</div> -->
 		</div>
-<%-- <!-- 댓글 -->
+		<hr/>
+ <!-- 댓글 -->
+<div class="row">
 <div id="comment">
   <ol class="commentList">
     <c:forEach items="${commentList}" var="board">
@@ -120,13 +120,26 @@ function fn_fileDown(attachNo) {
         작성 날짜 :  <fmt:formatDate value="${board.comment.commentDate}" pattern="yyyy-MM-dd" />
         </p> 
 
-        <p>${board.comment.commentContent}</p>
+        <p>댓글: ${board.comment.commentContent}</p>
       </li>
     </c:forEach>   
   </ol>
+</div>
 </div>	
 
-<form method="post" action="/board/addComment">
+<form name="replyForm" method="post">
+  <input type="hidden" id="boardNo" name="boardNo" value="${board.comment.boardNo}" />
+  <div>
+    <label for="writer">댓글 작성자: </label><input type="text" id="writer" name="writer" />
+    <br/>
+    <label for="content">댓글 내용: </label><input type="text" id="content" name="content" />
+  </div>
+  <div>
+ 	 <button type="button" id="replyWriteBtn" class="replyWriteBtn">작성</button>
+  </div>
+</form>
+
+<%-- <form method="post" action="/board/addComment">
   <p>
   	<label>댓글 작성자</label><input type="text" name="writer">
   </p>
