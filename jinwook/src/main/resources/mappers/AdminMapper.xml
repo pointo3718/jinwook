@@ -12,10 +12,6 @@
 	   <result property="user.userName"  column="user_name"    jdbcType="CHAR"/>      
 	</resultMap>
 	
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/master
 	<sql id="usersColumns">
 		  user_id
 		, user_name
