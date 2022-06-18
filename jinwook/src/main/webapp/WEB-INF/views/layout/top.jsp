@@ -31,8 +31,8 @@ a{
    
 .row.navbar{
     display: flex;
-      justify-content: center;
-   align-items: center;
+    justify-content: center;
+   	align-items: center;
 }
 
 </style> 
@@ -187,7 +187,6 @@ a{
                      src="${path}/resources/static/img/logo.png" alt="" style="width: 200px; margin-left: 27px;"></a>
                </div>
             </div>
-
          </div>
          <div class="humberger__open">
             <i class="fa fa-bars"></i>
@@ -225,7 +224,7 @@ a{
             <nav class="header__menu" style="padding-top: 0px; padding-bottom: 15px; position:sticky;">
                   <ul>
                      
-                     <li><a href="./shop-grid.html">Shop</a></li>
+                     <li ><a href="./shop-grid.html">Shop</a></li>
                      <li><a href="#">Pages</a>
                         <ul class="header__menu__dropdown">
                            <li><a href="/store/addStoreProduct?storeNo=10000">Shop Details</a></li>
