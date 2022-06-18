@@ -183,6 +183,7 @@ label {
 	cursor: inherit;
 	display: block;
 }
+
 </style>
 
 <script type="text/javascript">
