@@ -79,25 +79,6 @@ public class BoardController {
 		System.out.println(this.getClass());
 	}
 	
-	//파일 다운로드
-	@RequestMapping(value="/fileDown")
-	public void fileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
-		
-		Map<String, Object> resultMap = boardService.selectAttachInfo(map);
-		String storedFileName = (String) resultMap.get("stored_file_name");
-		String originalFileName = (String) resultMap.get("org_file_name");
-		System.out.println(originalFileName);
-		
-		// 파일을 저장했던 위치에서 첨부파일을 읽어 byte[]형식으로 변환한다.
-		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img"+storedFileName));
-		
-		response.setContentType("application/octet-stream");
-		response.setContentLength(fileByte.length);
-		response.setHeader("Content-Disposition",  "attachment; fileName=\""+URLEncoder.encode(originalFileName, "UTF-8")+"\";");
-		response.getOutputStream().write(fileByte);
-		response.getOutputStream().flush();
-		response.getOutputStream().close();
-	}
 	
 	//1:1문의 등록 화면
 	@GetMapping(value = "addBoardInquiryView")
@@ -127,67 +108,56 @@ public class BoardController {
 		return "board/addBoardInquiryView"; //보여줄 화면: .jsp
 	}
 	
-	//1:1문의등록 + 사진첨부
-	@RequestMapping(value = "addBoardInquiry", method = RequestMethod.POST) 
-	public String addBoardInquiry(Board board, MultipartHttpServletRequest mpRequest, HttpSession session) throws Exception {
-		System.out.println("/board/addBoardInquiry: POST");
-		
-		User user = new User();
-		String userId = ((User) session.getAttribute("user")).getUserId();
-		user.setUserId(userId);
-		board.setUser(user);
-		
-		boardService.addBoardInquiry(board, mpRequest);
-		return "redirect:/board/getBoardInquiryList";
-	}
-	
-//	//1:1문의 등록
-//	//페이징 처리 후 로직 추가 필요.
-//	@PostMapping(value = "addBoardInquiry")
-//	public String addBoardInquiry(Board board, HttpSession session, HttpServletRequest request, @RequestPart MultipartFile files) throws Exception {
+//	//1:1문의등록 + 사진첨부
+//	@RequestMapping(value = "addBoardInquiry", method = RequestMethod.POST) 
+//	public String addBoardInquiry(Board board, MultipartHttpServletRequest mpRequest, HttpSession session) throws Exception {
 //		System.out.println("/board/addBoardInquiry: POST");
-//		
-//		Board boardVO = new Board();
-//		FileVO  file  = new FileVO();
-//		boardVO.setBoardTitle(request.getParameter("boardTitle"));
-//		boardVO.setBoardContent(request.getParameter("boardContent"));
-//
-//		Map<String, Object> pagingParams = getPagingParams(board);
 //		
 //		User user = new User();
 //		String userId = ((User) session.getAttribute("user")).getUserId();
 //		user.setUserId(userId);
 //		board.setUser(user);
 //		
-//		if(files.isEmpty()) { //업로드 할 파일이 없을 시
-//			boardService.addBoardInquiry(boardVO);
-//		} else {
-//			String fileName = files.getOriginalFilename();
-//			String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
-//			File destinationFile; 
-//			String destinationFileName;
-//			String fileUrl = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img";
-//			
-//			do { 
-//				destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension; 
-//				destinationFile = new File(fileUrl + destinationFileName); 
-//			} while (destinationFile.exists()); 
-//			
-//			destinationFile.getParentFile().mkdirs(); 
-//			files.transferTo(destinationFile);
-//
-//			boardService.addBoardInquiry(board);//게시글 등록
-//			
-//			file.setBoardNo(board.getBoardNo());
-//			file.setFileName(destinationFileName);
-//			file.setFileOriName(fileName);
-//			file.setFileUrl(fileUrl);
-//			
-//			boardService.fileBoardInsert(file); //파일 등록
-//		}
-//		
+//		boardService.addBoardInquiry(board, mpRequest);
 //		return "redirect:/board/getBoardInquiryList";
 //	}
+	
+	//1:1문의등록 + 사진첨부
+	@RequestMapping(value = "addBoardInquiry", method = RequestMethod.POST) 
+	public String addBoardInquiry(Board board, MultipartHttpServletRequest mpRequest, HttpSession session) throws Exception {
+		System.out.println("/board/addBoardInquiry: POST");
+		User user = new User();
+		String userId = ((User) session.getAttribute("user")).getUserId();
+		user.setUserId(userId);
+		board.setUser(user);
+		
+		List<MultipartFile> fileList = mpRequest.getFiles("file");
+        String src = mpRequest.getParameter("src");
+
+        String path = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img";
+
+        for (MultipartFile mf : fileList) {
+            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long fileSize = mf.getSize(); // 파일 사이즈
+
+            System.out.println("originFileName : " + originFileName);
+            System.out.println("fileSize : " + fileSize);
+
+            String safeFile = path + originFileName;
+            try {
+                mf.transferTo(new File(safeFile));
+                boardService.addBoardInquiry(board, mpRequest);
+            } catch (IllegalStateException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+		
+		return "redirect:/board/getBoardInquiryList";
+	}
 	
 	// 1:1문의 수정 화면v
 	@GetMapping(value = "updateBoardInquiryView")
@@ -207,7 +177,7 @@ public class BoardController {
 	
 	//1:1문의 수정
 	@PostMapping(value = "updateBoardInquiry")
-	public String updateBoardInquiry(@ModelAttribute("board") Board board, RedirectAttributes rttr, @RequestParam(value="fileNoDel[]") String[] files,
+	public String updateBoardInquiry(Board board, RedirectAttributes rttr, @RequestParam(value="fileNoDel[]") String[] files,
 			 @RequestParam(value="fileNameDel[]") String[] fileNames, MultipartHttpServletRequest mpRequest,
 			@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) throws Exception {
 		System.out.println("/board/updateBoardInquiry: POST");
@@ -314,7 +284,7 @@ public class BoardController {
 	}
 	
 	//1:1문의 상세 조회
-	@GetMapping(value = "getBoardInquiry2")
+	@GetMapping(value = "getBoardInquiry")
 	public String getBoardInquiry(Board board, @RequestParam(value = "boardNo", required = false) int boardNo, Model model) throws Exception {
 		System.out.println("/board/getBoardInquiry: GET");
 		
@@ -327,18 +297,20 @@ public class BoardController {
 		System.out.println(fileList);
 		model.addAttribute("file", fileList);//첨부 파일 리스트 조회할 수 있도록 데이터 전송
 		
-//		List<Comment> commentList = boardService.getComment(board.getBoardNo());
-//		model.addAttribute("commentList", commentList);
+		List<Comment> commentList = boardService.getComment(board.getBoardNo());
+		model.addAttribute("commentList", commentList);
 		
-		return "board/getBoardInquiry2";
+		return "board/getBoardInquiry";
 	}
 	
 	// 1:1 문의 답변(댓글) 작성
 	@RequestMapping(value = "/addComment", method = RequestMethod.POST)
-	public String addComment(Comment comment) throws Exception {
+	public String addComment(Comment comment, RedirectAttributes rttr) throws Exception {
 		System.out.println("댓글작성: POST");
 
 		boardService.addComment(comment);
+		
+		rttr.addAttribute("boardNo", comment.getBoardNo());
 		
 		return "redirect:/board/getBoardInquiry?boardNo="+comment.getBoardNo();
 	}
@@ -353,11 +325,9 @@ public class BoardController {
 		boardService.updateBoardAnnouncementHits(boardNo);
 		//공지사항 작성자 id
 		User user1 = userService.getUser(userId);
-		User user2 = userService.getUser(((User) session.getAttribute("user")).getUserId());
 		Board board = boardService.getBoardAnnouncement(boardNo);
 		
 		model.addAttribute("user1",user1);
-		model.addAttribute("user2",user2);
 		model.addAttribute("board", board);
 		
 		return "board/getBoardAnnouncement";
@@ -390,7 +360,7 @@ public class BoardController {
 	
 	
 	// 레시피 등록 화면v
-	@GetMapping(value = "addRecipeView")
+	@GetMapping(value = "addRecipeView2")
 	public String addRecipeView(@RequestParam(value = "rcpNo", required = false) Integer rcpNo,
 			@RequestParam(value = "userId", required = false) String userId, Model model) throws Exception {
 		System.out.println("/board/addRecipeView: GET");
@@ -409,7 +379,7 @@ public class BoardController {
 			System.out.println(user);
 			System.out.println(recipe);
 		}
-		return "board/addRecipeView"; // 보여줄 화면: .jsp
+		return "board/addRecipeView2"; // 보여줄 화면: .jsp
 	}
 	
 	
