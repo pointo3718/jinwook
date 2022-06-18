@@ -71,28 +71,10 @@
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
-.sticky {
-	position: -webkit-sticky;
-	position: sticky;
-	top: 0;
-	background: #ffffff;
-	z-index: 10;
-}
-
 .row {
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
-}
-
-.mytop01 {
-	padding-left: 20px;
-}
-
-.mytop01-content {
-	padding-left: 180px;
-	color: #6A8F00;
-	display: inline;
 }
 
 .blog {
@@ -120,44 +102,6 @@
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-}
-
-.id_ok {
-	color: #7fad39;
-	display: none;
-	font-size: 10px;
-}
-
-.id_already {
-	color: red;
-	display: none;
-	font-size: 10px;
-	text-align: left;
-}
-
-.control-label {
-	whidth: 250px;
-	text-align: center;
-	justify-content: center;
-}
-
-.site-btn {
-	background-color: #7fad39; /* Green */
-	border: none;
-	color: white;
-	width: 200px;
-	text-align: center;
-	font-size: 20px;
-}
-
-.userId {
-	width: 300px;
-	text-indent: 1em;
-}
-
-.ss {
-	font-size: 30px;
-	justify-content: center;
 }
 
 input {
@@ -334,7 +278,8 @@ label {
 									class="list-group-item list-group-item-action"
 									aria-current="true">주문 내역</button>
 								<button type="button"
-									class="list-group-item list-group-item-action">상점 정보 수정</button>
+									class="list-group-item list-group-item-action">상점 정보
+									수정</button>
 								<button type="button"
 									class="list-group-item list-group-item-action" class="addStore">
 									<span class="addStore">개인 정보 수정</span>
@@ -413,7 +358,7 @@ label {
 					<!--지갑조회 주문내역 테이블 start-->
 
 					<h6 class="text-left">
-					
+
 						<strong>기간별 주문내역</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
 							style="color: #6E6E6E; font-size: 13px">${store.orderDateStart}~${store.orderDateEnd}</span>
 					</h6>

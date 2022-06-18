@@ -38,6 +38,12 @@
 	width: 550px;
 	
 	}
+	
+	.row{
+   display: flex;
+    justify-content: center;
+   align-items: flex-start;
+}
 	</style>
 </head>
 

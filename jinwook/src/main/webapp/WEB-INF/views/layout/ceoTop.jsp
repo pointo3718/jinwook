@@ -155,8 +155,8 @@ label {
 						<div class="bg-white text-black mx-3">
 
 							</br> <strong class="mytop01">${store.user.userName} 사장님</strong> </br> </br>
-							<h6 class="mytop01">진욱이네와 처음 만난 날</h6>
-							<h3 class="mytop01-content">${store.user.regDate}</h3>
+							<h6 class="mytop01"><strong>진욱이네와 처음 만난 날</strong>&nbsp;&nbsp;<i class="fa fa-heartbeat" aria-hidden="true" style="font-size:30px;"></i></h6>
+							<div class="mytop01-content"><span style="font-size:20px;">${store.user.regDate}</span></div>
 							</br> </br>
 
 						</div>
@@ -166,7 +166,7 @@ label {
 						<div class="bg-white text-black mx-3">
 
 							</br> <strong class="mytop01">진욱페이</strong> </br> </br>
-							<h1 class="mytop01-content">${store.user.jpBalance}원</h1>
+							<div class="mytop01-content"><span style="font-size:35px;">${store.user.jpBalance}</span>원</div>
 							</br> </br>
 
 						</div>
@@ -176,6 +176,7 @@ label {
 						<div class="bg-white text-black mx-3">
 
 							</br> <strong class="mytop01">${store.storeName}</strong> </br> </br>
+							&nbsp;&nbsp;&nbsp;&nbsp;
 							<div class="btn-group btn-group-toggle" data-toggle="buttons">
 								<label class="btn btn-success btn-sm active"> <input
 									type="radio" name="options" id="option1" checked> 오픈
@@ -183,7 +184,8 @@ label {
 									type="radio" name="options" id="option2"> 마감
 								</label>
 							</div>
-							<h6 class="mytop01-content">${store.storeAddr}</h6>
+							</br>
+							<div class="mytop01-content"><span style="font-size:15px;"><strong>${store.storeAddr}</strong></span></div>
 
 							</br> </br>
 
