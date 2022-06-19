@@ -6,12 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.jinwook.home.common.FileUtils;
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.StoreMapper;
 import com.jinwook.home.service.domain.Coupon;
@@ -22,141 +26,136 @@ import com.jinwook.home.service.domain.Store;
 @Service
 public class StoreServiceImpl implements StoreService {
 
-   @Autowired
-   private StoreMapper storeMapper;
+	@Resource(name = "fileUtils")
+	private FileUtils fileUtils;
 
-   @Override
-   public boolean updateStore(Store store) {
+	@Autowired
+	private StoreMapper storeMapper;
 
-      int queryResult = 0;
-      queryResult =storeMapper.updateStore(store);
-      
-      return (queryResult == 1) ? true : false;
-   }
+	@Override
+	public boolean updateStore(Store store) {
 
-   @Override
-   public void addStoreProduct(Product product) {
+		int queryResult = 0;
+		queryResult = storeMapper.updateStore(store);
 
-      storeMapper.addStoreProduct(product);
-   }
+		return (queryResult == 1) ? true : false;
+	}
 
-   @Override
-   public boolean updateStoreProduct(Product product) {
+	@Override
+	public void addStoreProduct(Product product) {
 
-      int queryResult = 0;
-      queryResult =storeMapper.updateStoreProduct(product);
-      return (queryResult == 1) ? true : false;
-   }
+		storeMapper.addStoreProduct(product);
+	}
 
-   @Override
-   public boolean deleteStoreProduct(int prodNo) {
+	@Override
+	public boolean updateStoreProduct(Product product) {
 
-      int queryResult = 0;
-      queryResult =storeMapper.deleteStoreProduct(prodNo);
-      return (queryResult == 1) ? true : false;
-   }
+		int queryResult = 0;
+		queryResult = storeMapper.updateStoreProduct(product);
+		return (queryResult == 1) ? true : false;
+	}
 
-   @Override
-   public boolean isSoldout(Product product) {
+	@Override
+	public boolean deleteStoreProduct(int prodNo) {
 
-      int queryResult = 0;
-      queryResult =storeMapper.isSoldout(product);
-      return (queryResult == 1) ? true : false;
+		int queryResult = 0;
+		queryResult = storeMapper.deleteStoreProduct(prodNo);
+		return (queryResult == 1) ? true : false;
+	}
 
-   }
+	@Override
+	public boolean isSoldout(Product product) {
 
-   @Override
-   public boolean isOpen(Store store) {
+		int queryResult = 0;
+		queryResult = storeMapper.isSoldout(product);
+		return (queryResult == 1) ? true : false;
 
-      int queryResult = 0;
-      queryResult =storeMapper.isOpen(store);
-      return (queryResult == 1) ? true : false;
-   }
+	}
 
-   @Override
-   public boolean addOrdersCoupon(int couponNo) {
+	@Override
+	public boolean isOpen(Store store) {
 
-      int queryResult = 0;
-      queryResult = storeMapper.addOrdersCoupon(couponNo);
-      return (queryResult == 1) ? true : false;
-   }
-   
+		int queryResult = 0;
+		queryResult = storeMapper.isOpen(store);
+		return (queryResult == 1) ? true : false;
+	}
 
-   @Override
-   public List<Coupon> getCouponList(String userId) {
-      List<Coupon> couponList = Collections.emptyList();
+	@Override
+	public boolean addOrdersCoupon(int couponNo) {
 
-      int couponTotalCount = storeMapper.getCouponTotalCount();
+		int queryResult = 0;
+		queryResult = storeMapper.addOrdersCoupon(couponNo);
+		return (queryResult == 1) ? true : false;
+	}
 
-      if (couponTotalCount > 0) {
-         couponList = storeMapper.getCouponList(userId);
-      }
+	@Override
+	public List<Coupon> getCouponList(String userId) {
+		List<Coupon> couponList = Collections.emptyList();
 
-      return couponList;
-   }
+		int couponTotalCount = storeMapper.getCouponTotalCount();
 
+		if (couponTotalCount > 0) {
+			couponList = storeMapper.getCouponList(userId);
+		}
 
+		return couponList;
+	}
 
-   @Override
-   public List<Store> getStore(int storeNo){
-      
-      List<Store> getStore = Collections.emptyList();
-      
-      int storeTotalCount = storeMapper.getStoreTotalCount();
+	@Override
+	public List<Store> getStore(int storeNo) {
 
-      if (storeTotalCount > 0) {
-         getStore = storeMapper.getStore(storeNo);
-      }
+		List<Store> getStore = Collections.emptyList();
 
-      return getStore;
-   }
-   
-   @Override
-   public List<Store> getStoreInfo(int storeNo){
-      
-      List<Store> getStore = Collections.emptyList();
-      
-      int storeTotalCount = storeMapper.getStoreTotalCount();
+		int storeTotalCount = storeMapper.getStoreTotalCount();
 
-      if (storeTotalCount > 0) {
-         getStore = storeMapper.getStoreInfo(storeNo);
-      }
+		if (storeTotalCount > 0) {
+			getStore = storeMapper.getStore(storeNo);
+		}
 
-      return getStore;
-   }
-   
-   @Override
-   public List<Store> getStoreRefund(int storeNo){
-      
-      List<Store> getStore = Collections.emptyList();
-      
-      int storeTotalCount = storeMapper.getStoreTotalCount();
+		return getStore;
+	}
 
-      if (storeTotalCount > 0) {
-         getStore = storeMapper.getStoreRefund(storeNo);
-      }
+	@Override
+	public List<Store> getStoreInfo(int storeNo) {
 
-      return getStore;
-   }
+		List<Store> getStore = Collections.emptyList();
 
+		int storeTotalCount = storeMapper.getStoreTotalCount();
 
-   
+		if (storeTotalCount > 0) {
+			getStore = storeMapper.getStoreInfo(storeNo);
+		}
 
+		return getStore;
+	}
 
+	@Override
+	public List<Store> getStoreRefund(int storeNo) {
 
-   @Override
-   public List<Store> getStoreWallet(Store store) {
-      
-      List<Store> getStoreWallet = Collections.emptyList();
+		List<Store> getStore = Collections.emptyList();
 
-      int storeTotalCount = storeMapper.getStoreWalletTotalCount();
+		int storeTotalCount = storeMapper.getStoreTotalCount();
 
-      if (storeTotalCount > 0) {
-         getStoreWallet = storeMapper.getStoreWallet(store);
-      }
+		if (storeTotalCount > 0) {
+			getStore = storeMapper.getStoreRefund(storeNo);
+		}
 
-      return getStoreWallet;
-      
-   }
-   
+		return getStore;
+	}
+
+	@Override
+	public List<Store> getStoreWallet(Store store) {
+
+		List<Store> getStoreWallet = Collections.emptyList();
+
+		int storeTotalCount = storeMapper.getStoreWalletTotalCount();
+
+		if (storeTotalCount > 0) {
+			getStoreWallet = storeMapper.getStoreWallet(store);
+		}
+
+		return getStoreWallet;
+
+	}
+
 }

@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
+import com.jinwook.home.service.domain.Store;
 
 @Component("fileUtils")
 public class FileUtils {
@@ -177,6 +178,8 @@ public class FileUtils {
 		}
 		return list;
 	}
+	
+	
 	
 	public static String getRandomString() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
