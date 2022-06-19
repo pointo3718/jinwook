@@ -386,7 +386,7 @@ public class BoardController {
 		//레시피 등록 처리v
 		//페이징 처리 후 로직 추가 필요.
 		@PostMapping(value = "addRecipe")//MultipartFile files = <input type name="files">
-		public String addRecipe(Recipe recipe,  HttpSession session, MultipartHttpServletRequest mpRequest, Model model) throws Exception {
+		public String addRecipe(Recipe recipe,  MultipartHttpServletRequest mpRequest, HttpSession session) throws Exception {
 			System.out.println("/board/addRecipe: POST");
 			
 			String userId = ((User) session.getAttribute("user")).getUserId();
