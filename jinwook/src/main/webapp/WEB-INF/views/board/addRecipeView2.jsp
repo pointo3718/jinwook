@@ -11,7 +11,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>상점등록</title>
+<title>레시피 등록</title>
 
 <!-- Google Font -->
 <link
@@ -71,6 +71,8 @@
 .blog__sidebar__item {
 	width: 200px;
 }
+
+
 </style>
 
 <script type="text/javascript">
@@ -112,46 +114,6 @@ function fn_addFile() {
 
 
 
-		<div class="container">
-			<c:forEach var="store" items="${storeInfo}" begin="0" end="0">
-				<input type="hidden" id="storeNo" data-value="${store.storeNo}"
-					value="${store.storeNo}" />
-				<div class="row my-1">
-
-					<div class="col-4">
-						<div class="bg-white text-black mx-3">
-
-							</br> <strong class="mytop01"><h5>${store.user.userName}
-									사장님</h5></strong> </br> </br> </br> </br>
-
-						</div>
-					</div>
-
-					<div class="col-4">
-						<div class="bg-white text-black mx-3">
-
-							</br> <strong class="mytop01">진욱페이 ></strong> </br> </br>
-							<h1 class="mytop01-content">${store.user.jpBalance}</h1>
-							원 </br> </br>
-
-
-						</div>
-					</div>
-
-					<div class="col-4">
-						<div class="bg-white text-black mx-3">
-
-							</br> <strong class="mytop01">${store.storeName}</strong> </br> </br>
-							<h1 class="mytop01-content"></h1>
-							</br> </br>
-
-
-						</div>
-					</div>
-
-				</div>
-			</c:forEach>
-		</div>
 		<!-- /container -->
 	</section>
 	<!-- Breadcrumb Section End -->
@@ -159,7 +121,6 @@ function fn_addFile() {
 	<!-- Blog Section Begin -->
 	<section class="blog spad">
 		<div class="container">
-			<div class="row" style="justify-content: space-around;">
 
 				<!-- 상점 정보 수정 -->
 				<div>
@@ -171,57 +132,61 @@ function fn_addFile() {
 
 
 
-					<form id="MultiUpload" action="addRecipe" method="post" enctype="multipart/form-data">						
+					<form id="MultiUpload" method="post" enctype="multipart/form-data">						
+					<div class="row">
 							<div class="form-group">
 								<label for="rcpTitle"
-									class="col-sm-offset-1 col-sm-3 control-label">레시피 제목</label>
-								<div class="col-lg-4" style="float: right;">
-									<input type="text" class="form-control" id="rcpTitle"name="rcpTitle"><span
+									class="col-sm-offset-1 col-sm-5 control-label">레시피 제목</label>
+								<div class="col-sm-4" style="float: right;">
+									<input type="text" class="form-control" id="rcpTitle"name="rcpTitle" style="width:300px;height:50px;font-size:15px;"><span
 										id="helpBlock" class="help-block"> </span>
 								</div>
 							</div>
+					</div>
 
 
-
+					<div class="row">
 							<div class="form-group">
 								<label for="rcpContent"
-									class="col-sm-offset-1 col-sm-3 control-label">레시피 내용</label>
+									class="col-sm-offset-1 col-sm-5 control-label">레시피 내용</label>
 								<div class="col-sm-4" style="float: right;">
-								<textarea id="summernote" class="form-control" rows="5" id="rcpContent" name="rcpContent"></textarea>
-										> <span id="helpBlock" class="help-block">
+								<textarea id="summernote" class="form-control" rows="5" id="rcpContent" name="rcpContent" style="width:300px;height:200px;font-size:15px;"></textarea>
+										<span id="helpBlock" class="help-block">
 									</span>
 								</div>
 							</div>
+						</div>
 
+					<div class="row">
 							<div class="form-group">
 								<label for="rcpIngredient"
-									class="col-sm-offset-1 col-sm-3 control-label">레시피 재료</label>
+									class="col-sm-offset-1 col-sm-5 control-label">레시피 재료</label>
 								<div class="col-sm-4" style="float: right;">
-									<input type="text" class="form-control" id="rcpIngredient"
-										name="rcpIngredient" > <span
-										id="helpBlock" class="help-block"> </span>
+								<textarea id="summernote" class="form-control" rows="5" id="rcpIngredient" name="rcpIngredient" style="width:300px;height:200px;font-size:15px;"></textarea>
 								</div>
 							</div>
+						</div>
 
+					<div class="row">
 							<div class="form-group">
 								<label for="storeIntro"
-									class="col-sm-offset-3 col-sm-3 control-label">레시피 소개</label>
+									class="col-sm-offset-3 col-sm-5 control-label">레시피 소개</label>
 								<div class="col-sm-4" style="float: right;">
-								
-									<input type="text" class="form-control" id="rcpInfo"
-										name="rcpInfo" >
+								<textarea id="summernote" class="form-control" rows="5" id="rcpInfo" name="rcpInfo" style="width:300px;height:200px;font-size:15px;"></textarea>
 								</div>
 							</div>
+						</div>
 
+					<div class="row">
 							<div class="form-group">
 								<label for="file"
-									class="col-sm-offset-1 col-sm-3 control-label">레시피 사진 업로드</label>
+									class="col-sm-offset-3 col-sm-5 control-label">레시피 사진 업로드</label>
 								<div class="col-sm-4" style="float: right;">
 									<input type="file" class="form-control" id="file"
-										name="file" >
+										name="file" style="width:250px;height:50px;font-size:15px;">
 								</div>
 							</div>
-
+						</div>
 
 
 					<div class="form-group">
@@ -235,7 +200,6 @@ function fn_addFile() {
 				</div>
 				</form>
 				<div class="text-center"></div>
-			</div>
 		</div>
 	</section>
 	<!-- Blog Section End -->

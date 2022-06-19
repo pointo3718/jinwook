@@ -394,7 +394,31 @@ public class BoardController {
 			user.setUserId(userId);
 			recipe.setUser(user);
 			
-			boardService.addRecipe(recipe, mpRequest);//레시피 등록
+			List<MultipartFile> fileList = mpRequest.getFiles("file");
+	        String src = mpRequest.getParameter("src");
+
+	        String path = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img";
+
+	        for (MultipartFile mf : fileList) {
+	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+	            long fileSize = mf.getSize(); // 파일 사이즈
+
+	            System.out.println("originFileName : " + originFileName);
+	            System.out.println("fileSize : " + fileSize);
+
+	            String safeFile = path + originFileName;
+	            try {
+	                mf.transferTo(new File(safeFile));
+	                boardService.addRecipe(recipe, mpRequest);//레시피 등록
+	            } catch (IllegalStateException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            } catch (IOException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            }
+	        }
+			
 
 			return "redirect:/board/getRecipeList";
 		}
