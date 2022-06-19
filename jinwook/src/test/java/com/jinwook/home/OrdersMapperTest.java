@@ -53,7 +53,7 @@ public class OrdersMapperTest {
       orders.setBuyerPhone("010-1234-9876");
 //      ZoneId zoneId = ZoneId.of("Asia/Seoul");
 //      orders.setPickupTime(LocalDateTime.now().plusMinutes(orders.getPlusTime()));
-      orders.setPickupTime(LocalDateTime.now().plusMinutes(orders.getPlusTime()));
+//      orders.setPickupTime(LocalDateTime.now().plusMinutes(orders.getPlusTime()));
       orders.setOrderReq(null);
       orders.setProdCount(3);
       orders.setOrderStatus("0");
@@ -86,7 +86,7 @@ public class OrdersMapperTest {
    
    @Test
    public void testSelectListOrders() {
-	  Orders orders = new Orders();
+     Orders orders = new Orders();
       int ordersTotalCount = ordersMapper.getOrdersTotalCount(orders);
       if(ordersTotalCount > 0) {
          List<Orders> ordersList = ordersMapper.getOrdersList(orders);
@@ -113,7 +113,7 @@ public class OrdersMapperTest {
    
    //@Test
    public void testgetOrders() {
-	  Orders orders = new Orders();
+     Orders orders = new Orders();
       int ordersTotalCount = ordersMapper.getOrdersTotalCount(orders);
       if(ordersTotalCount > 0) {
          List<Orders> ordersGet = ordersMapper.getOrders(10007);
@@ -281,7 +281,7 @@ public class OrdersMapperTest {
    
    //@Test
    public void testgetOrdersJpaylist() {
-	   Jpay jpay =new Jpay();
+      Jpay jpay =new Jpay();
       int jpayTotalCount = ordersMapper.getOrdersJpayListTotalCount(jpay);
       System.out.println(jpayTotalCount);
       if(jpayTotalCount > 0) {
@@ -328,7 +328,7 @@ public class OrdersMapperTest {
    
    //@Test
    public void testgetOrdersNoticelist() {
-	   Notice notice = new Notice();
+      Notice notice = new Notice();
       int getOrdersNoticelistTotalCount = ordersMapper.getOrdersNoticeListTotalCount(notice);
       if(getOrdersNoticelistTotalCount > 0) {
          List<Notice> noticeList = ordersMapper.getOrdersNoticeList(notice);
