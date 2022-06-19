@@ -205,10 +205,6 @@ label {
 
 
 <script type="text/javascript">
-   /*<![CDATA[*/
-   function movePage(uri, queryString) {
-      location.href = uri + queryString;
-   }
 
    var storeNo = $("input[id='storeNo']").val();
    /*]]>*/
@@ -263,17 +259,6 @@ label {
    });
 
    $(function() {
-	      $(".list-group-item:contains('내가 한 요청')").on(
-	            "click",
-	            function() {
-	               //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	               $(self.location).attr("href",
-	                     "../request/getRequestAdStoreList?storeNo=10000&userId=test05");
-	            });
-	   });
-
-   
-   $(function() {
       $(".list-group-item:contains('1:1 문의내역')").on(
             "click",
             function() {
@@ -283,30 +268,6 @@ label {
             });
    });
 
-   //=======기간별 조회========//
-   function fncGetStoreWallet(e) {
-
-      var STORENO = $("input[id='storeNo']").val();
-      var ORDERDATESTART = $("#orderDateStart").val();
-      var ORDERDATEEND = $("#orderDateEnd").val();
-
-      $.ajax({
-         type : "get",
-         url : "getStoreWallet/" + STORENO + "/" + ORDERDATESTART + "/"
-               + ORDERDATEEND,
-         data : {},
-         dataType : "json",
-         success : function(d) { //성공
-            $("#ajaxResult").html(d);
-            self.location = "getStoreWallet?storeNo=" + STORENO
-                  + "&orderDateStart=" + ORDERDATESTART
-                  + "&orderDateEnd=" + ORDERDATEEND;
-         },
-         error : function(e) { //실패
-            alert("에러: " + e);
-         }
-      });
-   };//ajaxBtn
 </script>
 
 
@@ -380,90 +341,52 @@ label {
             <!-- 지갑 조회 start-->
             <div style="margin-bottom: 1150px; width: 850px;">
                <h4 class="text-left">
-                  <strong>지갑 조회</strong>&nbsp; <span
-                     style="color: #6E6E6E; font-size: 13px">기간을 설정하지 않을시 오늘
-                     날짜로 조회됩니다.</span>
-
+                  <strong>내가 한 요청</strong>&nbsp; <span
+                     style="color: #6E6E6E; font-size: 13px">요청 내역들을 한 눈에 볼 수 있습니다.</span>
                   <hr size="10px">
                </h4>
 
-               <!-- 지갑조회 테이블 start -->
-               <table class="table table-borderless">
-                  <c:forEach var="store" items="${getStoreWallet}" begin="0" end="0">
-
-                     <tbody>
-                        <tr>
-                           <th scope="row">기간별 상점매출액</th>
-                           <td>${store.totalEarn}원</td>
-                           <td><input id="orderDateStart" type="date"> <input
-                              id="orderDateEnd" type="date">&nbsp;&nbsp;
-                              <button type="button" id="selectOrder"
-                                 class="btn btn-outline-success btn-sm"
-                                 onClick="fncGetStoreWallet(this)">조회</button></td>
-                        </tr>
-
-
-                        <tr>
-                           <th scope="row">진욱페이 잔액</th>
-                           <td>${store.user.jpBalance}원</td>
-                           <td><button type="button"
-                                 class="btn btn-outline-success btn-sm">환급신청</button></td>
-                        </tr>
-                     </tbody>
-                     <input type="hidden" id="storeNo" value="${store.storeNo}">
-                  </c:forEach>
-               </table>
-
-
-
-               <!-- 지갑조회 테이블 End -->
-
-
-
                <!--지갑조회 주문내역 테이블 start-->
-
-<<<<<<< HEAD
-					<h6 class="text-left">
-
-						<strong>기간별 주문내역</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
-							style="color: #6E6E6E; font-size: 13px">${store.orderDateStart}~${store.orderDateEnd}</span>
-					</h6>
-=======
->>>>>>> refs/remotes/origin/master
                <h6 class="text-left">
                
-                  <strong>기간별 주문내역</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                  <strong>광고 요청 내역</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
                      style="color: #6E6E6E; font-size: 13px">${store.orderDateStart}~${store.orderDateEnd}</span>
                </h6>
 
                <table class="table table-hover table-striped">
 
-
                   <thead>
                      <tr>
                         <th align="center">No</th>
-                        <th align="left">주문번호</th>
-                        <th align="left">주문날짜</th>
-                        <th align="left">구매자이름</th>
-                        <th align="left">주문금액</th>
+                        <th align="left">광고 요청 제목</th>
+                        <th align="left">요청 날짜</th>
+                        <th align="left">요청 상태</th>
                      </tr>
                   </thead>
 
                   <tbody>
 
                      <c:set var="i" value="0" />
-                     <c:forEach var="store" items="${getStoreWallet}" begin="0">
+                     <c:forEach var="adRequest" items="${requestList}" begin="0">
                         <c:set var="i" value="${ i+1 }" />
-
+						<c:if test="${adRequest.reqCode eq 4}">
                         <tr>
                            <td align="Center">${ i }</td>
-                           <td align="left">${store.orders.orderNo}</td>
-                           <td align="left">${store.orders.orderDate}</td>
-                           <td align="left">${store.orders.buyerName}</td>
-                           <td align="left">${store.orders.orderPrice}원</td>
-
-
+                           <td align="left">${adRequest.adTitle}</td>
+                           <td align="left">${adRequest.reqDate}</td>
+                           <td>
+                           <c:if test="${adRequest.reqStatus.trim()=='1'}">
+                           <span>요청중</span>        
+                           </c:if> 
+                           <c:if test="${adRequest.reqStatus.trim()=='2'}">
+                           <span style="color: blue;">수락완료</span> &nbsp;(${adRequest.resDate})
+                           </c:if> 
+                           <c:if test="${adRequest.reqStatus.trim()=='3'}">
+                           <span style="color: red;">거절</span>         
+                           </c:if>
+                           </td>
                         </tr>
+                        </c:if>
                      </c:forEach>
 
 
@@ -471,48 +394,47 @@ label {
 
                </table>
                <!--지갑조회 주문내역 테이블 End-->
-
-
-
+				<br/>
+				<hr>
+			
                <!--지갑조회 환급내역 테이블 start-->
                <h6 class="text-left">
-                  <strong>환급내역</strong>
+                  <strong>상점 등록 요청 내역</strong>
                </h6>
                <table class="table table-hover table-striped">
-
+	
                   <thead>
                      <tr>
-                        <th align="center">No</th>
-                        <th align="left">환급신청날짜</th>
-                        <th align="left">환급완료날짜</th>
-                        <th align="left">환급금액</th>
-                        <th align="left">요청상태</th>
+                        <th align="left">상점이름</th>
+                        <th align="left">사장님ID</th>
+                        <th align="left">요청 날짜</th>
+                        <th align="left">요청 상태</th>
                      </tr>
                   </thead>
 
                   <tbody>
 
                      <c:set var="i" value="0" />
-                     <c:forEach var="store" items="${getStoreRefund}">
+                     <c:forEach var="addRequest" items="${requestList}">
                         <c:set var="i" value="${ i+1 }" />
-                        <tr>
-                           <td align="Center">${ i }</td>
-                           <td align="left">${store.request.reqDate}</td>
-                           <td align="left">${store.request.resDate}</td>
-                           <td align="left">${store.request.refundMoney}</td>
-                           <td align="left"><c:if
-                                 test="${store.request.reqStatus.trim()=='1'}">
-                                        요청중         
-                              </c:if> <c:if
-                                 test="${store.request.reqStatus.trim()=='2'}">
-                                        수락완료         
-                              </c:if> <c:if
-                                 test="${store.request.reqStatus.trim()=='3'}">
-                                        거절         
-                              </c:if></td>
-
-
+                        <c:if test="${addRequest.reqCode eq 1}">
+                         <tr>
+                           <td align="left">${addRequest.store.storeName}</td>
+                           <td align="left">${addRequest.userId}</td>
+                           <td align="left">${addRequest.reqDate}</td>
+						   <td>
+                           <c:if test="${addRequest.reqStatus.trim()=='1'}">
+                           <span>요청중</span>        
+                           </c:if> 
+                           <c:if test="${addRequest.reqStatus.trim()=='2'}">
+                           <span style="color: blue;">수락완료</span> &nbsp;(${addRequest.resDate})
+                           </c:if> 
+                           <c:if test="${addRequest.reqStatus.trim()=='3'}">
+                           <span style="color: red;">거절</span>         
+                           </c:if>
+                           </td>
                         </tr>
+                        </c:if>
                      </c:forEach>
 
                   </tbody>

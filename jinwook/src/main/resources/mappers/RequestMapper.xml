@@ -237,14 +237,16 @@
 	<!-- 광고/상점 등록 요청 목록 (사장님용)  -->
 	<select id="getRequestAdStoreList" parameterType="String" resultMap="requestSelectMap">
 		SELECT
-			r.req_no, r.ad_title, u.user_id, u.user_name, r.req_date, r.req_status, r.req_code
+			s.store_name, r.req_no, r.ad_title, u.user_id, u.user_name, r.req_date, r.res_date, r.req_status, r.req_code
 		FROM
-			request r, users u
+			request r, users u, store s
 		WHERE
 			(r.req_code = 1 OR r.req_code = 4)
             AND
 			r.user_id = u.user_id 
 			AND 
+			s.user_id = u.user_id
+			AND
 			u.user_id = #{userId}
 	</select>
 	

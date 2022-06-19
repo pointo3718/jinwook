@@ -183,18 +183,6 @@ label {
 	cursor: inherit;
 	display: block;
 }
-
-<<<<<<< HEAD
-.img_wrap {
-	width: 300px;
-	margin-top: 50px;
-}
-
-.img_wrap img {
-	max-width: 100%;
-}
-=======
->>>>>>> refs/remotes/origin/master
 </style>
 
 <script type="text/javascript">
@@ -342,35 +330,6 @@ label {
 	}
 </script>
 
-<script type="text/javascript" src="./js/jquery-3.1.0.min.js"
-	charset="utf-8"></script>
-<script type="text/javascript">
-	var sel_file;
-
-	$(document).ready(function() {
-		$("#input_img").on("change", handleImgFileSelect);
-	});
-
-	function handleImgFileSelect(e) {
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-
-		filesArr.forEach(function(f) {
-			if (!f.type.match("image.*")) {
-				alert("확장자는 이미지 확장자만 가능합니다.");
-				return;
-			}
-
-			sel_file = f;
-
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#img").attr("src", e.target.result);
-			}
-			reader.readAsDataURL(f);
-		});
-	}
-</script>
 
 </head>
 
@@ -543,24 +502,19 @@ label {
 									<label for="colFormLabelLg"
 										class="col-sm-2 col-form-label col-form-label">상점사진</label>
 									<div class="col-sm-6">
-										<div>
-											<input type="file" id="input_img"  />
-										</div>
-
-										<div>
-											<div class="img_wrap">
-												<img id="img" style="width: 350px; height: 350px;" img
-														src="${path}/resources/static/img/cart/cart-1.jpg"/>
-											</div>
-										</div>
-
+										<input type="text" name="storeImage"
+											class="form-control form-control" id="storeImage"
+											value="${store.storeImage}" placeholder="상점사진">
 									</div>
 								</div>
+								
+								    <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
 
-								<!-- 사진 연습 -->
-
-
-
+								<span class="btn btn-default btn-file"
+									style="padding-left: 260px; padding-bottom: 15px;"> 사진변경
+									<input type="file" name="file">
+								</span>
+								</form>
 
 								<div class="form-group row">
 									<label for="colFormLabelLg"
@@ -618,9 +572,9 @@ label {
 									<label for="colFormLabelLg"
 										class="col-sm-2 col-form-label col-form-label">은행명</label>
 									<div class="col-sm-6" style="padding-left: 0px;">
-										<div class="col-sm-6">
+										<div class="col-sm-6">			
 											<select id="bank">
-												<option>${store.bank}</option>
+											<option>${store.bank}</option>
 												<option>카카오뱅크</option>
 												<option>농협</option>
 												<option>신한</option>
