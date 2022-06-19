@@ -38,8 +38,6 @@ public class Orders extends CommonDTO{
 	private String reviewImg1;		//리뷰사진 1	|주문리뷰
 	private String reviewImg2;		//리뷰사진 2	|주문리뷰
 	private String reviewImg3;		//리뷰사진 3	|주문리뷰
-	private Date orderDateStart;
-	private Date orderDateEnd;
 	
 	public Orders() {
 		// TODO Auto-generated constructor stub

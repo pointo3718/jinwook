@@ -53,7 +53,7 @@ public class OrdersMapperTest {
       orders.setBuyerPhone("010-1234-9876");
 //      ZoneId zoneId = ZoneId.of("Asia/Seoul");
 //      orders.setPickupTime(LocalDateTime.now().plusMinutes(orders.getPlusTime()));
-      orders.setPickupTime(LocalDateTime.now().plusMinutes(orders.getPlusTime()));
+//      orders.setPickupTime(LocalDateTime.now().plusMinutes(orders.getPlusTime()));
       orders.setOrderReq(null);
       orders.setProdCount(3);
       orders.setOrderStatus("0");
