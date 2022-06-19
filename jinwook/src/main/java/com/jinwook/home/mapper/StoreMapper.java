@@ -53,5 +53,6 @@ public interface StoreMapper {
 	public int getProductTotalCount();
 	
 	public int getRequestTotalCount();
+	
 
 }

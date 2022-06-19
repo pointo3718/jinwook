@@ -4,8 +4,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-   
-   
+
 <html lang="ko">
 
 <title>ceoTop</title>
@@ -394,7 +393,6 @@ document.detailForm.submit();
     
     <!-- 상점 등록 Modal -->
 
-
    <!-- ceoTop Section Begin -->
    <section class="breadcrumb-section set-bg"
       style="background-color: #F2F2F2">
@@ -409,7 +407,7 @@ document.detailForm.submit();
                      <!-- 상점등록  Modal 테스트 중 -->
                      <a id="userdetail" data-toggle="modal" href="#addRequestStoreModal" data-userid="">상점 등록</a>
                      <!-- 상점등록  Modal 테스트 중 -->
-                     
+
                      <h6 class="mytop01"><strong>진욱이네와 처음 만난 날</strong>&nbsp;&nbsp;<i class="fa fa-heartbeat" aria-hidden="true" style="font-size:30px;"></i></h6>
                      <div class="mytop01-content"><span style="font-size:20px;">${store.user.regDate}</span></div>
                      </br> </br>
@@ -453,8 +451,8 @@ document.detailForm.submit();
       </c:forEach>
    </section>
    <!-- ceoTop Section End -->
-<script>
 
+<script>
 //////////////// 이미지 미리보기 1 시작 /////////////////
    var sel_file;
  
