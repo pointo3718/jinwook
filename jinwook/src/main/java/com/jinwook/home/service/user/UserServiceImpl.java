@@ -150,7 +150,7 @@ public class UserServiceImpl implements UserService{
 	         mimeMessageHelper.setSubject("[진욱이네] 아이디 안내를 드립니다.");
 	         String content= " ";
 	         content = user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r ";
-	         content += "<br><br> ";
+	         content += "<br><img src=\"${path}/resources/static/img/logo.png><br> ";
 	        content += "요청하신 아이디를 안내드립니다.\n ";
 	        content += "<br><br> ";
 	        content += user.getUserId();
