@@ -20,6 +20,7 @@ import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.request.RequestService;
+import com.jinwook.home.service.store.StoreService;
 
 @Controller
 @RequestMapping("/request/*")
@@ -29,22 +30,16 @@ public class RequestController {
 	@Qualifier("requestServiceImpl")
 	private RequestService requestService;
 	
+	@Autowired
+	@Qualifier("storeServiceImpl")
+	private StoreService storeService;
+	
 	public RequestController(){
 		System.out.println(this.getClass());
 	}
 	
 	
-	// ========== 상점 등록 요청 화면 ===========
-	@GetMapping( value="addRequestAddStore")
-	public String addUser() throws Exception{
-	
-		System.out.println("/request/addRequestAddStore : GET");
-		
-		return "redirect:/request/addRequestAddStoreView.jsp";
-	}
-	
-	
-	// ========== 상점 등록 요청 ===========
+	// ========== 상점 등록 요청 !!!!!!! 요청 목록 만들고 다시 !!!!!!!===========
 	@PostMapping(value = "addRequestAddStore")
 	public String addRequestAddStore(@ModelAttribute("Store") Store store) {
 		
@@ -52,7 +47,7 @@ public class RequestController {
 		
 		requestService.addRequestAddStore(store);
 
-		return "redirect:/request/addRequestAddStore";
+		return "redirect:/request/";
 	}
 	
 	// ========== 상점 등록 요청 상세 ===========
@@ -130,16 +125,20 @@ public class RequestController {
 		Request request = requestService.getRequestAd(reqNo);
 		model.addAttribute("request", request);
 		
-		return "request/getRequestAd.jsp";
+		return "request/getRequestAd";
 	}
 	
 	// ========== 상점/광고 신청 목록 (사장님용) ============ /////////// 다시
 	@GetMapping(value = "getRequestAdStoreList")
-	public String listUserAdmin(@RequestParam("userId") String userId, Model model) {
+	public String listUserAdmin(@RequestParam("storeNo") int storeNo, @RequestParam("userId") String userId, Model model) {
 		List<Request> requestList = requestService.getRequestAdStoreList(userId);
+		
+		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+	      
+	    model.addAttribute("storeInfo", storeInfo);
 		model.addAttribute("requestList", requestList);
 
-		return "/request/getUserListAdmin";
+		return "/request/listRequestForBoss";
 	}
 	
 	
