@@ -41,7 +41,7 @@ public class KakaoService {
 			sb.append("grant_type=authorization_code");
             
 			sb.append("&client_id=7a50e1995f458ef51a98c92f52419d00"); //본인이 발급받은 key
-			sb.append("&redirect_uri=http://127.0.0.1:8082/user/loginView"); // 본인이 설정한 주소
+			sb.append("&redirect_uri=http://127.0.0.1:8082/user/kakaoLogin"); // 본인이 설정한 주소
             
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
@@ -112,14 +112,50 @@ public class KakaoService {
 			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-
+//			String phone = kakao_account.getAsJsonObject().get("phone_number").getAsString();
+//			String birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
+//			String email = kakao_account.getAsJsonObject().get("email").getAsString();
+			System.out.println( properties.getAsJsonObject().get("nickname").getAsString());
+//			System.out.println( kakao_account.getAsJsonObject().get("email").getAsString());
+//			System.out.println( kakao_account.getAsJsonObject().get("gender").getAsString());
 			userInfo.put("nickname", nickname);
-			userInfo.put("email", email);
+//			userInfo.put("birthday", birthday);
+//			userInfo.put("phone", phone);
+//			userInfo.put("email", email);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return userInfo;
 	}
+	
+	public void getLogout(String access_token) {
+        String reqURL ="https://kapi.kakao.com/v1/user/logout";
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            
+            conn.setRequestProperty("Authorization", "Bearer " + access_token);
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+ 
+            if(responseCode ==400)
+                throw new RuntimeException("카카오 로그아웃 도중 오류 발생");
+            
+            
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            
+            String br_line = "";
+            String result = "";
+            while ((br_line = br.readLine()) != null) {
+                result += br_line;
+            }
+            System.out.println("결과");
+            System.out.println(result);
+        }catch(IOException e) {
+            
+        }
+    }
+
 }
