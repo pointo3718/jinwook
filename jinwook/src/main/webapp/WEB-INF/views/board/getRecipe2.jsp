@@ -316,6 +316,15 @@ var rcpNo = ${recipe.rcpNo};
                     <div class="col-lg-6 col-md-6">
                         <input type="text" placeholder="Your Email">
                     </div>
+                    
+                    <div class="col-lg-12 text-center">
+                    	<textarea>${recipe.rcpInfo}</textarea>
+                    </div>
+                    
+                    <div class="col-lg-12 text-center">
+                    	<textarea>${recipe.rcpIngredient}</textarea>
+                    </div>
+                    
                     <div class="col-lg-12 text-center">
                         <textarea>${recipe.rcpContent}</textarea>
                         <button type="submit" class="site-btn">SEND MESSAGE</button>
