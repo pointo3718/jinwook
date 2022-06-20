@@ -71,7 +71,7 @@ public class AdminRestController {
    
 	///////////////// 유저 상세 //////////////////
    @GetMapping( value={"/getUserRest/{userId}"} )
-   public JSONObject countPickup(@PathVariable(value = "userId", required = false) String userId, @ModelAttribute("user") User user) throws Exception{
+   public JSONObject getUserRest(@PathVariable(value = "userId", required = false) String userId, @ModelAttribute("user") User user) throws Exception{
       
       System.out.println("/admin/getUserRest : GET ");
       Gson gson = new Gson();      
@@ -80,9 +80,7 @@ public class AdminRestController {
       String userObj = gson.toJson(user);
       JSONParser parser = new JSONParser();
       JSONObject jsonObj = (JSONObject)parser.parse(userObj);
-		
-      System.out.println("픽업 개수 컨트롤러 통과");
-        
+		        
       return jsonObj;
    }
    

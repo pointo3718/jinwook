@@ -14,7 +14,7 @@ public class Cart {
 	private User user;
 	private Product product;	//prod_no,prod_name,prod_img,prod_info,price
 	private Orders orders;
-	private String storeName;
+	private Store store;
 	private int prodCount;
 	private boolean cartStatus;
 	public Cart() {

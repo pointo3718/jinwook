@@ -80,5 +80,6 @@
     <script src="${path}/resources/static/js/mixitup.min.js"></script>
     <script src="${path}/resources/static/js/owl.carousel.min.js"></script>
     <script src="${path}/resources/static/js/main.js"></script>
+    <script src="${path}/resources/static/js/common.js"></script>
 
 
