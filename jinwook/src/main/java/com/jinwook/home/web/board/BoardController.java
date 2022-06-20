@@ -169,7 +169,7 @@ public class BoardController {
 		Board board = boardService.getBoardInquiry(boardNo);
 		
 		model.addAttribute("board", boardService.getBoardInquiry(boardNo));
-		List<Map<String, Object>> fileList = boardService.selectAttachList(board.getBoardNo());
+		List<Map<String, Object>> fileList = boardService.selectBoardAttachList(board.getBoardNo());
 		model.addAttribute("file", fileList);
 			
 		return "board/updateBoardInquiryView"; // 보여줄 화면: .jsp
@@ -177,12 +177,10 @@ public class BoardController {
 	
 	//1:1문의 수정
 	@PostMapping(value = "updateBoardInquiry")
-	public String updateBoardInquiry(Board board, RedirectAttributes rttr, @RequestParam(value="fileNoDel[]") String[] files,
-			 @RequestParam(value="fileNameDel[]") String[] fileNames, MultipartHttpServletRequest mpRequest,
-			@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) throws Exception {
+	public String updateBoardInquiry(Board board, Model model) throws Exception {
 		System.out.println("/board/updateBoardInquiry: POST");
 		
-		boardService.updateBoardInquiry(board, files, fileNames, mpRequest);
+		boardService.updateBoardInquiry(board);
 		
 		return "redirect:/board/getBoardInquiryList";
 	}
@@ -261,16 +259,22 @@ public class BoardController {
 				@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
 			System.out.println("/board/updateBoardAnnouncement: POST");
 			boardService.updateBoardAnnouncement(board);
-			return "redirect:/board/getBoardAnnouncementList?boardNo=" + board.getBoardNo();
+			return "redirect:/board/getBoardAnnouncementList";
 		}
 		
 	//1:1문의 목록 조회 + 첨부 파일 조회
 	@GetMapping(value = "getBoardInquiryList")
-	public String getBoardInquiryList(@ModelAttribute("board") Board board, Model model) throws Exception {
+	public String getBoardInquiryList(@ModelAttribute("board") Board board, Model model, HttpSession session) throws Exception {
+	
+		String userId = ((User) session.getAttribute("user")).getUserId();
+		User user = new User();
+		user.setUserId(userId);
+		board.setUser(user);
+		
 		List<Board> getBoardInquiryList = boardService.getBoardInquiryList(board);
 		model.addAttribute("getBoardInquiryList", getBoardInquiryList);//jsp foreach items
 		
-		System.out.println(getBoardInquiryList);
+		System.out.println("------------------------------------------------"+getBoardInquiryList);
 		return "board/getBoardInquiryList";
 	}
 	
@@ -284,7 +288,7 @@ public class BoardController {
 	}
 	
 	//1:1문의 상세 조회
-	@GetMapping(value = "getBoardInquiry")
+	@GetMapping(value = "getBoardInquiry2")
 	public String getBoardInquiry(Board board, @RequestParam(value = "boardNo", required = false) int boardNo, Model model) throws Exception {
 		System.out.println("/board/getBoardInquiry: GET");
 		
@@ -293,14 +297,14 @@ public class BoardController {
 		//상세 조회
 		model.addAttribute("board", boardService.getBoardInquiry(board.getBoardNo()));
 		
-		List<Map<String, Object>> fileList = boardService.selectAttachList(board.getBoardNo());
+		List<Map<String, Object>> fileList = boardService.selectBoardAttachList(board.getBoardNo());
 		System.out.println(fileList);
 		model.addAttribute("file", fileList);//첨부 파일 리스트 조회할 수 있도록 데이터 전송
 		
 		List<Comment> commentList = boardService.getComment(board.getBoardNo());
 		model.addAttribute("commentList", commentList);
 		
-		return "board/getBoardInquiry";
+		return "board/getBoardInquiry2";
 	}
 	
 	// 1:1 문의 답변(댓글) 작성
@@ -316,7 +320,7 @@ public class BoardController {
 	}
 	
 	//공지사항 상세 조회 - 파일첨부
-	@GetMapping(value = "getBoardAnnouncement")
+	@GetMapping(value = "getBoardAnnouncement2")
 	public String getBoardAnnouncement(@RequestParam(value = "boardNo", required = false) Integer boardNo, 
 			@RequestParam(value = "userId", required = false) String userId,
 			Model model, HttpSession session) throws Exception {
@@ -330,7 +334,7 @@ public class BoardController {
 		model.addAttribute("user1",user1);
 		model.addAttribute("board", board);
 		
-		return "board/getBoardAnnouncement";
+		return "board/getBoardAnnouncement2";
 	}
 	
 //	//1:1문의 삭제 처리
@@ -360,7 +364,7 @@ public class BoardController {
 	
 	
 	// 레시피 등록 화면v
-	@GetMapping(value = "addRecipeView2")
+	@GetMapping(value = "addRecipeView")
 	public String addRecipeView(@RequestParam(value = "rcpNo", required = false) Integer rcpNo,
 			@RequestParam(value = "userId", required = false) String userId, Model model) throws Exception {
 		System.out.println("/board/addRecipeView: GET");
@@ -379,7 +383,7 @@ public class BoardController {
 			System.out.println(user);
 			System.out.println(recipe);
 		}
-		return "board/addRecipeView2"; // 보여줄 화면: .jsp
+		return "board/addRecipeView"; // 보여줄 화면: .jsp
 	}
 	
 	
@@ -430,22 +434,11 @@ public class BoardController {
 				throws Exception {
 			System.out.println("/board/updateRecipeView: GET");
 			
-			if (rcpNo == null) {
-				model.addAttribute("recipe", new Recipe());
-			} else {
-				Recipe recipe = boardService.getRecipe(rcpNo);
-//				User user = userService.getUser(userId);
-				if (recipe == null) {
-					return "redirect:/board/getRecipeList";
-					//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
-				}
-//				String sessionUserId = ((User) session.getAttribute("user")).getUserId();
-//				user.setUserId(sessionUserId);
+			Recipe recipe = boardService.getRecipe(rcpNo);
+			model.addAttribute("recipe", boardService.getRecipe(rcpNo));
+		    List<Map<String, Object>> fileList = boardService.selectRecipeAttachList(recipe.getRcpNo());
+		    model.addAttribute("file", fileList);
 		    
-//				model.addAttribute("user", user);
-				model.addAttribute("recipe", recipe);
-
-			}
 			return "board/updateRecipeView"; // 보여줄 화면: .jsp
 		}
 		
@@ -483,10 +476,13 @@ public class BoardController {
 			System.out.println("/board/getRecipe : GET");
 			// 조회수 카운트
 			boardService.updateBoardRecipeHits(rcpNo);
-
+			//레시피 상세 조회
 			Recipe recipe = boardService.getRecipe(rcpNo);
 			//레시피 작성자 id
 			User user1 = userService.getUser(userId);
+			//첨부 파일 리스트 조회
+			List<Map<String, Object>> fileList = boardService.selectRecipeAttachList(recipe.getRcpNo());
+			model.addAttribute("file", fileList);
 			//추천을 누르는 로그인한 유저 id
 //			User user2 = userService.getUser(((User) session.getAttribute("user")).getUserId());
 			

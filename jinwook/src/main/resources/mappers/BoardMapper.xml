@@ -177,11 +177,20 @@
 		)
     </insert>
     
-    <!-- 첨부파일 조회 key가 대문자로 조회됨 -> 카멜 케이스 써야 함 ㅠㅠ -->
-	<select id="selectAttachList" parameterType="int" resultType="hashMap">
+    <!-- 게시판 첨부파일 조회 key가 대문자로 조회됨 -> 카멜 케이스 써야 함 ㅠㅠ -->
+	<select id="selectBoardAttachList" parameterType="int" resultType="hashMap">
 		SELECT attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
 	  	FROM attach
 	 	WHERE board_no = #{boardNo}
+	   	AND del_gb = 'N'
+	   	ORDER BY attach_no ASC
+	</select>
+	
+    <!-- 레시피 첨부파일 조회 key가 대문자로 조회됨 -> 카멜 케이스 써야 함 ㅠㅠ -->
+	<select id="selectRecipeAttachList" parameterType="int" resultType="hashMap">
+		SELECT attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
+	  	FROM attach
+	 	WHERE rcp_no = #{rcpNo}
 	   	AND del_gb = 'N'
 	   	ORDER BY attach_no ASC
 	</select>
@@ -358,7 +367,8 @@
 			COUNT(*)
 		FROM
 			board b, users u
-		WHERE b.user_id = u.user_id AND (u.role='관리자' || b.user_id=#{user.userId}) AND board_code=1
+		WHERE b.user_id = u.user_id 
+		AND board_code=1
 		ORDER BY board_no;	
 	</select>
 	<!-- 1:1문의 목록 개수 -->

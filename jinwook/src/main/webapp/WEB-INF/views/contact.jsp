@@ -15,14 +15,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
 </head>
 
 <body>
@@ -35,7 +35,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="img/logo.png" alt=""></a>
+            <a href="#"><img src="${path}/resources/static/img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -46,7 +46,7 @@
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
+                <img src="${path}/resources/static/img/language.png" alt="">
                 <div>English</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
@@ -112,7 +112,7 @@
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
-                                <img src="img/language.png" alt="">
+                                <img src="${path}/resources/static/img/language.png" alt="">
                                 <div>English</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
@@ -331,7 +331,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="./index.html"><img src="${path}/resources/static/img/logo.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
@@ -393,14 +393,14 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="${path}/resources/static/js/jquery-3.3.1.min.js"></script>
+    <script src="${path}/resources/static/js/bootstrap.min.js"></script>
+    <script src="${path}/resources/static/js/jquery.nice-select.min.js"></script>
+    <script src="${path}/resources/static/js/jquery-ui.min.js"></script>
+    <script src="${path}/resources/static/js/jquery.slicknav.js"></script>
+    <script src="${path}/resources/static/js/mixitup.min.js"></script>
+    <script src="${path}/resources/static/js/owl.carousel.min.js"></script>
+    <script src="${path}/resources/static/js/main.js"></script>
 
 
 
