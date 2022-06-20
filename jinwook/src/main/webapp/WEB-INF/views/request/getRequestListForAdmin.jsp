@@ -51,7 +51,7 @@
 	/*<![CDATA[*/
 
 	function movePage(uri, queryString) {
-		location.href = uri + queryString;
+		location.href = uri + queryString + "&reqCode=" + ${param.reqCode};
 	}
 
 	/*]]>*/
@@ -198,13 +198,13 @@
 		$.get(uri, function(response) {
 		
 				var countAddHtml = "";
-
+				if(`\${response.CountRequestWaiting}`>0){
 					countAddHtml += `
 						상점 등록 요청 &nbsp;<span class="badge badge-danger" id="addStore" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".addStore").html(countAddHtml);
-			
+				}
 		}, "json");
 	}
 	/*[- end of function -]*/
@@ -221,13 +221,13 @@
 				
 			
 				var countDeleteHtml = "";
-
+				if(`\${response.CountRequestWaiting}`>0){
 				countDeleteHtml += `
 						상점 삭제 요청 &nbsp;<span class="badge badge-danger" id="delete" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 				
 				$(".deleteStore").html(countDeleteHtml); 
-			
+				}
 		}, "json");
 	}
 	/*[- end of function -]*/
@@ -243,13 +243,13 @@
 		$.get(uri, function(response) {
 		
 				var countRefundHtml = "";
-
+				if(`\${response.CountRequestWaiting}`>0){
 				countRefundHtml += `
 						환급 요청 &nbsp;<span class="badge badge-danger" id="refund" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".refundStore").html(countRefundHtml);
-			
+				}
 		}, "json");
 	}
 	/*[- end of function -]*/
@@ -266,13 +266,14 @@
 		$.get(uri, function(response) {
 		
 				var countAdHtml = "";
-
+				
+				if(`\${response.CountRequestWaiting}`>0){
 				countAdHtml += `
 						광고 등록 요청 &nbsp;<span class="badge badge-danger" id="refund" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".adStore").html(countAdHtml);
-			
+				}
 		}, "json");
 	}
 	/*[- end of function -]*/
@@ -504,8 +505,9 @@ a{
     </div>
 	<!-- Modal3 End -->
 	
+	
 	<!-- Modal4 Begin -->
-    <!-- 상점등록 상세 modal -->
+    <!-- 상점등록요청 상세 modal -->
     <div class="modal" id="myModal3" aria-hidden="true" style="display: none; z-index: 1060;">
     	<div class="modal-dialog">
           <div class="modal-content">
@@ -557,6 +559,179 @@ a{
     </div>
     </div>
 	<!-- Modal4 End -->
+	
+	
+	<!-- Modal5 Begin -->	
+	<!-- 상점 등록 Modal -->
+    <div class="modal" id="getRequestAddStore" aria-hidden="true" style="display: none; z-index: 1060;">
+       <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismis style="margin-left: 0px; text-align: center;">상점 등록 요청 상세<s="modal" aria-label="Close">
+           </button>
+            </div><div class="container"></div>
+            <div class="modal-body">
+            
+           <div class="container">
+               <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;진욱이네에 등록 요청한 상점 정보입니다.</div>
+               <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;상점 등록 절차대로 진행해주세요.</div>
+         </div>      
+         <hr>        
+              		   <div class="form-group row">                    
+                           <label for="colFormLabel"
+                              class="col-sm-2 col-form-label col-form-label">사장님ID</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="userIdForStore"
+                                 class="form-control form-control" id="userIdForStore"
+                                 value="" placeholder="상점이름(상호명)을 입력해주세요." readonly>
+                           </div>
+                        </div>
+                        
+                         <div class="form-group row">                    
+                           <label for="colFormLabel"
+                              class="col-sm-2 col-form-label col-form-label">사장님 이름</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="userNameForStore"
+                                 class="form-control form-control" id="userNameForStore"
+                                 value="" placeholder="상점이름(상호명)을 입력해주세요." readonly>
+                           </div>
+                        </div>
+              
+              
+              			<div class="form-group row">
+                     
+                           <label for="colFormLabel"
+                              class="col-sm-2 col-form-label col-form-label">상점이름</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="storeName"
+                                 class="form-control form-control" id="storeName"
+                                 value="" placeholder="상점이름(상호명)을 입력해주세요." readonly>
+                           </div>
+                        </div>
+<!-- onchange="this.form.submit()" -->
+                        <div class="form-group row">
+                           <label for="colFormLabelLg"
+                              class="col-sm-2 col-form-label col-form-label">상점업종</label>
+                           <div class="col-sm-6">
+                           <input type="text" name="storeType"
+                                 class="form-control form-control" id="storeType"
+                                 value="" placeholder="상점이름(상호명)을 입력해주세요." readonly>
+
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                           <label for="colFormLabelLg"
+                              class="col-sm-2 col-form-label col-form-label">상점주소</label>
+                           <div class="col-sm-4">
+                              <input type="text" name="storeAddr" id="storeAddr_main"
+                                 class="form-control form-control" 
+                                 value="" placeholder="상점 주소 검색 Click" readonly>
+                           </div>
+                           <div class="col-sm-2" style="font-size: 22px; padding-left: 0px; right: 5px;">
+                           <i class="fa fa-search" aria-hidden="true"></i>
+                           </div>
+                        </div>                                           
+
+                        <div class="form-group row">
+                           <label for="colFormLabelLg"
+                              class="col-sm-2 col-form-label col-form-label">상점시작날짜</label>
+                           <div class="col-sm-6">
+                           <input type="text" name="storeStart"
+                                 class="form-control form-control" id="storeType"
+                                 value="" placeholder="상점이름(상호명)을 입력해주세요." readonly>
+
+                           </div>
+                        </div>
+
+                        <div class="form-group row">
+                           <label for="colFormLabelLg"
+                              class="col-sm-2 col-form-label col-form-label">상점소개</label>
+                           <div class="col-sm-6">
+                              <textarea class="form-control" id="storeIntro" name="storeIntro" cols="20" rows="5" value="" 
+                               readonly></textarea>
+                           </div>
+                        </div>
+
+                        <div class="form-group row">
+                           <label for="colFormLabelLg"
+                              class="col-sm-2 col-form-label col-form-label">상점전화번호</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="storePhone"
+                                 class="form-control form-control" id="storePhone"
+                                 value="" placeholder="상점전화번호" readonly>
+                           </div>
+                        </div>
+
+                        <div class="form-group row">
+                           <label for="colFormLabelLg"
+                              class="col-sm-2 col-form-label col-form-label">상점사진</label>
+                           <div class="col-sm-6">
+                              <span class="btn btn-default btn-file"
+                                    style="padding-left: 0px; padding-bottom: 15px;">
+                                 <input type="file" id="storeImage" name="storeImage"/>
+                                 <div>
+                                      <div class="img_wrap_fir">
+                                       <img id="img_fir" />
+                                      </div>
+                                  </div>
+                              </span>
+                           </div>
+                        </div>
+
+                        <div class="form-group row">
+                           <label for="colFormLabelLg"
+                              class="col-sm-2 col-form-label col-form-label">영업신고증</label>
+                           <div class="col-sm-6">
+                              <span class="btn btn-default btn-file"
+                                    style="padding-left: 0px; padding-bottom: 15px;">
+                                 <input type="file" id="businessCard" name="businessCard" />
+                                 <div>
+                                      <div class="img_wrap_sec">
+                                       <img id="img_sec" />
+                                      </div>
+                                  </div>
+                              </span>
+                           </div>
+                        </div>                                  
+                        
+
+                        <div class="form-group row">
+                           <label for="colFormLabelLg"
+                              class="col-sm-2 col-form-label col-form-label">계좌번호</label>
+                                                      
+                           <div class="col-sm-6" style="padding-left: 0px;">
+                              <div class="col-sm-6">
+                               <input type="text" name="bank"
+                                 class="form-control form-control" id="bank"
+                                 value="" placeholder=" '-' 없이 입력해주세요" readonly>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="form-group row">
+                           <label for="colFormLabelLg"
+                              class="col-sm-2 col-form-label col-form-label"></label>
+                           <div class="col-sm-6">
+                              <input type="text" name="accNo"
+                                 class="form-control form-control" id="accNo"
+                                 value="" placeholder=" '-' 없이 입력해주세요" readonly>
+                           </div>
+                        </div>
+                        </form>
+          				
+         			<br/>				
+            <div class="modal-footer">
+              <a href="#" data-dismiss="modal" class="btn">닫기</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    
+    
+    <!-- 상점 등록요청 상세 Modal -->
+	
+	<!-- Modal5 End -->
 
 
 	<!-- Breadcrumb Section Begin -->
@@ -624,25 +799,19 @@ a{
 								<button type="button"
 									class="list-group-item list-group-item-action">신고 접수 목록</button>
 								<button type="button"
-									class="list-group-item list-group-item-action" reqNo="1"><span class="addStore">상점 등록 요청
-									</span>
+									class="list-group-item list-group-item-action" reqNo="1"><span class="addStore">상점 등록 요청</span>
 									 </button>
 								<button type="button"
 									class="list-group-item list-group-item-action">
-									<span class="deleteStore">상점 삭제 요청 
-									</span>
+									<span class="deleteStore">상점 삭제 요청</span>
 								</button>
 								<button type="button"
 									class="list-group-item list-group-item-action">
-									<span class="refundStore">
-									환급 요청
-									</span>
+									<span class="refundStore">환급 요청</span>
 								</button>
 								<button type="button"
 									class="list-group-item list-group-item-action">
-									<span class="adStore">
-									광고 등록 요청
-									</span>
+									<span class="adStore">광고 등록 요청</span>
 								</button>
 								<button type="button"
 									class="list-group-item list-group-item-action">
@@ -719,7 +888,8 @@ a{
 								<tr>
 									<c:if test="${request.reqDeleteYn == false}">
 									<c:if test="${param.reqCode eq 1}">
-									<th scope="row"><a id="userdetail" data-toggle="modal" href="#myModal4" data-userid="${request.userId}"> ${request.store.storeName} </a></th>
+									<th scope="row"><a
+										id="RequestAddDetail" data-toggle="modal" href="#getRequestAddStore" data-reqno="${request.reqNo}">${request.store.storeName} </a></th>
 									</c:if>
 									<c:if test="${param.reqCode ne 1}">
 									<th scope="row">${request.store.storeName} </th>
@@ -1059,6 +1229,40 @@ $(document).ready(function(){
 		 });
 	});
 //////////////// 유저 상세 REST 끝   /////////////////
+
+
+////////////////상점등록요청 상세 REST 시작 /////////////////
+	var REQNO="";
+
+	function getRequestStore(){
+	        	
+		  var uri = "/request/getRequestStore/"+REQNO;
+		  $.get(uri, function(response) { 
+				 $('input[name=storeName]').attr('value',`\${response.store.storeName}`);
+				 $('input[name=storeType]').attr('value',`\${response.store.storeType}`);
+				 $('input[name=storeAddr]').attr('value',`\${response.store.storeAddr}`);
+				 $('input[name=storeStart]').attr('value',`\${response.store.storeStart}`);
+				 $("textarea#storeIntro").val(`\${response.store.storeIntro}`);
+				 $('input[name=storePhone]').attr('value',`\${response.store.storePhone}`);
+				 $('input[name=storeImage]').attr('value',`\${response.store.storeImage}`);
+				 $('input[name=businessCard]').attr('value',`\${response.store.businessCard}`);
+				 $('input[name=bank]').attr('value',`\${response.store.bank}`);
+				 $('input[name=accNo]').attr('value',`\${response.store.accNo}`);
+				 $('input[name=userIdForStore]').attr('value',`\${response.userId}`);
+				 $('input[name=userNameForStore]').attr('value',`\${response.user.userName}`);
+			   }, "json");
+			}
+
+	//모달 창 오픈할 때 해당 유저아이디 전달 //
+	$(document).ready(function() {     
+
+		$('#getRequestAddStore').on('show.bs.modal', function(event) {          
+			REQNO = $(event.relatedTarget).data('reqno');
+			getRequestStore();
+
+		 });
+	});
+//////////////// 상점등록요청 상세 REST 끝   /////////////////
 
 </script>
 
