@@ -30,6 +30,8 @@ public interface StoreMapper {
 	   
 	public int isSoldout(Product Product);
 	
+	public int isSell(Product Product);
+	
 	public int isOpen(Store store);
 	
 	public int addOrdersCoupon(int couponNo);

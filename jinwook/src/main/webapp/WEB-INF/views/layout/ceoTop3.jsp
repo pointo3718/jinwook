@@ -2,9 +2,6 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -143,85 +140,32 @@ label {
    cursor: inherit;
    display: block;
 }
-
-.img_wrap {
-            width: 300px;
-            margin-top: 50px;
-        }
-.img_wrap img {
-            max-width: 100%;
-        }
 </style>
-
-<script type="text/javascript">
-
-   //================상점 오픈======================//
-
-   $(function() {
-      $("#open").on("click", function fncIsOpen() {
-
-         const btnElement = document.getElementById('open');
-         var open = true
-
-         alert(open)
-
-         console.log(open);
-         var storeNo = $("#open").data("value");
-
-         $.ajax({
-            url : "isOpen/" + storeNo + "/" + open,
-            dataType : "json",
-            method : "post",
-            success : function(result) {
-               if (result != null) {
-                  alert("상점이 오픈되었습니다.");
-               }
-            }
-
-         });
-
-      });
-   });
-
-   //============= 상점 마감 =============//
-
-   $(function() {
-      $("#close").on("click", function fncIsOpen() {
-
-         const btnElement = document.getElementById('close');
-         var open = false
-
-         alert(open)
-
-         console.log(open);
-         var storeNo = $("#close").data("value");
-
-         $.ajax({
-            url : "isOpen/" + storeNo + "/" + open,
-            dataType : "json",
-            method : "post",
-            success : function(result) {
-               if (result != null) {
-                  alert("상점이 마감되었습니다.");
-               }
-            }
-
-         });
-
-      });
-   });
-   
-   
- </script>
-
-
-
-
 </head>
+<script>
+
+/////////////// 상점 등록 시작 //////////////////////
+$(function() {
+	$( "#requestAdd:contains('등록 요청')" ).on("click" , function() {
+		fncAddRequestStore();
+	});
+});
+
+function fncAddRequestStore(){
+//Form 유효성 검증
+
+
+document.detailForm.action='/request/addRequestAddStore';
+document.detailForm.submit();
+}
+
+/////////////// 상점 등록 끝 ///////////////////////
+
+</script>
+
 <body>
 
-
-    <!-- 상점 등록 Modal -->
+<!-- 상점 등록 Modal -->
     <div class="modal" id="addRequestStoreModal" aria-hidden="true" style="display: none; z-index: 1060;">
        <div class="modal-dialog modal-xl">
           <div class="modal-content">
@@ -239,6 +183,10 @@ label {
                <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;입점 관련 문의 및 요청 사항은 1:1문의/고객센터(1644-0000)로 문의 바랍니다.</div>
          </div>      
          <hr>
+               <form name="detailForm" method="post">
+               <input type="hidden" name="userId" value="${param.userId}" />
+               <input type="hidden" name="businessCard" value="파일업로드_언제하지.jpg" />
+               
                
                <div class="form-group row">
                      
@@ -250,12 +198,12 @@ label {
                                  value="" placeholder="상점이름(상호명)을 입력해주세요.">
                            </div>
                         </div>
-
+<!-- onchange="this.form.submit()" -->
                         <div class="form-group row">
                            <label for="colFormLabelLg"
                               class="col-sm-2 col-form-label col-form-label">상점업종</label>
                            <div class="col-sm-6">
-                           <select size="5" >
+                           <select name="storeType" size="5">
                                     <option selected>업종을 선택하세요</option>
                                     <option value="1">정육</option>
                                     <option value="2">수산</option>
@@ -263,26 +211,19 @@ label {
                                     <option value="4">과일</option>
                                     <option value="5">종합</option>
                            </select>
-							<script src="https://www.jqueryscript.net/demo/Mobile-friendly-Custom-Scrollbar-Plugin-With-jQuery-NiceScroll/js/jquery.nicescroll.min.js"></script>
-							<script>
-							  $(document).ready(function () {
-							    $('select').niceSelect();
-							    $('.nice-select .list').niceScroll();
-							    
-							    $('select').niceSelect('update');
-							    $('.nice-select .list').niceScroll();
-							    
-							  });
-							</script>
+
                            </div>
                         </div>
                         <div class="form-group row">
                            <label for="colFormLabelLg"
                               class="col-sm-2 col-form-label col-form-label">상점주소</label>
-                           <div class="col-sm-6">
-                              <input type="text" name="address"
-                                 class="form-control form-control" id="address_kakao"
-                                 value="" placeholder="상점 주소 검색" readonly>
+                           <div class="col-sm-4">
+                              <input type="text" name="storeAddr" id="storeAddr_main"
+                                 class="form-control form-control" 
+                                 value="" placeholder="상점 주소 검색 Click" readonly>
+                           </div>
+                           <div class="col-sm-2" style="font-size: 22px; padding-left: 0px; right: 5px;">
+                           <i class="fa fa-search" aria-hidden="true"></i>
                            </div>
                         </div>
                         
@@ -290,11 +231,11 @@ label {
                         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 						<script>
 						window.onload = function(){
-						    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+						    document.getElementById("storeAddr_main").addEventListener("click", function(){ //주소입력칸을 클릭하면
 						        //카카오 지도 발생
 						        new daum.Postcode({
 						            oncomplete: function(data) { //선택시 입력값 세팅
-						                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+						                document.getElementById("storeAddr_main").value = data.address; // 주소 넣기
 						                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
 						            }
 						        }).open();
@@ -303,11 +244,12 @@ label {
 						</script>
                         <!--  카카오 주소 API 끝 -->
                         
+                        
                         <div class="form-group row">
                            <label for="colFormLabelLg"
                               class="col-sm-2 col-form-label col-form-label">상점상세주소</label>
                            <div class="col-sm-6">
-                              <input  class="form-control form-control" type="text" name="address_detail" placeholder="상세 주소를 입력해주세요."/>
+                              <input  class="form-control form-control" type="text" id="storeAddr_detail" name="address_detail" placeholder="상세 주소를 입력해주세요."/>
                            </div>
                         </div>
 
@@ -315,9 +257,7 @@ label {
                            <label for="colFormLabelLg"
                               class="col-sm-2 col-form-label col-form-label">상점시작날짜</label>
                            <div class="col-sm-6">
-                              <input type="text" name="storeStart"
-                                 class="form-control form-control" id="storeStart"
-                                 value="" placeholder="상점시작날짜">
+                            <input type="date" name="storeStart" id="storeStart" value="">
                            </div>
                         </div>
 
@@ -325,10 +265,12 @@ label {
                            <label for="colFormLabelLg"
                               class="col-sm-2 col-form-label col-form-label">상점소개</label>
                            <div class="col-sm-6">
-                              <textarea class="form-control" id="storeIntro" name="storeIntro" cols="20" rows="4" placeholder="상점 소개를 50자 내로 입력해주세요."></textarea>
+                              <textarea class="form-control" id="storeIntro" name="storeIntro" cols="20" rows="5" 
+                              placeholder="상점 소개를 50자 내로 입력해주세요. &#13;&#10; &#13;&#10; ex) 진욱이네는 산지직송 당일판매를 원칙으로 합니다. &#13;&#10; ex) 진욱이네 오픈 기념 10% 할인 해드려요~" ></textarea>
 								<div class="text-right" id="test_cnt">(0 / 50)</div>
                            </div>
                         </div>
+                        
                         <script>
 	                        $(document).ready(function() {
 	                            $('#storeIntro').on('keyup', function() {
@@ -358,25 +300,13 @@ label {
                            <div class="col-sm-6">
                               <span class="btn btn-default btn-file"
                                     style="padding-left: 0px; padding-bottom: 15px;">
-                                 <input type="file" id="input_img" />
+                                 <input type="file" id="storeImage" name="storeImage"/>
                                  <div>
-                                      <div class="img_wrap">
-                                       <img id="img" />
+                                      <div class="img_wrap_fir">
+                                       <img id="img_fir" />
                                       </div>
-                                   </div>
+                                  </div>
                               </span>
-                           </div>
-                        </div>
-
-                        <div class="form-group row">
-                           <label for="colFormLabelLg"
-                              class="col-sm-2 col-form-label col-form-label"
-                              style="padding-right: 4px;">사업자등록번호</label>
-                           <div class="col-sm-6">
-                              <input type="text" name="businessNo"
-                                 class="form-control form-control" id="businessNo"
-                                 value="" placeholder="사업자등록번호"
-                                 readonly>
                            </div>
                         </div>
 
@@ -386,16 +316,15 @@ label {
                            <div class="col-sm-6">
                               <span class="btn btn-default btn-file"
                                     style="padding-left: 0px; padding-bottom: 15px;">
-                                 <input type="file" id="input_img" />
+                                 <input type="file" id="businessCard"  />
                                  <div>
-                                      <div class="img_wrap">
-                                       <img id="img" />
+                                      <div class="img_wrap_sec">
+                                       <img id="img_sec" />
                                       </div>
-                                   </div>
+                                  </div>
                               </span>
                            </div>
-                        </div>
-                        
+                        </div>                                  
                         
 
                         <div class="form-group row">
@@ -405,15 +334,15 @@ label {
                            <div class="col-sm-6" style="padding-left: 0px;">
                               <div class="col-sm-6">
                               <div class="wrapper">
-                                 <select size="5" >
+                                 <select size="5" name="bank">
                                     
                                     <option selected>은행명</option>
-                                    <option value="1">카카오뱅크</option>
-                                    <option value="2">농협</option>
-                                    <option value="3">신한</option>
-                                    <option value="4">IBK기업</option>
-                                    <option value="5">하나</option>
-                                    <option value="6">우리</option>
+                                    <option value="카카오뱅크">카카오뱅크</option>
+                                    <option value="농협">농협</option>
+                                    <option value="신한">신한</option>
+                                    <option value="IBK기업">IBK기업</option>
+                                    <option value="하나">하나</option>
+                                    <option value="우리">우리</option>
                                     <option value="7">국민</option>
                                     <option value="8">SC제일</option>
                                     <option value="9">대구</option>
@@ -444,10 +373,15 @@ label {
                            <div class="col-sm-6">
                               <input type="text" name="accNo"
                                  class="form-control form-control" id="accNo"
-                                 value="" placeholder="계좌번호">
+                                 value="" placeholder=" '-' 없이 입력해주세요">
                            </div>
                         </div>
-          
+                        </form>
+          				<br/><br/>
+          				<div class="form-group row">
+	          				<button id="requestAdd" class="btn btn-success" style="background-color: #7fad39; border-color: #7fad39; width: 126px;">등록 요청</button>
+          				</div>
+         			<br/>				
             <div class="modal-footer">
               <a href="#" data-dismiss="modal" class="btn">닫기</a>
             </div>
@@ -456,212 +390,74 @@ label {
     </div>
     </div>
     
+    
     <!-- 상점 등록 Modal -->
 
    <!-- ceoTop Section Begin -->
-   <section class="breadcrumb-section set-bg" 
-      style="background-color: #F2F2F2; padding-left: 110px;padding-right: 110px;" >
-      <c:forEach var="store" items="${storeInfo}">
+   <section class="breadcrumb-section set-bg"
+      style="background-color: #F2F2F2">
+      <c:forEach var="store" items="${storeInfo}" begin="0" end="0">
          <div class="container">
+            <div class="row my-1">
+               <div class="col-4">
+                  <div class="bg-white text-black mx-3">
 
-               
-              
-<div class="row" style="justify-content: space-between;">
-          <table class="table table-borderless"
-               style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
-               <thead>
-                  <tr>
-
-                     <th scope="col"><strong class="mytop01" style="font-size:20px;">${store.user.userName} 사장님</strong></th>
-
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr>
-
-                     <td><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;진욱이네와 처음 만난 날</strong></td>
-
-                  </tr>
-                  <tr>
-
-                     <td><span style="font-size:25px; color: #7fad39; margin-left:190px" >${store.user.regDate}</span></td>
-
-                  </tr>
-
-               </tbody>
-            </table>
-            
-
-            <table class="table table-borderless"
-               style="background-color: white; width: 350px; height: 170px; justify-content: space-around">
-               <thead>
-                  <tr>
-
-                     <th scope="col"><span style="font-size:20px;">진욱페이&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></th>
-
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr>
-
-                     <td style="padding-top: 60px;"><span style="font-size:25px; color: #7fad39; margin-left:230px" ><fmt:formatNumber value="${store.user.jpBalance}"/></span>원</td>
-
-                  </tr>
-
-
-               </tbody>
-            </table>
-            
-            
-             <c:if test="${store.storeStatus=='3'}">
-            
-                           <table class="table table-borderless" style="background-color: white; width: 350px; height: 170px; justify-content: space-around table-layout:fixed">
-                  <thead>
-                     <tr>
+                     </br> <strong class="mytop01">${store.user.userName} 사장님</strong> </br> </br>
                      
+                     <!-- 상점등록  Modal 테스트 중 -->
+                     <a id="userdetail" data-toggle="modal" href="#addRequestStoreModal" data-userid="">상점 등록</a>
+                     <!-- 상점등록  Modal 테스트 중 -->
 
-                        <th scope="col" style="width: 124px;">
-                        <span style="font-size:20px;">${store.storeName}&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></th>
+                     <h6 class="mytop01"><strong>진욱이네와 처음 만난 날</strong>&nbsp;&nbsp;<i class="fa fa-heartbeat" aria-hidden="true" style="font-size:30px;"></i></h6>
+                     <div class="mytop01-content"><span style="font-size:20px;">${store.user.regDate}</span></div>
+                     </br> </br>
 
-                        <th scope="col" style="padding-left: 70px; padding-right: 0px;">
-                        <button type="button" id="open"
-                                             data-value="${store.storeNo}"
-                                             class="btn btn-success btn-sm">오픈</button> 
-                                             <button type="button" id="close"
-                                             data-value="${store.storeNo}"
-                                             class="btn btn-danger btn-sm">마감</button></th>
-                                             <th style="padding-left: 0px; padding-right: 0px;">
-                                             
-                                            <c:if test="${store.open==false}">
-       										<strong><img
-														src="${path}/resources/static/img/close.png" style="width:40px; height:40px; padding-left:5px"></strong>
-                        					</c:if>
-											<c:if test="${store.open==true}">
-                       						 <strong><img
-														src="${path}/resources/static/img/open.png" style="width:40px; height:40px; padding-left:5px"></strong>                     
-                       						 </c:if>  
-                                                        
-                                             </th>
-                                             
-                                             
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-   
-                        <td colspan="2"><strong>${store.storeAddr}</strong></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-
-                        <td><strong>총 매출액</strong></td>
-                        <td colspan=2 style="padding-left: 80px;padding-right: 0px;"><span style="font-size:25px; color: #7fad39;" ><fmt:formatNumber value="${store.totalEarn}"/></span>원</td>
-                     	<td></td>
-                     </tr>
-
-                  </tbody>
-               </table>
+                  </div>
                </div>
-               </c:if>
-               
-               <c:if test="${store.storeStatus=='1'}">   
-               <table class="table table-borderless" style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
 
-                  <tbody>
-                     <tr>
-   
-                        <td></td>
-                        <td style="padding-top: 60px; padding-left: 90px;">            
-                        <a id="userdetail" data-toggle="modal" href="#addRequestStoreModal" data-userid=""><strong style="font-size:25px">상점 등록</strong></a></td>
-                        <td></td>
-                     </tr>
-   
+               <div class="col-4">
+                  <div class="bg-white text-black mx-3">
 
-                  </tbody>
-               </table>
-               </c:if>
-               
-               <c:if test="${store.storeStatus=='2'}">   
-               <table class="table table-borderless" style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
-                  <thead>
-                     <tr>
+                     </br> <strong class="mytop01">진욱페이</strong> </br> </br>
+                     <div class="mytop01-content"><span style="font-size:35px;">${store.user.jpBalance}</span>원</div>
+                     </br> </br>
 
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-   
-                        <td></td>
-                        <td style="padding-top: 45px; padding-left: 25px;"><strong style="font-size:25px;">상점 등록 대기중입니다.</strong></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-
-                  </tbody>
-               </table>
-               </c:if>               
-               
-               
-               
-               
+                  </div>
                </div>
-      
+
+               <div class="col-4">
+                  <div class="bg-white text-black mx-3">
+
+                     </br> <strong class="mytop01">${store.storeName}</strong> </br> </br>
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-success btn-sm active"> <input
+                           type="radio" name="options" id="option1" checked> 오픈
+                        </label> <label class="btn btn-danger btn-sm"> <input
+                           type="radio" name="options" id="option2"> 마감
+                        </label>
+                     </div>
+                     </br>
+                     <div class="mytop01-content"><span style="font-size:15px;"><strong>${store.storeAddr}</strong></span></div>
+
+                     </br> </br>
+
+                  </div>
+               </div>
+            </div>
+
+         </div>
          <!-- /container -->
-         
-         
       </c:forEach>
-      
-
    </section>
    <!-- ceoTop Section End -->
-   
-   
+
 <script>
-
-////////////////상점등록 REST 시작 (수정중) /////////////////
-var USERID="";
-
-function getUser(){
-           
-     var uri = "/admin/getUserRest/"+USERID;
-         $.get(uri, function(response) { 
-          $('input[name=userid]').attr('value',`\${response.userId}`);
-          $('input[name=username]').attr('value',`\${response.userName}`);
-          $('input[name=nickname]').attr('value',`\${response.nickName}`);
-          $('input[name=email]').attr('value',`\${response.email}`);
-          $('input[name=birth]').attr('value',`\${response.birth}`);
-          $('input[name=gender]').attr('value',`\${response.gender}`);
-          $('input[name=phone]').attr('value',`\${response.phone}`);
-          $('input[name=role]').attr('value',`\${response.role}`);
-          $('input[name=regdate]').attr('value',`\${response.regDate}`);
-         }, "json");
-      }
-
-//모달 창 오픈할 때 해당 유저아이디 전달 //
-$(document).ready(function() {     
-
-   $('#addRequestStoreModal').on('show.bs.modal', function(event) {          
-      USERID = $(event.relatedTarget).data('userid');
-       getUser();
-
-    });
-});
-////////////////상점등록 REST 끝   /////////////////
-
-//////////////// 이미지 미리보기 /////////////////
+//////////////// 이미지 미리보기 1 시작 /////////////////
    var sel_file;
  
         $(document).ready(function() {
-            $("#input_img").on("change", handleImgFileSelect);
+            $("#storeImage").on("change", handleImgFileSelect);
         }); 
  
         function handleImgFileSelect(e) {
@@ -678,14 +474,43 @@ $(document).ready(function() {
  
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $("#img").attr("src", e.target.result);
+                    $("#img_fir").attr("src", e.target.result);
                 }
                 reader.readAsDataURL(f);
             });
         }
-////////////////이미지 미리보기 /////////////////
-       
-        
+///////////////// 이미지 미리보기 1 끝 //////////////////
+
+
+//////////////// 이미지 미리보기 2 시작 /////////////////
+ 
+        $(document).ready(function() {
+            $("#businessCard").on("change", handleImgFileSelect);
+        }); 
+ 
+        function handleImgFileSelect(e) {
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+ 
+            filesArr.forEach(function(f) {
+                if(!f.type.match("image.*")) {
+                    alert("확장자는 이미지 확장자만 가능합니다.");
+                    return;
+                }
+ 
+                sel_file = f;
+ 
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#img_sec").attr("src", e.target.result);
+                }
+                reader.readAsDataURL(f);
+            });
+        }
+////////////////이미지 미리보기 2 끝 /////////////////
+
+
 </script>
+
 </body>
 </html>

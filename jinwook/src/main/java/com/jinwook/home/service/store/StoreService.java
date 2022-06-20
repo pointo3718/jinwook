@@ -28,6 +28,8 @@ public interface StoreService {
 	   
 	public boolean isSoldout(Product Product);
 	
+	public boolean isSell(Product Product);
+	
 	public boolean isOpen(Store store);
 	
 	public boolean addOrdersCoupon(int couponNo);

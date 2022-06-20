@@ -22,7 +22,7 @@ public class Store extends CommonDTO {
    private String storeName;
    private String storeAddr;
    private String storeType;
-   private boolean storeStatus;
+   private String storeStatus;
    private String storePhone;
    private String storeIntro;
    private Date storeStart;

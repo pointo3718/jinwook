@@ -46,35 +46,50 @@ public class StoreRestController {
    }
 
    
-   @PostMapping(value = "addStoreProduct/{storeNo}")
-      public JsonObject addStoreProduct(@PathVariable(value = "storeNo", required = false) int storeNo, @RequestBody Product product) {
+   @PostMapping(value = "addStoreProduct/{prodNo}/{storeNo}/{prodName}/{price}/{prodInfo}/{prodImg}/{prodOrign}/{soldout}")
+   public JsonObject addStoreProduct(@PathVariable(value = "storeNo", required = false) int storeNo,
+                              @PathVariable(value = "prodName", required = false) String prodName,
+                              @PathVariable(value = "price", required = false) int price,
+                              @PathVariable(value = "prodInfo", required = false) String prodInfo,
+                              @PathVariable(value = "prodImg", required = false) String prodImg,
+                              @PathVariable(value = "prodOrign", required = false) String prodOrign) {
 
-          System.out.println("/store/addStoreProduct : Post ");
+       System.out.println("/store/addStoreProduct : Post ");
 
-         JsonObject jsonObj = new JsonObject();
+      JsonObject jsonObj = new JsonObject();
+      
+      Product product= new Product();
+      product.setProdName(prodName);
+      product.setPrice(price);
+      product.setProdInfo(prodInfo);
+      product.setProdImg(prodImg);
+      product.setProdOrign(prodOrign);
 
-         try {
-            if (product != null) {
-               System.out.println("product 객체에 값 넣어줌");
-               product.setStoreNo(storeNo);
-            }
-            
-            System.out.println("컨트롤러에서의 Product :: "+product);
+      try {
+         if (product != null) {
+            System.out.println("product 객체에 값 넣어줌");
+            product.setStoreNo(storeNo);
 
-             storeService.addStoreProduct(product);
-
-         } catch (DataAccessException e) {
-            jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
-
-         } catch (Exception e) {
-            jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
          }
          
-           System.out.println("상품 등록 컨트롤러 통과");
-           
-         return jsonObj;
-         
-     }
+         System.out.println("컨트롤러에서의 Product :: "+product);
+
+          storeService.addStoreProduct(product);
+
+      } catch (DataAccessException e) {
+         jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+      } catch (Exception e) {
+         jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+      }
+      
+        System.out.println("상품 등록 컨트롤러 통과");
+        
+      return jsonObj;
+      
+  }
+   
+
      
       @PostMapping(value = "updateStore/{storeNo}/{storeIntro}/{storePhone}/{storeImage}/{startTime}/{endTime}/{holiday}/{bank}/{accNo}")
       public JsonObject updateStore(@PathVariable(value = "storeNo", required = false) int storeNo,
@@ -187,10 +202,9 @@ public class StoreRestController {
    
    
 
-   @PostMapping(value = "isSoldout/{prodNo}/{soldout}")
+   @PostMapping(value = "isSoldout/{prodNo}")
    @ResponseBody
-   public JsonObject isSoldout(@PathVariable(value="prodNo",required = false) int prodNo
-                        ,@PathVariable(value="soldout",required = false) boolean soldout) {
+   public JsonObject isSoldout(@PathVariable(value="prodNo",required = false) int prodNo) {
 
        System.out.println("/store/isSoldout : Post ");
 
@@ -202,7 +216,6 @@ public class StoreRestController {
          if (product != null) {
             System.out.println("product 객체에 값 넣어줌");
             product.setProdNo(prodNo);
-            product.setSoldout(soldout);
          }
          
          System.out.println("컨트롤러에서의 Store :: "+product);
@@ -223,11 +236,46 @@ public class StoreRestController {
       return jsonObj;
       
   }
+   
+   @PostMapping(value = "isSell/{prodNo}")
+   @ResponseBody
+   public JsonObject isSell(@PathVariable(value="prodNo",required = false) int prodNo) {
+
+       System.out.println("/store/isSoldout : Post ");
+
+      JsonObject jsonObj = new JsonObject();
+      
+      Product product = new Product();
+
+      try {
+         if (product != null) {
+            System.out.println("product 객체에 값 넣어줌");
+            product.setProdNo(prodNo);
+         }
+         
+         System.out.println("컨트롤러에서의 Store :: "+product);
+
+         boolean result=storeService.isSell(product);
+         jsonObj.addProperty("result", result);
+
+
+      } catch (DataAccessException e) {
+         jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+      } catch (Exception e) {
+         jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+      }
+      
+        System.out.println("상품 매진 컨트롤러 통과");
+        
+      return jsonObj;
+      
+  }
 
    @PostMapping(value = "isOpen/{storeNo}/{open}")
    @ResponseBody
    public JsonObject isOpen(@PathVariable(value="storeNo",required = false) int storeNo,
-                     @PathVariable(value="open",required = false) boolean open) {
+		   					@PathVariable(value="open",required = false) boolean open) {
 
        System.out.println("/store/isOpen : Post ");
 

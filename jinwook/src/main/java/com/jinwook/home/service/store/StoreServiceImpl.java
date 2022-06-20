@@ -46,6 +46,8 @@ public class StoreServiceImpl implements StoreService {
 
 		storeMapper.addStoreProduct(product);
 	}
+	
+
 
 	@Override
 	public boolean updateStoreProduct(Product product) {
@@ -68,6 +70,15 @@ public class StoreServiceImpl implements StoreService {
 
 		int queryResult = 0;
 		queryResult = storeMapper.isSoldout(product);
+		return (queryResult == 1) ? true : false;
+
+	}
+	
+	@Override
+	public boolean isSell(Product product) {
+
+		int queryResult = 0;
+		queryResult = storeMapper.isSell(product);
 		return (queryResult == 1) ? true : false;
 
 	}
