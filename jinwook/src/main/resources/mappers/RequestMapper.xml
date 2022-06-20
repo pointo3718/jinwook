@@ -9,7 +9,7 @@
 	   <result property="reqStatus"  column="req_status"    jdbcType="CHAR"/>
 	   <result property="userId"  column="user_id"    jdbcType="VARCHAR"/>
 	   <result property="user.userName"  column="user_name"    jdbcType="VARCHAR"/>   
-	   <result property="store.storeNo"  column="store_no"    jdbcType="INTEGER"/>   
+	   <result property="storeNo"  column="store_no"    jdbcType="INTEGER"/>   <!-- 오류난다면 여길 확인..... -->
 	   <result property="store.storeType"  column="store_type"    jdbcType="CHAR"/>   
 	   <result property="store.storeName"  column="store_name"    jdbcType="VARCHAR"/>   
 	   <result property="store.storeAddr"  column="store_addr"    jdbcType="VARCHAR"/>   
@@ -25,6 +25,7 @@
 	   <result property="adContent"  column="ad_content"    jdbcType="VARCHAR"/>      
 	   <result property="adImg"  column="ad_img"    jdbcType="VARCHAR"/>      
 	   <result property="reqDeleteYn"  column="req_delete_yn"    jdbcType="BOOLEAN"/>      
+	   <result property="refundMoney"  column="refund_money"    jdbcType="INTEGER"/>      
 	</resultMap>
 
 
@@ -37,7 +38,7 @@
 				, #{storeName}
 				, #{storeAddr}
 				, #{storeType}
-				, 0 <!-- storeStatus (미등록) -->
+				, 2 <!-- storeStatus (대기중) -->
 				, #{storePhone}
 				, #{storeIntro}
 				, #{storeStart}
@@ -73,7 +74,7 @@
 				, #{userId}
 				, #{storeNo}
 				, 1 <!-- 상점등록요청 -->
-				, 1 <!-- 답변전 -->
+				, 1 <!-- 대기중 -->
 				, NULL
 				, SYSDATE()  
 				, NULL
@@ -88,7 +89,7 @@
 	<!-- 상점 등록 요청 보기 -->
 	<select id="getRequestStore" parameterType="int" resultMap="requestSelectMap">
 		SELECT
-			s.user_id, u.user_name, s.store_type, s.store_no, s.store_name, s.store_addr, 
+			s.user_id, u.user_name, s.store_type, r.store_no, s.store_name, s.store_addr, 
 			s.store_start, s.store_intro, s.store_phone, u.business_no, s.acc_no, 
 			s.bank, r.req_date 
 		FROM
@@ -106,7 +107,7 @@
 	<update id="updateRequestAddStore" parameterType="Store">
 		UPDATE store
 		SET
-			store_status = true
+			store_status = 3
 		WHERE
 			store_no = #{storeNo} 
 	</update>

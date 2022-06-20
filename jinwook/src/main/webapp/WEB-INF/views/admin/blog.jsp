@@ -44,11 +44,35 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
    
-   /*<![CDATA[*/
    function movePage(uri, queryString) {
       location.href = uri + queryString;
    }
-   /*]]>*/
+
+
+   function searchBoard(form) {
+		/*[- 드롭다운이 아닌 메인 검색 키워드로 검색했을 때 -]*/
+	if (isEmpty(form) == true) {
+		var searchKeyword = document.getElementById("mainSearchKeyword");
+		if (isEmpty(searchKeyword.value) == true) {
+				alert("키워드를 입력해 주세요.");
+				searchKeyword.focus();
+				return false;
+			}
+
+			form = document.getElementById("searchForm");
+			form.searchKeyword.value = searchKeyword.value;
+			form.submit();
+		}
+
+		if (isEmpty(form.searchKeyword.value) == true) {
+			alert("키워드를 입력해 주세요.");
+			form.searchKeyword.focus();
+			return false;
+		}
+	}
+			
+   /*[- end of function -]*/
+   
    
    	/////////////// 회원목록 이동 시작 ////////////////
 		$(function() {
@@ -131,7 +155,7 @@
 	}
 	/*[- end of function -]*/
     
-    	 //////////// 신고 대기 ////////////
+    	//////////// 신고 대기 ////////////
 	  $(function() {
 		countCompain();
 	});
@@ -270,7 +294,6 @@
    
     /////////////// 요청대기 COUNT REST 끝    ////////////////
 
-
    
 </script>
 
@@ -399,9 +422,10 @@
 	  <div class="modal-dialog modal-dialog-scrollable modal-lg">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel"/h5>
+	        <h5 class="modal-title" id="exampleModalLabel">
 	        <button type="button" class="close" data-dismis>블랙리스트 목록<s="modal" aria-label="Close">
 	        </button>
+	        </h5>
 	      </div>
 	      <div class="modal-body">
 	        
@@ -487,7 +511,7 @@
                         <strong>관리자 페이지</strong>
                      </h5>
 
-                     </br>
+                     <br/>
 
                      <div class="list-group text-center" style="font-size: 15px;">
                         <button type="button"
@@ -538,6 +562,7 @@
                   회원 목록을 조회할 수 있습니다
                   </p>
                      
+                    
                    <!--   <label class="btn btn-light active" style="font-size: 13px;"> 
                      <input type="radio" name="options" id="option1" checked>
                       &nbsp; &nbsp; &nbsp; 일반 &nbsp; &nbsp; &nbsp;    
@@ -554,7 +579,44 @@
                      
                   <hr size="10px">
                </h4>
-
+               
+				
+				<!--///////////////// 검색 시작 ////////////////////-->
+                        <input type="text" id="mainSearchKeyword" class="form-control" value="${user.searchKeyword}" placeholder="키워드를 입력해 주세요." />
+								<div class="input-group-btn">
+									<div class="btn-group" role="group">
+										<div class="dropdown dropdown-lg">
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+											<div class="dropdown-menu dropdown-menu-right" role="menu">
+												<!--/* 검색 form */-->
+												<form id="searchForm" action="@{/board/list.do}" method="get" onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
+													<!-- /* 현재 페이지 번호, 페이지당 출력할 데이터 개수, 페이지 하단에 출력할 페이지 개수 Hidden 파라미터 */ -->
+													<input type="hidden" name="currentPageNo" value="1" />
+													<input type="hidden" name="recordsPerPage" value="${user.recordsPerPage}" />
+													<input type="hidden" name="pageSize" value="${user.pageSize}" />
+						
+													<%-- <div class="form-group">
+														<label for="filter">검색 유형</label>
+														<select name="searchType" class="form-control">
+															<option value="" selected="${#strings.isEmpty( user.searchType )}">전체</option>
+															<option value="title" selected="${#strings.equals( user.searchType, 'title' )}">제목</option>
+															<option value="content" selected="${#strings.equals( user.searchType, 'content' )}">내용</option>
+															<option value="writer" selected="${#strings.equals( user.searchType, 'writer' )}">작성자</option>
+														</select>
+													</div> --%>
+													<div class="form-group">
+														<label for="contain">키워드</label>
+														<input type="text" name="searchKeyword" class="form-control" value="${user.searchKeyword}" />
+													</div>
+													<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+												</form>
+											</div>
+										</div>
+										<button type="button" class="btn btn-primary" onclick="searchBoard(null)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+									</div>
+								</div>
+				<!--///////////////// 검색 끝 ////////////////////-->
+				
 
                <table class="table table-hover"
                   style="width: 730px; heigh: 300px;">
@@ -577,7 +639,7 @@
                         <c:set var="i" value="${ i+1 }" />
                         <tr>
                            <th scope="row">${ i }</th>
-                           <td align="left"><a
+                           <td align="left"><a 
                               data-toggle="modal" href="#myModal2" data-userid="${user.userId}">${user.userId}</a></td>
                            <td align="left">${user.userName}</td>
                            <td align="left">${user.phone}</td>
