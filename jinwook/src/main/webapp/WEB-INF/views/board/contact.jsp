@@ -1,68 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<html>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html lang="zxx">
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>1:1문의 상세</title>
+    <title>Ogani | Template</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/static/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/static/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/static/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/static/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/static/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	 <style type="text/css">
-   	.row {
-   		color: black;
-   	}
-  </style>
-
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-/*<![CDATA[*/
-
-function movePage(uri, queryString) {
-   location.href = uri + queryString;
-}
-
-$(function(){
-	
-	$("#updateButton").on("click", function() {
-		self.location = "/board/updateBoardInquiryView?boardNo=${board.boardNo}"
-	});
-});
-</script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
 <body>
@@ -75,7 +35,7 @@ $(function(){
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="${path}/resources/static/img/logo.png" alt=""></a>
+            <a href="#"><img src="img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -86,7 +46,7 @@ $(function(){
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="${path}/resources/static/img/language.png" alt="">
+                <img src="img/language.png" alt="">
                 <div>English</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
@@ -152,7 +112,7 @@ $(function(){
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
-                                <img src="${path}/resources/static/img/language.png" alt="">
+                                <img src="img/language.png" alt="">
                                 <div>English</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
@@ -172,7 +132,7 @@ $(function(){
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="${path}/resources/static/img/logo.png" alt=""></a>
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -188,8 +148,8 @@ $(function(){
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li class="active"><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li class="active"><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -263,103 +223,106 @@ $(function(){
     </section>
     <!-- Hero Section End -->
 
-    <!-- Blog Details Section Begin -->
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-7 order-md-1 order-1" style="border: 1px solid green;">
-                <form name="readForm" role="form" method="post">
-                    <div class="blog__details__text">
-                    <div class="row">
-	  					<div class="col-xs-5 col-md-3" style="font-size:15px">No. ${board.boardNo}</div>
-					</div><br/>
-                    <div class="container">
-	  					<div class="col-xl-7 col-xl-5" style="width:1000px;height:40px;font-size:25px;border: 1px solid green;">Q. ${board.boardTitle}</div>
-					</div><br/>
-                    <div class="container-fluid">
-	  					<div class="col-xs-5 col-md-3" style="font-size:15px; text-align:right; float:right;">조회수: ${board.boardHits}</div>
-					</div><br/>
-                    <div class="container-fluid">
-	  					<div class="col-xs-5 col-xl-5" style="font-size:15px; text-align:right; float:right;">
-                    작성일: <fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd"/>
-					</div>
-					</div><br/>
-                        <%-- <img src="${path}/resources/static/img/blog/details/details-pic.jpg" alt=""> --%>
-                    <div class="container">
-	  					<div class="col-xl-7 col-xl-5" style="width:1000px;height:500px;font-size:18px;border: 1px solid green;">${board.boardContent}
-	  				</div>
-					</div><br/><br/>
-                        <div class="form-group">
- 				<c:forEach var="file" items="${file}">
- 				<input type="hidden" id="attach_no" name="attach_no" value="">
- 					<a href="#" onclick="fn_fileDown('${file.attach_no}'); return false;">${file.org_file_name}</a>(${file.file_size}kb)<br>
- 					<img attachNo="${ file.attach_no }" width="400" height="400" src="../static/img/${file.org_file_name}" alt="..." 
-               onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"/>
- 				</c:forEach>
- 			</div>
- 			 <button type="button" class="btn btn-success" id="updateButton" style="text-align:center; float:center;">수 &nbsp;정</button>
-                    </div>
-                    <div class="blog__details__content">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="blog__details__author">
-                                    <div class="blog__details__author__pic">
-                                        <%-- <img src="${path}/resources/static/img/blog/details/details-author.jpg" alt=""> --%>
-                                    </div>
-                                    <div class="blog__details__author__text">
-                                    </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="blog__details__widget">
-                                    <ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <!-- Blog Details Section End -->
-
-    <!-- Related Blog Section Begin -->
-    <section class="related-blog spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title related-blog-title">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                        </div>
-                        <div class="blog__item__text">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                        </div>
-                        <div class="blog__item__text">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                        </div>
-                        <div class="blog__item__text">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Contact Us</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Contact Us</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Related Blog Section End -->
+    <!-- Breadcrumb Section End -->
+
+    <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_phone"></span>
+                        <h4>Phone</h4>
+                        <p>+01-3-8888-6868</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_pin_alt"></span>
+                        <h4>Address</h4>
+                        <p>60-49 Road 11378 New York</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_clock_alt"></span>
+                        <h4>Open time</h4>
+                        <p>10:00 am to 23:00 pm</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_mail_alt"></span>
+                        <h4>Email</h4>
+                        <p>hello@colorlib.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->
+
+    <!-- Map Begin -->
+    <div class="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49116.39176087041!2d-86.41867791216099!3d39.69977417971648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886ca48c841038a1%3A0x70cfba96bf847f0!2sPlainfield%2C%20IN%2C%20USA!5e0!3m2!1sen!2sbd!4v1586106673811!5m2!1sen!2sbd"
+            height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <div class="map-inside">
+            <i class="icon_pin"></i>
+            <div class="inside-widget">
+                <h4>New York</h4>
+                <ul>
+                    <li>Phone: +12-345-6789</li>
+                    <li>Add: 16 Creek Ave. Farmingdale, NY</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Map End -->
+
+    <!-- Contact Form Begin -->
+    <div class="contact-form spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="contact__form__title">
+                        <h2>Leave Message</h2>
+                    </div>
+                </div>
+            </div>
+            <form action="#">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <input type="text" placeholder="Your name">
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <input type="text" placeholder="Your Email">
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <textarea placeholder="Your message"></textarea>
+                        <button type="submit" class="site-btn">SEND MESSAGE</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Contact Form End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -430,14 +393,14 @@ $(function(){
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="${path}/resources/static/js/jquery-3.3.1.min.js"></script>
-    <script src="${path}/resources/static/js/bootstrap.min.js"></script>
-    <script src="${path}/resources/static/js/jquery.nice-select.min.js"></script>
-    <script src="${path}/resources/static/js/jquery-ui.min.js"></script>
-    <script src="${path}/resources/static/js/jquery.slicknav.js"></script>
-    <script src="${path}/resources/static/js/mixitup.min.js"></script>
-    <script src="${path}/resources/static/js/owl.carousel.min.js"></script>
-    <script src="${path}/resources/static/js/main.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
 
 
 

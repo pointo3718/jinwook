@@ -29,7 +29,9 @@ public interface BoardService {
 //	//레시피 사진 첨부v
 //	public int fileRecipeInsert(FileVO file) throws Exception;
 	// 게시판 첨부파일 조회
-	public List<Map<String, Object>> selectAttachList(int boardNo) throws Exception;
+	public List<Map<String, Object>> selectBoardAttachList(int boardNo) throws Exception;
+	// 레시피 첨부파일 조회
+	public List<Map<String, Object>> selectRecipeAttachList(int rcpNo) throws Exception;
 	// 게시판 첨부파일 다운
 	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
 	//1:1문의 등록v
@@ -37,7 +39,7 @@ public interface BoardService {
 	//공지사항 등록v
 	public void addBoardAnnouncement(Board board, MultipartHttpServletRequest mpRequest) throws Exception;
 	//1:1문의 수정v
-	public void updateBoardInquiry(Board board, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
+	public void updateBoardInquiry(Board board) throws Exception;
 	//공지사항 수정v
 	public int updateBoardAnnouncement(Board board);
 	//1:1문의 삭제v

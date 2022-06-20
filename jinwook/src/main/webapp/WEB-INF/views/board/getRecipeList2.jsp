@@ -525,7 +525,7 @@ function fncDeleteRecipe(e) {
                     </div>
                 </div>
                 <!-- 레시피 이미지 목록 -->
-                 <table class="table table-hover table-striped">
+               <%--   <table class="table table-hover table-striped">
                  <thead>
             <tr>
                <th align="center">No</th>
@@ -549,9 +549,9 @@ function fncDeleteRecipe(e) {
                </tr>
             </c:forEach>
             </tbody>
-      </table>
+      </table> --%>
                 
-               <%--  <div class="col-lg-8 col-md-7">
+                 <div class="col-lg-8 col-md-7">
                     <div class="row">
                 <div class="list_wrap">
             <ul>
@@ -568,7 +568,7 @@ function fncDeleteRecipe(e) {
             </ul>
         </div>
        </div>
-      </div> --%>
+      </div> 
                 
                 
                 <%-- <div class="col-lg-8 col-md-7">

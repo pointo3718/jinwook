@@ -29,8 +29,10 @@ public interface BoardMapper {
 	public void insertBoardFile(Map<String, Object> map) throws Exception;
 	//레시피 사진 업로드
 	public void insertRecipeFile(Map<String, Object> map) throws Exception;
-	// 첨부파일 조회
-	public List<Map<String, Object>> selectAttachList(int boardNo) throws Exception;
+	// 게시판 첨부파일 조회
+	public List<Map<String, Object>> selectBoardAttachList(int boardNo) throws Exception;
+	// 레시피 첨부파일 조회
+	public List<Map<String, Object>> selectRecipeAttachList(int rcpNo) throws Exception;
 	// 첨부파일 다운
 	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
 	// 첨부파일 수정
