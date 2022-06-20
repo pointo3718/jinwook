@@ -58,7 +58,8 @@
    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- date picker -->
 
 
 <script type="text/javascript">
@@ -200,11 +201,6 @@ label {
    cursor: inherit;
    display: block;
 }
-.swal-button{
-	background-color: #7fad39;
-	font-size: 12px;
-	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
-}
 </style>
 
 
@@ -252,7 +248,7 @@ label {
             function() {
                //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
                $(self.location).attr("href",
-                     "../request/addRequestAd?storeNo=10011");
+                     "../request/addRequestAdView");
             });
    });
 
@@ -311,10 +307,7 @@ label {
          }
       });
    };//ajaxBtn
-   
-   
 </script>
-
 
 </head>
 
@@ -328,55 +321,6 @@ label {
    <!-- ceoTop Section Begin -->
    <jsp:include page="../layout/ceoTop.jsp" />
    <!-- ceoTop Section End -->
-   
-   
-   <!-- Modal for Refund Begin -->
-   <div class="modal fade" id="modalForRefund" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">환급 신청</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      
-	      
-	      
-	       		<form id="detailForm" name="detailForm" method="post">
-	               <input type="hidden" id="userId" name="userId" value="test01" />
-	               <input type="hidden" name="storeNo" value="${param.storeNo}" />
-	      			<div class="container">
-                        <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;환급하실 금액을 숫자로만 입력해주세요.</div>
-              			<div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;문의사항은 1:1문의/고객센터(1644-0000)로 문의 바랍니다.</div>
-				    </div>      
-				         <hr>
-	      					      				
-						<div class="form-group row">							
-                           <label for="colFormLabelLg"
-                              class="col-sm-3 col-form-label col-form-label"><strong>환급 금액</strong></label>
-                           <div class="col-sm-7">
-                              <input class="form-control form-control" type="text" id="refundMoney" name="refundMoney" placeholder="환급하실 금액을 입력해주세요."/>
-                           
-                           
-                           </div>
-                           <div class="col-sm-1" style="padding-left:0px; top:8px; right: 10px;">
-                           원
-                           </div>
-                        </div>
-                  </form>
-
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-	        <button type="button" id="requestRefund" onClick="addRequestRefund(userId.value, ${param.storeNo}, refundMoney.value)" class="btn btn-primary" style="background-color: #7fad39; border-color: #7fad39;">요청 등록</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-   <!-- Modal for Refund End -->
-
 
    <!-- ceoLeft Section Begin -->
    <section class="blog spad">
@@ -432,141 +376,57 @@ label {
                </div>
             </div>
 
-            <!-- 지갑 조회 start-->
+            <!-- 광고 등록 start-->
             <div style="margin-bottom: 1150px; width: 850px;">
                <h4 class="text-left">
-                  <strong>지갑 조회</strong>&nbsp; <span
-                     style="color: #6E6E6E; font-size: 13px">기간을 설정하지 않을시 오늘
-                     날짜로 조회됩니다.</span>
+                  <strong>광고 등록</strong>&nbsp; <span
+                     style="color: #6E6E6E; font-size: 13px">진욱이네에 광고를 등록하세요</span>
 
                   <hr size="10px">
                </h4>
-
-               <!-- 지갑조회 테이블 start -->
-               <table class="table table-borderless">
-                  <c:forEach var="store" items="${getStoreWallet}" begin="0" end="0">
-
-                     <tbody>
-                        <tr>
-                           <th scope="row">기간별 상점매출액</th>
-                           <td>${store.totalEarn}원</td>
-                           <td><input id="orderDateStart" type="date"> <input
-                              id="orderDateEnd" type="date">&nbsp;&nbsp;
-                              <button type="button" id="selectOrder"
-                                 class="btn btn-outline-success btn-sm"
-                                 onClick="fncGetStoreWallet(this)">조회</button></td>
-                        </tr>
-
-
-                        <tr>
-                           <th scope="row">진욱페이 잔액</th>
-                           <td>${store.user.jpBalance}원</td>
-                           <td><button type="button"
-                                 class="btn btn-outline-success btn-sm" id="refund" data-toggle="modal" data-target="#modalForRefund">환급신청</button></td>
-                        </tr>
-                     </tbody>
-                     <input type="hidden" id="storeNo" value="${store.storeNo}">
-                  </c:forEach>
-               </table>
-
-
-
-               <!-- 지갑조회 테이블 End -->
-
-
-
-               <!--지갑조회 주문내역 테이블 start-->
-
-
-               <h6 class="text-left">
                
-                  <strong>기간별 주문내역</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
-                     style="color: #6E6E6E; font-size: 13px">${store.orderDateStart}~${store.orderDateEnd}</span>
-               </h6>
-
-               <table class="table table-hover table-striped">
-
-
-                  <thead>
-                     <tr>
-                        <th align="center">No</th>
-                        <th align="left">주문번호</th>
-                        <th align="left">주문날짜</th>
-                        <th align="left">구매자이름</th>
-                        <th align="left">주문금액</th>
-                     </tr>
-                  </thead>
-
-                  <tbody>
-
-                     <c:set var="i" value="0" />
-                     <c:forEach var="store" items="${getStoreWallet}" begin="0">
-                        <c:set var="i" value="${ i+1 }" />
-
-                        <tr>
-                           <td align="Center">${ i }</td>
-                           <td align="left">${store.orders.orderNo}</td>
-                           <td align="left">${store.orders.orderDate}</td>
-                           <td align="left">${store.orders.buyerName}</td>
-                           <td align="left">${store.orders.orderPrice}원</td>
-
-
-                        </tr>
-                     </c:forEach>
-
-
-                  </tbody>
-
-               </table>
-               <!--지갑조회 주문내역 테이블 End-->
-
-               <!--지갑조회 환급내역 테이블 start-->
-               <h6 class="text-left">
-                  <strong>환급내역</strong>
-               </h6>
-               <table class="table table-hover table-striped">
-
-                  <thead>
-                     <tr>
-                        <th align="center">No</th>
-                        <th align="left">환급신청날짜</th>
-                        <th align="left">환급완료날짜</th>
-                        <th align="left">환급금액</th>
-                        <th align="left">요청상태</th>
-                     </tr>
-                  </thead>
-
-                  <tbody>
-
-                     <c:set var="i" value="0" />
-                     <c:forEach var="store" items="${getStoreRefund}">
-                        <c:set var="i" value="${ i+1 }" />
-                        <tr>
-                           <td align="Center">${ i }</td>
-                           <td align="left">${store.request.reqDate}</td>
-                           <td align="left">${store.request.resDate}</td>
-                           <td align="left">${store.request.refundMoney}</td>
-                           <td align="left"><c:if
-                                 test="${store.request.reqStatus.trim()=='1'}">
-                                        요청중         
-                              </c:if> <c:if
-                                 test="${store.request.reqStatus.trim()=='2'}">
-                                        수락완료         
-                              </c:if> <c:if
-                                 test="${store.request.reqStatus.trim()=='3'}">
-                                        거절         
-                              </c:if></td>
-
-
-                        </tr>
-                     </c:forEach>
-
-                  </tbody>
-
-               </table>
-               <!--지갑조회 환급내역 테이블 start-->
+               <div class="container">
+               <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;진욱이네에 광고 등록을 위해 상점에 대한 정보를 입력해주세요.</div>
+               <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;광고 요청 후, 등록 완료까지 2주 가량 소요됩니다.</div>
+               <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;등록된 광고는 이벤트 페이지에서 확인 가능합니다.</div>
+               <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;확인절차에 따라 관리자의 연락이 갈 수 있습니다.</div>
+               <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;진욱이네는 사장님들의 피드백을 언제나 환영합니다. 광고 등록시 더 추가하고 싶은 사항이 있다면 언제든 요청해주세요.</div>
+               <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;광고 관련 문의 및 요청 사항은 1:1문의/고객센터(1644-0000)로 문의 바랍니다.</div>
+         </div>
+          <hr size="10px">
+				<form name="detailForm" method="post">		
+				<input type="hidden" name="userId" value="test05" />
+				<input type="hidden" name="storeNo" value="${param.storeNo}" />
+				  
+				   <div class="form-group">
+				    <label for="exampleInputEmail1"><strong>제목</strong></label>
+				    <input type="text" class="form-control" id="adTitle" name="adTitle" placeholder="ex) 진욱이네에서 광고 요청합니다.">
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="exampleFormControlTextarea1"><strong>내용</strong></label>
+				    <textarea class="form-control" id="adContent" rows="6"
+				    ></textarea>
+				  </div>
+				  
+				
+				  <div class="form-group">
+					 <label for="exampleFormControlFile1"><strong>사진</strong></label>
+					 <input type="file" class="form-control-file" id="adImage" name="adImage">
+				  	<small id="emailHelp" class="form-text text-muted">사진 확인 후 절차에 따라 관리자의 연락이 갈 수 있습니다.</small>
+				  	
+				  </div>
+					
+				  <br/><br/>
+          			<div class="form-group row">
+	          			<button id="requestAd" class="btn btn-success" style="background-color: #7fad39; border-color: #7fad39; width: 126px;">등록 요청</button>
+          			</div>
+         			<br/>
+				  
+				</form>
+				               
             </div>
-            <!-- 지갑조회 End -->
+            <!-- 광고 등록 End -->
             <div class="text-center"></div>
          </div>
       </div>
@@ -576,46 +436,25 @@ label {
    <!-- Footer Begin -->
    <jsp:include page="../layout/footer.jsp" />
    <!-- Footer End -->
+
+
 <script>
-////////////////// 환급 요청 REST ///////////////////////
-function addRequestRefund(USERID, STORENO, REFUNDMONEY) {
-   		alert(USERID);
-   		alert(STORENO);
-   		alert(REFUNDMONEY);
-		var uri = "../request/addRequestRefund/"+USERID+"/"+STORENO+ "/" +REFUNDMONEY;
+/////////////// 광고 등록 시작 //////////////////////
+$(function() {
+	$( "#requestAd:contains('등록 요청')" ).on("click" , function() {
+		fncAddRequestStore();
+	});
+});
 
-		var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
-		swal
-			$.ajax({
-				url: uri,
-				type: "POST",
-				headers: headers,
-				dataType: "json",
-				
-				success: function(response) {
-					if (response.result == false) {
-						swal("환급 요청에 실패했습니다.");
-						return false;
-						
-					}
-						swal("환급을 요청했습니다.", "", "success");
-						location.reload();
-						modal("hide");
-						return true;
-					
-				},
-				error: function(xhr, status, error) {
-					
-					alert("에러가 발생하였습니다.");
-					return false;
-				}
-			
-			});
+function fncAddRequestStore(){
+//Form 유효성 검증
+
+
+document.detailForm.action='/request/addRequestAd?storeNo=10000&userId=test05';
+document.detailForm.submit();
 }
-	
 
-//////////////////환급 요청 REST ////////////////////////
-
+/////////////// 광고 등록 끝 ///////////////////////
 </script>
 </body>
 

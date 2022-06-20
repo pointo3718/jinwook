@@ -9,9 +9,15 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<!-- jQuery UI toolTip 사용 JS-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta charset="UTF-8">
 <title>진욱이네</title>
 <style>
+.swal-button {
+	background-color: #7fad39;
+	font-size: 12px;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
 #modal{
 	display : none;
 	z-index : 1;
@@ -113,7 +119,7 @@
 </head>
 <body>
 <label>암호를 입력하려면 버튼을 클릭해 주세요.</label>
-<input type='button' value='addopen' id='btnOpen'>
+<input type='button' value='updateopen' id='btnOpen'>
 <div id='modal'>
 	<div id='content'>
 		<input type='button' value='X' class="close" id='btnClose'/>
@@ -131,6 +137,7 @@
 		        <span class="dot"></span>
 		        <span class="dot"></span>
 		        <span class="dot"></span>
+		        <p class="message">&nbsp;</p>
 	   		</div>
 	   		<div class="numberSection">
 		        <button class="number">1</button>
@@ -142,7 +149,7 @@
 		        <button class="number">7</button>		
 		        <button class="number">8</button>
 		        <button class="number">9</button>
-		        <button class="number">확인</button>
+		        <button class="number">초기화</button>
 		        <button class="number">0</button>
 		        <button class="number">X</button>
 	    	</div>
@@ -170,14 +177,21 @@ btnClose.onclick = closeRtn;
 function PwCheck(pw) {
     const _this = this; 
     _this.pwStr = pw.toString(); // 문자, 숫자열을 모두 허용하기 위해 무조건 한가지 타입으로 맞춤
+    _this.password = []; // 지정된 패스워드
     _this.passwordNumber = []; // 입력할 패스워드
     _this.cnt = 0; // 입력횟수 체크
     _this.compChk = false; // 입력완료 체크 
 
-    _this.parent = document.querySelector('.pwWrap'); //도트,비밀번호를 가져옴
-    _this.dots = document.querySelectorAll('.dot');	//도트 6개를 이벤트마다 배열에 담아 가져옴
-    _this.numbers = document.querySelectorAll('.number'); //비밀번호 6개를 이벤트마다 배열에 담아 가져옴
+    _this.parent = document.querySelector('.pwWrap');
+    _this.dots = document.querySelectorAll('.dot');
+    _this.numbers = document.querySelectorAll('.number');
 
+    // 비밀번호를 배열에 넣음 
+    _this.getPw = function(){
+        for(let i=0; i<_this.pwStr.length; i++) {
+            _this.password[i] = _this.pwStr[i];
+        }
+    }
 
     // 숫자버튼 click이벤트 연동
     _this.handleListener = function(){
@@ -212,21 +226,43 @@ function PwCheck(pw) {
                dot.classList.remove('active'); 
             })
         }
+        console.log(type);
+    }
+
+    // 비밀번호 비교
+    _this.handleCheckPw = function(){
+        let compare = JSON.stringify(_this.password) === JSON.stringify(_this.passwordNumber);
+        return compare; 
     }
 
     // 결과처리 
     _this.handleResult = function(){
+        if(_this.handleCheckPw()) {
             _this.parent.classList.add('confirm');
             _this.compChk = true;
+        } else {
+            _this.parent.classList.add('error');
+            // 입력상태 초기화 
+            _this.passwordNumber = [];
+            _this.cnt = 0; 
+            _this.compChk = true; // 일시적인 클릭 방지 
+            
+            setTimeout(function(){
+            	swal("진욱이네","결제비밀번호가 잘못입력되었습니다.다시입력해주세요");
+                _this.compChk = false;	
+                _this.parent.classList.remove('error');
+                _this.handleDotActive();
+            }, 200);
+        }
     }
 
     _this.init = function(){
         _this.handleListener();
+        _this.getPw();
     }();
 }
 
-let pwCheck = new PwCheck(000000);
-
+let pwCheck = new PwCheck(123456);
 
 
 

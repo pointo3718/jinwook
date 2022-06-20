@@ -52,8 +52,7 @@
 			user_bye_status = 0 
 		ORDER BY 
 			reg_date
-		LIMIT
-			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
+		<include refid="CommonMapper.paging" />
 		
 	</select>
 	
@@ -66,6 +65,7 @@
 			users
 		WHERE
 			user_bye_status = 0
+		<include refid="CommonMapper.search" />
 	</select>
 	
 	
