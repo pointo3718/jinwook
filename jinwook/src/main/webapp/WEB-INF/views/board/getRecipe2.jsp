@@ -307,7 +307,7 @@ var rcpNo = ${recipe.rcpNo};
  					<img attachNo="${ file.attach_no }" width="400" height="400" src="../static/img/${file.org_file_name}" alt="..." 
                onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"/>
  				</c:forEach>
- 			</div>
+ 						</div>
 				</div>
                 
                     <div class="col-lg-6 col-md-6">
