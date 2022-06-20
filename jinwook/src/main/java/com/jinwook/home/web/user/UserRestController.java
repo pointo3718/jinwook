@@ -319,6 +319,10 @@ public class UserRestController {
 		return Integer.toString(randomNumber);
 	}
 	
+	//문자인증 만료 시간 
+	
+	
+	
 //	//문자 인증
 //	@PostMapping("findIdPhone")
 //	public User findIdPhone(@ModelAttribute("user") User user ) throws Exception {

@@ -46,11 +46,11 @@ public class OrdersController {
       orders.setOrderPrice(orderPrice);
       String userid = ((User) session.getAttribute("user")).getUserId();
       cart.setUserId(userid);
+      System.out.println(userid);
       cart.setOrders(orders);
       List<Cart> getCartList = ordersService.getOrdersCartList(cart);
       System.out.println(getCartList);
       model.addAttribute("getCartList", getCartList);
-      System.out.println();
       return "orders/addOrders";
    }
    
@@ -67,7 +67,7 @@ public class OrdersController {
       orders.setUser(user);
 //      ZoneId zoneId = ZoneId.of("Asia/Seoul");
 //      orders.setPickupTime(LocalDateTime.now(zoneId).plusMinutes(plusTime));
-      
+      System.out.println(user);
       System.out.println(orders);
       ordersService.addOrders(orders);
     
@@ -139,6 +139,7 @@ public class OrdersController {
       
       String userid = ((User) session.getAttribute("user")).getUserId();
       cart.setUserId(userid);
+//      cart.setStoreName(storeName);
       //cart.setStoreName();
       System.out.println("cart"+cart);
       List<Cart> getCartList = ordersService.getOrdersCartList(cart);
@@ -236,6 +237,14 @@ public class OrdersController {
 	   System.out.println("/orders/getOrdersJpayChargeList : GET");
 	   
 	return "orders/getOrdersJpayChargeList";
+   }
+   
+   @GetMapping(value="addOrdersJpayPasswordCk")
+   public String addOrdersJpayPasswordCk() throws Exception {
+	   
+	   System.out.println("/orders/addOrdersJpayPasswordCk : GET");
+	   
+       return "orders/addOrdersJpayPasswordCk";
    }
    
 }

@@ -243,7 +243,8 @@
 					  </div>
 					  <hr>
 					  <div id="kakao_login" style="text-align: center">
-                     <a href="#">
+					  <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=7a50e1995f458ef51a98c92f52419d00&redirect_uri=	
+						http://127.0.0.1:8082/user/loginView&response_type=code">
                      <img width="350" height="50" 
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs_esG5vNalcfhJ7BalYK2Uk06Dkp9JIK_KA&usqp=CAU" /></a>
        				 </div>	<br>
