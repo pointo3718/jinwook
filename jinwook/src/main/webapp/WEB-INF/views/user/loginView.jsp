@@ -127,7 +127,7 @@
 
 	    function loginWithKakao() {
 	        Kakao.Auth.authorize({ 
-	        redirectUri: 'http://localhost:8082/index' 
+	        redirectUri: 'http://localhost:8082/user/kakaoLogin' 
 	        }); // 등록한 리다이렉트uri 입력
 	    }	
 	
@@ -167,10 +167,8 @@
 				 
 				 // 로그인할 때 검증 메세지
 				 const msg = "${msg}";
-				 if(msg.length() > 5){
 				 swal("[진욱이네]",msg);
 					 
-				 }
 					 
 				 
 			});
@@ -182,7 +180,7 @@
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$(".button2").on("click" , function() {
 				/* self.location = "/user/addUser" */
-				$("form").attr("method" , "GET").attr("action" , "/user/addUser").submit();
+				$("form").attr("method" , "GET").attr("action" , "/user/addUserSelec").submit();
 			});
 		});
 		
@@ -241,21 +239,23 @@
  					     <!--  <a class="button2 site-btn" href="#" role="button">회 &nbsp;원 &nbsp;가 &nbsp;입</a> -->
 					    </div>
 					  </div>
+					  <br>
 					  <hr>
+					  <br>
 					  <div id="kakao_login" style="text-align: center">
 					  <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=7a50e1995f458ef51a98c92f52419d00&redirect_uri=	
-						http://127.0.0.1:8082/user/loginView&response_type=code">
-                     <img width="350" height="50" 
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs_esG5vNalcfhJ7BalYK2Uk06Dkp9JIK_KA&usqp=CAU" /></a>
+						http://127.0.0.1:8082/user/kakaoLogin&response_type=code">
+                     <img width="50" height="50" 
+                        src="${path}/resources/static/kakao-icon.svg" /></a>
        				 </div>	<br>
-					  <div id="naver_login" style="text-align: center">
+					<%--   <div id="naver_login" style="text-align: center">
                      <a href="#">
                      <img width="350" height="50" src="${path}/resources/static/naverlogin.png" /></a>
        				 </div>	<br>
 					  <div id="google_login" style="text-align: center">
                      <a href="#">
                      <img width="350" height="50" src="${path}/resources/static/googlelogin.png" /></a>
-       				 </div>	
+       				 </div>	 --%>
 						 <!--  <div class="form-group row">
 							<div class="or-seperator"><b>or</b></div>
 						</div> -->

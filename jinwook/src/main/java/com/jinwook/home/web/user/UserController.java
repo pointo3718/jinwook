@@ -1,6 +1,7 @@
 package com.jinwook.home.web.user;
 
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,16 +59,16 @@ public class UserController {
 		System.out.println("==========index===========");
 		return "index";
 	}
-	@GetMapping("index2")
-	public String index(HttpSession session) throws Exception{
-		System.out.println("==========index===========");
-		return "index2";
-	}
-	
 	@GetMapping("addUser")
-	public String addUser() throws Exception{
+	public String addUser(@RequestParam(value="role" ,required = false) String role, Model model) throws Exception{
 	
 		System.out.println("/user/addUserView : GET");
+		User user = new User();
+		System.out.println(user);
+		user.setRole(role);
+		System.out.println(user.getRole()+"lolololololololo");
+		
+		model.addAttribute("role", user.getRole());
 		
 		return "/user/addUserView";
 	}
@@ -87,10 +89,26 @@ public class UserController {
 	
 	@GetMapping("addUserSelec")
 	public String addUserSelec()throws Exception{
+		System.out.println("zzzzzzzzzzz");
 		
 		return "/user/addUserSelec";
 	}
+	
+	@PostMapping("addUserSelec")
+	public String addUserSelec(@ModelAttribute("user") User user)throws Exception{
+		System.out.println(user+"zzzzzzzzzzz");
+		
+		return "/user/addUserView";
+	}
 
+	
+//	@PostMapping("addUserSelec")
+//	public String addUserSelec() throws Exception{
+//		
+//		
+//		return "/user/addUserView";		
+//	}
+	
 	@RequestMapping( value="getUser", method=RequestMethod.GET )
 	public String getUser( @RequestParam("userId") String userId , Model model ) throws Exception {
 		
@@ -154,7 +172,7 @@ public class UserController {
 		
 
 		if(dbUser == null) {
-			model.addAttribute("msg", "아이디나 비밀번호를 확인해주세요.");
+			model.addAttribute("msg", "아이디와 비밀번호를 확인해주세요.");
 			return "/user/loginView";
 		}
 		
@@ -343,7 +361,7 @@ public class UserController {
 		
 		// kakao login
 		@GetMapping("kakaoLogin")
-		public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+		public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
 			System.out.println("#########" + code);
 			
 			// code를 보내 access_Token 얻기
@@ -351,17 +369,43 @@ public class UserController {
 			System.out.println("123123123123123");
 			HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
 			
+			User user = new User();
+			user.setUserName((String)userInfo.get("nickname"));
+			user.setNickName((String)userInfo.get("nickname"));
+			
 			System.out.println("45645456456456456");
 			System.out.println("###access_Token#### : " + access_Token);
 			System.out.println("###nickname#### : " + userInfo.get("nickname"));
-//			System.out.println("###email#### : " + userInfo.get("email"));
+			System.out.println("###email#### : " + userInfo.get("email"));
+			System.out.println("###email#### : " + userInfo.get("birthday"));
+			System.out.println("###email#### : " + userInfo.get("gender"));
+			System.out.println(user);
 			
+			session.setAttribute("user", user);
+			
+			session.setAttribute("access_Token", access_Token);
 			return "index";
 			/*
 			 * 리턴값의 testPage는 아무 페이지로 대체해도 괜찮습니다.
 			 * 없는 페이지를 넣어도 무방합니다.
 			 * 404가 떠도 제일 중요한건 #########인증코드 가 잘 출력이 되는지가 중요하므로 너무 신경 안쓰셔도 됩니다.
 			 */
+	    }
+		//카카오 로그아웃
+		 @GetMapping("kakaoLogout")
+		 public String logout(ModelMap modelMap, HttpSession session)throws IOException {
+	        if(session.getAttribute("access_Token") != null) {
+	            kakaoService.getLogout((String)session.getAttribute("kakaoToken"));
+	        }
+	        session.setAttribute("user", null);
+	        session.invalidate();
+	        HashMap<String, String> message = new HashMap<>();
+	        message.put("title", "로그아웃");
+	        message.put("script", "location.href='/'");
+	        message.put("msg", "로그아웃 되었습니다");
+	        message.put("type","alert");
+	        modelMap.addAttribute("message",message);
+	        return "index";
 	    }
 //	@PostMapping("findIdEmail")
 //	public String findIdEmail(@ModelAttribute("user") User user, HttpSession session) throws Exception {
