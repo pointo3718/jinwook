@@ -589,7 +589,7 @@
 											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
 											<div class="dropdown-menu dropdown-menu-right" role="menu">
 												<!--/* 검색 form */-->
-												<form id="searchForm" action="@{/board/list.do}" method="get" onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
+												<form id="searchForm" action="/admin/blog" method="get" onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
 													<!-- /* 현재 페이지 번호, 페이지당 출력할 데이터 개수, 페이지 하단에 출력할 페이지 개수 Hidden 파라미터 */ -->
 													<input type="hidden" name="currentPageNo" value="1" />
 													<input type="hidden" name="recordsPerPage" value="${user.recordsPerPage}" />

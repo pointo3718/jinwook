@@ -32,9 +32,8 @@
 				<otherwise>
 					AND
 						(
-							   title LIKE CONCAT('%', #{searchKeyword}, '%')
-							OR content LIKE CONCAT('%', #{searchKeyword}, '%')
-							OR writer LIKE CONCAT('%', #{searchKeyword}, '%')
+							   user_id LIKE CONCAT('%', #{searchKeyword}, '%')
+							
 						)
 				</otherwise>
 			</choose>
