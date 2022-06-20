@@ -84,13 +84,15 @@ public class OrdersRestController {
 	
 	@GetMapping(value = "addOrdersCart/{prodNo}")
 	public int addOrdersCart(@ModelAttribute("cart")Cart cart,@PathVariable(value="prodNo",required = false) int prodNo,
-								@PathVariable(value="storeName",required = false) String storeName,HttpSession session) throws Exception {
+								@PathVariable(value="storeNo",required = false)int storeNo,HttpSession session) throws Exception {
 	User user = (User) session.getAttribute("user");
 	Product product =new Product();
 	product.setProdNo(prodNo);
+	Store store = new Store();
+	store.setStoreNo(storeNo);
 	cart.setProduct(product);
 	cart.setUserId(user.getUserId());
-	cart.setStoreName("진욱이네");
+	cart.setStore(store);
 	System.out.println(cart);
 	int result = ordersService.addOrdersCart(cart);
 	       return result;

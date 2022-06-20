@@ -120,6 +120,9 @@
     <section class="shoping-cart spad">
         <div class="container">
             <div class="row">
+              <div class="contact__form__title">
+             	<h1>${cart.storeName}</h1>
+           	  </div>
                 <div class="col-lg-12">
                     <div class="shoping__cart__table">
                         <table>
@@ -141,7 +144,7 @@
                                   <c:set var="i" value="${ i+1 }" />
                                 <tr>
                                  <td hidden="cartNo" id="cartNo" name="cartNo" value="${cart.cartNo}">+cart.cartNo</td>
-                                    <td class="shoping__cart__item">
+                                 <td hidden="storeName" id="storeName" name="storeName" value="${cart.storeName}">+cart.storeName</td>                                    <td class="shoping__cart__item">
                                         <img src="${path}/resources/static/img/cart/cart-1.jpg" style="margin-right: 30px;">
                                         <strong style="font-size: 20px;">${cart.product.prodName}</strong>
                                     </td>
@@ -187,7 +190,7 @@
                     <div class="shoping__checkout">
                         <h5>주문 총액</h5>
                         <ul>
-                            <li>주문 금액 <span id="orderPrices"><fmt:formatNumber value="${total}"/> </span>원</li>
+                            <li>주문 금액 <span id="orderPrices" name="orderPrice"><fmt:formatNumber value="${total}"/>원</span></li>
                         </ul>
                         <a><button class="primary-btn" style="max-width: 100%; width: 477px;" 
                          id="button" name="orderPrice" value="${total}">주문하기</button></a>
@@ -256,6 +259,8 @@
       <a href="/orders/getOrdersNoticeList">알림내역</a> <hr>
       <a href="/store/getStore?storeNo=10000" class="primary-btn">SHOP</a><hr>
       <a href="/orders/addOrdersJpayPassword">진욱페이비밀번호등록창</a> <hr>
+      <a href="/orders/addOrdersJpayPasswordCk">진욱페이비밀번호등록체크(일치여부)</a><hr>
+      <a href="/orders/updateOrdersJpayPassword">진욱페이비밀번호수정</a><hr>
       <a href="/orders/addOrdersJpayCharge">충전창</a> <hr>
       <a href="/orders/getOrdersJpayChargeList">금액설정창</a> <hr>
 </body>
