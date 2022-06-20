@@ -131,8 +131,7 @@ function fn_addFile() {
 					</h4>
 
 
-
-					<form id="MultiUpload" method="post" enctype="multipart/form-data">						
+					<form id="MultiUpload" action="addRecipe" method="post" enctype="multipart/form-data">
 					<div class="row">
 							<div class="form-group">
 								<label for="rcpTitle"
@@ -179,10 +178,9 @@ function fn_addFile() {
 
 					<div class="row">
 							<div class="form-group">
-								<label for="file"
-									class="col-sm-offset-3 col-sm-5 control-label">레시피 사진 업로드</label>
+								<label for="file" class="col-sm-offset-3 col-sm-5 control-label">레시피 사진 업로드</label>
 								<div class="col-sm-4" style="float: right;">
-									<input type="file" class="form-control" id="file"
+									<input type="file" class="form-control" id="file" multiple="multiple"
 										name="file" style="width:250px;height:50px;font-size:15px;">
 								</div>
 							</div>
@@ -197,8 +195,8 @@ function fn_addFile() {
 							<a class="btn btn-primary btn" href="#" role="button">취소</a>
 						</div>
 					</div>
-				</div>
 				</form>
+				</div>
 				<div class="text-center"></div>
 		</div>
 	</section>

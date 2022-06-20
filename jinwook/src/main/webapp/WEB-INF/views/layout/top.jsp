@@ -142,7 +142,7 @@ a {
                         <a href="/user/login"
                            style="word-break: break-all; margin-right: 20px;"><i
                            class="fa fa-sign-in" aria-hidden="true"></i>로그인&nbsp;</a>
-                        <a href="/user/addUser">회원가입 <i class="fa fa-user"
+                        <a href="/user/addUserSelec">회원가입 <i class="fa fa-user"
                            aria-hidden="true"></i></a>
                      </c:if>
                      <c:if test="${user != null}">
@@ -220,8 +220,43 @@ a {
                               </div>
                            </div>
                         </c:if>
-                        <a href="/user/logout">로그아웃 <i class="fa fa-sign-out"
+                        <!-- 카카오 사용자 -->
+                        <c:if test="${sessionScope.access_Token ne null}">
+                           <div class="dropdown">
+                              <a href="/admin/blog"
+                                 style="word-break: break-all; margin-right: 20px;"
+                                 class="dropdown-toggle" role="button" id="dropdownMenuLink"
+                                 data-toggle="dropdown" aria-expanded="false"><i
+                                 class="fa fa-heart" aria-hidden="true"></i>${sessionScope.user.nickName }
+                                 님</a>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                 <a class="dropdown-item" href="/user/login">관리자페이지</a> <a
+                                    class="dropdown-item" href="/admin/blog">회원 목록</a> <a
+                                    class="dropdown-item" href="/admin/listStoreAdmin">상점 목록</a>
+                                 <a class="dropdown-item" href="/admin/listComplainAdmin">신고
+                                    접수 목록</a> <a class="dropdown-item"
+                                    href="/request/getRequestListForAdmin?reqCode=1">상점 등록
+                                    요청</a> <a class="dropdown-item"
+                                    href="/request/getRequestListForAdmin?reqCode=2">상점 삭제
+                                    요청</a> <a class="dropdown-item"
+                                    href="/request/getRequestListForAdmin?reqCode=3">환급 요청</a> <a
+                                    class="dropdown-item"
+                                    href="/request/getRequestListForAdmin?reqCode=4">광고 등록
+                                    요청</a> <a class="dropdown-item"
+                                    href="/request/getRequestListForAdmin?reqCode=4">문의 내역</a> <a
+                                    class="dropdown-item" href="/user/kakoLogout"></a> <a class="dropdown-item"
+                                    href="#">로그아웃</a>
+                              </div>
+                           </div>
+                        </c:if>
+                        <c:if test="${sessionScope.access_Token ne null}">
+                        <a href="/user/kakaoLogout">Logout <i class="fa fa-sign-out"
                            aria-hidden="true"></i></a>
+                    	</c:if>
+                    	<c:if test="${sessionScope.access_Token eq null}">
+                        <a href="/user/logout">로그아웃 <i class="fa fa-sign-out"
+                           aria-hidden="true"></i></a> 
+                        </c:if>
                      </c:if>
                   </div>
                </div>
