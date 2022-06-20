@@ -32,7 +32,8 @@
 			<result property="user.grade"			column="grade"			jdbcType="VARCHAR"/>
 			<result property="orders.orderNo"		column="order_no"		jdbcType="INTEGER"/>
 			<result property="orders.orderPrice"	column="order_price"	jdbcType="INTEGER"/>
-			<result property="storeName"			column="store_name"		jdbcType="VARCHAR"/>
+			<result property="store.storeNo"		column="store_no"		jdbcType="INTEGER"/>
+			<result property="store.storeName"		column="store_name"		jdbcType="VARCHAR"/>
 			<result property="prodCount"			column="prod_count"		jdbcType="INTEGER"/>
 			<result property="cartStatus"			column="cart_status"	jdbcType="VARCHAR"/>
 			<result property="product.prodNo"		column="prod_no"		jdbcType="INTEGER"/>

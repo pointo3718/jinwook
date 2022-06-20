@@ -47,25 +47,20 @@ public class RequestController {
 		
 		requestService.addRequestAddStore(store);
 
-		return "redirect:/request/";
+		return "redirect:/request/getRequestAdStoreList";
 	}
 	
-	// ========== 상점 등록 요청 상세 ===========
-	@GetMapping( value="getRequestStore")
-	public String getUser( @RequestParam("reqNo") int reqNo , Model model ) throws Exception {
-		
-		System.out.println("/request/getRequestStore : GET");
-		
-		Request request = requestService.getRequestStore(reqNo);
-		model.addAttribute("request", request);
-		
-		return "request/getRequestStore.jsp";
-	}
 	
 	
 	// ============ 환급 요청 등록 =============   /////// 모든 등록 이렇게 수정 (예외 적용)
-	@PostMapping(value = "addRequestRefund")
-	public String addRequestRefund(@ModelAttribute("request") Request request) {
+	//@PostMapping(value = "addRequestRefund")
+	public String addRequestRefund(@ModelAttribute("request") Request request, Model model) {
+		
+		System.out.println("==================request :: "+ request);
+		System.out.println("왜 안지나가지 ....................................");
+		System.out.println("왜 안지나가지 ....................................");
+		System.out.println("왜 안지나가지 ....................................");
+		
 		try {
 			boolean result = requestService.addRequestRefund(request);
 			if (result == false) {
@@ -77,7 +72,7 @@ public class RequestController {
 		} catch (Exception e) {
 			// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
 		}
-		return "redirect:/request/addRequestRefund";
+		return "/store/getStoreWallet?storeNo=" +request.getStoreNo();
 	}
 	
 	
@@ -97,7 +92,15 @@ public class RequestController {
 		}
 		return "redirect:/request/addRequestDeleteStore";
 	}
-		
+	
+	
+	// ========== 광고 등록 신청 폼 ===========
+	@GetMapping(value = "addRequestAd")
+	public String addRequestAdView(@RequestParam("storeNo") int storeNo, Model model) {
+		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+		model.addAttribute("storeInfo", storeInfo);
+		return "/request/addRequestAdView";
+	}
 	
 	// ========== 광고 등록 신청 ===========
 	@PostMapping(value = "addRequestAd")
@@ -113,7 +116,7 @@ public class RequestController {
 		} catch (Exception e) {
 			// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
 		}
-		return "redirect:/request/addRequestAd";
+		return "redirect:/request/getRequestAdStoreList";
 	}
 	
 	// ========== 광고 등록 요청 보기 ===========

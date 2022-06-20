@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -34,17 +35,54 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
 	<style type="text/css">
+	*{font-family: 'Noto Sans KR', sans-serif;}
+	
 	.checkout__input {
 	width: 550px;
-	
 	}
 	
 	.row{
-   display: flex;
+   	display: flex;
     justify-content: center;
-   align-items: flex-start;
-}
+  	 align-items: flex-start;
+	}
 	</style>
+	<!--  ///////////////////////// JavaScript ////////////////////////// -->
+	<script type="text/javascript">
+	function fncAddOrders() {
+	
+	const name=$("input[name='buyerName']").val();
+	const phone=$("input[name='buyerPhone']").val();
+	const pick=$("input[name='plusTime']").val();
+	
+	if(name == null || name.length <1){
+		alert("이름은 반드시 입력하셔야 합니다.");
+		return;
+	}
+	
+	if(phone == null || phone.length <1){
+		alert("전화번호는 반드시 입력하셔야 합니다.");
+		return;
+	}
+	
+	if(pick == null || pick.length <1){
+		alert("픽업시간은 반드시 입력하셔야 합니다.");
+		return;
+	}
+	/* document.addPurchase.submit(); action="/purchase/addPurchase*/
+	$("form").attr("method" , "POST").attr("action" , "/orders/addOrders").submit();
+}
+	$(function(){
+		$( "button" ).on("click" , function() {
+			fncAddOrders();
+		}); 
+	});
+	$(function(){
+		$("a[href='#' ]").on("click" , function() {
+			history.go(-1);
+		});
+	});
+</script>
 </head>
 
 <body>
@@ -75,34 +113,33 @@
         <div class="container">
             <div class="row">
             </div>
+            <div class="contact__form__title">
+                        <h1>${orders.cart.storeName}</h1>
+            </div>
             <div class="checkout__form">
                 <h4>구매자 정보</h4>
-                <form action="#">
-                    <div class="row">
+                <form action="#" >
+                    <div class="row" >
                         <div class="col-lg-6 col-md-6">
-                           <div class="checkout__input">
+                           <div class="checkout__input" >
                            		<p>구매자 이름<span>*</span></p>
-                            	<input type="text" name="" value="${user.userId}">
+                            	<input type="text" name="buyerName" value="${user.userName}" style="color: black;">
                             </div>
-                            <div class="checkout__input">
+                            <div class="checkout__input" >
                                 <p>구매자 전화번호<span>*</span></p>
-                                <input type="text" name="${orders.buyerPhone}" value="${user.phone}">
+                                <input type="text" name="buyerPhone" value="${user.phone}" style="color: black;">
                             </div>
                             <div class="checkout__input">
                                 <p>픽업희망시간<span>*</span></p>
-                                <input type="text" name="plusTime" placeholder="분으로 숫자만 입력해주세요" class="checkout__input__add">
+                                <input type="text" name="plusTime" placeholder="분으로 숫자만 입력해주세요" class="checkout__input__add" style="color: black;">
                             </div>
                             <div class="checkout__input">
                                 <p>요청사항</p>
-                                <input type="text" name="orderReq" placeholder="예)감자 10개를 5개씩 나눠 담아주세요.">
+                                <input type="text" name="orderReq" placeholder="예)감자 10개를 5개씩 나눠 담아주세요." style="color: black;">
                             </div>
                             <div class="checkout__input">
                                 <p>쿠폰<span></span></p>
-                                <input type="text" value="${user.grade}">
-                            </div>
-                            <div class="checkout__input">
-                                <p>쿠폰할인율<span></span></p>
-                                <input type="text" name="coupon.couponDc" value="${orders.coupon.couponDc}" placeholder="쿠폰을 입력하시면 자동입력됩니다." readonly>
+                                <input type="text" value="${orders.coupon.couponType}" style="color: black;">
                             </div>
                             
                         </div>
@@ -116,25 +153,26 @@
                                 	<c:set var="total" value="${total + (cart.product.price*cart.prodCount) }" />
                                 </c:forEach>
                                 </ul>
-                                <div class="checkout__order__subtotal">총상품금액 <span>${total}원</div>
-                                <div class="checkout__order__total">회원등급할인 <span id="grade" name="grade" value="${user.grade}">${user.grade}</span></div>
-
-                                <div class="checkout__order__total">실결제금액 <span>${orders.finalPrice} </span></div>
-                                	<c:choose>
+                                <div class="checkout__order__subtotal">총상품금액 <span>${cart.orders.orderPrice}원</span></div>
+                                <div class="checkout__order__total"> 쿠폰할인	<span>${orders.coupon.couponDc}</span></div>
+                                <div class="checkout__order__total">회원등급할인<span id="grade" name="grade" value="${user.grade}">
+	                               	<c:choose>
 										<c:when test="${user.grade=='프랜즈'}">
-											<input type="text" class="ct_input_g" id="finalPrice" name="finalPrice"   value="${cart.orders.orderPrice*0.99}" readonly>
+											<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${cart.orders.orderPrice*0.01}"/>${total}원</td>
 										</c:when>
 									    <c:when test="${user.grade=='패밀리'}">
-											<input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice*0.97}" readonly>
+											<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${cart.orders.orderPrice*0.03}"/>${total}원</td>
 									    </c:when>
 									    <c:when test="${user.grade=='퍼스트'}">
-									    <td align="left"><fmt:formatNumber var="total" pattern="###" value="${cart.orders.orderPrice*0.95}"/></td>
-									      	 <input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${total}" readonly>
+									    	<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${cart.orders.orderPrice*0.05}"/>${total}원</td>
 									    </c:when>
 										<c:when test="${user.grade=='일반'}">
-									    	<input type="text" class="ct_input_g" id="finalPrice" name="finalPrice" value="${cart.orders.orderPrice}" readonly>
+								    	<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${cart.orders.orderPrice*0}"/>${total}원</td>
 									    </c:when>
 								     </c:choose>
+							     </span></div>
+								 <div class="checkout__order__total" > 실결제금액<span id=finalPrice style="color: black;">${cart.orders.orderPrice-total}원</span></div>
+								     
                                 <button type="submit" class="site-btn">주문하기</button>
                             </div>
                         </div>

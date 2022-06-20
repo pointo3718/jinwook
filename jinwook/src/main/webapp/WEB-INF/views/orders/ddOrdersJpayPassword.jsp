@@ -1,278 +1,108 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="zxx">
+
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-<meta charset="UTF-8">
-<title>password input modal</title>
-<style>
-#modal{
-	display : none;
-	z-index : 1;
-	background-color: rgba(0,0,0,.3);
-	position:fixed;
-	left:0;
-	top: 0;
-	height:100%;
-	width: 100%;ㄴ
-	
-}
-#modal>#content{
-	width: 80%;
-	max-width: 350px;
-	margin:100px auto;
-	padding:20px;
-	position: relative;
-	background-color:#fff;
-}
+<!-- 
 
-#modal .close{
-	position:absolute;
-	top:4px;
-	right:4px;	
-	font-size:20px;
-	border:0;
-	background-color: #fff;
-}
+			모달 클래스이름		모달 아이디이름				화면 숨기는듯					텍스트영역과 현재요소를 연결?    		텝하면 넘어가는거
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  			클래스이름	모달 기본모델   모달기본모델가운데
+  <div class="modal-dialog modal-dialog-centered">
+  			클레스이름	모달 콘텐츠
+    <div class="modal-content">
+    		클래스이름 모달 머리글
+      <div class="modal-header">
+      		클래스이름 모달 타이틀				모달아이디이름 			화면타이틀이름
+        <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+					타입= 버튼		클래스이름 버튼			 	모달을 닫는 속성			아이콘과 텍스트를 결합		
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      		클래스이름 모달의 내용
+      <div class="modal-body">
+        Show a second modal and hide this one with the button below.
+      </div>
+      		클래스이름 모달 꼬리말
+      <div class="modal-footer">
+      				클래스이름						데이타대상? 								모달을 열음
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
+      </div>
+    </div>
+  </div>
+</div>		클래스이름					얘가 대상인가봄			화면숨기고					텍스트영역과 현재요소 연결?					탭		
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+			클래스이름
+  <div class="modal-dialog modal-dialog-centered">
+  			클래스이름 콘텐츠
+    <div class="modal-content">
+    		클래스이름 모달머리
+      <div class="modal-header">
+      		클래스이름 타이틀					타이틀이름				화면타이틀이름
+        <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
+        		타입 버튼				클래스이름 버튼 닫기			모달을 닫음			닫기버튼에 텍스트 요소 추가
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      		클래스이름 모달내용
+      <div class="modal-body">
+        Hide this modal and show the first with the button below.
+      </div>
+      		클래스이름 모달 꼬리말
+      <div class="modal-footer">
+      				클래스이름 버튼의색은 파란색				타겟 대상							대상은 모달	
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
+      </div>
+    </div>
+  </div>
+</div>		버튼은 파란색				모달						링크						버튼			
+<a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>
 
-#modal>#content .title {
-	text-align: center;
-}
+//============================================================================================================
+			버튼타입				파란색버튼					모달열어				이아이디를가진 모달을				이번튼을 누르면 @mdo 가 실행됨
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
+			버튼타입				파란색버튼					모달열어				이아이디를가진 모달을				이번튼을 누르면 @fat 가 실행됨
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Open modal for @fat</button>
+			버튼타입				파란색버튼					모달열어				이아이디를가진 모달을				이번튼을 누르면 @getbootstrap 가 실행됨
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Open modal for @getbootstrap</button>
 
-#modal>#content .pwWrap .pwSection{
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 150px;
-}
-
-#modal>#content .pwWrap .pwSection .dot {
-  display: block;
-  width: 10px;
-  height: 10px;
-  background: darkgrey;
-  border-radius: 100%;
-  margin: 0 5px;
-}
-
-#modal>#content .pwWrap .pwSection .dot.active {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-#modal>#content .pwWrap .pwSection .message {
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  z-index: 1;
-  min-width: 100%;
-  text-align: center;
-  font-size: 14px;
-  font-weight: bold;
-  letter-spacing: -0.03em;
-  opacity: 0;
-  transition: .2s ease-out;
-}
-
-#modal>#content .pwWrap .numberSection {
-  overflow: hidden;
-}
-
-#modal>#content .pwWrap .numberSection .number {
-  float: left;
-  width: 33.33%;
-  height: 60px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 20px 0;
-  cursor: pointer;
-  background: #7fad39;
-  color: #ffffff;
-  font-size: medium;
-}
-
-#modal>#content .pwWrap .numberSection .number:last-child {
-  margin-left: 0%;
-  
-}
-
-#modal>#content .pwWrap .error .message {
-  opacity: 1;
-  color: red;
-}
-
-#modal>#content .pwWrap .confirm .message {
-  opacity: 1;
-  color: green;
-}
-
-#modal .close:hover,
-#modal .close:focus {
-  color : #000;
-  text-decoration: none;
-  cursor :pointer;
-}
-</style>
-
-</head>
-<body>
-<label>암호를 입력하려면 버튼을 클릭해 주세요.</label>
-<input type='button' value='addopen' id='btnOpen'>
-<div id='modal'>
-	<div id='content'>
-		<input type='button' value='X' class="close" id='btnClose'/>
-		<div class="title">
-			<h2 class="h3">
-	   		   <span style="color : #7fad39">진욱페이</span>
-	    	</h2>
-			<h3 class="h4"> 비밀번호 입력</h3><hr>
-		</div>
-		<div class="pwWrap">		
-			<div class="pwSection">
-		        <span class="dot"></span>
-		        <span class="dot"></span>
-		        <span class="dot"></span>
-		        <span class="dot"></span>
-		        <span class="dot"></span>
-		        <span class="dot"></span>
-		        <p class="message">&nbsp;</p>
-	   		</div>
-	   		<div class="numberSection">
-		        <button class="number">1</button>
-		        <button class="number">2</button>
-		        <button class="number">3</button>
-		        <button class="number">4</button>
-		        <button class="number">5</button>
-		        <button class="number">6</button>
-		        <button class="number">7</button>		
-		        <button class="number">8</button>
-		        <button class="number">9</button>
-		        <button class="number">확인</button>
-		        <button class="number">0</button>
-		        <button class="number">X</button>
-	    	</div>
-	    </div>
-	</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
 </div>
-<script>
-var btnOpen  = document.getElementById('btnOpen');
-var btnClose = document.getElementById('btnClose');
 
-// modal 창을 보여줌
-btnOpen.onclick = function(){
-	var modal = document.getElementById('modal');
-	modal.style.display = 'block';
-	
-}
-//modal 창을 감춤
-var closeRtn = function(){
-	var modal = document.getElementById('modal');
-	modal.style.display = 'none';
-	
-}
-btnClose.onclick = closeRtn;
+var exampleModal = document.getElementById('exampleModal')
+exampleModal.addEventListener('show.bs.modal', function (event) {
+  // 모달을 트리거 한 버튼
+  var button = event.relatedTarget
+  // data-bs- * 속성에서 정보 추출
+  var recipient = button.getAttribute('data-bs-whatever')
+  // 필요한 경우 여기에서 AJAX 요청을 시작할 수 있습니다.
+  // 그런 다음 콜백에서 업데이트를 수행합니다.
+  //
+  // 모달의 내용을 업데이트합니다.
+  var modalTitle = exampleModal.querySelector('.modal-title')
+  var modalBodyInput = exampleModal.querySelector('.modal-body input')
 
-function PwCheck(pw) {
-    const _this = this; 
-    _this.pwStr = pw.toString(); // 문자, 숫자열을 모두 허용하기 위해 무조건 한가지 타입으로 맞춤
-    _this.password = []; // 지정된 패스워드
-    _this.passwordNumber = []; // 입력할 패스워드
-    _this.cnt = 0; // 입력횟수 체크
-    _this.compChk = false; // 입력완료 체크 
-    _this.msg = [	
-        'Wrong Password! Try Again! 👿',
-        'Success! 😍'
-    ]; 
-
-    _this.parent = document.querySelector('.pwWrap');
-    _this.dots = document.querySelectorAll('.dot');
-    _this.numbers = document.querySelectorAll('.number');
-    _this.message = document.querySelector('.message');
-
-
-    // 비밀번호를 배열에 넣음 
-    _this.getPw = function(){
-        for(let i=0; i<_this.pwStr.length; i++) {
-            _this.password[i] = _this.pwStr[i];
-        }
-    }
-
-    // 숫자버튼 click이벤트 연동
-    _this.handleListener = function(){
-        if(!_this.compChk) {
-            _this.numbers.forEach(function(number){
-                number.addEventListener('click', function(){_this.handleNumber(number)});
-            })
-        }
-    }
-
-    // 숫자키를 눌렀을때 이벤트 
-    _this.handleNumber = function(number){
-        if(!_this.compChk) {
-            _this.passwordNumber[_this.cnt] = number.textContent;
-            _this.handleDotActive(true);
-            _this.cnt++;
-            if(_this.cnt === 6) {
-                _this.handleResult();
-            }
-        }
-        console.log(_this.passwordNumber);
-    }
-
-    // dot 활성화 
-    _this.handleDotActive = function(type){
-        if(type) {
-            _this.dots.forEach(function(dot, i){
-                if(i === _this.cnt) dot.classList.add('active'); 
-            })
-        } else {
-            _this.dots.forEach(function(dot){
-               dot.classList.remove('active'); 
-            })
-        }
-        console.log(type);
-    }
-
-    // 비밀번호 비교
-    _this.handleCheckPw = function(){
-        let compare = JSON.stringify(_this.password) === JSON.stringify(_this.passwordNumber);
-        return compare; 
-    }
-
-    // 결과처리 
-    _this.handleResult = function(){
-        if(_this.handleCheckPw()) {
-            _this.parent.classList.add('confirm');
-            _this.message.textContent = _this.msg[1];
-            _this.compChk = true;
-        } else {
-            _this.parent.classList.add('error');
-            _this.message.textContent = _this.msg[0];
-            // 입력상태 초기화 
-            _this.passwordNumber = [];
-            _this.cnt = 0; 
-            _this.compChk = true; // 일시적인 클릭 방지 
-            
-            setTimeout(function(){
-                _this.compChk = false;	
-                _this.parent.classList.remove('error');
-                _this.handleDotActive();
-            }, 1000);
-        }
-    }
-
-    _this.init = function(){
-        _this.handleListener();
-        _this.getPw();
-    }();
-}
-
-let pwCheck = new PwCheck(123456);
-
-
-
-</script>
-</body>
-</html>	
+  modalTitle.textContent = 'New message to ' + recipient
+  modalBodyInput.value = recipient
+}) -->

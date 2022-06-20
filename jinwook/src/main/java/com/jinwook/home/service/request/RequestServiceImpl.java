@@ -40,7 +40,7 @@ public class RequestServiceImpl implements RequestService {
 	// ========== 상점 등록 요청 보기 ===========
 	@Override
 	public Request getRequestStore(int reqNo) {
-		return requestMapper.getRequestStore(reqNo);
+		return 	requestMapper.getRequestStore(reqNo);
 	}
 
 	
