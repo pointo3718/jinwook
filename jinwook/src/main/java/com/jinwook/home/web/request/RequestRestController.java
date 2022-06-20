@@ -3,9 +3,12 @@ package com.jinwook.home.web.request;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
+import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +45,22 @@ public class RequestRestController {
 	}
 	
 	
+	// ========== 상점 등록 요청 상세 ===========
+	@GetMapping( value={"/getRequestStore/{reqNo}"})
+	public JSONObject getRequestStore( @PathVariable(value = "reqNo", required = false) int reqNo,  @ModelAttribute("request") Request request ) throws Exception {
+		
+		  System.out.println("/request/getRequestStore : GET ");
+	      Gson gson = new Gson();      
+	      request = requestService.getRequestStore(reqNo);
+				
+	      String requestObj = gson.toJson(request);
+	      JSONParser parser = new JSONParser();
+	      JSONObject jsonObj = (JSONObject)parser.parse(requestObj);
+			
+		return jsonObj;
+	}
+	
+	
 	// ========== 상점 등록 요청 수락 ===========
 	@PatchMapping( value={"updateRequestAddStore/{reqNo}"})
 	public JsonObject updateRequestAddStore(@PathVariable(value = "reqNo", required = false) int reqNo) {
@@ -52,7 +71,6 @@ public class RequestRestController {
 		JsonObject jsonObj = new JsonObject();
 		
 		try { 
-			
 			boolean result = requestService.updateRequestAddStore(reqNo);
 			jsonObj.addProperty("result", result);
 
@@ -67,6 +85,44 @@ public class RequestRestController {
         
 		return jsonObj;
 	}
+	
+	
+	// ============ 환급 요청 등록 =============   /////// 모든 등록 이렇게 수정 (예외 적용)
+	@PostMapping(value = "addRequestRefund/{userId}/{storeNo}/{refundMoney}")
+	@ResponseBody
+	public JsonObject addRequestRefund(@PathVariable(value = "userId", required = false) String userId,
+									@PathVariable(value = "storeNo", required = false) int storeNo,
+									@PathVariable(value = "refundMoney", required = false) int refundMoney) {
+		
+		System.out.println("==================request :: ");
+		System.out.println("왜 안지나가지 ....................................");
+		System.out.println("왜 안지나가지 ....................................");
+		System.out.println("왜 안지나가지 ....................................");
+		
+		Request request = new Request();
+		request.setUserId(userId);
+		request.setStoreNo(storeNo);
+		request.setRefundMoney(refundMoney);
+		
+		JsonObject jsonObj = new JsonObject();
+		
+		try { 
+			
+			boolean result = requestService.addRequestRefund(request);
+			jsonObj.addProperty("result", result);
+
+		} catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+		
+        System.out.println("환급 요청 컨트롤러 통과");
+        
+		return jsonObj;
+	}
+	
 	
 	
 	// ========== 환급 요청 수락 ===========
