@@ -562,7 +562,7 @@ label {
 
                   </tbody>
                </table>
-               </div>
+            
                </c:if>
                
                <c:if test="${store.storeStatus=='1'}">   
@@ -608,7 +608,9 @@ label {
 
                   </tbody>
                </table>
-               </c:if>               
+               </c:if>   
+               
+                  </div>            
                
                
                

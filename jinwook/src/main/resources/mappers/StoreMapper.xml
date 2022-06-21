@@ -156,7 +156,7 @@
    SELECT
    u.user_name, u.jp_balance, s. store_name, s. store_addr, s. total_earn, s.store_no, s.store_intro,s.store_image, s.holiday,
    u.business_no, s.business_card,s.bank, s.acc_no, s.start_time, s.end_time, s.store_type, s.store_phone, s.store_start, 
-   s.store_status, u.reg_date, s.store_status, s.is_open
+   s.store_status, u.reg_date, s.is_open
    FROM users u, store s
    WHERE u.user_id=s.user_id AND
    s.store_no = #{storeNo}
@@ -215,6 +215,42 @@
       AND
       o.store_no=#{storeNo}
       ORDER BY order_no
+   </select>
+   
+   
+    <select id="getStoreListByOrderCount" resultMap="storeSelectMap">
+	SELECT COUNT(*), o.store_no, s.store_name, s.store_type, s.store_addr
+	FROM orders o, store s
+	WHERE o.store_no = s.store_no AND
+		 s.store_status !=0
+	GROUP BY o.store_no
+	ORDER BY COUNT(*) DESC
+	LIMIT 5;
+   </select>
+   
+   <select id="getStoreMap" resultMap="storeSelectMap">
+   
+   SELECT s.store_name, s.store_addr, s.store_type,p.prod_name, p.price
+	FROM store s, product p
+	WHERE s.store_no = p.store_no
+	
+   </select>
+   
+   <select id="getStoreMapTotalCount" parameterType="Store"
+      resultType="int">
+      SELECT
+      COUNT(*)
+      FROM
+      store
+   </select>
+   
+   
+   <select id="getStoreListTotalCount" parameterType="Store"
+      resultType="int">
+      SELECT
+      COUNT(*)
+      FROM
+      store
    </select>
     
     

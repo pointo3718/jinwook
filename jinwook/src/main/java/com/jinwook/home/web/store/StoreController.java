@@ -1,6 +1,5 @@
 package com.jinwook.home.web.store;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,12 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Coupon;
-import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
@@ -221,6 +217,16 @@ public class StoreController {
 
 
 		return "store/getCouponList";
+	}
+	
+	@GetMapping(value = "/../../index")
+	public String getStoreListByOrderCount(Model model) {
+
+		List<Store> storeList = storeService.getStoreListByOrderCount();
+
+		model.addAttribute("storeList", storeList);
+
+		return "/";
 	}
 
 }

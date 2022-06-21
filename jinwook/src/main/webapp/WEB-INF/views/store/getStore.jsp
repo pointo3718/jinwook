@@ -405,20 +405,7 @@ label {
 							<td></td>
 							<td></td>
 							<th scope="row"><span style="color: blsck; font-size: 20px">업종</span></th>
-							<td><span style="color: #2E2E2E; font-size: 15px"><strong>
-										<c:if test="${store.storeType.trim()=='1'}">
-                            정육         
-                        </c:if> <c:if test="${store.storeType.trim()=='2'}">
-                            수산         
-                        </c:if> <c:if test="${store.storeType.trim()=='3'}">
-                            채소         
-                        </c:if> <c:if test="${store.storeType.trim()=='4'}">
-                            과일         
-                        </c:if> <c:if test="${store.storeType.trim()=='5'}">
-                            종합         
-                        </c:if>
-
-								</strong></span></td>
+							<td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storeType}</strong></span></td>
 							<td></td>
 							<td></td>
 						</tr>

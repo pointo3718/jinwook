@@ -43,6 +43,10 @@ public interface StoreService {
 	public List<Store> getStoreRefund(int storeNo);
 
 	public List<Store> getStoreWallet(Store store);
+	
+	public List<Store> getStoreListByOrderCount();
+	
+	public List<Store> getStoreMap();
 
 	
 

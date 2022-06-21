@@ -414,6 +414,54 @@ public class StoreRestController {
 //         return storeList;
 //      }
       
+      @GetMapping( value="getStoreListByOrderCount")
+      public JsonObject getStoreListByOrderCount() throws Exception{
+         
+           
+           Store store= new Store();
+
+                     
+            System.out.println("/store/getStoreListByOrderCount : GET ");
+            
+            JsonObject jsonObj = new JsonObject();
+            
+            List<Store> storeList = storeService.getStoreListByOrderCount();
+            
+            if (CollectionUtils.isEmpty(storeList) == false) {
+               com.google.gson.JsonArray jsonArr = new Gson().toJsonTree(storeList).getAsJsonArray();
+               jsonObj.add("storeList", jsonArr);
+            
+               System.out.println("상점조회 컨트롤러 통과");
+            }
+
+            return jsonObj;
+         }
+      
+      @GetMapping( value="getStoreMap")
+      public JsonObject getStoreMap() throws Exception{
+    	  
+    	  
+    	  Store store= new Store();
+    	  
+    	  
+    	  System.out.println("/store/getStoreMap : GET ");
+    	  
+    	  JsonObject jsonObj = new JsonObject();
+    	  
+    	  List<Store> storeMap = storeService.getStoreMap();
+    	  
+    	  if (CollectionUtils.isEmpty(storeMap) == false) {
+    		  com.google.gson.JsonArray jsonArr = new Gson().toJsonTree(storeMap).getAsJsonArray();
+    		  jsonObj.add("storeList", jsonArr);
+    		  
+    		  System.out.println("상점지도조회 컨트롤러 통과");
+    	  }
+    	  
+    	  return jsonObj;
+      }
+      
+
+      
 
 
 }

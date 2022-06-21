@@ -46,6 +46,12 @@ public interface StoreMapper {
 	
 	public List<Store> getStoreRefund(int storeNo);
 	
+	public List<Store> getStoreListByOrderCount();
+	
+	public List<Store> getStoreMap();
+		
+	public int getStoreMapTotalCount();
+	
 	public int getStoreTotalCount();
 	
 	public int getStoreWalletTotalCount();
@@ -56,5 +62,6 @@ public interface StoreMapper {
 	
 	public int getRequestTotalCount();
 	
+	public int getStoreListTotalCount();
 
 }

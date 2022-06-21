@@ -168,5 +168,33 @@ public class StoreServiceImpl implements StoreService {
 		return getStoreWallet;
 
 	}
+	
+	@Override
+	public List<Store> getStoreListByOrderCount() {
+
+		List<Store> getStoreListByOrderCount = Collections.emptyList();
+
+		int storeTotalCount = storeMapper.getStoreListTotalCount();
+
+		if (storeTotalCount > 0) {
+			getStoreListByOrderCount = storeMapper.getStoreListByOrderCount();
+		}
+
+		return getStoreListByOrderCount;
+	}
+	
+	@Override
+	public List<Store> getStoreMap() {
+		
+		List<Store> getStoreMap = Collections.emptyList();
+		
+		int storeTotalCount = storeMapper.getStoreMapTotalCount();
+		
+		if (storeTotalCount > 0) {
+			getStoreMap = storeMapper.getStoreMap();
+		}
+		
+		return getStoreMap;
+	}
 
 }
