@@ -166,6 +166,7 @@
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '2'}">
                                     		고객님의 첫구매를 축하합니다.(첫구매 쿠폰 30%할인)
+                                    		
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '3'}">
                                     		고객님의 생일을 축하합니다.(생일축하 쿠폰 30%할인)
