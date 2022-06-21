@@ -34,9 +34,9 @@
 .dropdown-menu {
    margin-top: 0;
 } /* hover 메뉴때문에 넣음 */
-a {
-   color: #7fad39;
-}
+
+
+
 
 .row.navbar {
    display: flex;

@@ -41,7 +41,7 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
@@ -186,6 +186,10 @@ label {
 </style>
 
 <script type="text/javascript">
+
+
+
+
 	/*<![CDATA[*/
 	function movePage(uri, queryString) {
 		location.href = uri + queryString;
@@ -633,7 +637,8 @@ label {
 								data-value="${store.storeNo}" onClick="fncUpdateStore(this)">
 								수정</button>
 							&nbsp;&nbsp;&nbsp;
-							<button type="button" id="button" class="btn btn-outline-danger">상점삭제신청</button>
+							<button type="button" id="confirmStart" class="btn btn-outline-danger">상점삭제신청</button>
+						
 						</div>
 						<!-- 수정, 삭제신청 버튼 End -->
 					</c:forEach>
@@ -654,7 +659,70 @@ label {
 	<!-- Footer Begin -->
 	<jsp:include page="../layout/footer.jsp" />
 	<!-- Footer End -->
+<script>
 
+$().ready(function () {
+    $("#confirmStart").click(function () {
+        Swal.fire({
+            title: '정말로 그렇게 하시겠습니까?',
+            text: "다시 되돌릴 수 없습니다. 신중하세요.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '삭제 신청',
+            cancelButtonText: '취소'
+        }).then((result) => {
+            if (result.isConfirmed) {
+            	
+            	fncAddRequestDeleteStore();	
+            
+                Swal.fire(
+                    '삭제 신청이 완료되었습니다.',
+                    '화끈하시네요~!',
+                    'success'
+                )
+            }
+        })
+    });
+});
+
+var USERID;
+var STOREID;
+
+/////////////////// 상점 삭제 신청 /////////////////////
+function fncAddRequestDeleteStore() {
+       
+			var uri = "/request/updateRequestStatusToRefuse/" + USERID +"/" +STORENO;
+	
+			var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+
+				$.ajax({
+					url: uri,
+					type: "POST",
+					headers: headers,
+					dataType: "json",
+					
+					success: function(response) {
+										
+						if (response.result == true) {
+							location.reload();
+							return true;
+						}
+						swal(response.message, "", "error");
+						
+					},
+					error: function(xhr, status, error) {
+						alert("에러가 발생하였습니다.");
+						return false;
+					}
+				
+				});
+	}
+	
+/////////////////// 상점 삭제 신청 끝 /////////////////////
+
+</script>
 </body>
 
 </html>
