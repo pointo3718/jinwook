@@ -151,6 +151,32 @@ label {
 .img_wrap img {
             max-width: 100%;
         }
+<<<<<<< HEAD
+=======
+
+        
+</style>
+
+<script type="text/javascript">
+/////////////// 상점 등록 시작 //////////////////////
+$(function() {
+   $( "#requestAdd:contains('등록 요청')" ).on("click" , function() {
+      fncAddRequestStore();
+   });
+});
+
+function fncAddRequestStore(){
+//Form 유효성 검증
+
+
+document.detailForm.action='/request/addRequestAddStore';
+document.detailForm.submit();
+}
+
+/////////////// 상점 등록 끝 ///////////////////////
+
+   
+>>>>>>> refs/remotes/origin/master
 </style>
 
 <script type="text/javascript">
@@ -239,6 +265,14 @@ label {
                <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;입점 관련 문의 및 요청 사항은 1:1문의/고객센터(1644-0000)로 문의 바랍니다.</div>
          </div>      
          <hr>
+<<<<<<< HEAD
+=======
+               
+ <form name="detailForm" method="post" enctype="multipart/form-data">
+               <input type="hidden" name="userId" value="${param.userId}" />
+               <input type="hidden" name="businessCard" value="파일업로드_언제하지.jpg" />
+               
+>>>>>>> refs/remotes/origin/master
                
                <div class="form-group row">
                      
@@ -290,6 +324,14 @@ label {
                         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
                   <script>
                   window.onload = function(){
+<<<<<<< HEAD
+=======
+                      document.getElementById("storeAddr_main").addEventListener("click", function(){ //주소입력칸을 클릭하면
+                          //카카오 지도 발생
+                          new daum.Postcode({
+                              oncomplete: function(data) { //선택시 입력값 세팅
+                                  document.getElementById("storeAddr_main").value = data.address; // 주소 넣기
+>>>>>>> refs/remotes/origin/master
                       document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
                           //카카오 지도 발생
                           new daum.Postcode({
@@ -325,7 +367,13 @@ label {
                            <label for="colFormLabelLg"
                               class="col-sm-2 col-form-label col-form-label">상점소개</label>
                            <div class="col-sm-6">
+<<<<<<< HEAD
                               <textarea class="form-control" id="storeIntro" name="storeIntro" cols="20" rows="4" placeholder="상점 소개를 50자 내로 입력해주세요."></textarea>
+=======
+                              <textarea class="form-control" id="storeIntro" name="storeIntro" cols="20" rows="5" 
+                              placeholder="상점 소개를 50자 내로 입력해주세요. &#13;&#10; &#13;&#10; ex) 진욱이네는 산지직송 당일판매를 원칙으로 합니다. &#13;&#10; ex) 진욱이네 오픈 기념 10% 할인 해드려요~" >
+                              </textarea><textarea class="form-control" id="storeIntro" name="storeIntro" cols="20" rows="4" placeholder="상점 소개를 50자 내로 입력해주세요."></textarea>
+>>>>>>> refs/remotes/origin/master
                         <div class="text-right" id="test_cnt">(0 / 50)</div>
                            </div>
                         </div>
@@ -358,6 +406,10 @@ label {
                            <div class="col-sm-6">
                               <span class="btn btn-default btn-file"
                                     style="padding-left: 0px; padding-bottom: 15px;">
+<<<<<<< HEAD
+=======
+                                 <input type="file"  name="file" value=""/>
+>>>>>>> refs/remotes/origin/master
                                  <input type="file" id="input_img" />
                                  <div>
                                       <div class="img_wrap">
@@ -447,6 +499,15 @@ label {
                                  value="" placeholder="계좌번호">
                            </div>
                         </div>
+<<<<<<< HEAD
+=======
+                        </form>
+                      <br/><br/>
+                      <div class="form-group row">
+                         <button id="requestAdd" class="btn btn-success" style="background-color: #7fad39; border-color: #7fad39; width: 126px;">등록 요청</button>
+                      </div>
+                  <br/>            
+>>>>>>> refs/remotes/origin/master
           
             <div class="modal-footer">
               <a href="#" data-dismiss="modal" class="btn">닫기</a>
@@ -455,10 +516,17 @@ label {
         </div>
     </div>
     </div>
+<<<<<<< HEAD
     
+=======
+>>>>>>> refs/remotes/origin/master
     <!-- 상점 등록 Modal -->
 
+<<<<<<< HEAD
    <!-- ceoTop Section Begin -->
+=======
+ <!-- ceoTop Section Begin -->
+>>>>>>> refs/remotes/origin/master
    <section class="breadcrumb-section set-bg" 
       style="background-color: #F2F2F2; padding-left: 110px;padding-right: 110px;" >
       <c:forEach var="store" items="${storeInfo}">
@@ -562,7 +630,64 @@ label {
 
                   </tbody>
                </table>
+<<<<<<< HEAD
+=======
+            
+               </c:if>
+               
+               <c:if test="${store.storeStatus=='1'}">   
+               <table class="table table-borderless" style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
+
+                  <tbody>
+                     <tr>
+   
+                        <td></td>
+                        <td style="padding-top: 60px; padding-left: 90px;">            
+                        <a id="userdetail" data-toggle="modal" href="#addRequestStoreModal" data-userid=""><strong style="font-size:25px">상점 등록</strong></a></td>
+                        <td></td>
+                     </tr>
+   
+
+                  </tbody>
+               </table>
+               </c:if>
+               
+               <c:if test="${store.storeStatus=='2'}">   
+               <table class="table table-borderless" style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
+                  <thead>
+                     <tr>
+
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+   
+                        <td></td>
+                        <td style="padding-top: 45px; padding-left: 25px;"><strong style="font-size:25px;">상점 등록 대기중입니다.</strong></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     </tr>
+
+                  </tbody>
+               </table>
+               </c:if>   
+               
+                  </div>            
+               
+               
+               
+               
+>>>>>>> refs/remotes/origin/master
                </div>
+<<<<<<< HEAD
                </c:if>
                
                <c:if test="${store.storeStatus=='1'}">   
@@ -614,6 +739,8 @@ label {
                
                
                </div>
+=======
+>>>>>>> refs/remotes/origin/master
       
          <!-- /container -->
          

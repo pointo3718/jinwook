@@ -1,5 +1,6 @@
 package com.jinwook.home.service.domain;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class Recipe extends CommonDTO {
 //	private int rcpSeqNo;
 	private String rcpTitle;
 	private String rcpContent;
-	private LocalDate rcpDate;
+	private Date rcpDate;
 	private String rcpThumb;//레시피 썸네일 사진
 	private String rcpInfo;
 	private String rcpIngredient;
@@ -25,6 +26,8 @@ public class Recipe extends CommonDTO {
 	private Integer rcpJjimCnt;
 	private Integer commentCount;
 	private Integer recommendCount;
+	
+	private Comment comment;
 
 	public Recipe() {
 	}

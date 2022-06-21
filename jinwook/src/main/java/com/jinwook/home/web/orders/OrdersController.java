@@ -1,6 +1,6 @@
 package com.jinwook.home.web.orders;
 
-import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jinwook.home.service.domain.Cart;
+import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Jpay;
 import com.jinwook.home.service.domain.Notice;
 import com.jinwook.home.service.domain.Orders;
-import com.jinwook.home.service.domain.Product;
-import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
+import com.jinwook.home.service.store.StoreService;
 
 @Controller
 @RequestMapping("/orders/*")
@@ -32,8 +32,11 @@ public class OrdersController {
 
    @Autowired
    @Qualifier("ordersServiceImpl")
-   
    private OrdersService ordersService;
+   
+   @Autowired
+   @Qualifier("storeServiceImpl")
+   private StoreService storeService;
    
    public OrdersController() {
       System.out.println(this.getClass());
@@ -49,24 +52,28 @@ public class OrdersController {
       System.out.println(userid);
       cart.setOrders(orders);
       List<Cart> getCartList = ordersService.getOrdersCartList(cart);
+      List<Coupon> couponList = storeService.getCouponList(userid);
+      model.addAttribute("couponList", couponList);
+      System.out.println(couponList);
       System.out.println(getCartList);
       model.addAttribute("getCartList", getCartList);
       return "orders/addOrders";
    }
    
    @PostMapping(value = "addOrders") 
-   public String addOrders(@ModelAttribute("orders") Orders orders,@ModelAttribute("cart") Cart cart,
-         @RequestParam(value="plusTime", required = false)int plusTime,HttpSession session) throws Exception {
+   public String addOrders(@ModelAttribute("orders") Orders orders,@ModelAttribute("cart") Cart cart
+         ,@RequestParam(value="plusTime", required = false)int plusTime,HttpSession session) throws Exception {
       
       System.out.println("/orders/addOrders: POST");
       String userid = ((User) session.getAttribute("user")).getUserId();
       User user = new User();
       user.setUserId(userid);
-     
       orders.setCart(cart);
       orders.setUser(user);
-//      ZoneId zoneId = ZoneId.of("Asia/Seoul");
-//      orders.setPickupTime(LocalDateTime.now(zoneId).plusMinutes(plusTime));
+      orders.setPickupTime(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Seoul")).plusMinutes(plusTime).plusHours(9)));
+//    ZoneId zoneId = ZoneId.of("Asia/Seoul");
+//    orders.setPickupTime(LocalDateTime.now(zoneId).plusMinutes(plusTime));
+      System.out.println(cart);
       System.out.println(user);
       System.out.println(orders);
       ordersService.addOrders(orders);
@@ -80,6 +87,14 @@ public class OrdersController {
 //      orders.setCart(cart);
       
       return "orders/addOrdersView";
+   }
+   
+   @GetMapping(value= "addOrdersView")
+   public String addOrdersView() throws Exception{
+	   
+	   System.out.println("orders/addOrdersView : POST");
+	   
+	   return null;
    }
    
    @PostMapping(value = "updateOrders")
@@ -139,8 +154,6 @@ public class OrdersController {
       
       String userid = ((User) session.getAttribute("user")).getUserId();
       cart.setUserId(userid);
-//      cart.setStoreName(storeName);
-      //cart.setStoreName();
       System.out.println("cart"+cart);
       List<Cart> getCartList = ordersService.getOrdersCartList(cart);
       model.addAttribute("getCartList", getCartList);

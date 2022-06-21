@@ -2,10 +2,15 @@ package com.jinwook.home.service.request;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.jinwook.home.common.FileUtils;
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.RequestMapper;
 import com.jinwook.home.service.domain.Request;
@@ -15,6 +20,8 @@ import com.jinwook.home.service.domain.Store;
 @Service
 public class RequestServiceImpl implements RequestService {
 	
+	@Resource(name="fileUtils")
+	private FileUtils fileUtils;
 	
 	@Autowired
 	private RequestMapper requestMapper;
@@ -23,9 +30,18 @@ public class RequestServiceImpl implements RequestService {
 	// ========== 상점 등록 요청 ===========
 	// 1.상점 예비 등록  2.예비 등록된 storeNo + userId 가져오기  3. storeNo + userId 포함해 요청 넣기
 	@Override
-	public void addRequestAddStore(Store store) {		
+	public void addRequestAddStore(Store store, MultipartHttpServletRequest mpRequest) throws Exception{		
+		
 		requestMapper.addRequestAddStore(store); 			// 1. 상점 예비 등록
 		
+		List<Map<String,Object>> list = fileUtils.parseInsertStoreFileInfo(store, mpRequest); 
+			int size = list.size();
+			
+			for(int i=0; i<size; i++){ 
+				requestMapper.insertStoreFile(list.get(i)); 
+			}
+		
+
 		Store newStore = requestMapper.getNewStore();
 		int storeNo = newStore.getStoreNo(); 				// 2. 예비 등록된 storeNo
 		String userId = newStore.getUserId();  				// 2. 예비 등록된 상점의 userId

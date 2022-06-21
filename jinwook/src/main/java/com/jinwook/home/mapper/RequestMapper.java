@@ -1,6 +1,7 @@
 package com.jinwook.home.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -52,5 +53,8 @@ public interface RequestMapper {
 	
 	// 대기중인 요청 목록 개수
 	public int CountRequestWaiting(String reqCode);					// 대기중인 요청목록 개수 (뱃지로 띄워줄 예정)
+
+	// 상점등록 시 사진 업로드
+	public void insertStoreFile(Map<String, Object> map) throws Exception;
 
 }

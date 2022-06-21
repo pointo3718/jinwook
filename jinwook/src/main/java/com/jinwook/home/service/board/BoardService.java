@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
-import com.jinwook.home.service.domain.FileVO;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
@@ -29,7 +29,9 @@ public interface BoardService {
 //	//레시피 사진 첨부v
 //	public int fileRecipeInsert(FileVO file) throws Exception;
 	// 게시판 첨부파일 조회
-	public List<Map<String, Object>> selectAttachList(int boardNo) throws Exception;
+	public List<Map<String, Object>> selectBoardAttachList(int boardNo) throws Exception;
+	// 레시피 첨부파일 조회
+	public List<Map<String, Object>> selectRecipeAttachList(int rcpNo) throws Exception;
 	// 게시판 첨부파일 다운
 	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
 	//1:1문의 등록v
@@ -37,7 +39,7 @@ public interface BoardService {
 	//공지사항 등록v
 	public void addBoardAnnouncement(Board board, MultipartHttpServletRequest mpRequest) throws Exception;
 	//1:1문의 수정v
-	public void updateBoardInquiry(Board board, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
+	public void updateBoardInquiry(Board board) throws Exception;
 	//공지사항 수정v
 	public int updateBoardAnnouncement(Board board);
 	//1:1문의 삭제v
@@ -71,6 +73,8 @@ public interface BoardService {
 	public int deleteRecipe(Integer rcpNo);
 	//레시피 상세 조회v
 	public Recipe getRecipe(Integer rcpNo);
+//	//레시피 목록 조회v
+//	public List<Recipe> getRecipeList(PaginationInfo pInfo);
 	//레시피 목록 조회v
 	public List<Recipe> getRecipeList(Recipe rcp);
 	
@@ -80,9 +84,20 @@ public interface BoardService {
 //	public List<Comment> getCommentList(Comment comment);
 	
 	//댓글 조회
-	public List<Comment> getComment(int boardNo) throws Exception;
+	public List<Comment> getInquiryComment(int boardNo) throws Exception;
+	//댓글 조회
+	public List<Comment> getRecipeComment(int rcpNo) throws Exception;
 	//댓글 등록
 	public void addComment(Comment comment) throws Exception;
+	//레시피 댓글 등록
+	public void addRecipeComment(Comment comment) throws Exception;
+	//레시피 댓글 수정
+	public void updateRecipeComment(Comment comment) throws Exception;
+	//레시피 댓글 삭제
+	public void deleteRecipeComment(Comment comment) throws Exception;
+	//선택된 레시피 댓글 조회
+	public Comment selectRecipeComment(int commentNo) throws Exception;
+	
 	//답변 상태 변화
 	public boolean updateBoardInqStatus(Board board);
 	

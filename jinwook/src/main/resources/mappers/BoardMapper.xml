@@ -177,11 +177,20 @@
 		)
     </insert>
     
-    <!-- 첨부파일 조회 key가 대문자로 조회됨 -> 카멜 케이스 써야 함 ㅠㅠ -->
-	<select id="selectAttachList" parameterType="int" resultType="hashMap">
+    <!-- 게시판 첨부파일 조회 key가 대문자로 조회됨 -> 카멜 케이스 써야 함 ㅠㅠ -->
+	<select id="selectBoardAttachList" parameterType="int" resultType="hashMap">
 		SELECT attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
 	  	FROM attach
 	 	WHERE board_no = #{boardNo}
+	   	AND del_gb = 'N'
+	   	ORDER BY attach_no ASC
+	</select>
+	
+    <!-- 레시피 첨부파일 조회 key가 대문자로 조회됨 -> 카멜 케이스 써야 함 ㅠㅠ -->
+	<select id="selectRecipeAttachList" parameterType="int" resultMap="attachSelectMap">
+		SELECT attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
+	  	FROM attach
+	 	WHERE rcp_no = #{rcpNo}
 	   	AND del_gb = 'N'
 	   	ORDER BY attach_no ASC
 	</select>
@@ -358,7 +367,8 @@
 			COUNT(*)
 		FROM
 			board b, users u
-		WHERE b.user_id = u.user_id AND (u.role='관리자' || b.user_id=#{user.userId}) AND board_code=1
+		WHERE b.user_id = u.user_id 
+		AND board_code=1
 		ORDER BY board_no;	
 	</select>
 	<!-- 1:1문의 목록 개수 -->
@@ -406,7 +416,7 @@
 	</select>
 
 	<!-- ?Recipe selectList? -->
-	<select id="getRecipeList" parameterType="Recipe" resultType="Recipe">
+	<select id="getRecipeList" parameterType="Recipe" resultMap="recipeSelectMap">
 		SELECT
 			rcp_no, rcp_title, rcp_date, rcp_hits
 		FROM
@@ -430,7 +440,7 @@
 	</update>
 
 	<!-- 레시피 목록 개수 -->
-	<select id="getRecipeTotalCount" parameterType="Board" resultType="int">
+	<select id="getRecipeTotalCount" parameterType="Recipe" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
@@ -523,15 +533,58 @@
 		)
 	</insert>
 	
+	 <insert id="addRecipeComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="commentNo">
+		INSERT INTO comment (
+			comment_no, rcp_no, comment_content, comment_writer, comment_date
+		) VALUES (
+			  #{commentNo:INTEGER}
+			, #{rcpNo:INTEGER}
+			, #{commentContent:VARCHAR}
+			, #{commentWriter:VARCHAR}
+			, SYSDATE()
+		)
+	</insert>
+	
 	<!-- 댓글 조회 -->
-	<select id="getComment" resultType="Comment" parameterType="int" resultMap="boardSelectMap">
+	<select id="getInquiryComment" resultType="Comment" parameterType="int" resultMap="boardSelectMap">
     	SELECT
     		  comment_no, comment_content, comment_writer, comment_date
     	 FROM comment
     	WHERE board_no = #{boardNo}
 	</select>
 	
+	<!-- 댓글 조회 -->
+	<select id="getRecipeComment" resultType="Comment" parameterType="int" resultMap="boardSelectMap">
+    	SELECT
+    		  comment_no, comment_content, comment_writer, comment_date
+    	 FROM comment
+    	WHERE rcp_no = #{rcpNo}
+	</select>
 	
+	<!-- 레시피 댓글 수정 -->
+	<update id="updateRecipeComment" parameterType="Comment">
+		UPDATE comment 
+		SET comment_content = #{commentContent}
+		WHERE comment_no = #{commentNo}
+	</update>
+
+	<!-- 레시피 댓글 삭제 -->
+	<delete id="deleteRecipeComment" parameterType="Comment">
+		DELETE FROM comment
+		WHERE comment_no = #{commentNo}
+	</delete>
+	
+	<!-- 선택된 레시피 댓글 조회 -->
+	<select id="selectRecipeComment" resultType="Comment">
+		SELECT
+				rcp_no
+			  , comment_no
+			  , comment_content
+			  , comment_writer
+			  , comment_date
+		  FROM comment
+		 WHERE comment_no = #{commentNo}
+	</select>
 	
 	<!-- <update id="updateComment" parameterType="Comment">
 		UPDATE comment

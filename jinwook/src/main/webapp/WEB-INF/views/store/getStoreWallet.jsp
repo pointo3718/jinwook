@@ -201,9 +201,9 @@ label {
    display: block;
 }
 .swal-button{
-	background-color: #7fad39;
-	font-size: 12px;
-	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+   background-color: #7fad39;
+   font-size: 12px;
+   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
 }
 </style>
 
@@ -267,14 +267,14 @@ label {
    });
 
    $(function() {
-	      $(".list-group-item:contains('내가 한 요청')").on(
-	            "click",
-	            function() {
-	               //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	               $(self.location).attr("href",
-	                     "../request/getRequestAdStoreList?storeNo=10000&userId=test05");
-	            });
-	   });
+         $(".list-group-item:contains('내가 한 요청')").on(
+               "click",
+               function() {
+                  //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+                  $(self.location).attr("href",
+                        "../request/getRequestAdStoreList?storeNo=10000&userId=test05");
+               });
+      });
 
    
    $(function() {
@@ -332,28 +332,28 @@ label {
    
    <!-- Modal for Refund Begin -->
    <div class="modal fade" id="modalForRefund" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">환급 신청</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      
-	      
-	      
-	       		<form id="detailForm" name="detailForm" method="post">
-	               <input type="hidden" id="userId" name="userId" value="test01" />
-	               <input type="hidden" name="storeNo" value="${param.storeNo}" />
-	      			<div class="container">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">환급 신청</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+         
+         
+         
+                <form id="detailForm" name="detailForm" method="post">
+                  <input type="hidden" id="userId" name="userId" value="test01" />
+                  <input type="hidden" name="storeNo" value="${param.storeNo}" />
+                  <div class="container">
                         <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;환급하실 금액을 숫자로만 입력해주세요.</div>
-              			<div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;문의사항은 1:1문의/고객센터(1644-0000)로 문의 바랍니다.</div>
-				    </div>      
-				         <hr>
-	      					      				
-						<div class="form-group row">							
+                       <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;문의사항은 1:1문의/고객센터(1644-0000)로 문의 바랍니다.</div>
+                </div>      
+                     <hr>
+                                          
+                  <div class="form-group row">                     
                            <label for="colFormLabelLg"
                               class="col-sm-3 col-form-label col-form-label"><strong>환급 금액</strong></label>
                            <div class="col-sm-7">
@@ -367,14 +367,14 @@ label {
                         </div>
                   </form>
 
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-	        <button type="button" id="requestRefund" onClick="addRequestRefund(userId.value, ${param.storeNo}, refundMoney.value)" class="btn btn-primary" style="background-color: #7fad39; border-color: #7fad39;">요청 등록</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+           <button type="button" id="requestRefund" onClick="addRequestRefund(userId.value, ${param.storeNo}, refundMoney.value)" class="btn btn-primary" style="background-color: #7fad39; border-color: #7fad39;">요청 등록</button>
+         </div>
+       </div>
+     </div>
+   </div>
    <!-- Modal for Refund End -->
 
 
@@ -477,14 +477,7 @@ label {
 
                <!--지갑조회 주문내역 테이블 start-->
 
-<<<<<<< HEAD
-					<h6 class="text-left">
 
-						<strong>기간별 주문내역</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
-							style="color: #6E6E6E; font-size: 13px">${store.orderDateStart}~${store.orderDateEnd}</span>
-					</h6>
-=======
->>>>>>> refs/remotes/origin/master
                <h6 class="text-left">
                
                   <strong>기간별 주문내역</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
@@ -586,40 +579,40 @@ label {
 <script>
 ////////////////// 환급 요청 REST ///////////////////////
 function addRequestRefund(USERID, STORENO, REFUNDMONEY) {
-   		alert(USERID);
-   		alert(STORENO);
-   		alert(REFUNDMONEY);
-		var uri = "../request/addRequestRefund/"+USERID+"/"+STORENO+ "/" +REFUNDMONEY;
+         alert(USERID);
+         alert(STORENO);
+         alert(REFUNDMONEY);
+      var uri = "../request/addRequestRefund/"+USERID+"/"+STORENO+ "/" +REFUNDMONEY;
 
-		var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
-		swal
-			$.ajax({
-				url: uri,
-				type: "POST",
-				headers: headers,
-				dataType: "json",
-				
-				success: function(response) {
-					if (response.result == false) {
-						swal("환급 요청에 실패했습니다.");
-						return false;
-						
-					}
-						swal("환급을 요청했습니다.", "", "success");
-						location.reload();
-						modal("hide");
-						return true;
-					
-				},
-				error: function(xhr, status, error) {
-					
-					alert("에러가 발생하였습니다.");
-					return false;
-				}
-			
-			});
+      var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+      swal
+         $.ajax({
+            url: uri,
+            type: "POST",
+            headers: headers,
+            dataType: "json",
+            
+            success: function(response) {
+               if (response.result == false) {
+                  swal("환급 요청에 실패했습니다.");
+                  return false;
+                  
+               }
+                  swal("환급을 요청했습니다.", "", "success");
+                  location.reload();
+                  modal("hide");
+                  return true;
+               
+            },
+            error: function(xhr, status, error) {
+               
+               alert("에러가 발생하였습니다.");
+               return false;
+            }
+         
+         });
 }
-	
+   
 
 //////////////////환급 요청 REST ////////////////////////
 

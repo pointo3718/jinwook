@@ -14,9 +14,9 @@
 <title>상점 목록</title>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">	
 
 <!-- Css Styles -->
 <link rel="stylesheet"
@@ -49,6 +49,30 @@
 	}
 
 	/*]]>*/
+	
+	function searchBoard(form) {
+		/*[- 드롭다운이 아닌 메인 검색 키워드로 검색했을 때 -]*/
+	if (isEmpty(form) == true) {
+		var searchKeyword = document.getElementById("mainSearchKeyword");
+		if (isEmpty(searchKeyword.value) == true) {
+				alert("키워드를 입력해 주세요.");
+				searchKeyword.focus();
+				return false;
+			}
+
+			form = document.getElementById("searchForm");
+			form.searchKeyword.value = searchKeyword.value;
+			form.submit();
+		}
+
+		if (isEmpty(form.searchKeyword.value) == true) {
+			alert("키워드를 입력해 주세요.");
+			form.searchKeyword.focus();
+			return false;
+		}
+	}
+			
+   /*[- end of function -]*/
 	
 	/////////////// 회원목록 이동 ////////////////
 		$(function() {
@@ -569,7 +593,37 @@ color: #7fad39;
 						</div> -->
 						<hr size="10px">
 					</h4>
-
+					
+					<!--///////////////// 검색 시작 ////////////////////-->
+				
+				<div class="blog__sidebar__search" style="text-align:right; margin-bottom: 0px;">
+                        <input type="text" id="mainSearchKeyword" value="${store.searchKeyword}" placeholder="상호명 검색..." style="width: 300px; height: 30px;" />
+                        <button onclick="searchBoard(null)"><span class="icon_search"></span></button>
+                 </div>
+								<div >
+									<div class="btn-group" role="group">
+										<div class="dropdown dropdown-lg">
+											<div class="dropdown-menu dropdown-menu-right" role="menu">
+												<!--/* 검색 form */-->
+												<form id="searchForm" action="/admin/listStoreAdmin" method="get" onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
+													<!-- /* 현재 페이지 번호, 페이지당 출력할 데이터 개수, 페이지 하단에 출력할 페이지 개수 Hidden 파라미터 */ -->
+													<input type="hidden" name="currentPageNo" value="1" />
+													<input type="hidden" name="recordsPerPage" value="${store.recordsPerPage}" />
+													<input type="hidden" name="pageSize" value="${store.pageSize}" />
+						
+													
+													<div>
+														<label for="contain">키워드</label>
+														<input type="text" name="searchKeyword" value="${store.searchKeyword}" />
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+				<!--///////////////// 검색 끝 ////////////////////-->
+				
 
 					<table class="table table-hover"
 						style="width: 730px; heigh: 300px;">
@@ -594,23 +648,8 @@ color: #7fad39;
 									<td align="left">${store.storeName}</td>									
 									<td align="left"><a
 										id="userdetail" data-toggle="modal" href="#myModal2" data-userid="${store.userId}">${store.user.userName}</a></td>
-									<c:choose>
-										<c:when test= "${store.storeType eq '1'}">
-											<td align="left">정육</td>
-										</c:when>
-										<c:when test= "${store.storeType eq '2'}">
-											<td align="left">수산</td>
-										</c:when>
-										<c:when test= "${store.storeType eq '3'}">
-											<td align="left">채소</td>
-										</c:when>
-										<c:when test= "${store.storeType eq '4'}">
-											<td align="left">과일</td>
-										</c:when>
-										<c:when test= "${store.storeType eq '5'}">
-											<td align="left">종합</td>
-										</c:when>
-									</c:choose>
+									
+									<td align="left">${store.storeType}</td>
 									<td align="left">${store.storeAddr}</td>
 									<td align="left">${store.storePhone}</td>
 									

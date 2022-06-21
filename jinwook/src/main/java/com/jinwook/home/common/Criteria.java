@@ -27,7 +27,7 @@ public class Criteria {
 
 	public Criteria() {
 		this.currentPageNo = 1;
-		this.recordsPerPage = 5;
+		this.recordsPerPage = 6;//페이징 처리 6개씩!
 		this.pageSize = 5;
 	}
 

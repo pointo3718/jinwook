@@ -1,5 +1,7 @@
 package com.jinwook.home.web.request;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
@@ -41,12 +45,50 @@ public class RequestController {
 	
 	// ========== 상점 등록 요청 !!!!!!! 요청 목록 만들고 다시 !!!!!!!===========
 	@PostMapping(value = "addRequestAddStore")
-	public String addRequestAddStore(@ModelAttribute("Store") Store store) {
+	public String addRequestAddStore(@ModelAttribute("Store") Store store, HttpSession session, MultipartHttpServletRequest mpRequest) throws Exception {
 		
 		System.out.println("/request/addRequestAddStore : POST");
 		
-		requestService.addRequestAddStore(store);
+		String sessionUserId = ((User) session.getAttribute("user")).getUserId();
+		store.setUserId(sessionUserId);
+		
+		
+		
+		///////////////////////////
+		
+		List<MultipartFile> fileList = mpRequest.getFiles("file");
+        String src = mpRequest.getParameter("src");
 
+        String path = "C:\\Users\\ghdtj\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img";
+
+        for (MultipartFile mf : fileList) {
+            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long fileSize = mf.getSize(); // 파일 사이즈
+
+            System.out.println("originFileName : " + originFileName);
+            System.out.println("fileSize : " + fileSize);
+
+            String safeFile = path + originFileName;
+            try {
+                mf.transferTo(new File(safeFile));
+        		requestService.addRequestAddStore(store, mpRequest);
+            } catch (IllegalStateException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+		
+		///////////////////////////
+		
+		
+		
+		
+		
+		
+		
 		return "redirect:/request/getRequestAdStoreList";
 	}
 	
@@ -74,24 +116,7 @@ public class RequestController {
 		}
 		return "/store/getStoreWallet?storeNo=" +request.getStoreNo();
 	}
-	
-	
-	// ========== 상점 삭제 신청 ===========
-	@PostMapping(value = "addRequestDeleteStore")
-	public String addRequestDeleteStore(@ModelAttribute("request") Request request) {
-		try {
-			boolean result = requestService.addRequestDeleteStore(request);
-			if (result == false) {
-				// TODO => 등록에 실패하였다는 메시지를 전달
-			}
-		} catch (DataAccessException e) {
-			// TODO => 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
 
-		} catch (Exception e) {
-			// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
-		}
-		return "redirect:/request/addRequestDeleteStore";
-	}
 	
 	
 	// ========== 광고 등록 신청 폼 ===========
