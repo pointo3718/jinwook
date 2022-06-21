@@ -367,6 +367,9 @@ $(function() {
 </script>
 
 <style>
+
+*{font-family: 'Noto Sans KR', sans-serif;}
+
 .sticky {
   position: -webkit-sticky;
   position: sticky;
@@ -375,10 +378,10 @@ $(function() {
   z-index: 10;
 }
 
-.row{
-	display: flex;
- 	justify-content: center;
-	align-items: flex-start;
+.row {
+   display: flex;
+   justify-content: center;
+   align-items: flex-start;
 }
 
 .mytop01 {
@@ -607,9 +610,10 @@ color: #7fad39;
 						
 					</table>
 				</div>
+				<br/><br/><br/>
 				<div class="text-center">
 					<!-- PageNavigation Start... -->
-					<div class="col-lg-12" style="left:120px; margin-top:70px;">
+					<div class="col-lg-12" style="left:120px; margin-top:70px; top:70px;">
 
 
 <c:set var="params" value="${board}"/>

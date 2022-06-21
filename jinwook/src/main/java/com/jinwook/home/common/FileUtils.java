@@ -18,7 +18,11 @@ import com.jinwook.home.service.domain.Store;
 
 @Component("fileUtils")
 public class FileUtils {
+<<<<<<< HEAD
 	private static final String filePath = "C:\\Users\\ghdtj\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img\\"; // 파일이 저장될 위치
+=======
+	private static final String filePath = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img\\"; // 파일이 저장될 위치
+>>>>>>> refs/heads/Song
 	
 	//1:1문의, 공지사항 사진첨부정보
 	public List<Map<String, Object>> parseInsertBoardFileInfo(Board board, 

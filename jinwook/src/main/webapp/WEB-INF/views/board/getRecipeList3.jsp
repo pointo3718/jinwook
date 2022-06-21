@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -12,7 +12,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>레시피 상세</title>
+    <title>레시피 목록</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -26,7 +26,45 @@
     <link rel="stylesheet" href="${path}/resources/static/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="${path}/resources/static/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+.blog {
+   padding-top: 50px;
+}
+
+.blog__sidebar {
+   padding-top: 0px;
+}
+
+.list-group {
+   padding-top: 0px;
+}
+
+.blog__sidebar__item {
+   width: 200px;
+}
+.row{
+   display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.paging-div {
+  padding: 15px 0 5px 10px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  
+#buttons{
+    border: 1px solid #7fad39;
+	color: #7fad39;  
+	}
+}
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>    
 <script type="text/javascript">
 /*<![CDATA[*/
 
@@ -35,53 +73,89 @@ function movePage(uri, queryString) {
 }
 
 /*]]>*/
-<!-- 레시피 추천 -->
-function updateRecipeReco() {
-var rcpNo = ${recipe.rcpNo};
-	$.ajax({
-		type : "POST",
-		url : "updateRecipeReco",
-		dataType : "json",
-		data : {'rcpNo' : rcpNo},
-		error : function() {
-			alert("통신 에러");
-		},
-		success : function(recoCheck) {
-			if (recoCheck == 0) {
-				alert("추천 완료!");
-				location.reload();
-			}
-			else if (recoCheck == 2) {
-				alert("이미 추천하셨습니다");
-				location.reload();
-					}
-				}
-			});
-		} 
-		
-	//===url 공유====//
-	function clip() {
 
-		var url = '';
-		var textarea = document.createElement("textarea");
-		document.body.appendChild(textarea);
-		url = window.document.location.href;
-		textarea.value = url;
-		textarea.select();
-		document.execCommand("copy");
-		document.body.removeChild(textarea);
-		alert("URL이 복사되었습니다.")
+function fncDeleteRecipe(e) {
+	if (!confirm('상품을 삭제하시겠어요?')) {
+		return false;
 	}
 	
-	<!-- 수정 버튼 이벤트 -->
-	$(function(){
+	console.log(e);
+	const no = $(e).data("value");
+	 $.ajax({
+			url : "/board/deleteRecipe/"+no,
+			dataType : "json",
+			success : function(result){
+				if(result != null){
+					alert("삭제완료");
+					self.location = "/board/getRecipeList";
+				}
+			}
 		
-		$("#updateButton").on("click", function() {
-			self.location = "/board/updateRecipeView?rcpNo=${recipe.rcpNo}"
 		});
-	});
-</script>    
-    
+	
+}
+
+$(function() {
+
+    //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+    $("#recipeDetail").on("click", function() {
+       self.location = "/board/getRecipe?rcpNo="+$(this).data("param");
+    });
+
+ });
+
+   //=============    검색 / page 두가지 경우 모두  Event  처리 =============   
+   function fncGetUserList(currentPage) {
+      $("#currentPage").val(currentPage)
+      $("form").attr("method", "POST").attr("action",
+            "/purchase/listPurchase").submit();
+   }
+
+   //============= "검색"  Event  처리 =============   
+   $(function() {
+      //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+      $("button.btn.btn-default").on("click", function() {
+         fncGetUserList(1);
+      });
+   });
+
+   //============= userId 에 회원정보보기  Event  처리(Click) =============   
+   $(function() {
+
+      //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+      $("td:nth-child(1)").on(
+            "click",
+            function() {
+               self.location = "/purchase/getPurchase?tranNo="
+                     + $(this).attr("tranNo");
+            });
+
+      //==> userId LINK Event End User 에게 보일수 있도록 
+      $("td:nth-child(2)").css("color", "red");
+
+   });
+
+   $(function() {
+
+      //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+      $("td:nth-child(2)").on("click", function() {
+         self.location = "/user/getUser?userId=" + $(this).text().trim();
+      });
+
+   });
+
+   //============= userId 에 회원정보보기  Event  처리 (double Click)=============
+   $(function() {
+
+      //==> userId LINK Event End User 에게 보일수 있도록 
+      $(".ct_list_pop td:nth-child(3)").css("color", "red");
+      $("h7").css("color", "red");
+
+      //==> 아래와 같이 정의한 이유는 ??
+      $(".ct_list_pop:nth-child(4n+6)").css("background-color", "whitesmoke");
+   });
+   
+</script>   
 </head>
 
 <body>
@@ -94,7 +168,7 @@ var rcpNo = ${recipe.rcpNo};
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="${path}/resources/static/img/logo.png" alt=""></a>
+            <a href="#"><img src="img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -207,8 +281,8 @@ var rcpNo = ${recipe.rcpNo};
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li class="active"><a href="./contact.html">Contact</a></li>
+                            <li class="active"><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -282,58 +356,153 @@ var rcpNo = ${recipe.rcpNo};
     </section>
     <!-- Hero Section End -->
 
-    <!-- Contact Form Begin -->
-    <div class="contact-form spad">
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="contact__form__title">
-                        <h2>레시피 상세</h2>
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Blog</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Blog</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <form action="#">
-                <div class="row">
-                
-                <div class="imgborder">
-                <form name="readForm" role="form" method="post">
-					<img
-						src="https://media.istockphoto.com/photos/kimchi-stir-fried-with-pork-and-vegetables-sprinkle-sesame-seeds-on-picture-id1206518905?b=1&k=20&m=1206518905&s=170667a&w=0&h=9qzoXifvJg_E220JqkrDKmdWbGcSoOA47jz-gFMlFl0="
-						alt="My Image" width="400" height="300">
-						<div class="form-group">
- 				<c:forEach var="file" items="${file}">
- 				<input type="hidden" id="attach_no" name="attach_no" value="">
- 					<a href="#" onclick="fn_fileDown('${file.attach_no}'); return false;">${file.org_file_name}</a>(${file.file_size}kb)<br>
- 					<img attachNo="${ file.attach_no }" width="400" height="400" src="../static/img/${file.org_file_name}" alt="..." 
-               onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"/>
- 				</c:forEach>
- 						</div>
-				</div>
-                
-                    <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your name">
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your Email">
-                    </div>
-                    
-                    <div class="col-lg-12 text-center">
-                    	<textarea>${recipe.rcpInfo}</textarea>
-                    </div>
-                    
-                    <div class="col-lg-12 text-center">
-                    	<textarea>${recipe.rcpIngredient}</textarea>
-                    </div>
-                    
-                    <div class="col-lg-12 text-center">
-                        <textarea>${recipe.rcpContent}</textarea>
-                        <button type="submit" class="site-btn">SEND MESSAGE</button>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Blog Section Begin -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-7">
+                    <div class="row">
+                        	<c:set var="i" value="0" />
+            					<c:forEach var="recipe" items="${getRecipeList}">
+               						<c:set var="i" value="${ i+1 }" />
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-2.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> ${recipe.rcpDate}</li>
+                                        <li><i class="fa fa-comment-o"></i> ${recipe.recommendCount}</li>
+                                    </ul>
+                                    <h5>${recipe.rcpTitle}</h5>
+                                    <p><i class="bi bi-eye"></i> ${recipe.rcpHits}</p>
+                                     <div id="recipeDetail" data-param="${recipe.rcpNo}" class="blog__btn">더보기<span class="arrow_right"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        </c:forEach>
+                        
+                        <%-- <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-3.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="#">Visit the clean farm in the US</a></h5>
+                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                        quaerat </p>
+                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-1.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
+                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                        quaerat </p>
+                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-4.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
+                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                        quaerat </p>
+                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-4.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="#">The Moment You Need To Remove Garlic From The Menu</a></h5>
+                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                        quaerat </p>
+                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="${path}/resources/static/img/blog/blog-6.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
+                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                        quaerat </p>
+                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div> --%>
+                        
+                        <div class="col-lg-12">
+                            <div class="product__pagination blog__pagination">
+                                <a href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-    <!-- Contact Form End -->
+    <!-- Blog Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -395,7 +564,7 @@ var rcpNo = ${recipe.rcpNo};
                         <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
   Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
+                        <div class="footer__copyright__payment"><img src="${path}/resources/static/img/payment-item.png" alt=""></div>
                     </div>
                 </div>
             </div>
