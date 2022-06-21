@@ -130,7 +130,7 @@
     )
 </select>
 	 
-	 <update id= "updatePassword"	parameterType="user" >
+	 <update id= "updatePassword" >
 		UPDATE users 
 		<set>
 			password = #{password}

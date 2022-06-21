@@ -242,9 +242,9 @@
 					  <br>
 					  <hr>
 					  <br>
-					  <div id="kakao_login" style="text-align: center">
+					  <div id="kakao_login" style="text-align: center" data-toggle="modal" data-target="#staticBackdrop">
 					  <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=7a50e1995f458ef51a98c92f52419d00&redirect_uri=	
-						http://127.0.0.1:8082/user/kakaoLogin&response_type=code">
+						http://127.0.0.1:8082/user/kakaoLogin&response_type=code" >
                      <img width="50" height="50" 
                         src="${path}/resources/static/kakao-icon.svg" /></a>
        				 </div>	<br>

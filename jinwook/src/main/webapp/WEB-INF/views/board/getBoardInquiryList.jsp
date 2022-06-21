@@ -51,7 +51,7 @@
 	/*]]>*/
 	
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
-function fncDeleteAnnouncement(e) {
+function fncDeleteInquiry(e) {
 	if (!confirm('상품을 삭제하시겠어요?')) {
 		return false;
 	}
@@ -367,6 +367,9 @@ $(function() {
 </script>
 
 <style>
+
+*{font-family: 'Noto Sans KR', sans-serif;}
+
 .sticky {
   position: -webkit-sticky;
   position: sticky;
@@ -375,10 +378,10 @@ $(function() {
   z-index: 10;
 }
 
-.row{
-	display: flex;
- 	justify-content: center;
-	align-items: flex-start;
+.row {
+   display: flex;
+   justify-content: center;
+   align-items: flex-start;
 }
 
 .mytop01 {
@@ -554,7 +557,7 @@ color: #7fad39;
 				<!-- UserList Table Start -->
 				<div>
 					<h4 class="text-left">
-						<strong>공지사항 목록</strong>
+						<strong>1:1문의사항 목록</strong>
 						<p class="text-muted" style="display: inline; font-size: 12px;">
 						</p>
 						<!-- <div class="btn-group btn-group-toggle" data-toggle="buttons" style="left:300px;">
@@ -598,7 +601,7 @@ color: #7fad39;
 									<td align="left" data-param="${board.boardNo}">${board.boardTitle}</td>
 									<td align="left">${board.writeDate}</td>
 									<td align="left">${board.boardHits}</td>
-									<td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteAnnouncement(this)">X</button></td>
+									<td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteInquiry(this)">X</button></td>
 								</tr>
 							</c:forEach>
 							</tr>
@@ -607,9 +610,10 @@ color: #7fad39;
 						
 					</table>
 				</div>
+				<br/><br/><br/>
 				<div class="text-center">
 					<!-- PageNavigation Start... -->
-					<div class="col-lg-12" style="left:120px; margin-top:70px;">
+					<div class="col-lg-12" style="left:120px; margin-top:70px; top:70px;">
 
 
 <c:set var="params" value="${board}"/>
@@ -617,13 +621,6 @@ color: #7fad39;
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
       <div class="product__pagination blog__pagination" style="padding-top: 0px; bottom: 100px;">
             <!--  <<== ÁÂÃø nav -->
-           <%--  <c:if test="${ params.paginationInfo.hasPreviousPage == false }">
-               <li>
-            </c:if>
-            <c:if test="${ params.paginationInfo.hasPreviousPage == true  }">
-               <li
-                  onclick="javascript:void(0);">
-            </c:if> --%>
             <a   
                href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(1)}');"
                aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -631,13 +628,6 @@ color: #7fad39;
            
 
             <!--  <== ÁÂÃø nav -->
-            <%-- <c:if test="${ params.paginationInfo.hasPreviousPage == false }">
-               <li>
-            </c:if>
-            <c:if test="${ params.paginationInfo.hasPreviousPage == true  }">
-               <li
-                  onclick="javascript:void(0);">
-            </c:if> --%>
             <a href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(params.paginationInfo.firstPage-1)}');" aria-label="Previous"> <span
                aria-hidden="true">&lsaquo;</span>
             </a>

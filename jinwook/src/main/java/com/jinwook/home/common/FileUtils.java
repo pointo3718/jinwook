@@ -18,212 +18,212 @@ import com.jinwook.home.service.domain.Store;
 
 @Component("fileUtils")
 public class FileUtils {
-	private static final String filePath = "C:\\Users\\ghdtj\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img\\"; // 파일이 저장될 위치
-	
-	//1:1문의, 공지사항 사진첨부정보
-	public List<Map<String, Object>> parseInsertBoardFileInfo(Board board, 
-			MultipartHttpServletRequest mpRequest) throws Exception{
-		
-		Iterator<String> iterator = mpRequest.getFileNames();
-		
-		MultipartFile multipartFile = null;
-		String originalFileName = null;
-		String originalFileExtension = null;
-		String storedFileName = null;
-		
-		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-		Map<String, Object> listMap = null;
-		
-		int boardNo = board.getBoardNo();
-		
-		File file = new File(filePath);
-		if(file.exists() == false) {
-			file.mkdirs();
-		}
-		
-		while(iterator.hasNext()) {
-			multipartFile = mpRequest.getFile(iterator.next());
-			if(multipartFile.isEmpty() == false) {
-				originalFileName = multipartFile.getOriginalFilename();
-				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-				storedFileName = getRandomString() + originalFileExtension;
-				
-				file = new File(filePath + storedFileName);
-				multipartFile.transferTo(file);
-				listMap = new HashMap<String, Object>();
-				listMap.put("boardNo", boardNo);
-				listMap.put("orgFileName", originalFileName);
-				listMap.put("storedFileName", storedFileName);
-				listMap.put("fileSize", multipartFile.getSize());
-				list.add(listMap);
-			}
-		}
-		return list;
-	}
-	
-	public List<Map<String, Object>> parseUpdateFileInfo(Board board, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception{ 
-		Iterator<String> iterator = mpRequest.getFileNames();
-		MultipartFile multipartFile = null; 
-		String originalFileName = null; 
-		String originalFileExtension = null; 
-		String storedFileName = null; 
-		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-		Map<String, Object> listMap = null; 
-		int boardNo = board.getBoardNo();
-		while(iterator.hasNext()){ 
-			multipartFile = mpRequest.getFile(iterator.next()); 
-			if(multipartFile.isEmpty() == false){ 
-				originalFileName = multipartFile.getOriginalFilename(); 
-				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")); 
-				storedFileName = getRandomString() + originalFileExtension; 
-				multipartFile.transferTo(new File(filePath + storedFileName)); 
-				listMap = new HashMap<String,Object>();
-				listMap.put("IS_NEW", "Y");
-				listMap.put("boardNo", boardNo);
-				listMap.put("orgFileName", originalFileName);
-				listMap.put("storedFileName", storedFileName);
-				listMap.put("fileSize", multipartFile.getSize());
-				list.add(listMap); 
-			} 
-		}
-		if(files != null && fileNames != null){ 
-			for(int i = 0; i<fileNames.length; i++) {
-					listMap = new HashMap<String,Object>();
+   private static final String filePath = "C:\\Users\\ghdtj\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img\\"; // 파일이 저장될 위치
+   
+   //1:1문의, 공지사항 사진첨부정보
+   public List<Map<String, Object>> parseInsertBoardFileInfo(Board board, 
+         MultipartHttpServletRequest mpRequest) throws Exception{
+      
+      Iterator<String> iterator = mpRequest.getFileNames();
+      
+      MultipartFile multipartFile = null;
+      String originalFileName = null;
+      String originalFileExtension = null;
+      String storedFileName = null;
+      
+      List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+      Map<String, Object> listMap = null;
+      
+      int boardNo = board.getBoardNo();
+      
+      File file = new File(filePath);
+      if(file.exists() == false) {
+         file.mkdirs();
+      }
+      
+      while(iterator.hasNext()) {
+         multipartFile = mpRequest.getFile(iterator.next());
+         if(multipartFile.isEmpty() == false) {
+            originalFileName = multipartFile.getOriginalFilename();
+            originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+            storedFileName = getRandomString() + originalFileExtension;
+            
+            file = new File(filePath + storedFileName);
+            multipartFile.transferTo(file);
+            listMap = new HashMap<String, Object>();
+            listMap.put("boardNo", boardNo);
+            listMap.put("orgFileName", originalFileName);
+            listMap.put("storedFileName", storedFileName);
+            listMap.put("fileSize", multipartFile.getSize());
+            list.add(listMap);
+         }
+      }
+      return list;
+   }
+   
+   public List<Map<String, Object>> parseUpdateFileInfo(Board board, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception{ 
+      Iterator<String> iterator = mpRequest.getFileNames();
+      MultipartFile multipartFile = null; 
+      String originalFileName = null; 
+      String originalFileExtension = null; 
+      String storedFileName = null; 
+      List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+      Map<String, Object> listMap = null; 
+      int boardNo = board.getBoardNo();
+      while(iterator.hasNext()){ 
+         multipartFile = mpRequest.getFile(iterator.next()); 
+         if(multipartFile.isEmpty() == false){ 
+            originalFileName = multipartFile.getOriginalFilename(); 
+            originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")); 
+            storedFileName = getRandomString() + originalFileExtension; 
+            multipartFile.transferTo(new File(filePath + storedFileName)); 
+            listMap = new HashMap<String,Object>();
+            listMap.put("IS_NEW", "Y");
+            listMap.put("boardNo", boardNo);
+            listMap.put("orgFileName", originalFileName);
+            listMap.put("storedFileName", storedFileName);
+            listMap.put("fileSize", multipartFile.getSize());
+            list.add(listMap); 
+         } 
+      }
+      if(files != null && fileNames != null){ 
+         for(int i = 0; i<fileNames.length; i++) {
+               listMap = new HashMap<String,Object>();
                     listMap.put("IS_NEW", "N");
-					listMap.put("attachNo", files[i]);//v 
-					list.add(listMap); 
-			}
-		}
-		return list; 
-	}
-	
-	//레시피 사진첨부정보
-	public List<Map<String, Object>> parseInsertRecipeFileInfo(Recipe recipe, 
-			MultipartHttpServletRequest mpRequest) throws Exception{
-		
-		Iterator<String> iterator = mpRequest.getFileNames();
-		
-		MultipartFile multipartFile = null;
-		String originalFileName = null;
-		String originalFileExtension = null;
-		String storedFileName = null;
-		
-		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-		Map<String, Object> listMap = null;
-		
-		int rcpNo = recipe.getRcpNo();
-		
-		File file = new File(filePath);
-		if(file.exists() == false) {
-			file.mkdirs();
-		}
-		
-		while(iterator.hasNext()) {
-			multipartFile = mpRequest.getFile(iterator.next());
-			if(multipartFile.isEmpty() == false) {
-				originalFileName = multipartFile.getOriginalFilename();
-				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-				storedFileName = getRandomString() + originalFileExtension;
-				
-				file = new File(filePath + storedFileName);
-				multipartFile.transferTo(file);
-				listMap = new HashMap<String, Object>();
-				listMap.put("rcpNo", rcpNo);
-				listMap.put("orgFileName", originalFileName);
-				listMap.put("storedFileName", storedFileName);
-				listMap.put("fileSize", multipartFile.getSize());
-				list.add(listMap);
-			}
-		}
-		return list;
-	}
-	
-	//상점후기 사진첨부정보
-	public List<Map<String, Object>> parseInsertReviewFileInfo(Orders orders, 
-			MultipartHttpServletRequest mpRequest) throws Exception{
-		
-		Iterator<String> iterator = mpRequest.getFileNames();
-		
-		MultipartFile multipartFile = null;
-		String originalFileName = null;
-		String originalFileExtension = null;
-		String storedFileName = null;
-		
-		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-		Map<String, Object> listMap = null;
-		
-		int orderNo = orders.getOrderNo();
-		
-		File file = new File(filePath);
-		if(file.exists() == false) {
-			file.mkdirs();
-		}
-		
-		while(iterator.hasNext()) {
-			multipartFile = mpRequest.getFile(iterator.next());
-			if(multipartFile.isEmpty() == false) {
-				originalFileName = multipartFile.getOriginalFilename();
-				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-				storedFileName = getRandomString() + originalFileExtension;
-				
-				file = new File(filePath + storedFileName);
-				multipartFile.transferTo(file);
-				listMap = new HashMap<String, Object>();
-				listMap.put("orderNo", orderNo);
-				listMap.put("orgFileName", originalFileName);
-				listMap.put("storedFileName", storedFileName);
-				listMap.put("fileSize", multipartFile.getSize());
-				list.add(listMap);
-			}
-		}
-		return list;
-	}
-	
-	
-	// 상점 등록시 사진첨부 정보
-	public List<Map<String, Object>> parseInsertStoreFileInfo(Store store, 
-			MultipartHttpServletRequest mpRequest) throws Exception{
-		
-		Iterator<String> iterator = mpRequest.getFileNames();
-		
-		MultipartFile multipartFile = null;
-		String originalFileName = null;
-		String originalFileExtension = null;
-		String storedFileName = null;
-		
-		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-		Map<String, Object> listMap = null;
-		
-		int storeNo = store.getStoreNo();
-		
-		File file = new File(filePath);
-		if(file.exists() == false) {
-			file.mkdirs();
-		}
-		
-		while(iterator.hasNext()) {
-			multipartFile = mpRequest.getFile(iterator.next());
-			if(multipartFile.isEmpty() == false) {
-				originalFileName = multipartFile.getOriginalFilename();
-				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-				storedFileName = getRandomString() + originalFileExtension;
-				
-				file = new File(filePath + storedFileName);
-				multipartFile.transferTo(file);
-				listMap = new HashMap<String, Object>();
-				listMap.put("storeNo", storeNo);
-				listMap.put("orgFileName", originalFileName);
-				listMap.put("storedFileName", storedFileName);
-				listMap.put("fileSize", multipartFile.getSize());
-				list.add(listMap);
-			}
-		}
-		return list;
-	}
-	
-	
-	public static String getRandomString() {
-		return UUID.randomUUID().toString().replaceAll("-", "");
-	}
-	
+               listMap.put("attachNo", files[i]);//v 
+               list.add(listMap); 
+         }
+      }
+      return list; 
+   }
+   
+   //레시피 사진첨부정보
+   public List<Map<String, Object>> parseInsertRecipeFileInfo(Recipe recipe, 
+         MultipartHttpServletRequest mpRequest) throws Exception{
+      
+      Iterator<String> iterator = mpRequest.getFileNames();
+      
+      MultipartFile multipartFile = null;
+      String originalFileName = null;
+      String originalFileExtension = null;
+      String storedFileName = null;
+      
+      List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+      Map<String, Object> listMap = null;
+      
+      int rcpNo = recipe.getRcpNo();
+      
+      File file = new File(filePath);
+      if(file.exists() == false) {
+         file.mkdirs();
+      }
+      
+      while(iterator.hasNext()) {
+         multipartFile = mpRequest.getFile(iterator.next());
+         if(multipartFile.isEmpty() == false) {
+            originalFileName = multipartFile.getOriginalFilename();
+            originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+            storedFileName = getRandomString() + originalFileExtension;
+            
+            file = new File(filePath + storedFileName);
+            multipartFile.transferTo(file);
+            listMap = new HashMap<String, Object>();
+            listMap.put("rcpNo", rcpNo);
+            listMap.put("orgFileName", originalFileName);
+            listMap.put("storedFileName", storedFileName);
+            listMap.put("fileSize", multipartFile.getSize());
+            list.add(listMap);
+         }
+      }
+      return list;
+   }
+   
+   //상점후기 사진첨부정보
+   public List<Map<String, Object>> parseInsertReviewFileInfo(Orders orders, 
+         MultipartHttpServletRequest mpRequest) throws Exception{
+      
+      Iterator<String> iterator = mpRequest.getFileNames();
+      
+      MultipartFile multipartFile = null;
+      String originalFileName = null;
+      String originalFileExtension = null;
+      String storedFileName = null;
+      
+      List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+      Map<String, Object> listMap = null;
+      
+      int orderNo = orders.getOrderNo();
+      
+      File file = new File(filePath);
+      if(file.exists() == false) {
+         file.mkdirs();
+      }
+      
+      while(iterator.hasNext()) {
+         multipartFile = mpRequest.getFile(iterator.next());
+         if(multipartFile.isEmpty() == false) {
+            originalFileName = multipartFile.getOriginalFilename();
+            originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+            storedFileName = getRandomString() + originalFileExtension;
+            
+            file = new File(filePath + storedFileName);
+            multipartFile.transferTo(file);
+            listMap = new HashMap<String, Object>();
+            listMap.put("orderNo", orderNo);
+            listMap.put("orgFileName", originalFileName);
+            listMap.put("storedFileName", storedFileName);
+            listMap.put("fileSize", multipartFile.getSize());
+            list.add(listMap);
+         }
+      }
+      return list;
+   }
+   
+   
+   // 상점 등록시 사진첨부 정보
+   public List<Map<String, Object>> parseInsertStoreFileInfo(Store store, 
+         MultipartHttpServletRequest mpRequest) throws Exception{
+      
+      Iterator<String> iterator = mpRequest.getFileNames();
+      
+      MultipartFile multipartFile = null;
+      String originalFileName = null;
+      String originalFileExtension = null;
+      String storedFileName = null;
+      
+      List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+      Map<String, Object> listMap = null;
+      
+      int storeNo = store.getStoreNo();
+      
+      File file = new File(filePath);
+      if(file.exists() == false) {
+         file.mkdirs();
+      }
+      
+      while(iterator.hasNext()) {
+         multipartFile = mpRequest.getFile(iterator.next());
+         if(multipartFile.isEmpty() == false) {
+            originalFileName = multipartFile.getOriginalFilename();
+            originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+            storedFileName = getRandomString() + originalFileExtension;
+            
+            file = new File(filePath + storedFileName);
+            multipartFile.transferTo(file);
+            listMap = new HashMap<String, Object>();
+            listMap.put("storeNo", storeNo);
+            listMap.put("orgFileName", originalFileName);
+            listMap.put("storedFileName", storedFileName);
+            listMap.put("fileSize", multipartFile.getSize());
+            list.add(listMap);
+         }
+      }
+      return list;
+   }
+   
+   
+   public static String getRandomString() {
+      return UUID.randomUUID().toString().replaceAll("-", "");
+   }
+   
 }

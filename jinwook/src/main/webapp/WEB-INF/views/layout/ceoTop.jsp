@@ -173,7 +173,7 @@ document.detailForm.submit();
 
 /////////////// 상점 등록 끝 ///////////////////////
 
-	
+   
 </style>
 
 <script type="text/javascript">

@@ -16,7 +16,6 @@ import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.BoardMapper;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
-import com.jinwook.home.service.domain.FileVO;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
@@ -54,21 +53,8 @@ public class BoardServiceImpl implements BoardService {
    }
    
    @Override
-   public void updateBoardInquiry(Board board, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception {
-	   
+   public void updateBoardInquiry(Board board) throws Exception {
 	   boardMapper.updateBoardInquiry(board);
-	   
-	   List<Map<String, Object>> list = fileUtils.parseUpdateFileInfo(board, files, fileNames, mpRequest);
-		Map<String, Object> tempMap = null;
-		int size = list.size();
-		for(int i = 0; i<size; i++) {
-			tempMap = list.get(i);
-			if(tempMap.get("IS_NEW").equals("Y")) {
-				boardMapper.insertBoardFile(tempMap);
-			}else {
-				boardMapper.updateAttach(tempMap);
-			}
-		}
    }
    
    //공지사항 수정v
@@ -407,22 +393,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.updateBoardRecipeHits(rcpNo);
 	}
 	
-//	//게시판 사진 업로드
-//	@Override
-//	public int fileBoardInsert(FileVO file) throws Exception {
-//		return boardMapper.fileBoardInsert(file);
-//	}
-//	
-//	//레시피 사진 업로드
-//	@Override
-//	public int fileRecipeInsert(FileVO file) throws Exception {
-//		return boardMapper.fileRecipeInsert(file);
-//	}
-
-	//댓글 조회
+	//댓글(1:1답변) 조회
 	@Override
-	public List<Comment> getComment(int boardNo) throws Exception {
-		return boardMapper.getComment(boardNo);
+	public List<Comment> getInquiryComment(int boardNo) throws Exception {
+		return boardMapper.getInquiryComment(boardNo);
 	}
 
 	@Override
@@ -436,10 +410,16 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.updateBoardInqStatus(board);
 	}
 
-	//파일 첨부 조회
+	// 게시판 파일 첨부 조회
 	@Override
-	public List<Map<String, Object>> selectAttachList(int boardNo) throws Exception {
-		return boardMapper.selectAttachList(boardNo);
+	public List<Map<String, Object>> selectBoardAttachList(int boardNo) throws Exception {
+		return boardMapper.selectBoardAttachList(boardNo);
+	}
+	
+	// 레시피 파일 첨부 조회
+	@Override
+	public List<Map<String, Object>> selectRecipeAttachList(int rcpNo) throws Exception {
+		return boardMapper.selectRecipeAttachList(rcpNo);
 	}
 
 	//파일 다운로드
@@ -453,6 +433,33 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public void addRecipeComment(Comment comment) throws Exception {
+		boardMapper.addRecipeComment(comment);
+	}
+
+	@Override
+	public List<Comment> getRecipeComment(int rcpNo) throws Exception {
+		return boardMapper.getRecipeComment(rcpNo);
+	}
+
+	@Override
+	public void updateRecipeComment(Comment comment) throws Exception {
+		boardMapper.updateRecipeComment(comment);
+	}
+
+	@Override
+	public void deleteRecipeComment(Comment comment) throws Exception {
+		boardMapper.deleteRecipeComment(comment);
+	}
+
+	@Override
+	public Comment selectRecipeComment(int commentNo) throws Exception {
+		return boardMapper.selectRecipeComment(commentNo);
+	}
+	
+	
 
 
 
