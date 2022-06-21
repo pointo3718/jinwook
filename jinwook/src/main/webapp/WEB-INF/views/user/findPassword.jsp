@@ -138,8 +138,9 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 			   text: '인증 완료',
 			   
 			}).then(function(){
+			$("#findPassword").hide();
+			$("#updatePw").show();
 			
-		self.location = "updatePasswordView";
 		})
         }
         else {
@@ -151,8 +152,32 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
  });
  });
 	
+
+	$(function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$( "#bts" ).on("click" , function() {
+
+		var pw=$("input[name='password']").val();
+		var pw2=$("input[name='password2']").val();
+		
+		if(pw == null || pw.length <1){
+			alert("패스워드는  반드시 입력하셔야 합니다.");
+			return;
+		}
+		if(pw2 == null || pw2.length <1){
+			alert("패스워드는  반드시 입력하셔야 합니다.");
+			return;
+		}
+		if( pw != pw2 ) {				
+			alert("비밀번호 확인이 일치하지 않습니다.");
+			$("input:text[name='password2']").focus();
+			return;
+		}
+		alert("성공");
+		$(".updatePassword_page").attr("method" , "POST").attr("action" , "/user/updatePassword").submit();
 	
-	
+		});
+	});	
 	
 	
 	
@@ -168,6 +193,7 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 	 		alert(email);
 			if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1 )){
 		swal("진욱이네", "이메일 형식이 아닙니다.");
+				email.focus();
 				return;
 			}
 			
@@ -179,7 +205,8 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 	
 			})
 			.then(function() {
-				location.href = "/user/login";
+				$("#findPassword").hide();
+				$("#updatePw").show();
 				/* const html =
 					"<div class='send_email'> "
 						+ "<div> "
@@ -307,6 +334,34 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 		</form>	
 			<br><br>
 			
+	<form class="updatePassword_page text-center" id="updatePw" style="display:none;">
+		<div class="row">
+			<h1 class="">비밀번호 변경</h1>
+			<br><br>
+		</div>
+			<br><br>
+		<div class="text-center " style="margin-right:190px; ">
+		 <input id='userId' type='hidden' name='userId' value='${userId}'>
+		<label for="password " style="font-size:15px; " >새 비밀번호 등록</label>	
+		</div>
+			<div class="aaa " style="font-size:15px;">
+			<input type="password" maxlength='50' id="password" name="password" class="password" placeholder="새 비밀번호를 입력해주세요.">
+			</div>
+			<br>
+			
+		<div class="text-center" id="" >
+			<div class="text-center " style="margin-right:190px;">
+			<label for="password2 " style="font-size:15px;" >새 비밀번호 확인</label>	
+			</div>
+				<div class="adad" style="font-size:15px;">
+				<input type="password" id="password2" name="password2" class="password2" placeholder="새 비밀번호를 한 번 더 입력해주세요.">
+				</div>
+				<br>
+				<button class="bts  site-btn"  id="bts" style="width:300px;">확인</button>
+				<br><br>
+		</div>
+</form>
+				
  	<!--  화면구성 div end /////////////////////////////////////-->
 <jsp:include page="../layout/footer.jsp" />
 

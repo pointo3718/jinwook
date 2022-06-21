@@ -126,7 +126,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public User updatePassword(User user) throws Exception {
+	public int updatePassword(User user) throws Exception {
 		return userMapper.updatePassword(user);
 //		int result =  userMapper.updatePassword(user);
 		
@@ -150,7 +150,9 @@ public class UserServiceImpl implements UserService{
 	         mimeMessageHelper.setSubject("[진욱이네] 아이디 안내를 드립니다.");
 	         String content= " ";
 	         content = user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r ";
-	         content += "<br><img src=\"${path}/resources/static/img/logo.png><br> ";
+	         content += "<br><br> ";
+	         content += "<img src=\"/Users/choiingyu/Downloads/logo.png\"> ";
+	         content += "<br><br> ";
 	        content += "요청하신 아이디를 안내드립니다.\n ";
 	        content += "<br><br> ";
 	        content += user.getUserId();
@@ -199,6 +201,8 @@ public class UserServiceImpl implements UserService{
 	public void sendPasswordEmail(User user) throws Exception{
 		MimeMessage mimeMessage = mailSender.createMimeMessage();
 		
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+		
 		try {
 	         
 	         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
@@ -207,14 +211,10 @@ public class UserServiceImpl implements UserService{
 	         mimeMessageHelper.setSubject("[진욱이네] 비밀번호 재설정 안내를 드립니다.");
 	         String content= " ";
 	         content = user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r ";
-	         content += "<br> <br> ";
-	        content += "아래 버튼을 눌러 비밀번호를 재설정 해주세요. ";
 	        content += "<br><br>  ";
-	        content += "<a href='http://localhost:8082/user/updatePasswordView'>진욱이네</a><br/>\n ";
+	        content += "[진욱이네] 인증번호는" + "["+randomNumber+"]" + "입니다." ;
 	        content += "<br><br>  ";
-	        content += "유효 시간 : "+LocalDateTime.now()+"\n ";
-	        content += "<br> ";
-	        content += "유효 시간 내에 비밀번호 재설정을 완료해 주세요.\n ";
+	        content += "인증 완료 후 비밀번호 재설정을 완료해 주세요.\n ";
 //	         StringBuffer sb = new StringBuffer();
 //			 sb.append(user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n"
 //					+ "\n"

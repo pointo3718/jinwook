@@ -1,6 +1,7 @@
 package com.jinwook.home.service.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +25,7 @@ public class User extends CommonDTO {
 	private String grade;
 	private int jpBalance;
 	private String jpPassword;
-	private Date regDate;
+	private LocalDate regDate;
 	private Date blacklistRegDate;
 	private Date blacklistEndDate;
 	private boolean noticeStatus;

@@ -33,7 +33,7 @@ public interface UserService {
 		
 		public User findPasswordEmail(User user) throws Exception;
 		
-		public User updatePassword(User user) throws Exception; 
+		public int updatePassword(User user) throws Exception; 
 		
 		public void sendIdEmail(User user) throws Exception;
 		

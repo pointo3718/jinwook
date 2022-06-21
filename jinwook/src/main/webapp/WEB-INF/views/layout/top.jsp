@@ -221,7 +221,7 @@ a {
                            </div>
                         </c:if>
                         <!-- 카카오 사용자 -->
-                        <c:if test="${sessionScope.access_Token ne null}">
+                      <%--   <c:if test="${sessionScope.access_Token ne null}">
                            <div class="dropdown">
                               <a href="/admin/blog"
                                  style="word-break: break-all; margin-right: 20px;"
@@ -248,7 +248,7 @@ a {
                                     href="#">로그아웃</a>
                               </div>
                            </div>
-                        </c:if>
+                        </c:if> --%>
                         <c:if test="${sessionScope.access_Token ne null}">
                         <a href="/user/kakaoLogout">Logout <i class="fa fa-sign-out"
                            aria-hidden="true"></i></a>

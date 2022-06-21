@@ -2,7 +2,6 @@
 <%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -106,7 +105,6 @@
 	//아이디 찾기 문자 인증 
 	$(document).ready(function() {
 	$("#snedA").click(function(){
-		swal("진욱이네", "인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
 	var phone = $("#phone").val();
 	var userName = $(".userName").val();
 	$.ajax({
@@ -122,6 +120,7 @@
 				$(".successPhoneChk").css("color","red");
 				$("#phone").attr("autofocus",true); */
         	}else{	        		
+		swal("진욱이네", "인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
         		/* $("#phone2").attr("disabled",false);
         		$("#phoneChk2").css("display","inline-block");
         		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
@@ -184,20 +183,6 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 				data: {email: email,
 						userName : userName}
 	
-			})
-			.success(function() {
-				location.href = "/user/login";
-				/* const html =
-					"<div class='send_email'> "
-						+ "<div> "
-						+	"<h3>"+email+"</h3> "
-						+	"<span>으로 아이디를 전송했습니다</span><br> "
-						+	"<div>가입한 적이 없는 이메일 주소나 올바르지 않은 이메일 주소를 입력하신 경우에는 메일을 받을 수 없습니다.</div> "
-						+	"<button class='back_btn'>돌아가기</button> "
-						+"</div> "
-					+"</div>";
-				$("main").html(html); */
-	 
 			})
 			.fail(function() {
 				alert("다시 확인해주세요.");
@@ -316,10 +301,11 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 			
 			
 		<form class="text-center" id="poem" style="display:none;">
+			<br>
 			<h3>고객님의 진욱이네 계정을 찾았습니다.</h3>
 			<h4>아이디 확인 후 로그인해주세요.</h4>
 			<br>
-			<h4><a class="fa fa-user">	: ${userName}</a></h4>
+			<h4><a class="fa fa-user">	: ${userId}</a></h4>
 			<br>
 			<h4><a class="fa fa-calendar-o" aria-hidden="true"> 가입 날짜 : ${regDate}</a></h4>
 			<br><br><br>
