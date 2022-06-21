@@ -210,7 +210,7 @@
 	<update id="deleteStore" parameterType="Request">
 		UPDATE store
 		SET
-			store_status = false
+			store_status = 0
 		WHERE
 			store_no = #{storeNo}
 	</update>

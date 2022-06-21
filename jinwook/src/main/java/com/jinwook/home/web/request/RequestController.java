@@ -116,7 +116,6 @@ public class RequestController {
 		}
 		return "/store/getStoreWallet?storeNo=" +request.getStoreNo();
 	}
-
 	
 	
 	// ========== 광고 등록 신청 폼 ===========

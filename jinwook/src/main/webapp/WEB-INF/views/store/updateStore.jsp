@@ -638,7 +638,8 @@ label {
 								수정</button>
 							&nbsp;&nbsp;&nbsp;
 							<button type="button" id="confirmStart" class="btn btn-outline-danger">상점삭제신청</button>
-						
+							<input type="hidden" id="storeno" value="${param.storeNo}" />
+							<input type="hidden" id="userid" value="${sessionScope.user.userId}" />
 						</div>
 						<!-- 수정, 삭제신청 버튼 End -->
 					</c:forEach>
@@ -661,8 +662,16 @@ label {
 	<!-- Footer End -->
 <script>
 
+var USERID;
+var STOREID;
+
 $().ready(function () {
     $("#confirmStart").click(function () {
+    	
+    	STORENO = $("input[id='storeno']").val();
+    	USERID = $("input[id='userid']").val();
+    		alert(STORENO);
+    		alert(USERID);
         Swal.fire({
             title: '정말로 그렇게 하시겠습니까?',
             text: "다시 되돌릴 수 없습니다. 신중하세요.",
@@ -687,13 +696,12 @@ $().ready(function () {
     });
 });
 
-var USERID;
-var STOREID;
+
 
 /////////////////// 상점 삭제 신청 /////////////////////
 function fncAddRequestDeleteStore() {
        
-			var uri = "/request/updateRequestStatusToRefuse/" + USERID +"/" +STORENO;
+			var uri = "/request/addRequestDeleteStore/" + USERID +"/" +STORENO;
 	
 			var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
 
@@ -706,7 +714,6 @@ function fncAddRequestDeleteStore() {
 					success: function(response) {
 										
 						if (response.result == true) {
-							location.reload();
 							return true;
 						}
 						swal(response.message, "", "error");
