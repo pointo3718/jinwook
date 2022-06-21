@@ -114,14 +114,14 @@ public class KakaoService {
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 //			String phone = kakao_account.getAsJsonObject().get("phone_number").getAsString();
 //			String birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
-//			String email = kakao_account.getAsJsonObject().get("email").getAsString();
+			String email = kakao_account.getAsJsonObject().get("email").getAsString();
 			System.out.println( properties.getAsJsonObject().get("nickname").getAsString());
 //			System.out.println( kakao_account.getAsJsonObject().get("email").getAsString());
 //			System.out.println( kakao_account.getAsJsonObject().get("gender").getAsString());
 			userInfo.put("nickname", nickname);
 //			userInfo.put("birthday", birthday);
 //			userInfo.put("phone", phone);
-//			userInfo.put("email", email);
+			userInfo.put("email", email);
 
 		} catch (IOException e) {
 			e.printStackTrace();

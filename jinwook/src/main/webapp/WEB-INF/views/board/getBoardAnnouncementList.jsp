@@ -14,9 +14,9 @@
 <title>공지사항 목록</title>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">   
 
 <!-- Css Styles -->
 <link rel="stylesheet"
@@ -39,6 +39,24 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+*{font-family: 'Noto Sans KR', sans-serif;}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 10;
+}
+
+.row {
+   display: flex;
+   justify-content: center;
+   align-items: flex-start;
+}
+</style>
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -609,7 +627,7 @@ color: #7fad39;
 				</div>
 				<div class="text-center">
 					<!-- PageNavigation Start... -->
-					<div class="col-lg-12" style="left:120px; margin-top:70px;">
+					<div class="col-lg-12"style="left:120px; margin-top:70px; top:70px;">
 
 
 <c:set var="params" value="${board}"/>
@@ -617,13 +635,6 @@ color: #7fad39;
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
       <div class="product__pagination blog__pagination" style="padding-top: 0px; bottom: 100px;">
             <!--  <<== ÁÂÃø nav -->
-           <%--  <c:if test="${ params.paginationInfo.hasPreviousPage == false }">
-               <li>
-            </c:if>
-            <c:if test="${ params.paginationInfo.hasPreviousPage == true  }">
-               <li
-                  onclick="javascript:void(0);">
-            </c:if> --%>
             <a   
                href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(1)}');"
                aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -631,13 +642,6 @@ color: #7fad39;
            
 
             <!--  <== ÁÂÃø nav -->
-            <%-- <c:if test="${ params.paginationInfo.hasPreviousPage == false }">
-               <li>
-            </c:if>
-            <c:if test="${ params.paginationInfo.hasPreviousPage == true  }">
-               <li
-                  onclick="javascript:void(0);">
-            </c:if> --%>
             <a href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(params.paginationInfo.firstPage-1)}');" aria-label="Previous"> <span
                aria-hidden="true">&lsaquo;</span>
             </a>

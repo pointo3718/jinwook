@@ -220,6 +220,16 @@ public class StoreControllerTest {
 							.andExpect(status().isOk())
 							.andDo(print());
 	   } 
+	   
+	   
+		@Test
+		@Transactional
+		@DisplayName("getStoreWallet 파라미터 방식 테스트")
+		public void getStoreListByOrderCount() throws Exception{
+		  this.mvc.perform(get("/store/getStoreListByOrderCount"))
+		  									.andExpect(status().isOk())
+		                   					.andDo(print());
+		}
 
 	
 	

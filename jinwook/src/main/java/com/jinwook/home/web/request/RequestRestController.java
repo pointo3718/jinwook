@@ -123,6 +123,7 @@ public class RequestRestController {
 		return jsonObj;
 	}
 	
+
 	
 	
 	// ========== 환급 요청 수락 ===========
@@ -186,6 +187,28 @@ public class RequestRestController {
 			return jsonObj;
 	   }
 	 
+	// ========== 상점 삭제 신청 ===========
+	@PostMapping(value = {"addRequestDeleteStore/{userId}/{storeNo}"})
+	public JsonObject addRequestDeleteStore(@ModelAttribute("request") Request request) {
+		
+	     JsonObject jsonObj = new JsonObject();
+
+	     try { 
+				boolean result = requestService.addRequestDeleteStore(request);
+				jsonObj.addProperty("result", result);
+
+			} catch (DataAccessException e) {
+				jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+			} catch (Exception e) {
+				jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+			}
+			
+	        System.out.println("상점삭제신청 컨트롤러 통과");
+	        
+			return jsonObj;
+	}
+	
 
 	// ========== 상점 삭제 수락 ===========
 	 @ResponseBody

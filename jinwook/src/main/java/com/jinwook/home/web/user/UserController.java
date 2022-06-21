@@ -2,6 +2,9 @@ package com.jinwook.home.web.user;
 
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -261,8 +264,9 @@ public class UserController {
 	}
 	
 	@GetMapping("findId")
-	public String findId() {
+	public String findId(@ModelAttribute("user") User user) {
 		
+		System.out.println(user);
 		System.out.println("============FIND ID PAGE============");
 		return "/user/findId";
 	}
@@ -310,7 +314,7 @@ public class UserController {
 	//---------------------------------------
 		// 비밀번호 재설정 페이지로 이동
 		@GetMapping("updatePasswordView")
-		public String updatePasswordView( User user, HttpSession session) throws Exception{
+		public String updatePasswordView( User user, HttpSession session, Model model) throws Exception{
 //		    Map<String, Object> authStatus = (Map<String, Object>) session.getAttribute("authStatus");
 		    
 //		    if(authStatus == null || !username.equals(authStatus.get("userId"))) {
@@ -322,6 +326,10 @@ public class UserController {
 //			// Model 과 View 연결
 //			model.addAttribute("user", user);
 			System.out.println(user);
+			System.out.println(user);
+			model.addAttribute("userId", user.getUserId());
+			
+			System.out.println("ksdjahflskdhfjksadhfkjlhsadkjfhkjdahfkjshdlkfhsdakjfhk");
 //			session.setAttribute("user", user.getUserId());
 //			System.out.println(session.getAttribute("user"));
 //			System.out.println(session.getAttribute(user.getUserId()));
@@ -336,20 +344,14 @@ public class UserController {
 		}
 		
 		@PostMapping("updatePassword")
-		public String updatePassword(@ModelAttribute("user") User user ,String userId, HttpSession session) throws Exception {
-			session.setAttribute("user", user.getUserId());	
-			session.setAttribute("user", user.getPhone());
-			System.out.println(userId+"mmmmmmmmmmmmmm");
-			user.setUserId( ((User)session.getAttribute("user")).getUserId());
+		public String updatePassword(@ModelAttribute("user") User user , HttpSession session) throws Exception {
+			System.out.println(user+"mmmmmmmmmmmmmm");
 			
 			userService.updatePassword(user);
-			String sessionId=((User)session.getAttribute("user")).getUserId();
-			if(sessionId.equals(user.getUserId())){
-				session.setAttribute("user", user);
-				System.out.println(user+"1123312132123132321312435545667878990");
-			}
+			
+				System.out.println("패스워드 변경");
 				
-			return "/user/login";
+			return "/user/loginView";
 		}
 		
 		//비밀번호 찾기 페이지로 이동
@@ -370,9 +372,14 @@ public class UserController {
 			HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
 			
 			User user = new User();
+			user.setUserId((String)userInfo.get("email"));
 			user.setUserName((String)userInfo.get("nickname"));
-			user.setNickName((String)userInfo.get("nickname"));
+			user.setNickName("kakao_"+(String)userInfo.get("nickname"));
+			user.setEmail((String)userInfo.get("email"));
+			user.setRole("사용자");
+			user.setRegDate(LocalDate.now(ZoneId.of("Asia/Seoul")));
 			
+			System.out.println(userInfo);
 			System.out.println("45645456456456456");
 			System.out.println("###access_Token#### : " + access_Token);
 			System.out.println("###nickname#### : " + userInfo.get("nickname"));
@@ -385,11 +392,6 @@ public class UserController {
 			
 			session.setAttribute("access_Token", access_Token);
 			return "index";
-			/*
-			 * 리턴값의 testPage는 아무 페이지로 대체해도 괜찮습니다.
-			 * 없는 페이지를 넣어도 무방합니다.
-			 * 404가 떠도 제일 중요한건 #########인증코드 가 잘 출력이 되는지가 중요하므로 너무 신경 안쓰셔도 됩니다.
-			 */
 	    }
 		//카카오 로그아웃
 		 @GetMapping("kakaoLogout")

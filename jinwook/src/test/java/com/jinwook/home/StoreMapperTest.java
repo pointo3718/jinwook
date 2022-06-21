@@ -247,4 +247,31 @@ class StoreMapperTest {
 			}
 		}
 	}
+	
+	
+	@Test
+	public void testOfgetStoreListByOrderCount() {
+		
+		
+		int getStoreTotalCount = storeMapper.getStoreTotalCount();
+		if (getStoreTotalCount > 0) {
+			List<Store> getStore = storeMapper.getStoreListByOrderCount();
+			
+			if (CollectionUtils.isEmpty(getStore) == false) { 		
+				for (Store store : getStore) {
+					System.out.println("=========================");
+	
+					System.out.println(store.getStoreNo());
+					System.out.println(store.getStoreName());	
+					System.out.println(store.getStoreAddr());
+					System.out.println(store.getStoreType());
+
+					
+
+					
+					System.out.println("=========================");
+				}
+			}
+		}
+	}
 }

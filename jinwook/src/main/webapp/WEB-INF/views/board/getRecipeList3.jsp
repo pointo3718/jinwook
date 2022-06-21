@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -24,112 +26,9 @@
     <link rel="stylesheet" href="${path}/resources/static/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="${path}/resources/static/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
-    <link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-   /*<![CDATA[*/
-
-   function movePage(uri, queryString) {
-      location.href = uri + queryString;
-   }
-
-   /*]]>*/
-</script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <style>
-
-/* 카드형 start*/
-{
-    margin: 0;
-    padding: 0;
-}
-ul, li {
-    list-style: none;
-}
-a {
-    text-decoration: none;
-    color: inherit;
-}
-.list_wrap {
-    width: 1000px;
-    margin: 0 auto;
-    padding: 100px;
-}
-
-.list_wrap ul {
-    font-size: 0;
-}
-.list_wrap .item {
-    display: inline-block;
-    width: 30%;
-    margin-top: 40px;
-    margin-left: 5%;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-}
-.list_wrap .item:nth-child(-n+3) {
-    margin-top: 0;
-}
-.list_wrap .item:nth-child(3n-2) {
-    margin-left: 0;
-}
-.list_wrap .item .image {
-    width: 100%;
-    height: 160px;
-    background-color: #ddd;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: cover;
-}
-
-.list_wrap .item1 .image { background-image: url(../rcpImg/img1.png); }
-.list_wrap .item2 .image { background-image: url(../rcpImg/img2.png); }
-.list_wrap .item3 .image { background-image: url(../rcpImg/img3.png); }
-.list_wrap .item4 .image { background-image: url(../rcpImg/img4.png); }
-.list_wrap .item5 .image { background-image: url(../rcpImg/img5.png); }
-.list_wrap .item6 .image { background-image: url(../rcpImg/img6.png); }
-.list_wrap .item7 .image { background-image: url(../rcpImg/img7.png); }
-.list_wrap .item8 .image { background-image: url(../rcpImg/img8.png); }
-.list_wrap .item9 .image { background-image: url(../rcpImg/img9.png); }
-
-.list_wrap .item .cont {
-    padding: 20px;
-}
-.list_wrap .item strong {
-    display: block;
-    margin: 0 0 10px 0;
-    font-size: 16px;
-    letter-spacing: -1px;
-}
-.list_wrap .item p {
-    font-size: 13px;
-    letter-spacing: -1px;
-}
-.list_wrap .item a {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 5px 10px;
-    background: #eee;
-    font-size: 13px;
-    letter-spacing: -1px;
-}
-.list_wrap .item a:hover {
-    background: #325cb2;
-    color: #fff;
-}
-/* 카드형 end*/
-
-.mytop01 {
-   padding-left: 20px;
-}
-
-.mytop01-content {
-   padding-left: 180px;
-   color: #6A8F00;
-   display: inline;
-}
-
 .blog {
    padding-top: 50px;
 }
@@ -164,7 +63,17 @@ a {
 }
 </style>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>    
 <script type="text/javascript">
+/*<![CDATA[*/
+
+function movePage(uri, queryString) {
+   location.href = uri + queryString;
+}
+
+/*]]>*/
+
 function fncDeleteRecipe(e) {
 	if (!confirm('상품을 삭제하시겠어요?')) {
 		return false;
@@ -178,13 +87,22 @@ function fncDeleteRecipe(e) {
 			success : function(result){
 				if(result != null){
 					alert("삭제완료");
-					self.location = "/board/getRecipeList2";
+					self.location = "/board/getRecipeList";
 				}
 			}
 		
 		});
 	
 }
+
+$(function() {
+
+    //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+    $("#recipeDetail").on("click", function() {
+       self.location = "/board/getRecipe?rcpNo="+$(this).data("param");
+    });
+
+ });
 
    //=============    검색 / page 두가지 경우 모두  Event  처리 =============   
    function fncGetUserList(currentPage) {
@@ -237,8 +155,7 @@ function fncDeleteRecipe(e) {
       $(".ct_list_pop:nth-child(4n+6)").css("background-color", "whitesmoke");
    });
    
-</script>
-
+</script>   
 </head>
 
 <body>
@@ -251,7 +168,7 @@ function fncDeleteRecipe(e) {
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="${path}/resources/static/img/logo.png" alt=""></a>
+            <a href="#"><img src="img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -262,7 +179,7 @@ function fncDeleteRecipe(e) {
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
+                <img src="${path}/resources/static/img/language.png" alt="">
                 <div>English</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
@@ -348,7 +265,7 @@ function fncDeleteRecipe(e) {
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="${path}/resources/static/img/logo.png" alt=""></a>
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -440,12 +357,12 @@ function fncDeleteRecipe(e) {
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="${path}/resources/static/img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>레시피 목록</h2>
+                        <h2>Blog</h2>
                         <div class="breadcrumb__option">
                             <a href="./index.html">Home</a>
                             <span>Blog</span>
@@ -458,121 +375,13 @@ function fncDeleteRecipe(e) {
     <!-- Breadcrumb Section End -->
 
     <!-- Blog Section Begin -->
-    <section class="blog spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-5">
-                    <div class="blog__sidebar">
-                        <div class="blog__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
-                        <div class="blog__sidebar__item">
-                            <h4>Categories</h4>
-                            <ul>
-                                <li><a href="#">All</a></li>
-                                <li><a href="#">Beauty (20)</a></li>
-                                <li><a href="#">Food (5)</a></li>
-                                <li><a href="#">Life Style (9)</a></li>
-                                <li><a href="#">Travel (10)</a></li>
-                            </ul>
-                        </div>
-                        <div class="blog__sidebar__item">
-                            <h4>Recent News</h4>
-                            <div class="blog__sidebar__recent">
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="${path}/resources/static/img/blog/sidebar/sr-1.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="${path}/resources/static/img/blog/sidebar/sr-2.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="${path}/resources/static/img/blog/sidebar/sr-3.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="blog__sidebar__item">
-                            <h4>Search By</h4>
-                            <div class="blog__sidebar__item__tags">
-                                <a href="#">제육볶음</a>
-                                <a href="#">소불고기</a>
-                                <a href="#">연어 샐러드</a>
-                                <a href="#">옥수수전</a>
-                                <a href="#">샌드위치</a>
-                                <a href="#">파스타</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 레시피 이미지 목록 -->
-                 <table class="table table-hover table-striped">
-                 <thead>
-            <tr>
-               <th align="center">No</th>
-               <th align="left">레시피 제목</th>
-               <th align="left">작성일</th>
-               <th align="left">조회수</th>
-            </tr>
-         </thead>
-
-         <tbody>
-
-            <c:set var="i" value="0" />
-            <c:forEach var="recipe" items="${getRecipeList}">
-               <c:set var="i" value="${ i+1 }" />
-               <tr>
-                  <td align="Center">${ recipe.rcpNo }</td>
-                  <td align="left">${recipe.rcpTitle}</td>
-                  <td align="left">${recipe.rcpDate}</td>
-                  <td align="left">${recipe.rcpHits}</td>
-                  <td align="left"><button data-value="${recipe.rcpNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteRecipe(this)">X</button></td>
-               </tr>
-            </c:forEach>
-            </tbody>
-      </table>
-                
-               <%--  <div class="col-lg-8 col-md-7">
+                <div class="col-lg-8 col-md-7">
                     <div class="row">
-                <div class="list_wrap">
-            <ul>
-                <li class="item item1">
-                    <div class="image">사진</div>
-                    <div class="cont">
-                        <strong>레시피: ${recipe.rcpTitle}</strong>
-                        <p>레시피 소개: ${recipe.rcpInfo}</p>
-                        <p>작성일: ${recipe.rcpDate}</p>
-                        <p>조회수: ${recipe.rcpInfo}</p>
-                        <a href="#">더보기</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-       </div>
-      </div> --%>
-                
-                
-                <%-- <div class="col-lg-8 col-md-7">
-                    <div class="row">
+                        	<c:set var="i" value="0" />
+            					<c:forEach var="recipe" items="${getRecipeList}">
+               						<c:set var="i" value="${ i+1 }" />
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
@@ -580,17 +389,18 @@ function fncDeleteRecipe(e) {
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                        <li><i class="fa fa-calendar-o"></i> ${recipe.rcpDate}</li>
+                                        <li><i class="fa fa-comment-o"></i> ${recipe.recommendCount}</li>
                                     </ul>
-                                    <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                    <h5>${recipe.rcpTitle}</h5>
+                                    <p><i class="bi bi-eye"></i> ${recipe.rcpHits}</p>
+                                     <div id="recipeDetail" data-param="${recipe.rcpNo}" class="blog__btn">더보기<span class="arrow_right"></span></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        </c:forEach>
+                        
+                        <%-- <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
                                     <img src="${path}/resources/static/img/blog/blog-3.jpg" alt="">
@@ -603,10 +413,11 @@ function fncDeleteRecipe(e) {
                                     <h5><a href="#">Visit the clean farm in the US</a></h5>
                                     <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
                                         quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
@@ -620,10 +431,11 @@ function fncDeleteRecipe(e) {
                                     <h5><a href="#">Cooking tips make cooking simple</a></h5>
                                     <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
                                         quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
@@ -637,10 +449,11 @@ function fncDeleteRecipe(e) {
                                     <h5><a href="#">Cooking tips make cooking simple</a></h5>
                                     <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
                                         quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
@@ -654,10 +467,11 @@ function fncDeleteRecipe(e) {
                                     <h5><a href="#">The Moment You Need To Remove Garlic From The Menu</a></h5>
                                     <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
                                         quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
@@ -671,10 +485,11 @@ function fncDeleteRecipe(e) {
                                     <h5><a href="#">Cooking tips make cooking simple</a></h5>
                                     <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
                                         quaerat </p>
-                                    <a href="#" class="blog__btn">레시피 더보기<span class="arrow_right"></span></a>
+                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div> --%>
+                        
                         <div class="col-lg-12">
                             <div class="product__pagination blog__pagination">
                                 <a href="#">1</a>
@@ -687,7 +502,6 @@ function fncDeleteRecipe(e) {
                 </div>
             </div>
         </div>
-    </section>
     <!-- Blog Section End -->
 
     <!-- Footer Section Begin -->
@@ -750,7 +564,7 @@ function fncDeleteRecipe(e) {
                         <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
   Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
+                        <div class="footer__copyright__payment"><img src="${path}/resources/static/img/payment-item.png" alt=""></div>
                     </div>
                 </div>
             </div>

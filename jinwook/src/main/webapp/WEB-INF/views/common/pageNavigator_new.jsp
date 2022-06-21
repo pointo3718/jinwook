@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<div class="col-lg-12" style="left:120px; margin-top:70px;">
+<div class="col-lg-12" style="left:120px; margin-top:70px; top:70px;">
 
 <c:set var="params" value="${orders}"/>
 <c:if test="${params == null}">
@@ -12,9 +12,6 @@
 </c:if>      
 <c:if test="${params == null}">
 <c:set var="params" value="${notice}"/>
-</c:if>      
-<c:if test="${params == null}">
-<c:set var="params" value="${user}"/>
 </c:if>      
 <c:if test="${params == null}">
 <c:set var="params" value="${store}"/>
@@ -31,6 +28,9 @@
 <c:if test="${params == null}">
 <c:set var="params" value="${complain}"/>
 </c:if> 
+<c:if test="${params == null}">
+<c:set var="params" value="${user}"/>
+</c:if>  
 
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
       <div class="product__pagination blog__pagination" style="padding-top: 0px; bottom: 100px;">

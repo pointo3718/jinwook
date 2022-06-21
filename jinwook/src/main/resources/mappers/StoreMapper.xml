@@ -216,6 +216,42 @@
       o.store_no=#{storeNo}
       ORDER BY order_no
    </select>
+   
+   
+    <select id="getStoreListByOrderCount" resultMap="storeSelectMap">
+	SELECT COUNT(*), o.store_no, s.store_name, s.store_type, s.store_addr
+	FROM orders o, store s
+	WHERE o.store_no = s.store_no AND
+		 s.store_status !=0
+	GROUP BY o.store_no
+	ORDER BY COUNT(*) DESC
+	LIMIT 5;
+   </select>
+   
+   <select id="getStoreMap" resultMap="storeSelectMap">
+   
+   SELECT s.store_name, s.store_addr, s.store_type,p.prod_name, p.price
+	FROM store s, product p
+	WHERE s.store_no = p.store_no
+	
+   </select>
+   
+   <select id="getStoreMapTotalCount" parameterType="Store"
+      resultType="int">
+      SELECT
+      COUNT(*)
+      FROM
+      store
+   </select>
+   
+   
+   <select id="getStoreListTotalCount" parameterType="Store"
+      resultType="int">
+      SELECT
+      COUNT(*)
+      FROM
+      store
+   </select>
     
     
 
@@ -261,19 +297,19 @@
    </select>
    
        <insert id="insertStoreFile" parameterType="hashMap">
-      INSERT INTO MP_FILE(
-         FILE_NO,
-         store_no,
-         ORG_FILE_NAME,
-         STORED_FILE_NAME,
-         FILE_SIZE
-      )VALUES(
-         SEQ_MP_FILE_NO.NEXTVAL,
-         #{store_no},
-         #{ORG_FILE_NAME},
-         #{STORED_FILE_NAME},
-         #{FILE_SIZE}
-      )
+		INSERT INTO MP_FILE(
+			FILE_NO,
+			store_no,
+			ORG_FILE_NAME,
+			STORED_FILE_NAME,
+			FILE_SIZE
+		)VALUES(
+			SEQ_MP_FILE_NO.NEXTVAL,
+			#{store_no},
+			#{ORG_FILE_NAME},
+			#{STORED_FILE_NAME},
+			#{FILE_SIZE}
+		)
     </insert>
 
 

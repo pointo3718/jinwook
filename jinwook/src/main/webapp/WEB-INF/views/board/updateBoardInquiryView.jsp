@@ -1,123 +1,151 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 
 <head>
 <meta charset="UTF-8">
-	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   <script src="../javascript/calendar.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-		body {
-            padding-top : 50px;
-        }
-    </style>
-    
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
-<script type="text/javascript">	
-		
-function fn_addFile(){
-	var fileIndex = 1;
-	//$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"<button type='button' style='float:right;' id='fileAddBtn'>"+"추가"+"</button></div>");
-	$(".fileAdd_btn").on("click", function(){
-		$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>");
-	});
-	$(document).on("click","#fileDelBtn", function(){
-		$(this).parent().remove();
-		
-	});
-}
-	var fileNoArry = new Array();
-	var fileNameArry = new Array();
-	function fn_del(value, name){
-		
-		fileNoArry.push(value);
-		fileNameArry.push(name);
-		$("#fileNoDel").attr("value", fileNoArry);
-		$("#fileNameDel").attr("value", fileNameArry);
-	}
-		
-		function fncUpdateInquiry() {
+<meta name="description" content="Ogani Template">
+<meta name="keywords" content="Ogani, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>1:1문의 수정</title>
 
-			$("form").attr("method", "POST").attr("action", "/board/updateBoardInquiry").submit();
-		}
-		
-		//==> 추가된부분 : "수정"  Event 연결
-		$(function() {
-			$("button.btn.btn-primary").on("click", function() {
-				fncUpdateInquiry();
-			});
-		});
-		
-		//==> 추가된부분 : "취소"  Event 연결 및 처리
-		$(function() {
-			$("a[href='#' ]").on("click", function() {
-				$("form")[0].reset();
-			});
-		});
-		
-	</script>
-	
+<!-- Google Font -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+	rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet"
+	href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/nice-select.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/owl.carousel.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${path}/resources/static/css/style.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<style>
+.mytop01 {
+	padding-left: 20px;
+}
+
+.mytop01-content {
+	padding-left: 180px;
+	color: #6A8F00;
+	display: inline;
+}
+
+.blog {
+	padding-top: 50px;
+}
+
+.blog__sidebar {
+	padding-top: 0px;
+}
+
+.list-group {
+	padding-top: 0px;
+}
+
+.blog__sidebar__item {
+	width: 200px;
+}
+
+
+</style>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+//==> 추가된부분 : "수정"  Event 연결
+$(function() {
+	$("button.btn.btn-success").on("click", function() {
+		fncUpdateInquiry();
+	});
+});
+
+$(function() {
+	$("a[href='#' ]").on("click", function() {
+		$("form")[0].reset();
+	});
+});
+
+function fncUpdateInquiry() {
+
+	$("form").attr("method", "POST").attr("action", "/board/updateBoardInquiry").submit();
+}
+
+var cnt = 1;
+function fn_addFile() {
+	$("#d_file").append("<br>" + "<input type='file' name='file'" + cnt +"' />");
+}
+</script>
+
+
 </head>
 
 <body>
 
 
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<!-- Header Begin -->
+	<jsp:include page="../layout/top.jsp" />
+	<!-- Header End -->
 
-		<div class="page-header text-center">
-			<h3 class=" text-info">1:1문의 정보수정</h3>
-		</div>
+	<!-- Breadcrumb Section Begin -->
+	<section class="breadcrumb-section set-bg"
+		style="background-color: #F2F2F2">
 
-		<!-- form Start /////////////////////////////////////-->
-		<form action="board/updateBoardInquiry" method="post" class="form-horizontal" enctype="multipart/form-data">
-			<input type="hidden" id="fileNoDel" name="fileNoDel[]" value=""> 
-			<input type="hidden" id="fileNameDel" name="fileNameDel[]" value="">
-					
-			<div class="form-group">
-				<label for="rcpNo" class="col-sm-offset-1 col-sm-3 control-label">1:1문의 번호</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="boardNo" name="boardNo" value="${board.boardNo}">
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="rcpTitle" class="col-sm-offset-1 col-sm-3 control-label">1:1문의 제목</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${board.boardTitle}">
-				</div>
-			</div>
 
-			<div class="form-group">
-				<label for="boardContent" class="col-sm-offset-1 col-sm-3 control-label">1:1문의 내용</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="boardContent"
-						name="boardContent" value="${board.boardContent}">
-						
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="file" class="col-sm-offset-1 col-sm-3 control-label">1:1문의 사진 수정</label>
-			<tr>
+
+		<!-- /container -->
+	</section>
+	<!-- Breadcrumb Section End -->
+
+	<!-- Blog Section Begin -->
+	<section class="blog spad">
+		<div class="container" style="background-color: ivory; border:1px solid green;">
+
+				<!-- 상점 정보 수정 -->
+				<div>
+					<h4 class="text-left">
+						<strong>1:1문의 정보 수정</strong>
+						<hr size="10px">
+					</h4>
+
+	<form id="MultiUpload" action="updateRecipe" method="post" enctype="multipart/form-data">
+	<input type="hidden" id="boardNo" name="boardNo" value="${board.boardNo}"> 
+	
+	<div class="form-group">
+	<input hidden>
+    <label for="boardTitle">1:1문의 제목</label>
+    <input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${board.boardTitle}">
+  </div>
+  
+  <div class="form-group">
+    <label for="boardContent">1:1문의 내용</label>
+    <textarea class="form-control" id="boardContent" name="boardContent" rows="3" placeholder="ex) 집밥 제육볶음">${board.boardContent}</textarea>
+  </div>
+  
+  <div class="form-group">
+    <label for="file">1:1문의 사진 수정</label>
+    <input type="file" class="form-control" id="file" name="file" multiple="multiple" value="${files.fileNo}">
+    <tr>
 				<td id="fileIndex"><c:forEach var="file" items="${file}" varStatus="var">
 						<div>
 							<input type="hidden" id="attach_no" name="attach_no_${var.index}"value="${file.attach_no}"> 
@@ -130,22 +158,25 @@ function fn_addFile(){
 						</div>
 					</c:forEach></td>
 			</tr>
-				<div class="col-sm-4">
-					<button type="button" class="fileAdd_btn">파일추가</button>
+  </div>
+  
+  <div class="form-group">
+	<div class="col-sm-offset-4  col-sm-4 text-center">
+		<button type="submit" class="btn btn-success">수 &nbsp;정</button>
+		<a class="btn btn-primary btn" href="#" role="button">취소</a>
+						</div>
+					</div>
 				</div>
-			</div>
+				
+				</form>
+				<div class="text-center"></div>
+		</div>
+	</section>
+	<!-- Blog Section End -->
 
-			<div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="submit" class="btn btn-primary">수 &nbsp;정</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
-		    </div>
-		  </div>
-		</form>
-		<!-- form Start /////////////////////////////////////-->
-
-	</div>
-	<!--  화면구성 div Start /////////////////////////////////////-->
+	<!-- Footer Begin -->
+	<jsp:include page="../layout/footer.jsp" />
+	<!-- Footer End -->
 
 </body>
 

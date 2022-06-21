@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
-import com.jinwook.home.service.domain.FileVO;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
@@ -29,8 +28,10 @@ public interface BoardMapper {
 	public void insertBoardFile(Map<String, Object> map) throws Exception;
 	//레시피 사진 업로드
 	public void insertRecipeFile(Map<String, Object> map) throws Exception;
-	// 첨부파일 조회
-	public List<Map<String, Object>> selectAttachList(int boardNo) throws Exception;
+	// 게시판 첨부파일 조회
+	public List<Map<String, Object>> selectBoardAttachList(int boardNo) throws Exception;
+	// 레시피 첨부파일 조회
+	public List<Map<String, Object>> selectRecipeAttachList(int rcpNo) throws Exception;
 	// 첨부파일 다운
 	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
 	// 첨부파일 수정
@@ -89,10 +90,22 @@ public interface BoardMapper {
 //	//특정 게시글에 포함된 댓글 목록을 조회하는 SELECT 쿼리를 호출
 //	public List<Comment> getCommentList(Comment comment);
 	
-	//댓글 조회
-	public List<Comment> getComment(int boardNo) throws Exception;
-	//댓글 등록
+	//댓글(1:1문의 답변) 조회
+	public List<Comment> getInquiryComment(int boardNo) throws Exception;
+	//댓글(레시피) 조회
+	public List<Comment> getRecipeComment(int rcpNo) throws Exception;
+	//댓글 등록(1:1문의,레시피)
 	public void addComment(Comment comment) throws Exception;
+	//레시피 댓글 등록
+	public void addRecipeComment(Comment comment) throws Exception;
+	//레시피 댓글 수정
+	public void updateRecipeComment(Comment comment) throws Exception;
+	//레시피 댓글 삭제
+	public void deleteRecipeComment(Comment comment) throws Exception;
+	//선택된 레시피 댓글 조회
+	public Comment selectRecipeComment(int commentNo) throws Exception;
+	
+	
 	//답변 상태 변화
 	public boolean updateBoardInqStatus(Board board);
 	
