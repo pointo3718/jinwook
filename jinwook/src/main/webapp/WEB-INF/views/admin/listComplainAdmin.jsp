@@ -192,18 +192,18 @@ color: #7fad39;
 
 	function countAddRequest() {
 
-		var uri = "CountRequestWaiting/1";
+		var uri = "../admin/CountRequestWaiting/1";
 
 		$.get(uri, function(response) {
 		
 				var countAddHtml = "";
-
+				if(`\${response.CountRequestWaiting}`>0){
 					countAddHtml += `
-						상점 등록 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						상점 등록 요청 &nbsp;<span class="badge badge-danger" id="addStore" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".addStore").html(countAddHtml);
-			
+				}
 		}, "json");
 	}
 	/*[- end of function -]*/
@@ -214,18 +214,19 @@ color: #7fad39;
 
 	function countDeleteRequest() {
 
-		var uri = "CountRequestWaiting/2";
+		var uri = "../admin/CountRequestWaiting/2";
 
 		$.get(uri, function(response) {
+				
 			
 				var countDeleteHtml = "";
-
+				if(`\${response.CountRequestWaiting}`>0){
 				countDeleteHtml += `
-						상점 삭제 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						상점 삭제 요청 &nbsp;<span class="badge badge-danger" id="delete" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 				
 				$(".deleteStore").html(countDeleteHtml); 
-			
+				}
 		}, "json");
 	}
 	/*[- end of function -]*/
@@ -236,18 +237,18 @@ color: #7fad39;
 
 	function countRefundRequest() {
 
-		var uri = "CountRequestWaiting/3";
+		var uri = "../admin/CountRequestWaiting/3";
 
 		$.get(uri, function(response) {
 		
 				var countRefundHtml = "";
-
+				if(`\${response.CountRequestWaiting}`>0){
 				countRefundHtml += `
-						환급 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						환급 요청 &nbsp;<span class="badge badge-danger" id="refund" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".refundStore").html(countRefundHtml);
-			
+				}
 		}, "json");
 	}
 	/*[- end of function -]*/
@@ -259,18 +260,19 @@ color: #7fad39;
 
 	function countAdRequest() {
 
-		var uri = "CountRequestWaiting/4";
+		var uri = "../admin/CountRequestWaiting/4";
 
 		$.get(uri, function(response) {
 		
 				var countAdHtml = "";
-
+				
+				if(`\${response.CountRequestWaiting}`>0){
 				countAdHtml += `
-						광고 등록 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
+						광고 등록 요청 &nbsp;<span class="badge badge-danger" id="refund" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
 					`;
 
 				$(".adStore").html(countAdHtml);
-			
+				}
 		}, "json");
 	}
 	/*[- end of function -]*/

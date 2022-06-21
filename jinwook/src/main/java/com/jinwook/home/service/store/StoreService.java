@@ -28,6 +28,8 @@ public interface StoreService {
 	   
 	public boolean isSoldout(Product Product);
 	
+	public boolean isSell(Product Product);
+	
 	public boolean isOpen(Store store);
 	
 	public boolean addOrdersCoupon(int couponNo);
@@ -41,6 +43,10 @@ public interface StoreService {
 	public List<Store> getStoreRefund(int storeNo);
 
 	public List<Store> getStoreWallet(Store store);
+	
+	public List<Store> getStoreListByOrderCount();
+	
+	public List<Store> getStoreMap();
 
 	
 

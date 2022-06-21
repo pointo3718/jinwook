@@ -4,12 +4,12 @@
 
 	<resultMap type="store" id="storeSelectMap">
 	   <result property="storeNo"  column="store_no"    jdbcType="INTEGER"/>
-	   <result property="storeName"  column="store_name"    jdbcType="CHAR"/>
-	   <result property="storeType"  column="store_type"    jdbcType="CHAR"/>
+	   <result property="storeName"  column="store_name"    jdbcType="VARCHAR"/>
+	   <result property="storeType"  column="store_type"    jdbcType="VARCHAR"/>
 	   <result property="userId"  column="user_id"    jdbcType="VARCHAR"/>
 	   <result property="storeAddr"  column="store_addr"    jdbcType="VARCHAR"/>
 	   <result property="storePhone"  column="store_phone"    jdbcType="VARCHAR"/>   
-	   <result property="user.userName"  column="user_name"    jdbcType="CHAR"/>      
+	   <result property="user.userName"  column="user_name"    jdbcType="VARCHAR"/>      
 	</resultMap>
 	
 	<sql id="usersColumns">
@@ -50,6 +50,8 @@
 			users
 		WHERE
 			user_bye_status = 0 
+		<include refid="CommonMapper.search" />
+		
 		ORDER BY 
 			reg_date
 		<include refid="CommonMapper.paging" />
@@ -77,10 +79,20 @@
 			store s, users u
 		WHERE 
 			s.user_id = u.user_id
+		<if test="searchKeyword != null and searchKeyword != ''">
+			
+					AND
+						(
+							   s.store_name LIKE CONCAT('%', #{searchKeyword}, '%')
+							   OR
+							   u.user_name LIKE CONCAT('%', #{searchKeyword}, '%') 
+							
+						)
+				
+		</if>
 		ORDER BY 
 			s.store_no
-		LIMIT
-			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
+		<include refid="CommonMapper.paging" />
 	</select>
 	
 	
@@ -92,6 +104,17 @@
 			store
 		WHERE 
 			store_status = true
+		<if test="searchKeyword != null and searchKeyword != ''">
+			
+					AND
+						(
+							   s.store_name LIKE CONCAT('%', #{searchKeyword}, '%')
+							   OR
+							   u.user_name LIKE CONCAT('%', #{searchKeyword}, '%') 
+							
+						)
+				
+		</if>	
 	</select>
 	
 	

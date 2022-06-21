@@ -304,6 +304,32 @@ label {
 		document.body.removeChild(textarea);
 		alert("URL이 복사되었습니다.")
 	}
+
+	//======장바구니===========//
+
+	function fncAddOrdersCart(e) {
+		const prodNo = $(e).data("value");
+		const storeName = $("#stoName").data("values");
+
+		const passdata = {
+			'prodNo' : prodNo,
+			'storeName' : storeName
+		};
+		console.log(storeName);
+		console.log(prodNo);
+		$.ajax({
+			anyne : true,
+			url : "/orders/addOrdersCart/" + prodNo,
+			contentType : 'application/json',
+			data : JSON.stringify(passdata).e,
+			dataType : "text",
+			success : function(result) {
+				if (result != null) {
+					alert("담기완료");
+				}
+			}
+		});
+	}
 </script>
 
 
@@ -333,8 +359,8 @@ label {
 				</div>
 
 
-
-				<table class="table table-borderless" style="width: 600px;">
+				<table class="table table-borderless" style="width: 600px;"
+					id="storeInf">
 					<thead>
 
 						<tr>
@@ -343,8 +369,11 @@ label {
 							<th scope="row" style="width: 108px;"><span
 								style="color: blsck; font-size: 20px">상점이름</span></th>
 							<td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storeName}</strong></span></td>
-							<td></td>
-							<td></td>
+							<td><c:if test="${store.open==true}">
+									<button type="button" class="btn btn-light">상점오픈</button>
+								</c:if> <c:if test="${store.open==false}">
+									<button type="button" class="btn btn-light">상점마감</button>
+								</c:if></td>
 						</tr>
 
 						<tr>
@@ -353,12 +382,9 @@ label {
 							<th scope="row"><span style="color: red; font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
 									class="bi bi-telephone-fill"></i></span></th>
 							<td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storePhone}</strong></span></td>
-							<td style="width: 94px;"><span
-								style="color: #FACC2E; font-size: 20px"><i
-									class="bi bi-star-fill"></i></span>&nbsp;&nbsp;&nbsp;<span
-								style="color: #2E2E2E; font-size: 20px"><strong>${store.orders.reviewStar}</strong></span></td>
-							<td><span style="color: #FF0080; font-size: 20px"><i
-									class="bi bi-suit-heart-fill"></i></span></td>
+							<td><button type="button" class="btn btn-outline-success">
+									<strong>상점후기</strong>
+								</button></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -367,30 +393,19 @@ label {
 							<td></td>
 							<th scope="row"><span style="color: blsck; font-size: 20px">상점주소</span></th>
 							<td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storeAddr}</strong></span></td>
-							<td></td>
-							<td><button type="button" class="btn btn-outline-success">
-									<strong>상점후기</strong>
-								</button></td>
+			
+
+							<td style="width: 94px;"><span
+								style="color: #FACC2E; font-size: 20px"><i
+									class="bi bi-star-fill"></i></span>&nbsp;&nbsp;&nbsp;<span
+								style="color: #2E2E2E; font-size: 20px"><strong>${store.orders.reviewStar}</strong></span></td>
 						</tr>
 
 						<tr>
 							<td></td>
 							<td></td>
 							<th scope="row"><span style="color: blsck; font-size: 20px">업종</span></th>
-							<td><span style="color: #2E2E2E; font-size: 15px"><strong>
-										<c:if test="${store.storeType.trim()=='1'}">
-                				정육         
-            				</c:if> <c:if test="${store.storeType.trim()=='2'}">
-                				수산         
-            				</c:if> <c:if test="${store.storeType.trim()=='3'}">
-                				채소         
-            				</c:if> <c:if test="${store.storeType.trim()=='4'}">
-                				과일         
-            				</c:if> <c:if test="${store.storeType.trim()=='5'}">
-                				종합         
-            				</c:if>
-
-								</strong></span></td>
+							<td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storeType}</strong></span></td>
 							<td></td>
 							<td></td>
 						</tr>
@@ -417,7 +432,7 @@ label {
 							<td></td>
 							<td></td>
 							<th scope="row"><span style="color: blsck; font-size: 20px">상점소개</span></th>
-							<td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storeIntro}</strong></span></td>
+							<td colspan="2"><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storeIntro}</strong></span></td>
 						</tr>
 
 						<tr>
@@ -432,7 +447,6 @@ label {
 							<td></td>
 							<th scope="row"><span style="color: blsck; font-size: 20px"></span></th>
 							<td><span style="color: #2E2E2E; font-size: 15px"><strong></strong></span></td>
-							<td></td>
 							<td><span class="button gray medium"><a href="#"
 									onclick="clip(); return false;"><i class="bi bi-share"></i>&nbsp;&nbsp;공유</a></span></td>
 						</tr>
@@ -440,48 +454,64 @@ label {
 					</tbody>
 				</table>
 			</div>
+	</div>
 
-		</c:forEach>
-		<!--상점 정보 End-->
+	</c:forEach>
+	<!--상점 정보 End-->
 
-		<hr />
+	<hr />
 
-		<!--  상품 목록 Begin-->
-		<div class="row store" style="display: flex; align-items: flex-start; justify-content: flex-start">
-			<c:forEach var="store" items="${getStore}">
+	<!--  상품 목록 Begin-->
+	<div class="row store"
+		style="display: flex; align-items: flex-start; justify-content: flex-start; margin-left: 370px; margin-right: 370px;">
+		<c:forEach var="store" items="${getStore}">
 
 
-				<div class="col-lg-4 col-md-6 col-sm-6">
-					<div class="product__item">
-						<div class="product__item__pic set-bg"
-							data-setbg="${path}/resources/static/img/product/product-2.jpg"
-							width="300" height="300">
-							<ul class="product__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="product__item__text">
-							<h6>
-								<a href="#">${store.product.prodName}
-									(${store.product.prodInfo}) 원산지: ${store.product.prodOrign}</a>
-							</h6>
-							<h5>${store.product.price}원
-								<div class="qty mt-5">
-									<span class="minus bg-dark">-</span> <input type="number"
-										class="count" name="qty" value="1"> <span
-										class="plus bg-dark">+</span>
-								</div>
-							</h5>
-						</div>
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="product__item">
+					<div class="product__item__pic set-bg"
+						data-setbg="${path}/resources/static/img/product/product-2.jpg"
+						width="300" height="300">
+						<ul class="product__item__pic__hover">
+							<li><i class="fa fa-shopping-cart"
+								onClick="fncAddOrdersCart(this)"></i></a></li>
+						</ul>
+					</div>
+					<div class="product__item__text">
+						<h6>
+							<a href="#">${store.product.prodName}
+								(${store.product.prodInfo}) 원산지: ${store.product.prodOrign}</a>
+						</h6>
+						<h5>
+
+							<c:if
+								test="${store.product.soldout=='false' || store.open=='false' }">
+								<span style="color: darkgray;"><del>${store.product.price}원</del></span>
+								<span style="color: red; font-size: 15px;"><strong>구매불가</strong></span>
+							</c:if>
+
+							<c:if
+								test="${store.product.soldout=='true' && store.open=='true'}">
+									${store.product.price}원
+								</c:if>
+
+
+
+							<div class="qty mt-5">
+								<span class="minus bg-dark">-</span> <input type="number"
+									class="count" name="qty" value="1"> <span
+									class="plus bg-dark">+</span>
+							</div>
+						</h5>
 					</div>
 				</div>
+			</div>
 
 
 
-			</c:forEach>
-		</div>
-		<!--  상품 목록 End-->
+		</c:forEach>
+	</div>
+	<!--  상품 목록 End-->
 	</div>
 	<!-- 상점 상세 End -->
 

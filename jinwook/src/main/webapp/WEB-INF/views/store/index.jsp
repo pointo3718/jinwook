@@ -59,70 +59,49 @@
 	justify-content: center;
 	align-items: center;
 }
-
-.customoverlay {
-	position: relative;
-	bottom: 85px;
-	border-radius: 6px;
-	border: 1px solid #ccc;
-	border-bottom: 2px solid #ddd;
-	float: left;
-}
-
-.customoverlay:nth-of-type(n) {
-	border: 0;
-	box-shadow: 0px 1px 2px #888;
-}
-
-.customoverlay a {
-	display: block;
-	text-decoration: none;
-	color: #000;
-	text-align: center;
-	border-radius: 6px;
-	font-size: 14px;
-	font-weight: bold;
-	overflow: hidden;
-	background: #d95050;
-	background: #d95050
-		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
-		no-repeat right 14px center;
-}
-
-.customoverlay .title {
-	display: block;
-	text-align: center;
-	background: #fff;
-	margin-right: 35px;
-	padding: 10px 15px;
-	font-size: 14px;
-	font-weight: bold;
-}
-
-.customoverlay:after {
-	content: '';
-	position: absolute;
-	margin-left: -12px;
-	left: 50%;
-	bottom: -12px;
-	width: 22px;
-	height: 12px;
-	background:
-		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
-}
 </style>
 
+<script type="text/javascript">
+
+$(function() {
+	getStoreListByOrderCount();
+});
+
+function getStoreListByOrderCount() {
+	
+	   var uri = "/store/getStoreListByOrderCount"
+
+	   $.get(uri, function(response) { 
+	      
+	         var storelistHtmlBody = "";
+	         
+	         $(response.storeList).each(function(idx,store) {
+
+	        	 storelistHtmlBody += `
+	 				<tr>
+	 					<th scope="row">\${i}</th>
+	 					<td>\${store.storeName}</td>
+	 					<td>\${store.storeAddr}</td>
+	 					<td></td>
+	 				</tr>
+	            `;
+	         }
+	         
+	         $(".storeList").html(storelistHtmlBody);
+	         //$(".userlisthead").html(blacklistHtmlBody);
+	      
+	   }, "json");
+}
+
+</script>
 
 
-
-<script src="vendor/jquery/jquery.min.js"></script>
 
 
 </head>
 <body>
 
 	<!-- Header Begin -->
-	<jsp:include page="./layout/top.jsp" />
 	<!-- Header End -->
 
 	<!-- Categories Section Begin -->
@@ -609,156 +588,54 @@
 		<div class="row" style="align-items: flex-start;">
 
 			<!-- 지도를 표시할 div 입니다 -->
-			<div id="map" style="width: 500px; height: 500px; right: 50px"></div>
+			<div id="map" style="width: 600px; height: 500px; right: 50px"></div>
 
 			<script type="text/javascript"
 				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e53eaf4dd896374cd449da869e2ddcdc"></script>
-			<script>
+<script>
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				mapOption = {
-					center : new kakao.maps.LatLng(37.643308684205, 127.01021511086), // 지도의 중심좌표
-					level : 6
+					center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+					level : 3
 				// 지도의 확대 레벨
 				};
 
-				// 지도를 생성합니다    
-			      var map = new kakao.maps.Map(mapContainer, mapOption);
-				
-			   // 마커를 표시할 위치와 title 객체 배열입니다 
-			      var positions = [
-			    	  
-			          {
-			              title: '근린공원',
-			              latlng: new kakao.maps.LatLng(37.643308684205, 127.01021511086)
-			          }
-			      ];
-
-			      // 마커 이미지의 이미지 주소입니다
-			      var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-			          
-			      for (var i = 0; i < positions.length; i ++) {
-			          
-			          // 마커 이미지의 이미지 크기 입니다
-			          var imageSize = new kakao.maps.Size(24, 35); 
-			          
-			          // 마커 이미지를 생성합니다    
-			          var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-			          
-			          // 마커를 생성합니다
-			          var marker = new kakao.maps.Marker({
-			              map: map, // 마커를 표시할 지도
-			              position: positions[i].latlng, // 마커를 표시할 위치
-			              title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-			              image : markerImage // 마커 이미지 
-			          });
-			      }
-			
-
-		
-				var options = {
-						  enableHighAccuracy: true,
-						  timeout: 5000,
-						  maximumAge: 0
-						};
-
-						function success(position) {
-						  //좌표를 알아낼 수 있는데, 여기서 알아낸 좌표를 kakaoAPI url에 사용할 것이다.
-						  console.log('위도 : ' + position.coords.latitude); 
-						  console.log('경도: ' + position.coords.longitude);
-						};
-
-						function error(err) {
-						  console.warn('ERROR(' + err.code + '): ' + err.message);
-						};
-
-						navigator.geolocation.getCurrentPosition(success, error, options);
+				// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+				var map = new kakao.maps.Map(mapContainer, mapOption);
 			</script>
 
-			<div>
+<div>
 
-				<h3 class="text-left">
-					<strong style="font-size: 22px;">진욱이네 상점 TOP5</strong><span
-						style="font-size: 13px; color: #A4A4A4; padding-left: 230px;">*주문수
-						기준</span>
-					</hr>
-				</h3>
+	<h3 class="text-left">
+		<strong style="font-size: 22px; padding-left: 100px;">진욱이네 상점
+			TOP5</strong>
+		</hr>
+	</h3>
 
-				<table class="table" style="width: 500px; height: 50px;">
+	<table class="table" style="width: 400px; height: 50px;">
 
-					<thead>
-						<tr style="text-align: center">
-							<th scope="col">상점이름</th>
-							<th scope="col">상점주소</th>
-							<th scope="col">상점업종</th>
-						</tr>
-					</thead>
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">상점이름</th>
+				<th scope="col">상점주소</th>
+				<th scope="col">상점업종</th>
+			</tr>
+		</thead>
 
-					<tbody class="storeList">
+			<tbody class="storeList">
 
-					</tbody>
-
-				</table>
-			</div>
-		</div>
-
+			</tbody>
+	</table>
+</div>
+</div>
 
 
-	</section>
 
-	<script type="text/javascript">
-	
-//======BEST 상점 목록=========//
+</section>
 
-$(function() {
-	getStoreListByOrderCount();
-});
+<!-- Blog Section End -->
 
-function getStoreListByOrderCount() {
-	
-	   var uri = "/store/getStoreListByOrderCount"
-
-	   $.get(uri, function(response) { 
-	      
-	         var storelistHtmlBody = "";
-	         
-	         $(response.storeList).each(function(idx,store) {
-	        	 
-	        	 
-
-	        	 storelistHtmlBody += `
-	 				<tr style="text-align:center">
-	 					<td>\${store.storeName}</td>
-	 					<td>\${store.storeAddr}</td>
-	 					<td>\${store.storeType}</td>
-	 				</tr>
-	            `;
-	         });
-	         
-	         
-	         $(".storeList").html(storelistHtmlBody);
-	         //$(".userlisthead").html(blacklistHtmlBody);
-	      
-	   }, "json");
-
-}
-
-//=============map 상점 정보 rest가져오기==================//
-
-$.ajax({
-url: "/store/getStoreMap",
-dataType: "json"
-}).done(function(data){
-console.log(data);
-});
-
-
-//============================================//
-
-
-</script>
-
-	<!-- Blog Section End -->
-	<jsp:include page="layout/footer.jsp" />
 </body>
 
 </html>

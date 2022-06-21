@@ -2,6 +2,7 @@ package com.jinwook.home.service.domain;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,10 +26,10 @@ public class Orders extends CommonDTO{
    private int orderNo;         //주문번호      |주문
    private Date orderDate;         //주문날짜      |주문
    private int plusTime;         //픽업시간인int   |주문
-   private Time pickupTime;   //픽업시간형식   |주문
+   private Timestamp pickupTime;   //픽업시간형식   |주문
    private String orderReq;      //주문요청      |주문
-    private String orderStatus;      //주문상태      |주문
-    private int finalPrice;         //실결제금액   |주문(회원주문시 쿠폰dc,등급dc 차감액)
+   private String orderStatus;      //주문상태      |주문
+   private int finalPrice;         //실결제금액   |주문(회원주문시 쿠폰dc,등급dc 차감액)
    private int prodCount;         //상품수량      |장바구니
    private int orderPrice;         //주문금액      |장바구니
    private String reviewTitle;      //리뷰제목      |주문리뷰
@@ -43,7 +44,11 @@ public class Orders extends CommonDTO{
       // TODO Auto-generated constructor stub
    }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> refs/heads/Song
+=======
+
+>>>>>>> refs/remotes/origin/master
 }

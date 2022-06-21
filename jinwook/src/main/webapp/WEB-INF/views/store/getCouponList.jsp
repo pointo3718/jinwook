@@ -1,282 +1,603 @@
-<%@ page contentType="text/html; charset=euc-kr"%>
-<%@ page pageEncoding="EUC-KR"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-
 <!DOCTYPE html>
-
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
+<meta name="description" content="Ogani Template">
+<meta name="keywords" content="Ogani, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>ìƒí’ˆë“±ë¡</title>
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
 
-<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+<!-- Css Styles -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-<!-- Bootstrap Dropdown Hover CSS -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-
-
-<!-- jQuery UI toolTip »ç¿ë CSS-->
+	href="${path}/resources/static/css/font-awesome.min.css"
+	type="text/css">
 <link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip »ç¿ë JS-->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	href="${path}/resources/static/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/nice-select.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/owl.carousel.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/static/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${path}/resources/static/css/style.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<!--  ///////////////////////// CSS ////////////////////////// -->
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+<script type="text/javascript">
+	/*<![CDATA[*/
+</script>
+
 <style>
-body {
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	background: #ffffff;
+	z-index: 10;
+}
+
+.row {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start
+}
+
+.mytop01 {
+	padding-left: 20px;
+}
+
+.mytop01-content {
+	padding-left: 180px;
+	color: #6A8F00;
+	display: inline;
+}
+
+.blog {
 	padding-top: 50px;
+}
+
+.list-group {
+	padding-top: 0px;
+}
+
+.blog__sidebar {
+	align-items: flex-start;
+}
+
+.blog__sidebar__item {
+	width: 200px;
+	/*  body > div.container{
+           border: 3px solid #D6CDB7;
+            margin-top: 10px;
+        }  */ / . row { margin-top : 10px;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.id_ok {
+	color: #7fad39;
+	display: none;
+	font-size: 10px;
+}
+
+.id_already {
+	color: red;
+	display: none;
+	font-size: 10px;
+	text-align: left;
+}
+
+.control-label {
+	whidth: 250px;
+	text-align: center;
+	justify-content: center;
+}
+
+.site-btn {
+	background-color: #7fad39; /* Green */
+	border: none;
+	color: white;
+	width: 200px;
+	text-align: center;
+	font-size: 20px;
+}
+
+.userId {
+	width: 300px;
+	text-indent: 1em;
+}
+
+.ss {
+	font-size: 30px;
+	justify-content: center;
+}
+
+input {
+	width: 300px;
+	height: 50px;
+	text-indent: 1em;
+	font-size: 15px;
+}
+
+div {
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+}
+
+label {
+	font-size: 15px;
+	justify-content: top;
+	text-align: left;
+	display: flex;
+	align-items: left;
+}
+
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
+
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity = 0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
 }
 </style>
 
-<!--  ///////////////////////// JavaScript ////////////////////////// -->
+
 <script type="text/javascript">
-	//=====±âÁ¸Code ÁÖ¼® Ã³¸® ÈÄ  jQuery º¯°æ ======//
-	// °Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ Form Àü¼ÛÀ» À§ÇØ JavaScrpt ÀÌ¿ë  
-	function fncGetUserList(currentPage) {
-		$("#currentPage").val(currentPage)
-		$("form").attr("method", "POST").attr("action",
-				"/product/listProduct?menu=${menu}").submit();
+	/*<![CDATA[*/
+	function movePage(uri, queryString) {
+		location.href = uri + queryString;
 	}
-	//===========================================//
 
-       $(function() {
-          //==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-          $( "button.btn.btn-default" ).on("click" , function() {
-            fncGetUserList(1);
-         });
-       });
+	var storeNo = $("input[id='storeNo']").val();
+	/*]]>*/
 
-
-	
-	<c:if test= "${param.menu=='manage'}" >	
-    $(function() {
-        
-        //==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-        $( "td:nth-child(2)" ).on("click" , function() {
-            self.location ="/product/updateProduct?prodNo="+ $(this).attr("prodNo");
-        });
-                 
-        //==> prodNo LINK Event End User ¿¡°Ô º¸ÀÏ¼ö ÀÖµµ·Ï 
-        $( "td:nth-child(2)" ).css("color" , "red");
-        
-     }); 
-    </c:if>
-
-	<c:if test= "${param.menu=='search'}" >
 	$(function() {
-
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		$("td:nth-child(2)").on(
-				"click",
-				function() {
-					self.location = "/product/getProduct?prodNo="
-							+ $(this).attr("prodNo");
-				});
-
-		//==> userId LINK Event End User ¿¡°Ô º¸ÀÏ¼ö ÀÖµµ·Ï 
-		$("td:nth-child(2)").css("color", "red");
-
-	});
-	</c:if>
-	
-
-    $(function() {
-        
-        //==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-        $(  "td:nth-child(6) > i" ).on("click" , function() {
-
-              var prodNo = $(this).next().val();
-           
-              $.ajax( 
-                    {
-                       url : "/product/json/getProduct/"+prodNo ,
-                       method : "GET" ,
-                       dataType : "json" ,
-                       headers : {
-                          "Accept" : "application/json",
-                          "Content-Type" : "application/json"
-                       },
-                       success : function(JSONData , status) {
-
-                          var displayValue = "<h6>"
-                  							+"»óÇ°¹øÈ£    : "+JSONData.prodNo+"<br/>"
-              								 +"»óÇ°¸í       : "+JSONData.prodName+"<br/>"
-              				 				+"»óÇ°ÀÌ¹ÌÁö    : "+JSONData.fileName+"<br/>"
-              				 				+"»óÇ°»óÁ¦Á¤º¸    : "+JSONData.prodDetail+"<br/>"
-               								+"°¡°İ       : "+JSONData.price+"<br/>"
-                                            +"</h6>";
-                          					$("h6").remove();
-                          					$( "#"+JSONData.prodNo+"" ).append(displayValue);
-                       }
-                 });
-                 ////////////////////////////////////////////////////////////////////////////////////////////
-        });
-        
-        //==> prodNo LINK Event End User ¿¡°Ô º¸ÀÏ¼ö ÀÖµµ·Ï 
-        $( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
-        $("h7").css("color" , "red");
-        
-        //==> ¾Æ·¡¿Í °°ÀÌ Á¤ÀÇÇÑ ÀÌÀ¯´Â ??
-        $(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
-     });   
-    
-    $(function () {	//È­¸é ·ÎµùÈÄ ½ÃÀÛ
-		$("#searchKeyword").autocomplete({  //¿ÀÅä ÄÄÇÃ¸´Æ® ½ÃÀÛ
-			source: ["ÀÚÀü°Å","º¸µå¼¼Æ®","º¸¸£µµ","º¸¶ó»ö","º¸µåÄ«","º¸¶óµ¹ÀÌ","¹ÎÆ®ÃÊÄİ¸´","¹Îµé·¹","¹ÎÆ®","¹è´ŞÀÇ¹ÎÁ·","¹Î±¹ÀÌ","´ëÇÑ¹Î±¹"],	// source´Â data.jsÆÄÀÏ ³»ºÎÀÇ List ¹è¿­
-			focus : function(event, ui) { // ¹æÇâÅ°·Î ÀÚµ¿¿Ï¼º´Ü¾î ¼±ÅÃ °¡´ÉÇÏ°Ô ¸¸µé¾îÁÜ	
-				return false;
-			},
-			minLength: 1,// ÃÖ¼Ò ±ÛÀÚ¼ö
-			delay: 100,	//autocomplete µô·¹ÀÌ ½Ã°£(ms)
-			//disabled: true, //ÀÚµ¿¿Ï¼º ±â´É ²ô±â
+		$(".list-group-item:contains('ì£¼ë¬¸ ë‚´ì—­')").on("click", function() {
+			$(self.location).attr("href", "/admin/blog");
 		});
 	});
-  
-  </script>
+
+	$(function() {
+		$(".list-group-item:contains('ìƒì  ì •ë³´ ìˆ˜ì •')").on("click", function() {
+			$(self.location).attr("href", "/store/updateStore?storeNo=10000");
+		});
+	});
+
+	$(function() {
+		$(".list-group-item:contains('ê°œì¸ ì •ë³´ ìˆ˜ì •')").on("click", function() {
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href", "/admin/listComplainAdmin");
+		});
+	});
+
+	$(function() {
+		$(".list-group-item:contains('ìƒí’ˆ ë“±ë¡')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/store/addStoreProduct?storeNo=10000");
+				});
+	});
+
+	$(function() {
+		$(".list-group-item:contains('ê´‘ê³  ë“±ë¡')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/request/getRequestListForAdmin?reqCode=1");
+				});
+	});
+
+	$(function() {
+		$(".list-group-item:contains('ì§€ê°‘')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/store/getStoreWallet?storeNo=10000");
+				});
+	});
+
+	$(function() {
+		$(".list-group-item:contains('1:1 ë¬¸ì˜ë‚´ì—­')").on(
+				"click",
+				function() {
+					//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+					$(self.location).attr("href",
+							"/request/getRequestListForAdmin?reqCode=2");
+				});
+	});
+
+	//============= "ìƒí’ˆ ì‚­ì œ"  Event ì—°ê²° =============
+	function fncDeleteStoreProduct(e) {
+		if (!confirm('ìƒí’ˆì„ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?')) {
+			return false;
+		}
+
+		console.log(e);
+
+		var STORENO = $("input[id='storeNo']").val();
+		const no = $(e).data("value");
+
+		$.ajax({
+			url : "deleteStoreProduct/" + no,
+			dataType : "json",
+			success : function(result) {
+				if (result != null) {
+					alert("ì‚­ì œì™„ë£Œ");
+					self.location = "addStoreProduct?storeNo=" + STORENO
+				}
+			}
+
+		});
+
+	}
+
+	//================ë§¤ì§„ ìƒíƒœ ë³€ê²½======================//
+
+	function fncIsSoldout(e) {
+
+		console.log(e);
+
+		var STORENO = $("input[name='storeNo']").val();
+		var prodNo = $(e).data("value");
+
+		$.ajax({
+			url : "isSoldout/" + prodNo,
+			dataType : "json",
+			method : "POST",
+			success : function(result) {
+				if (result != null) {
+					alert("ë§¤ì§„ ì²˜ë¦¬ë˜ì—ˆìŠµë‹ˆë‹¤.");
+					self.location = "addStoreProduct?storeNo=" + STORENO
+				}
+			}
+
+		});
+
+	}
+	//============= íŒë§¤ ìƒíƒœ ë³€ê²½ =============//
+
+	function fncIsSell(e) {
+
+		console.log(e);
+
+		var STORENO = $("input[name='storeNo']").val();
+		var prodNo = $(e).data("value");
+
+		$.ajax({
+			url : "isSell/" + prodNo,
+			dataType : "json",
+			method : "POST",
+			success : function(result) {
+				if (result != null) {
+					alert("íŒë§¤ ì²˜ë¦¬ë˜ì—ˆìŠµë‹ˆë‹¤.");
+					self.location = "addStoreProduct?storeNo=" + STORENO
+				}
+			}
+
+		});
+
+	}
+
+	//============= "ìƒí’ˆ ìˆ˜ì •"  Event ì—°ê²° =============
+
+	function fncUpdateStoreProduct(e) {
+
+		console.log(e);
+
+		var PRICE = $(e).parent().parent().find("#price").val()
+		var STORENO = $("input[name='storeNo']").val();
+		var prodNo = $(e).data("value");
+		var PRODINFO = $(e).parent().parent().find("#prodInfo").val()
+		var PRODIMG = $(e).parent().parent().find("#prodImg").val()
+		var PRODORIGN = $(e).parent().parent().find("#prodOrign").val()
+
+		if (PRICE == null || PRICE.length < 1) {
+			alert("ê°€ê²©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
+			return;
+		}
+
+		if (PRODINFO == null || PRODINFO.length < 1) {
+			alert("ìƒí’ˆì†Œê°œëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+			return;
+		}
+
+		//if (PRODIMG == null || PRODIMG.length < 1) {
+		//	alert("ìƒí’ˆì‚¬ì§„ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+		//	return;
+		//}
+
+		alert(prodNo);
+
+		$.ajax({
+			url : "updateStoreProduct/" + prodNo + "/" + PRICE + "/"
+					+ PRODORIGN + "/" + PRODINFO + "/" + PRODIMG,
+			dataType : "json",
+			method : "POST",
+			data : {
+
+				"PRICE" : PRICE,
+				"PRODINFO" : PRODINFO,
+				"PRODIMG" : PRODIMG,
+				"PRODORIGN" : PRODORIGN
+
+			},
+			success : function(result) {
+				if (result != null) {
+					alert("ìˆ˜ì • ì™„ë£Œ");
+					self.location = "addStoreProduct?storeNo=" + STORENO
+				}
+			}
+
+		});
+
+	}
+
+	//====ì…ë ¥ì°½ ì¶”ê°€=====//
+	$(document)
+			.ready(
+					function() {
+						$('.btn.btn-outline-success')
+								.click(
+										function() {
+											$('#plus')
+													.append(
+															'<form id="inputitem"><div class="form-row"><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <span class="btn btn-default btn-file"> <input type="file"></span></div><div class="col-md-2 mb-3"><label for="validationDefault02"></label><input type="text" class="form-control" id="addProdName" placeholder="ìƒí’ˆì´ë¦„" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addProdInfo" placeholder="ì˜ˆ)100gë‹¹ ê°€ê²©" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addProdOrign" placeholder="ì›ì‚°ì§€" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addPrice" placeholder="ê°€ê²©" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label><br><button type="button" id="validationDefault01" class="btn btn-warning" onClick="fncAddStoreProduct(this)">ìƒí’ˆë“±ë¡</button></div></div></div></form>'); // end append                            
+										}); // end click                                            
+					}); // end ready
+
+	//ìƒí’ˆ ë“±ë¡//
+
+	function fncAddStoreProduct(e) {
+
+		console.log(e);
+
+		var PRICE = $(e).parent().parent().find("#addPrice").val()
+		var STORENO = $("input[name='storeNo']").val();
+		var prodNo = null;
+		var PRODINFO = $(e).parent().parent().find("#addProdInfo").val()
+		var PRODIMG = "ì‚¬ì§„.jpg";
+		//var PRODIMG = $(e).parent().parent().find("#addProdImg").val()
+		var PRODORIGN = $(e).parent().parent().find("#addProdOrign").val()
+		var PRODNAME = $(e).parent().parent().find("#addProdName").val()
+		var soldout = true;
+
+		if (PRODNAME == null || PRODNAME.length < 1) {
+			alert("ìƒí’ˆì´ë¦„ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
+			return;
+		}
+
+		if (PRICE == null || PRICE.length < 1) {
+			alert("ê°€ê²©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
+			return;
+		}
+
+		if (PRODINFO == null || PRODINFO.length < 1) {
+			alert("ìƒí’ˆì†Œê°œëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+			return;
+		}
+
+		//if (PRODIMG == null || PRODIMG.length < 1) {
+		//   alert("ìƒí’ˆì‚¬ì§„ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+		//   return;
+		//}
+
+		alert(STORENO + PRODNAME + PRICE + PRODINFO + PRODORIGN);
+
+		$.ajax({
+			url : "addStoreProduct/" + prodNo + "/" + STORENO + "/" + PRODNAME
+					+ "/" + PRICE + "/" + PRODINFO + "/" + PRODIMG + "/"
+					+ PRODORIGN + "/" + soldout,
+			dataType : "json",
+			method : "post",
+			success : function(result) {
+				if (result != null) {
+					alert("ë“±ë¡ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+					self.location = "addStoreProduct?storeNo=" + STORENO
+				}
+			}
+
+		});
+
+	}
+</script>
 
 
 </head>
 
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
-	<div class="container">
+	<!-- Header Begin -->
+	<jsp:include page="../layout/top.jsp" />
+	<!-- Header End -->
 
-		<div class="page-header text-info">
-			<h3>»óÇ°¸ñ·ÏÁ¶È¸</h3>
-		</div>
+	<!-- ceoTop Section Begin -->
+	<jsp:include page="../layout/ceoTop.jsp" />
+	<!-- ceoTop Section End -->
 
-		<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
-		<div class="row">
+	<!-- ceoLeft Section Begin -->
+	<section class="blog spad">
+		<div class="container">
+			<div class="row" style="justify-content: space-around;">
+				<div class="col-xs-4 col-xs-5"
+					style="width: 200px; margin-right: 30px;">
+					<div class="blog__sidebar" style="width: 200px; padding-top: 0px;">
 
-			<div class="col-md-6 text-left">
-				<p class="text-primary">ÀüÃ¼ ${resultPage.totalCount } °Ç¼ö, ÇöÀç
-					${resultPage.currentPage} ÆäÀÌÁö</p>
+						<div class="blog__sidebar__item">
+
+							<h5 class="text-center" style="margin-bottom: 0px;">
+								<strong>ì‚¬ì¥ë‹˜ í˜ì´ì§€</strong>
+							</h5>
+
+							<br />
+
+
+
+							<div class="list-group text-center" style="font-size: 15px;">
+								<button type="button"
+									class="list-group-item list-group-item-action"
+									aria-current="true">ì£¼ë¬¸ ë‚´ì—­</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">ìƒì  ì •ë³´
+									ìˆ˜ì •</button>
+								<button type="button"
+									class="list-group-item list-group-item-action" class="addStore">
+									<span class="addStore">ê°œì¸ ì •ë³´ ìˆ˜ì •</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+									<span class="deleteStore">ìƒí’ˆ ë“±ë¡</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+									<span class="refundStore">ê´‘ê³  ë“±ë¡</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+									<span class="adStore">ë‚´ê°€ í•œ ìš”ì²­</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">
+									<span class="adStore">ì§€ê°‘</span>
+								</button>
+								<button type="button"
+									class="list-group-item list-group-item-action">1:1
+									ë¬¸ì˜ë‚´ì—­</button>
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+				<!-- ì¿ í° ëª©ë¡  Begin -->
+
+				<!-- ì¿ í° ëª©ë¡ End -->
+
 			</div>
 
-			<div class="col-md-6 text-right">
-				<form class="form-inline" name="detailForm">
 
-					<div class="form-group">
-						<select class="form-control" name="searchCondition">
-							<option value="0"
-								${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>»óÇ°¹øÈ£</option>
-							<option value="1"
-								${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>»óÇ°¸í</option>
-							<option value="2"
-								${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>°¡°İ</option>
-						</select>
+
+
+<!-- ì¿ í° ëª¨ë‹¬ ë²„íŠ¼ -->
+			<button type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#staticBackdrop">ì¿ í°</button>
+<!-- ëª¨ë‹¬ ë -->
+
+			<!-- ì¿ í° Modal ì‹œì‘  -->
+			<div class="modal fade" id="staticBackdrop" data-backdrop="static"
+				data-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+
+				<div class="modal-dialog">
+					<div class="modal-content"
+						style="width: 802px; height: 500px; align-items: center">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">
+								<strong style="padding-right: 550px;"><img
+									src="${path}/resources/static/img/coupon.png"
+									style="width: 50px; height: 40px;">&nbsp;&nbsp;&nbsp;ì¿ í° ëª©ë¡ ì¡°íšŒ</strong></strong>
+							</h5>
+						</div>
+						<div class="modal-body">
+							<div>
+
+								<table class="table" style="width: 700px">
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">ì¿ í°ì¢…ë¥˜</th>
+											<th scope="col">ì¿ í°í• ì¸ìœ¨</th>
+											<th scope="col">ìœ íš¨ê¸°ê°„</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="coupon" items="${couponList}">
+											<c:set var="i" value="${ i+1 }" />
+
+											<tr>
+												<th scope="row">${i}</th>
+												<td><c:if test="${coupon.couponType==0}">
+      								ì²« ê°€ì… ì¿ í°
+      							</c:if> <c:if test="${coupon.couponType==1}">
+      								ì²« êµ¬ë§¤ ì¿ í°
+      							</c:if> <c:if test="${coupon.couponType==2}">
+     								 ìƒì¼ ì¿ í°
+      							</c:if> <c:if test="${coupon.couponType==3}">
+     								 ì¶”ì²œì¸ ì¿ í°
+      							</c:if></td>
+												<td style="padding-left: 35px;">${coupon.couponDc}%</td>
+												<td>${coupon.couponValidDate}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+
+
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
 					</div>
+				</div>
 
-					<div class="form-group">
-						<label class="sr-only" for="searchKeyword">°Ë»ö¾î</label> <input
-							type="text" class="form-control" id="searchKeyword"
-							name="searchKeyword" placeholder="°Ë»ö¾î"
-							value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-					</div>
 
-					<button type="button" class="btn btn-default">°Ë»ö</button>
-
-					<!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
-					<input type="hidden" id="currentPage" name="currentPage" value="" />
-
-				</form>
 			</div>
+			<!-- ì¿ í° Modal ë -->
+	</section>
+	<!-- ceoLeft Section End -->
 
-		</div>
-		<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
-
-
-		<!--  table Start /////////////////////////////////////-->
-		<table class="table table-hover table-striped">
-
-			<thead>
-				<tr>
-					<th align="center">No</th>
-					<th align="left">»óÇ°¸í</th>
-					<th align="left">°¡°İ</th>
-					<th align="left">µî·ÏÀÏ</th>
-					<th align="left">ÇöÀç»óÅÂ</th>
-					<th align="left">°£·«Á¤º¸</th>
-				</tr>
-			</thead>
-
-			<tbody>
-
-				<c:set var="i" value="0" />
-				<c:forEach var="product" items="${list}">
-					<c:set var="i" value="${ i+1 }" />
-					<tr>
-						<td align="center">${ i }</td>
-						<td align="left" title="Click : »óÇ° »ó¼¼Á¤º¸ È®ÀÎ"
-							prodNo="${product.prodNo}">${product.prodName}</td>
-						<td align="left">${product.price}</td>
-						<td align="left">${product.regDate}</td>
-						<td align="left">
-
-			<c:if test= "${param.menu=='search'}" >
-				<c:if test= "${product.proTranCode.trim()=='0'}" >
-				 	ÆÇ¸ÅÁß				
-				</c:if>
-				<c:if test="${product.proTranCode.trim()!='0'}">
-					Àç°í¾øÀ½
-				</c:if>
-			</c:if>
-			
-			<c:if test= "${param.menu=='manage'}" >
-				<c:if test="${product.proTranCode.trim()=='0'}">
-					ÆÇ¸ÅÁß
-				</c:if>
-				<c:if test="${product.proTranCode.trim()=='1'}">
-					±¸¸Å¿Ï·á&nbsp;<a href="/purchase/updateTranCode?prodNo=${product.prodNo}&tranCode=2">¹è¼ÛÇÏ±â</a>
-				</c:if>
-				<c:if test="${product.proTranCode.trim()=='2'}">
-					¹è¼ÛÁß
-				</c:if>
-				<c:if test="${product.proTranCode.trim()=='3'}">
-					¹è¼Û¿Ï·á
-				</c:if>
-			</c:if>
-
-						</td>
-						<td align="left"><i class="glyphicon glyphicon-ok"
-							id="${product.prodNo}"></i> <input type="hidden"
-							value="${product.prodNo}"></td>
-					</tr>
-				</c:forEach>
-
-
-			</tbody>
-
-		</table>
-		<!--  table End /////////////////////////////////////-->
-
-	</div>
-	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
-
-
-	<!-- PageNavigation Start... -->
-	<!-- PageNavigation End... -->
+	<!-- Footer Begin -->
+	<jsp:include page="../layout/footer.jsp" />
+	<!-- Footer End -->
 
 </body>
 

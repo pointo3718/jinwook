@@ -9,7 +9,7 @@
    <result property="storeName"         column="store_name"     jdbcType="VARCHAR"/>
    <result property="storeAddr"         column="store_addr"     jdbcType="VARCHAR"/>
    <result property="storeType"         column="store_type"     jdbcType="CHAR"/>
-   <result property="storeStatus"         column="store_status"   jdbcType="TINYINT"/>
+   <result property="storeStatus"         column="store_status"   jdbcType="VARCHAR"/>
    <result property="storePhone"         column="store_phone"    jdbcType="VARCHAR"/>
    <result property="storeIntro"         column="store_intro"    jdbcType="VARCHAR"/>
    <result property="storeStart"         column="store_start"    jdbcType="DATE"/>
@@ -75,7 +75,7 @@
       product(prod_no,store_no,prod_name, price, prod_info, prod_img,
       prod_orign, is_soldout)
       VALUES(#{prodNo:INTEGER},#{storeNo:INTEGER},
-      #{prodName},#{price}, #{prodInfo}, #{prodImg},#{prodOrign},1)
+      #{prodName:VARCHAR},#{price:INTEGER}, #{prodInfo:VARCHAR}, #{prodImg:VARCHAR},#{prodOrign:VARCHAR},1)
    </insert>
    
    <update id="updateStoreProduct" parameterType="Product">
@@ -98,7 +98,15 @@
    <update id="isSoldout" parameterType="Product">
       UPDATE product
       SET
-      is_soldout=#{isSoldout}
+      is_soldout=0
+      WHERE
+      prod_no=#{prodNo}
+   </update>
+   
+     <update id="isSell" parameterType="Product">
+      UPDATE product
+      SET
+      is_soldout=1
       WHERE
       prod_no=#{prodNo}
    </update>
@@ -132,7 +140,7 @@
    
    <select id="getStore" parameterType="int" resultMap="storeSelectMap">
         SELECT
-      s.store_no, s.store_phone, s.store_name, s.store_type, s.store_addr, s.start_time, s.end_time, s.holiday,
+      s.store_no, s.store_phone, s.store_name, s.store_type, s.store_addr, s.start_time, s.end_time, s.holiday, s.is_open,
       s.store_intro, vt.review_star, p.prod_no, p.prod_name, p.prod_img, p.price, p.prod_orign, p.prod_info, p.is_soldout      
       FROM store s, product p, orders o,(SELECT ROUND(AVG(review_star),1) review_star 
                   FROM orders
@@ -147,7 +155,8 @@
    <select id="getStoreInfo" parameterType="int" resultMap="storeSelectMap">   
    SELECT
    u.user_name, u.jp_balance, s. store_name, s. store_addr, s. total_earn, s.store_no, s.store_intro,s.store_image, s.holiday,
-   u.business_no, s.business_card,s.bank, s.acc_no, s.start_time, s.end_time, s.store_type, s.store_phone, s.store_start, s.store_status, u.reg_date
+   u.business_no, s.business_card,s.bank, s.acc_no, s.start_time, s.end_time, s.store_type, s.store_phone, s.store_start, 
+   s.store_status, u.reg_date, s.is_open
    FROM users u, store s
    WHERE u.user_id=s.user_id AND
    s.store_no = #{storeNo}
@@ -206,6 +215,42 @@
       AND
       o.store_no=#{storeNo}
       ORDER BY order_no
+   </select>
+   
+   
+    <select id="getStoreListByOrderCount" resultMap="storeSelectMap">
+	SELECT COUNT(*), o.store_no, s.store_name, s.store_type, s.store_addr
+	FROM orders o, store s
+	WHERE o.store_no = s.store_no AND
+		 s.store_status !=0
+	GROUP BY o.store_no
+	ORDER BY COUNT(*) DESC
+	LIMIT 5;
+   </select>
+   
+   <select id="getStoreMap" resultMap="storeSelectMap">
+   
+   SELECT s.store_name, s.store_addr, s.store_type,p.prod_name, p.price
+	FROM store s, product p
+	WHERE s.store_no = p.store_no
+	
+   </select>
+   
+   <select id="getStoreMapTotalCount" parameterType="Store"
+      resultType="int">
+      SELECT
+      COUNT(*)
+      FROM
+      store
+   </select>
+   
+   
+   <select id="getStoreListTotalCount" parameterType="Store"
+      resultType="int">
+      SELECT
+      COUNT(*)
+      FROM
+      store
    </select>
     
     

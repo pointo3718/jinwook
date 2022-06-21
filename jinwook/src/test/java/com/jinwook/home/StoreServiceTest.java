@@ -197,4 +197,23 @@ class StoreServiceTest {
 			}
 		}
 	}
+	
+	
+//	@Test
+//	public void getStoreListByOrderCount() {
+//
+//		List<Store> storeList = storeService.getStoreListByOrderCount();
+//		if (CollectionUtils.isEmpty(storeList) == false) {
+//			for (Store store : storeList) {
+//				System.out.println("=========================");
+//
+//				System.out.println(store.getRequest().getResDate());
+//				System.out.println(store.getRequest().getReqDate());
+//				System.out.println(store.getRequest().getRefundMoney());
+//				System.out.println(store.getRequest().getReqStatus());
+//
+//				System.out.println("=========================");
+//			}
+//		}
+//	}
 }
