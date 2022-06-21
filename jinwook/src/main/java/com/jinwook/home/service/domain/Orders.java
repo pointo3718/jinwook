@@ -43,12 +43,5 @@ public class Orders extends CommonDTO{
    public Orders() {
       // TODO Auto-generated constructor stub
    }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/heads/Song
-=======
-
->>>>>>> refs/remotes/origin/master
 }
