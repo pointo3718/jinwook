@@ -174,6 +174,9 @@ document.detailForm.submit();
 /////////////// 상점 등록 끝 ///////////////////////
 
 	
+</style>
+
+<script type="text/javascript">
 
    //================상점 오픈======================//
 
@@ -275,12 +278,12 @@ document.detailForm.submit();
                                  value="" placeholder="상점이름(상호명)을 입력해주세요.">
                            </div>
                         </div>
-<!-- onchange="this.form.submit()" -->
+
                         <div class="form-group row">
                            <label for="colFormLabelLg"
                               class="col-sm-2 col-form-label col-form-label">상점업종</label>
                            <div class="col-sm-6">
-                           <select name="storeType" size="5">
+                           <select size="5" >
                                     <option selected>업종을 선택하세요</option>
                                     <option value="1">정육</option>
                                     <option value="2">수산</option>
@@ -288,19 +291,26 @@ document.detailForm.submit();
                                     <option value="4">과일</option>
                                     <option value="5">종합</option>
                            </select>
-
+                     <script src="https://www.jqueryscript.net/demo/Mobile-friendly-Custom-Scrollbar-Plugin-With-jQuery-NiceScroll/js/jquery.nicescroll.min.js"></script>
+                     <script>
+                       $(document).ready(function () {
+                         $('select').niceSelect();
+                         $('.nice-select .list').niceScroll();
+                         
+                         $('select').niceSelect('update');
+                         $('.nice-select .list').niceScroll();
+                         
+                       });
+                     </script>
                            </div>
                         </div>
                         <div class="form-group row">
                            <label for="colFormLabelLg"
                               class="col-sm-2 col-form-label col-form-label">상점주소</label>
-                           <div class="col-sm-4">
-                              <input type="text" name="storeAddr" id="storeAddr_main"
-                                 class="form-control form-control" 
-                                 value="" placeholder="상점 주소 검색 Click" readonly>
-                           </div>
-                           <div class="col-sm-2" style="font-size: 22px; padding-left: 0px; right: 5px;">
-                           <i class="fa fa-search" aria-hidden="true"></i>
+                           <div class="col-sm-6">
+                              <input type="text" name="address"
+                                 class="form-control form-control" id="address_kakao"
+                                 value="" placeholder="상점 주소 검색" readonly>
                            </div>
                         </div>
                         
@@ -313,6 +323,11 @@ document.detailForm.submit();
                           new daum.Postcode({
                               oncomplete: function(data) { //선택시 입력값 세팅
                                   document.getElementById("storeAddr_main").value = data.address; // 주소 넣기
+                      document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+                          //카카오 지도 발생
+                          new daum.Postcode({
+                              oncomplete: function(data) { //선택시 입력값 세팅
+                                  document.getElementById("address_kakao").value = data.address; // 주소 넣기
                                   document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
                               }
                           }).open();
@@ -321,12 +336,11 @@ document.detailForm.submit();
                   </script>
                         <!--  카카오 주소 API 끝 -->
                         
-                        
                         <div class="form-group row">
                            <label for="colFormLabelLg"
                               class="col-sm-2 col-form-label col-form-label">상점상세주소</label>
                            <div class="col-sm-6">
-                              <input  class="form-control form-control" type="text" id="storeAddr_detail" name="address_detail" placeholder="상세 주소를 입력해주세요."/>
+                              <input  class="form-control form-control" type="text" name="address_detail" placeholder="상세 주소를 입력해주세요."/>
                            </div>
                         </div>
 
@@ -334,7 +348,9 @@ document.detailForm.submit();
                            <label for="colFormLabelLg"
                               class="col-sm-2 col-form-label col-form-label">상점시작날짜</label>
                            <div class="col-sm-6">
-                            <input type="date" name="storeStart" id="storeStart" value="">
+                              <input type="text" name="storeStart"
+                                 class="form-control form-control" id="storeStart"
+                                 value="" placeholder="상점시작날짜">
                            </div>
                         </div>
 
@@ -343,11 +359,11 @@ document.detailForm.submit();
                               class="col-sm-2 col-form-label col-form-label">상점소개</label>
                            <div class="col-sm-6">
                               <textarea class="form-control" id="storeIntro" name="storeIntro" cols="20" rows="5" 
-                              placeholder="상점 소개를 50자 내로 입력해주세요. &#13;&#10; &#13;&#10; ex) 진욱이네는 산지직송 당일판매를 원칙으로 합니다. &#13;&#10; ex) 진욱이네 오픈 기념 10% 할인 해드려요~" ></textarea>
+                              placeholder="상점 소개를 50자 내로 입력해주세요. &#13;&#10; &#13;&#10; ex) 진욱이네는 산지직송 당일판매를 원칙으로 합니다. &#13;&#10; ex) 진욱이네 오픈 기념 10% 할인 해드려요~" >
+                              </textarea><textarea class="form-control" id="storeIntro" name="storeIntro" cols="20" rows="4" placeholder="상점 소개를 50자 내로 입력해주세요."></textarea>
                         <div class="text-right" id="test_cnt">(0 / 50)</div>
                            </div>
                         </div>
-                        
                         <script>
                            $(document).ready(function() {
                                $('#storeIntro').on('keyup', function() {
@@ -378,12 +394,25 @@ document.detailForm.submit();
                               <span class="btn btn-default btn-file"
                                     style="padding-left: 0px; padding-bottom: 15px;">
                                  <input type="file"  name="file" value=""/>
+                                 <input type="file" id="input_img" />
                                  <div>
-                                      <div class="img_wrap_fir">
-                                       <img id="img_fir" />
+                                      <div class="img_wrap">
+                                       <img id="img" />
                                       </div>
-                                  </div>
+                                   </div>
                               </span>
+                           </div>
+                        </div>
+
+                        <div class="form-group row">
+                           <label for="colFormLabelLg"
+                              class="col-sm-2 col-form-label col-form-label"
+                              style="padding-right: 4px;">사업자등록번호</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="businessNo"
+                                 class="form-control form-control" id="businessNo"
+                                 value="" placeholder="사업자등록번호"
+                                 readonly>
                            </div>
                         </div>
 
@@ -393,15 +422,16 @@ document.detailForm.submit();
                            <div class="col-sm-6">
                               <span class="btn btn-default btn-file"
                                     style="padding-left: 0px; padding-bottom: 15px;">
-                                 <input type="file" id="businessCard"  />
+                                 <input type="file" id="input_img" />
                                  <div>
-                                      <div class="img_wrap_sec">
-                                       <img id="img_sec" />
+                                      <div class="img_wrap">
+                                       <img id="img" />
                                       </div>
-                                  </div>
+                                   </div>
                               </span>
                            </div>
-                        </div>                                  
+                        </div>
+                        
                         
 
                         <div class="form-group row">
@@ -411,15 +441,15 @@ document.detailForm.submit();
                            <div class="col-sm-6" style="padding-left: 0px;">
                               <div class="col-sm-6">
                               <div class="wrapper">
-                                 <select size="5" name="bank">
+                                 <select size="5" >
                                     
                                     <option selected>은행명</option>
-                                    <option value="카카오뱅크">카카오뱅크</option>
-                                    <option value="농협">농협</option>
-                                    <option value="신한">신한</option>
-                                    <option value="IBK기업">IBK기업</option>
-                                    <option value="하나">하나</option>
-                                    <option value="우리">우리</option>
+                                    <option value="1">카카오뱅크</option>
+                                    <option value="2">농협</option>
+                                    <option value="3">신한</option>
+                                    <option value="4">IBK기업</option>
+                                    <option value="5">하나</option>
+                                    <option value="6">우리</option>
                                     <option value="7">국민</option>
                                     <option value="8">SC제일</option>
                                     <option value="9">대구</option>
@@ -450,7 +480,7 @@ document.detailForm.submit();
                            <div class="col-sm-6">
                               <input type="text" name="accNo"
                                  class="form-control form-control" id="accNo"
-                                 value="" placeholder=" '-' 없이 입력해주세요">
+                                 value="" placeholder="계좌번호">
                            </div>
                         </div>
                         </form>
@@ -459,6 +489,7 @@ document.detailForm.submit();
                          <button id="requestAdd" class="btn btn-success" style="background-color: #7fad39; border-color: #7fad39; width: 126px;">등록 요청</button>
                       </div>
                   <br/>            
+          
             <div class="modal-footer">
               <a href="#" data-dismiss="modal" class="btn">닫기</a>
             </div>
@@ -466,10 +497,9 @@ document.detailForm.submit();
         </div>
     </div>
     </div>
-    
+    <!-- 상점 등록 Modal -->
 
-
-   <!-- ceoTop Section Begin -->
+ <!-- ceoTop Section Begin -->
    <section class="breadcrumb-section set-bg" 
       style="background-color: #F2F2F2; padding-left: 110px;padding-right: 110px;" >
       <c:forEach var="store" items="${storeInfo}">
@@ -524,7 +554,7 @@ document.detailForm.submit();
             </table>
             
             
-             <c:if test="${store.storeStatus eq '3'}">
+             <c:if test="${store.storeStatus=='3'}">
             
                            <table class="table table-borderless" style="background-color: white; width: 350px; height: 170px; justify-content: space-around table-layout:fixed">
                   <thead>
@@ -576,7 +606,7 @@ document.detailForm.submit();
             
                </c:if>
                
-               <c:if test="${store.storeStatus eq'1'}">   
+               <c:if test="${store.storeStatus=='1'}">   
                <table class="table table-borderless" style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
 
                   <tbody>
@@ -584,7 +614,7 @@ document.detailForm.submit();
    
                         <td></td>
                         <td style="padding-top: 60px; padding-left: 90px;">            
-                        <a id="userdetail" data-toggle="modal" href="#addRequestStoreModal" data-userid=""><strong style="font-size:25px">상점을 등록하세요!</strong></a></td>
+                        <a id="userdetail" data-toggle="modal" href="#addRequestStoreModal" data-userid=""><strong style="font-size:25px">상점 등록</strong></a></td>
                         <td></td>
                      </tr>
    
@@ -593,7 +623,7 @@ document.detailForm.submit();
                </table>
                </c:if>
                
-               <c:if test="${store.storeStatus eq '2'}">   
+               <c:if test="${store.storeStatus=='2'}">   
                <table class="table table-borderless" style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
                   <thead>
                      <tr>
