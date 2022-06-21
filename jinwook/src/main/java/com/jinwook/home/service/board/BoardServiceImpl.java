@@ -16,7 +16,6 @@ import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.BoardMapper;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
-import com.jinwook.home.service.domain.FileVO;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
@@ -394,22 +393,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.updateBoardRecipeHits(rcpNo);
 	}
 	
-//	//게시판 사진 업로드
-//	@Override
-//	public int fileBoardInsert(FileVO file) throws Exception {
-//		return boardMapper.fileBoardInsert(file);
-//	}
-//	
-//	//레시피 사진 업로드
-//	@Override
-//	public int fileRecipeInsert(FileVO file) throws Exception {
-//		return boardMapper.fileRecipeInsert(file);
-//	}
-
-	//댓글 조회
+	//댓글(1:1답변) 조회
 	@Override
-	public List<Comment> getComment(int boardNo) throws Exception {
-		return boardMapper.getComment(boardNo);
+	public List<Comment> getInquiryComment(int boardNo) throws Exception {
+		return boardMapper.getInquiryComment(boardNo);
 	}
 
 	@Override
@@ -446,6 +433,33 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public void addRecipeComment(Comment comment) throws Exception {
+		boardMapper.addRecipeComment(comment);
+	}
+
+	@Override
+	public List<Comment> getRecipeComment(int rcpNo) throws Exception {
+		return boardMapper.getRecipeComment(rcpNo);
+	}
+
+	@Override
+	public void updateRecipeComment(Comment comment) throws Exception {
+		boardMapper.updateRecipeComment(comment);
+	}
+
+	@Override
+	public void deleteRecipeComment(Comment comment) throws Exception {
+		boardMapper.deleteRecipeComment(comment);
+	}
+
+	@Override
+	public Comment selectRecipeComment(int commentNo) throws Exception {
+		return boardMapper.selectRecipeComment(commentNo);
+	}
+	
+	
 
 
 

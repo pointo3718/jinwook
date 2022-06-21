@@ -26,6 +26,8 @@ public class Recipe extends CommonDTO {
 	private Integer rcpJjimCnt;
 	private Integer commentCount;
 	private Integer recommendCount;
+	
+	private Comment comment;
 
 	public Recipe() {
 	}

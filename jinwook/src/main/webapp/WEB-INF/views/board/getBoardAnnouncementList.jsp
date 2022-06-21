@@ -627,7 +627,7 @@ color: #7fad39;
 				</div>
 				<div class="text-center">
 					<!-- PageNavigation Start... -->
-					<div class="col-lg-12" style="left:120px; margin-top:70px;">
+					<div class="col-lg-12"style="left:120px; margin-top:70px; top:70px;">
 
 
 <c:set var="params" value="${board}"/>

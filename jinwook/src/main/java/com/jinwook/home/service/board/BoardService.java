@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
-import com.jinwook.home.service.domain.FileVO;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
@@ -73,6 +73,8 @@ public interface BoardService {
 	public int deleteRecipe(Integer rcpNo);
 	//레시피 상세 조회v
 	public Recipe getRecipe(Integer rcpNo);
+//	//레시피 목록 조회v
+//	public List<Recipe> getRecipeList(PaginationInfo pInfo);
 	//레시피 목록 조회v
 	public List<Recipe> getRecipeList(Recipe rcp);
 	
@@ -82,9 +84,20 @@ public interface BoardService {
 //	public List<Comment> getCommentList(Comment comment);
 	
 	//댓글 조회
-	public List<Comment> getComment(int boardNo) throws Exception;
+	public List<Comment> getInquiryComment(int boardNo) throws Exception;
+	//댓글 조회
+	public List<Comment> getRecipeComment(int rcpNo) throws Exception;
 	//댓글 등록
 	public void addComment(Comment comment) throws Exception;
+	//레시피 댓글 등록
+	public void addRecipeComment(Comment comment) throws Exception;
+	//레시피 댓글 수정
+	public void updateRecipeComment(Comment comment) throws Exception;
+	//레시피 댓글 삭제
+	public void deleteRecipeComment(Comment comment) throws Exception;
+	//선택된 레시피 댓글 조회
+	public Comment selectRecipeComment(int commentNo) throws Exception;
+	
 	//답변 상태 변화
 	public boolean updateBoardInqStatus(Board board);
 	
