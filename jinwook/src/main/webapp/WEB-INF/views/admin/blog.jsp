@@ -202,95 +202,96 @@
 	}
 	/*[- end of function -]*/
     
-    $(function() {
-      countAddRequest();
-   });
+	 $(function() {
+		countAddRequest();
+	});
 
-   function countAddRequest() {
+	function countAddRequest() {
 
-      var uri = "CountRequestWaiting/1";
+		var uri = "../admin/CountRequestWaiting/1";
 
-      $.get(uri, function(response) {
-      
-            var countAddHtml = "";
+		$.get(uri, function(response) {
+		
+				var countAddHtml = "";
+				if(`\${response.CountRequestWaiting}`>0){
+					countAddHtml += `
+						상점 등록 요청 &nbsp;<span class="badge badge-danger" id="addStore" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
+					`;
 
-               countAddHtml += `
-                  상점 등록 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
-               `;
+				$(".addStore").html(countAddHtml);
+				}
+		}, "json");
+	}
+	/*[- end of function -]*/
+	
+	 $(function() {
+		countDeleteRequest();
+	});
 
-            $(".addStore").html(countAddHtml);
-         
-      }, "json");
-   }
-   /*[- end of function -]*/
-   
-    $(function() {
-      countDeleteRequest();
-   });
+	function countDeleteRequest() {
 
-   function countDeleteRequest() {
+		var uri = "../admin/CountRequestWaiting/2";
 
-      var uri = "CountRequestWaiting/2";
+		$.get(uri, function(response) {
+				
+			
+				var countDeleteHtml = "";
+				if(`\${response.CountRequestWaiting}`>0){
+				countDeleteHtml += `
+						상점 삭제 요청 &nbsp;<span class="badge badge-danger" id="delete" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
+					`;
+				
+				$(".deleteStore").html(countDeleteHtml); 
+				}
+		}, "json");
+	}
+	/*[- end of function -]*/
+	
+	 $(function() {
+		countRefundRequest();
+	});
 
-      $.get(uri, function(response) {
-            
-         
-            var countDeleteHtml = "";
+	function countRefundRequest() {
 
-            countDeleteHtml += `
-                  상점 삭제 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
-               `;
-            
-            $(".deleteStore").html(countDeleteHtml); 
-         
-      }, "json");
-   }
-   /*[- end of function -]*/
-   
-    $(function() {
-      countRefundRequest();
-   });
+		var uri = "../admin/CountRequestWaiting/3";
 
-   function countRefundRequest() {
+		$.get(uri, function(response) {
+		
+				var countRefundHtml = "";
+				if(`\${response.CountRequestWaiting}`>0){
+				countRefundHtml += `
+						환급 요청 &nbsp;<span class="badge badge-danger" id="refund" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
+					`;
 
-      var uri = "CountRequestWaiting/3";
+				$(".refundStore").html(countRefundHtml);
+				}
+		}, "json");
+	}
+	/*[- end of function -]*/
+	
+	
+	$(function() {
+		countAdRequest();
+	});
 
-      $.get(uri, function(response) {
-      
-            var countRefundHtml = "";
+	function countAdRequest() {
 
-            countRefundHtml += `
-                  환급 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
-               `;
+		var uri = "../admin/CountRequestWaiting/4";
 
-            $(".refundStore").html(countRefundHtml);
-         
-      }, "json");
-   }
-   /*[- end of function -]*/
-   
-   
-   $(function() {
-      countAdRequest();
-   });
+		$.get(uri, function(response) {
+		
+				var countAdHtml = "";
+				
+				if(`\${response.CountRequestWaiting}`>0){
+				countAdHtml += `
+						광고 등록 요청 &nbsp;<span class="badge badge-danger" id="refund" value="\${response.CountRequestWaiting}">\${response.CountRequestWaiting}</span>
+					`;
 
-   function countAdRequest() {
-
-      var uri = "CountRequestWaiting/4";
-
-      $.get(uri, function(response) {
-      
-            var countAdHtml = "";
-
-            countAdHtml += `
-                  광고 등록 요청 <span class="badge badge-danger">\${response.CountRequestWaiting}</span>
-               `;
-
-            $(".adStore").html(countAdHtml);
-         
-      }, "json");
-   }
-   /*[- end of function -]*/
+				$(".adStore").html(countAdHtml);
+				}
+		}, "json");
+	}
+	/*[- end of function -]*/
    
     /////////////// 요청대기 COUNT REST 끝    ////////////////
 
@@ -331,6 +332,7 @@
     justify-content: center;
 	align-items: flex-start;
 }
+
 
 </style>
 
@@ -582,39 +584,33 @@
                
 				
 				<!--///////////////// 검색 시작 ////////////////////-->
-                        <input type="text" id="mainSearchKeyword" class="form-control" value="${user.searchKeyword}" placeholder="키워드를 입력해 주세요." />
-								<div class="input-group-btn">
+				
+				<div class="blog__sidebar__search" style="text-align:right; margin-bottom: 0px;">
+                        <input type="text" id="mainSearchKeyword" value="${user.searchKeyword}" placeholder="ID or 이름 검색..." style="width: 300px; height: 30px;" />
+                        <button onclick="searchBoard(null)"><span class="icon_search"></span></button>
+                 </div>
+								<div >
 									<div class="btn-group" role="group">
 										<div class="dropdown dropdown-lg">
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
 											<div class="dropdown-menu dropdown-menu-right" role="menu">
 												<!--/* 검색 form */-->
-												<form id="searchForm" action="@{/board/list.do}" method="get" onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
+												<form id="searchForm" action="/admin/blog" method="get" onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
 													<!-- /* 현재 페이지 번호, 페이지당 출력할 데이터 개수, 페이지 하단에 출력할 페이지 개수 Hidden 파라미터 */ -->
 													<input type="hidden" name="currentPageNo" value="1" />
 													<input type="hidden" name="recordsPerPage" value="${user.recordsPerPage}" />
 													<input type="hidden" name="pageSize" value="${user.pageSize}" />
 						
-													<%-- <div class="form-group">
-														<label for="filter">검색 유형</label>
-														<select name="searchType" class="form-control">
-															<option value="" selected="${#strings.isEmpty( user.searchType )}">전체</option>
-															<option value="title" selected="${#strings.equals( user.searchType, 'title' )}">제목</option>
-															<option value="content" selected="${#strings.equals( user.searchType, 'content' )}">내용</option>
-															<option value="writer" selected="${#strings.equals( user.searchType, 'writer' )}">작성자</option>
-														</select>
-													</div> --%>
-													<div class="form-group">
+													
+													<div>
 														<label for="contain">키워드</label>
-														<input type="text" name="searchKeyword" class="form-control" value="${user.searchKeyword}" />
+														<input type="text" name="searchKeyword" value="${user.searchKeyword}" />
 													</div>
-													<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 												</form>
 											</div>
 										</div>
-										<button type="button" class="btn btn-primary" onclick="searchBoard(null)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 									</div>
 								</div>
+								
 				<!--///////////////// 검색 끝 ////////////////////-->
 				
 

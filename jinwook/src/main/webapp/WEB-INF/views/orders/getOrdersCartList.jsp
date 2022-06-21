@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -119,16 +119,20 @@
     <form class="form-horizontal">
     <section class="shoping-cart spad">
         <div class="container">
+          <div class="cartListstoreName">
+            	<c:forEach var="cart" items="${getCartList}" begin="0" end="0">
+				<strong style="font-size: 35px;">${cart.storeName}</strong>
+				<td hidden="storeNo" id="storeNo" name="storeNo" value="${cart.storeNo}"></td><
+				</c:forEach>
+				<br><br><br><br>
+			</div>
             <div class="row">
-              <div class="contact__form__title">
-             	<h1>${cart.storeName}</h1>
-           	  </div>
                 <div class="col-lg-12">
                     <div class="shoping__cart__table">
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product " style="width: 400px;" >상 품</th>
+                                    <th class="shoping__product " style="width: 400px;">상 품</th>
                                     <th class="text-center" style="width: 700px;">상 품 설 명</th>
                                     <th class="text-center" style="width: 300px;">가 격</th>
                                     <th class="text-center" style="width: 200px;">상 품 수 량</th>
@@ -144,7 +148,8 @@
                                   <c:set var="i" value="${ i+1 }" />
                                 <tr>
                                  <td hidden="cartNo" id="cartNo" name="cartNo" value="${cart.cartNo}">+cart.cartNo</td>
-                                 <td hidden="storeName" id="storeName" name="storeName" value="${cart.storeName}">+cart.storeName</td>                                    <td class="shoping__cart__item">
+                                  <td hidden="storeNo" id="storeNo" name="storeNo" value="${cart.storeNo}">+cart.storeNo</td>                    
+                                 <td class="shoping__cart__item">
                                         <img src="${path}/resources/static/img/cart/cart-1.jpg" style="margin-right: 30px;">
                                         <strong style="font-size: 20px;">${cart.product.prodName}</strong>
                                     </td>
@@ -190,7 +195,7 @@
                     <div class="shoping__checkout">
                         <h5>주문 총액</h5>
                         <ul>
-                            <li>주문 금액 <span id="orderPrices" name="orderPrice"><fmt:formatNumber value="${total}"/>원</span></li>
+                            <li>주문 금액 <span id="orderPrice" name="orderPrice"><fmt:formatNumber value="${total}"/>원</span></li>
                         </ul>
                         <a><button class="primary-btn" style="max-width: 100%; width: 477px;" 
                          id="button" name="orderPrice" value="${total}">주문하기</button></a>

@@ -2,12 +2,14 @@ package com.jinwook.home.service.request;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 
 public interface RequestService {
 
-	public void addRequestAddStore(Store store);  						// 상점 예비 등록 
+	public void addRequestAddStore(Store store, MultipartHttpServletRequest mpRequest) throws Exception;  						// 상점 예비 등록 
 	
 	public Request getRequestStore(int reqNo);							// 상점 등록 요청 보기
 

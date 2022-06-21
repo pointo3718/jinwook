@@ -54,6 +54,20 @@
 			)
 	</insert>
 	
+	<insert id="insertStoreFile" parameterType="hashMap">
+		INSERT INTO attach(
+			store_no,
+			ORG_FILE_NAME,
+			STORED_FILE_NAME,
+			FILE_SIZE
+		)VALUES(
+			#{storeNo},
+			#{ORG_FILE_NAME},
+			#{STORED_FILE_NAME},
+			#{FILE_SIZE}
+		)
+    </insert>
+	
 	
 	<!-- 최근 등록된 상점 가져오기 -->
 	<select id="getNewStore"  resultType="Store">

@@ -84,16 +84,17 @@ public class OrdersRestController {
 	
 	@GetMapping(value = "addOrdersCart/{prodNo}")
 	public int addOrdersCart(@ModelAttribute("cart")Cart cart,@PathVariable(value="prodNo",required = false) int prodNo,
-								@PathVariable(value="storeNo",required = false)int storeNo,HttpSession session) throws Exception {
+								@PathVariable(value="storeNo",required = false)int storeNo,HttpSession session,@PathVariable(value="storeName",required = false)String storeName) throws Exception {
 	User user = (User) session.getAttribute("user");
 	Product product =new Product();
 	product.setProdNo(prodNo);
-	Store store = new Store();
-	store.setStoreNo(storeNo);
 	cart.setProduct(product);
 	cart.setUserId(user.getUserId());
-	cart.setStore(store);
-	System.out.println(cart);
+	cart.setStoreNo(storeNo);
+	cart.setStoreName(storeName);
+	System.out.println(storeNo+"우우우우우우우");
+	System.out.println(storeName+"으으으으으으");
+	System.out.println(cart+"킼");
 	int result = ordersService.addOrdersCart(cart);
 	       return result;
 	}

@@ -1,5 +1,6 @@
 package com.jinwook.home.web.store;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Coupon;
+import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
@@ -24,13 +28,13 @@ import com.jinwook.home.service.store.StoreService;
 @RequestMapping("/store/*")
 public class StoreController {
 
-	@Autowired
-	@Qualifier("storeServiceImpl")
-	private StoreService storeService;
+   @Autowired
+   @Qualifier("storeServiceImpl")
+   private StoreService storeService;
 
-	public StoreController() {
-		System.out.println(this.getClass());
-	}
+   public StoreController() {
+      System.out.println(this.getClass());
+   }
 
 //   @GetMapping(value = "confirmPassword")
 //   public String updateStore() {
@@ -38,78 +42,78 @@ public class StoreController {
 //      return "store/confirmPassword";
 //   }
 
-	@GetMapping(value = "updateStore")
-	public String updateStore(@RequestParam("storeNo") int storeNo, Model model, HttpSession session) {
+   @GetMapping(value = "updateStore")
+   public String updateStore(@RequestParam("storeNo") int storeNo, Model model, HttpSession session) {
 
-		Store store1 = new Store();
+      Store store1 = new Store();
 
-		String userid = ((User) session.getAttribute("user")).getUserId();
+      String userid = ((User) session.getAttribute("user")).getUserId();
 
-		store1.setUserId(userid);
+      store1.setUserId(userid);
 
-		if ("false".equals(store1.getStoreStatus())) {
-			// TODO => 등록된 상점이 없다는 메세지 전달 후 메인페이지로 이동
-			return "redirect:/../index";
-		}
+      if ("false".equals(store1.getStoreStatus())) {
+         // TODO => 등록된 상점이 없다는 메세지 전달 후 메인페이지로 이동
+         return "redirect:/../index";
+      }
 
-		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+      List<Store> storeInfo = storeService.getStoreInfo(storeNo);
 
-		model.addAttribute("storeInfo", storeInfo);
+      model.addAttribute("storeInfo", storeInfo);
 
-		List<Store> store = storeService.getStore(storeNo);
+      List<Store> store = storeService.getStore(storeNo);
 
-		model.addAttribute("store", store);
+      model.addAttribute("store", store);
 
-		return "store/updateStore";
-	}
+      return "store/updateStore";
+   }
 
-	@GetMapping(value = "addStoreProduct")
-	public String addStoreProduct(@RequestParam("storeNo") int storeNo, Model model, HttpSession session) {
+   @GetMapping(value = "addStoreProduct")
+   public String addStoreProduct(@RequestParam("storeNo") int storeNo, Model model, HttpSession session) {
 
-		Store store1 = new Store();
+      Store store1 = new Store();
 
-		String userid = ((User) session.getAttribute("user")).getUserId();
+      String userid = ((User) session.getAttribute("user")).getUserId();
 
-		store1.setUserId(userid);
+      store1.setUserId(userid);
 
-		if ("false".equals(store1.getStoreStatus())) {
-			// TODO => 등록된 상점이 없다는 메세지 전달 후 메인페이지로 이동
-			return "redirect:/../index";
-		}
+      if ("false".equals(store1.getStoreStatus())) {
+         // TODO => 등록된 상점이 없다는 메세지 전달 후 메인페이지로 이동
+         return "redirect:/../index";
+      }
 
-		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+      List<Store> storeInfo = storeService.getStoreInfo(storeNo);
 
-		model.addAttribute("storeInfo", storeInfo);
+      model.addAttribute("storeInfo", storeInfo);
 
-		List<Store> store = storeService.getStore(storeNo);
+      List<Store> store = storeService.getStore(storeNo);
 
-		model.addAttribute("store", store);
+      model.addAttribute("store", store);
 
-		return "store/addStoreProduct";
-	}
+      return "store/addStoreProduct";
+   }
 
-	@PostMapping(value = "updateStore")
-	public String updateStore(@RequestParam("storeNo") int storeNo, Store Store, Model model) {
+   @PostMapping(value = "updateStore")
+   public String updateStore(@RequestParam("storeNo") int storeNo, Store Store, Model model) {
 
-		Store store = new Store();
-		store.setStoreNo(storeNo);
+      Store store = new Store();
+      store.setStoreNo(storeNo);
 
-		storeService.updateStore(Store);
+      storeService.updateStore(Store);
 
-		model.addAttribute("Store", Store);
+      model.addAttribute("Store", Store);
 
-		return "store/updateStore";
-	}
+      return "store/updateStore";
+   }
 
-	@PostMapping(value = "addStoreProduct")
-	public String addStoreProduct(@ModelAttribute("product") Product product) {
+   @PostMapping(value = "addStoreProduct")
+   public String addStoreProduct(@ModelAttribute("product") Product product) {
 
-		product.setSoldout(true);
-		storeService.addStoreProduct(product);
+      product.setSoldout(true);
+      storeService.addStoreProduct(product);
 
-		return "store/addStoreProduct";
+      return "store/addStoreProduct";
 
-	}
+   }
 
 //   @PostMapping(value = "updateStoreProduct")
 //   public String updateStoreProduct(@RequestParam("prodNo") int prodNo , Product product, Model model) {
@@ -131,68 +135,68 @@ public class StoreController {
 //      return "store/addStoreProduct";
 //   }
 
-	@PostMapping(value = "isSoldout")
-	public String isSoldout(@RequestParam("prodNo") int prodNo, Product product, Model model) {
+   @PostMapping(value = "isSoldout")
+   public String isSoldout(@RequestParam("prodNo") int prodNo, Product product, Model model) {
 
-		storeService.isSoldout(product);
+      storeService.isSoldout(product);
 
-		model.addAttribute("product", product);
+      model.addAttribute("product", product);
 
-		return "common/myPageTop";
-	}
+      return "common/myPageTop";
+   }
 
-	@PostMapping(value = "isOpen")
-	public String isOpen(@RequestParam("storeNo") int storeNo, Store store, Model model) {
+   @PostMapping(value = "isOpen")
+   public String isOpen(@RequestParam("storeNo") int storeNo, Store store, Model model) {
 
-		storeService.isOpen(store);
+      storeService.isOpen(store);
 
-		model.addAttribute("store", store);
+      model.addAttribute("store", store);
 
-		return "common/myPageTop";
-	}
+      return "common/myPageTop";
+   }
 
-	@PostMapping(value = "addOrdersCoupon")
-	public String addOrdersCoupon(@RequestParam("couponNo") int couponNo, Model model) {
+   @PostMapping(value = "addOrdersCoupon")
+   public String addOrdersCoupon(@RequestParam("couponNo") int couponNo, Model model) {
 
-		storeService.addOrdersCoupon(couponNo);
+      storeService.addOrdersCoupon(couponNo);
 
-		model.addAttribute("couponNo", couponNo);
+      model.addAttribute("couponNo", couponNo);
 
-		return "orders/addOrders";
-	}
+      return "orders/addOrders";
+   }
 
-	@GetMapping(value = "getStore")
-	public String getStore(@RequestParam("storeNo") int storeNo, Model model) {
+   @GetMapping(value = "getStore")
+   public String getStore(@RequestParam("storeNo") int storeNo, Model model) {
 
-		List<Store> getStore = storeService.getStore(storeNo);
-		model.addAttribute("getStore", getStore);
+      List<Store> getStore = storeService.getStore(storeNo);
+      model.addAttribute("getStore", getStore);
 
-		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+      List<Store> storeInfo = storeService.getStoreInfo(storeNo);
 
-		model.addAttribute("storeInfo", storeInfo);
+      model.addAttribute("storeInfo", storeInfo);
 
-		return "store/getStore";
-	}
+      return "store/getStore";
+   }
 
-	@GetMapping(value = "getStoreWallet")
-	public String getStoreWallet(@RequestParam("storeNo") int storeNo, Store store, Model model, HttpSession session) {
+   @GetMapping(value = "getStoreWallet")
+   public String getStoreWallet(@RequestParam("storeNo") int storeNo, Store store, Model model, HttpSession session) {
 
-		String userid = ((User) session.getAttribute("user")).getUserId();
+      String userid = ((User) session.getAttribute("user")).getUserId();
 
-		store.setUserId(userid);
+      store.setUserId(userid);
 
-		List<Store> getStoreRefund = storeService.getStoreRefund(storeNo);
-		model.addAttribute("getStoreRefund", getStoreRefund);
+      List<Store> getStoreRefund = storeService.getStoreRefund(storeNo);
+      model.addAttribute("getStoreRefund", getStoreRefund);
 
-		List<Store> getStoreWallet = storeService.getStoreWallet(store);
-		model.addAttribute("getStoreWallet", getStoreWallet);
+      List<Store> getStoreWallet = storeService.getStoreWallet(store);
+      model.addAttribute("getStoreWallet", getStoreWallet);
 
-		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+      List<Store> storeInfo = storeService.getStoreInfo(storeNo);
 
-		model.addAttribute("storeInfo", storeInfo);
+      model.addAttribute("storeInfo", storeInfo);
 
-		return "store/getStoreWallet";
-	}
+      return "store/getStoreWallet";
+   }
 
 //   @GetMapping(value = "getStoreRefund")
 //   public String getStoreRefund(@RequestParam("storeNo") int storeNo, Model model) {
@@ -203,30 +207,20 @@ public class StoreController {
 //      return "store/getStoreRefund";
 //   }
 
-	@GetMapping(value = "getCouponList")
-	public String getCouponList(@RequestParam("userId") String userId, Model model, HttpSession session) {
+   @GetMapping(value = "getCouponList")
+   public String getCouponList(@RequestParam("userId") String userId, Model model, HttpSession session) {
 
-		Store store = new Store();
+      Store store = new Store();
 
-		String userid = ((User) session.getAttribute("user")).getUserId();
+      String userid = ((User) session.getAttribute("user")).getUserId();
 
-		store.setUserId(userid);
+      store.setUserId(userid);
 
-		List<Coupon> couponList = storeService.getCouponList(userId);
-		model.addAttribute("couponList", couponList);
+      List<Coupon> couponList = storeService.getCouponList(userId);
+      model.addAttribute("couponList", couponList);
 
 
-		return "store/getCouponList";
-	}
-	
-	@GetMapping(value = "/../../index")
-	public String getStoreListByOrderCount(Model model) {
-
-		List<Store> storeList = storeService.getStoreListByOrderCount();
-
-		model.addAttribute("storeList", storeList);
-
-		return "/";
-	}
+      return "store/getCouponList";
+   }
 
 }
