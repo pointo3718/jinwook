@@ -25,7 +25,7 @@ public class User extends CommonDTO {
 	private String grade;
 	private int jpBalance;
 	private String jpPassword;
-	private LocalDate regDate;
+	private Date regDate;
 	private Date blacklistRegDate;
 	private Date blacklistEndDate;
 	private boolean noticeStatus;

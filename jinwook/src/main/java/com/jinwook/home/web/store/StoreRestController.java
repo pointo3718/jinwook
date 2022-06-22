@@ -330,6 +330,38 @@ public class StoreRestController {
       return jsonObj;
    }
    
+   
+   ////////////////// 갖고 있는 쿠폰 개수 ///////////////////
+	@GetMapping( value={"/getCouponCount"} )
+	public JsonObject getCouponCount(HttpSession session)throws Exception{
+  
+	   System.out.println("/admin/getCouponCount : GET ");
+	
+	   JsonObject jsonObj = new JsonObject();
+       User user = (User) session.getAttribute("user");
+       String userId = user.getUserId();
+	   
+	   try { 	
+			int getCouponCount = storeService.getCouponCount(userId);
+			System.out.println("   ::  "+getCouponCount);
+			jsonObj.addProperty("getCouponCount", getCouponCount);
+	
+		} catch (DataAccessException e) {
+				jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+	
+		} catch (Exception e) {
+				jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+		
+	   System.out.println("갖고있는 쿠폰 개수 컨트롤러 통과");
+		return jsonObj;
+	}
+   
+   
+   
+   
+   
+   
       @GetMapping( value="/getStoreWallet/{storeNo}/{orderDateStart}/{orderDateEnd}")
       public JsonObject getStoreWallet(@PathVariable(value="storeNo",required = false) int storeNo,
                                  @PathVariable(value="orderDateStart",required = false) String orderDateStart,

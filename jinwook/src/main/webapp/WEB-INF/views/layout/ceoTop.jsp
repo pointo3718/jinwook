@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -145,14 +145,13 @@ label {
 }
 
 .img_wrap {
-            width: 300px;
-            margin-top: 50px;
-        }
-.img_wrap img {
-            max-width: 100%;
-        }
+   width: 300px;
+   margin-top: 50px;
+}
 
-        
+.img_wrap img {
+   max-width: 100%;
+}
 </style>
 
 <script type="text/javascript">
@@ -244,12 +243,12 @@ document.detailForm.submit();
 <body>
 
 
-    <!-- 상점 등록 Modal -->
+  <!-- 상점 등록 Modal -->
     <div class="modal" id="addRequestStoreModal" aria-hidden="true" style="display: none; z-index: 1060;">
        <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-            <button type="button" class="close" data-dismis style="margin-left: 0px; text-align: center;">상점 등록 요청<s="modal" aria-label="Close">
+            <button type="button" class="close" data-dismis style="margin-left: 0px; text-align: center;">상점 등록 요청<s="modal" aria-label="Close"></s>
            </button>
             </div><div class="container"></div>
             <div class="modal-body">
@@ -360,7 +359,7 @@ document.detailForm.submit();
                            <div class="col-sm-6">
                               <textarea class="form-control" id="storeIntro" name="storeIntro" cols="20" rows="5" 
                               placeholder="상점 소개를 50자 내로 입력해주세요. &#13;&#10; &#13;&#10; ex) 진욱이네는 산지직송 당일판매를 원칙으로 합니다. &#13;&#10; ex) 진욱이네 오픈 기념 10% 할인 해드려요~" >
-                              </textarea><textarea class="form-control" id="storeIntro" name="storeIntro" cols="20" rows="4" placeholder="상점 소개를 50자 내로 입력해주세요."></textarea>
+                              </textarea>
                         <div class="text-right" id="test_cnt">(0 / 50)</div>
                            </div>
                         </div>
@@ -394,7 +393,6 @@ document.detailForm.submit();
                               <span class="btn btn-default btn-file"
                                     style="padding-left: 0px; padding-bottom: 15px;">
                                  <input type="file"  name="file" value=""/>
-                                 <input type="file" id="input_img" />
                                  <div>
                                       <div class="img_wrap">
                                        <img id="img" />
@@ -499,176 +497,187 @@ document.detailForm.submit();
     </div>
     <!-- 상점 등록 Modal -->
 
- <!-- ceoTop Section Begin -->
-   <section class="breadcrumb-section set-bg" 
-      style="background-color: #F2F2F2; padding-left: 110px;padding-right: 110px;" >
-      <c:forEach var="store" items="${storeInfo}">
-         <div class="container">
+   <!-- ceoTop Section Begin -->
+   <section class="breadcrumb-section set-bg"
+      style="background-color: #F2F2F2; padding-left: 110px; padding-right: 110px;">
+      <div class="container">
 
-               
-              
-<div class="row" style="justify-content: space-between;">
-          <table class="table table-borderless"
+
+
+         <div class="row" style="justify-content: space-between;">
+            <table class="table table-borderless"
                style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
                <thead>
                   <tr>
 
-                     <th scope="col"><strong class="mytop01" style="font-size:20px;">${store.user.userName} 사장님</strong></th>
+                     <th scope="col"><strong class="mytop01"
+                        style="font-size: 20px;">${user.userName} 사장님</strong></th>
 
                   </tr>
                </thead>
                <tbody>
                   <tr>
 
-                     <td><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;진욱이네와 처음 만난 날</strong></td>
+                     <td><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;진욱이네와 처음
+                           만난 날</strong></td>
 
                   </tr>
                   <tr>
 
-                     <td><span style="font-size:25px; color: #7fad39; margin-left:190px" >${store.user.regDate}</span></td>
+                     <td><span
+                        style="font-size: 25px; color: #7fad39; margin-left: 190px">${user.regDate}</span></td>
 
                   </tr>
 
                </tbody>
             </table>
-            
+
 
             <table class="table table-borderless"
                style="background-color: white; width: 350px; height: 170px; justify-content: space-around">
                <thead>
                   <tr>
 
-                     <th scope="col"><span style="font-size:20px;">진욱페이&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></th>
+                     <th scope="col"><span style="font-size: 20px;">진욱페이&nbsp;<i
+                           class="fa fa-chevron-right" aria-hidden="true"></i></span></th>
 
                   </tr>
                </thead>
                <tbody>
                   <tr>
 
-                     <td style="padding-top: 60px;"><span style="font-size:25px; color: #7fad39; margin-left:230px" ><fmt:formatNumber value="${store.user.jpBalance}"/></span>원</td>
+                     <td style="padding-top: 60px;"><span
+                        style="font-size: 25px; color: #7fad39; margin-left: 230px"><fmt:formatNumber
+                              value="${user.jpBalance}" /></span>원</td>
 
                   </tr>
 
 
                </tbody>
             </table>
-            
-            
-             <c:if test="${store.storeStatus=='3'}">
-            
-                           <table class="table table-borderless" style="background-color: white; width: 350px; height: 170px; justify-content: space-around table-layout:fixed">
-                  <thead>
-                     <tr>
-                     
 
-                        <th scope="col" style="width: 124px;">
-                        <span style="font-size:20px;">${store.storeName}&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></th>
+            <c:forEach var="store" items="${storeInfo}">
+               <c:if test="${store.storeStatus=='2'}">
 
-                        <th scope="col" style="padding-left: 70px; padding-right: 0px;">
-                        <button type="button" id="open"
-                                             data-value="${store.storeNo}"
-                                             class="btn btn-success btn-sm">오픈</button> 
-                                             <button type="button" id="close"
-                                             data-value="${store.storeNo}"
-                                             class="btn btn-danger btn-sm">마감</button></th>
-                                             <th style="padding-left: 0px; padding-right: 0px;">
-                                             
-                                            <c:if test="${store.open==false}">
-                                     <strong><img
-                                          src="${path}/resources/static/img/close.png" style="width:40px; height:40px; padding-left:5px"></strong>
-                                       </c:if>
-                                 <c:if test="${store.open==true}">
-                                          <strong><img
-                                          src="${path}/resources/static/img/open.png" style="width:40px; height:40px; padding-left:5px"></strong>                     
-                                          </c:if>  
-                                                        
-                                             </th>
-                                             
-                                             
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-   
-                        <td colspan="2"><strong>${store.storeAddr}</strong></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
+                  <table class="table table-borderless"
+                     style="background-color: white; width: 350px; height: 170px; justify-content: space-around table-layout:fixed">
+                     <thead>
+                        <tr>
 
-                        <td><strong>총 매출액</strong></td>
-                        <td colspan=2 style="padding-left: 80px;padding-right: 0px;"><span style="font-size:25px; color: #7fad39;" ><fmt:formatNumber value="${store.totalEarn}"/></span>원</td>
-                        <td></td>
-                     </tr>
 
-                  </tbody>
-               </table>
-            
+                           <th scope="col" style="width: 124px;"><span
+                              style="font-size: 20px;">${store.storeName}&nbsp;<i
+                                 class="fa fa-chevron-right" aria-hidden="true"></i></span></th>
+
+                           <th scope="col" style="padding-left: 70px; padding-right: 0px;">
+                              <button type="button" id="open" data-value="${store.storeNo}"
+                                 class="btn btn-success btn-sm">오픈</button>
+                              <button type="button" id="close" data-value="${store.storeNo}"
+                                 class="btn btn-danger btn-sm">마감</button>
+                           </th>
+                           <th style="padding-left: 0px; padding-right: 0px;"><c:if
+                                 test="${store.open==false}">
+                                 <strong><img
+                                    src="${path}/resources/static/img/close.png"
+                                    style="width: 40px; height: 40px; padding-left: 5px"></strong>
+                              </c:if> <c:if test="${store.open==true}">
+                                 <strong><img
+                                    src="${path}/resources/static/img/open.png"
+                                    style="width: 40px; height: 40px; padding-left: 5px"></strong>
+                              </c:if></th>
+
+
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+
+                           <td colspan="2"><strong>${store.storeAddr}</strong></td>
+                           <td></td>
+                           <td></td>
+                        </tr>
+                        <tr>
+
+                           <td><strong>총 매출액</strong></td>
+                           <td colspan=2 style="padding-left: 80px; padding-right: 0px;"><span
+                              style="font-size: 25px; color: #7fad39;"><fmt:formatNumber
+                                    value="${store.totalEarn}" /></span>원</td>
+                           <td></td>
+                        </tr>
+
+                     </tbody>
+                  </table>
+
                </c:if>
-               
-               <c:if test="${store.storeStatus=='1'}">   
-               <table class="table table-borderless" style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
 
-                  <tbody>
-                     <tr>
-   
-                        <td></td>
-                        <td style="padding-top: 60px; padding-left: 90px;">            
-                        <a id="userdetail" data-toggle="modal" href="#addRequestStoreModal" data-userid=""><strong style="font-size:25px">상점 등록</strong></a></td>
-                        <td></td>
-                     </tr>
-   
+               <c:if test="${store.storeStatus=='4'}">
+                  <table class="table table-borderless"
+                     style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
 
-                  </tbody>
-               </table>
+                     <tbody>
+                        <tr>
+
+                           <td></td>
+                           <td style="padding-top: 60px; padding-left: 90px;"><a
+                              id="userdetail" data-toggle="modal"
+                              href="#addRequestStoreModal" data-userid=""><strong
+                                 style="font-size: 25px">상점 등록</strong></a></td>
+                           <td></td>
+                        </tr>
+
+
+                     </tbody>
+                  </table>
                </c:if>
-               
-               <c:if test="${store.storeStatus=='2'}">   
-               <table class="table table-borderless" style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
-                  <thead>
-                     <tr>
 
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-   
-                        <td></td>
-                        <td style="padding-top: 45px; padding-left: 25px;"><strong style="font-size:25px;">상점 등록 대기중입니다.</strong></td>
-                        <td></td>
-                     </tr>
-                     <tr>
+               <c:if test="${store.storeStatus=='1'}">
+                  <table class="table table-borderless"
+                     style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
+                     <thead>
+                        <tr>
 
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
+                           <th scope="col"></th>
+                           <th scope="col"></th>
+                           <th scope="col"></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
 
-                  </tbody>
-               </table>
-               </c:if>   
-               
-                  </div>            
-               
-               
-               
-               
-               </div>
-      
-         <!-- /container -->
-         
-         
-      </c:forEach>
-      
+                           <td></td>
+                           <td style="padding-top: 45px; padding-left: 25px;"><strong
+                              style="font-size: 25px;">상점 등록 대기중입니다.</strong></td>
+                           <td></td>
+                        </tr>
+                        <tr>
+
+                           <td></td>
+                           <td></td>
+                           <td></td>
+                        </tr>
+
+                     </tbody>
+                  </table>
+               </c:if>
+            </c:forEach>
+
+         </div>
+
+
+
+
+      </div>
+
+      <!-- /container -->
+
+
+
 
    </section>
    <!-- ceoTop Section End -->
-   
-   
-<script>
+
+
+   <script>
 
 ////////////////상점등록 REST 시작 (수정중) /////////////////
 var USERID="";
