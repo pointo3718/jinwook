@@ -333,6 +333,11 @@
 	align-items: flex-start;
 }
 
+input.form-control[readonly] {
+    background-color: #ffffff;
+    opacity: 1;
+}
+
 
 </style>
 
@@ -354,7 +359,7 @@
             <button type="button" class="close" data-dismis style="margin-left: 0px; text-align: center;">회원 상세<s="modal" aria-label="Close">
 	        </button>
             </div><div class="container"></div>
-            <div class="modal-body">
+            <div class="modal-body" >
           
          <div class="col-md-10 order-md-1">
           <div class="col-md-12 mb-3">

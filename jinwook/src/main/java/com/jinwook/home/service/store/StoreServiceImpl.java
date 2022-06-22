@@ -111,7 +111,14 @@ public class StoreServiceImpl implements StoreService {
 
 		return couponList;
 	}
+	
+	@Override
+	public int getCouponCount(String userId) {
+		
+		return storeMapper.getCouponCount(userId);
+	}
 
+	
 	@Override
 	public List<Store> getStore(int storeNo) {
 

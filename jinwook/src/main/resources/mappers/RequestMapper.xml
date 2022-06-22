@@ -38,7 +38,7 @@
 				, #{storeName}
 				, #{storeAddr}
 				, #{storeType}
-				, 2 <!-- storeStatus (대기중) -->
+				, 1 <!-- storeStatus (대기중) -->
 				, #{storePhone}
 				, #{storeIntro}
 				, #{storeStart}
@@ -121,7 +121,7 @@
 	<update id="updateRequestAddStore" parameterType="Store">
 		UPDATE store
 		SET
-			store_status = 3
+			store_status = 2
 		WHERE
 			store_no = #{storeNo} 
 	</update>
@@ -210,7 +210,7 @@
 	<update id="deleteStore" parameterType="Request">
 		UPDATE store
 		SET
-			store_status = false
+			store_status = 0
 		WHERE
 			store_no = #{storeNo}
 	</update>

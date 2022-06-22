@@ -37,6 +37,8 @@ public interface StoreService {
 	
 	public List<Coupon> getCouponList(String userId);
 	
+	public int getCouponCount(String userId);		// 갖고있는 쿠폰개수
+	
 	public List<Store> getStore(int storeNo);
 	
 	public List<Store>  getStoreInfo(String userId);

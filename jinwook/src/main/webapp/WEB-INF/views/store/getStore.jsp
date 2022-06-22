@@ -13,6 +13,8 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>상점 상세</title>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- Google Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -276,20 +278,6 @@ label {
 
 
 <script type="text/javascript">
-	//===수량 버튼===//
-	$(document).ready(function() {
-		$('.count').prop('disabled', true);
-		$(document).on('click', '.plus', function() {
-			$('.count').val(parseInt($('.count').val()) + 1);
-		});
-		$(document).on('click', '.minus', function() {
-			$('.count').val(parseInt($('.count').val()) - 1);
-			if ($('.count').val() == 0) {
-				$('.count').val(1);
-			}
-		});
-	});
-
 	//===url 공유====//
 
 	function clip() {
@@ -309,19 +297,27 @@ label {
 
 	function fncAddOrdersCart(e) {
 		const prodNo = $(e).data("value");
+		const storeNo = $("#stoNo").data("valuese");
 		const storeName = $("#stoName").data("values");
+		const prodCount = $("#count").data("count");
 
 		const passdata = {
 			'prodNo' : prodNo,
-			'storeName' : storeName
+			'storeNo' : storeNo,
+			'storeName' : storeName,
+			'prodCount' : prodCount
+			/* 'prodCount' : prodCount */
 		};
-		console.log(storeName);
+		console.log(storeNo);
 		console.log(prodNo);
+		console.log(storeName);
+		console.log(prodCount);
+		console.log(passdata);
+		/* console.log(prodCount); */
 		$.ajax({
 			anyne : true,
-			url : "/orders/addOrdersCart/" + prodNo,
+			url : "/orders/addOrdersCart/" + prodNo+"/"+storeNo+"/"+storeName+"/"+prodCount,
 			contentType : 'application/json',
-			data : JSON.stringify(passdata).e,
 			dataType : "text",
 			success : function(result) {
 				if (result != null) {
@@ -364,11 +360,11 @@ label {
 					<thead>
 
 						<tr>
-							<td></td>
+							<td><span  id="stoNo" data-valuese="${store.storeNo}"></span></td>
 							<td></td>
 							<th scope="row" style="width: 108px;"><span
 								style="color: blsck; font-size: 20px">상점이름</span></th>
-							<td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storeName}</strong></span></td>
+							<td><span style="color: #2E2E2E; font-size: 15px"><strong id="stoName" data-values="${store.storeName}">${store.storeName}</strong></span></td>
 							<td><c:if test="${store.open==true}">
 									<button type="button" class="btn btn-light">상점오픈</button>
 								</c:if> <c:if test="${store.open==false}">
@@ -473,8 +469,8 @@ label {
 						data-setbg="${path}/resources/static/img/product/product-2.jpg"
 						width="300" height="300">
 						<ul class="product__item__pic__hover">
-							<li><i class="fa fa-shopping-cart"
-								onClick="fncAddOrdersCart(this)"></i></a></li>
+							<li><i class="fa fa-shopping-cart" data-value="${store.product.prodNo}" 
+								onClick="fncAddOrdersCart(this)"></i></li>
 						</ul>
 					</div>
 					<div class="product__item__text">
@@ -495,13 +491,34 @@ label {
 									${store.product.price}원
 								</c:if>
 
-
-
 							<div class="qty mt-5">
-								<span class="minus bg-dark">-</span> <input type="number"
-									class="count" name="qty" value="1"> <span
-									class="plus bg-dark">+</span>
+								<span class="minus bg-dark" onClick="minusCount(this)" data-prodno="${store.product.prodNo}">-</span> 
+								<input type="number" class="count" id="count" name="count" data-count="${prodCount}" value="${store.cart.prodCount+0}"> 
+								<span class="plus bg-dark" onClick="plusCount(this)" data-prodno="${store.product.prodNo}">+</span>
 							</div>
+							<script type="text/javascript">
+								function minusCount(e){
+									console.log(e);
+									const prodNo = $(e).data("prodno");
+									var prodCount = $(e).parent("div").find("input[name='count']").val();
+									prodCount--;
+									if(prodCount<0){
+										swal("진욱이네","상품수량은 0보다 작아질수 없습니다.");
+										return;
+									}
+									console.log(prodCount+"--");
+									$(e).parent("div").find("input[name='count']").val(prodCount);
+								}
+								
+								function plusCount(e){
+									console.log(e);
+									const prodNo = $(e).data("prodno");
+									var prodCount = $(e).parent("div").find("input[name='count']").val();
+									prodCount++;
+									console.log(prodCount+"++");
+									$(e).parent("div").find("input[name='count']").val(prodCount);
+								}
+							</script>
 						</h5>
 					</div>
 				</div>

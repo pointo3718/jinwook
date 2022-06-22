@@ -238,8 +238,6 @@ public class AdminRestController {
 	}
 	}
 
-
-
    ///////////////// 신고 등록  //////////////////	
 
 
