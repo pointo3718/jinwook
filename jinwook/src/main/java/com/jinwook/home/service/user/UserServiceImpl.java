@@ -1,7 +1,6 @@
 package com.jinwook.home.service.user;
 
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +13,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.jinwook.home.mapper.UserMapper;
 import com.jinwook.home.service.domain.User;
@@ -151,7 +151,7 @@ public class UserServiceImpl implements UserService{
 	         String content= " ";
 	         content = user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r ";
 	         content += "<br><br> ";
-	         content += "<img src=\"/Users/choiingyu/Downloads/logo.png\"> ";
+	         content += "<img src=\"+${path}+"+"/resources/static/img/logo.png\"> ";
 	         content += "<br><br> ";
 	        content += "요청하신 아이디를 안내드립니다.\n ";
 	        content += "<br><br> ";
@@ -199,9 +199,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void sendPasswordEmail(User user) throws Exception{
-		MimeMessage mimeMessage = mailSender.createMimeMessage();
 		
-		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+		MimeMessage mimeMessage = mailSender.createMimeMessage();
 		
 		try {
 	         
@@ -212,7 +211,8 @@ public class UserServiceImpl implements UserService{
 	         String content= " ";
 	         content = user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r ";
 	        content += "<br><br>  ";
-	        content += "[진욱이네] 인증번호는" + "["+randomNumber+"]" + "입니다." ;
+	        content += "[진욱이네] ";
+	        content += "인증번호는" + " ["+user.getAuthNumber()+"] " + "입니다." ;
 	        content += "<br><br>  ";
 	        content += "인증 완료 후 비밀번호 재설정을 완료해 주세요.\n ";
 //	         StringBuffer sb = new StringBuffer();
@@ -224,7 +224,6 @@ public class UserServiceImpl implements UserService{
 //					+ " \n"
 //					+ "<a href='http://localhost:8082/user/updatePassword'>진욱이네</a><br/>\n ");
 //			 sb.append(System.lineSeparator());
-	         
 	         
 	         mimeMessageHelper.setText(content, true);
 //	         mailSender.send(mimeMessage);

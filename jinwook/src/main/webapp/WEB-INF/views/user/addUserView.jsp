@@ -162,7 +162,6 @@
 						/* alert("중복된 아이디입니다."); */
 						$('.id_already').css("display","inline-block");
 	                    $('.id_ok').css("display", "none");
-	                    //유저아이디초기화시키
 					}
 				},
 				 error:function(){

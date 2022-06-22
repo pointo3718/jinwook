@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -108,44 +109,6 @@ public class UserRestController {
 		return user;
 	}
 	
-//	@RequestMapping( value="json/listUser" )
-//	public Map listUser( @RequestBody Search search ) throws Exception{
-//		
-//		System.out.println("/user/listUser : GET / POST");
-//		
-//		if(search.getCurrentPage() ==0 ){
-//			search.setCurrentPage(1);
-//		}
-//		search.setPageSize(pageSize);
-//		
-//		// Business logic ����
-//		Map<String , Object> map=userService.getUserList(search);
-//		
-//		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-//		System.out.println(resultPage);
-//		
-//		// Model �� View ����
-////		model.addAttribute("list", map.get("list"));
-////		model.addAttribute("resultPage", resultPage);
-////		model.addAttribute("search", search);
-//		
-//		return map;
-//	}
-	
-//	@RequestMapping( value="json/checkDuplication", method=RequestMethod.POST )
-//	public Map checkDuplication( @RequestBody String userId , Model model ) throws Exception{
-//		
-//		System.out.println("/user/checkDuplication : POST");
-//		//Business Logic
-//		boolean result=userService.checkId(userId);
-//		// Model �� View ����
-////		model.addAttribute("result", new Boolean(result));
-////		model.addAttribute("userId", userId);
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("result", result);
-//		map.put("userId", userId);
-//		return map;
-//	}
 	
 	//아이디 중복 확인 
 	@PostMapping("checkId")
@@ -193,18 +156,23 @@ public class UserRestController {
 	        userService.sendIdEmail(user);
 	    }
 	    
+	    System.out.println("===================아이디 찾기 이메일 보내기 성공===================");
+	    
 	    return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
 	//비밀번호 찾기 - 이메일 인증 보내기
 	@PostMapping("findPasswordEmail")
-	public ResponseEntity<Object> findPasswordEmail(@ModelAttribute("user") User user, HttpSession session) throws Exception{
+	public User findPasswordEmail(@ModelAttribute("user") User user, HttpSession session, Model model) throws Exception{
+		
 		System.out.println("=====SEND METHOD=====");
 		User dbUser =userService.findPasswordEmail(user);
 		user = dbUser;
 		
-	    
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
 		
+		user.setAuthNumber(randomNumber);
+		model.addAttribute("authNumber", user.getAuthNumber());
 		if(dbUser != null) {
 			userService.sendPasswordEmail(user);
 		}
@@ -223,105 +191,106 @@ public class UserRestController {
 	    session.setAttribute("authNum", authNumMap);
 	    System.out.println(authNumMap);
 		
-		System.out.println("--------------------------------------------------------"+user);
 		
-		return new ResponseEntity<Object>(user, HttpStatus.OK);
+		ResponseEntity<Object> res = new ResponseEntity<Object>(HttpStatus.OK);
+		user.setRes(res);
+		System.out.println("--------------------------------------------------------"+user);
+		System.out.println("===================비민번호 찾기 이메일 보내기 성공===================");
+		
+		return user;
 	}
+		
+	//아이디 찾기 - 휴대폰 인증 문자 보내기
+		@GetMapping("findIdPhoneSend")
+		@ResponseBody
+		public User findIdPhoneSend(@RequestParam("phone") String phone, @RequestParam ("userName") String userName) throws Exception { // 휴대폰 문자보내기
+			int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+			User user = new User();
+			
+			user.setUserName(userName);
+			user.setPhone(phone);
+			
+			User dbUser = userService.findIdPhone(user);
+			
+			if(dbUser.getUserName()== userName && dbUser.getPhone()==phone) {
+				
+				userService.certifiedPhoneNumber(phone,randomNumber);
+			}
+			user = dbUser;
+			
+			System.out.println("-------------"+randomNumber+"------------");
+			
+			user.setAuthNumber(randomNumber);
+			
+			System.out.println("===================아이디 찾기 문자 보내기 성공===================");
+			
+			return user;
+		}
+		
+		//비밀번호 찾기 - 휴대폰 인증 문자 보내기
+		@GetMapping("findPasswordPhoneSend")
+		@ResponseBody
+		public User findPasswordPhoneSend(@RequestParam("phone") String phone, @RequestParam ("userId") String userId) throws Exception { // 휴대폰 문자보내기
+			int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+			User user = new User();
+			
+			user.setUserId(userId);
+			user.setPhone(phone);
+			
+			User dbUser = userService.findPasswordPhone(user);
+			
+			if(dbUser.getUserId()== userId && dbUser.getPhone()==phone) {
+				
+				userService.certifiedPhoneNumber(phone,randomNumber);
+			}
+			user = dbUser;
+			user.setAuthNumber(randomNumber);
+			
+			System.out.println(user);
+			System.out.println("-------------"+randomNumber+"------------");
+			System.out.println("===================비밀번호 찾기 문자 보내기 성공===================");
+			return user;
+		}
+		
+		//문자인증 만료 시간 
 		
 	
 	// 인증번호 보내기
-	@PostMapping("/send/authNum")
-	private ResponseEntity<String> authNum(String phone, String email, HttpSession session) throws Exception{
-	    String authNum = "";
-	    for(int i=0;i<6;i++) {
-	        authNum += (int)(Math.random() * 10);
-	    }
-	    
-	    System.out.println("인증번호 : " + authNum);
-	    
-	    // 전화번호로 인증번호 보내기 추가
-	    if(phone != null) {
-//				System.out.println("전화번호로 인증번호 보내기");
-	 
-	        
-	        
-	    // 이메일로 인증번호 보내기
-	    } else if(email != null) {
-//				System.out.println("이메일로 인증번호 보내기");
-	        userService.sendAuthNum(email, authNum);
-	    }
-	    
-	    
-	    Map<String, Object> authNumMap = new HashMap<>();
-	    long createTime = System.currentTimeMillis(); // 인증번호 생성시간
-	    long endTime = createTime + (300 *1000);	// 인증번호 만료시간
-	    
-	    authNumMap.put("createTime", createTime);
-	    authNumMap.put("endTime", endTime);
-	    authNumMap.put("authNum", authNum);
-	    
-	    session.setMaxInactiveInterval(300);
-	    session.setAttribute("authNum", authNumMap);
-	    
-	    return new ResponseEntity<String>("인증번호가 전송되었습니다", HttpStatus.OK);
-	}
-	
-	
-	//아이디 찾기 - 휴대폰 인증 문자 보내기
-	@GetMapping("findIdPhoneSend")
-	@ResponseBody
-	public String findIdPhoneSend(@RequestParam("phone") String phone, @RequestParam ("userName") String userName, HttpSession session) throws Exception { // 휴대폰 문자보내기
-		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
-		User user = new User();
-		
-		user.setUserName(userName);
-		user.setPhone(phone);
-		
-		User dbUser = userService.findIdPhone(user);
-		
-		if(dbUser.getUserName()== userName && dbUser.getPhone()==phone) {
-			
-			userService.certifiedPhoneNumber(phone,randomNumber);
-		}
-		session.setAttribute("userName", dbUser.getUserId());
-		session.setAttribute("phone", phone);
-		System.out.println(dbUser.getRegDate()+"fdsjkhadslkhjdshkjladsfklhjfda");
-		session.setAttribute("regDate", dbUser.getRegDate());
-		System.out.println(session.getAttribute("userName")+"-=-=-=-=-=-=-=-=-=-=-=-1=-21=-2=1");
-		System.out.println(userName+"----=-=-=-=-=-=-=-=-=-=-=-=-=");
-		
-		System.out.println("-------------"+randomNumber+"------------");
-		return Integer.toString(randomNumber);
-	}
-	
-	//비밀번호 찾기 - 휴대폰 인증 문자 보내기
-	@GetMapping("findPasswordPhoneSend")
-	@ResponseBody
-	public String findPasswordPhoneSend(@RequestParam("phone") String phone, @RequestParam ("userId") String userId, HttpSession session) throws Exception { // 휴대폰 문자보내기
-		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
-		User user = new User();
-		
-		user.setUserId(userId);
-		user.setPhone(phone);
-		
-		User dbUser = userService.findPasswordPhone(user);
-		
-		if(dbUser.getUserId()== userId && dbUser.getPhone()==phone) {
-			
-			userService.certifiedPhoneNumber(phone,randomNumber);
-		}
-		session.setAttribute("userId", userId);
-		session.setAttribute("phone", phone);
-		System.out.println(session.getAttribute("userId")+"-=-=-=-=-=-=-=-=-=-=-=-1=-21=-2=1");
-		System.out.println(userId+"----=-=-=-=-=-=-=-=-=-=-=-=-=");
-		
-		System.out.println("-------------"+randomNumber+"------------");
-		return Integer.toString(randomNumber);
-	}
-	
-	//문자인증 만료 시간 
-	
-	
+//	@PostMapping("/send/authNum")
+//	private ResponseEntity<String> authNum(String phone, String email, HttpSession session) throws Exception{
+//	    String authNum = "";
+//	    for(int i=0;i<6;i++) {
+//	        authNum += (int)(Math.random() * 10);
+//	    }
+//	    
+//	    System.out.println("인증번호 : " + authNum);
+//	    
+//	    // 전화번호로 인증번호 보내기 추가
+//	    if(phone != null) {
+////				System.out.println("전화번호로 인증번호 보내기");
+//	 
+//	        
+//	        
+//	    // 이메일로 인증번호 보내기
+//	    } else if(email != null) {
+////				System.out.println("이메일로 인증번호 보내기");
+//	        userService.sendAuthNum(email, authNum);
+//	    }
+//	    
+//	    
+//	    Map<String, Object> authNumMap = new HashMap<>();
+//	    long createTime = System.currentTimeMillis(); // 인증번호 생성시간
+//	    long endTime = createTime + (300 *1000);	// 인증번호 만료시간
+//	    
+//	    authNumMap.put("createTime", createTime);
+//	    authNumMap.put("endTime", endTime);
+//	    authNumMap.put("authNum", authNum);
+//	    
+//	    session.setMaxInactiveInterval(300);
+//	    session.setAttribute("authNum", authNumMap);
+//	    
+//	    return new ResponseEntity<String>("인증번호가 전송되었습니다", HttpStatus.OK);
+//	}
 	
 	
 //	//문자 인증
