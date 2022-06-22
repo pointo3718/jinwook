@@ -121,8 +121,8 @@ public class RequestController {
 	
 	// ========== 광고 등록 신청 폼 ===========
 	@GetMapping(value = "addRequestAd")
-	public String addRequestAdView(@RequestParam("storeNo") int storeNo, Model model) {
-		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+	public String addRequestAdView(@RequestParam("userId") String userId, Model model) {
+		List<Store> storeInfo = storeService.getStoreInfo(userId);
 		model.addAttribute("storeInfo", storeInfo);
 		return "/request/addRequestAdView";
 	}
@@ -158,10 +158,10 @@ public class RequestController {
 	
 	// ========== 상점/광고 신청 목록 (사장님용) ============ /////////// 다시
 	@GetMapping(value = "getRequestAdStoreList")
-	public String listUserAdmin(@RequestParam("storeNo") int storeNo, @RequestParam("userId") String userId, Model model) {
+	public String listUserAdmin(@RequestParam("userId") String userId, Model model) {
 		List<Request> requestList = requestService.getRequestAdStoreList(userId);
 		
-		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+		List<Store> storeInfo = storeService.getStoreInfo(userId);
 	      
 	    model.addAttribute("storeInfo", storeInfo);
 		model.addAttribute("requestList", requestList);

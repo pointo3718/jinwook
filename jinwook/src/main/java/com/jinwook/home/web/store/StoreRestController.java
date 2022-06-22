@@ -460,6 +460,33 @@ public class StoreRestController {
     	  return jsonObj;
       }
       
+      
+      @GetMapping( value="/getStore/{storeNo}")
+      public JsonObject getStoreWallet(@PathVariable(value="storeNo",required = false) int storeNo) throws Exception{
+         
+           
+           Store store= new Store();
+
+              store.setStoreNo(storeNo);
+
+              
+         
+            System.out.println("/store/getStoreWallet : GET ");
+            
+            JsonObject jsonObj = new JsonObject();
+            
+            List<Store> getStore = storeService.getStore(storeNo);
+            
+            if (CollectionUtils.isEmpty(getStore) == false) {
+               com.google.gson.JsonArray jsonArr = new Gson().toJsonTree(getStore).getAsJsonArray();
+               jsonObj.add("getStore", jsonArr);
+            
+               System.out.println("상점 조회 컨트롤러 통과");
+            }
+
+            return jsonObj;
+         }
+      
 
       
 

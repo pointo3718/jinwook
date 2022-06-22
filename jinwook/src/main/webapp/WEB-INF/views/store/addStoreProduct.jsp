@@ -552,7 +552,7 @@ label {
 														src="${path}/resources/static/img/cart/cart-1.jpg"></td>
 													<td><strong style="font-size: 20px;"> <c:if
 																test="${store.product.soldout=='false'}">
-																<span style="color: red;"><del>${store.product.prodName}</del></span>
+																<span style="color: red;"><s>${store.product.prodName}</s></span>
 															</c:if> <c:if test="${store.product.soldout=='true'}">
                                        ${store.product.prodName}
                                        </c:if>

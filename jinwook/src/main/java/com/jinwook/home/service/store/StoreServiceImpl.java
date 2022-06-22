@@ -127,14 +127,14 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<Store> getStoreInfo(int storeNo) {
+	public List<Store> getStoreInfo(String userId) {
 
 		List<Store> getStore = Collections.emptyList();
 
 		int storeTotalCount = storeMapper.getStoreTotalCount();
 
 		if (storeTotalCount > 0) {
-			getStore = storeMapper.getStoreInfo(storeNo);
+			getStore = storeMapper.getStoreInfo(userId);
 		}
 
 		return getStore;
@@ -169,6 +169,7 @@ public class StoreServiceImpl implements StoreService {
 
 	}
 	
+	
 	@Override
 	public List<Store> getStoreListByOrderCount() {
 
@@ -196,5 +197,7 @@ public class StoreServiceImpl implements StoreService {
 		
 		return getStoreMap;
 	}
+	
+
 
 }

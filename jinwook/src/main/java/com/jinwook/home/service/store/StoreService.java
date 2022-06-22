@@ -33,12 +33,13 @@ public interface StoreService {
 	public boolean isOpen(Store store);
 	
 	public boolean addOrdersCoupon(int couponNo);
+
 	
 	public List<Coupon> getCouponList(String userId);
 	
 	public List<Store> getStore(int storeNo);
 	
-	public List<Store>  getStoreInfo(int storeNo);
+	public List<Store>  getStoreInfo(String userId);
 	
 	public List<Store> getStoreRefund(int storeNo);
 
