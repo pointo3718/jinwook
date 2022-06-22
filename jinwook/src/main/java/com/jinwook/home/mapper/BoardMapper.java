@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jinwook.home.common.Criteria;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
@@ -31,7 +32,7 @@ public interface BoardMapper {
 	// 게시판 첨부파일 조회
 	public List<Map<String, Object>> selectBoardAttachList(int boardNo) throws Exception;
 	// 레시피 첨부파일 조회
-	public List<Map<String, Object>> selectRecipeAttachList(int rcpNo) throws Exception;
+	public List<Attach> selectRecipeAttachList(int rcpNo) throws Exception;
 	// 첨부파일 다운
 	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
 	// 첨부파일 수정
@@ -99,9 +100,9 @@ public interface BoardMapper {
 	//레시피 댓글 등록
 	public void addRecipeComment(Comment comment) throws Exception;
 	//레시피 댓글 수정
-	public void updateRecipeComment(Comment comment) throws Exception;
+	public int updateRecipeComment(Comment comment) throws Exception;
 	//레시피 댓글 삭제
-	public void deleteRecipeComment(Comment comment) throws Exception;
+	public int deleteRecipeComment(int commentNo) throws Exception;
 	//선택된 레시피 댓글 조회
 	public Comment selectRecipeComment(int commentNo) throws Exception;
 	

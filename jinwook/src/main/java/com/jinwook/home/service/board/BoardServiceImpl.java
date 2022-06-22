@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.jinwook.home.common.FileUtils;
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.BoardMapper;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
@@ -418,7 +419,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 레시피 파일 첨부 조회
 	@Override
-	public List<Map<String, Object>> selectRecipeAttachList(int rcpNo) throws Exception {
+	public List<Attach> selectRecipeAttachList(int rcpNo) throws Exception {
 		return boardMapper.selectRecipeAttachList(rcpNo);
 	}
 
@@ -445,13 +446,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void updateRecipeComment(Comment comment) throws Exception {
-		boardMapper.updateRecipeComment(comment);
+	public int updateRecipeComment(Comment comment) throws Exception {
+		
+		return boardMapper.updateRecipeComment(comment);
+
 	}
 
 	@Override
-	public void deleteRecipeComment(Comment comment) throws Exception {
-		boardMapper.deleteRecipeComment(comment);
+	public int deleteRecipeComment(int commentNo) throws Exception {
+		return boardMapper.deleteRecipeComment(commentNo);
 	}
 
 	@Override

@@ -86,6 +86,29 @@ $(function() {
 });
 
 function fncAddRecipe() {
+	
+	var rcpTitle = $("input[name='rcpTitle']").val();
+	var rcpInfo = $("textarea[name='rcpInfo']").val();
+	var rcpIngredient = $("textarea[name='rcpIngredient']").val();
+	var rcpContent = $("textarea[name='rcpContent']").val();
+
+	if (rcpTitle == null || rcpTitle.length < 1) {
+		alert("레시피 제목은 반드시 입력하여야 합니다.");
+		return;
+	}
+	if (rcpInfo == null || rcpInfo.length < 1) {
+		alert("레시피 소개는 반드시 입력하여야 합니다.");
+		return;
+	}
+	if (rcpIngredient == null || rcpIngredient.length < 1) {
+		alert("레시피 재료는 반드시 입력하셔야 합니다.");
+		return;
+	}
+	if (rcpContent == null || rcpContent.length < 1) {
+		alert("레시피 내용은 반드시 입력하셔야 합니다.");
+		return;
+	}
+	
 	$("form").attr("method", "POST").attr("action", "/board/addRecipe").submit();
 }
 

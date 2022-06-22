@@ -1,5 +1,6 @@
 package com.jinwook.home.web.board;
 
+import java.sql.Time;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.board.BoardService;
 import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.Store;
 
 @RestController
 @RequestMapping("/board/*")
@@ -103,6 +105,64 @@ public class BoardRestController {
 			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
 		}
 		System.out.println("jsonObj"+jsonObj);
+		return jsonObj;
+	}
+	
+	
+	
+		//댓글 수정 처리
+	  @PostMapping(value = "updateRecipeComment/{commentNo}/{commentContent}")
+      public JsonObject updateRecipeComment(@PathVariable(value = "commentNo", required = false) int commentNo,
+                           @PathVariable(value = "commentContent", required = false) String commentContent) {
+         
+         JsonObject jsonObj = new JsonObject();
+         
+         Comment comment = new Comment();
+
+         try {
+            if (comment != null) {
+               System.out.println("댓글 객체에 값 넣어줌");
+               comment.setCommentNo(commentNo);
+               comment.setCommentContent(commentContent);
+               
+            }
+            
+            int result = boardService.updateRecipeComment(comment);
+            jsonObj.addProperty("result", result);
+
+         } catch (DataAccessException e) {
+            jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+         } catch (Exception e) {
+            jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+         }
+         
+           System.out.println("상점 수정 컨트롤러 통과");
+           
+         return jsonObj;
+         
+      }
+	
+	// 댓글 삭제 처리
+	@GetMapping(value = "deleteRecipeComment/{commentNo}")
+	public JsonObject deleteRecipeComment(@PathVariable(value = "commentNo", required = false) int commentNo) {
+		System.out.println("/board/deleteRecipeComment: GET");
+		System.out.println("rest commentNo" + commentNo);
+
+		JsonObject jsonObj = new JsonObject();
+
+		try {
+			int result = boardService.deleteRecipeComment(commentNo);
+			System.out.println("result" + result);
+			jsonObj.addProperty("result", result);
+
+		} catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+		System.out.println("jsonObj" + jsonObj);
 		return jsonObj;
 	}
 	

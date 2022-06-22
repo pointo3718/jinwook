@@ -12,10 +12,11 @@ import lombok.ToString;
 @ToString
 public class Recipe extends CommonDTO {
 	
-	private Integer rcpNo;
+	private int rcpNo;
 	private String userId;
 	private User user;
 //	private int rcpSeqNo;
+	private Attach attach;
 	private String rcpTitle;
 	private String rcpContent;
 	private Date rcpDate;
