@@ -92,64 +92,60 @@
     
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+
 	
+	var USERID;
 	//비밀번호 찾기 문자 인증 
 	$(document).ready(function() {
-	$("#snedA").click(function(){
-		swal("진욱이네", "인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
-	var phone = $("#phone").val();
-	var userId = $(".userId").val();
-	$.ajax({
-        type:"GET",
-        url:"findPasswordPhoneSend?phone=" + phone+"&userId="+userId,
-        cache : false,
-        success:function(data){
-        	alert("asdas"+data) 
-        	if(data == "error"){
-				swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
-        		
-				/* $(".successPhoneChk").text("유효한 번호를 입력해주세요.");
-				$(".successPhoneChk").css("color","red");
-				$("#phone").attr("autofocus",true); */
-        	}else{	        		
-        		/* $("#phone2").attr("disabled",false);
-        		$("#phoneChk2").css("display","inline-block");
-        		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
-        		$(".successPhoneChk").css("color","green");
-        		$("#phone").attr("readonly",true);
-        		code2 = data; */
-        		$("#phoneDoubleChk").val(data); 
-        	}
-        }
-    });
-});
+		$("#snedA").click(function(){
+			swal("진욱이네", "인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
+		var phone = $("#phone").val();
+		USERID = $(".userId").val();
+		$('#userid').attr('value', USERID);
+		$.ajax({
+	        type:"GET",
+	        url:"findPasswordPhoneSend?phone=" + phone+"&userId="+USERID,
+	        cache : false, // 동기 실행
+	        success:function(data){
+	        		alert(data.authNumber);
+	        	if(data.authNumber == "error"){
+					swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
+	        		
+	        	}else{	      
+	        		
+	        		$("#phoneDoubleChk").val(data.authNumber); 
+	        	}
+    	    }
+	    });
 	});
-	$(document).ready(function() {
-$("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 비교한다 */
-   	const phone2 = $("#authNo1").val();
-	const data = $("#phoneDoubleChk").val();
-    console.log(data);
-    if(phone2 == null || phone2 == ""){
-    	swal("진욱이네", "휴대폰으로 발송된 인증번호를 입력해주세요.");
-    } else{     
-       if(phone2 == data){
-		swal({
-			   title: '진욱이네',
-			   text: '인증 완료',
-			   
-			}).then(function(){
-			$("#findPassword").hide();
-			$("#updatePw").show();
-			
-		})
-        }
-        else {
-           alert("실패");
-        }
-    }
-    
-        
- });
+});
+	
+$(document).ready(function() {
+	$("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 비교한다 */
+	   	const phone2 = $("#authNo1").val();
+		const data = $("#phoneDoubleChk").val();
+	    console.log(data);
+	    if(phone2 == null || phone2 == ""){
+	    	swal("진욱이네", "휴대폰으로 발송된 인증번호를 입력해주세요.");
+	    } else{     
+	       if(phone2 == data){
+			swal({
+				   title: '진욱이네',
+				   text: '인증 완료',
+				   
+				}).then(function(){
+				$("#findPassword").hide();
+				$("#updatePw").show();
+				
+			})
+	        }
+	        else {
+	           alert("실패");
+	        }
+	    }
+	    
+	        
+	 });
  });
 	
 
@@ -180,17 +176,20 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 	});	
 	
 	
-	
 	//비밀번호 찾기 이메일 인증		
 	$(document).ready(function() {
 		$("#snedE").click(function() {
+			
 			const email = $("#email").val();
-			const userId = $(".userId").val();
+			USERID = $(".userId").val();
+		$('#userid').attr('value', USERID);
 			/* if (!emailCheck(email)) {
 				swal("이메일을 정확히 입력해주세요");
 				return;
 			} */
+			
 	 		alert(email);
+			alert(${authNumber});
 			if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1 )){
 		swal("진욱이네", "이메일 형식이 아닙니다.");
 				email.focus();
@@ -201,34 +200,33 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 				url: "/user/findPasswordEmail",
 				type: "POST",
 				data: {email: email,
-						userId : userId}
+						userId : USERID},
+				cache : false,
+				success : function(data){
+					alert(data.authNumber);
+					if(data.authNumber == "error"){
+						swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
+		        		
+						/* $(".successPhoneChk").text("유효한 번호를 입력해주세요.");
+						$(".successPhoneChk").css("color","red");
+						$("#phone").attr("autofocus",true); */
+		        	}else{	        		
+		        		/* $("#phone2").attr("disabled",false);
+		        		$("#phoneChk2").css("display","inline-block");
+		        		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
+		        		$(".successPhoneChk").css("color","green");
+		        		$("#phone").attr("readonly",true);
+		        		code2 = data; */
+		        		$("#snedE").hide();
+		        		$("#authNo").show();
+		        		$("#phoneDoubleChk").val(data.authNumber); 
+		        	}
+				}
+		});
+	});
+});
 	
-			})
-			.then(function() {
-				$("#findPassword").hide();
-				$("#updatePw").show();
-				/* const html =
-					"<div class='send_email'> "
-						+ "<div> "
-						+	"<h3>"+email+"</h3> "
-						+	"<span>으로 아이디를 전송했습니다</span><br> "
-						+	"<div>가입한 적이 없는 이메일 주소나 올바르지 않은 이메일 주소를 입력하신 경우에는 메일을 받을 수 없습니다.</div> "
-						+	"<button class='back_btn'>돌아가기</button> "
-						+"</div> "
-					+"</div>";
-				$("main").html(html); */
-	 
-			})
-			.fail(function() {
-				alert("다시 확인해주세요.");
-				return;
-			})
-		})
-	 
-		$(document).on("click", ".back_btn", function() {
-			location.href = "login";
-		})
-	})
+	
 	
 	// 버튼 클릭 이벤트 - 이메일 인증 버튼	
 	function emailAuth(){
@@ -304,7 +302,7 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 			<input type="email" id="email" class="email" placeholder="이메일을 입력해주세요.">
 			</div>
 			<br>
-			<button class="send_btn site-btn" id="snedE" style="width:300px;">전송</button>
+			<button class="send_btn site-btn" id="snedE" type="button" style="width:300px;">전송</button>
 	</div>
 	
 	<div class="text-center" id="fPhone" >
@@ -341,7 +339,6 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 		</div>
 			<br><br>
 		<div class="text-center " style="margin-right:190px; ">
-		 <input id='userId' type='hidden' name='userId' value='${userId}'>
 		<label for="password " style="font-size:15px; " >새 비밀번호 등록</label>	
 		</div>
 			<div class="aaa " style="font-size:15px;">
@@ -351,6 +348,7 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 			
 		<div class="text-center" id="" >
 			<div class="text-center " style="margin-right:190px;">
+		 <input id="userid" type="hidden" name="userId" value="">
 			<label for="password2 " style="font-size:15px;" >새 비밀번호 확인</label>	
 			</div>
 				<div class="adad" style="font-size:15px;">

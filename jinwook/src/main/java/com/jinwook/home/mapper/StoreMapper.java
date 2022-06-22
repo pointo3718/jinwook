@@ -42,7 +42,7 @@ public interface StoreMapper {
 	
 	public List<Store> getStore(int storeNo);
 	
-	public List<Store> getStoreInfo(int storeNo);
+	public List<Store> getStoreInfo(String userId);
 	
 	public List<Store> getStoreWallet(Store store);
 	
@@ -51,6 +51,7 @@ public interface StoreMapper {
 	public List<Store> getStoreListByOrderCount();
 	
 	public List<Store> getStoreMap();
+	
 		
 	public int getStoreMapTotalCount();
 	

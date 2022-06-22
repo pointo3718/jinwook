@@ -37,7 +37,8 @@
 </resultMap>
 
 <resultMap type="comment" id="commentSelectMap">
-   <result property="commentNo"          column="comment_no"        jdbcType="INTEGER"/>   
+   <result property="commentNo"          column="comment_no"        jdbcType="INTEGER"/>
+   <result property="user.userId"        column="user_id"           jdbcType="VARCHAR"/>   
    <result property="board.boardNo"      column="board_no"          jdbcType="INTEGER"/>   
    <result property="recipe.rcpNo"       column="rcp_no"      		jdbcType="INTEGER"/>   
    <result property="commentContent"     column="comment_content"   jdbcType="VARCHAR"/>   
@@ -155,8 +156,8 @@
 		)VALUES(
 			#{attachNo},
 			#{rcpNo},
-			#{orgFileName},
-			#{storedFileName},
+			#{orgFileName:VARCHAR},
+			#{storedFileName:VARCHAR},
 			#{fileSize}
 		)
     </insert>
@@ -562,14 +563,14 @@
 	</select>
 	
 	<!-- 레시피 댓글 수정 -->
-	<update id="updateRecipeComment" parameterType="Comment">
-		UPDATE comment 
-		SET comment_content = #{commentContent}
-		WHERE comment_no = #{commentNo}
+	<update id="updateRecipeComment" parameterType="Comment">		
+	UPDATE comment 
+	SET	comment_content = #{commentContent}		
+	WHERE comment_no = #{comment_no}	
 	</update>
 
 	<!-- 레시피 댓글 삭제 -->
-	<delete id="deleteRecipeComment" parameterType="Comment">
+	<delete id="deleteRecipeComment" parameterType="int">
 		DELETE FROM comment
 		WHERE comment_no = #{commentNo}
 	</delete>
