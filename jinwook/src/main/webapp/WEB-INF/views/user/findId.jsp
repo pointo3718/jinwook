@@ -88,6 +88,7 @@
 					background-color: #7fad39;
 					font-size: 12px;
 					text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+					
 				}
 				
  #phoneBt{
@@ -112,7 +113,8 @@
         url:"findIdPhoneSend?phone=" + phone+"&userName="+userName,
         cache : false,
         success:function(data){
-        	alert("asdas"+data)
+        	alert("asdas"+data.authNumber);
+        	alert("asdas"+data.regDate);
         	if(data == "error"){
 				swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
         		
@@ -127,34 +129,40 @@
         		$(".successPhoneChk").css("color","green");
         		$("#phone").attr("readonly",true);
         		code2 = data; */
-        		$("#phoneDoubleChk").val(data); 
-        		$(".userId").val();
-        		$(".regDate").val();
+        		$("#phoneDoubleChk").val(data.authNumber); 
+        		$("#userid").val(data.userId);
+        		$("#regDate").val(data.regDate);
         		console.log();
         	}
         }
     });
 });
 	});
-	$(document).ready(function() {
-$("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 비교한다 */
-   	const phone2 = $("#authNo1").val();
-	const data = $("#phoneDoubleChk").val();
-    console.log(data);
-    if(phone2 == null || phone2 == ""){
-		swal("진욱이네", "휴대폰으로 발송된 인증번호를 입력해주세요.");
-    } else{     
-       if(phone2 == data){
-		swal("진욱이네", "인증 완료");
-           $("#findId").hide();
-   		   $("#poem").show().html();
-        }
-        else {
-           alert("실패");
-        }    
-    }
-        
- });
+	
+var USERID = $('#userid').val();
+var REGDATE = $('#regDate').val();
+	$('#userid').attr('value', USERID);
+	$('#regDate').attr('value', REGDATE);
+
+$(document).ready(function() {
+	$("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 비교한다 */
+	   	const phone2 = $("#authNo1").val();
+		const data = $("#phoneDoubleChk").val();
+	    console.log(data);
+	    if(phone2 == null || phone2 == ""){
+			swal("진욱이네", "휴대폰으로 발송된 인증번호를 입력해주세요.");
+	    } else{     
+	       if(phone2 == data){
+			swal("진욱이네", "인증 완료");
+	           $("#findId").hide();
+	   		   $("#poem").show().html();
+	        }
+	        else {
+	           alert("실패");
+	        }    
+	    }
+	        
+	 });
  });
 	
 	
@@ -184,14 +192,15 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 						userName : userName}
 	
 			})
+				
 			.fail(function() {
 				alert("다시 확인해주세요.");
 				return;
 			})
+		location.href="/user/login";
 		})
 	 
 		$(document).on("click", ".back_btn", function() {
-			location.href = "login";
 		})
 	})
 	
@@ -240,7 +249,6 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 
 <body>
 <jsp:include page="../layout/top.jsp" />
-	
 	<form class="find_id_page text-center" id="findId">
 		<div class="find_info">
 			<h1 class="">아이디 찾기</h1>
@@ -269,7 +277,7 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 			<input type="email" id="email" class="email" placeholder="이메일을 입력해주세요.">
 			</div>
 			<br>
-			<button class="send_btn site-btn" id="snedE" style="width:300px;">전송</button>
+			<button class="send_btn site-btn" id="snedE" type="button" style="width:300px;">전송</button>
 	</div>
 	
 	<div class="text-center" id="fPhone" >
@@ -300,14 +308,22 @@ $("#sned").click(function() {   /* 내가 작성한 번호와 인증번호를 �
 			<br><br>
 			
 			
-		<form class="text-center" id="poem" style="display:none;">
+		<form class="text-center" id="poem" style="display:none; ">
 			<br>
 			<h3>고객님의 진욱이네 계정을 찾았습니다.</h3>
 			<h4>아이디 확인 후 로그인해주세요.</h4>
 			<br>
-			<h4><a class="fa fa-user">	: ${userId}</a></h4>
+			<div class="text-center" style="margin-left:10px;">
+			<h4><label for="userId" class="col-sm-2 control-label"></label>
+			<a class="fa fa-user" style="text-align : center;">  : </a> 
+			<input type="text" id="userid" value="" style="border:none; " readonly> </h4>
+			</div>
 			<br>
-			<h4><a class="fa fa-calendar-o" aria-hidden="true"> 가입 날짜 : ${regDate}</a></h4>
+			<div class="text-center"  style="margin-right:90px;" >
+			<h4><label for="userId" class="col-sm-2 control-label"></label>
+			<a class="fa fa-calendar-o" aria-hidden="true">  가입 날짜 : </a>
+			<input type="text" id="regDate" value="" style="border:none;" readonly></h4>
+			</div> 
 			<br><br><br>
 			<button type="button" onclick="location.href='/user/login' " class="button1 site-btn" style="width:300px;" >로 &nbsp;그 &nbsp;인</button>
 			<br>

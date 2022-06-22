@@ -1,7 +1,8 @@
 package com.jinwook.home.service.domain;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.util.Date;
+
+import org.springframework.http.ResponseEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,4 +36,6 @@ public class User extends CommonDTO {
 	private String blackPeriod;
 	private String complainCode;
 	private Store store;
+	private int authNumber;
+	private ResponseEntity<Object> res;
 }

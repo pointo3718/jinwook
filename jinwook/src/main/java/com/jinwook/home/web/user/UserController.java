@@ -2,9 +2,7 @@ package com.jinwook.home.web.user;
 
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -344,12 +342,16 @@ public class UserController {
 		}
 		
 		@PostMapping("updatePassword")
-		public String updatePassword(@ModelAttribute("user") User user , HttpSession session) throws Exception {
+		public String updatePassword(@ModelAttribute("user") User user) throws Exception {
 			System.out.println(user+"mmmmmmmmmmmmmm");
 			
-			userService.updatePassword(user);
 			
+			int result = userService.updatePassword(user);
+			
+			if(result == 1) {
 				System.out.println("패스워드 변경");
+			}
+			
 				
 			return "/user/loginView";
 		}
@@ -358,6 +360,8 @@ public class UserController {
 		@GetMapping("findPassword")
 		public String findPasswordPhone() {
 //			user.setUserId("user");
+			System.out.println("=============findPassword Page===========");
+			
 			return "/user/findPassword";
 		}
 		
@@ -370,14 +374,14 @@ public class UserController {
 			String access_Token = kakaoService.getAccessToken(code);
 			System.out.println("123123123123123");
 			HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
-			
+			Date date = new Date();
 			User user = new User();
 			user.setUserId((String)userInfo.get("email"));
 			user.setUserName((String)userInfo.get("nickname"));
 			user.setNickName("kakao_"+(String)userInfo.get("nickname"));
 			user.setEmail((String)userInfo.get("email"));
 			user.setRole("사용자");
-			user.setRegDate(LocalDate.now(ZoneId.of("Asia/Seoul")));
+			user.setRegDate(date);
 			
 			System.out.println(userInfo);
 			System.out.println("45645456456456456");
