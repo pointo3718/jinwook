@@ -94,7 +94,6 @@
 			history.go(-1);
 		});
 	});
-	
 </script>
 
 </head>
@@ -157,7 +156,7 @@
                             </div>
                             <div class="checkout__input">
                                 <p>쿠폰<span></span></p>
-                                <select size="10" name="couponType" value="${orders.coupon.couponType}" style="color: black;" onchange="selectBoxChange(this.value);">
+                                <select size="10" name="couponType" id="couponType" style="color: black;" onchange="selectBoxChange(this.value);"> 
                                 <option id="chargeType" selected>할인쿠폰을 선택하세요</option>
 	                                    <c:forEach var="coupon" items="${couponList}">
                                     	<option value="${coupon.couponType}">
@@ -166,7 +165,6 @@
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '2'}">
                                     		고객님의 첫구매를 축하합니다.(첫구매 쿠폰 30%할인)
-                                    		
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '3'}">
                                     		고객님의 생일을 축하합니다.(생일축하 쿠폰 30%할인)
@@ -178,12 +176,20 @@
                                     </c:forEach>
                                 </select>
                              	<script>
-                             	var selectBoxChange = function(value){
+                             	 var selectBoxChange = function(value){
                              		console.log("값변경: " + value);
                              		$("#chargeType").val(value);
                              		$("#couponDc").val(value);
                              	}
                              	
+                             	/* $(document).ready(function(){
+                             	    $('#couponType').change(function(e){
+                             	        var thisOption = $("#couponType option:selected").val();
+                             	        var thisDc = $("#couponType").text();
+
+                             	        $('#couponDc').empty();
+                             	        $('<option>').text(thisText).val(thisVal).appendTo('#couponDc');
+                             	    }); */
                              	</script>
                             </div>
                         </div>
@@ -200,19 +206,19 @@
                                 </ul>
                                 <div class="checkout__order__subtotal">총상품금액 <span id="orderPrice">${cart.orders.orderPrice}원</span></div>
                                 <input type="hidden" name="orderPrice" value="${cart.orders.orderPrice}">
-                                <div class="checkout__order__total"> 쿠폰할인	<span id="couponDc" name="couponDc">${total1}원</span></div>
-                                	<c:if test="">
+                                <div class="checkout__order__total"> 쿠폰할인	<span id="couponDc" value="${type}">${total1}원</span></div>
+                                	<c:if test="${couponType == '1'}">
                                 		<fmt:formatNumber var="total1" pattern="###" value="${cart.orders.orderPrice*0.20}"/>
                                 	</c:if>
-                                	<c:if test="">
+                                	<c:if test="${couponType == '2'}">
                                 		<fmt:formatNumber var="total1" pattern="###" value="${cart.orders.orderPrice*0.30}"/>
                                 	</c:if>
-                                	<c:if test="">
+                                	<c:if test="${couponType == '3'}">
                                 		<fmt:formatNumber var="total1" pattern="###" value="${cart.orders.orderPrice*0.30}"/>
                                 	</c:if>
-                                	<c:if test="">
+                                	<c:if test="${couponType == '4'}">
                                 		<fmt:formatNumber var="total1" pattern="###" value="${cart.orders.orderPrice*0.15}"/>
-                                	</c:if>
+                                	</c:if> 
                                 <div class="checkout__order__total">회원등급할인<span id="grade" name="grade" value="${user.grade}	">
 	                               	<c:choose>
 										<c:when test="${user.grade=='프랜즈'}">
