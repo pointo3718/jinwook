@@ -466,7 +466,7 @@ var rcpNo = ${recipe.rcpNo};
                         					data-value="${recipe.comment.commentNo}" onClick="fncUpdateRecipeComment(this)">수정</button>&nbsp;&nbsp;&nbsp; --%>
 											
 											<button data-value="${recipe.comment.commentNo}" id="buttons" type="button" class="btn btn-primary" 
-											onClick="fncDeleteRecipeComment(this)">X</button></td>
+											onClick="fncDeleteRecipeComment(this)">X</button>
 										</div>
 									</li>
 								</c:forEach>
