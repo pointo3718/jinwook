@@ -69,7 +69,8 @@
             success : function(result){
                if(result != null){
                   alert("삭제완료");
-                  self.location = "/orders/getOrdersCartList";
+                  /* self.location = "/orders/getOrdersCartList"; */
+                  $("#deletepoint").load("/orders/getOrdersCartList #deletepoint");
                }
             }
          
@@ -117,7 +118,7 @@
 
     <!-- Shoping Cart Section Begin -->
     <form class="form-horizontal">
-    <section class="shoping-cart spad">
+    <section class="shoping-cart spad" id="deletepoint">
         <div class="container">
           <div class="cartListstoreName">
             	<c:forEach var="cart" items="${getCartList}" begin="0" end="0">
@@ -147,8 +148,8 @@
                                   <c:forEach var="cart" items="${getCartList}">
                                   <c:set var="i" value="${ i+1 }" />
                                 <tr>
-                                 <td hidden="cartNo" id="cartNo" name="cartNo" value="${cart.cartNo}">+cart.cartNo</td>
-                                  <td hidden="storeNo" id="storeNo" name="storeNo" value="${cart.storeNo}">+cart.storeNo</td>                    
+                                 <td hidden="cartNo" id="cartNo" name="cartNo" value="${cart.cartNo}">${cart.cartNo}</td>
+                                  <td hidden="storeNo" id="storeNo" name="storeNo" value="${cart.storeNo}">${cart.storeNo}</td>                    
                                  <td class="shoping__cart__item">
                                         <img src="${path}/resources/static/img/cart/cart-1.jpg" style="margin-right: 30px;">
                                         <strong style="font-size: 20px;">${cart.product.prodName}</strong>
@@ -195,7 +196,7 @@
                     <div class="shoping__checkout">
                         <h5>주문 총액</h5>
                         <ul>
-                            <li>주문 금액 <span id="orderPrice" name="orderPrice"><fmt:formatNumber value="${total}"/>원</span></li>
+                            <li>주문 금액 <span id="orderPrices" name="orderPrice"><fmt:formatNumber value="${total}"/>원</span></li>
                         </ul>
                         <a><button class="primary-btn" style="max-width: 100%; width: 477px;" 
                          id="button" name="orderPrice" value="${total}">주문하기</button></a>
@@ -203,8 +204,7 @@
                     </div>
                 </div>
             </div>
-            
-        </div>
+       	 </div>
         </div>
     </section>
     </form>

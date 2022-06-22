@@ -43,6 +43,13 @@ public class RequestController {
 	}
 	
 	
+	// ========== 마이페이지 폼 ===========
+	@GetMapping(value = "myPage")
+	public String mypage() {
+		
+		return "/user/myPage";
+	}
+	
 	// ========== 상점 등록 요청 !!!!!!! 요청 목록 만들고 다시 !!!!!!!===========
 	@PostMapping(value = "addRequestAddStore")
 	public String addRequestAddStore(@ModelAttribute("Store") Store store, HttpSession session, MultipartHttpServletRequest mpRequest) throws Exception {
@@ -51,9 +58,7 @@ public class RequestController {
 		
 		String sessionUserId = ((User) session.getAttribute("user")).getUserId();
 		store.setUserId(sessionUserId);
-		
-		
-		
+
 		///////////////////////////
 		
 		List<MultipartFile> fileList = mpRequest.getFiles("file");
@@ -83,19 +88,13 @@ public class RequestController {
 		
 		///////////////////////////
 		
-		
-		
-		
-		
-		
-		
 		return "redirect:/request/getRequestAdStoreList";
 	}
 	
 	
 	
 	// ============ 환급 요청 등록 =============   /////// 모든 등록 이렇게 수정 (예외 적용)
-	//@PostMapping(value = "addRequestRefund")
+	@PostMapping(value = "addRequestRefund")
 	public String addRequestRefund(@ModelAttribute("request") Request request, Model model) {
 		
 		System.out.println("==================request :: "+ request);
@@ -116,20 +115,24 @@ public class RequestController {
 		}
 		return "/store/getStoreWallet?storeNo=" +request.getStoreNo();
 	}
-
+	
+	
 	
 	
 	// ========== 광고 등록 신청 폼 ===========
 	@GetMapping(value = "addRequestAd")
-	public String addRequestAdView(@RequestParam("storeNo") int storeNo, Model model) {
-		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+	public String addRequestAdView(@RequestParam("userId") String userId, Model model) {
+		List<Store> storeInfo = storeService.getStoreInfo(userId);
 		model.addAttribute("storeInfo", storeInfo);
 		return "/request/addRequestAdView";
 	}
 	
 	// ========== 광고 등록 신청 ===========
 	@PostMapping(value = "addRequestAd")
-	public String addRequestAd(@ModelAttribute("request") Request request) {
+	public String addRequestAd(@ModelAttribute("request") Request request, HttpSession session) {
+		String sessionUserId = ((User) session.getAttribute("user")).getUserId();
+		request.setUserId(sessionUserId);
+		
 		try {
 			boolean result = requestService.addRequestAd(request);
 			if (result == false) {
@@ -141,27 +144,17 @@ public class RequestController {
 		} catch (Exception e) {
 			// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
 		}
-		return "redirect:/request/getRequestAdStoreList";
+		return "redirect:/request/getRequestAdStoreList?storeNo=" + request.getStoreNo() + "&userId=" +sessionUserId;
 	}
 	
-	// ========== 광고 등록 요청 보기 ===========
-	@GetMapping( value="getRequestAd")
-	public String getRequestAd( @RequestParam("reqNo") int reqNo , Model model ) throws Exception {
-		
-		System.out.println("/request/getRequestAd : GET");
-		
-		Request request = requestService.getRequestAd(reqNo);
-		model.addAttribute("request", request);
-		
-		return "request/getRequestAd";
-	}
+
 	
 	// ========== 상점/광고 신청 목록 (사장님용) ============ /////////// 다시
 	@GetMapping(value = "getRequestAdStoreList")
-	public String listUserAdmin(@RequestParam("storeNo") int storeNo, @RequestParam("userId") String userId, Model model) {
+	public String listUserAdmin(@RequestParam("userId") String userId, Model model) {
 		List<Request> requestList = requestService.getRequestAdStoreList(userId);
 		
-		List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+		List<Store> storeInfo = storeService.getStoreInfo(userId);
 	      
 	    model.addAttribute("storeInfo", storeInfo);
 		model.addAttribute("requestList", requestList);

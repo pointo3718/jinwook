@@ -270,6 +270,22 @@ public class RequestRestController {
 		}
 	 
 	 
+	// ========== 광고 등록 요청 보기 ===========
+	@GetMapping( value="getRequestAd/{reqNo}")
+	public JSONObject getRequestAd( @PathVariable(value = "reqNo", required = false) int reqNo,  @ModelAttribute("request") Request request ) throws Exception {
+		
+		System.out.println("/request/getRequestAd : GET ");
+	      Gson gson = new Gson();      
+	      request = requestService.getRequestAd(reqNo);
+				
+	      String requestObj = gson.toJson(request);
+	      JSONParser parser = new JSONParser();
+	      JSONObject jsonObj = (JSONObject)parser.parse(requestObj);
+			
+		return jsonObj;
+	}
+	 
+	 
 	// ============= 요청 거절 ================
 	 @PatchMapping( value={"updateRequestStatusToRefuse/{reqNo}"})
 		public JsonObject updateRequestStatusToRefuse(@PathVariable(value = "reqNo", required = false) int reqNo) {

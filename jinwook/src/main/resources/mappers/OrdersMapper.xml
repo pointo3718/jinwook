@@ -120,8 +120,8 @@
 	
 	<insert id="addOrdersCart" useGeneratedKeys="true" keyProperty="cartNo">
 		INSERT
-		INTO cart(user_id,prod_no,prod_count,store_name,cart_status)
-		VALUES(#{userId},#{product.prodNo},#{prodCount:VARCHAR},#{storeName},#{cartStatus})
+		INTO cart(user_id,prod_no,prod_count,store_no,store_name,cart_status)
+		VALUES(#{userId},#{product.prodNo},#{prodCount:VARCHAR},#{storeNo},#{storeName},#{cartStatus})
 	</insert>
 	
 	<update id="updateOrdersCart">

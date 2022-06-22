@@ -449,67 +449,13 @@ a{
     </div>
     </div>
 	<!-- Modal2 End -->
-	
 
-	<!-- Modal3 Begin -->
-    <!-- 광고 요청 상세 modal -->
-    <div class="modal" id="myModal4" aria-hidden="true" style="display: none; z-index: 1060;">
-    	<div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismis style="margin-left: 0px; text-align: center;">광고 요청<s="modal" aria-label="Close">
-	        </button>
-            </div><div class="container"></div>
-            <div class="modal-body">
-          
-         <div class="col-md-10 order-md-1">
-          <div class="col-md-12 mb-3">
-            <label for="Name">제목</label>
-            <input type="text" class="form-control" name="userid" placeholder="" value="" readonly>
-          </div>
-          
-         <div class="container">  
-         	<div class="row forModal">
-          	<div class="col-md-6 mb-3">
-            	<label for="userId">상점 이름</label>
-            	<input type="text" class="form-control" name="username" placeholder="" value="" readonly>
-         	 </div>
-          <div class="col-md-6 mb-3">
-           	 	<label for="userId">사장님 이름</label>
-           	 	<input type="text" class="form-control" name="nickname" placeholder="" value="" readonly>
-          </div>
-			</div>
-        </div>
-
-        <div class="col-md-12 mb-3">
-            <label for="Name">사진</label>
-			<img src="${path}/resources/static/img/footerlogo.png" class="img-thumbnail" alt="...">          
-		</div>
-
-        <div class="container">  
-         	<div class="row forModal">
-          	<div class="col-md-6 mb-3">
-            	<label for="userId">내용</label>
-            	<input type="text" class="form-control" name="birth" placeholder="" value="" readonly>
-         	 </div>
-			</div>
-        </div>
-
-            <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn">닫기</a>
-            </div>
-          </div>
-        </div>
-    </div>
-    </div>
-    </div>
-	<!-- Modal3 End -->
 	
 	
 	<!-- Modal4 Begin -->
-    <!-- 상점등록요청 상세 modal -->
-    <div class="modal" id="myModal3" aria-hidden="true" style="display: none; z-index: 1060;">
-    	<div class="modal-dialog">
+    <!-- 광고등록요청 상세 modal -->
+    <div class="modal" id="getRequestAd" aria-hidden="true" style="display: none; z-index: 1060;">
+    	<div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
             <button type="button" class="close" data-dismis style="margin-left: 0px; text-align: center;">광고 요청<s="modal" aria-label="Close">
@@ -517,37 +463,48 @@ a{
             </div><div class="container"></div>
             <div class="modal-body">
           
-         <div class="col-md-10 order-md-1">
-          <div class="col-md-12 mb-3">
-            <label for="Name">제목</label>
-            <input type="text" class="form-control" name="userid" placeholder="" value="" readonly>
-          </div>
+            <!-- 광고 등록 start-->
+            <div style="margin-bottom: 0px; width: 700px; margin-left: 30px;">
+                              
+               <div class="container">
+               <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;진욱이네에 광고 등록을 위해 사장님께서 입력한 글입니다.</div>
+               <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;요청글을 꼼꼼히 살펴보고 해당 사장님께 확인 연락해주세요.</div>
           
-         <div class="container">  
-         	<div class="row forModal">
-          	<div class="col-md-6 mb-3">
-            	<label for="userId">상점 이름</label>
-            	<input type="text" class="form-control" name="username" placeholder="" value="" readonly>
-         	 </div>
-          <div class="col-md-6 mb-3">
-           	 	<label for="userId">사장님 이름</label>
-           	 	<input type="text" class="form-control" name="nickname" placeholder="" value="" readonly>
-          </div>
-			</div>
-        </div>
-
-        <div class="col-md-12 mb-3">
-            <label for="Name">사진</label>
-			<img src="${path}/resources/static/img/footerlogo.png" class="img-thumbnail" alt="...">          
-		</div>
-
-        <div class="container">  
-         	<div class="row forModal">
-          	<div class="col-md-6 mb-3">
-            	<label for="userId">내용</label>
-            	<input type="text" class="form-control" name="birth" placeholder="" value="" readonly>
-         	 </div>
-			</div>
+         </div>
+          <hr size="10px">
+				<form name="detailForm" id="adForm" method="post">		
+				<input type="hidden" name="userId" value="test01" />
+				<input type="hidden" name="storeNo" value="${param.storeNo}" />
+				  
+				   <div class="form-group">
+				    <label for="exampleInputEmail1"><strong>제목</strong></label>
+				    <input type="text" class="form-control" id="adTitle" name="adTitle" placeholder="ex) 진욱이네에서 광고 요청합니다.">
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="exampleFormControlTextarea1"><strong>내용</strong></label>
+				    <textarea class="form-control" id="adContent" rows="6"
+				    ></textarea>
+				  </div>
+				  
+				
+				  <div class="form-group">
+					 <label for="exampleFormControlFile1"><strong>사진</strong></label>
+					 <input type="file" class="form-control-file" id="adImage" name="adImage">
+				  	<small id="emailHelp" class="form-text text-muted">사진 확인 후 절차에 따라 관리자의 연락이 갈 수 있습니다.</small>
+				  	
+				  </div>
+					
+				  <br/><br/>
+          			<div class="form-group row">
+	          			<button type="button" id="requestAd" class="btn btn-success" style="background-color: #7fad39; border-color: #7fad39; width: 126px;">등록 요청</button>
+          			</div>
+         			<br/>
+				  
+				</form>
+				               
+            </div>
+            <!-- 광고 등록 End -->
         </div>
 
             <div class="modal-footer">
@@ -563,7 +520,7 @@ a{
 	
 	<!-- Modal5 Begin -->	
 	<!-- 상점 등록 Modal -->
-    <div class="modal" id="getRequestAddStore" aria-hidden="true" style="display: none; z-index: 1060;">
+    <div class="modal" id="#getRequestAddStore" aria-hidden="true" style="display: none; z-index: 1060;">
        <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -821,7 +778,6 @@ a{
 
 						</div>
 
-
 					</div>
 				</div>
 
@@ -903,7 +859,7 @@ a{
 									<td align="left"><strong style="color: red;">${request.refundMoney}</strong></td>
 									</c:if>
 									<c:if test="${param.reqCode eq 4}">
-									<td align="left"><a style="color: black;" id="addetail" data-toggle="modal" href="#myModal3" data-userid="${request.userId}"><strong>${request.adTitle}</strong></a></td>
+									<td align="left"><a style="color: black;" id="addetail" data-toggle="modal" href="#getRequestAd" data-reqno="${request.reqNo}"><strong>${request.adTitle}</strong></a></td>
 									</c:if>
 									
 									<td align="left">${request.reqDate}</td>
@@ -1265,6 +1221,31 @@ $(document).ready(function(){
 		 });
 	});
 //////////////// 상점등록요청 상세 REST 끝   /////////////////
+
+
+//////////////// 광고등록요청 상세 REST 시작   /////////////////
+
+	function getRequestAd(){
+	        	
+		  var uri = "/request/getRequestAd/"+REQNO;
+		  $.get(uri, function(response) { 
+				 $('input[name=adTitle]').attr('value',`\${response.adTitle}`);
+				 $("textarea#adContent").val(`\${response.adContent}`);
+				 $('input[name=userName]').attr('value',`\${response.user.userName}`);		
+			   }, "json");
+			}
+
+	//모달 창 오픈할 때 해당 유저아이디 전달 //
+	$(document).ready(function() {     
+
+		$('#getRequestAd').on('show.bs.modal', function(event) {          
+			REQNO = $(event.relatedTarget).data('reqno');
+			getRequestAd();
+
+		 });
+	});
+
+//////////////// 광고등록요청 상세 REST 끝   /////////////////
 
 </script>
 
