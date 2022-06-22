@@ -299,7 +299,7 @@ label {
 		const prodNo = $(e).data("value");
 		const storeNo = $("#stoNo").data("valuese");
 		const storeName = $("#stoName").data("values");
-		const prodCount = $("#count").data("count");
+		const prodCount = $(e).parent().parent().siblings().children().closest("#count").val()
 
 		const passdata = {
 			'prodNo' : prodNo,
