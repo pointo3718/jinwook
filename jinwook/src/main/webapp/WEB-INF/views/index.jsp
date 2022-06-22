@@ -132,7 +132,7 @@
             <div class="categories__slider owl-carousel">
                <div class="col-lg-3">
                   <div class="categories__item set-bg"
-                     data-setbg="${path}/resources/static/img/categories/cat-1.jpg">
+                     data-setbg="${path}/resources/static/img/banner/진욱이네광고.jpg">
                      <h5>
                         <a href="#">Fresh Fruit</a>
                      </h5>
@@ -351,7 +351,7 @@
          <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                <div class="banner__pic">
-                  <img src="${path}/resources/static/img/banner/banner-1.jpg" alt="">
+                  <img src="${path}/resources/static/img/banner/진욱이네광고.jpg" alt="">
                </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">

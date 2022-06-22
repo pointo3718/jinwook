@@ -243,6 +243,10 @@ function getCouponCount() {
 		<!-- /container -->
 	</section>
 	<!-- Breadcrumb Section End -->
+	
+	<div class="row">
+                  <img src="${path}/resources/static/img/banner/선경이네.png" alt="" style="height: 120px;">
+               </div>
 
    <!-- Blog Section Begin -->
    <section class="blog spad">
