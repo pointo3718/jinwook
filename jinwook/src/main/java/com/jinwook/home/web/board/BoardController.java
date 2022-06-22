@@ -386,7 +386,7 @@ public class BoardController {
 			List<MultipartFile> fileList = mpRequest.getFiles("file");
 	        String src = mpRequest.getParameter("src");
 
-	        String path = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img\\";
+	        String path = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\";
 
 	        for (MultipartFile mf : fileList) {
 	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
@@ -422,8 +422,8 @@ public class BoardController {
 			
 			Recipe recipe = boardService.getRecipe(rcpNo);
 			model.addAttribute("recipe", boardService.getRecipe(rcpNo));
-		    List<Map<String, Object>> fileList = boardService.selectRecipeAttachList(recipe.getRcpNo());
-		    model.addAttribute("file", fileList);
+//		    List<Map<String, Object>> fileList = boardService.selectRecipeAttachList(recipe.getRcpNo());
+//		    model.addAttribute("file", fileList);
 		    
 			return "board/updateRecipeView"; // 보여줄 화면: .jsp
 		}
@@ -449,10 +449,19 @@ public class BoardController {
 		@GetMapping(value = "getRecipeList3")
 		public String getRecipeList(@ModelAttribute("rcp") Recipe rcp, Model model) throws Exception {
 			List<Recipe> getRecipeList = boardService.getRecipeList(rcp);
-//			List<Map<String, Object>> fileList = boardService.selectRecipeAttachList(rcp.getRcpNo());
+			
+			List<Attach> attach = null;
+			
+			for (Recipe recipe : getRecipeList) {
+				attach = boardService.selectRecipeAttachList(recipe.getRcpNo());
+			}
+			
 //			System.out.println(fileList);
-//			model.addAttribute("file", fileList);
+//			model.addAttribute("attach", attach);
 			model.addAttribute("getRecipeList", getRecipeList);
+			model.addAttribute("attach", attach);
+			System.out.println("----------"+attach);
+			System.out.println(getRecipeList);
 			return "board/getRecipeList3";
 		}
 		
@@ -471,11 +480,11 @@ public class BoardController {
 			//레시피 작성자 id
 			User user1 = userService.getUser(userId);
 			//첨부 파일 리스트 조회
-			List<Map<String, Object>> fileList = boardService.selectRecipeAttachList(recipe.getRcpNo());
+			//List<Map<String, Object>> fileList = boardService.selectRecipeAttachList(recipe.getRcpNo());
 			//댓글 조회
 			List<Comment> commentList = boardService.getRecipeComment(recipe.getRcpNo());
 			model.addAttribute("commentList", commentList);
-			model.addAttribute("file", fileList);
+			//model.addAttribute("file", fileList);
 			model.addAttribute("user1",user1);
 			
 			return "board/getRecipe";
@@ -483,8 +492,11 @@ public class BoardController {
 		
 		// 레시피(댓글) 작성
 		@RequestMapping(value = "addRecipeComment", method = RequestMethod.POST)
-		public String addRecipeComment(Comment comment, RedirectAttributes rttr) throws Exception {
+		public String addRecipeComment(Comment comment, RedirectAttributes rttr, HttpSession session) throws Exception {
 			System.out.println("레시피 댓글작성: POST");
+			
+//			String userId = (String) session.getAttribute("userId");
+//			comment.setCommentWriter(userId);
 			
 			boardService.addRecipeComment(comment);
 			
@@ -525,17 +537,17 @@ public class BoardController {
 			return "board/commentDeleteView";
 		}
 		
-		//댓글 삭제
-		@RequestMapping(value="commentDelete", method = RequestMethod.POST)
-		public String commentDelete(Comment comment,RedirectAttributes rttr) throws Exception {
-			System.out.println("레시피 댓글삭제처리: POST");
-			
-			boardService.deleteRecipeComment(comment);
-			
-			rttr.addAttribute("bno", comment.getRcpNo());
-			
-			return "redirect:/board/getRecipe";
-		}
+//		//댓글 삭제
+//		@RequestMapping(value="commentDelete", method = RequestMethod.POST)
+//		public String commentDelete(Comment comment,RedirectAttributes rttr) throws Exception {
+//			System.out.println("레시피 댓글삭제처리: POST");
+//			
+//			boardService.deleteRecipeComment(comment);
+//			
+//			rttr.addAttribute("bno", comment.getRcpNo());
+//			
+//			return "redirect:/board/getRecipe";
+//		}
 		
 		//레시피 추천수 /board/updateRecipeReco	
 		@ResponseBody

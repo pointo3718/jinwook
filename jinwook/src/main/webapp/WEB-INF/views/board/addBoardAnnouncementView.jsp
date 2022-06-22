@@ -86,10 +86,18 @@ $(function() {
 });
 
 function fncAddBoardAnnouncement() {
-	$("form").attr("method", "POST").attr("action", "addBoardAnnouncement").submit();
-}
+	
+	var boardTitle = $("input[name='boardTitle']").val();
+	var boardContent = $("textarea[name='boardContent']").val();
 
-function fncAddBoardAnnouncement() {
+	if (boardTitle == null || boardTitle.length < 1) {
+		alert("공지사항 제목은 반드시 입력하여야 합니다.");
+		return;
+	}
+	if (boardContent == null || boardContent.length < 1) {
+		alert("공지사항 내용은 반드시 입력하여야 합니다.");
+		return;
+	}
 	
 	$("form").attr("method", "POST").attr("action", "/board/addBoardAnnouncement").submit();
 }

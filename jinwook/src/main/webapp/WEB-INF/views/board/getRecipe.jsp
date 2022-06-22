@@ -30,11 +30,71 @@
  
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
+
+<style>
+ div.replyModal { position:relative; z-index:1; display:none;}
+ div.modalBackground { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:-1; }
+ div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:500px; height:250px; padding:20px 10px; background:#fff; border:2px solid #666; }
+ div.modalContent textarea { font-size:16px; font-family:'맑은 고딕', verdana; padding:10px; width:500px; height:200px; }
+ div.modalContent button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
+ div.modalContent button.modal_cancel { margin-left:20px; }
+</style>
+
 <script type="text/javascript">
 /*<![CDATA[*/
 
 function movePage(uri, queryString) {
    location.href = uri + queryString;
+}
+
+<!-- 댓글 수정 모달창 -->
+<!-- 댓글 수정 모달창 end-->
+
+/* function fncUpdateRecipeComment(e) {
+
+    console.log(e);
+
+    const commentNo = $(e).data("value");
+
+    var commentContent = $("div[id='commentContent']").val();
+
+    $.ajax({
+       url : "updateRecipeComment/" + commentNo + "/" + commentContent,
+       dataType : "json",
+       method : "POST",
+       data : {
+
+       },
+       success : function(result) {
+          if (result != null) {
+             alert("댓글 수정이 완료되었습니다.");
+             self.location = "getRecipe?commentNo=" + commentNo;
+          }
+       }
+
+    });
+
+ } */
+
+function fncDeleteRecipeComment(e) {
+	if (!confirm('댓글을 삭제하시겠어요?')) {
+		return false;
+	}
+	
+	console.log(e);
+	const no = $(e).data("value");
+	 $.ajax({
+			url : "/board/deleteRecipeComment/"+no,
+			dataType : "json",
+			success : function(result){
+				if(result != null){
+					alert("삭제완료");
+					self.location = "/board/getRecipe?rcpNo=${recipe.rcpNo}";
+				}
+			}
+		
+		});
+	
 }
 
 $(function() {
@@ -50,6 +110,14 @@ $(function() {
 });
 
 function fncAddRecipeComment() {
+	
+	 var commentContent = $("textarea[id='commentContent']").val();
+
+	    if (commentContent == null || commentContent.length < 1) {
+	       alert("댓글내용을 반드시 입력하여야 합니다.");
+	       return;
+	    }
+	
 	$("form").attr("method", "POST").attr("action", "/board/addRecipeComment").submit();
 }
 
@@ -328,7 +396,7 @@ var rcpNo = ${recipe.rcpNo};
  				<c:forEach var="file" items="${file}">
  				<input type="hidden" id="attach_no" name="attach_no" value="">
  					<a href="#" onclick="fn_fileDown('${attach.attachNo}'); return false;">${attach.orgFileName}</a>(${attach.fileSize})<br>
- 					<img attachNo="${ attach.attachNo }" width="400" height="400" src="../static/img/${attach.orgFileName}" alt="..." 
+ 					<img attachNo="${ attach.attachNo }" width="400" height="400" src="${path}/resources/static/${attach.orgFileName}" alt="..." 
                onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"/>
  				</c:forEach>
  				
@@ -384,43 +452,37 @@ var rcpNo = ${recipe.rcpNo};
 					</form>
 					<!-- 댓글 작성폼 end -->
 					
-					<!-- 댓글 조회 폼 start -->
+					<!-- 댓글 리스트 조회 폼 start -->
 					<div class="card">
 						<div class="card-header">댓글 리스트</div>
 							<ul id="comment" class="commentList">
 								<c:forEach items="${commentList}" var="recipe">
 									<li id="comment--1" class="list-group-item d-flex justify-content-between">
-										<div>${recipe.comment.commentContent}</div>
+											<div class="font-itatlic">작성자 :${recipe.comment.commentWriter} | &nbsp;</div>
+											<br/>
 										<div class="d-flex">
-											<div class="font-itatlic">작성자 :${recipe.comment.commentWriter} &nbsp;</div>
-											<button class="badge">삭제</button>
+										<div>${recipe.comment.commentContent}</div>&nbsp;&nbsp;&nbsp;
+											<%-- <button type="button" id="button" class="btn btn-outline-success"
+                        					data-value="${recipe.comment.commentNo}" onClick="fncUpdateRecipeComment(this)">수정</button>&nbsp;&nbsp;&nbsp; --%>
+											
+											<button data-value="${recipe.comment.commentNo}" id="buttons" type="button" class="btn btn-primary" 
+											onClick="fncDeleteRecipeComment(this)">X</button></td>
 										</div>
 									</li>
 								</c:forEach>
 							</ul>
 					</div>
 					<!-- 댓글 조회 폼 end -->
-					
-					<%-- <!-- 댓글 작성 폼 start -->
-					<form name="replyForm" method="post" action="addRecipeComment">
-						<input type="hidden" id="rcpNo" name="rcpNo" value="${recipe.rcpNo}"/>
 
-						<div>
-							<label for="commentWriter">댓글 작성자</label>
-							<input type="text" id="commentWriter" name="commentWriter" /> <br /> 
-							<label for="content">댓글 내용</label><input type="text" id="commentContent" name="commentContent"/>
-						</div>
-						<div>
-							<button type="submit" class="replyWriteBtn" id="replyWriteBtn">작성</button>
-						</div>
-					</form>
-					<!-- 댓글 작성 폼 end --> --%>
-					
-					
+			<!-- 댓글 수정 모달창 start -->
+			
+			<!-- 댓글 수정 모달창 end -->
 
+
+
+				</div>
 			</div>
-        </div>
-    </div>
+		</div>
     <!-- Contact Form End -->
 
     <!-- Footer Section Begin -->

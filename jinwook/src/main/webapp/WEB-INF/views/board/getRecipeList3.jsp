@@ -75,7 +75,7 @@ function movePage(uri, queryString) {
 /*]]>*/
 
 function fncDeleteRecipe(e) {
-	if (!confirm('상품을 삭제하시겠어요?')) {
+	if (!confirm('댓글을 삭제하시겠어요?')) {
 		return false;
 	}
 	
@@ -92,7 +92,6 @@ function fncDeleteRecipe(e) {
 			}
 		
 		});
-	
 }
 
 $(function() {
@@ -118,17 +117,6 @@ $(function() {
          fncGetUserList(1);
       });
    });
-
-   //============= userId 에 회원정보보기  Event  처리(Click) =============   
-   $(function() {
-
-      //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-      $("td:nth-child(1)").on(
-            "click",
-            function() {
-               self.location = "/purchase/getPurchase?tranNo="
-                     + $(this).attr("tranNo");
-            });
 
       //==> userId LINK Event End User 에게 보일수 있도록 
       $("td:nth-child(2)").css("color", "red");
@@ -168,7 +156,7 @@ $(function() {
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="img/logo.png" alt=""></a>
+            <a href="#"><img src="${path}/resources/static/img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -265,7 +253,7 @@ $(function() {
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="./index.html"><img src="${path}/resources/static/img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -373,7 +361,11 @@ $(function() {
         </div>
     </section>
     <!-- Breadcrumb Section End -->
-
+    
+	<c:forEach var="a" items="${attach}">
+		${a.orgFileName}
+	</c:forEach>
+	
     <!-- Blog Section Begin -->
         <div class="container">
             <div class="row">
@@ -385,16 +377,23 @@ $(function() {
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
-                                    <img src="${path}/resources/static/img/blog/blog-2.jpg" alt="">
+										<img width="400" height="400"
+											src="/resources/static/${attach.orgFileName}" alt="..."
+											onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" />
+									<%-- <img attachNo="${attach.attachNo}" class="images" src="/resources/static/${attach.orgFileName}" alt=""
+                                    onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"> --%>
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
                                         <li><i class="fa fa-calendar-o"></i> ${recipe.rcpDate}</li>
-                                        <li><i class="fa fa-comment-o"></i> ${recipe.recommendCount}</li>
+                                        <li><i class="fa fa-comment-o"></i></li>
                                     </ul>
                                     <h5>${recipe.rcpTitle}</h5>
                                     <p><i class="bi bi-eye"></i> ${recipe.rcpHits}</p>
-                                     <div id="recipeDetail" data-param="${recipe.rcpNo}" class="blog__btn">더보기<span class="arrow_right"></span></div>
+                                     <div class="blog__btn">
+                                     <button id="recipeDetail" type="button" class="btn btn-primary" data-param="${recipe.rcpNo}">${recipe.rcpTitle}</button>
+                                     </div>
+                                     <input type="hidden" value="${recipe.rcpNo}">
                                 </div>
                             </div>
                         </div>
