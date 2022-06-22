@@ -82,9 +82,10 @@ public class OrdersRestController {
 		return jsonObj;
 	}
 	
-	@GetMapping(value = "addOrdersCart/{prodNo}")
-	public int addOrdersCart(@ModelAttribute("cart")Cart cart,@PathVariable(value="prodNo",required = false) int prodNo,
-								@PathVariable(value="storeNo",required = false)int storeNo,HttpSession session,@PathVariable(value="storeName",required = false)String storeName) throws Exception {
+	@GetMapping(value = "addOrdersCart/{prodNo}/{storeNo}/{storeName}/{prodCount}")
+	public int addOrdersCart(@ModelAttribute("cart")Cart cart,@PathVariable(value="prodNo",required = false) int prodNo,@PathVariable(value="storeNo",required = false)int storeNo,
+							HttpSession session,@PathVariable(value="storeName",required = false)String storeName,@PathVariable(value="prodCount",required = false)int prodCount) throws Exception {
+	System.out.println("gogogogod");
 	User user = (User) session.getAttribute("user");
 	Product product =new Product();
 	product.setProdNo(prodNo);

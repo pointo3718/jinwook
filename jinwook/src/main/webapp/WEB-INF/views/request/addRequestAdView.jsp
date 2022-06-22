@@ -58,6 +58,7 @@
    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <!-- date picker -->
 
@@ -394,8 +395,8 @@ label {
                <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;광고 관련 문의 및 요청 사항은 1:1문의/고객센터(1644-0000)로 문의 바랍니다.</div>
          </div>
           <hr size="10px">
-				<form name="detailForm" method="post">		
-				<input type="hidden" name="userId" value="test05" />
+				<form name="detailForm" id="adForm" method="post">		
+				<input type="hidden" name="userId" value="test01" />
 				<input type="hidden" name="storeNo" value="${param.storeNo}" />
 				  
 				   <div class="form-group">
@@ -405,7 +406,7 @@ label {
 				  
 				  <div class="form-group">
 				    <label for="exampleFormControlTextarea1"><strong>내용</strong></label>
-				    <textarea class="form-control" id="adContent" rows="6"
+				    <textarea class="form-control" name="adContent" id="adContent" rows="6"
 				    ></textarea>
 				  </div>
 				  
@@ -419,7 +420,7 @@ label {
 					
 				  <br/><br/>
           			<div class="form-group row">
-	          			<button id="requestAd" class="btn btn-success" style="background-color: #7fad39; border-color: #7fad39; width: 126px;">등록 요청</button>
+	          			<button type="button" id="requestAd" class="btn btn-success" style="background-color: #7fad39; border-color: #7fad39; width: 126px;">등록 요청</button>
           			</div>
          			<br/>
 				  
@@ -440,20 +441,46 @@ label {
 
 <script>
 /////////////// 광고 등록 시작 //////////////////////
-$(function() {
-	$( "#requestAd:contains('등록 요청')" ).on("click" , function() {
-		fncAddRequestStore();
-	});
+
+$().ready(function () {
+    $("#requestAd").click(function () {
+    	
+        Swal.fire({
+       		title: '광고를 등록을 신청하시겠습니까?',
+            text: "확인절차에 따라 관리자의 연락이 갈 수 있습니다.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#7fad39',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '신청',
+            cancelButtonText: '취소'
+        }).then((result) => {
+            if (result.isConfirmed) {
+            	fncAddRequestStore();	 
+            } 
+				fncSwal();
+        })
+        
+    });
+    
+   
 });
 
-function fncAddRequestStore(){
-//Form 유효성 검증
-
-
-document.detailForm.action='/request/addRequestAd?storeNo=10000&userId=test05';
-document.detailForm.submit();
+function fncAddRequestStore() {
+    
+	//Form 유효성 검증 필요
+		document.detailForm.action='/request/addRequestAd';
+		$("#adForm").submit(); 
 }
 
+function fncSwal() {
+    
+	Swal.fire(
+   		  	'광고 신청이 완료되었습니다.',
+            '일주일 내로 관리자의 연락이 갈 예정입니다.',
+            'success'
+        ); 
+}
 /////////////// 광고 등록 끝 ///////////////////////
 </script>
 </body>

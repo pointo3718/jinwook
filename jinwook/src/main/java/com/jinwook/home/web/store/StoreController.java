@@ -56,13 +56,15 @@ public class StoreController {
          return "redirect:/../index";
       }
 
-      List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+      List<Store> storeInfo = storeService.getStoreInfo(userid);
 
       model.addAttribute("storeInfo", storeInfo);
 
       List<Store> store = storeService.getStore(storeNo);
 
       model.addAttribute("store", store);
+      
+      
 
       return "store/updateStore";
    }
@@ -81,13 +83,14 @@ public class StoreController {
          return "redirect:/../index";
       }
 
-      List<Store> storeInfo = storeService.getStoreInfo(storeNo);
+      List<Store> storeInfo = storeService.getStoreInfo(userid);
 
       model.addAttribute("storeInfo", storeInfo);
 
       List<Store> store = storeService.getStore(storeNo);
 
       model.addAttribute("store", store);
+      
 
       return "store/addStoreProduct";
    }
@@ -99,8 +102,9 @@ public class StoreController {
       store.setStoreNo(storeNo);
 
       storeService.updateStore(Store);
-
       model.addAttribute("Store", Store);
+      
+      
 
       return "store/updateStore";
    }
@@ -171,9 +175,6 @@ public class StoreController {
       List<Store> getStore = storeService.getStore(storeNo);
       model.addAttribute("getStore", getStore);
 
-      List<Store> storeInfo = storeService.getStoreInfo(storeNo);
-
-      model.addAttribute("storeInfo", storeInfo);
 
       return "store/getStore";
    }
@@ -191,9 +192,11 @@ public class StoreController {
       List<Store> getStoreWallet = storeService.getStoreWallet(store);
       model.addAttribute("getStoreWallet", getStoreWallet);
 
-      List<Store> storeInfo = storeService.getStoreInfo(storeNo);
-
+      List<Store> storeInfo = storeService.getStoreInfo(userid);
       model.addAttribute("storeInfo", storeInfo);
+      
+      
+
 
       return "store/getStoreWallet";
    }
@@ -218,6 +221,7 @@ public class StoreController {
 
       List<Coupon> couponList = storeService.getCouponList(userId);
       model.addAttribute("couponList", couponList);
+      
 
 
       return "store/getCouponList";

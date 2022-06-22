@@ -16,6 +16,7 @@ public class Store extends CommonDTO {
    private int storeNo;
    private User user;
    private Orders orders;
+   private Cart cart;
    private Product product;
    private Request request;
    private String userId;

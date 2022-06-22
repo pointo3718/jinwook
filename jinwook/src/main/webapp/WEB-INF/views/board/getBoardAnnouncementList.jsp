@@ -70,7 +70,7 @@
 	
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 function fncDeleteAnnouncement(e) {
-	if (!confirm('상품을 삭제하시겠어요?')) {
+	if (!confirm('게시글을 삭제하시겠어요?')) {
 		return false;
 	}
 	
