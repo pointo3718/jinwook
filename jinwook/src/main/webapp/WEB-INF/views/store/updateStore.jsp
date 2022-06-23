@@ -263,7 +263,6 @@ label {
       console.log(e);
 
       const storeNo = $(e).data("value");
-
       var storeIntro = $("input[id='storeIntro']").val();
       var storePhone = $("input[id='storePhone']").val();
       var storeImage = $("input[id='storeImage']").val();
@@ -638,8 +637,8 @@ label {
                         수정</button>
                      &nbsp;&nbsp;&nbsp;
                      <button type="button" id="confirmStart" class="btn btn-outline-danger">상점삭제신청</button>
-                  	<input type="hidden" id="userid" value="${sessionScope.user.userId}"/> 
-                  	<input type="hidden" id="storeno" value="${param.storeNo}"/> 
+                     <input type="hidden" id="userid" value="${sessionScope.user.userId}"/> 
+                     <input type="hidden" id="storeno" value="${param.storeNo}"/> 
                   </div>
                   <!-- 수정, 삭제신청 버튼 End -->
                </c:forEach>
@@ -668,14 +667,14 @@ var STORENO;
 
 $().ready(function () {
     $("#confirmStart").click(function () {
-    	
-    	STORENO = $("input[id='storeno']").val();
-    	USERID = $("input[id='userid']").val();
-    		alert(STORENO);
-    		alert(USERID);
+       
+       STORENO = $("input[id='storeno']").val();
+       USERID = $("input[id='userid']").val();
+          alert(STORENO);
+          alert(USERID);
         Swal.fire({
-       		title: '정말로 상점 삭제 요청을 하시겠습니까?',
-            text: "확인 절차에 따라 관리자의 연락이 갑니다."",
+             title: '정말로 상점 삭제 요청을 하시겠습니까?',
+            text: "확인 절차에 따라 관리자의 연락이 갑니다.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#7fad39',
@@ -684,8 +683,8 @@ $().ready(function () {
             cancelButtonText: '취소'
         }).then((result) => {
             if (result.isConfirmed) {
-            	
-            	fncAddRequestDeleteStore();	
+               
+               fncAddRequestDeleteStore();   
             
                 
             }
@@ -698,34 +697,34 @@ $().ready(function () {
 /////////////////// 상점 삭제 신청 /////////////////////
 function fncAddRequestDeleteStore() {
        
-	var uri = "/request/addRequestDeleteStore/" + USERID +"/" +STORENO;
+   var uri = "/request/addRequestDeleteStore/" + USERID +"/" +STORENO;
 
-	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+   var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
 
-		$.ajax({
-			url: uri,
-			type: "POST",
-			headers: headers,
-			dataType: "json",
-			
-			success: function(response) {
-								
-				if (response.result == true) {
-					
-					Swal.fire(
-		           		  	'삭제 신청이 완료되었습니다.',
-		                    '일주일 내로 관리자의 연락이 갈 예정입니다.',
-		                    'success'
-		                );
-				}
-				swal(response.message, "", "error");
-			},
-			error: function(xhr, status, error) {
+      $.ajax({
+         url: uri,
+         type: "POST",
+         headers: headers,
+         dataType: "json",
+         
+         success: function(response) {
+                        
+            if (response.result == true) {
+               
+               Swal.fire(
+                            '삭제 신청이 완료되었습니다.',
+                          '일주일 내로 관리자의 연락이 갈 예정입니다.',
+                          'success'
+                      );
+            }
+            swal(response.message, "", "error");
+         },
+         error: function(xhr, status, error) {
                   alert("에러가 발생하였습니다.");
-				return false;
-			}
-		
-		});
+            return false;
+         }
+      
+      });
 }
 /////////////////// 상점 삭제 신청 끝 /////////////////////
 

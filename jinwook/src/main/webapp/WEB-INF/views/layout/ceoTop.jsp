@@ -175,9 +175,6 @@ document.detailForm.submit();
 /////////////// 상점 등록 끝 ///////////////////////
 
    
-</style>
-
-<script type="text/javascript">
 
    //================상점 오픈======================//
 
@@ -311,18 +308,7 @@ document.detailForm.submit();
                            <option value="4">과일</option>
                            <option value="5">종합</option>
                         </select>
-                        <script
-                           src="https://www.jqueryscript.net/demo/Mobile-friendly-Custom-Scrollbar-Plugin-With-jQuery-NiceScroll/js/jquery.nicescroll.min.js"></script>
-                        <script>
-                       $(document).ready(function () {
-                         $('select').niceSelect();
-                         $('.nice-select .list').niceScroll();
-                         
-                         $('select').niceSelect('update');
-                         $('.nice-select .list').niceScroll();
-                         
-                       });
-                     </script>
+            
                      </div>
                   </div>
                   <div class="form-group row">
@@ -338,6 +324,7 @@ document.detailForm.submit();
                   <!--  카카오 주소 API 시작 -->
                   <script
                      src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                 
                   <script>
                   window.onload = function(){
                       document.getElementById("storeAddr_main").addEventListener("click", function(){ //주소입력칸을 클릭하면
