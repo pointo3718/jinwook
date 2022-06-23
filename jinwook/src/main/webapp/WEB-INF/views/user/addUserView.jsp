@@ -228,6 +228,7 @@
 			var pw_confirm=$("input[name='password2']").val();
 			var name=$("input[name='userName']").val();
 			var nickName=$("input[name='nickName']").val();
+			var phone=$("input[name='phone']").val();
 			
 			
 			if(id == null || id.length <1){
@@ -242,8 +243,15 @@
 				alert("패스워드 확인은  반드시 입력하셔야 합니다.");
 				return;
 			}
+			
+			var regExName = /^[가-힣]*$/;
 			if(name == null || name.length <1){
 				alert("이름은  반드시 입력하셔야 합니다.");
+				return;
+			}
+			
+			if(!regExName.test(name)){
+				swal("[진욱이네]", "한글만 입력해주세요.");
 				return;
 			}
 			
@@ -257,7 +265,12 @@
 				$("input:text[name='password2']").focus();
 				return;
 			}
-				
+			
+			var uidCheck = /^[0-9+]{6,12}$/; // 숫자만
+			if(!uidCheck.test(phone)){
+				swal("[진욱이네]", "숫자만 입력해주세요.");
+				return;
+			}	
 				
 			/* var value = "";	
 			if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {

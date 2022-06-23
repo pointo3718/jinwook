@@ -1,129 +1,368 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
-
 <html lang="ko">
-	
-<head>
-	<meta charset="EUC-KR">
-	
-	<!-- ���� : http://getbootstrap.com/css/   ���� -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-    	 body >  div.container{ 
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-        }
-    </style>
-    
-    
-    
-    <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-	
 
-		//============= "�α���"  Event ���� =============
-		$( function() {
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Ogani Template">
+<meta name="keywords" content="Ogani, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>유저/사장/관리자 페이지 </title>
+
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">	
+
+<!-- Css Styles -->
+<link rel="stylesheet"
+   href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/font-awesome.min.css"
+   type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/nice-select.css" type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/owl.carousel.min.css"
+   type="text/css">
+<link rel="stylesheet"
+   href="${path}/resources/static/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${path}/resources/static/css/style.css"
+   type="text/css">
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+   
+   function movePage(uri, queryString) {
+      location.href = uri + queryString;
+   }
+
+
+   function searchBoard(form) {
+		/*[- 드롭다운이 아닌 메인 검색 키워드로 검색했을 때 -]*/
+	if (isEmpty(form) == true) {
+		var searchKeyword = document.getElementById("mainSearchKeyword");
+		if (isEmpty(searchKeyword.value) == true) {
+				alert("키워드를 입력해 주세요.");
+				searchKeyword.focus();
+				return false;
+			}
+
+			form = document.getElementById("searchForm");
+			form.searchKeyword.value = searchKeyword.value;
+			form.submit();
+		}
+
+		if (isEmpty(form.searchKeyword.value) == true) {
+			alert("키워드를 입력해 주세요.");
+			form.searchKeyword.focus();
+			return false;
+		}
+	}
 			
-			$("#password").focus();
-			
-			//==> DOM Object GET 3���� ��� ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("button").on("click" , function() {
-				var id=$("input:text").val();
-				var pw=$("input:password").val();
-				
-				
-				if(pw == null || pw.length <1) {
-					alert('�н����带 �Է����� �����̽��ϴ�.');
-					$("#password").focus();
-					return;
-				}
-				
-				$("form").attr("method","POST").attr("action","/user/confirmPassword").submit();
-			});
-		});	
-		
-		
-		//============= ȸ��������ȭ���̵� =============
-		$( function() {
-			//==> DOM Object GET 3���� ��� ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("a[href='#' ]").on("click" , function() {
-				self.location = "/user/getUser?userId=${sessionScope.user.userId}"
-			});
+   /*[- end of function -]*/
+   
+   
+   	/////////////// 회원목록 이동 시작 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('회원 목록')").on("click" , function() {
+			$(self.location).attr("href","/admin/blog");
 		});
-		
-	</script>		
+	});
+	//////////////// 상점목록 이동 끝 /////////////////
 	
+	/////////////// 상점목록 이동 시작 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('상점 목록')").on("click" , function() {
+			$(self.location).attr("href","/admin/listStoreAdmin");
+		});
+	});
+	//////////////// 상점목록 이동 끝 /////////////////
+	
+	/////////////// 신고접수 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('신고 접수 목록')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/admin/listComplainAdmin");
+		});
+	});
+	
+	/////////////// 상점등록요청 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('상점 등록 요청')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=1");
+		});
+	});
+	
+	/////////////// 상점삭제요청 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('상점 삭제 요청')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=2");
+		});
+	});
+
+	/////////////// 환급요청 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('환급 요청')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=3");
+		});
+	});
+
+	/////////////// 광고 요청 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('광고 등록 요청')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=4");
+		});
+	});
+
+
+
+//============= "탈퇴"  Event 처리 및  연결 =============
+$(function() {
+	$("#deleteUser").on("click" , function() {
+		$("form").attr("method" , "POST").attr("action" , "/user/deleteUser").submit();
+	});
+});	
+
+//=============이메일" 유효성Check  Event 처리 =============
+ $(function() {
+	 
+	 $("input[name='email']").on("change" , function() {
+			
+		 var email=$("input[name='email']").val();
+	    
+		 if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
+	    	alert("이메일 형식이 아닙니다.");
+	     }
+	});
+	 
+});	
+
+////////////////////////////////수정 시작///////////////////////////////////////
+	function fncUpdateUser() {
+		var password=$("input[name='password']").val();
+		
+		if(password == null || password.length <1 || password == " "){
+			alert("비밀번호를 입력하세요.");
+			return;
+		}
+	
+	
+	
+	
+	
+	$("#confirmPw").attr("method" , "POST").attr("action" , "/user/confirmPassword").submit();   
+}
+
+	function confirm() {
+		location.href="/user/confirmPasswordView?userId=${user.userId}"
+	}
+
+</script>
+
+<style>
+
+
+.mytop01 {
+   padding-left: 20px;
+}
+
+.mytop01-content {
+   padding-left: 180px;
+   color: #6A8F00;
+   display: inline;
+}
+
+.blog {
+   padding-top: 50px;
+}
+
+.blog__sidebar {
+   padding-top: 0px;
+}
+
+.list-group {
+   padding-top: 0px;
+}
+
+.blog__sidebar__item {
+   width: 200px;
+}
+
+.row{
+   display: flex;
+    justify-content: center;
+	align-items: flex-start;
+}
+
+
+</style>
+
 </head>
 
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="index">�� �� �� ��</a>
-   		</div>
-   	</div>
-   	<!-- ToolBar End /////////////////////////////////////-->	
-	
-	<!--  ȭ�鱸�� div Start /////////////////////////////////////-->
-	<div class="container">
-		<!--  row Start /////////////////////////////////////-->
-		<div class="row">
-		
-	   	 	
-	 	 	<div class="col-md-6">
-	 	 	
-		 	 	<br/><br/>
-				
-				<div class="jumbotron">	 	 	
-		 	 		<h1 class="text-center" >��й�ȣ Ȯ��</h1>
+   <!-- Header Begin -->
+   <jsp:include page="../layout/top.jsp" />
+   <!-- Header End -->
 
-			        <form class="form-horizontal">
-		  
-					  
-					  <div class="form-group">
-					    <label for="password" class="col-sm-4 control-label">�� �� �� ��</label>
-					    <div class="col-sm-6">
-					      <input type="password" class="form-control" name="password" id="password" placeholder="�н�����" >
-					    </div>
-					  </div>
-					  
-					  <div class="form-group">
-					    <div class="col-sm-offset-4 col-sm-6 text-center">
-					      <button type="button" class="btn btn-primary"  >Ȯ &nbsp;��</button>
-					      
-					      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-					<div class="d-flex justify-content-center">
-						<a href="#" class="text-reset p-2" title="Tooltip">��й�ȣ ã��</a> 
-						<span class="p-2"> | </span> 
-						<a href="registerUser" class="text-reset p-2" title="Tooltip">ȸ������</a>
+	<!-- Breadcrumb Section Begin -->
+	<section class="breadcrumb-section set-bg"
+		style="background-color: #F2F2F2">
+		<div class="container">
+			<div class="row my-1">
+				<div class="col-4">
+					<div class="bg-white text-black mx-3">
+
+						<br/> <button type="button" class="btn btn-outline-success" style="margin-left: 20px; margin-bottom: 10px; color:#7fad39; border-color:#7fad39;" disabled>${sessionScope.user.grade}</button>
+						<span>
+						<strong class="mytop01"><span style="font-size: 30px;">${sessionScope.user.nickName}</span>&nbsp;님&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></strong><br/>
+						</span>
+						<h1 class="mytop01-content " id="inquiry"><span class="countinq"></span></h1>
+						<a href="#" style="color: gray;">전체등급보기</a> <br/> <br/>
+						
 					</div>
 				</div>
-		    		</form>
+
+				<div class="col-4">
+					<div class="bg-white text-black mx-3" style="height: 153px;">
+
+						<br/> <strong class="mytop01"><span style="font-size: 25px;">진욱페이 &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></strong>
+						&nbsp;&nbsp;<a href="#" style="color:gray;">충전하기</a></br> </br>
+						<div><h2 class="mytop01-content " id="request" style="padding-left:170px;"><span class="countall">${sessionScope.user.jpBalance}</span></h2> 원</div>
+						<br/> <br/>
+					</div>
+				</div>
+
+				<div class="col-4">
+					<div class="bg-white text-black mx-3" style="height: 153px;">
+
+						<br/> <strong class="mytop01"><span style="font-size: 25px;">보유쿠폰 &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></strong> <br/> <br/>
+						<h2 class="mytop01-content " id="request"><span class="countall"><span class="countCoupon"></span></span></h2> 개 </br> </br>
+
+					</div>
 				</div>
 			</div>
+
 		</div>
-	</div>
-					      
-  	 	<!--  row Start /////////////////////////////////////-->
-  	 	
- 	<!--  ȭ�鱸�� div end /////////////////////////////////////-->
+		<!-- /container -->
+	</section>
+	<!-- Breadcrumb Section End -->
+
+   <!-- Blog Section Begin -->
+   <section class="blog spad">
+      <div class="container">
+         <div class="row" style="justify-content: space-around;">
+            <div class="col-xs-4 col-xs-5"
+               style="width: 200px; margin-right: 30px;">
+               <div class="blog__sidebar" style="width: 200px;">
+
+                  <div class="blog__sidebar__item">
+
+                     <h5 class="text-center" style="margin-bottom: 0px;">
+                        <strong>마이 페이지</strong>
+                     </h5>
+
+                     <br/>
+
+                     <div class="list-group text-center" style="font-size: 15px;">
+                        <button type="button"
+                           class="list-group-item list-group-item-action"
+                           aria-current="true" onclick="location.href='/orders/getOrdersList'">주문내역</button>
+                        <button type="button"
+                           class="list-group-item list-group-item-action" onclick="confirm()">개인정보</button>
+                        <button type="button"
+                           class="list-group-item list-group-item-action" onclick="location.href='/board/getBoardInquiryList'">1:1문의</button>
+                        <button type="button"
+                           class="list-group-item list-group-item-action" class="addStore"><span class="addStore">작성한 글 
+                           </span>
+                            </button>
+                     </div>
+
+                  </div>
+
+
+               </div>
+            </div>
+
+            <!-- 개인 정보 수정 Start -->
+            <div>
+               <h4 class="text-left">
+                  <strong>개인 정보 수정</strong>
+
+               </h4>
+                  <hr style="height:20px;">
+               <h5 class="text-left">
+                  <strong>비밀번호 확인</strong>
+               </h5>
+				<a>고객님의 정보를 보호하기 위해 비밀번호를 확인합니다.</a>
+                  <hr size="10px">
+
+
+                  <table class="table table-hover"
+                     style="width: 730px; heigh: 300px;">
+
+                     <form class="form-horizontal" id="confirmPw">
+
+
+                        <div class="form-group row">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label">아이디</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="userId"
+                                 class="form-control form-control" id="userId"
+                                 value="${user.userId}" readonly>
+                           </div>
+                        </div>
+
+                        <div class="form-group row">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label">비밀번호</label>
+                           <div class="col-sm-6">
+                              <input type="password" name="password"
+                                 class="form-control form-control" id="password"
+                                 value="" >
+                           </div>
+                        </div>
+
+                        
+                    </form>
+
+
+
+                  </table>
+                  
+                  <!--비밀번호 확인 Start-->
+                   <hr style="height:20px;">
+
+                  <div class="text-center">
+                     <button type="button" id="button" class="btn site-btn" onClick="fncUpdateUser()">
+                        확인</button>
+                  </div>
+                  <!--비밀번호 확인 End-->
+         </div>
+      </div>
+   </section>
+   <!--   Blog Section End -->
+
+   <!--  Footer Begin -->
+   <jsp:include page="../layout/footer.jsp" />
+   <!-- Footer End -->
 
 </body>
 
