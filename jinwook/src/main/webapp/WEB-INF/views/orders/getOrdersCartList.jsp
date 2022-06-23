@@ -257,12 +257,9 @@
                
 	</script>
 	
-      <a href="/board/getRecipe?rcpNo=6">레시피</a> <hr>
-      <a href="/board/addBoardInquiryView">1:1문의 등록(파일 업로드)</a> <hr>
       <a href="/orders/getOrdersList">주문내역</a> <hr>
       <a href="/orders/getOrdersJpayList">진욱페이내역</a> <hr>
       <a href="/orders/getOrdersNoticeList">알림내역</a> <hr>
-      <a href="/store/getStore?storeNo=10000" class="primary-btn">SHOP</a><hr>
       <a href="/orders/addOrdersJpayPassword">진욱페이비밀번호등록창</a> <hr>
       <a href="/orders/addOrdersJpayPasswordCk">진욱페이비밀번호등록체크(일치여부)</a><hr>
       <a href="/orders/updateOrdersJpayPassword">진욱페이비밀번호수정</a><hr>

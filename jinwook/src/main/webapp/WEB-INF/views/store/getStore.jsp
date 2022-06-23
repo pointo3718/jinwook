@@ -21,7 +21,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
-
+	
 <!-- Css Styles -->
 <link rel="stylesheet"
 	href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
@@ -58,8 +58,6 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!-- 수량 버튼 -->
 
 <script type="text/javascript">
 	/*<![CDATA[*/
@@ -299,8 +297,9 @@ label {
 		const prodNo = $(e).data("value");
 		const storeNo = $("#stoNo").data("valuese");
 		const storeName = $("#stoName").data("values");
-		const prodCount = $("#count").data("count");
-
+		//const prodCount = prodCount;
+		const prodCount = $(e).parent().parent().parent().parent().find(".product__item__text").find(".count").val();
+		console.log(prodCount)
 		const passdata = {
 			'prodNo' : prodNo,
 			'storeNo' : storeNo,
@@ -510,6 +509,7 @@ label {
 									$(e).parent("div").find("input[name='count']").val(prodCount);
 								}
 								
+								
 								function plusCount(e){
 									console.log(e);
 									const prodNo = $(e).data("prodno");
@@ -517,6 +517,7 @@ label {
 									prodCount++;
 									console.log(prodCount+"++");
 									$(e).parent("div").find("input[name='count']").val(prodCount);
+									console.log(prodCount);
 								}
 							</script>
 						</h5>

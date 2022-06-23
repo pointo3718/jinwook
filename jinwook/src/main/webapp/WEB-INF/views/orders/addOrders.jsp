@@ -148,7 +148,7 @@
                             </div>
                             <div class="checkout__input">
                                 <p>픽업희망시간<span>*</span></p>
-                                <input type="number" name="plusTime" placeholder="분으로 숫자만 입력해주세요" class="checkout__input__add" style="color: black;" Min = "1" oninput="validity.valid||(value='');">
+                                <input type="number" name="plusTime" placeholder="분으로 숫자만 입력해주세요" class="checkout__input__add" style="color: black;" Min = "1" max="120" oninput="validity.valid||(value='');">
                             </div>
                             <div class="checkout__input">
                                 <p>요청사항</p>
@@ -156,28 +156,37 @@
                             </div>
                             <div class="checkout__input">
                                 <p>쿠폰<span></span></p>
-                                <select size="10" name="couponType" id="couponType" style="color: black;" onchange="selectBoxChange(this.value);"> 
+                                <select size="10" name="couponType" id="couponType" data-coupon="" style="color: black;" onchange="selectBoxChange(this.value);"> 
                                 <option id="chargeType" selected>할인쿠폰을 선택하세요</option>
 	                                    <c:forEach var="coupon" items="${couponList}">
                                     	<option value="${coupon.couponType}">
                                     	<c:if test="${coupon.couponType == '1'}">
+                                    	<span type="hidden" id="couDc" value="${coupon.couponDc}"></span>
                                     		고객님의 회원가입을 축하합니다.(회원가입 쿠폰 20%할인)
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '2'}">
+                                    	<span type="hidden" id="couDc"  value="${coupon.couponDc}"></span>
                                     		고객님의 첫구매를 축하합니다.(첫구매 쿠폰 30%할인)
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '3'}">
+                                    	<span type="hidden" vid="couDc" ="${coupon.couponDc}"></span>
                                     		고객님의 생일을 축하합니다.(생일축하 쿠폰 30%할인)
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '4'}">
+                                    	<span type="hidden" value="${coupon.couponDc}"></span>
                                     		고객님께 소중한 쿠폰 배달왔습니다.(추천인 쿠폰 15%할인)
                                     	</c:if>
                                     	</option>
                                     </c:forEach>
                                 </select>
                              	<script>
+                             	 function(){
                              	 var selectBoxChange = function(value){
+                             		const couponDc = data("couDc");
+                             		const orderPrice = $(e).data("oprice");
                              		console.log("값변경: " + value);
+                             		console.log("쿠폰값: " + couponDc);
+                             		console.log("주문금액: " + orderPrice);
                              		$("#chargeType").val(value);
                              		$("#couponDc").val(value);
                              	}
@@ -204,7 +213,7 @@
                                 	<c:set var="total" value="${total + (cart.product.price*cart.prodCount) }" />
                                 </c:forEach>
                                 </ul>
-                                <div class="checkout__order__subtotal">총상품금액 <span id="orderPrice">${cart.orders.orderPrice}원</span></div>
+                                <div class="checkout__order__subtotal">총상품금액 <span id="orderPrice" data-oprice="${cart.orders.orderPrice}">${cart.orders.orderPrice}원</span></div>
                                 <input type="hidden" name="orderPrice" value="${cart.orders.orderPrice}">
                                 <div class="checkout__order__total"> 쿠폰할인	<span id="couponDc" value="${type}">${total1}원</span></div>
                                 	<c:if test="${couponType == '1'}">
