@@ -675,7 +675,7 @@ $().ready(function () {
     		alert(USERID);
         Swal.fire({
        		title: '정말로 상점 삭제 요청을 하시겠습니까?',
-            text: "확인 절차에 따라 관리자의 연락이 갑니다."",
+            text: "확인 절차에 따라 관리자의 연락이 갑니다.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#7fad39',

@@ -520,7 +520,7 @@ a{
 	
 	<!-- Modal5 Begin -->	
 	<!-- 상점 등록 Modal -->
-    <div class="modal" id="#getRequestAddStore" aria-hidden="true" style="display: none; z-index: 1060;">
+    <div class="modal" id="getRequestAddStore" aria-hidden="true" style="display: none; z-index: 1060;">
        <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">

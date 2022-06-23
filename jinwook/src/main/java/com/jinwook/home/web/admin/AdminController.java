@@ -40,7 +40,11 @@ public class AdminController {
 		return "/admin/blog";
 	}
 
+	@GetMapping(value = "chart")
+	public String getChart() {
 
+		return "/admin/chart";
+	}
 	
 	@GetMapping(value = "getUserAdmin")
 	public String getUserAdmin(@RequestParam(value = "userId", required = false) String userId, Model model) {
