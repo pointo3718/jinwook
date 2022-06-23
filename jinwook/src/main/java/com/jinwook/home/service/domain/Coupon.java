@@ -16,7 +16,7 @@ public class Coupon {
    private String couponType;
    private boolean couponStatus; 
    private Date couponValidDate; 
-   private int couponDc; 
+   private double couponDc; 
    
    public Coupon(){
    }
