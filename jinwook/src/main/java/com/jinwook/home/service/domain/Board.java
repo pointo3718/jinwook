@@ -16,7 +16,7 @@ import lombok.ToString;
 public class Board extends CommonDTO {
 
 	private int boardNo;
-	private Attach attach;
+	private Attach attach;//첨부 파일 조회를 위한 attach 객체
 	private User user;
 	private String userId;
 	private String boardTitle;

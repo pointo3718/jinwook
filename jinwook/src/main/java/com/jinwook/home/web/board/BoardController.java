@@ -62,8 +62,6 @@ import com.mysql.cj.log.Log;
 @RequestMapping("/board/*")
 public class BoardController {
 	
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img\\";
-	
 	@Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
@@ -119,7 +117,7 @@ public class BoardController {
 		List<MultipartFile> fileList = mpRequest.getFiles("file");
         String src = mpRequest.getParameter("src");
 
-        String path = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img\\";
+        String path = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\";
 
         for (MultipartFile mf : fileList) {
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
@@ -154,8 +152,8 @@ public class BoardController {
 		Board board = boardService.getBoardInquiry(boardNo);
 		
 		model.addAttribute("board", boardService.getBoardInquiry(boardNo));
-		List<Map<String, Object>> fileList = boardService.selectBoardAttachList(board.getBoardNo());
-		model.addAttribute("file", fileList);
+//		List<Map<String, Object>> fileList = boardService.selectBoardAttachList(board.getBoardNo());
+//		model.addAttribute("file", fileList);
 			
 		return "board/updateBoardInquiryView"; // 보여줄 화면: .jsp
 	}
@@ -174,7 +172,6 @@ public class BoardController {
 		@GetMapping(value = "addBoardAnnouncementView")
 		public String addBoardAnnouncementView(@RequestParam(value = "boardNo", required = false) Integer boardNo, 
 																	@RequestParam(value = "userId", required = false) String userId, Model model) throws Exception {
-			System.out.println("/board/addBoardAnnouncementView: GET");
 			
 			if (boardNo == null) {
 				model.addAttribute("board", new Board());
@@ -274,17 +271,29 @@ public class BoardController {
 	
 	//1:1문의 상세 조회
 	@GetMapping(value = "getBoardInquiry")
-	public String getBoardInquiry(Board board, @RequestParam(value = "boardNo", required = false) int boardNo, Model model) throws Exception {
+	public String getBoardInquiry(@ModelAttribute("board") Board board, @RequestParam(value = "boardNo", required = false) int boardNo, 
+			@RequestParam(value = "userId", required = false) String userId,Model model) throws Exception {
 		System.out.println("/board/getBoardInquiry: GET");
 		
 		// 조회수 카운트
 		boardService.updateBoardInquiryHits(boardNo);
 		//상세 조회
 		model.addAttribute("board", boardService.getBoardInquiry(board.getBoardNo()));
+		//공지사항 작성자 id
+		User user1 = userService.getUser(userId);
+		model.addAttribute("user1",user1);
 		
-		List<Map<String, Object>> fileList = boardService.selectBoardAttachList(board.getBoardNo());
-		System.out.println(fileList);
-		model.addAttribute("file", fileList);//첨부 파일 리스트 조회할 수 있도록 데이터 전송
+		
+			Attach attach=new Attach();
+			attach = boardService.selectBoardAttachList(board.getBoardNo());
+			board.setAttach(attach);
+			System.out.println("--------------"+attach);
+			System.out.println("------------"+board);
+	
+		
+//		List<Map<String, Object>> fileList = boardService.selectBoardAttachList(board.getBoardNo());
+//		System.out.println(fileList);
+//		model.addAttribute("file", fileList);//첨부 파일 리스트 조회할 수 있도록 데이터 전송
 		
 		List<Comment> commentList = boardService.getInquiryComment(board.getBoardNo());
 		model.addAttribute("commentList", commentList);
@@ -306,18 +315,25 @@ public class BoardController {
 	
 	//공지사항 상세 조회 - 파일첨부
 	@GetMapping(value = "getBoardAnnouncement")
-	public String getBoardAnnouncement(@RequestParam(value = "boardNo", required = false) Integer boardNo, 
-			@RequestParam(value = "userId", required = false) String userId,
-			Model model, HttpSession session) throws Exception {
+	public String getBoardAnnouncement(@ModelAttribute("board") Board board, @RequestParam(value = "boardNo", required = false) int boardNo, 
+			@RequestParam(value = "userId", required = false) String userId, Model model, HttpSession session) throws Exception {
 		System.out.println("/board/getBoardAnnouncement: GET");
-		// 조회수 카운트
-		boardService.updateBoardAnnouncementHits(boardNo);
+		
 		//공지사항 작성자 id
 		User user1 = userService.getUser(userId);
-		Board board = boardService.getBoardAnnouncement(boardNo);
-		
 		model.addAttribute("user1",user1);
-		model.addAttribute("board", board);
+		// 조회수 카운트
+		boardService.updateBoardAnnouncementHits(boardNo);
+		//상세 조회
+		model.addAttribute("board", boardService.getBoardAnnouncement(board.getBoardNo()));
+		
+			Attach attach = new Attach();
+			attach = boardService.selectBoardAttachList(board.getBoardNo());
+			board.setAttach(attach);
+		
+		System.out.println("--------------"+attach);
+		System.out.println("------------"+board);
+		
 		
 		return "board/getBoardAnnouncement";
 	}
@@ -408,8 +424,6 @@ public class BoardController {
 	                e.printStackTrace();
 	            }
 	        }
-			
-
 			return "redirect:/board/getRecipeList";
 		}
 		
@@ -446,23 +460,21 @@ public class BoardController {
 //		}
 		
 		//레시피 목록 조회
-		@GetMapping(value = "getRecipeList3")
-		public String getRecipeList(@ModelAttribute("rcp") Recipe rcp, Model model) throws Exception {
-			List<Recipe> getRecipeList = boardService.getRecipeList(rcp);
+		@GetMapping(value = "getRecipeList")
+		public String getRecipeList(@ModelAttribute("recipe") Recipe recipe, Model model) throws Exception {
+			List<Recipe> getRecipeList = boardService.getRecipeList(recipe);
 			
-			List<Attach> attach = null;
+			System.out.println(getRecipeList.size());
 			
-			for (Recipe recipe : getRecipeList) {
-				attach = boardService.selectRecipeAttachList(recipe.getRcpNo());
+			for (Recipe recipe2 : getRecipeList) {
+				Attach attach = new Attach();
+				attach = boardService.selectRecipeAttachList(recipe2.getRcpNo());
+				recipe2.setAttach(attach);
 			}
 			
-//			System.out.println(fileList);
-//			model.addAttribute("attach", attach);
 			model.addAttribute("getRecipeList", getRecipeList);
-			model.addAttribute("attach", attach);
-			System.out.println("----------"+attach);
 			System.out.println(getRecipeList);
-			return "board/getRecipeList3";
+			return "board/getRecipeList";
 		}
 		
 		//레시피 상세 조회 + 조회수 증가
@@ -477,14 +489,14 @@ public class BoardController {
 			//레시피 상세 조회
 			model.addAttribute("recipe", boardService.getRecipe(recipe.getRcpNo()));
 			
-			//레시피 작성자 id
-			User user1 = userService.getUser(userId);
 			//첨부 파일 리스트 조회
 			//List<Map<String, Object>> fileList = boardService.selectRecipeAttachList(recipe.getRcpNo());
 			//댓글 조회
 			List<Comment> commentList = boardService.getRecipeComment(recipe.getRcpNo());
 			model.addAttribute("commentList", commentList);
 			//model.addAttribute("file", fileList);
+			//레시피 작성자 id
+			User user1 = userService.getUser(userId);
 			model.addAttribute("user1",user1);
 			
 			return "board/getRecipe";
@@ -591,8 +603,6 @@ public class BoardController {
 					return "redirect:/board/getReviewList";
 					//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
 				}
-				String sessionUserId = ((User) session.getAttribute("user")).getUserId();
-			    user.setUserId(sessionUserId);
 			    
 				model.addAttribute("user", user);
 				model.addAttribute("orders", orders);
@@ -601,10 +611,10 @@ public class BoardController {
 				
 			}
 			
-			return "redirect:/board/addReviewView";
+			return "board/addReviewView";
 		}
 		
-		//상점 후기 등록 처리
+		//상점 후기 등록 -> 기존에 있는 것을 update하는 방식.
 		@PostMapping(value = "addReview")
 		public String addReview(@ModelAttribute("orders") Orders orders) {
 			System.out.println("/board/addReview : POST");
@@ -645,5 +655,31 @@ public class BoardController {
 
 			return params;
 		}
+		
+			//리뷰 연습용 컨트롤러
+		   @GetMapping(value = "getOrdersList2")//리뷰날짜가 null이아닐경우 후기버튼 지움
+		   public String getOrdersList(@ModelAttribute("orders") Orders orders,HttpSession session,Model model) throws Exception {
+//		     String userid = ((User) session.getAttribute("user")).getUserId();
+//		     User user = new User();
+//		      user.setUserId(userid);
+//		      orders.setUser(user);
+		      
+		      System.out.println("/orders/getOrdersList : GET");
+		      List<Orders> getOrdersList = ordersService.getOrdersList(orders);
+		      System.out.println(orders);
+		      
+		      model.addAttribute("getOrdersList", getOrdersList);
+		      
+		      return "board/getOrdersList2";
+		   }
+		   
+		   @GetMapping("/replyEnroll/{userId}")
+		   	public String replyEnrollWindowGET(@PathVariable("userId") String userId, int orderNo,  Model model) {
+			   Orders order = boardService.getReviewInfo(orderNo);
+			   model.addAttribute("order", order); //주문내역의 후기 정보
+			   model.addAttribute("userId", userId);
+			   
+			   return "board/replyEnroll";
+		   }
 		
 }//class
