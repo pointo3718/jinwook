@@ -198,7 +198,7 @@ function getUserType(){
 	    	    datasets: [{ 
 	    	        data: [user, blacklist, byeuser], // 값
 	    	        label: "역할",
-	    	        backgroundColor : ["#7fad39","#fadb5e", "ff9e5e"],
+	    	        backgroundColor : ["#7fad39","#435b1e", "d1fa91"],
 	    	        fill: false
 	    	      }
 	    	    ]
