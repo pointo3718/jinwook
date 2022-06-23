@@ -79,17 +79,9 @@
 			store s, users u
 		WHERE 
 			s.user_id = u.user_id
-		<if test="searchKeyword != null and searchKeyword != ''">
-			
-					AND
-						(
-							   s.store_name LIKE CONCAT('%', #{searchKeyword}, '%')
-							   OR
-							   u.user_name LIKE CONCAT('%', #{searchKeyword}, '%') 
-							
-						)
+			AND 
+			s.store_status = 2
 				
-		</if>
 		ORDER BY 
 			s.store_no
 		<include refid="CommonMapper.paging" />
@@ -103,18 +95,8 @@
 		FROM
 			store
 		WHERE 
-			store_status = true
-		<if test="searchKeyword != null and searchKeyword != ''">
-			
-					AND
-						(
-							   s.store_name LIKE CONCAT('%', #{searchKeyword}, '%')
-							   OR
-							   u.user_name LIKE CONCAT('%', #{searchKeyword}, '%') 
-							
-						)
-				
-		</if>	
+			store_status = 2
+
 	</select>
 	
 	
@@ -257,6 +239,79 @@
 		WHERE
 			board_inq_status = 0
 	</select>
+	
+	
+	<!-- 차트 -->
+	<!-- 월별 회원가입 -->
+	<select id="getJoinForMonthChart" resultType="Chart">
+	SELECT 
+		CONCAT(YEAR(reg_date), '-', MONTH(reg_date)) AS ym, count(*) AS count
+	FROM 
+		users
+	WHERE 
+		YEAR(reg_date) = 2022
+	GROUP BY 
+		ym
+	ORDER BY 
+		ym
+	</select>
+	
+	<!-- 역할별 사용자 -->
+ 	<select id="getUserByRole" resultType="Chart">
+	SELECT DISTINCT 
+		(SELECT COUNT(*) FROM users WHERE role = '사용자')AS user_count, 
+		(SELECT COUNT(*) FROM users WHERE role = '사장님')AS ceo_count, 
+		(SELECT COUNT(*) FROM users WHERE role = '관리자')AS admin_count
+	FROM 
+		users;
+	</select> 
+	
+	<!-- 월별 주문수 / 주문금액 -->
+ 	<select id="getOrderCountAndPrice" resultType="Chart">
+	SELECT 
+		CONCAT(YEAR(order_date), '-', MONTH(order_date)) AS ym,
+		count(*) AS count, 
+		SUM(order_price)/10000 AS sum_price
+	FROM 
+		orders
+	WHERE 
+		YEAR(order_date) = 2022
+	GROUP BY 
+		ym
+	ORDER BY 
+		ym
+	</select> 
+	
+	<!-- 사용자 구분(일반/블랙/탈퇴) -->
+ 	<select id="getUserType" resultType="Chart">
+	SELECT DISTINCT
+		(SELECT 
+			COUNT(*) 
+		 FROM 
+		 	users
+		 WHERE 
+		 	user_bye_status = false AND blacklist_status = FALSE
+		) AS user_count,
+		
+		(SELECT 
+			COUNT(*) 
+		 FROM 
+		 	users
+		 WHERE 
+		 	user_bye_status = false AND blacklist_status = TRUE
+		) AS blacklist_count,
+		
+		(SELECT 
+			COUNT(*) 
+		 FROM 
+		 	users
+		 WHERE 
+		 	user_bye_status = TRUE
+		)AS bye_user_count
+		
+	FROM 
+		users;
+	</select> 
 	
 
 </mapper>

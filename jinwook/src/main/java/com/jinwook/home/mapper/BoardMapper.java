@@ -29,10 +29,12 @@ public interface BoardMapper {
 	public void insertBoardFile(Map<String, Object> map) throws Exception;
 	//레시피 사진 업로드
 	public void insertRecipeFile(Map<String, Object> map) throws Exception;
+	
 	// 게시판 첨부파일 조회
-	public List<Map<String, Object>> selectBoardAttachList(int boardNo) throws Exception;
+	public Attach selectBoardAttachList(int boardNo) throws Exception;
 	// 레시피 첨부파일 조회
-	public List<Attach> selectRecipeAttachList(int rcpNo) throws Exception;
+	public Attach selectRecipeAttachList(int rcpNo) throws Exception;
+	
 	// 첨부파일 다운
 	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
 	// 첨부파일 수정
@@ -73,6 +75,11 @@ public interface BoardMapper {
 	public int deleteReview(int ordersNo);
 	public Orders getReview(int ordersNo);
 	public List<Orders> getReviewList(Board board);
+	//상점 후기 정보 얻어와서 보내주기
+	//상품정보=후기정보, 상품id=후기번호(주문번호)
+	public Orders getReviewInfo(int orderNo);
+	//주문내역(상점후기)에 정보를 등록하는 매퍼
+	public int enrollReview(Orders orders);
 	
 	//레시피
 	public int addRecipe(Recipe rcp);
@@ -81,7 +88,7 @@ public interface BoardMapper {
 	//조인 필요: recipe, comment, recommend
 	public Recipe getRecipe(Integer rcpNo);
 	public List<Recipe> getRecipeList(Recipe rcp);
-
+	
 	//댓글 등록
 //	public int addComment(Comment comment);
 	//댓글 수정

@@ -8,8 +8,13 @@
 
 <c:set var="params" value="${orders}"/>
 <c:if test="${params == null}">
+<c:set var="params" value="${recipe}"/>
+</c:if>
+
+<c:if test="${params == null}">
 <c:set var="params" value="${jpay}"/>
-</c:if>      
+</c:if>
+      
 <c:if test="${params == null}">
 <c:set var="params" value="${notice}"/>
 </c:if>      

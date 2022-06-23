@@ -3,6 +3,7 @@ package com.jinwook.home.service.admin;
 import java.util.List;
 
 import com.jinwook.home.common.Criteria;
+import com.jinwook.home.service.domain.Chart;
 import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
@@ -26,5 +27,13 @@ public interface AdminService {
 		public int	getComplainTotalCount();	// 대기중인 신고목록 개수 
 		
 		public int	getWatingInquiryCount();	// 대기중인 문의목록 개수 
+
+		public List<Chart>	getJoinForMonthChart();		// 월별 회원가입 수
+
+		public List<Chart> getUserByRole();				// 역할별 사용자 통계
+		
+		public List<Chart> getOrderCountAndPrice();		// 월별 주문량, 주문금액
+
+		public List<Chart> getUserType();				// 사용자 유형 (일반/블랙/탈퇴)
 
 }

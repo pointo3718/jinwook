@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.admin.AdminService;
+import com.jinwook.home.service.domain.Chart;
 import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.request.RequestService;
@@ -236,10 +237,97 @@ public class AdminRestController {
 	 
 		return jsonObj;
 	}
-	}
+	
+
 
    ///////////////// 신고 등록  //////////////////	
 
 
+	//==================== 통계 ======================//
+	
+	///////////////// 월별 회원가입 수  //////////////////	
+	@GetMapping( value="/getJoinForMonthChart" )
+	@ResponseBody
+	public JsonObject getJoinForMonthChart(@ModelAttribute("chart") Chart chart) throws Exception{
+	   
+	   System.out.println("/admin/getJoinForMonthChart : GET ");
+	
+	   JsonObject jsonObj = new JsonObject();
+	   
+	   List<Chart> joinlist = adminService.getJoinForMonthChart();
+	   
+	   if (CollectionUtils.isEmpty(joinlist) == false) {
+	      JsonArray jsonArr = new Gson().toJsonTree(joinlist).getAsJsonArray();
+	      jsonObj.add("joinlist", jsonArr);
+	   
+	      System.out.println("월별 회원가입 수 통계 컨트롤러 통과");
+	   }
+	
+	   return jsonObj;
+	}
+	
+	///////////////// 역할별 사용자수  //////////////////	
+	@GetMapping( value="/getUserByRole" )
+	@ResponseBody
+	public JsonObject getUserByRole() throws Exception{
+	   
+	   System.out.println("/admin/getUserByRole : GET ");
+	
+	   JsonObject jsonObj = new JsonObject();
+	   
+	   List<Chart> userlist = adminService.getUserByRole();
+	   
+	   if (CollectionUtils.isEmpty(userlist) == false) {
+	      JsonArray jsonArr = new Gson().toJsonTree(userlist).getAsJsonArray();
+	      jsonObj.add("userlist", jsonArr);
+	   
+	      System.out.println("역할별 회원수 통계 컨트롤러 통과");
+	   }
+	
+	   return jsonObj;
+	}
+	
+	///////////////// 월별 주문량/주문금액  //////////////////	
+	@GetMapping( value="/getOrderCountAndPrice" )
+	@ResponseBody
+	public JsonObject getOrderCountAndPrice() throws Exception{
+	   
+	   System.out.println("/admin/getOrderCountAndPrice : GET ");
+	
+	   JsonObject jsonObj = new JsonObject();
+	   
+	   List<Chart> orderlist = adminService.getOrderCountAndPrice();
+	   
+	   if (CollectionUtils.isEmpty(orderlist) == false) {
+	      JsonArray jsonArr = new Gson().toJsonTree(orderlist).getAsJsonArray();
+	      jsonObj.add("orderlist", jsonArr);
+	   
+	      System.out.println("월별 주문량/주문금액 통계 컨트롤러 통과");
+	   }
+	
+	   return jsonObj;
+	}
+	
+	///////////////// 사용자 유형 (일반/블랙/탈퇴)  //////////////////	
+	@GetMapping( value="/getUserType" )
+	@ResponseBody
+	public JsonObject getUserType() throws Exception{
+	   
+	   System.out.println("/admin/getUserType : GET ");
+	
+	   JsonObject jsonObj = new JsonObject();
+	   
+	   List<Chart> usertypelist = adminService.getUserType();
+	   
+	   if (CollectionUtils.isEmpty(usertypelist) == false) {
+	      JsonArray jsonArr = new Gson().toJsonTree(usertypelist).getAsJsonArray();
+	      jsonObj.add("usertypelist", jsonArr);
+	   
+	      System.out.println("사용자 유형 통계 컨트롤러 통과");
+	   }
+	
+	   return jsonObj;
+	}
+}
 
    

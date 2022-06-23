@@ -14,9 +14,9 @@
 <title>1:1문의 등록</title>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">  
 
 <!-- Css Styles -->
 <link rel="stylesheet"
@@ -40,7 +40,6 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <style>
 *{font-family: 'Noto Sans KR', sans-serif;}
@@ -86,7 +85,8 @@
 }
 
 </style>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 $(function() {
 	$("button.btn.btn-success").on("click", function() {
@@ -145,12 +145,12 @@ function fn_addFile() {
 
 	<!-- Blog Section Begin -->
 	<section class="blog spad">
-		<div class="container" style="background-color: ivory; border:1px solid green;">
+		<div class="container" style="background-color: #F2F2F2;">
 
 				<!-- 상점 정보 수정 -->
 				<div>
 					<h4 class="text-left">
-						<strong>1:1문의 정보 등록</strong>
+						<strong><i class="bi bi-question-lg"></i>&nbsp; 1:1문의 정보 등록</strong>
 						<hr size="10px">
 					</h4>
 
@@ -166,7 +166,7 @@ function fn_addFile() {
   </div>
   <div class="form-group">
     <label for="file">1:1문의 사진 업로드</label>
-    <input type="file" class="form-control" id="file" name="file" multiple="multiple">
+    <input type="file" class="form-control" id="file" name="file">
   </div>
   <div class="form-group">
 	<div class="col-sm-offset-4  col-sm-4 text-center">

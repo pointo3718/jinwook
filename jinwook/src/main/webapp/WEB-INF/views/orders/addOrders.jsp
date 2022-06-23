@@ -148,7 +148,7 @@
                             </div>
                             <div class="checkout__input">
                                 <p>픽업희망시간<span>*</span></p>
-                                <input type="number" name="plusTime" placeholder="분으로 숫자만 입력해주세요" class="checkout__input__add" style="color: black;" Min = "1" oninput="validity.valid||(value='');">
+                                <input type="number" name="plusTime" placeholder="분으로 숫자만 입력해주세요" class="checkout__input__add" style="color: black;" Min = "1" max="120" oninput="validity.valid||(value='');">
                             </div>
                             <div class="checkout__input">
                                 <p>요청사항</p>
@@ -156,69 +156,82 @@
                             </div>
                             <div class="checkout__input">
                                 <p>쿠폰<span></span></p>
-                                <select size="10" name="couponType" id="couponType" style="color: black;" onchange="selectBoxChange(this.value);"> 
+                                <select size="10" name="couponType" id="couponType" style="color: black;" data-coupon="${coupon.couponDc}" onchange="selectBoxChange(this);"> 
                                 <option id="chargeType" selected>할인쿠폰을 선택하세요</option>
 	                                    <c:forEach var="coupon" items="${couponList}">
                                     	<option value="${coupon.couponType}">
                                     	<c:if test="${coupon.couponType == '1'}">
-                                    		고객님의 회원가입을 축하합니다.(회원가입 쿠폰 20%할인)
+                                    	<c:set var="cpDc" value="${coupon.couponDc}"/>
+                                    		고객님의 회원가입을 축하합니다.(회원가입 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '2'}">
-                                    		고객님의 첫구매를 축하합니다.(첫구매 쿠폰 30%할인)
+                                    	<c:set var="cpDc" value="${coupon.couponDc}"/>
+                                    		고객님의 첫구매를 축하합니다.(첫구매 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '3'}">
-                                    		고객님의 생일을 축하합니다.(생일축하 쿠폰 30%할인)
+                                    	<c:set var="cpDc" value="${coupon.couponDc}"/>
+                                    		고객님의 생일을 축하합니다.(생일축하 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '4'}">
-                                    		고객님께 소중한 쿠폰 배달왔습니다.(추천인 쿠폰 15%할인)
+                                    	<c:set var="cpDc" value="${coupon.couponDc}"/>
+                                    		고객님께 소중한 쿠폰 배달왔습니다.(추천인 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
                                     	</c:if>
                                     	</option>
                                     </c:forEach>
                                 </select>
                              	<script>
-                             	 var selectBoxChange = function(value){
-                             		console.log("값변경: " + value);
-                             		$("#chargeType").val(value);
-                             		$("#couponDc").val(value);
+                             	/* var selectBoxChange = function(value){ */
+                             	 function selectBoxChange(e){
+									const va = e.value
+									let finpr = $(e).parent().parent().parent().find("input[name='finalPrice2']").val();
+									const ffinalprice =
+									console.log(finpr)
+									console.log(va)
+                             	 	if(va ==="1"){
+                             	 		$("#couponDc").text(parseInt("${cart.orders.orderPrice*0.20}")+"원");
+                             	 		$("#finalPrice").text((finpr-"${cart.orders.orderPrice*0.20}")+"원");
+                             	 		finpr=finpr-"${cart.orders.orderPrice*0.20}"
+                             	 	}else if(va ==="2"){
+                             	 		$("#couponDc").text(parseInt("${cart.orders.orderPrice*0.30}")+"원");
+                             	 		$("#finalPrice").text((finpr-"${cart.orders.orderPrice*0.30}")+"원");
+                             	 		finpr=finpr-"${cart.orders.orderPrice*0.30}"
+                             	 	}else if(va ==="3"){
+                             	 		$("#couponDc").text(parseInt("${cart.orders.orderPrice*0.30}")+"원");
+                             	 		$("#finalPrice").text((finpr-"${cart.orders.orderPrice*0.30}")+"원");
+                             	 		finpr=finpr-"${cart.orders.orderPrice*0.30}"
+                             	 	}else if(va ==="4"){
+                             	 		$("#couponDc").text(parseInt("${cart.orders.orderPrice*0.15}")+"원");
+                             	 		$("#finalPrice").text((finpr-"${cart.orders.orderPrice*0.15}")+"원");
+                             	 		finpr=finpr-"${cart.orders.orderPrice*0.15}"
+                             	 	}
+                             	 	console.log(finpr)
+                             	 	$('input[name=finalPrice]').attr('value',finpr);
                              	}
                              	
-                             	/* $(document).ready(function(){
-                             	    $('#couponType').change(function(e){
-                             	        var thisOption = $("#couponType option:selected").val();
-                             	        var thisDc = $("#couponType").text();
-
-                             	        $('#couponDc').empty();
-                             	        $('<option>').text(thisText).val(thisVal).appendTo('#couponDc');
-                             	    }); */
                              	</script>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <div class="checkout__order">
                                 <h4>고객님 주문리스트</h4>
-                                <div class="checkout__order__products">상품들 <span >총액</span> <span style="margin-right: 100px;">수량</span></div>
+                                <div class="row">
+                                <div class="checkout__order__products col-sm-4" style="text-align: left;">상 품</div>
+                                <div class="checkout__order__products col-sm-4" style="text-align: center;">수 량</div>
+                                <div class="checkout__order__products col-sm-4" style="text-align: right; ">총 액</div> 
                                 <ul>
                                 <c:forEach var="cart" items="${getCartList}">
                                 	<input type=hidden id="storeNo" name="storeNo" value="${cart.storeNo}">
-                                    <li>${cart.product.prodName}<span hidden="price" value="${cart.product.price}"></span> <span >${cart.product.price*cart.prodCount}원</span><span style="margin-right: 100px;">${cart.prodCount}</span></li>
+                                    <div class="col-sm-4" style="text-align: left; font-size:18px; width: 180px;">${cart.product.prodName}</div>
+                                    <div class="col-sm" hidden="price" value="${cart.product.price}"></div>
+                                    <div class="col-sm-4" style="text-align: center; font-size:18px;">${cart.prodCount}</div>
+                                    <div class="col-sm-4" style="text-align: right; font-size:18px;">${cart.product.price*cart.prodCount}원</div>
                                 	<c:set var="total" value="${total + (cart.product.price*cart.prodCount) }" />
                                 </c:forEach>
                                 </ul>
-                                <div class="checkout__order__subtotal">총상품금액 <span id="orderPrice">${cart.orders.orderPrice}원</span></div>
+                                </div>
+                                <div class="checkout__order__subtotal">총상품금액 <span id="orderPrice" data-oprice="${total}">${total}원</span></div>
                                 <input type="hidden" name="orderPrice" value="${cart.orders.orderPrice}">
-                                <div class="checkout__order__total"> 쿠폰할인	<span id="couponDc" value="${type}">${total1}원</span></div>
-                                	<c:if test="${couponType == '1'}">
-                                		<fmt:formatNumber var="total1" pattern="###" value="${cart.orders.orderPrice*0.20}"/>
-                                	</c:if>
-                                	<c:if test="${couponType == '2'}">
-                                		<fmt:formatNumber var="total1" pattern="###" value="${cart.orders.orderPrice*0.30}"/>
-                                	</c:if>
-                                	<c:if test="${couponType == '3'}">
-                                		<fmt:formatNumber var="total1" pattern="###" value="${cart.orders.orderPrice*0.30}"/>
-                                	</c:if>
-                                	<c:if test="${couponType == '4'}">
-                                		<fmt:formatNumber var="total1" pattern="###" value="${cart.orders.orderPrice*0.15}"/>
-                                	</c:if> 
+                                <div class="checkout__order__total"> 쿠폰할인	<span id="couponDc">${total1}원</span></div>
                                 <div class="checkout__order__total">회원등급할인<span id="grade" name="grade" value="${user.grade}	">
 	                               	<c:choose>
 										<c:when test="${user.grade=='프랜즈'}">
@@ -235,9 +248,10 @@
 									    </c:when>
 								     </c:choose>
 							     </span></div>
-								 <div class="checkout__order__total" > 실결제금액<span id=finalPrice style="color: black;">${cart.orders.orderPrice-total-total1}원</span></div>
-								 <input type=hidden name="finalPrice" value="${cart.orders.orderPrice-total-total1}">
-								     
+								 <div class="checkout__order__total" > 실결제금액<span id=finalPrice style="color: black;">${cart.orders.orderPrice-total}원</span></div>
+								 <input type=hidden name="finalPrice" value="${cart.orders.orderPrice-total}">
+								 <input type=hidden name="finalPrice2" value="${cart.orders.orderPrice-total}">
+								 
                                 <button type="submit" id="order" class="site-btn" >주문하기</button>
                             </div>
                         </div>

@@ -413,13 +413,13 @@ public class BoardServiceImpl implements BoardService {
 
 	// 게시판 파일 첨부 조회
 	@Override
-	public List<Map<String, Object>> selectBoardAttachList(int boardNo) throws Exception {
+	public Attach selectBoardAttachList(int boardNo) throws Exception {
 		return boardMapper.selectBoardAttachList(boardNo);
 	}
 	
 	// 레시피 파일 첨부 조회
 	@Override
-	public List<Attach> selectRecipeAttachList(int rcpNo) throws Exception {
+	public Attach selectRecipeAttachList(int rcpNo) throws Exception {
 		return boardMapper.selectRecipeAttachList(rcpNo);
 	}
 
@@ -460,6 +460,18 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Comment selectRecipeComment(int commentNo) throws Exception {
 		return boardMapper.selectRecipeComment(commentNo);
+	}
+
+	@Override
+	public Orders getReviewInfo(int orderNo) {
+		return boardMapper.getReviewInfo(orderNo);
+	}
+
+	@Override
+	public int enrollReview(Orders orders) {
+		
+		int result = boardMapper.enrollReview(orders);
+		return result;
 	}
 	
 	

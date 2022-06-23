@@ -263,7 +263,6 @@ label {
       console.log(e);
 
       const storeNo = $(e).data("value");
-
       var storeIntro = $("input[id='storeIntro']").val();
       var storePhone = $("input[id='storePhone']").val();
       var storeImage = $("input[id='storeImage']").val();

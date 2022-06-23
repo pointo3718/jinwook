@@ -100,11 +100,10 @@ $('#myModal').on('shown.bs.modal', function () {
 		</div>
 	</div>
 
-<button type="button" class="btn btn-dark" id="preRegister"
-													data-toggle="modal" data-target="#exampleModal"
-													data-notifyid="${complain.userId}"
-													data-complainno="${complain.complainNo}">등록</button> <!--  data-toggle="modal" data-target="#exampleModal -->
-											</td>
+<button type="button" class="btn btn-dark" id="preRegister" data-toggle="modal" data-target="#exampleModal" >등록</button>
+													
+													 <!--  data-toggle="modal" data-target="#exampleModal -->
+											
 
 </body>
 

@@ -1,0 +1,6524 @@
+{
+	"storeMap": [
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청포도",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 40000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 10000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 2000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "딸기",
+				"price": 7000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 3000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 2000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 2000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2350,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오렌지",
+				"price": 1250,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "바나나",
+				"price": 3500,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "거봉",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "딸기",
+				"price": 5000,
+				"isSoldout": false
+			},
+			"storeName": "진욱이네",
+			"storeAddr": "서울특별시 강북구 덕릉로 102-4 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634534714452,
+			"longitude": 127.02496559104,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "인규네",
+			"storeAddr": "\t서울특별시 강북구 미아동 158-10",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634698301219,
+			"longitude": 127.02565484609,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "인규네",
+			"storeAddr": "\t서울특별시 강북구 미아동 158-10",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634698301219,
+			"longitude": 127.02565484609,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "인규네",
+			"storeAddr": "\t서울특별시 강북구 미아동 158-10",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634698301219,
+			"longitude": 127.02565484609,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "인규네",
+			"storeAddr": "\t서울특별시 강북구 미아동 158-10",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634698301219,
+			"longitude": 127.02565484609,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파프리카",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "인규네",
+			"storeAddr": "\t서울특별시 강북구 미아동 158-10",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634698301219,
+			"longitude": 127.02565484609,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 3200,
+				"isSoldout": false
+			},
+			"storeName": "인규네",
+			"storeAddr": "\t서울특별시 강북구 미아동 158-10",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634698301219,
+			"longitude": 127.02565484609,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 2150,
+				"isSoldout": false
+			},
+			"storeName": "인규네",
+			"storeAddr": "\t서울특별시 강북구 미아동 158-10",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634698301219,
+			"longitude": 127.02565484609,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2500,
+				"isSoldout": false
+			},
+			"storeName": "인규네",
+			"storeAddr": "\t서울특별시 강북구 미아동 158-10",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634698301219,
+			"longitude": 127.02565484609,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1200,
+				"isSoldout": false
+			},
+			"storeName": "인규네",
+			"storeAddr": "\t서울특별시 강북구 미아동 158-10",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634698301219,
+			"longitude": 127.02565484609,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "인규네",
+			"storeAddr": "\t서울특별시 강북구 미아동 158-10",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634698301219,
+			"longitude": 127.02565484609,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2350,
+				"isSoldout": false
+			},
+			"storeName": "인규네",
+			"storeAddr": "\t서울특별시 강북구 미아동 158-10",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634698301219,
+			"longitude": 127.02565484609,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "선경이네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 108-6 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634513508582,
+			"longitude": 127.02570882672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고구마",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "선경이네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 108-6 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634513508582,
+			"longitude": 127.02570882672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "피망",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "선경이네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 108-6 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634513508582,
+			"longitude": 127.02570882672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "선경이네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 108-6 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634513508582,
+			"longitude": 127.02570882672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 2250,
+				"isSoldout": false
+			},
+			"storeName": "선경이네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 108-6 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634513508582,
+			"longitude": 127.02570882672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2530,
+				"isSoldout": false
+			},
+			"storeName": "선경이네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 108-6 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634513508582,
+			"longitude": 127.02570882672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "선경이네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 108-6 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634513508582,
+			"longitude": 127.02570882672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1300,
+				"isSoldout": false
+			},
+			"storeName": "선경이네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 108-6 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634513508582,
+			"longitude": 127.02570882672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2450,
+				"isSoldout": false
+			},
+			"storeName": "선경이네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 108-6 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634513508582,
+			"longitude": 127.02570882672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고구마",
+				"price": 2000,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2000,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 3000,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 3000,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 3000,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2000,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 3000,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 1000,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2530,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2430,
+				"isSoldout": false
+			},
+			"storeName": "지호네",
+			"storeAddr": "\t서울특별시 강북구 덕릉로 96 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634618626043,
+			"longitude": 127.02439692358,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "수진이네",
+			"storeAddr": "서울특별시 강북구 덕릉로30길 9-5 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634486824724,
+			"longitude": 127.02604296205,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 3350,
+				"isSoldout": false
+			},
+			"storeName": "수진이네",
+			"storeAddr": "서울특별시 강북구 덕릉로30길 9-5 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634486824724,
+			"longitude": 127.02604296205,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "수진이네",
+			"storeAddr": "서울특별시 강북구 덕릉로30길 9-5 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634486824724,
+			"longitude": 127.02604296205,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "수진이네",
+			"storeAddr": "서울특별시 강북구 덕릉로30길 9-5 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634486824724,
+			"longitude": 127.02604296205,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "수진이네",
+			"storeAddr": "서울특별시 강북구 덕릉로30길 9-5 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634486824724,
+			"longitude": 127.02604296205,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "수진이네",
+			"storeAddr": "서울특별시 강북구 덕릉로30길 9-5 (미아동)",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634486824724,
+			"longitude": 127.02604296205,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "몽자네",
+			"storeAddr": "서울특별시 강북구 도봉로 134-1 (미아동)",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.620929452451,
+			"longitude": 127.02848485756,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3350,
+				"isSoldout": false
+			},
+			"storeName": "몽자네",
+			"storeAddr": "서울특별시 강북구 도봉로 134-1 (미아동)",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.620929452451,
+			"longitude": 127.02848485756,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 3430,
+				"isSoldout": false
+			},
+			"storeName": "몽자네",
+			"storeAddr": "서울특별시 강북구 도봉로 134-1 (미아동)",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.620929452451,
+			"longitude": 127.02848485756,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "몽자네",
+			"storeAddr": "서울특별시 강북구 도봉로 134-1 (미아동)",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.620929452451,
+			"longitude": 127.02848485756,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3350,
+				"isSoldout": false
+			},
+			"storeName": "몽자네",
+			"storeAddr": "서울특별시 강북구 도봉로 134-1 (미아동)",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.620929452451,
+			"longitude": 127.02848485756,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 35330,
+				"isSoldout": false
+			},
+			"storeName": "몽자네",
+			"storeAddr": "서울특별시 강북구 도봉로 134-1 (미아동)",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.620929452451,
+			"longitude": 127.02848485756,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "쓸쓸이네",
+			"storeAddr": "서울특별시 강북구 도봉로 16 (미아동)",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.61037678561,
+			"longitude": 127.03062855571,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "쓸쓸이네",
+			"storeAddr": "서울특별시 강북구 도봉로 16 (미아동)",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.61037678561,
+			"longitude": 127.03062855571,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "쓸쓸이네",
+			"storeAddr": "서울특별시 강북구 도봉로 16 (미아동)",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.61037678561,
+			"longitude": 127.03062855571,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "씩씩이네",
+			"storeAddr": "서울특별시 강북구 미아동 860-173",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.615570786531,
+			"longitude": 127.03075197597,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "씩씩이네",
+			"storeAddr": "서울특별시 강북구 미아동 860-173",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.615570786531,
+			"longitude": 127.03075197597,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "씩씩이네",
+			"storeAddr": "서울특별시 강북구 미아동 860-173",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.615570786531,
+			"longitude": 127.03075197597,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "몽몽이네",
+			"storeAddr": "서울특별시 강북구 미아동 54-26",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.613977946963,
+			"longitude": 127.03190967345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "몽몽이네",
+			"storeAddr": "서울특별시 강북구 미아동 54-26",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.613977946963,
+			"longitude": 127.03190967345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "몽몽이네",
+			"storeAddr": "서울특별시 강북구 미아동 54-26",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.613977946963,
+			"longitude": 127.03190967345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "상추",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "몽몽이네",
+			"storeAddr": "서울특별시 강북구 미아동 54-26",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.613977946963,
+			"longitude": 127.03190967345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "깻잎",
+				"price": 4330,
+				"isSoldout": false
+			},
+			"storeName": "몽몽이네",
+			"storeAddr": "서울특별시 강북구 미아동 54-26",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.613977946963,
+			"longitude": 127.03190967345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 5430,
+				"isSoldout": false
+			},
+			"storeName": "몽몽이네",
+			"storeAddr": "서울특별시 강북구 미아동 54-26",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.613977946963,
+			"longitude": 127.03190967345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "해피채소",
+			"storeAddr": "서울특별시 강북구 미아동 75-163",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.615149418904,
+			"longitude": 127.03110086447,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 2250,
+				"isSoldout": false
+			},
+			"storeName": "해피채소",
+			"storeAddr": "서울특별시 강북구 미아동 75-163",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.615149418904,
+			"longitude": 127.03110086447,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "해피채소",
+			"storeAddr": "서울특별시 강북구 미아동 75-163",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.615149418904,
+			"longitude": 127.03110086447,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "상추",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "해피채소",
+			"storeAddr": "서울특별시 강북구 미아동 75-163",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.615149418904,
+			"longitude": 127.03110086447,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "깻잎",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "해피채소",
+			"storeAddr": "서울특별시 강북구 미아동 75-163",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.615149418904,
+			"longitude": 127.03110086447,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "해피채소",
+			"storeAddr": "서울특별시 강북구 미아동 75-163",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.615149418904,
+			"longitude": 127.03110086447,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 1250,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "상추",
+				"price": 830,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "깻잎",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 1250,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 830,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "여기가짱",
+			"storeAddr": "서울특별시 강북구 미아동 451-20",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.616086467507,
+			"longitude": 127.02695924064,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "해피수산",
+			"storeAddr": "서울특별시 강북구 미아동 128-2",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.623323377578,
+			"longitude": 127.02949915123,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 1250,
+				"isSoldout": false
+			},
+			"storeName": "해피수산",
+			"storeAddr": "서울특별시 강북구 미아동 128-2",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.623323377578,
+			"longitude": 127.02949915123,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "해피수산",
+			"storeAddr": "서울특별시 강북구 미아동 128-2",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.623323377578,
+			"longitude": 127.02949915123,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 830,
+				"isSoldout": false
+			},
+			"storeName": "해피수산",
+			"storeAddr": "서울특별시 강북구 미아동 128-2",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.623323377578,
+			"longitude": 127.02949915123,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "해피수산",
+			"storeAddr": "서울특별시 강북구 미아동 128-2",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.623323377578,
+			"longitude": 127.02949915123,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "해피수산",
+			"storeAddr": "서울특별시 강북구 미아동 128-2",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.623323377578,
+			"longitude": 127.02949915123,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "싱싱하네",
+			"storeAddr": "서울특별시 강북구 번동 454-86",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636307347399,
+			"longitude": 127.03454975672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 1250,
+				"isSoldout": false
+			},
+			"storeName": "싱싱하네",
+			"storeAddr": "서울특별시 강북구 번동 454-86",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636307347399,
+			"longitude": 127.03454975672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "싱싱하네",
+			"storeAddr": "서울특별시 강북구 번동 454-86",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636307347399,
+			"longitude": 127.03454975672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 830,
+				"isSoldout": false
+			},
+			"storeName": "싱싱하네",
+			"storeAddr": "서울특별시 강북구 번동 454-86",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636307347399,
+			"longitude": 127.03454975672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "싱싱하네",
+			"storeAddr": "서울특별시 강북구 번동 454-86",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636307347399,
+			"longitude": 127.03454975672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "싱싱하네",
+			"storeAddr": "서울특별시 강북구 번동 454-86",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636307347399,
+			"longitude": 127.03454975672,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "철썩철썩",
+			"storeAddr": "서울특별시 강북구 번동 454-90",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63598057872,
+			"longitude": 127.0347496108,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 1250,
+				"isSoldout": false
+			},
+			"storeName": "철썩철썩",
+			"storeAddr": "서울특별시 강북구 번동 454-90",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63598057872,
+			"longitude": 127.0347496108,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "철썩철썩",
+			"storeAddr": "서울특별시 강북구 번동 454-90",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63598057872,
+			"longitude": 127.0347496108,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 830,
+				"isSoldout": false
+			},
+			"storeName": "철썩철썩",
+			"storeAddr": "서울특별시 강북구 번동 454-90",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63598057872,
+			"longitude": 127.0347496108,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "철썩철썩",
+			"storeAddr": "서울특별시 강북구 번동 454-90",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63598057872,
+			"longitude": 127.0347496108,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "철썩철썩",
+			"storeAddr": "서울특별시 강북구 번동 454-90",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63598057872,
+			"longitude": 127.0347496108,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "몽몽과일",
+			"storeAddr": "\t서울특별시 강북구 번동 521-37",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633633201944,
+			"longitude": 127.03071411828,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "몽몽과일",
+			"storeAddr": "\t서울특별시 강북구 번동 521-37",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633633201944,
+			"longitude": 127.03071411828,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2530,
+				"isSoldout": false
+			},
+			"storeName": "몽몽과일",
+			"storeAddr": "\t서울특별시 강북구 번동 521-37",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633633201944,
+			"longitude": 127.03071411828,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "몽몽과일",
+			"storeAddr": "\t서울특별시 강북구 번동 521-37",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633633201944,
+			"longitude": 127.03071411828,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "몽몽과일",
+			"storeAddr": "\t서울특별시 강북구 번동 521-37",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633633201944,
+			"longitude": 127.03071411828,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2430,
+				"isSoldout": false
+			},
+			"storeName": "몽몽과일",
+			"storeAddr": "\t서울특별시 강북구 번동 521-37",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633633201944,
+			"longitude": 127.03071411828,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "상큼상킁",
+			"storeAddr": "서울특별시 강북구 번동 436-3",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634678460265,
+			"longitude": 127.03149589941,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "상큼상킁",
+			"storeAddr": "서울특별시 강북구 번동 436-3",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634678460265,
+			"longitude": 127.03149589941,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2530,
+				"isSoldout": false
+			},
+			"storeName": "상큼상킁",
+			"storeAddr": "서울특별시 강북구 번동 436-3",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634678460265,
+			"longitude": 127.03149589941,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "상큼상킁",
+			"storeAddr": "서울특별시 강북구 번동 436-3",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634678460265,
+			"longitude": 127.03149589941,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "상큼상킁",
+			"storeAddr": "서울특별시 강북구 번동 436-3",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634678460265,
+			"longitude": 127.03149589941,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2430,
+				"isSoldout": false
+			},
+			"storeName": "상큼상킁",
+			"storeAddr": "서울특별시 강북구 번동 436-3",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634678460265,
+			"longitude": 127.03149589941,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "생생과일",
+			"storeAddr": "서울특별시 강북구 번동 416-67",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637750024281,
+			"longitude": 127.02815309476,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "생생과일",
+			"storeAddr": "서울특별시 강북구 번동 416-67",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637750024281,
+			"longitude": 127.02815309476,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2530,
+				"isSoldout": false
+			},
+			"storeName": "생생과일",
+			"storeAddr": "서울특별시 강북구 번동 416-67",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637750024281,
+			"longitude": 127.02815309476,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "생생과일",
+			"storeAddr": "서울특별시 강북구 번동 416-67",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637750024281,
+			"longitude": 127.02815309476,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "생생과일",
+			"storeAddr": "서울특별시 강북구 번동 416-67",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637750024281,
+			"longitude": 127.02815309476,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2430,
+				"isSoldout": false
+			},
+			"storeName": "생생과일",
+			"storeAddr": "서울특별시 강북구 번동 416-67",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637750024281,
+			"longitude": 127.02815309476,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "커몬커몬",
+			"storeAddr": "서울특별시 강북구 번동 433-45",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634838501485,
+			"longitude": 127.03262578138,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "커몬커몬",
+			"storeAddr": "서울특별시 강북구 번동 433-45",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634838501485,
+			"longitude": 127.03262578138,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2530,
+				"isSoldout": false
+			},
+			"storeName": "커몬커몬",
+			"storeAddr": "서울특별시 강북구 번동 433-45",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634838501485,
+			"longitude": 127.03262578138,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "커몬커몬",
+			"storeAddr": "서울특별시 강북구 번동 433-45",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634838501485,
+			"longitude": 127.03262578138,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "커몬커몬",
+			"storeAddr": "서울특별시 강북구 번동 433-45",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634838501485,
+			"longitude": 127.03262578138,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2430,
+				"isSoldout": false
+			},
+			"storeName": "커몬커몬",
+			"storeAddr": "서울특별시 강북구 번동 433-45",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634838501485,
+			"longitude": 127.03262578138,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "하늘하늘",
+			"storeAddr": "\t서울특별시 강북구 번동 457-18",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637557828734,
+			"longitude": 127.03430419549,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "하늘하늘",
+			"storeAddr": "\t서울특별시 강북구 번동 457-18",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637557828734,
+			"longitude": 127.03430419549,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2530,
+				"isSoldout": false
+			},
+			"storeName": "하늘하늘",
+			"storeAddr": "\t서울특별시 강북구 번동 457-18",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637557828734,
+			"longitude": 127.03430419549,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "하늘하늘",
+			"storeAddr": "\t서울특별시 강북구 번동 457-18",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637557828734,
+			"longitude": 127.03430419549,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "하늘하늘",
+			"storeAddr": "\t서울특별시 강북구 번동 457-18",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637557828734,
+			"longitude": 127.03430419549,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2430,
+				"isSoldout": false
+			},
+			"storeName": "하늘하늘",
+			"storeAddr": "\t서울특별시 강북구 번동 457-18",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637557828734,
+			"longitude": 127.03430419549,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "김씨네",
+			"storeAddr": "서울특별시 강북구 번동 469-103",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640961438469,
+			"longitude": 127.03132408952,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "김씨네",
+			"storeAddr": "서울특별시 강북구 번동 469-103",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640961438469,
+			"longitude": 127.03132408952,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2530,
+				"isSoldout": false
+			},
+			"storeName": "김씨네",
+			"storeAddr": "서울특별시 강북구 번동 469-103",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640961438469,
+			"longitude": 127.03132408952,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "김씨네",
+			"storeAddr": "서울특별시 강북구 번동 469-103",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640961438469,
+			"longitude": 127.03132408952,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "김씨네",
+			"storeAddr": "서울특별시 강북구 번동 469-103",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640961438469,
+			"longitude": 127.03132408952,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2430,
+				"isSoldout": false
+			},
+			"storeName": "김씨네",
+			"storeAddr": "서울특별시 강북구 번동 469-103",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640961438469,
+			"longitude": 127.03132408952,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "레몬",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "박씨네",
+			"storeAddr": "서울특별시 강북구 번동 414-34",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636074847754,
+			"longitude": 127.02846061288,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "파인애플",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "박씨네",
+			"storeAddr": "서울특별시 강북구 번동 414-34",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636074847754,
+			"longitude": 127.02846061288,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "사과",
+				"price": 2530,
+				"isSoldout": false
+			},
+			"storeName": "박씨네",
+			"storeAddr": "서울특별시 강북구 번동 414-34",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636074847754,
+			"longitude": 127.02846061288,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "체리",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "박씨네",
+			"storeAddr": "서울특별시 강북구 번동 414-34",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636074847754,
+			"longitude": 127.02846061288,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "귤",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "박씨네",
+			"storeAddr": "서울특별시 강북구 번동 414-34",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636074847754,
+			"longitude": 127.02846061288,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "포도",
+				"price": 2430,
+				"isSoldout": false
+			},
+			"storeName": "박씨네",
+			"storeAddr": "서울특별시 강북구 번동 414-34",
+			"storeType": "과일",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636074847754,
+			"longitude": 127.02846061288,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "이씨네",
+			"storeAddr": "서울특별시 강북구 번동 148-387",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.625899394089,
+			"longitude": 127.03670776345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "이씨네",
+			"storeAddr": "서울특별시 강북구 번동 148-387",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.625899394089,
+			"longitude": 127.03670776345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "이씨네",
+			"storeAddr": "서울특별시 강북구 번동 148-387",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.625899394089,
+			"longitude": 127.03670776345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "가리비살",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "이씨네",
+			"storeAddr": "서울특별시 강북구 번동 148-387",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.625899394089,
+			"longitude": 127.03670776345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자살",
+				"price": 4330,
+				"isSoldout": false
+			},
+			"storeName": "이씨네",
+			"storeAddr": "서울특별시 강북구 번동 148-387",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.625899394089,
+			"longitude": 127.03670776345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "국거리",
+				"price": 5430,
+				"isSoldout": false
+			},
+			"storeName": "이씨네",
+			"storeAddr": "서울특별시 강북구 번동 148-387",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.625899394089,
+			"longitude": 127.03670776345,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "두근두근",
+			"storeAddr": "서울특별시 강북구 번동 148-418",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.627125435326,
+			"longitude": 127.03573530278,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "두근두근",
+			"storeAddr": "서울특별시 강북구 번동 148-418",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.627125435326,
+			"longitude": 127.03573530278,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "두근두근",
+			"storeAddr": "서울특별시 강북구 번동 148-418",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.627125435326,
+			"longitude": 127.03573530278,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "가리비살",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "두근두근",
+			"storeAddr": "서울특별시 강북구 번동 148-418",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.627125435326,
+			"longitude": 127.03573530278,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자살",
+				"price": 4330,
+				"isSoldout": false
+			},
+			"storeName": "두근두근",
+			"storeAddr": "서울특별시 강북구 번동 148-418",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.627125435326,
+			"longitude": 127.03573530278,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "국거리",
+				"price": 5430,
+				"isSoldout": false
+			},
+			"storeName": "두근두근",
+			"storeAddr": "서울특별시 강북구 번동 148-418",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.627125435326,
+			"longitude": 127.03573530278,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "몽몽정육",
+			"storeAddr": "서울특별시 강북구 번동 428-100",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634420274893,
+			"longitude": 127.03675254044,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "몽몽정육",
+			"storeAddr": "서울특별시 강북구 번동 428-100",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634420274893,
+			"longitude": 127.03675254044,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "몽몽정육",
+			"storeAddr": "서울특별시 강북구 번동 428-100",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634420274893,
+			"longitude": 127.03675254044,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "가리비살",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "몽몽정육",
+			"storeAddr": "서울특별시 강북구 번동 428-100",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634420274893,
+			"longitude": 127.03675254044,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자살",
+				"price": 4330,
+				"isSoldout": false
+			},
+			"storeName": "몽몽정육",
+			"storeAddr": "서울특별시 강북구 번동 428-100",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634420274893,
+			"longitude": 127.03675254044,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "국거리",
+				"price": 5430,
+				"isSoldout": false
+			},
+			"storeName": "몽몽정육",
+			"storeAddr": "서울특별시 강북구 번동 428-100",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634420274893,
+			"longitude": 127.03675254044,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "김씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 413-44",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636636243254,
+			"longitude": 127.02917780583,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "김씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 413-44",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636636243254,
+			"longitude": 127.02917780583,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "김씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 413-44",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636636243254,
+			"longitude": 127.02917780583,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "가리비살",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "김씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 413-44",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636636243254,
+			"longitude": 127.02917780583,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자살",
+				"price": 4330,
+				"isSoldout": false
+			},
+			"storeName": "김씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 413-44",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636636243254,
+			"longitude": 127.02917780583,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "국거리",
+				"price": 5430,
+				"isSoldout": false
+			},
+			"storeName": "김씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 413-44",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.636636243254,
+			"longitude": 127.02917780583,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "돈돈",
+			"storeAddr": "서울특별시 강북구 번동 462-62",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.639193002155,
+			"longitude": 127.03019308848,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "돈돈",
+			"storeAddr": "서울특별시 강북구 번동 462-62",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.639193002155,
+			"longitude": 127.03019308848,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "돈돈",
+			"storeAddr": "서울특별시 강북구 번동 462-62",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.639193002155,
+			"longitude": 127.03019308848,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "가리비살",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "돈돈",
+			"storeAddr": "서울특별시 강북구 번동 462-62",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.639193002155,
+			"longitude": 127.03019308848,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자살",
+				"price": 4330,
+				"isSoldout": false
+			},
+			"storeName": "돈돈",
+			"storeAddr": "서울특별시 강북구 번동 462-62",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.639193002155,
+			"longitude": 127.03019308848,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "국거리",
+				"price": 5430,
+				"isSoldout": false
+			},
+			"storeName": "돈돈",
+			"storeAddr": "서울특별시 강북구 번동 462-62",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.639193002155,
+			"longitude": 127.03019308848,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "백씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 469-24",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640297972577,
+			"longitude": 127.03155753266,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "백씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 469-24",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640297972577,
+			"longitude": 127.03155753266,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "백씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 469-24",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640297972577,
+			"longitude": 127.03155753266,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "가리비살",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "백씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 469-24",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640297972577,
+			"longitude": 127.03155753266,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자살",
+				"price": 4330,
+				"isSoldout": false
+			},
+			"storeName": "백씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 469-24",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640297972577,
+			"longitude": 127.03155753266,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "국거리",
+				"price": 5430,
+				"isSoldout": false
+			},
+			"storeName": "백씨네정육",
+			"storeAddr": "서울특별시 강북구 번동 469-24",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640297972577,
+			"longitude": 127.03155753266,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "한돈",
+			"storeAddr": "서울특별시 강북구 수유동 563-3",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.64646831396,
+			"longitude": 127.00805279174,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "한돈",
+			"storeAddr": "서울특별시 강북구 수유동 563-3",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.64646831396,
+			"longitude": 127.00805279174,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "한돈",
+			"storeAddr": "서울특별시 강북구 수유동 563-3",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.64646831396,
+			"longitude": 127.00805279174,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "가리비살",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "한돈",
+			"storeAddr": "서울특별시 강북구 수유동 563-3",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.64646831396,
+			"longitude": 127.00805279174,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자살",
+				"price": 4330,
+				"isSoldout": false
+			},
+			"storeName": "한돈",
+			"storeAddr": "서울특별시 강북구 수유동 563-3",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.64646831396,
+			"longitude": 127.00805279174,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "국거리",
+				"price": 5430,
+				"isSoldout": false
+			},
+			"storeName": "한돈",
+			"storeAddr": "서울특별시 강북구 수유동 563-3",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.64646831396,
+			"longitude": 127.00805279174,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "목살",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "음메음메",
+			"storeAddr": "서울특별시 강북구 수유동 535-233",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642817511812,
+			"longitude": 127.00447225437,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "삼겹살",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "음메음메",
+			"storeAddr": "서울특별시 강북구 수유동 535-233",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642817511812,
+			"longitude": 127.00447225437,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "항정살",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "음메음메",
+			"storeAddr": "서울특별시 강북구 수유동 535-233",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642817511812,
+			"longitude": 127.00447225437,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "가리비살",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "음메음메",
+			"storeAddr": "서울특별시 강북구 수유동 535-233",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642817511812,
+			"longitude": 127.00447225437,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자살",
+				"price": 4330,
+				"isSoldout": false
+			},
+			"storeName": "음메음메",
+			"storeAddr": "서울특별시 강북구 수유동 535-233",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642817511812,
+			"longitude": 127.00447225437,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "국거리",
+				"price": 5430,
+				"isSoldout": false
+			},
+			"storeName": "음메음메",
+			"storeAddr": "서울특별시 강북구 수유동 535-233",
+			"storeType": "정육",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642817511812,
+			"longitude": 127.00447225437,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 3230,
+				"isSoldout": false
+			},
+			"storeName": "푸릇푸릇",
+			"storeAddr": "서울특별시 강북구 수유동 31-4",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63992628403,
+			"longitude": 127.02137032965,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 1250,
+				"isSoldout": false
+			},
+			"storeName": "푸릇푸릇",
+			"storeAddr": "서울특별시 강북구 수유동 31-4",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63992628403,
+			"longitude": 127.02137032965,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "푸릇푸릇",
+			"storeAddr": "서울특별시 강북구 수유동 31-4",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63992628403,
+			"longitude": 127.02137032965,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 830,
+				"isSoldout": false
+			},
+			"storeName": "푸릇푸릇",
+			"storeAddr": "서울특별시 강북구 수유동 31-4",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63992628403,
+			"longitude": 127.02137032965,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 530,
+				"isSoldout": false
+			},
+			"storeName": "푸릇푸릇",
+			"storeAddr": "서울특별시 강북구 수유동 31-4",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63992628403,
+			"longitude": 127.02137032965,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 1330,
+				"isSoldout": false
+			},
+			"storeName": "푸릇푸릇",
+			"storeAddr": "서울특별시 강북구 수유동 31-4",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.63992628403,
+			"longitude": 127.02137032965,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 2230,
+				"isSoldout": false
+			},
+			"storeName": "싱싱수산",
+			"storeAddr": "서울특별시 강북구 수유동 254-9",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.645305903504,
+			"longitude": 127.02063429793,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "싱싱수산",
+			"storeAddr": "서울특별시 강북구 수유동 254-9",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.645305903504,
+			"longitude": 127.02063429793,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 4430,
+				"isSoldout": false
+			},
+			"storeName": "싱싱수산",
+			"storeAddr": "서울특별시 강북구 수유동 254-9",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.645305903504,
+			"longitude": 127.02063429793,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 3830,
+				"isSoldout": false
+			},
+			"storeName": "싱싱수산",
+			"storeAddr": "서울특별시 강북구 수유동 254-9",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.645305903504,
+			"longitude": 127.02063429793,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "싱싱수산",
+			"storeAddr": "서울특별시 강북구 수유동 254-9",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.645305903504,
+			"longitude": 127.02063429793,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "싱싱수산",
+			"storeAddr": "서울특별시 강북구 수유동 254-9",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.645305903504,
+			"longitude": 127.02063429793,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 2230,
+				"isSoldout": false
+			},
+			"storeName": "생생수산",
+			"storeAddr": "서울특별시 강북구 수유동 715-6",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.646941652199,
+			"longitude": 127.02269682052,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "생생수산",
+			"storeAddr": "서울특별시 강북구 수유동 715-6",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.646941652199,
+			"longitude": 127.02269682052,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 4430,
+				"isSoldout": false
+			},
+			"storeName": "생생수산",
+			"storeAddr": "서울특별시 강북구 수유동 715-6",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.646941652199,
+			"longitude": 127.02269682052,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 3830,
+				"isSoldout": false
+			},
+			"storeName": "생생수산",
+			"storeAddr": "서울특별시 강북구 수유동 715-6",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.646941652199,
+			"longitude": 127.02269682052,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "생생수산",
+			"storeAddr": "서울특별시 강북구 수유동 715-6",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.646941652199,
+			"longitude": 127.02269682052,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "생생수산",
+			"storeAddr": "서울특별시 강북구 수유동 715-6",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.646941652199,
+			"longitude": 127.02269682052,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 2230,
+				"isSoldout": false
+			},
+			"storeName": "선경수산",
+			"storeAddr": "서울특별시 강북구 수유동 1-164",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637706785144,
+			"longitude": 127.02130676402,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "선경수산",
+			"storeAddr": "서울특별시 강북구 수유동 1-164",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637706785144,
+			"longitude": 127.02130676402,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 4430,
+				"isSoldout": false
+			},
+			"storeName": "선경수산",
+			"storeAddr": "서울특별시 강북구 수유동 1-164",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637706785144,
+			"longitude": 127.02130676402,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 3830,
+				"isSoldout": false
+			},
+			"storeName": "선경수산",
+			"storeAddr": "서울특별시 강북구 수유동 1-164",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637706785144,
+			"longitude": 127.02130676402,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "선경수산",
+			"storeAddr": "서울특별시 강북구 수유동 1-164",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637706785144,
+			"longitude": 127.02130676402,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "선경수산",
+			"storeAddr": "서울특별시 강북구 수유동 1-164",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.637706785144,
+			"longitude": 127.02130676402,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 2230,
+				"isSoldout": false
+			},
+			"storeName": "진욱수산",
+			"storeAddr": "서울특별시 강북구 수유동 451-57",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634757500979,
+			"longitude": 127.01627089566,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "진욱수산",
+			"storeAddr": "서울특별시 강북구 수유동 451-57",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634757500979,
+			"longitude": 127.01627089566,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 4430,
+				"isSoldout": false
+			},
+			"storeName": "진욱수산",
+			"storeAddr": "서울특별시 강북구 수유동 451-57",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634757500979,
+			"longitude": 127.01627089566,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 3830,
+				"isSoldout": false
+			},
+			"storeName": "진욱수산",
+			"storeAddr": "서울특별시 강북구 수유동 451-57",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634757500979,
+			"longitude": 127.01627089566,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "진욱수산",
+			"storeAddr": "서울특별시 강북구 수유동 451-57",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634757500979,
+			"longitude": 127.01627089566,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "진욱수산",
+			"storeAddr": "서울특별시 강북구 수유동 451-57",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.634757500979,
+			"longitude": 127.01627089566,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 2230,
+				"isSoldout": false
+			},
+			"storeName": "지호수산",
+			"storeAddr": "\t서울특별시 강북구 수유동 167-67",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.643236644772,
+			"longitude": 127.02818929486,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "지호수산",
+			"storeAddr": "\t서울특별시 강북구 수유동 167-67",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.643236644772,
+			"longitude": 127.02818929486,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 4430,
+				"isSoldout": false
+			},
+			"storeName": "지호수산",
+			"storeAddr": "\t서울특별시 강북구 수유동 167-67",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.643236644772,
+			"longitude": 127.02818929486,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 3830,
+				"isSoldout": false
+			},
+			"storeName": "지호수산",
+			"storeAddr": "\t서울특별시 강북구 수유동 167-67",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.643236644772,
+			"longitude": 127.02818929486,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "지호수산",
+			"storeAddr": "\t서울특별시 강북구 수유동 167-67",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.643236644772,
+			"longitude": 127.02818929486,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "지호수산",
+			"storeAddr": "\t서울특별시 강북구 수유동 167-67",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.643236644772,
+			"longitude": 127.02818929486,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 2230,
+				"isSoldout": false
+			},
+			"storeName": "수진수산",
+			"storeAddr": "서울특별시 강북구 수유동 45-54",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.635159773656,
+			"longitude": 127.02203267145,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 3250,
+				"isSoldout": false
+			},
+			"storeName": "수진수산",
+			"storeAddr": "서울특별시 강북구 수유동 45-54",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.635159773656,
+			"longitude": 127.02203267145,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 4430,
+				"isSoldout": false
+			},
+			"storeName": "수진수산",
+			"storeAddr": "서울특별시 강북구 수유동 45-54",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.635159773656,
+			"longitude": 127.02203267145,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 3830,
+				"isSoldout": false
+			},
+			"storeName": "수진수산",
+			"storeAddr": "서울특별시 강북구 수유동 45-54",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.635159773656,
+			"longitude": 127.02203267145,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 3530,
+				"isSoldout": false
+			},
+			"storeName": "수진수산",
+			"storeAddr": "서울특별시 강북구 수유동 45-54",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.635159773656,
+			"longitude": 127.02203267145,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "수진수산",
+			"storeAddr": "서울특별시 강북구 수유동 45-54",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.635159773656,
+			"longitude": 127.02203267145,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 4130,
+				"isSoldout": false
+			},
+			"storeName": "인규수산",
+			"storeAddr": "서울특별시 강북구 수유동 172-148",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642656747516,
+			"longitude": 127.02721163083,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "갈치",
+				"price": 3320,
+				"isSoldout": false
+			},
+			"storeName": "인규수산",
+			"storeAddr": "서울특별시 강북구 수유동 172-148",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642656747516,
+			"longitude": 127.02721163083,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "문어",
+				"price": 4430,
+				"isSoldout": false
+			},
+			"storeName": "인규수산",
+			"storeAddr": "서울특별시 강북구 수유동 172-148",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642656747516,
+			"longitude": 127.02721163083,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오징어",
+				"price": 3850,
+				"isSoldout": false
+			},
+			"storeName": "인규수산",
+			"storeAddr": "서울특별시 강북구 수유동 172-148",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642656747516,
+			"longitude": 127.02721163083,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "자갈치",
+				"price": 3630,
+				"isSoldout": false
+			},
+			"storeName": "인규수산",
+			"storeAddr": "서울특별시 강북구 수유동 172-148",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642656747516,
+			"longitude": 127.02721163083,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "광어",
+				"price": 5334,
+				"isSoldout": false
+			},
+			"storeName": "인규수산",
+			"storeAddr": "서울특별시 강북구 수유동 172-148",
+			"storeType": "수산",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642656747516,
+			"longitude": 127.02721163083,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "초록초록",
+			"storeAddr": "서울특별시 강북구 수유동 36-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640951375364,
+			"longitude": 127.01960189614,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "초록초록",
+			"storeAddr": "서울특별시 강북구 수유동 36-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640951375364,
+			"longitude": 127.01960189614,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "초록초록",
+			"storeAddr": "서울특별시 강북구 수유동 36-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640951375364,
+			"longitude": 127.01960189614,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "상추",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "초록초록",
+			"storeAddr": "서울특별시 강북구 수유동 36-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640951375364,
+			"longitude": 127.01960189614,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "깻잎",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "초록초록",
+			"storeAddr": "서울특별시 강북구 수유동 36-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640951375364,
+			"longitude": 127.01960189614,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "초록초록",
+			"storeAddr": "서울특별시 강북구 수유동 36-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.640951375364,
+			"longitude": 127.01960189614,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "건강채소",
+			"storeAddr": "서울특별시 강북구 수유동 235-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642794297184,
+			"longitude": 127.02040375899,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "건강채소",
+			"storeAddr": "서울특별시 강북구 수유동 235-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642794297184,
+			"longitude": 127.02040375899,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "건강채소",
+			"storeAddr": "서울특별시 강북구 수유동 235-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642794297184,
+			"longitude": 127.02040375899,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "상추",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "건강채소",
+			"storeAddr": "서울특별시 강북구 수유동 235-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642794297184,
+			"longitude": 127.02040375899,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "깻잎",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "건강채소",
+			"storeAddr": "서울특별시 강북구 수유동 235-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642794297184,
+			"longitude": 127.02040375899,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "건강채소",
+			"storeAddr": "서울특별시 강북구 수유동 235-8",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.642794297184,
+			"longitude": 127.02040375899,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "듬뿍듬뿍",
+			"storeAddr": "서울특별시 강북구 수유동 491-85",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633390325302,
+			"longitude": 127.01094982253,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "듬뿍듬뿍",
+			"storeAddr": "서울특별시 강북구 수유동 491-85",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633390325302,
+			"longitude": 127.01094982253,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "듬뿍듬뿍",
+			"storeAddr": "서울특별시 강북구 수유동 491-85",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633390325302,
+			"longitude": 127.01094982253,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "상추",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "듬뿍듬뿍",
+			"storeAddr": "서울특별시 강북구 수유동 491-85",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633390325302,
+			"longitude": 127.01094982253,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "깻잎",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "듬뿍듬뿍",
+			"storeAddr": "서울특별시 강북구 수유동 491-85",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633390325302,
+			"longitude": 127.01094982253,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "듬뿍듬뿍",
+			"storeAddr": "서울특별시 강북구 수유동 491-85",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.633390325302,
+			"longitude": 127.01094982253,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "채",
+			"storeAddr": "서울특별시 강북구 우이동 64-1",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.655961788596,
+			"longitude": 127.013060642,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "채",
+			"storeAddr": "서울특별시 강북구 우이동 64-1",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.655961788596,
+			"longitude": 127.013060642,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "채",
+			"storeAddr": "서울특별시 강북구 우이동 64-1",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.655961788596,
+			"longitude": 127.013060642,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "상추",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "채",
+			"storeAddr": "서울특별시 강북구 우이동 64-1",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.655961788596,
+			"longitude": 127.013060642,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "깻잎",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "채",
+			"storeAddr": "서울특별시 강북구 우이동 64-1",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.655961788596,
+			"longitude": 127.013060642,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "채",
+			"storeAddr": "서울특별시 강북구 우이동 64-1",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.655961788596,
+			"longitude": 127.013060642,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "소",
+			"storeAddr": "서울특별시 강북구 우이동 71-11",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.650889720309,
+			"longitude": 127.01251118711,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "소",
+			"storeAddr": "서울특별시 강북구 우이동 71-11",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.650889720309,
+			"longitude": 127.01251118711,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "소",
+			"storeAddr": "서울특별시 강북구 우이동 71-11",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.650889720309,
+			"longitude": 127.01251118711,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "상추",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "소",
+			"storeAddr": "서울특별시 강북구 우이동 71-11",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.650889720309,
+			"longitude": 127.01251118711,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "깻잎",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "소",
+			"storeAddr": "서울특별시 강북구 우이동 71-11",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.650889720309,
+			"longitude": 127.01251118711,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "소",
+			"storeAddr": "서울특별시 강북구 우이동 71-11",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.650889720309,
+			"longitude": 127.01251118711,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "채채네",
+			"storeAddr": "서울특별시 강북구 우이동 56-9",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657267171124,
+			"longitude": 127.0128188573,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "채채네",
+			"storeAddr": "서울특별시 강북구 우이동 56-9",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657267171124,
+			"longitude": 127.0128188573,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "채채네",
+			"storeAddr": "서울특별시 강북구 우이동 56-9",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657267171124,
+			"longitude": 127.0128188573,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "상추",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "채채네",
+			"storeAddr": "서울특별시 강북구 우이동 56-9",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657267171124,
+			"longitude": 127.0128188573,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "깻잎",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "채채네",
+			"storeAddr": "서울특별시 강북구 우이동 56-9",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657267171124,
+			"longitude": 127.0128188573,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "채채네",
+			"storeAddr": "서울특별시 강북구 우이동 56-9",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657267171124,
+			"longitude": 127.0128188573,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "재재네수산",
+			"storeAddr": "\t서울특별시 강북구 우이동 50-6",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657334138931,
+			"longitude": 127.01311435601,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "당근",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "재재네수산",
+			"storeAddr": "\t서울특별시 강북구 우이동 50-6",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657334138931,
+			"longitude": 127.01311435601,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "감자",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "재재네수산",
+			"storeAddr": "\t서울특별시 강북구 우이동 50-6",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657334138931,
+			"longitude": 127.01311435601,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "상추",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "재재네수산",
+			"storeAddr": "\t서울특별시 강북구 우이동 50-6",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657334138931,
+			"longitude": 127.01311435601,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "깻잎",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "재재네수산",
+			"storeAddr": "\t서울특별시 강북구 우이동 50-6",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657334138931,
+			"longitude": 127.01311435601,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "재재네수산",
+			"storeAddr": "\t서울특별시 강북구 우이동 50-6",
+			"storeType": "채소",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.657334138931,
+			"longitude": 127.01311435601,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "진욱청과",
+			"storeAddr": "서울특별시 강북구 우이동 21-47",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661449849973,
+			"longitude": 127.01267142133,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고구마",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "진욱청과",
+			"storeAddr": "서울특별시 강북구 우이동 21-47",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661449849973,
+			"longitude": 127.01267142133,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "딸기",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "진욱청과",
+			"storeAddr": "서울특별시 강북구 우이동 21-47",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661449849973,
+			"longitude": 127.01267142133,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오렌지",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "진욱청과",
+			"storeAddr": "서울특별시 강북구 우이동 21-47",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661449849973,
+			"longitude": 127.01267142133,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "진욱청과",
+			"storeAddr": "서울특별시 강북구 우이동 21-47",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661449849973,
+			"longitude": 127.01267142133,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "진욱청과",
+			"storeAddr": "서울특별시 강북구 우이동 21-47",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661449849973,
+			"longitude": 127.01267142133,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "선경청과",
+			"storeAddr": "서울특별시 강북구 우이동 161-34",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661309429509,
+			"longitude": 127.01118083418,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고구마",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "선경청과",
+			"storeAddr": "서울특별시 강북구 우이동 161-34",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661309429509,
+			"longitude": 127.01118083418,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "딸기",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "선경청과",
+			"storeAddr": "서울특별시 강북구 우이동 161-34",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661309429509,
+			"longitude": 127.01118083418,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오렌지",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "선경청과",
+			"storeAddr": "서울특별시 강북구 우이동 161-34",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661309429509,
+			"longitude": 127.01118083418,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "선경청과",
+			"storeAddr": "서울특별시 강북구 우이동 161-34",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661309429509,
+			"longitude": 127.01118083418,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "선경청과",
+			"storeAddr": "서울특별시 강북구 우이동 161-34",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.661309429509,
+			"longitude": 127.01118083418,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "인규청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 265",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.660902600373,
+			"longitude": 127.00651758337,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고구마",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "인규청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 265",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.660902600373,
+			"longitude": 127.00651758337,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "딸기",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "인규청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 265",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.660902600373,
+			"longitude": 127.00651758337,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오렌지",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "인규청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 265",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.660902600373,
+			"longitude": 127.00651758337,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "인규청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 265",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.660902600373,
+			"longitude": 127.00651758337,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "인규청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 265",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.660902600373,
+			"longitude": 127.00651758337,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "지호청과",
+			"storeAddr": "서울특별시 강북구 우이동 165-3",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.662504335797,
+			"longitude": 127.01104387807,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고구마",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "지호청과",
+			"storeAddr": "서울특별시 강북구 우이동 165-3",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.662504335797,
+			"longitude": 127.01104387807,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "딸기",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "지호청과",
+			"storeAddr": "서울특별시 강북구 우이동 165-3",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.662504335797,
+			"longitude": 127.01104387807,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오렌지",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "지호청과",
+			"storeAddr": "서울특별시 강북구 우이동 165-3",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.662504335797,
+			"longitude": 127.01104387807,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "지호청과",
+			"storeAddr": "서울특별시 강북구 우이동 165-3",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.662504335797,
+			"longitude": 127.01104387807,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "지호청과",
+			"storeAddr": "서울특별시 강북구 우이동 165-3",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.662504335797,
+			"longitude": 127.01104387807,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "수진청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 216-1",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.667024733234,
+			"longitude": 127.00941374004,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고구마",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "수진청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 216-1",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.667024733234,
+			"longitude": 127.00941374004,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "딸기",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "수진청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 216-1",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.667024733234,
+			"longitude": 127.00941374004,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오렌지",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "수진청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 216-1",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.667024733234,
+			"longitude": 127.00941374004,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "수진청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 216-1",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.667024733234,
+			"longitude": 127.00941374004,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "수진청과",
+			"storeAddr": "\t서울특별시 강북구 우이동 216-1",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.667024733234,
+			"longitude": 127.00941374004,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "시금치",
+				"price": 3330,
+				"isSoldout": false
+			},
+			"storeName": "다있어마트",
+			"storeAddr": "서울특별시 강북구 우이동 123-23",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.659205341544,
+			"longitude": 127.01160640689,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고구마",
+				"price": 1230,
+				"isSoldout": false
+			},
+			"storeName": "다있어마트",
+			"storeAddr": "서울특별시 강북구 우이동 123-23",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.659205341544,
+			"longitude": 127.01160640689,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "딸기",
+				"price": 1530,
+				"isSoldout": false
+			},
+			"storeName": "다있어마트",
+			"storeAddr": "서울특별시 강북구 우이동 123-23",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.659205341544,
+			"longitude": 127.01160640689,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "오렌지",
+				"price": 860,
+				"isSoldout": false
+			},
+			"storeName": "다있어마트",
+			"storeAddr": "서울특별시 강북구 우이동 123-23",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.659205341544,
+			"longitude": 127.01160640689,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "고등어",
+				"price": 550,
+				"isSoldout": false
+			},
+			"storeName": "다있어마트",
+			"storeAddr": "서울특별시 강북구 우이동 123-23",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.659205341544,
+			"longitude": 127.01160640689,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		},
+		{
+			"storeNo": 0,
+			"product": {
+				"prodNo": 0,
+				"storeNo": 0,
+				"prodName": "청경채",
+				"price": 2330,
+				"isSoldout": false
+			},
+			"storeName": "다있어마트",
+			"storeAddr": "서울특별시 강북구 우이동 123-23",
+			"storeType": "종합",
+			"totalEarn": 0,
+			"isOpen": false,
+			"latitude": 37.659205341544,
+			"longitude": 127.01160640689,
+			"currentPageNo": 1,
+			"recordsPerPage": 6,
+			"pageSize": 5
+		}
+	]
+}

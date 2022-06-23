@@ -591,6 +591,8 @@
 	</section>
 	<!-- Latest Product Section End -->
 
+
+
 	<!-- Blog Section Begin -->
 	<section class="from-blog spad" style="padding-bottom: 0px;">
 		<div class="container">
@@ -609,77 +611,14 @@
 		<div class="row" style="align-items: flex-start;">
 
 			<!-- 지도를 표시할 div 입니다 -->
-			<div id="map" style="width: 500px; height: 500px; right: 50px"></div>
-
-			<script type="text/javascript"
-				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e53eaf4dd896374cd449da869e2ddcdc"></script>
-
-			<script>
 			
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-   		 	mapOption = { 
-        	center: new kakao.maps.LatLng(37.643308684205, 127.01021511086), // 지도의 중심좌표
-        	level: 6 // 지도의 확대 레벨
-    		};
-			
+			<div>
+			<div id="map" style="width: 500px; height: 500px; right: 50px;">	
+			</div>
+			</div>
 
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-			
-			console.log("되긴되는거야?")
-/////////////////////////////////////////////////////////////////
+			<jsp:include page="map.jsp" />
 
-$(function() {
-	getStoreMap();
-});
-
-function getStoreMap() {
-	
-	   var uri = "/store/getStoreMap"
-
-	   $.get(uri, function(response) { 
-		   
-	         
-	         $(response.storeMap).each(function(idx,store) {
-	        	 
-	        	 alert("나오냐")
-	        	 
-					var arr = data['records'];
-					console.log(arr)
-					for (var i = 0; i < arr.length; i++) {
-					var storeName = arr[i]['상점이름']; 
-					var storeAddr = arr[i]['상점주소'];
-				//	var lat = arr[i]['위도'];
-				//	var lng = arr[i]['경도'];
-					console.log(storeName + "/" + storeAddr + "/" + lat + "/" + lng);
-					
-					var imageSrc = "images/marker.png";
-					var imageSize = new kakao.maps.Size(20, 20);
-					var markerImage = new kakao.maps.MarkerImage(imageSrc,
-					imageSize);
-					var latlng = new kakao.maps.LatLng(lat, lng);
-					var marker = new kakao.maps.Marker({
-					map : map,
-					position : latlng,
-					title : name,
-					
-					
-					
-					})}
-	
-	         });
-	         
-	        	      
-	   }, "json");
-
-}
-
-
-
-//////////////////////////////////////////////////////////////
-			
-
-			  
-			</script>
 
 			<div>
 
@@ -713,39 +652,39 @@ function getStoreMap() {
 	</section>
 
 	<script type="text/javascript">
-	
+   
 //======BEST 상점 목록=========//
 
 $(function() {
-	getStoreListByOrderCount();
+   getStoreListByOrderCount();
 });
 
 function getStoreListByOrderCount() {
-	
-	   var uri = "/store/getStoreListByOrderCount"
+   
+      var uri = "/store/getStoreListByOrderCount"
 
-	   $.get(uri, function(response) { 
-	      
-	         var storelistHtmlBody = "";
-	         
-	         $(response.storeList).each(function(idx,store) {
-	        	 
-	        	 
+      $.get(uri, function(response) { 
+         
+            var storelistHtmlBody = "";
+            
+            $(response.storeList).each(function(idx,store) {
+               
+               
 
-	        	 storelistHtmlBody += `
-	 				<tr style="text-align:center">
-	 					<td>\${store.storeName}</td>
-	 					<td>\${store.storeAddr}</td>
-	 					<td>\${store.storeType}</td>
-	 				</tr>
-	            `;
-	         });
-	         
-	         
-	         $(".storeList").html(storelistHtmlBody);
-	         //$(".userlisthead").html(blacklistHtmlBody);
-	      
-	   }, "json");
+               storelistHtmlBody += `
+                <tr style="text-align:center">
+                   <td><a href="http://localhost:8082/store/getStore?storeNo=\${store.storeNo}" style="color:black;">\${store.storeName}</td>
+                   <td>\${store.storeAddr}</td>
+                   <td>\${store.storeType}</td>
+                </tr>
+               `;
+            });
+            
+            
+            $(".storeList").html(storelistHtmlBody);
+            //$(".userlisthead").html(blacklistHtmlBody);
+         
+      }, "json");
 
 }
 
