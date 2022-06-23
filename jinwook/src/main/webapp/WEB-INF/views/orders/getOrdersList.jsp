@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 
@@ -75,18 +75,17 @@
         <c:forEach var="orders" items="${getOrdersList}">
          <c:set var="i" value="${ i+1 }" />
          <tr>
-           <td align="center">${orders.orderNo}</td>
-           <td align="left">${orders.orderDate}</td>
+           <td align="center" value="${orders.orderNo}">${i}</td>
+           <td align="left"><fmt:formatDate value="${orders.orderDate}" dateStyle="full"/></td>
            <td align="left">${orders.product.prodImg}</td>
            <td align="left">${orders.product.prodName}</td>
            <td align="left">${orders.orderPrice}</td>
-           <td align="left">${orders.pickupTime}</td>
+           <td align="left"><fmt:formatDate value="${orders.pickupTime}" type="time" pattern="a hh:mm"/></td>
            <td align="left">
-           <c:if test="${orders.orderStatus eq '0'}">주문 접수중</c:if>
-           <c:if test="${orders.orderStatus eq '1'}">주문 거절</c:if>
-           <c:if test="${orders.orderStatus eq '2'}">픽업 준비중</c:if>
-           <c:if test="${orders.orderStatus eq '3'}">주문 취소</c:if>
-           <c:if test="${orders.orderStatus eq '4'}">픽업 완료</c:if>
+           <c:if test="${orders.orderStatus eq '1'}">주문 접수중</c:if>
+           <c:if test="${orders.orderStatus eq '2'}">주문 거절</c:if>
+           <c:if test="${orders.orderStatus eq '3'}">픽업 준비중</c:if>
+           <c:if test="${orders.orderStatus eq '4'}">주문 취소</c:if>
            <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
            </td>
          </tr>

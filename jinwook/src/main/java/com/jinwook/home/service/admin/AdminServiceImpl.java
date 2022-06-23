@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.AdminMapper;
+import com.jinwook.home.service.domain.Chart;
 import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
@@ -143,11 +144,54 @@ public class AdminServiceImpl implements AdminService{
 		return adminMapper.getComplainTotalCountAll();
 	}
 	
-	//=============== 대기중인 신고 목록 개수 =================
+	//=============== 대기중인 문의 목록 개수 =================
 	@Override
 	public int getWatingInquiryCount() {
 		return adminMapper.getWatingInquiryCount();
 	}
 
+	//=============== 월별 회원가입 수 =================	
+	@Override
+	public List<Chart> getJoinForMonthChart() {
+		
+		List<Chart> joinlist = Collections.emptyList();
+
+		joinlist = adminMapper.getJoinForMonthChart();
+		
+		return joinlist;
+	}
+	
+	//=============== 역할별 사용자 통계 =================	
+	@Override
+	public List<Chart> getUserByRole() {
+		
+		List<Chart> userlist = Collections.emptyList();
+
+		userlist = adminMapper.getUserByRole();
+		
+		return userlist;
+	}
+	
+	//=============== 월별 주문량, 주문금액 =================	
+	@Override
+	public List<Chart> getOrderCountAndPrice() {
+		
+		List<Chart> orderlist = Collections.emptyList();
+
+		orderlist = adminMapper.getOrderCountAndPrice();
+		
+		return orderlist;
+	}
+	
+	//=============== 사용자 유형 (일반/블랙/탈퇴) =================	
+	@Override
+	public List<Chart> getUserType() {
+		
+		List<Chart> usertypelist = Collections.emptyList();
+
+		usertypelist = adminMapper.getUserType();
+		
+		return usertypelist;
+	}
 }
 

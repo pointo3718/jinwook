@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.jinwook.home.common.Criteria;
+import com.jinwook.home.service.domain.Chart;
 import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
@@ -38,9 +39,22 @@ public interface AdminMapper {
 	public int getComplainTotalCount(Complain complain);			// 신고 목록 개수
 	
 	public int getComplainTotalCountAll();							// 대기중인 신고 목록 개수
-	public int getWatingInquiryCount();	// 대기중인 문의 목록 개수
+	
+	public int getWatingInquiryCount();								// 대기중인 문의 목록 개수
 	
 	public int getBlacklistTotalCount(User user);					// 블랙리스트 목록 개수
+	
+	
+	//////// 차트 ////////
+	public List<Chart> getJoinForMonthChart();						// 월별 회원가입 수 통계
+
+	public List<Chart> getUserByRole();								// 역할별 사용자 통계
+	
+	public List<Chart> getOrderCountAndPrice();						// 월별 주문수/주문금액 통계
+	
+	public List<Chart> getUserType();								// 사용자 유형 (일반/블랙/탈퇴)
 
 
+	
+	
 }
