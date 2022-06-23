@@ -42,22 +42,48 @@
     }
 
     /*]]>*/
+    
+    /* 리뷰쓰기 */
+	$(".reply_button_wrap").on("click", function(e){
+		e.preventDefault();
+		
+		const userId = '${user.userId}';
+		const orderNo = '${orders.orderNo}';
+
+		let popUrl = "/replyEnroll/" + userId + "?orderNo=" + orderNo;
+		console.log(popUrl);
+		let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+		
+		window.open(popUrl,"리뷰 쓰기",popOption);
+	});
     </script>
 </head>
 <body>
 
 <form class="form-horizontal" name="getOrdersList">
-	<div class="navbar  navbar-default">
+   <div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/user/index">진욱이네</a>
-   		</div>
-   	</div>
+           <a class="navbar-brand" href="/user/index">진욱이네</a>
+         </div>
+      </div>
 
-	<h2 class="text-center">주문내역</h2>
+   <h2 class="text-center">주문내역</h2>
 
    <table class="table table-hover table-striped" >
          <br><br><br><br>
-       <thead>
+
+			<!-- 리뷰 div -->
+			<div class="content bottom">
+				<div class="reply_subject">
+					<h2>리뷰</h2>
+				</div>
+				<div class="reply_button_wrap">
+					<button>리뷰 쓰기</button>
+				</div>
+			</div>
+			<!-- 리뷰 div -->
+
+			<thead>
           <tr>
             <th align="center">주문번호</th>
             <th align="left" >주문날짜</th>
@@ -69,7 +95,7 @@
           </tr>
        </thead>
         
-   	<tbody>
+      <tbody>
       
         <c:set var="i" value="0" />
         <c:forEach var="orders" items="${getOrdersList}">
@@ -90,7 +116,7 @@
            </td>
          </tr>
           </c:forEach>
-         	
+            
     </tbody>
       
 </table>

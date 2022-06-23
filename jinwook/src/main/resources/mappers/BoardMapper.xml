@@ -172,15 +172,15 @@
 		)VALUES(
 			#{attachNo},
 			#{boardNo},
-			#{orgFileName},
-			#{storedFileName},
+			#{orgFileName:VARCHAR},
+			#{storedFileName:VARCHAR},
 			#{fileSize}
 		)
     </insert>
     
     <!-- 게시판 첨부파일 조회 key가 대문자로 조회됨 -> 카멜 케이스 써야 함 ㅠㅠ -->
-	<select id="selectBoardAttachList" parameterType="int" resultType="hashMap">
-		SELECT attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
+	<select id="selectBoardAttachList" parameterType="int" resultMap="attachSelectMap">
+		SELECT attach_no, org_file_name, stored_file_name, ROUND(file_size/1024,1) AS file_size
 	  	FROM attach
 	 	WHERE board_no = #{boardNo}
 	   	AND del_gb = 'N'
@@ -191,7 +191,7 @@
 	<select id="selectRecipeAttachList" parameterType="int" resultMap="attachSelectMap">
 		SELECT attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
 	  	FROM attach
-	 	WHERE rcp_no = #{rcpNo}
+	  	WHERE rcp_no = #{rcpNo}
 	   	AND del_gb = 'N'
 	   	ORDER BY attach_no ASC
 	</select>
@@ -317,7 +317,7 @@
 		AND
 			(board_inq_status = false OR board_inq_status = true)
 		ORDER BY
-			board_no ASC
+			board_no DESC
 		 LIMIT
          #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
@@ -331,7 +331,7 @@
 		WHERE
 			board_code = 1
 		ORDER BY
-			board_no ASC
+			board_no DESC
 		 LIMIT
          #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
@@ -509,8 +509,20 @@
 		WHERE
 			order_no = #{orderNo}
 		LIMIT
-         #{startPage}, #{recordsPerPage}
+         #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
+	
+	<select id="getReviewInfo" resultType="Orders">
+		SELECT review_title, review_content, review_date, review_star 
+		FROM orders 
+		WHERE order_no = #{orderNo}
+	</select>
+	
+	<!-- 상점후기 등록 -->
+  	<insert id="enrollReview">
+  		INSERT INTO orders(order_no, user_id, review_content, review_star) 
+  		VALUES(#{orderNo}, #{userId}, #{reviewContent}, #{reviewStar})
+  	</insert>
 	
 	 <sql id="commentColumns">
 	comment_no

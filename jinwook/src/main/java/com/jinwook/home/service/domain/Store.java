@@ -38,6 +38,9 @@ public class Store extends CommonDTO {
    private boolean isOpen;
    private String orderDateStart;
    private String orderDateEnd;
+   private double latitude;
+   private double longitude;
+
    
    
    public Store(){

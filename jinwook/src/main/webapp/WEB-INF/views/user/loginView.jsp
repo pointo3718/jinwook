@@ -148,8 +148,35 @@
 					return;
 				}
 				
-				if(pw == null || pw.length <1) {
-					swal("진욱이네", "비밀번호를 입력해주세요.");
+				if(id.length < 6 || id.length > 25) {
+					swal("진욱이네", "아이디는 6~25자 이내로 입력해주세요.");
+					$(".userId").focus();
+					return;
+				}
+				
+				for(var i = 0; i < id.length; i++){
+					
+					var ch = id.charAt(i);
+					if(!(ch >= 'a' &&  ch <= 'z') && !(ch >= '0' && ch <= '9')){
+					swal("진욱이네", "아이디는 영문 소문자로 입력해주세요.");
+					$(".userId").focus();
+					$(".userId").select();
+					return;
+					}
+					
+				}
+				
+				var password1RegExp = /^[a-zA-z0-9]{4,12}$/; //비밀번호 유효성 검사        
+				if (!password1RegExp.test(pw)) {
+					swal("진욱이네", "비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해주세요.");            
+					pw = "";            
+					$(".password").focus();  
+					return;        
+					}
+				
+				
+				if(pw == null || pw.length <4) {
+					swal("진욱이네", "비밀번호를 8자 이상으로 입력해주세요.");
 					$(".password").focus();
 					return;
 				}
@@ -167,7 +194,8 @@
 				 
 				 // 로그인할 때 검증 메세지
 				 const msg = "${msg}";
-				 swal("[진욱이네]",msg);
+					 
+				 swal("진욱이네",msg);
 					 
 					 
 				 
@@ -183,6 +211,7 @@
 				$("form").attr("method" , "GET").attr("action" , "/user/addUserSelec").submit();
 			});
 		});
+		
 		
 	</script>		
 	
@@ -213,14 +242,14 @@
 					  <div class="form-group">
 					    <label for="userId" class="col-sm-2 control-label"></label>
 					    <div class="col-sm-3" style="font-size:15px;">
-					      <input type=   "text" class="userId" name="userId" id="userId"  placeholder="아이디를 입력해주세요." required="required" >
+					      <input type=   "text" class="userId" name="userId" id="userId"  placeholder="아이디를 입력해주세요." required="required" onKeyup="this.value=this.value.replace(' ','');"/>
 					    </div>
 					  </div>
 					  
 					  <div class="form-group">
 					    <label for="password" class="col-sm-2 control-label"></label>
 					    <div class="col-sm-6" style="font-size:15px;">
-					      <input type="password" class="password" name="password" id="password" placeholder="패스워드를 입력해주세요." >
+					      <input type="password" class="password" name="password" id="password" placeholder="패스워드를 입력해주세요."  onKeyup="this.value=this.value.replace(' ','');" >
 					    </div>
 					  </div>
 					  	<br/><br/>

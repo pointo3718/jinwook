@@ -484,7 +484,7 @@ public class StoreRestController {
     	  
     	  if (CollectionUtils.isEmpty(storeMap) == false) {
     		  com.google.gson.JsonArray jsonArr = new Gson().toJsonTree(storeMap).getAsJsonArray();
-    		  jsonObj.add("storeList", jsonArr);
+    		  jsonObj.add("storeMap", jsonArr);
     		  
     		  System.out.println("상점지도조회 컨트롤러 통과");
     	  }
@@ -493,7 +493,7 @@ public class StoreRestController {
       }
       
       
-      @GetMapping( value="/getStore/{storeNo}")
+      @GetMapping( value="getStore/{storeNo}")
       public JsonObject getStoreWallet(@PathVariable(value="storeNo",required = false) int storeNo) throws Exception{
          
            

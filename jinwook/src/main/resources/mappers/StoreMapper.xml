@@ -21,7 +21,9 @@
    <result property="accNo"             column="acc_no"         jdbcType="VARCHAR"/>
    <result property="bank"                 column="bank"           jdbcType="VARCHAR"/>
    <result property="totalEarn"         column="total_earn"     jdbcType="INTEGER"/>
-   <result property="isOpen"             column="is_open"        jdbcType="TINYINT"/>   
+   <result property="isOpen"             column="is_open"        jdbcType="TINYINT"/>  
+   <result property="latitude"                 column="latitude"           jdbcType="INTEGER"/>
+   <result property="longitude"                 column="longitude"           jdbcType="INTEGER"/> 
    <result property="user.jpBalance"     column="jp_balance"     jdbcType="INTEGER"/>
    <result property="user.userName"     column="user_name"     jdbcType="VARCHAR"/>   
    <result property="user.businessNo"     column="business_no"     jdbcType="VARCHAR"/>  
@@ -157,7 +159,6 @@
                   FROM orders
                   WHERE store_no=#{storeNo})vt
       WHERE    s.store_no=p.store_no AND
-         s.store_no=o.store_no AND
                   p.store_no=s.store_no AND
            s.store_no = #{storeNo}
       GROUP BY  p.prod_no
@@ -241,9 +242,10 @@
    
    <select id="getStoreMap" resultMap="storeSelectMap">
    
-   SELECT s.store_name, s.store_addr, s.store_type,p.prod_name, p.price
+   SELECT s.store_name, s.store_addr, s.store_type,p.prod_name, p.price, s.latitude,s.longitude,s.store_no
 	FROM store s, product p
-	WHERE s.store_no = p.store_no
+	WHERE s.store_no = p.store_no AND
+			s.store_status=2
 	
    </select>
    

@@ -5,6 +5,7 @@
 
 <!DOCTYPE html>
 <html lang="ko">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Ogani Template">
@@ -590,6 +591,8 @@
 	</section>
 	<!-- Latest Product Section End -->
 
+
+
 	<!-- Blog Section Begin -->
 	<section class="from-blog spad" style="padding-bottom: 0px;">
 		<div class="container">
@@ -608,70 +611,14 @@
 		<div class="row" style="align-items: flex-start;">
 
 			<!-- 지도를 표시할 div 입니다 -->
-			<div id="map" style="width: 500px; height: 500px; right: 50px"></div>
-
-			<script type="text/javascript"
-				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e53eaf4dd896374cd449da869e2ddcdc"></script>
-			<script>
-				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-				mapOption = {
-					center : new kakao.maps.LatLng(37.643308684205, 127.01021511086), // 지도의 중심좌표
-					level : 6
-				// 지도의 확대 레벨
-				};
-
-				// 지도를 생성합니다    
-			      var map = new kakao.maps.Map(mapContainer, mapOption);
-				
-			   // 마커를 표시할 위치와 title 객체 배열입니다 
-			      var positions = [
-			    	  
-			          {
-			              title: '근린공원',
-			              latlng: new kakao.maps.LatLng(37.643308684205, 127.01021511086)
-			          }
-			      ];
-
-			      // 마커 이미지의 이미지 주소입니다
-			      var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-			          
-			      for (var i = 0; i < positions.length; i ++) {
-			          
-			          // 마커 이미지의 이미지 크기 입니다
-			          var imageSize = new kakao.maps.Size(24, 35); 
-			          
-			          // 마커 이미지를 생성합니다    
-			          var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-			          
-			          // 마커를 생성합니다
-			          var marker = new kakao.maps.Marker({
-			              map: map, // 마커를 표시할 지도
-			              position: positions[i].latlng, // 마커를 표시할 위치
-			              title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-			              image : markerImage // 마커 이미지 
-			          });
-			      }
 			
+			<div>
+			<div id="map" style="width: 500px; height: 500px; right: 50px;">	
+			</div>
+			</div>
 
-		
-				var options = {
-						  enableHighAccuracy: true,
-						  timeout: 5000,
-						  maximumAge: 0
-						};
+			<jsp:include page="map.jsp" />
 
-						function success(position) {
-						  //좌표를 알아낼 수 있는데, 여기서 알아낸 좌표를 kakaoAPI url에 사용할 것이다.
-						  console.log('위도 : ' + position.coords.latitude); 
-						  console.log('경도: ' + position.coords.longitude);
-						};
-
-						function error(err) {
-						  console.warn('ERROR(' + err.code + '): ' + err.message);
-						};
-
-						navigator.geolocation.getCurrentPosition(success, error, options);
-			</script>
 
 			<div>
 
@@ -705,39 +652,39 @@
 	</section>
 
 	<script type="text/javascript">
-	
+   
 //======BEST 상점 목록=========//
 
 $(function() {
-	getStoreListByOrderCount();
+   getStoreListByOrderCount();
 });
 
 function getStoreListByOrderCount() {
-	
-	   var uri = "/store/getStoreListByOrderCount"
+   
+      var uri = "/store/getStoreListByOrderCount"
 
-	   $.get(uri, function(response) { 
-	      
-	         var storelistHtmlBody = "";
-	         
-	         $(response.storeList).each(function(idx,store) {
-	        	 
-	        	 
+      $.get(uri, function(response) { 
+         
+            var storelistHtmlBody = "";
+            
+            $(response.storeList).each(function(idx,store) {
+               
+               
 
-	        	 storelistHtmlBody += `
-	 				<tr style="text-align:center">
-	 					<td>\${store.storeName}</td>
-	 					<td>\${store.storeAddr}</td>
-	 					<td>\${store.storeType}</td>
-	 				</tr>
-	            `;
-	         });
-	         
-	         
-	         $(".storeList").html(storelistHtmlBody);
-	         //$(".userlisthead").html(blacklistHtmlBody);
-	      
-	   }, "json");
+               storelistHtmlBody += `
+                <tr style="text-align:center">
+                   <td><a href="http://localhost:8082/store/getStore?storeNo=\${store.storeNo}" style="color:black;">\${store.storeName}</td>
+                   <td>\${store.storeAddr}</td>
+                   <td>\${store.storeType}</td>
+                </tr>
+               `;
+            });
+            
+            
+            $(".storeList").html(storelistHtmlBody);
+            //$(".userlisthead").html(blacklistHtmlBody);
+         
+      }, "json");
 
 }
 
@@ -748,10 +695,15 @@ url: "/store/getStoreMap",
 dataType: "json"
 }).done(function(data){
 console.log(data);
+var storeList = data;
+console.log(storeList);
 });
 
 
 //============================================//
+
+
+
 
 
 </script>

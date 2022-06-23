@@ -153,6 +153,11 @@ function getCouponCount() {
       
    }, "json");
 }
+	
+	//개인정보 변경 페이지로 이동
+	function confirm() {
+		location.href="/user/confirmPasswordView?userId=${user.userId}"
+	}
 
 $('#myModal').on('shown.bs.modal', function () {
      $('#myInput').trigger('focus')
@@ -598,11 +603,11 @@ $('#myModal').on('shown.bs.modal', function () {
                      <div class="list-group text-center" style="font-size: 15px;">
                         <button type="button"
                            class="list-group-item list-group-item-action"
-                           aria-current="true">구매내역</button>
+                           aria-current="true" onclick="location.href='/orders/getOrdersList'">주문내역</button>
                         <button type="button"
-                           class="list-group-item list-group-item-action">개인정보</button>
+                           class="list-group-item list-group-item-action" onclick="confirm()">개인정보</button>
                         <button type="button"
-                           class="list-group-item list-group-item-action">1:1문의</button>
+                           class="list-group-item list-group-item-action" onclick="location.href='/board/getBoardInquiryList'">1:1문의</button>
                         <button type="button"
                            class="list-group-item list-group-item-action" class="addStore"><span class="addStore">작성한 글 
                            </span>

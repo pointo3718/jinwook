@@ -135,7 +135,7 @@
 //============= "탈퇴"  Event 처리 및  연결 =============
 $(function() {
 	$("#deleteUser").on("click" , function() {
-		$("form").attr("method" , "POST").attr("action" , "/user/deleteUser").submit();
+		$("#modifyUser").attr("method" , "POST").attr("action" , "/user/deleteUser").submit();
 	});
 });	
 
@@ -155,24 +155,31 @@ $(function() {
 
 ////////////////////////////////수정 시작///////////////////////////////////////
 	function fncUpdateUser() {
-		var password=$("input[name='password']").val();
+		var name=$("input[name='userName']").val();
 		
-		if(password == null || password.length <1 || password == " "){
-			alert("비밀번호를 입력하세요.");
+		if(name == null || name.length <1){
+			alert("이름은  반드시 입력하셔야 합니다.");
 			return;
 		}
 	
 	
+	var value = "";	
+	if( $("input[name='birth_year']").val() != ""  &&  $("input[name='birth_month']").val() != "" &&  $("input[name='birth_day']").val() != ""){
+		var value = $("input[name='birth_year']").val()  
+							+ $("input[name='birth_month']").val() 
+							+ $("input[name='birth_day']").val();
+	}
 	
+	$("input:hidden[name='birth']").val( value );
 	
-	
-	$("#confirmPw").attr("method" , "POST").attr("action" , "/user/confirmPassword").submit();   
+	$("#modifyUser").attr("method" , "POST").attr("action" , "/user/updateUser").submit();   
 }
-
+	
+	//개인정보 변경 페이지로 이동
 	function confirm() {
 		location.href="/user/confirmPasswordView?userId=${user.userId}"
 	}
-
+	
 </script>
 
 <style>
@@ -306,19 +313,16 @@ $(function() {
                   <strong>개인 정보 수정</strong>
 
                </h4>
-                  <hr style="height:20px;">
-               <h5 class="text-left">
-                  <strong>비밀번호 확인</strong>
-               </h5>
-				<a>고객님의 정보를 보호하기 위해 비밀번호를 확인합니다.</a>
                   <hr size="10px">
+
 
 
                   <table class="table table-hover"
                      style="width: 730px; heigh: 300px;">
 
-                     <form class="form-horizontal" id="confirmPw">
+                     <form class="form-horizontal" id="modifyUser">
 
+	            <c:if test="${sessionScope.user.role == '사용자' }">
 
                         <div class="form-group row">
                            <label for="colFormLabel"
@@ -340,6 +344,116 @@ $(function() {
                            </div>
                         </div>
 
+                        <div class="form-group row">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label">새 비밀번호</label>
+                           <div class="col-sm-6">
+                              <input type="password" name="password2"
+                                 class="form-control form-control" id="password2"
+                                 value="" >
+                           </div>
+                        </div>
+
+                        <div class="form-group row">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label">새 비밀번호 확인</label>
+                           <div class="col-sm-6">
+                              <input type="password" name="password3"
+                                 class="form-control form-control" id="password3"
+                                 value="" >
+                           </div>
+                        </div>
+
+                        <div class="form-group row">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label">이름</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="userName"
+                                 class="form-control form-control" id="userName"
+                                 value="${user.userName}" readonly>
+                           </div>
+                        </div>
+
+                        <div class="form-group row">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label">이메일</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="email"
+                                 class="form-control form-control" id="email"
+                                 value="${user.email}" >
+                           </div>
+                        </div>
+
+                        <div class="form-group row">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label">닉네임</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="nickName"
+                                 class="form-control form-control" id="nickName"
+                                 value="${user.nickName}" >
+                           </div>
+                        </div>
+
+                        <div class="form-group row" >
+                           <label for="colFormLabel" 
+                              class="col-sm-3 col-form-label col-form-label">성별</label>
+                              
+                           <div class="col-sm-2" style="display:flex; margin-top:5px;">
+                              <input type="radio" name="남"
+                                 class="form-control form-control" id="gender"
+                                 value="남" style="font-size:10px;">
+                           	<label for="" class="col-sm-1" style="margin-right:40px;">남</label>
+                           </div>
+                           
+                           <div class="col-sm-2" style="display:flex; text-align:center; margin-top:5px;">
+                              <input type="radio" name="여"
+                                 class="form-control form-control" id="gender"
+                                 value="여" style="font-size:10px;">
+                           	<label for="" class="col-sm-1" style="margin-right:40px;">여</label>
+                           </div>
+                           
+                           <div class="col-sm-2" style="display:flex; margin-top:5px;">
+                              <input type="radio" name="없음"
+                                 class="form-control form-control" id="gender"
+                                 value="없음" style="font-size:10px;">
+                           	<label for="" class="col-sm-1" style="margin-right:40px;">X</label>
+                           </div>
+                           
+                        </div>
+
+                        <div class="form-group row" style="display:flex;">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label">생년월일</label>
+                          
+                           <div class="col-sm-2">
+                              <input type="text" name="birth_year"
+                                 class="form-control form-control text-center" id="birth"
+                                 value="" placeholder="YYYY" size="4" maxlength="4" >
+                              <input type="hidden" name="birth"
+                                 class="form-control form-control text-center" id="birth"
+                                 value="">
+                           </div>
+                           <div class="col-sm-2">
+                              <input type="text" name="birth_month"
+                                 class="form-control form-control text-center" id="birth"
+                                 value="" pattern="[0-9]*"  placeholder="MM" size="2" maxlength="2">
+                           </div>
+                           <div class="col-sm-2">
+                              <input type="text" name="birth_day"
+                                 class="form-control form-control text-center" id="birth"
+                                 value=""  placeholder="DD" size="2" maxlength="2" min="2">
+                        </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label">휴대폰 번호</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="phone"
+                                 class="form-control form-control" id="phone"
+                                 value="${user.phone}" >
+                           </div>
+                        </div>
                         
                     </form>
 
@@ -347,14 +461,19 @@ $(function() {
 
                   </table>
                   
-                  <!--비밀번호 확인 Start-->
-                   <hr style="height:20px;">
+                  <!-- 개인 정보 수정 End-->
+                  <!-- 회원 탈퇴 Begin -->
 
-                  <div class="text-center">
-                     <button type="button" id="button" class="btn site-btn" onClick="fncUpdateUser()">
-                        확인</button>
+                  <hr size="1px">
+
+                  <div style="padding-left: 295px;">
+                     <button type="button" id="button" class="btn btn-outline-success" onClick="fncUpdateUser()">
+                        수정</button>
+                     &nbsp;&nbsp;&nbsp;
+                     <button type="button" id="deleteUser" class="btn btn-outline-danger">회원 탈퇴</button>
                   </div>
-                  <!--비밀번호 확인 End-->
+	            </c:if>
+				<!-- 회원 탈퇴 버튼 End -->
          </div>
       </div>
    </section>

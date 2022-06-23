@@ -14,9 +14,9 @@
 <title>공지사항 수정</title>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">  
 
 <!-- Css Styles -->
 <link rel="stylesheet"
@@ -41,8 +41,25 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
 <style>
+*{font-family: 'Noto Sans KR', sans-serif;}
+
+ .sticky {
+     position: -webkit-sticky;
+     position: sticky;
+     top: 0;
+     background: #ffffff;
+     z-index: 10;
+   }
+   
+
+.row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
+
 .mytop01 {
 	padding-left: 20px;
 }
@@ -119,7 +136,7 @@ function fn_addFile() {
 
 	<!-- Blog Section Begin -->
 	<section class="blog spad">
-		<div class="container" style="background-color: ivory; border:1px solid green;">
+		<div class="container" style="background-color: #F2F2F2;">
 
 				<!-- 상점 정보 수정 -->
 				<div>

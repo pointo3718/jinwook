@@ -123,19 +123,19 @@ public class UserController {
 	}
 	
 
-	@RequestMapping( value="updateUser", method=RequestMethod.GET )
-	public String updateUser( @RequestParam("userId") String userId , Model model ) throws Exception{
+	@GetMapping("updateUser")
+	public String updateUserView(@RequestParam("userid") String userId , Model model, HttpSession session ) throws Exception{
 
 		System.out.println("/user/updateUser : GET");
 		//Business Logic
-		User user = userService.getUser(userId);
+		User dbUser = userService.getUser(userId);
 		// Model �� View ����
-		model.addAttribute("user", user);
+		model.addAttribute("user", dbUser);
 		
 		return "/user/updateUser";
 	}
 
-	@RequestMapping( value="updateUser", method=RequestMethod.POST )
+	@PostMapping("updateUser")
 	public String updateUser( @ModelAttribute("user") User user , Model model , HttpSession session) throws Exception{
 
 		System.out.println("/user/updateUser : POST");
@@ -147,7 +147,7 @@ public class UserController {
 			session.setAttribute("user", user);
 		}
 		
-		return "/user/updateUser";
+		return "redirect:/user/updateUser";
 	}
 	
 	
@@ -190,6 +190,7 @@ public class UserController {
 		}
 		System.out.println(dbUser+"123123123123123123123123213123");
 		user = dbUser;
+		model.addAttribute("msg", "환영합니다.");
 		session.setAttribute("user", user);
 		System.out.println(user+"--------------------------------------------------------");
 //		model.addAttribute("msg", "로그인 성공");
@@ -239,8 +240,11 @@ public class UserController {
 	
 	
 	@GetMapping("confirmPasswordView")
-	public String comfirmPasswordView() throws Exception {
+	public String comfirmPasswordView(@ModelAttribute("user") User user, HttpSession session) throws Exception {
 		
+		System.out.println(user);
+		user = userService.getUser(user.getUserId());
+		System.out.println(user);
 		System.out.println("===========CONFIRM PASSWORD PAGE===========");
 		
 		return "/user/confirmPasswordView";
@@ -250,7 +254,7 @@ public class UserController {
 	public String comfirmPassword(@ModelAttribute("user") User user ,  HttpSession session, Model model ) throws Exception {
 		System.out.println("===========CONFIRM PASSWORD=========");
 		System.out.println(user);
-		user.setUserId( ((User)session.getAttribute("user")).getUserId());
+//		user.setUserId( ((User)session.getAttribute("user")).getUserId());
 		int result = userService.confirmPassword(user);
 		if(result==0) {
 			return "/user/confirmPasswordView";
