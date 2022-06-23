@@ -17,6 +17,10 @@ import com.jinwook.home.service.domain.User;
 
 public interface BoardService {
 	
+	//상점후기정보 불러오기
+	public Orders getReviewInfo(int orderNo);
+	public int enrollReview(Orders orders);
+	
 	//레시피 조회수 증가v
 	public int updateBoardRecipeHits(Integer rcpNo);
 	//1:1문의 조회수 증가v
@@ -25,14 +29,10 @@ public interface BoardService {
 	public int updateBoardAnnouncementHits(Integer boardNo);
 	public int updateBoardInqStatus(Integer boardNo);
 	
-//	//게시판 사진 첨부v
-//	public int fileBoardInsert(FileVO file) throws Exception;
-//	//레시피 사진 첨부v
-//	public int fileRecipeInsert(FileVO file) throws Exception;
 	// 게시판 첨부파일 조회
-	public List<Map<String, Object>> selectBoardAttachList(int boardNo) throws Exception;
+	public Attach selectBoardAttachList(int boardNo) throws Exception;
 	// 레시피 첨부파일 조회
-	public List<Attach> selectRecipeAttachList(int rcpNo) throws Exception;
+	public Attach selectRecipeAttachList(int rcpNo) throws Exception;
 	// 게시판 첨부파일 다운
 	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
 	//1:1문의 등록v

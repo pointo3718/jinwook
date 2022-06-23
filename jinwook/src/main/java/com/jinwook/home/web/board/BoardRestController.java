@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.board.BoardService;
 import com.jinwook.home.service.domain.Comment;
+import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Store;
 
 @RestController
@@ -165,5 +166,12 @@ public class BoardRestController {
 		System.out.println("jsonObj" + jsonObj);
 		return jsonObj;
 	}
+	
+	/* 상점 후기 등록 */
+	@PostMapping("/enroll")
+	public void enrollReplyPOST(Orders orders) {
+		boardService.enrollReview(orders);
+	}
+
 	
 }
