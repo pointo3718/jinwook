@@ -52,24 +52,46 @@ function movePage(uri, queryString) {
 		});
 	});
 	
-	function setThumbnail(event) {
-        var reader = new FileReader();
-
-        reader.onload = function(event) {
-          var img = document.createElement("img");
-          img.setAttribute("src", event.target.result);
-          document.querySelector("div#image_container").appendChild(img);
-        };
-
-        reader.readAsDataURL(event.target.files[0]);
-      }
-	
-	$("#replyWriteBtn").on("click", function(){
-		  var formObj = $("form[name='replyForm']");
-		  formObj.attr("action", "/board/addInquiryComment");
-		  formObj.submit();
+	<!-- 1:1문의 답변 등록 버튼 이벤트 -->
+	$(function() {
+		$("#replyWriteBtn").on("click", function() {
+			fncAddInquiryComment();
 		});
+	});
 	
+	<!-- 1:1문의 답변 삭제 -->
+	function fncDeleteInquiryComment(e) {
+		if (!confirm('답변을 삭제하시겠어요?')) {
+			return false;
+		}
+		
+		console.log(e);
+		const no = $(e).data("value");
+		 $.ajax({
+				url : "/board/deleteInquiryComment/"+no,
+				dataType : "json",
+				success : function(result){
+					if(result != null){
+						alert("삭제완료");
+						self.location = "/board/getBoardInquiry?boardNo=${board.boardNo}";
+					}
+				}
+			
+			});
+	}
+	
+	<!-- 1:1문의 답변 등록 -->
+	function fncAddInquiryComment() {
+		
+		 var commentContent = $("textarea[id='commentContent']").val();
+
+		    if (commentContent == null || commentContent.length < 1) {
+		       alert("댓글내용을 반드시 입력하여야 합니다.");
+		       return;
+		    }
+		
+		$("form").attr("method", "POST").attr("action", "/board/addInquiryComment").submit();
+	}
 </script>    
  
  
@@ -168,6 +190,7 @@ function movePage(uri, queryString) {
                     <div class="col-sm-4 col-sm-4">
                         <i class="bi bi-eye"></i> ${board.boardHits}<br/>
  						<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 						
                     </div>
  						<br/><br/><br/>
                     
@@ -179,6 +202,52 @@ function movePage(uri, queryString) {
                     <div class="col-lg-12 text-center">
                         <button type="button" class="btn btn-success" id="updateButton">수 &nbsp;정</button>
                     </div>
+                    <hr/>
+                    <!-- 댓글 작성폼 start -->
+					<div class="card mb-2" style="margin-left:20px;">
+						<!-- 댓글 헤더 -->
+						<div class="card-header bg-light">
+							<i class="fa fa-comment fa"></i> 1:1문의 답변
+						</div>
+					<form name="replyForm" method="post" action="addInquiryComment">
+						<div class="card-body">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<input type="hidden" id="boardNo" name="boardNo" value="${board.boardNo}"/>
+									<div class="form-inline mb-2">
+										<label for="commentWriter"><i class="fa fa-user-circle-o fa-2x"></i></label> 
+										<input type="text" class="form-control ml-2" id="commentWriter" name="commentWriter" readonly="readonly" value="관리자"> 
+									</div> 
+									<textarea class="form-control" id="commentContent" name="commentContent" rows="3"></textarea>
+									<button type="submit" class="btn btn-dark mt-3" id="replyWriteBtn">답변 작성</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+					</form>
+					<!-- 댓글 작성폼 end -->
+					
+					<!-- 댓글 리스트 조회 폼 start -->
+					<div class="card">
+						<div class="card-header">답변 내역</div>
+							<ul id="comment" class="commentList">
+								<c:forEach items="${commentList}" var="board">
+									<li id="comment--1" class="list-group-item d-flex justify-content-between">
+											<div class="font-itatlic">작성자 :${board.comment.commentWriter} | &nbsp;</div>
+											<br/>
+										<div class="d-flex">
+										<div>${board.comment.commentContent}</div>&nbsp;&nbsp;&nbsp;
+											<%-- <button type="button" id="button" class="btn btn-outline-success"
+                        					data-value="${recipe.comment.commentNo}" onClick="fncUpdateRecipeComment(this)">수정</button>&nbsp;&nbsp;&nbsp; --%>
+											
+											<button data-value="${board.comment.commentNo}" id="buttons" type="button" class="btn btn-primary" 
+											onClick="fncDeleteInquiryComment(this)">X</button>
+										</div>
+									</li>
+								</c:forEach>
+							</ul>
+					</div>
+					<!-- 댓글 조회 폼 end -->
                     
                    <%--  <!-- 답변 리스트 조회 -->
 					<div class="replies" style="margin-left:20px; margin-top:20px; margin-bottom:20px;">

@@ -16,10 +16,13 @@
    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
    
+<<<<<<< HEAD
    <!-- Google Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">   
+=======
+>>>>>>> refs/heads/Song
    
 	   <!-- Css Styles -->
 	<link rel="stylesheet"
@@ -68,21 +71,42 @@
     /*]]>*/
     
     /* 리뷰쓰기 */
+<<<<<<< HEAD
    $(".reply_button_wrap").on("click", function(){
       e.preventDefault();
       console.log(e)
       const orderNo = '${orders.orderNo}';
+=======
+	$(".reply_button_wrap").on("click", function(){
+		e.preventDefault();
+		console.log(e)
+		const orderNo = '${orders.orderNo}';
+>>>>>>> refs/heads/Song
 
+<<<<<<< HEAD
       let popUrl = "/board/replyEnroll/"+orderNo;
       console.log(popUrl);
       let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
       
       window.open(popUrl,"리뷰 쓰기",popOption);
    });
+=======
+		let popUrl = "/board/replyEnroll/"+orderNo;
+		console.log(popUrl);
+		let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+		
+		window.open(popUrl,"리뷰 쓰기",popOption);
+	});
+>>>>>>> refs/heads/Song
     </script>
 </head>
 <body>
-
+				<div class="reply_subject">
+					<h2>리뷰</h2>
+				</div>
+			<div class="reply_button_wrap">
+				<button value="${orders.orderNo}">리뷰 쓰기</button>
+			</div>
 <form class="form-horizontal" name="getOrdersList">
 <!-- Header Begin -->
 <%-- 	<jsp:include page="../layout/top.jsp" /> --%>
@@ -93,9 +117,15 @@
    <table class="table table-hover table-striped" >
          <br><br><br><br>
 
+<<<<<<< HEAD
          <!-- 리뷰 div -->
          
          <!-- 리뷰 div -->
+=======
+			<!-- 리뷰 div -->
+			
+			<!-- 리뷰 div -->
+>>>>>>> refs/heads/Song
 
          <thead>
           <tr>
@@ -129,10 +159,15 @@
            <c:if test="${orders.orderStatus eq '4'}">주문 취소</c:if>
            <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
            </td>
+<<<<<<< HEAD
            <td><<div class="reply_button_wrap">
                <button value="${orders.orderNo}">리뷰 쓰기</button>
             </div>
          </td>
+=======
+           
+			
+>>>>>>> refs/heads/Song
          </tr>
           </c:forEach>
             
