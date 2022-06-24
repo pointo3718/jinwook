@@ -14,6 +14,8 @@ public class Attach {
 	private int boardNo;
 	private int rcpNo;
 	private int orderNo;
+	private int storeNo;
+	
 	private String orgFileName;
 	private String storedFileName;
 	private int fileSize;

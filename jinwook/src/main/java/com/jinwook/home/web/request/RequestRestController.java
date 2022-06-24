@@ -213,19 +213,22 @@ public class RequestRestController {
 	// ========== 상점 삭제 수락 ===========
 	 @ResponseBody
 	 @PatchMapping(value={"deleteStore/{reqNo}/{storeNo}"})
-		public JsonObject deleteStore(@PathVariable(value = "reqNo", required = false) int reqNo
-												) {
+		public JsonObject deleteStore(@PathVariable(value = "reqNo", required = false) int reqNo,
+										@PathVariable(value = "storeNo", required = false) int storeNo,
+										 @PathVariable(value = "userId", required = false) String userId){
 		
 			System.out.println("/request/deleteStore : PATCH");
 			System.out.println("reqNo :: "+reqNo);
 			
 			JsonObject jsonObj = new JsonObject();
 			Request request = new Request();
+			
 			try { 
 				if (request != null) {
 					System.out.println("request 객체에 값 넣어줌");
 					request.setReqNo(reqNo);
-					request.setStoreNo(10016);
+					request.setStoreNo(storeNo);
+					request.setUserId(userId);
 				}
 				
 				boolean result = requestService.deleteStore(request);

@@ -655,7 +655,7 @@
 
 	<script type="text/javascript">
 	
-	 window.open("/adPopup.jsp","광고","width=600,height=200");
+window.open("/adPopup.jsp","광고","width=600,height=300");
 
    
 //======BEST 상점 목록=========//
