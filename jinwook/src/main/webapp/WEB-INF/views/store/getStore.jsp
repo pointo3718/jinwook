@@ -320,7 +320,7 @@ label {
          dataType : "text",
          success : function(result) {
             if (result != null) {
-               alert("담기완료");
+               swal("진욱이네","담기완료","success");
             }
          }
       });
@@ -468,8 +468,8 @@ label {
                   data-setbg="${path}/resources/static/img/product/product-2.jpg"
                   width="300" height="300">
                   <ul class="product__item__pic__hover">
-                     <li><span style="font-size:30px;"><i class="fa fa-cart-arrow-down"  aria-hidden="true" data-value="${store.product.prodNo}" 
-                        onClick="fncAddOrdersCart(this)"></i></span></li>
+                     <li><i class="fa fa-cart-arrow-down" data-value="${store.product.prodNo}" 
+                        onClick="fncAddOrdersCart(this)" style="font-size:25px;"></i></li>
                   </ul>
                </div>
                <div class="product__item__text">

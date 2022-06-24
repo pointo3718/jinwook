@@ -97,6 +97,14 @@
 		});
 	});
 	
+	/////////////// 1:1문의 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('1:1 문의내역')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/board/getBoardInquiryList");
+		});
+	});
+	
 	/////////////// 광고 요청 목록 이동 ////////////////
 		$(function() {
 	 	$( ".list-group-item:contains('통계')").on("click" , function() {
@@ -104,6 +112,8 @@
 			$(self.location).attr("href","/admin/chart");
 		});
 	});
+	
+	
    
 	
     /////////////// 요청대기 COUNT REST 시작 ////////////////
@@ -410,7 +420,7 @@ input.form-control[readonly] {
                         </button>
                         <button type="button"
                            class="list-group-item list-group-item-action">
-                        1:1 문의내역
+                           1:1 문의내역
                         </button>
                          <button type="button"
                            class="list-group-item list-group-item-action">

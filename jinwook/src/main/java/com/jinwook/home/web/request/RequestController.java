@@ -52,19 +52,20 @@ public class RequestController {
 	
 	// ========== 상점 등록 요청 !!!!!!! 요청 목록 만들고 다시 !!!!!!!===========
 	@PostMapping(value = "addRequestAddStore")
-	public String addRequestAddStore(@ModelAttribute("Store") Store store, HttpSession session, MultipartHttpServletRequest mpRequest) throws Exception {
+	
+	public String addRequestAddStore(Store store, HttpSession session, MultipartHttpServletRequest mpRequest, @RequestParam("storeNo") int storeNo
+										) throws Exception {
 		
 		System.out.println("/request/addRequestAddStore : POST");
 		
 		String sessionUserId = ((User) session.getAttribute("user")).getUserId();
 		store.setUserId(sessionUserId);
 
-		///////////////////////////
-		
+		//////// 파일 업로드 ///////
 		List<MultipartFile> fileList = mpRequest.getFiles("file");
         String src = mpRequest.getParameter("src");
 
-        String path = "C:\\Users\\ghdtj\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\img";
+        String path = "C:\\Users\\ghdtj\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\";
 
         for (MultipartFile mf : fileList) {
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
@@ -74,9 +75,10 @@ public class RequestController {
             System.out.println("fileSize : " + fileSize);
 
             String safeFile = path + originFileName;
+            System.out.println(safeFile);
             try {
                 mf.transferTo(new File(safeFile));
-        		requestService.addRequestAddStore(store, mpRequest);
+                requestService.addRequestAddStore(store, mpRequest);//레시피 등록
             } catch (IllegalStateException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -151,7 +153,8 @@ public class RequestController {
 	
 	// ========== 상점/광고 신청 목록 (사장님용) ============ /////////// 다시
 	@GetMapping(value = "getRequestAdStoreList")
-	public String listUserAdmin(@RequestParam("userId") String userId, Model model) {
+	public String listUserAdmin(HttpSession session, Model model) {
+		String userId = ((User) session.getAttribute("user")).getUserId();
 		List<Request> requestList = requestService.getRequestAdStoreList(userId);
 		
 		List<Store> storeInfo = storeService.getStoreInfo(userId);

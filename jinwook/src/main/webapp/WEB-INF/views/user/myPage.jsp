@@ -157,11 +157,11 @@ function getCouponCount() {
       
    }, "json");
 }
-	
-	//개인정보 변경 페이지로 이동
-	function confirm() {
-		location.href="/user/confirmPasswordView?userId=${user.userId}"
-	}
+   
+   //개인정보 변경 페이지로 이동
+   function confirm() {
+      location.href="/user/confirmPasswordView?userId=${user.userId}"
+   }
 
 $('#myModal').on('shown.bs.modal', function () {
      $('#myInput').trigger('focus')
@@ -378,55 +378,54 @@ $('#myModal').on('shown.bs.modal', function () {
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 80px;">진욱페이 </span>
-                              <strong style="margin-right : 65px;"> 5,500 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>5,000원</button>
+                              <strong style="margin-right : 65px;" class="chargePay"> 5,500 원</strong>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal" data-won="5000" onclick="PwCheck(this)" >5,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 11,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>10,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >10,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 33,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>30,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >30,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 55,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>50,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >50,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 60px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 110,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>100,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >100,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 60px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 330,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>300,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >300,000원</button>
                               <br><br>
                            </div>
                         </div>
                      </div>
                   </div>
                </div>
-            
-            
+               
             <div class="modal" id="modal" style="z-index: 1060;">
                <div id='content'>
                   <!-- <input type='button' value='X' class="close" id='btnClose'/> -->
-                  <input type="button" class="close" data-dismiss="modal" aria-label="Close" value="X">	
+                  <input type="button" class="close" data-dismiss="modal" aria-label="Close" value="X">   
                   <div class="title">
                      <h2 class="h3">
                            <span style="color : #7fad39">진욱페이</span>
@@ -463,7 +462,7 @@ $('#myModal').on('shown.bs.modal', function () {
             <script type="text/javascript">
             /* var btnOpen  = document.getElementById('btnOpen'); */
             /* var btnClose = document.getElementById('btnClose'); */
-            	
+               
             // modal 창을 보여줌
 /*             btnOpen.onclick = function(){
             var modal = document.getElementById('modal');
@@ -478,7 +477,9 @@ $('#myModal').on('shown.bs.modal', function () {
             btnClose.onclick = closeRtn; */
             
             function PwCheck(pw) {
-                const _this = this; 
+                const _this = this;
+                const wwww = $(pw).data('won');
+                console.log(wwww);
                 _this.pwStr = pw.toString(); // 문자, 숫자열을 모두 허용하기 위해 무조건 한가지 타입으로 맞춤
                 _this.password = []; // 지정된 패스워드
                 _this.passwordNumber = []; // 입력할 패스워드
@@ -515,7 +516,7 @@ $('#myModal').on('shown.bs.modal', function () {
                             _this.handleResult();
                         }
                     }
-                    console.log(_this.passwordNumber);
+                    /* console.log(_this.passwordNumber); */
                 }
 
                 // dot 활성화 
@@ -534,7 +535,16 @@ $('#myModal').on('shown.bs.modal', function () {
 
                 // 비밀번호 비교
                 _this.handleCheckPw = function(){
-                    let compare = JSON.stringify(_this.password) === JSON.stringify(_this.passwordNumber);
+                    ajax{
+                       url : "/user/checkLogin",
+                  type : "post",
+                  dataType : "json",
+                  data : {"jpPassword" : $("#password").val()},
+                  success : function(data){
+                  alert(data.password);
+                  }
+               }
+            });
                     return compare; 
                 }
 
@@ -543,8 +553,10 @@ $('#myModal').on('shown.bs.modal', function () {
                     if(_this.handleCheckPw()) {
                        /*  _this.parent.classList.add('confirm');
                         _this.compChk = true; */
+                        console.log(wwww)
                         iamport();
                     } else {
+                        console.log(wwww)
                         _this.parent.classList.add('error');
                         // 입력상태 초기화 
                         _this.passwordNumber = [];
@@ -566,38 +578,38 @@ $('#myModal').on('shown.bs.modal', function () {
                 }();
             }
 
-            let pwCheck = new PwCheck(123456);
+            //let pwCheck = new PwCheck(123456);
            
             function iamport(){
-            	var jpBalance = $(iamportplus).val();
-            	//가맹점 식별코드
-            	IMP.init('imp94304882'); // 콘솔에서 확인
-            	IMP.request_pay({
-            	    pg : 'kcp',
-            	    pay_method : 'card',
-            	    merchant_uid : 'merchant_' + new Date().getTime(),
-            	    name : '진욱페이 5500원' , //결제창에서 보여질 이름
-            	    amount : '5000', //실제 결제되는 가격
-            	    buyer_email : 'asd@naver.com',
-            	    buyer_name : '최인규',
-            	    buyer_tel : '010-1111-9990',
-            	}, function(rsp) {
-            		console.log(rsp);
-            	    if ( rsp.success ) {
-            	    	var msg = '결제가 완료되었습니다.';
-            	    	jpBalance = jpBalance+5000;
-            	        /* msg += '고유ID : ' + rsp.imp_uid;
-            	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-            	        msg += '결제 금액 : ' + rsp.paid_amount;
-            	        msg += '카드 승인번호 : ' + rsp.apply_num; */
-            	        self.location="";
-            	    } else {
-            	    	 var msg = '결제에 실패하였습니다.';
-            	         msg += '에러내용 : ' + rsp.error_msg;
-            	         self.location="";
-            	    }
-            	    alert(msg);
-            	});
+               var jpBalance = $(iamportplus).val();
+               //가맹점 식별코드
+               IMP.init('imp94304882'); // 콘솔에서 확인
+               IMP.request_pay({
+                   pg : 'kcp',
+                   pay_method : 'card',
+                   merchant_uid : 'merchant_' + new Date().getTime(),
+                   name : '진욱페이 5500원' , //결제창에서 보여질 이름
+                   amount : '5000', //실제 결제되는 가격
+                   buyer_email : 'asd@naver.com',
+                   buyer_name : '최인규',
+                   buyer_tel : '010-1111-9990',
+               }, function(rsp) {
+                  console.log(rsp);
+                   if ( rsp.success ) {
+                      var msg = '결제가 완료되었습니다.';
+                      jpBalance = jpBalance+5000;
+                       /* msg += '고유ID : ' + rsp.imp_uid;
+                       msg += '상점 거래ID : ' + rsp.merchant_uid;
+                       msg += '결제 금액 : ' + rsp.paid_amount;
+                       msg += '카드 승인번호 : ' + rsp.apply_num; */
+                       self.location="";
+                   } else {
+                       var msg = '결제에 실패하였습니다.';
+                        msg += '에러내용 : ' + rsp.error_msg;
+                        self.location="";
+                   }
+                   alert(msg);
+               });
             }
             </script>
             <div class="col-4">
@@ -674,10 +686,10 @@ $('#myModal').on('shown.bs.modal', function () {
          <thead>
           <tr>
             <th align="center">주문번호</th>
-            <th align="left" >주문날짜</th>
-            <th align="left" >상품사진</th>
             <th align="left">상품이름</th>
             <th align="left">주문금액</th>
+            <th align="left" >주문날짜</th>
+            <!-- <th align="left" >상품사진</th> -->
             <th align="left">픽업시간</th>
             <th align="left">주문현황</th>
             <!-- <th align="left">&nbsp; </th> -->
@@ -690,10 +702,10 @@ $('#myModal').on('shown.bs.modal', function () {
          <c:set var="i" value="${ i+1 }" />
          <tr>
            <td align="center" value="${orders.orderNo}">${orders.orderNo}</td>
-           <td align="left"><fmt:formatDate value="${orders.orderDate}" dateStyle="full"/></td>
-           <td align="left">${orders.product.prodImg}</td>
            <td align="left">${orders.product.prodName}</td>
            <td align="left">${orders.orderPrice}</td>
+           <td align="left"><fmt:formatDate value="${orders.orderDate}" dateStyle="full"/></td>
+           <%-- <td align="left">${orders.product.prodImg}</td> --%>
            <td align="left"><fmt:formatDate value="${orders.pickupTime}" type="time" pattern="a hh:mm"/></td>
            <td align="left">
            <c:if test="${orders.orderStatus eq '1'}">주문 접수중</c:if>
@@ -723,11 +735,11 @@ $('#myModal').on('shown.bs.modal', function () {
    </section>
    <!--   Blog Section End -->
 
-   <!--  Footer Begin -->
+   <!—  Footer Begin —>
    <jsp:include page="../layout/footer.jsp" />
-   <!-- Footer End -->
+   <!— Footer End —>
 
 </body>
 
-	
+   
 </html>

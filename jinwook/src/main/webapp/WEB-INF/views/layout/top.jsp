@@ -308,7 +308,7 @@
                   <ul style="margin-left: 60px;" >
 
                      <li><a href="/store/getStore?storeNo=10000"><span style="font-size:18px;">Shop</span></a></li>
-                     <li><a href="#"><span style="font-size:18px;">레시피</span></a>
+                     <li><a href="/board/getRecipeList"><span style="font-size:18px;">레시피</span></a>
                         <ul class="header__menu__dropdown">
                            <li><a href="/store/addStoreProduct?storeNo=10000">Shop
                                  Details</a></li>

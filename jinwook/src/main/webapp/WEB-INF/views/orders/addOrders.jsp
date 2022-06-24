@@ -134,7 +134,7 @@
             <div class="row">
             </div>
             <div class="checkout__form">
-                <h4 style="font-size: 22px;">구매자 정보 </h4>
+                <h4 style="font-size: 22px;">구매자 정보</h4>
                 <form action="#" >
                     <div class="row" >
                         <div class="col-lg-6 col-md-6">
@@ -217,7 +217,7 @@
                                 <div class="row">
                                 <div class="checkout__order__products col-sm-4" style="text-align: left;">상 품</div>
                                 <div class="checkout__order__products col-sm-4" style="text-align: center;">수 량</div>
-                                <div class="checkout__order__products col-sm-4" style="text-align: right; ">총 액</div> 
+                                <div class="checkout__order__products col-sm-4" style="text-align: right;">총 액</div> 
                                 <ul>
                                 <c:forEach var="cart" items="${getCartList}">
                                 	<input type=hidden id="storeNo" name="storeNo" value="${cart.storeNo}">
@@ -232,7 +232,7 @@
                                 <div class="checkout__order__subtotal">총상품금액 <span id="orderPrice" data-oprice="${total}">${total}원</span></div>
                                 <input type="hidden" name="orderPrice" value="${cart.orders.orderPrice}">
                                 <div class="checkout__order__total"> 쿠폰할인	<span id="couponDc">${total1}원</span></div>
-                                <div class="checkout__order__total">회원등급할인<span id="grade" name="grade" value="${user.grade}	">
+                                <div class="checkout__order__total">회원등급할인<span id="grade" name="grade" value="${user.grade}">
 	                               	<c:choose>
 										<c:when test="${user.grade=='프랜즈'}">
 											<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${cart.orders.orderPrice*0.01}"/>${total}원</td>

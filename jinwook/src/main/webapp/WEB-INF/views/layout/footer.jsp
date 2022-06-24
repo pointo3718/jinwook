@@ -11,11 +11,7 @@
                         <div class="footer__about__logo">
                             <a href="./index.jsp"><img src="${path}/resources/static/img/footerlogo.png" alt="" style="height:120px;"></a>
                         </div>
-                        <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
-                        </ul>
+
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">

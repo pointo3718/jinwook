@@ -51,6 +51,8 @@
 				, #{bank}
 				, 0 <!-- totalEarn -->
 				, 0 <!-- isOpen -->
+				, 0
+				, 0
 			)
 	</insert>
 	
@@ -124,6 +126,19 @@
 			store_status = 2
 		WHERE
 			store_no = #{storeNo} 
+	</update>
+	
+	<update id="updateUserStoreYn" parameterType="String">
+		UPDATE user
+		SET
+		<if test= 'store_yn == false'>
+			store_yn = true
+		</if>
+		<if test= 'store_yn == true'>
+			store_yn = false
+		</if>
+		WHERE
+			user_id = #{userId} 
 	</update>
 	
 	
@@ -213,6 +228,7 @@
 			store_status = 0
 		WHERE
 			store_no = #{storeNo}
+			<!-- store_yn false로 변경 -->
 	</update>
 
 

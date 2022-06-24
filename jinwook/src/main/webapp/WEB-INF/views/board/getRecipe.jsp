@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">    
  
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
 
@@ -79,11 +80,69 @@ function movePage(uri, queryString) {
    location.href = uri + queryString;
 }
 
-$('#myModal').on('shown.bs.modal', function () {
-	  $('#myInput').trigger('focus')
-	})
+<!-- 레시피 댓글 리스트 불러오는 함수 -->
+$(document).on(function(){
+	getCommentList();
+});
+
+<!-- 레시피 댓글 리스트 함수 -->
+function getCommentList() {
+	var commentUrl = "/board/commentList/";
+	var rcpNo = $('#rcpNo').val();
+		
+	$.ajax({
+		url: commentUrl+rcpNo,
+		type: 'POST',
+		dataType: 'json',
+		success : function(result) {
+			var comments = "";
+			if(result.length<1) {
+				comments = "등록된 댓글이 없습니다.";
+			}else {
+				$(result).each(function(){
+					comments += '<br/>';
+					comments += '<strong>';
+					comments += '작성자 : '+this.commentWriter;
+					comments += '</strong>&nbsp;&nbsp;&nbsp;&nbsp;';
+					comments += '작성 날짜 : '+this.commentDate;
+					comments += '<br/> <p>';
+					comments += '댓글 내용 : &nbsp;&nbsp;&nbsp;';
+					comments += this.commentContent;
+					comments += '</p>';
+					comments += '<br/>';
+					comments += '<button type="button" class="btn btn-outline-success" id="replyupdateBtn"';
+					comments += 'data-rno='+this.commentNo+'>'
+					comments += '댓글수정';
+					comments += '</button>';
+					comments += '<br/>';
+				});
+			}
+				$("#replylist").html(comments);
+		}
+	});
+}
+
+<!-- 레시피 댓글 수정 버튼 이벤트 -->
+function fncUpdateBtn(commentNo, commentContent) {
+	
+	var updateUrl = "/board/commentUpdate/";
+	var commentContent = $("#commentContentInfo").val(); //어디서 불러와?
+	
+	$.ajax({
+		url: updateUrl+commentNo+'/'+commentContent,
+		type: 'POST',
+		dataType: 'json',
+		success: function(result) {
+			getCommentList();//답변 리스트?
+		}
+		, error: function(error) {
+			swal("진욱이네","에러 : "+error);
+		}
+	});
+};
 
 
+<!-- 레시피 삭제 -->
 function fncDeleteRecipe(e) {
 	if (!confirm('레시피를 삭제하시겠어요?')) {
 		return false;
@@ -96,15 +155,15 @@ function fncDeleteRecipe(e) {
 			dataType : "json",
 			success : function(result){
 				if(result != null){
-					alert("삭제완료");
+					swal("진욱이네","삭제완료");
 					self.location = "/board/getRecipeList";
 				}
 			}
 		
 		});
-	
 }
 
+<!-- 레시피 댓글 삭제 -->
 function fncDeleteRecipeComment(e) {
 	if (!confirm('댓글을 삭제하시겠어요?')) {
 		return false;
@@ -117,7 +176,7 @@ function fncDeleteRecipeComment(e) {
 			dataType : "json",
 			success : function(result){
 				if(result != null){
-					alert("삭제완료");
+					swal("진욱이네","삭제완료");
 					self.location = "/board/getRecipe?rcpNo=${recipe.rcpNo}";
 				}
 			}
@@ -126,6 +185,7 @@ function fncDeleteRecipeComment(e) {
 	
 }
 
+<!-- 레시피 댓글 등록 버튼 이벤트 -->
 $(function() {
 	$("#replyWriteBtn").on("click", function() {
 		fncAddRecipeComment();
@@ -160,15 +220,15 @@ var rcpNo = ${recipe.rcpNo};
 		dataType : "json",
 		data : {'rcpNo' : rcpNo},
 		error : function() {
-			alert("통신 에러");
+			swal("진욱이네","통신 에러");
 		},
 		success : function(recoCheck) {
 			if (recoCheck == 0) {
-				alert("추천 완료!");
+				swal("진욱이네","추천 완료!");
 				location.reload();
 			}
 			else if (recoCheck == 2) {
-				alert("이미 추천하셨습니다");
+				swal("진욱이네","이미 추천하셨습니다");
 				location.reload();
 					}
 				}
@@ -230,17 +290,9 @@ var rcpNo = ${recipe.rcpNo};
 						alt="My Image" width="400" height="400" style="margin-left:20px;">
 						<div class="form-group">
 						
-						<img width="400" height="400"
+						<%-- <img width="400" height="400"
 											src="/resources/static/${recipe.attach.orgFileName}" alt="..."
-											onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" />
-						
- 				<%-- <c:forEach var="file" items="${file}">
- 				<input type="hidden" id="attach_no" name="attach_no" value="">
- 					<a href="#" onclick="fn_fileDown('${attach.attachNo}'); return false;">${attach.orgFileName}</a>(${attach.fileSize})<br>
- 					<img attachNo="${ attach.attachNo }" width="400" height="400" src="/resources/static/${attach.orgFileName}" alt="..." 
-               onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"/>
- 				</c:forEach> --%>
- 				
+											onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" /> --%>
  						</div>
 				</div>
                 
@@ -269,7 +321,7 @@ var rcpNo = ${recipe.rcpNo};
                         <button type="button" class="btn btn-success" id="updateButton">수 정</button>&nbsp;
                         <button data-value="${recipe.rcpNo}" id="buttons" type="button" class="btn btn-danger" onClick="fncDeleteRecipe(this)">삭 제</button>
                     </div>
-
+					
 					<!-- 댓글 작성폼 start -->
 					<div class="card mb-2" style="margin-left:20px;">
 						<!-- 댓글 헤더 -->
@@ -300,13 +352,11 @@ var rcpNo = ${recipe.rcpNo};
 							<ul id="comment" class="commentList">
 								<c:forEach items="${commentList}" var="recipe">
 									<li id="comment--1" class="list-group-item d-flex justify-content-between">
-											<div class="font-itatlic">작성자 :${recipe.comment.commentWriter} | &nbsp;</div>
-											<br/>
+											<div class="font-itatlic">작성자 :${recipe.comment.commentWriter} | &nbsp;</div><br/>
 										<div class="d-flex">
-										<div>${recipe.comment.commentContent}</div>&nbsp;&nbsp;&nbsp;
-											<%-- <button type="button" id="button" class="btn btn-outline-success"
-                        					data-value="${recipe.comment.commentNo}" onClick="fncUpdateRecipeComment(this)">수정</button>&nbsp;&nbsp;&nbsp; --%>
+											<div id="commentContentInfo">${recipe.comment.commentContent}</div>&nbsp;&nbsp;&nbsp;
 											
+											<button type="button" class="btn btn-outline-success" id="replyupdateBtn" data-rno="${recipe.comment.commentNo}" onclick="fncUpdateBtn();">댓글 수정</button>
 											<button data-value="${recipe.comment.commentNo}" id="buttons" type="button" class="btn btn-primary" 
 											onClick="fncDeleteRecipeComment(this)">X</button>
 										</div>
@@ -317,72 +367,6 @@ var rcpNo = ${recipe.rcpNo};
 					<!-- 댓글 조회 폼 end -->
 
 			<!-- 댓글 수정 모달창 start -->
-			<div class="modal fade" id="exampleModal" data-toggle="modal" 
-		tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog " style="width: 530px; heigh: 300px;">
-			<div class="modal-content" >
-				<div class="modal-header" >
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					</br>
-					<h3 class="modal-title" id="exampleModalLabel" style="color : #7fad39">
-						 <strong> 댓글수정 </strong>
-					</h3>
-					<h4>
-						<strong>댓글을 수정합니다.</strong>					
-					</h4>
-				</div>
-				<div class="modal-body" style="font-size : 20px; margin-left : 20px; ">
-				<h3 class="h4" style="text-align: center; color: #F05441; font-weight:bold;"> 진욱페이는 결제금액에 10% 추가지급합니다. </br>
-				</h3>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 85px;">진욱페이 </span>
-						<strong style="margin-right : 70px;"> 5,500 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">5,000원</button>
-					</div>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 75px;">진욱페이 </span>
-						<strong style="margin-right : 70px;"> 11,000 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">10,000원</button>
-					</div>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 75px;">진욱페이 </span>
-						<strong style="margin-right : 70px;"> 33,000 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">30,000원</button>
-					</div>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 75px;">진욱페이 </span>
-						<strong style="margin-right : 70px;"> 55,000 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">50,000원</button>
-					</div>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
-						<strong style="margin-right : 65px;"> 110,000 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">100,000원</button>
-					</div>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
-						<strong style="margin-right : 65px;"> 330,000 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">300,000원</button>
-						</br></br>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 			<!-- 댓글 수정 모달창 end -->
 
 

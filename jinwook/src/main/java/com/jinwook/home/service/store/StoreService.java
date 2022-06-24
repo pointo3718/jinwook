@@ -35,7 +35,6 @@ public interface StoreService {
 	public boolean addOrdersCoupon(int couponNo);
 	
 	public List<Store> getStoreOnly(int storeNo);
-
 	
 	public List<Coupon> getCouponList(String userId);
 	
