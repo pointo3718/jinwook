@@ -57,6 +57,10 @@
      body {
             padding-top : 0px;
         }
+        
+     .rating svg:nth-chiled(-n+3) {
+     	color:#f05522;
+     }   
     </style>
 <script type="text/javascript">
     /*<![CDATA[*/
@@ -67,18 +71,6 @@
 
     /*]]>*/
     
-    /* 리뷰쓰기 */
-   $(".reply_button_wrap").on("click", function(){
-      e.preventDefault();
-      console.log(e)
-      const orderNo = '${orders.orderNo}';
-
-      let popUrl = "/board/replyEnroll/"+orderNo;
-      console.log(popUrl);
-      let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
-      
-      window.open(popUrl,"리뷰 쓰기",popOption);
-   });
     </script>
 </head>
 <body>
@@ -94,7 +86,6 @@
          <br><br><br><br>
 
          <!-- 리뷰 div -->
-         
          <!-- 리뷰 div -->
 
          <thead>
@@ -129,10 +120,6 @@
            <c:if test="${orders.orderStatus eq '4'}">주문 취소</c:if>
            <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
            </td>
-           <td><<div class="reply_button_wrap">
-               <button value="${orders.orderNo}">리뷰 쓰기</button>
-            </div>
-         </td>
          </tr>
           </c:forEach>
             

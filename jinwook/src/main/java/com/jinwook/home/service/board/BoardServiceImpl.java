@@ -450,10 +450,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int updateRecipeComment(Comment comment) throws Exception {
-		
-		return boardMapper.updateRecipeComment(comment);
-
+	public void updateRecipeComment(Comment comment) throws Exception {
+		boardMapper.updateRecipeComment(comment);
 	}
 
 	@Override

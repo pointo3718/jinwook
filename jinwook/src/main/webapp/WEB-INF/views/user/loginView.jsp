@@ -154,17 +154,17 @@
 					return;
 				}
 				
-				for(var i = 0; i < id.length; i++){
+				 for(var i = 0; i < id.length; i++){
 					
 					var ch = id.charAt(i);
-					if(!(ch >= 'a' &&  ch <= 'z') || !(ch >= '0' && ch <= '9')){
+					if(!(ch >= 'a' &&  ch <= 'z') && !(ch >= '0' && ch <= '9')){
 					swal("진욱이네", "아이디는 영문 소문자로 입력해주세요.");
 					$(".userId").focus();
 					$(".userId").select();
 					return;
 					}
 					
-				}
+				} 
 				
 				var password1RegExp = /^[a-zA-z0-9]{4,12}$/; //비밀번호 유효성 검사        
 				if (!password1RegExp.test(pw)) {

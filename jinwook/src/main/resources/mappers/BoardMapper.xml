@@ -306,7 +306,7 @@
 			board_no = #{boardNo}
 	</select>
 	
-	<!-- 1:1문의 목록 조회 0, 답변상태 쿼리 필요 -->
+	<!-- 1:1문의 목록 조회 0-->
 	<select id="getBoardInquiryList" parameterType="Board" resultType="Board">
 		SELECT
 			board_no, board_title, write_date, board_inq_status
@@ -533,6 +533,7 @@
 	,comment_date
 	</sql> 
 	
+	 <!-- 1:1문의 답변 -->
 	 <insert id="addComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="commentNo">
 		INSERT INTO comment (
 			comment_no, board_no, comment_content, comment_writer, comment_date
@@ -545,6 +546,7 @@
 		)
 	</insert>
 	
+	<!-- 레시피 댓글 -->
 	 <insert id="addRecipeComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="commentNo">
 		INSERT INTO comment (
 			comment_no, rcp_no, comment_content, comment_writer, comment_date
@@ -557,7 +559,7 @@
 		)
 	</insert>
 	
-	<!-- 댓글 조회 -->
+	<!-- 답변 조회 -->
 	<select id="getInquiryComment" resultType="Comment" parameterType="int" resultMap="boardSelectMap">
     	SELECT
     		  comment_no, comment_content, comment_writer, comment_date
@@ -572,6 +574,13 @@
     	 FROM comment
     	WHERE rcp_no = #{rcpNo}
 	</select>
+	
+	<!-- 1:1 답변 수정 -->
+	<!-- <update id="updateRecipeComment" parameterType="Comment">		
+	UPDATE comment 
+	SET	comment_content = #{commentContent}		
+	WHERE comment_no = #{comment_no}	
+	</update> -->
 	
 	<!-- 레시피 댓글 수정 -->
 	<update id="updateRecipeComment" parameterType="Comment">		
