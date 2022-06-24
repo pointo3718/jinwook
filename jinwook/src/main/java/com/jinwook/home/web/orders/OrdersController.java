@@ -136,7 +136,7 @@ public class OrdersController {
       
       model.addAttribute("getOrdersList", getOrdersList);
       
-      return "orders/getOrdersList";
+      return "user/myPage";
    }
    
    @GetMapping(value = "getOrders")
@@ -261,5 +261,5 @@ public class OrdersController {
 	   
        return "orders/addOrdersJpayPasswordCk";
    }
-   
+
 }

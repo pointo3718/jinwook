@@ -29,6 +29,17 @@ public class AdminController {
 	public AdminController(){
 		System.out.println(this.getClass());
 	}
+	
+	
+	@GetMapping(value = "listStoreForUser")
+	public String getStoreList(@ModelAttribute("store") Store store, @RequestParam(value = "storeType", required = false) String storeType, Model model) {
+		store.setStoreType(storeType);
+		
+		List<Store> storeList = adminService.getStoreList(storeType);
+		model.addAttribute("storeList", storeList);
+
+		return "/admin/listStoreForUser";
+	}
 
 		
 	@GetMapping(value = "blog")

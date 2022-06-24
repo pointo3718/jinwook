@@ -26,8 +26,13 @@ public interface AdminService {
 		
 		public int	getComplainTotalCount();	// 대기중인 신고목록 개수 
 		
-		public int	getWatingInquiryCount();	// 대기중인 문의목록 개수 
+		public int	getWatingInquiryCount();	// 대기중인 문의목록 개수
+		
+		public List<Store> getStoreList(String storeType);		// 카테고리별 상점 목록
 
+
+		// 통계
+		
 		public List<Chart>	getJoinForMonthChart();		// 월별 회원가입 수
 
 		public List<Chart> getUserByRole();				// 역할별 사용자 통계

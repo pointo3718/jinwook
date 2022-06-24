@@ -11,6 +11,50 @@
 	   <result property="storePhone"  column="store_phone"    jdbcType="VARCHAR"/>   
 	   <result property="user.userName"  column="user_name"    jdbcType="VARCHAR"/>      
 	</resultMap>
+		
+	<resultMap type="store" id="storeSelectMap2">
+   <result property="storeNo"             column="store_no"       jdbcType="INTEGER"/>   
+   <result property="userId"             column="user_id"        jdbcType="VARCHAR"/>   
+   <result property="storeName"         column="store_name"     jdbcType="VARCHAR"/>
+   <result property="storeAddr"         column="store_addr"     jdbcType="VARCHAR"/>
+   <result property="storeType"         column="store_type"     jdbcType="CHAR"/>
+   <result property="storeStatus"         column="store_status"   jdbcType="VARCHAR"/>
+   <result property="storePhone"         column="store_phone"    jdbcType="VARCHAR"/>
+   <result property="storeIntro"         column="store_intro"    jdbcType="VARCHAR"/>
+   <result property="storeStart"         column="store_start"    jdbcType="DATE"/>
+   <result property="startTime"         column="start_time"     jdbcType="TIME"/>
+   <result property="endTime"             column="end_time"       jdbcType="TIME"/>
+   <result property="holiday"             column="holiday"        jdbcType="VARCHAR"/>
+   <result property="businessCard"      column="business_card" jdbcType="VARCHAR"/>
+   <result property="storeImage"         column="store_image"    jdbcType="VARCHAR"/>
+   <result property="accNo"             column="acc_no"         jdbcType="VARCHAR"/>
+   <result property="bank"                 column="bank"           jdbcType="VARCHAR"/>
+   <result property="totalEarn"         column="total_earn"     jdbcType="INTEGER"/>
+   <result property="isOpen"             column="is_open"        jdbcType="TINYINT"/>  
+   <result property="latitude"                 column="latitude"           jdbcType="INTEGER"/>
+   <result property="longitude"                 column="longitude"           jdbcType="INTEGER"/> 
+   <result property="user.jpBalance"     column="jp_balance"     jdbcType="INTEGER"/>
+   <result property="user.userName"     column="user_name"     jdbcType="VARCHAR"/>   
+   <result property="user.businessNo"     column="business_no"     jdbcType="VARCHAR"/>  
+   <result property="user.regDate"     column="reg_date"     jdbcType="DATE"/>     
+   <result property="orders.reviewStar"  column="review_star"    jdbcType="INTEGER"/>
+   <result property="orders.orderPrice"  column="order_price"    jdbcType="DATE"/>
+   <result property="orders.orderNo"  column="order_no"    jdbcType="INTEGER"/>
+   <result property="orders.orderDate"  column="order_date"    jdbcType="DATE"/>
+   <result property="orders.buyerName"  column="buyer_name"    jdbcType="VARCHAR"/>
+   <result property="product.prodNo"     column="prod_no"        jdbcType="INTEGER"/>     
+   <result property="product.prodName"   column="prod_name"      jdbcType="VARCHAR"/>     
+   <result property="product.prodImg"   column="prod_img"      jdbcType="VARCHAR"/>     
+   <result property="product.price"      column="price"          jdbcType="INTEGER"/>     
+   <result property="product.prodOrign"  column="prod_orign"    jdbcType="VARCHAR"/>   
+   <result property="product.prodInfo"  column="prod_info"    jdbcType="VARCHAR"/>  
+   <result property="product.isSoldout"  column="is_soldout"    jdbcType="INTEGER"/>       
+   <result property="request.resDate"      column="res_date"     jdbcType="DATE"/>     
+   <result property="request.reqDate"  column="req_date"    jdbcType="DATE"/>   
+   <result property="request.refundMoney"  column="refund_money"    jdbcType="INTEGER"/> 
+   <result property="request.userId"  column="user_id"    jdbcType="VARCHAR"/>    
+   <result property="request.reqStatus"  column="req_status"    jdbcType="CHAR"/>              
+</resultMap>
 	
 	<sql id="usersColumns">
 		  user_id
@@ -30,6 +74,17 @@
 		, user_bye_status
 	</sql>
 	
+	<!--  카테고리별 상점 목록  -->
+   <select id="getStoreList" parameterType="String" resultMap="storeSelectMap2">
+ 	  SELECT
+	      s.store_no, s.store_phone, s.store_name, s.store_type, s.store_addr,
+	      s.store_intro, vt.review_star
+      FROM 
+      	  store s, orders o,
+      	  (SELECT ROUND(AVG(review_star),1) review_star FROM orders)vt
+      WHERE s.store_type= #{storeType}
+      GROUP BY store_no
+   </select>
 
 	<!-- 유저 상세 -->
 	<select id="getUserAdmin" parameterType="String" resultType="user">
@@ -50,8 +105,7 @@
 			users
 		WHERE
 			user_bye_status = 0 
-		<include refid="CommonMapper.search" />
-		
+		<include refid="CommonMapper.search" />		
 		ORDER BY 
 			reg_date
 		<include refid="CommonMapper.paging" />

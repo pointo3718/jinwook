@@ -96,7 +96,16 @@
 			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=4");
 		});
 	});
+	
+	/////////////// 광고 요청 목록 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('통계')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/admin/chart");
+		});
+	});
    
+	
     /////////////// 요청대기 COUNT REST 시작 ////////////////
     
         //////////// 문의 대기 ////////////
@@ -287,7 +296,7 @@
 }
 
 .list-group {
-   padding-top: 0px;
+   padding-top: 0px
 }
 
 .blog__sidebar__item {
@@ -304,6 +313,13 @@ input.form-control[readonly] {
     background-color: #ffffff;
     opacity: 1;
 }
+
+.swal-button{
+	background-color: #7fad39;
+	font-size: 12px;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+
 </style>
  </head>   
  
