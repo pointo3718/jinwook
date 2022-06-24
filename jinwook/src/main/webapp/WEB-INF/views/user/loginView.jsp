@@ -157,7 +157,7 @@
 				for(var i = 0; i < id.length; i++){
 					
 					var ch = id.charAt(i);
-					if(!(ch >= 'a' &&  ch <= 'z') && !(ch >= '0' && ch <= '9')){
+					if(!(ch >= 'a' &&  ch <= 'z') || !(ch >= '0' && ch <= '9')){
 					swal("진욱이네", "아이디는 영문 소문자로 입력해주세요.");
 					$(".userId").focus();
 					$(".userId").select();
@@ -188,7 +188,6 @@
 				document.location.href= url;
 				 */
 				 
-				 
  			 
 				$(".form-horizontal").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 				 
@@ -201,7 +200,17 @@
 				 
 			});
 		});	
-		
+				// 테스트 중
+				 $("#userId").on("propertychange change keyup paste input" , function() {
+				
+					 $(".button1").css({
+							'border-bottom': '3px solid #E6E6E6',
+							'color' : 'gray'
+						});
+					 
+					 
+				 });
+				 
 		
 		//============= 회원원가입화면이동 =============
 		$( function() {
@@ -242,7 +251,7 @@
 					  <div class="form-group">
 					    <label for="userId" class="col-sm-2 control-label"></label>
 					    <div class="col-sm-3" style="font-size:15px;">
-					      <input type=   "text" class="userId" name="userId" id="userId"  placeholder="아이디를 입력해주세요." required="required" onKeyup="this.value=this.value.replace(' ','');"/>
+					      <input type=   "text" class="userId" name="userId" id="userId" placeholder="아이디를 입력해주세요." required="required" onKeyup="this.value=this.value.replace(' ','');"/>
 					    </div>
 					  </div>
 					  

@@ -65,8 +65,8 @@ public class UserController {
 	
 		System.out.println("/user/addUserView : GET");
 		User user = new User();
-		System.out.println(user);
 		user.setRole(role);
+		System.out.println(user);
 		System.out.println(user.getRole()+"lolololololololo");
 		
 		model.addAttribute("role", user.getRole());
@@ -80,7 +80,6 @@ public class UserController {
 		System.out.println("/user/addUser : POST");
 		//Business Logic
 		//사용자, 사장님, 관리자 구분 가입
-		user.setRole("사용자");
 		System.out.println("=====================12312312312312312312312");
 		userService.addUser(user);
 		
