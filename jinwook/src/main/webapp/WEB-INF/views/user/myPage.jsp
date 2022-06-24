@@ -630,74 +630,62 @@ $('#myModal').on('shown.bs.modal', function () {
                      
                   <hr size="10px">
                </h4>
-               
-            
-            <!--///////////////// 검색 시작 ////////////////////-->
-            
-            <div class="blog__sidebar__search" style="text-align:right; margin-bottom: 0px;">
-                        <input type="text" id="mainSearchKeyword" value="${user.searchKeyword}" placeholder="ID or 이름 검색..." style="width: 300px; height: 30px;" />
-                        <button onclick="searchBoard(null)"><span class="icon_search"></span></button>
-                 </div>
-                        <div >
-                           <div class="btn-group" role="group">
-                              <div class="dropdown dropdown-lg">
-                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <!--/* 검색 form */-->
-                                    <form id="searchForm" action="/admin/blog" method="get" onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
-                                       <!-- /* 현재 페이지 번호, 페이지당 출력할 데이터 개수, 페이지 하단에 출력할 페이지 개수 Hidden 파라미터 */ -->
-                                       <input type="hidden" name="currentPageNo" value="1" />
-                                       <input type="hidden" name="recordsPerPage" value="${user.recordsPerPage}" />
-                                       <input type="hidden" name="pageSize" value="${user.pageSize}" />
-                  
-                                       
-                                       <div>
-                                          <label for="contain">키워드</label>
-                                          <input type="text" name="searchKeyword" value="${user.searchKeyword}" />
-                                       </div>
-                                    </form>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        
-            <!--///////////////// 검색 끝 ////////////////////-->
             
 
                <table class="table table-hover"
-                  style="width: 730px; heigh: 300px;">
-                  
-                  <thead>
-                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">ID</th>
-                        <th scope="col">이름</th>
-                        <th scope="col">전화번호</th>
-                        <th scope="col">구분</th>
-                     </tr>
-                  </thead>
+                  style="width: 730px; heigh: 300px; font-size: small;">
+                 
 
-                  <tbody>   
-                     <tr>
-                     <c:set var="i" value="0" />
-                     <c:forEach var="user" items="${userList}">
-                        <c:set var="user" value="${user}" />
-                        <c:set var="i" value="${ i+1 }" />
-                        <tr>
-                           <th scope="row">${ i }</th>
-                           <td align="left"><a 
-                              data-toggle="modal" href="#myModal2" data-userid="${user.userId}">${user.userId}</a></td>
-                           <td align="left">${user.userName}</td>
-                           <td align="left">${user.phone}</td>
-                           <td align="left">${user.role}</td>
-                        </tr>
-                     </c:forEach>
-                     </tr>
-                     
-                  </tbody>
-                  
+         <!-- 리뷰 div -->
+         
+         <!-- 리뷰 div -->
+
+         <thead>
+          <tr>
+            <th align="center">주문번호</th>
+            <th align="left" >주문날짜</th>
+            <th align="left" >상품사진</th>
+            <th align="left">상품이름</th>
+            <th align="left">주문금액</th>
+            <th align="left">픽업시간</th>
+            <th align="left">주문현황</th>
+            <th align="left">&nbsp; </th>
+          </tr>
+       </thead>
+        
+      <tbody>
+        <c:set var="i" value="0" />
+        <c:forEach var="orders" items="${getOrdersList}">
+         <c:set var="i" value="${ i+1 }" />
+         <tr>
+           <td align="center" value="${orders.orderNo}">${orders.orderNo}</td>
+           <td align="left"><fmt:formatDate value="${orders.orderDate}" dateStyle="full"/></td>
+           <td align="left">${orders.product.prodImg}</td>
+           <td align="left">${orders.product.prodName}</td>
+           <td align="left">${orders.orderPrice}</td>
+           <td align="left"><fmt:formatDate value="${orders.pickupTime}" type="time" pattern="a hh:mm"/></td>
+           <td align="left">
+           <c:if test="${orders.orderStatus eq '1'}">주문 접수중</c:if>
+           <c:if test="${orders.orderStatus eq '2'}">주문 거절</c:if>
+           <c:if test="${orders.orderStatus eq '3'}">픽업 준비중</c:if>
+           <c:if test="${orders.orderStatus eq '4'}">주문 취소</c:if>
+           <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
+           </td>
+           <td><div class="reply_button_wrap">
+               <button value="${orders.orderNo}">리뷰 작성</button>
+            </div>
+         </td>
+         </tr>
+          </c:forEach>      
+   		 </tbody>
+ 
                </table>
             </div>
-
+				<div class="text-center">
+					<!-- PageNavigation Start... -->
+					<jsp:include page="../common/pageNavigator_new.jsp" />
+					<!-- PageNavigation End... -->
+				</div>
          </div>
       </div>
    </section>
