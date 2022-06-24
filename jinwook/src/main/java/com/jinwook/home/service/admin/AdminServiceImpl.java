@@ -20,6 +20,16 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private AdminMapper adminMapper;
 	
+	
+	////////////// 카텍리별 상점 목록 ///////////////
+	@Override
+	public List<Store> getStoreList(String storeType) {
+		List<Store> storeList = Collections.emptyList();
+
+		storeList = adminMapper.getStoreList(storeType);	
+		return storeList;
+	}
+	
 		
 	///////////////// 유저 상세 //////////////////	
 	@Override

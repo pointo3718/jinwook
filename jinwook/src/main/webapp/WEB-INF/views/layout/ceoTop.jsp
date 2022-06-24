@@ -542,6 +542,7 @@ document.detailForm.submit();
                         style="font-size: 25px; color: #7fad39; margin-left: 190px">${user.regDate}</span></td>
 
                   </tr>
+                                    
 
                </tbody>
             </table>

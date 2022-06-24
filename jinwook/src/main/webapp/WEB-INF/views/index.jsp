@@ -175,6 +175,62 @@
 		</div>
 	</section>
 	<!-- Categories Section End -->
+	
+		<!-- Blog Section Begin -->
+	<section class="from-blog spad" style="padding-bottom: 0px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title from-blog__title">
+						<h2>진욱이네 상점 구경하기</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="map">
+
+		<div class="row" style="align-items: flex-start;">
+
+			<!-- 지도를 표시할 div 입니다 -->
+		
+			
+			<div id="map" style="width: 500px; height: 500px; right: 50px;">	
+			</div>
+			
+			<div>
+
+				<h3 class="text-left">
+					<strong style="font-size: 22px;">진욱이네 상점 TOP 7</strong><span
+						style="font-size: 13px; color: #A4A4A4; padding-left: 220px;">*주문수
+						기준</span>
+					</hr>
+				</h3>
+
+				<table class="table" style="width: 500px; height: 50px;">
+
+					<thead>
+						<tr style="text-align: center">
+							<th scope="col">상점이름</th>
+							<th scope="col">상점주소</th>
+							<th scope="col">상점업종</th>
+						</tr>
+					</thead>
+
+					<tbody class="storeList">
+
+					</tbody>
+
+				</table>
+			</div>
+			
+					<jsp:include page="map.jsp" />
+		</div>
+
+
+
+	</section>
 
 	<!-- Featured Section Begin -->
 	<section class="featured spad">
@@ -593,63 +649,9 @@
 
 
 
-	<!-- Blog Section Begin -->
-	<section class="from-blog spad" style="padding-bottom: 0px;">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title from-blog__title">
-						<h2>지도 조회</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 
-	<section class="map">
-
-		<div class="row" style="align-items: flex-start;">
-
-			<!-- 지도를 표시할 div 입니다 -->
-			
-			<div>
-			<div id="map" style="width: 500px; height: 500px; right: 50px;">	
-			</div>
-			</div>
-
-			<jsp:include page="map.jsp" />
-
-
-			<div>
-
-				<h3 class="text-left">
-					<strong style="font-size: 22px;">진욱이네 상점 TOP5</strong><span
-						style="font-size: 13px; color: #A4A4A4; padding-left: 230px;">*주문수
-						기준</span>
-					</hr>
-				</h3>
-
-				<table class="table" style="width: 500px; height: 50px;">
-
-					<thead>
-						<tr style="text-align: center">
-							<th scope="col">상점이름</th>
-							<th scope="col">상점주소</th>
-							<th scope="col">상점업종</th>
-						</tr>
-					</thead>
-
-					<tbody class="storeList">
-
-					</tbody>
-
-				</table>
-			</div>
-		</div>
-
-
-
-	</section>
+	
+	<br><br><br>
 
 	<script type="text/javascript">
    

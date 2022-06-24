@@ -52,6 +52,8 @@ public interface StoreMapper {
 	
 	public List<Store> getStoreMap();
 	
+	public List<Store> getStoreOnly(int storeNo);
+	
 		
 	public int getStoreMapTotalCount();
 	
