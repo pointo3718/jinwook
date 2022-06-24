@@ -723,9 +723,9 @@ $('#myModal').on('shown.bs.modal', function () {
    </section>
    <!--   Blog Section End -->
 
-   <!--  Footer Begin -->
+   <!—  Footer Begin —>
    <jsp:include page="../layout/footer.jsp" />
-   <!-- Footer End -->
+   <!— Footer End —>
 
 </body>
 
