@@ -114,15 +114,14 @@ function fncDeleteRecipe(e) {
 		});
 }
 
-$(function() {
+function fncgetRecipe(rcpNo) {
+
 
     //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
     //==> 레시피 리스트에서 레시피 상세로 이동
-    $("#recipeDetail").on("click", function() {
-       self.location = "/board/getRecipe?rcpNo="+$(this).data("param");
-    });
+       self.location = "/board/getRecipe?rcpNo="+rcpNo;
+    }
 
- });
 
 </script>   
 </head>
@@ -153,7 +152,8 @@ $(function() {
                                     	<li><i class="bi bi-eye"></i> ${recipe.rcpHits}</li>
                                     </ul>
                                      <input type="hidden" value="${recipe.rcpNo}"/>
-                                     <button id="recipeDetail" type="button" class="btn btn-dark" data-param="${recipe.rcpNo}">${recipe.rcpTitle}</button>
+                                     <button id="recipeDetail" type="button" class="btn btn-dark" data-param="${recipe.rcpNo}" onclick="fncgetRecipe(${recipe.rcpNo})">
+                                     ${recipe.rcpTitle}</button>
                                 </div>
                             </div>
                         </div>

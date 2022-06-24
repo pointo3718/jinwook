@@ -70,6 +70,7 @@ public class BoardController {
 	private UserService userService;
 	
 	@Autowired
+	@Qualifier("ordersServiceImpl")
 	private OrdersService ordersService;
 	
 	public BoardController(){
@@ -307,7 +308,10 @@ public class BoardController {
 		System.out.println("댓글작성: POST");
 
 		boardService.addComment(comment);
-		
+		System.out.println("1:1문의 작성 되고 있나? --------------------------------");
+		//댓글 작성 후 답변완료로 변경
+		Board board = new Board();
+		boardService.updateBoardInqStatus(comment.getBoardNo());
 		rttr.addAttribute("boardNo", comment.getBoardNo());
 		
 		return "redirect:/board/getBoardInquiry?boardNo="+comment.getBoardNo();
@@ -673,11 +677,10 @@ public class BoardController {
 		      return "board/getOrdersList2";
 		   }
 		   
-		   @GetMapping("/replyEnroll/{userId}")
-		   	public String replyEnrollWindowGET(@PathVariable("userId") String userId, int orderNo,  Model model) {
+		   @GetMapping("/replyEnroll/{orderNo}")
+		   	public String replyEnrollWindowGET(@PathVariable("orderNo") int orderNo,  Model model) {
 			   Orders order = boardService.getReviewInfo(orderNo);
 			   model.addAttribute("order", order); //주문내역의 후기 정보
-			   model.addAttribute("userId", userId);
 			   
 			   return "board/replyEnroll";
 		   }

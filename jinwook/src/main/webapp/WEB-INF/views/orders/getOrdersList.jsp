@@ -16,11 +16,6 @@
    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
    
-   <!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
    
    <!-- jQuery UI toolTip 사용 CSS-->
@@ -34,7 +29,7 @@
             padding-top : 0px;
         }
     </style>
-    <script type="text/javascript">
+<script type="text/javascript">
     /*<![CDATA[*/
 
     function movePage(uri, queryString) {
@@ -44,13 +39,12 @@
     /*]]>*/
     
     /* 리뷰쓰기 */
-	$(".reply_button_wrap").on("click", function(e){
+	$(".reply_button_wrap").on("click", function(){
 		e.preventDefault();
-		
-		const userId = '${user.userId}';
+		console.log(e)
 		const orderNo = '${orders.orderNo}';
 
-		let popUrl = "/replyEnroll/" + userId + "?orderNo=" + orderNo;
+		let popUrl = "/board/replyEnroll/"+orderNo;
 		console.log(popUrl);
 		let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
 		
@@ -59,7 +53,12 @@
     </script>
 </head>
 <body>
-
+				<div class="reply_subject">
+					<h2>리뷰</h2>
+				</div>
+			<div class="reply_button_wrap">
+				<button value="${orders.orderNo}">리뷰 쓰기</button>
+			</div>
 <form class="form-horizontal" name="getOrdersList">
    <div class="navbar  navbar-default">
         <div class="container">
@@ -73,14 +72,7 @@
          <br><br><br><br>
 
 			<!-- 리뷰 div -->
-			<div class="content bottom">
-				<div class="reply_subject">
-					<h2>리뷰</h2>
-				</div>
-				<div class="reply_button_wrap">
-					<button>리뷰 쓰기</button>
-				</div>
-			</div>
+			
 			<!-- 리뷰 div -->
 
 			<thead>
@@ -92,6 +84,7 @@
             <th align="left">주문금액</th>
             <th align="left">픽업시간</th>
             <th align="left">주문현황</th>
+            <th align="left">임시 </th>
           </tr>
        </thead>
         
@@ -101,7 +94,7 @@
         <c:forEach var="orders" items="${getOrdersList}">
          <c:set var="i" value="${ i+1 }" />
          <tr>
-           <td align="center" value="${orders.orderNo}">${i}</td>
+           <td align="center" value="${orders.orderNo}">${orders.orderNo}</td>
            <td align="left"><fmt:formatDate value="${orders.orderDate}" dateStyle="full"/></td>
            <td align="left">${orders.product.prodImg}</td>
            <td align="left">${orders.product.prodName}</td>
@@ -114,6 +107,8 @@
            <c:if test="${orders.orderStatus eq '4'}">주문 취소</c:if>
            <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
            </td>
+           
+			
          </tr>
           </c:forEach>
             

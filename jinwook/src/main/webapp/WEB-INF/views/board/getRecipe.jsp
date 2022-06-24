@@ -79,11 +79,7 @@ function movePage(uri, queryString) {
    location.href = uri + queryString;
 }
 
-$('#myModal').on('shown.bs.modal', function () {
-	  $('#myInput').trigger('focus')
-	})
-
-
+<!-- 레시피 삭제 -->
 function fncDeleteRecipe(e) {
 	if (!confirm('레시피를 삭제하시겠어요?')) {
 		return false;
@@ -102,9 +98,9 @@ function fncDeleteRecipe(e) {
 			}
 		
 		});
-	
 }
 
+<!-- 레시피 댓글 삭제 -->
 function fncDeleteRecipeComment(e) {
 	if (!confirm('댓글을 삭제하시겠어요?')) {
 		return false;
@@ -126,6 +122,7 @@ function fncDeleteRecipeComment(e) {
 	
 }
 
+<!-- 레시피 댓글 등록 버튼 이벤트 -->
 $(function() {
 	$("#replyWriteBtn").on("click", function() {
 		fncAddRecipeComment();
@@ -230,9 +227,9 @@ var rcpNo = ${recipe.rcpNo};
 						alt="My Image" width="400" height="400" style="margin-left:20px;">
 						<div class="form-group">
 						
-						<img width="400" height="400"
+						<%-- <img width="400" height="400"
 											src="/resources/static/${recipe.attach.orgFileName}" alt="..."
-											onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" />
+											onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" /> --%>
 						
  				<%-- <c:forEach var="file" items="${file}">
  				<input type="hidden" id="attach_no" name="attach_no" value="">
@@ -317,72 +314,6 @@ var rcpNo = ${recipe.rcpNo};
 					<!-- 댓글 조회 폼 end -->
 
 			<!-- 댓글 수정 모달창 start -->
-			<div class="modal fade" id="exampleModal" data-toggle="modal" 
-		tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog " style="width: 530px; heigh: 300px;">
-			<div class="modal-content" >
-				<div class="modal-header" >
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					</br>
-					<h3 class="modal-title" id="exampleModalLabel" style="color : #7fad39">
-						 <strong> 댓글수정 </strong>
-					</h3>
-					<h4>
-						<strong>댓글을 수정합니다.</strong>					
-					</h4>
-				</div>
-				<div class="modal-body" style="font-size : 20px; margin-left : 20px; ">
-				<h3 class="h4" style="text-align: center; color: #F05441; font-weight:bold;"> 진욱페이는 결제금액에 10% 추가지급합니다. </br>
-				</h3>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 85px;">진욱페이 </span>
-						<strong style="margin-right : 70px;"> 5,500 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">5,000원</button>
-					</div>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 75px;">진욱페이 </span>
-						<strong style="margin-right : 70px;"> 11,000 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">10,000원</button>
-					</div>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 75px;">진욱페이 </span>
-						<strong style="margin-right : 70px;"> 33,000 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">30,000원</button>
-					</div>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 75px;">진욱페이 </span>
-						<strong style="margin-right : 70px;"> 55,000 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">50,000원</button>
-					</div>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
-						<strong style="margin-right : 65px;"> 110,000 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">100,000원</button>
-					</div>
-					</br>
-					<div class="form-check">
-						<i class="bi bi-coin"></i>
-						<span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
-						<strong style="margin-right : 65px;"> 330,000 원</strong>
-						<button type="button" class="buttonType" style=" width: 110px;">300,000원</button>
-						</br></br>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 			<!-- 댓글 수정 모달창 end -->
 
 
