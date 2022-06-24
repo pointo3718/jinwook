@@ -156,12 +156,7 @@
                                  ${sessionScope.user.nickName } 님</a>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                  <a class="dropdown-item" href="/user/login">마이페이지</a> <a
-<<<<<<< HEAD
-                                    class="dropdown-item" href="/request/myPage">구매내역</a> <a
-                                    class="dropdown-item" href="/orders/getOrdersList">주문내역</a> <a
-=======
                                     class="dropdown-item" href="/orders/getOrdersList">구매내역</a> <a
->>>>>>> refs/remotes/origin/master
                                     class="dropdown-item" href="#">개인정보</a> <a
                                     class="dropdown-item" href="#">1:1문의</a> <a
                                     class="dropdown-item" href="#">작성한글</a> <a
