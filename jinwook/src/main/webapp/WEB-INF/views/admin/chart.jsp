@@ -52,15 +52,28 @@
    <!-- adminTop Begin -->
    <jsp:include page="../layout/adminTop.jsp" />
    <!-- adminTop End -->
+   			<div>
+   			<div style="width: 750px;">
+			<h4 class="text-left">
+						<strong>통계</strong>
+						<p class="text-muted" style="display: inline; font-size: 12px;">
+							진욱이네 사용자/사장님 현황 관련 통계입니다.</p>
+						<hr size="10px">
+					</h4>
+				<canvas id="join-chart"style="height:50vh; width:35vw"></canvas>
+				
+			</div>
+				</div>
 
+<br/>
+<div class="row" style="margin-left:150px; margin-top: 50px;">
+<canvas id="user-chart"style="height:25vh; width:25vw"></canvas>
+<canvas id="userType-chart"style="height:25vh; width:25vw"></canvas>
+</div>
+<br/>
+<canvas id="order-chart"style="height:30vh; width:45vw; margin-top: 50px;"></canvas>
+</div>
 
-<canvas id="join-chart"style="height:50vh; width:45vw"></canvas>
-<canvas id="user-chart"style="height:30vh; width:45vw"></canvas>
-<canvas id="userType-chart"style="height:30vh; width:45vw"></canvas>
-<canvas id="order-chart"style="height:30vh; width:45vw"></canvas>
-
-
-      </div>
    </div>
 </section>
    
@@ -111,7 +124,8 @@ function getGraphJoinForMonth(){
 	    		  responsive: false,
 	    	    title: {
 	    	      display: true,
-	    	      text: '월별 회원가입 수'
+	    	      text: '월별 회원가입 수',
+	    	      fontSize: 20
 	    	    }
 	    	  }
 	    	}); //그래프
@@ -149,7 +163,7 @@ function getGraphUserByRole(){
 	    	    labels: ["사용자", "사장님", "관리자"], // X축 
 	    	    datasets: [{ 
 	    	        data: [user, ceo, admin], // 값
-	    	        label: "역할",
+	    	        label: "유저 비율",
 	    	        backgroundColor : ["#7fad39","#fadb5e", "ff9e5e"],
 	    	        fill: false
 	    	      }
@@ -159,12 +173,12 @@ function getGraphUserByRole(){
 	    		  responsive: false,
 	    	    title: {
 	    	      display: true,
-	    	      text: '역할'
+	    	      text: '역할별 유저 비율',
+	    	      fontSize: 20
 	    	    }
 	    	  }
 	    	}); //그래프
 	  }, "json");
-	 
 }  
 
 
@@ -198,7 +212,7 @@ function getUserType(){
 	    	    datasets: [{ 
 	    	        data: [user, blacklist, byeuser], // 값
 	    	        label: "역할",
-	    	        backgroundColor : ["#7fad39","#fadb5e", "ff9e5e"],
+	    	        backgroundColor : ["#7fad39","#435b1e", "d1fa91"],
 	    	        fill: false
 	    	      }
 	    	    ]
@@ -207,7 +221,8 @@ function getUserType(){
 	    		  responsive: false,
 	    	    title: {
 	    	      display: true,
-	    	      text: '역할'
+	    	      text: '사용자 유형 비율',
+	    	      fontSize: 20
 	    	    }
 	    	  }
 	    	}); //그래프
@@ -216,7 +231,7 @@ function getUserType(){
 }  
 
 
-//======= 월별 주문량/주문금액 통계 ====== //
+//======= 월별 주문량 / 주문금액 통계 ====== //
 $(document).ready(function(){ 
 	getGraphOrderCountAndPrice();
 });
@@ -257,9 +272,7 @@ function getGraphOrderCountAndPrice(){
 	    	        fill: false,
 	    	        order: 1
 	    	      },
-	    	    
-	    	  
-	    	  
+
 	    	  	{	data: priceList, 
 	    	    	type: 'line',
 	    	    	label: "주문금액(기준:만원)",
@@ -274,7 +287,8 @@ function getGraphOrderCountAndPrice(){
 	    		  responsive: false,
 		    	  title: {
 		    	      display: true,
-		    	      text: '역할'
+		    	      text: '주문량/주문금액',
+		    	      fontSize: 20
 		    	    },
 		    	  scales: {
 	    	        // y축
@@ -296,8 +310,7 @@ function getGraphOrderCountAndPrice(){
 		    	 } // option 끝
 	    	 
 	    	}); //그래프
-	  }, "json");
-	 
+	  }, "json");	 
 } 
 
 </script>
