@@ -204,6 +204,19 @@ public class StoreServiceImpl implements StoreService {
 		
 		return getStoreMap;
 	}
+	@Override
+	public List<Store> getStoreOnly(int storeNo) {
+		
+		List<Store> getStoreOnly = Collections.emptyList();
+		
+		int storeTotalCount = storeMapper.getStoreMapTotalCount();
+		
+		if (storeTotalCount > 0) {
+			getStoreOnly = storeMapper.getStoreOnly(storeNo);
+		}
+		
+		return getStoreOnly;
+	}
 	
 
 
