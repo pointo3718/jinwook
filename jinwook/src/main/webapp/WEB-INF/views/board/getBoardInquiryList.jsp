@@ -585,7 +585,7 @@ color: #7fad39;
 								<th scope="col">No</th>							
 								<th scope="col">문의 제목</th>
 								<th scope="col">작성일</th>
-								<th scope="col">조회수</th>
+								<th scope="col">답변상태</th>
 								<th scope="col">삭제</th>
 							</tr>
 						</thead>
@@ -600,7 +600,10 @@ color: #7fad39;
 									<td align="left" data-value="${board.boardNo}">${i}</td>									
 									<td align="left" data-param="${board.boardNo}">${board.boardTitle}</td>
 									<td align="left">${board.writeDate}</td>
-									<td align="left">${board.boardHits}</td>
+									<td align="left">
+										<c:if test="${board.boardInqStatus == false}">답변대기중</c:if>
+										<c:if test="${board.boardInqStatus == true}">답변완료</c:if>
+									</td>
 									<td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteInquiry(this)">X</button></td>
 								</tr>
 							</c:forEach>

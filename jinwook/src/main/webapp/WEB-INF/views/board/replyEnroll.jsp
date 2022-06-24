@@ -119,7 +119,7 @@ $(".enroll_btn").on("click", function(e){
 	$.ajax({
 		data : data,
 		type : 'POST',
-		url : '/reply/enroll',
+		url : '/board/enroll',
 		success : function(result){
 			window.close();
 		}

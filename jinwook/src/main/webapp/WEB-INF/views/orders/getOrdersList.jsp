@@ -16,12 +16,36 @@
    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
    
-   <!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   <!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">   
    
+      <!-- Css Styles -->
+   <link rel="stylesheet"
+      href="${path}/resources/static/css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet"
+      href="${path}/resources/static/css/font-awesome.min.css"
+      type="text/css">
+   <link rel="stylesheet"
+      href="${path}/resources/static/css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet"
+      href="${path}/resources/static/css/nice-select.css" type="text/css">
+   <link rel="stylesheet"
+      href="${path}/resources/static/css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet"
+      href="${path}/resources/static/css/owl.carousel.min.css"
+      type="text/css">
+   <link rel="stylesheet"
+      href="${path}/resources/static/css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="${path}/resources/static/css/style.css"
+      type="text/css">
+   <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+   
+   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
    
    <!-- jQuery UI toolTip 사용 CSS-->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -34,7 +58,7 @@
             padding-top : 0px;
         }
     </style>
-    <script type="text/javascript">
+<script type="text/javascript">
     /*<![CDATA[*/
 
     function movePage(uri, queryString) {
@@ -44,46 +68,36 @@
     /*]]>*/
     
     /* 리뷰쓰기 */
-	$(".reply_button_wrap").on("click", function(e){
-		e.preventDefault();
-		
-		const userId = '${user.userId}';
-		const orderNo = '${orders.orderNo}';
+   $(".reply_button_wrap").on("click", function(){
+      e.preventDefault();
+      console.log(e)
+      const orderNo = '${orders.orderNo}';
 
-		let popUrl = "/replyEnroll/" + userId + "?orderNo=" + orderNo;
-		console.log(popUrl);
-		let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
-		
-		window.open(popUrl,"리뷰 쓰기",popOption);
-	});
+      let popUrl = "/board/replyEnroll/"+orderNo;
+      console.log(popUrl);
+      let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+      
+      window.open(popUrl,"리뷰 쓰기",popOption);
+   });
     </script>
 </head>
 <body>
 
 <form class="form-horizontal" name="getOrdersList">
-   <div class="navbar  navbar-default">
-        <div class="container">
-           <a class="navbar-brand" href="/user/index">진욱이네</a>
-         </div>
-      </div>
-
+<!-- Header Begin -->
+<%--    <jsp:include page="../layout/top.jsp" /> --%>
+   <!-- Header End -->
+   
    <h2 class="text-center">주문내역</h2>
 
    <table class="table table-hover table-striped" >
          <br><br><br><br>
 
-			<!-- 리뷰 div -->
-			<div class="content bottom">
-				<div class="reply_subject">
-					<h2>리뷰</h2>
-				</div>
-				<div class="reply_button_wrap">
-					<button>리뷰 쓰기</button>
-				</div>
-			</div>
-			<!-- 리뷰 div -->
+         <!-- 리뷰 div -->
+         
+         <!-- 리뷰 div -->
 
-			<thead>
+         <thead>
           <tr>
             <th align="center">주문번호</th>
             <th align="left" >주문날짜</th>
@@ -92,6 +106,7 @@
             <th align="left">주문금액</th>
             <th align="left">픽업시간</th>
             <th align="left">주문현황</th>
+            <th align="left">임시 </th>
           </tr>
        </thead>
         
@@ -101,7 +116,7 @@
         <c:forEach var="orders" items="${getOrdersList}">
          <c:set var="i" value="${ i+1 }" />
          <tr>
-           <td align="center" value="${orders.orderNo}">${i}</td>
+           <td align="center" value="${orders.orderNo}">${orders.orderNo}</td>
            <td align="left"><fmt:formatDate value="${orders.orderDate}" dateStyle="full"/></td>
            <td align="left">${orders.product.prodImg}</td>
            <td align="left">${orders.product.prodName}</td>
@@ -114,6 +129,10 @@
            <c:if test="${orders.orderStatus eq '4'}">주문 취소</c:if>
            <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
            </td>
+           <td><<div class="reply_button_wrap">
+               <button value="${orders.orderNo}">리뷰 쓰기</button>
+            </div>
+         </td>
          </tr>
           </c:forEach>
             
@@ -123,5 +142,6 @@
 </form>
 
 <jsp:include page="../common/pageNavigator_new.jsp"/>
+<%-- <jsp:include page="../layout/footer.jsp" /> --%>
 </body>
 </html>

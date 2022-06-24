@@ -53,7 +53,7 @@
 	<link rel="stylesheet"
 	   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	
-	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
        /*  body > div.container{
@@ -71,7 +71,8 @@
         .id_ok {color:#7fad39;
         		display: none;
         		font-size:10px;
-        
+        		text-align:left;
+            justify-content: left;
         }
 		.id_already{color:red;
 					 display: none;
@@ -83,14 +84,14 @@
 			text-align: center;
 			 justify-content: center;
 		}
-        .site-btn{
+        /* .site-btn{
 			 background-color: #7fad39; 
 			 border: none;
 			 color: white;
 	       	 width : 200px;
 	       	 text-align: center;
 	       	 font-size:20px;
-		} 
+		}  */
 		.userId{
           width:300px;
 		  text-indent: 1em;
@@ -170,12 +171,13 @@
 			});
 			
 		}
+		
 		$("#userId").change(function(){
 			
 		
 				idChk = false;
 		});
-		//============아이디 중복 확인 ==============
+		//============닉네임 중복 확인 ==============
 			function checkNickName(){
 			$.ajax({
 				url : "/user/checkNickName",
@@ -220,6 +222,51 @@
 			
 		}
 		
+		//============ 추천인 아이디 중복 확인 ==============
+		function checkRpId(){
+			$.ajax({
+				url : "/user/checkId",
+				type : "post",
+				dataType : "json",
+				data : {"userId" : $("#rpId").val()},
+				success : function(data){
+					if($("#rpId").val() == null || $("#rpId").val().length <1){
+						swal("진욱이네", "추천인 아이디는  반드시 입력하셔야 합니다.");
+						$("#rpId").focus();
+						return;
+					}
+					
+					for(var i = 0; i < rpId.length; i++){
+						
+						var ch = rpId.charAt(i);
+						if(!(ch >= 'a' &&  ch <= 'z') || !(ch >= '0' && ch <= '9')){
+						swal("진욱이네", "추천인 아이디는 영문 소문자로 입력해주세요.");
+						$(".rpId").focus();
+						$(".rpId").select();
+						return;
+						}
+						
+					}
+					
+					 if(data != 1){
+					 /* $("#idChk").attr("value", "Y");
+						alert("사용가능한 아이디입니다."); */
+						$('.id_ok').css("display","inline-block"); 
+		                $('.id_already').css("display", "none");
+						
+					}else {
+						/* alert("중복된 아이디입니다."); */
+						$('.id_already').css("display","inline-block");
+	                    $('.id_ok').css("display", "none");
+					}
+				},
+				 error:function(){
+		                alert("에러입니다");
+		            }
+			});
+			
+		}
+		
 		
 		function fncAddUser() {
 			
@@ -229,7 +276,13 @@
 			var name=$("input[name='userName']").val();
 			var nickName=$("input[name='nickName']").val();
 			var phone=$("input[name='phone']").val();
+			var email=$("input[name='email']").val();
+			var rpId=$("input[name='rpId']").val();
 			
+			
+			var regexEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/; // 이메일 유효성 검사
+			var regexName = /^[가-힣]*$/; // 이름 한글만
+			var regexPhone = /^[0-9+]{6,12}$/; // 휴대폰 번호 숫자만
 			
 			if(id == null || id.length <1){
 				alert("아이디는 반드시 입력하셔야 합니다.");
@@ -244,31 +297,71 @@
 				return;
 			}
 			
-			var regExName = /^[가-힣]*$/;
 			if(name == null || name.length <1){
 				alert("이름은  반드시 입력하셔야 합니다.");
 				return;
 			}
 			
-			if(!regExName.test(name)){
+			if(!regexName.test(name)){
 				swal("[진욱이네]", "한글만 입력해주세요.");
 				return;
 			}
 			
 			if(nickName == null || nickName.length <1){
-				alert("닉네임은  반드시 입력하셔야 합니다.");
+				swal("진욱이네", "닉네임은  반드시 입력하셔야 합니다.");
+				nickName.focus();
 				return;
 			}
 			
+			if(email == null || email.length <1){
+				swal("진욱이네", "이메일은  반드시 입력하셔야 합니다.");
+				email.focus();
+				return;
+			}
+			
+			if (!regexEmail.test(email)) {
+	            swal("진욱이네", "잘못된 이메일 형식입니다.");
+	            email = "";
+	            email.focus();
+	            return;
+	        }
+			
+			for (var i = 0; i < email.length; i++) {
+	           var ch = email.charAt(i)
+	            if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z') && !(ch >= 'A' && ch <= 'Z') && ch == '@' && ch == '.') {
+	                swal("진욱이네", "이메일은 영문 대소문자, 숫자만 입력가능합니다.");
+	                email.focus();
+	                email.select();
+	                return;
+	            }
+	        }
+			
+			for(var i = 0; i < rpId.length; i++){
+				
+				var ch = rpId.charAt(i);
+				if(!(ch >= 'a' &&  ch <= 'z') || !(ch >= '0' && ch <= '9')){
+				swal("진욱이네", "아이디는 영문 소문자로 입력해주세요.");
+				$(".rpId").focus();
+				$(".rpId").select();
+				return;
+				}
+				
+			}
+			
+			if (password == id) {
+	            swal("진욱이네", "아이디와 비밀번호가 같습니다.")
+	            password.focus();
+	            return;
+	        }
+			
 			if( pw != pw_confirm ) {				
-				alert("비밀번호 확인이 일치하지 않습니다.");
+				swal("진욱이네", "비밀번호 확인이 일치하지 않습니다.");
 				$("input:text[name='password2']").focus();
 				return;
 			}
 			
-			var uidCheck = /^[0-9+]{6,12}$/; // 숫자만
-			if(!uidCheck.test(phone)){
-				swal("[진욱이네]", "숫자만 입력해주세요.");
+			if(!regexPhone.test(phone)){
+				swal("[진욱이네]", "휴대폰 번호는 숫자만 입력해주세요.");
 				return;
 			}	
 				
@@ -353,7 +446,7 @@
 		<div class="row">
 		
 	   	 	
-	 	 	<div class="col-md-6" >
+	 	 	<div class="col-md-7" >
 	 	 	
 		 	 	<br/><br/>
 				
@@ -401,6 +494,7 @@
 		    <label for="birth" class="col-sm-offset-0 col-sm-3 control-label"><a>생년월일</a></label>
 		    <div class="col-sm-6">
 		      <input type="text" maxlength='8' class="birth" id="birth" name="birth" placeholder="생년월일" >
+		      <input type="hidden" maxlength='8' class="role" id="role" name="role" value=${role } placeholder="role" >
 		    </div>
 		  </div>
 		  
@@ -408,25 +502,53 @@
 		    <label for="nickName" class="col-sm-offset-0 col-sm-3 control-label"><a>닉네임</a></label>
 		    <div class="col-sm-6">
 		      <input type="text" maxlength='20' class="nickName" id="nickName" name="nickName" placeholder="닉네임" style=" display:inline-block">
-		      <button class="nickNameChk" type="button" id="nickNameChk" onclick="checkNickName()" value="N" style=" display:inline-block">중복확인</button>
+		    </div>  
+		    <div class="">
+		      <button class="nickNameChk site-btn" type="button" id="nickNameChk " onclick="checkNickName()" value="N" style="margin-right:50px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="phone" class="col-sm-offset-0 col-sm-3 control-label"><a>휴대전화번호</a></label>
+		    <label for="phone" class="col-sm-offset-0 col-sm-3 control-label"><a>휴대폰번호</a></label>
 		     <div class="col-sm-6">
-		      <input type="text" class="phone" id="phone" name="phone" placeholder="번호">
+		      <input type="text" class="phone" id="phone" name="phone" placeholder="휴대폰번호">
 		    </div>
 		  </div>
 		  
-		  <div class="form-group">
+		  <!-- <div class="form-group">
 		    <label for="gender" class=" col-sm-3 control-label">성별</label>
 		    <div class="col-sm-2" style="display:flex; justify-center;">
 		    	<input type="radio" 	name="gender" value="남"/> 남        
 		    	<input type="radio" 	name="gender" value="여" /> 여
 		  </div>
-		  </div>
+		  </div> -->
 		  
+		  <div class="form-group" >
+		                           <label for="gender" 
+		                              class="col-sm-offset-0 col-sm-3 control-label"><a>성별</a></label>
+		                              
+		                           <div class="col-sm-2" style="display:flex; margin-top:5px;">
+		                              <input type="radio" name="남"
+		                                 class="form-control form-control" id="gender"
+		                                 value="남" style="font-size:10px;">
+		                           	<label for="" class="col-sm-1" style="margin-right:40px;">남</label>
+		                           </div>
+		                           
+		                           <div class="col-sm-2" style="display:flex; text-align:center; margin-top:5px;">
+		                              <input type="radio" name="여"
+		                                 class="form-control form-control" id="gender"
+		                                 value="여" style="font-size:10px;">
+		                           	<label for="" class="col-sm-1" style="margin-right:40px;">여</label>
+		                           </div>
+		                           
+		                           <div class="col-sm-2" style="display:flex; margin-top:5px;">
+		                              <input type="radio" name="없음"
+		                                 class="form-control form-control" id="gender"
+		                                 value="없음" style="font-size:10px;">
+		                           	<label for="" class="col-sm-1" style="margin-right:40px;">X</label>
+		                           </div>
+		                           
+		                        </div>
 		  <!-- <div class="custom-control custom-radio" >
 						<input type="radio" name="jb-radio" id="jb-radio-1" class="custom-control-input">
 						<label class="custom-control-label" for="jb-radio-1">남</label>
@@ -438,17 +560,21 @@
 		  
 		   <div class="form-group">
 		    <label for="email" class=" col-sm-3 control-label">이메일</label>
-		    <div class="col-sm-4">
+		    <div class="col-sm-6">
 		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="이메일">
-		      <button class="emailChk" type="button" id="emailChk" onclick="checkEmail()" value="N">중복확인</button> 
+		    </div>
+		    <div>
+		      <button class="emailChk site-btn" type="button" id="emailChk" onclick="checkEmail()" value="N" style="margin-right:50px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button> 
 		    </div>
 		  </div>
 		  
 		   <div class="form-group">
 		    <label for="rpId" class=" col-sm-3 control-label">추천인 아이디</label>
-		    <div class="col-sm-4">
+		    <div class="col-sm-6">
 		      <input type="text" maxlength='50' class="rpId" id="rpId" name="rpId" placeholder="추천인 아이디를 입력하세요.">
-		      <button class="emailChk" type="button" id="emailChk" onclick="checkEmail()" value="N">중복확인</button> 
+		    </div>
+		    <div>
+		      <button class="rpIdChk site-btn" type="button" id="rpIdChk" onclick="checkRpId()" value="N" style="margin-right:50px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button> 
 		    </div>
 		  </div>
 		 </c:if>
@@ -519,11 +645,11 @@
 						<label class="custom-control-label" for="jb-radio-2">여</label>
 					</div> -->
 		  
-		   <div class="form-group">
+		   <div class="form-group" style="display:flex;">
 		    <label for="email" class=" col-sm-3 control-label">이메일</label>
-		    <div class="col-sm-4">
+		    <div class="col-sm-4" >
 		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="이메일">
-		      <button class="emailChk" type="button" id="emailChk" onclick="checkEmail()" value="N">중복확인</button> 
+		      <button class="emailChk" type="button" id="emailChk" onclick="checkEmail()" value="N" >중복확인</button> 
 		    </div>
 		  </div>
 		  
@@ -539,7 +665,7 @@
 		  <!-- 사장님 폼 끝 -->
 		  <div class="form-group">
 		    <div class="col-sm-offset-3  col-sm-6 text-center">
-		      <button type="button" class="bts site-btn"  >가입하기</button>
+		      <button type="button" class="bts site-btn"  style="width:200px; font-size:20px;">가입하기</button>
 			<!--   <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a> -->
 		<br><br><br><br><br><br>
 		    </div>

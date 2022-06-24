@@ -24,7 +24,7 @@ public interface BoardMapper {
 	//공지사항 조회수 증가
 	public int updateBoardAnnouncementHits(Integer boardNo);
 	//답변상태 변화시키기
-	public int updateBoardInqStatus(Integer boardNo);
+	public int updateBoardInqStatus(int boardNo);
 	//게시판 사진 업로드
 	public void insertBoardFile(Map<String, Object> map) throws Exception;
 	//레시피 사진 업로드
@@ -59,8 +59,6 @@ public interface BoardMapper {
 	
 	//조인 필요: board, comment 1:1문의 상세 조회 시 답변상태 false/true로 표시.
 	public Board getBoardInquiry(Integer boardNo);
-	//1:1문의 답변대기중 -> 답변완료(true)
-	public int updateBoardInqStatus(int boardNo);	
 	//조인 필요: board, comment 공지사항 상세 조회
 	public Board getBoardAnnouncement(Integer boardNo);
 	//1:1문의 목록 조회
@@ -102,7 +100,8 @@ public interface BoardMapper {
 	public List<Comment> getInquiryComment(int boardNo) throws Exception;
 	//댓글(레시피) 조회
 	public List<Comment> getRecipeComment(int rcpNo) throws Exception;
-	//댓글 등록(1:1문의,레시피)
+	
+	//1:1문의 댓글 등록
 	public void addComment(Comment comment) throws Exception;
 	//레시피 댓글 등록
 	public void addRecipeComment(Comment comment) throws Exception;
@@ -110,6 +109,7 @@ public interface BoardMapper {
 	public int updateRecipeComment(Comment comment) throws Exception;
 	//레시피 댓글 삭제
 	public int deleteRecipeComment(int commentNo) throws Exception;
+	
 	//선택된 레시피 댓글 조회
 	public Comment selectRecipeComment(int commentNo) throws Exception;
 	

@@ -468,8 +468,8 @@ label {
                   data-setbg="${path}/resources/static/img/product/product-2.jpg"
                   width="300" height="300">
                   <ul class="product__item__pic__hover">
-                     <li><i class="fa fa-shopping-cart" data-value="${store.product.prodNo}" 
-                        onClick="fncAddOrdersCart(this)"></i></li>
+                     <li><span style="font-size:30px;"><i class="fa fa-cart-arrow-down"  aria-hidden="true" data-value="${store.product.prodNo}" 
+                        onClick="fncAddOrdersCart(this)"></i></span></li>
                   </ul>
                </div>
                <div class="product__item__text">

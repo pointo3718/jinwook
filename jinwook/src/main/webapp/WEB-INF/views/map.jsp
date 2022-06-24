@@ -202,12 +202,66 @@
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		mapOption = {
-			center : new kakao.maps.LatLng(37.643308684205, 127.01021511086), // 지도의 중심좌표
-			level : 6
+			center : new kakao.maps.LatLng(37.634513508582, 127.02570882672), // 지도의 중심좌표
+			level : 2
 		// 지도의 확대 레벨
 		};
 
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		
+		if (navigator.geolocation) {
+		    
+		    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+		    navigator.geolocation.getCurrentPosition(function(position) {
+		        
+		        var lat = position.coords.latitude, // 위도
+		            lon = position.coords.longitude; // 경도
+		        
+		        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+		            message = '<div style="padding:5px;"><strong>&nbsp;&nbsp;&nbsp;현재위치입니다.</strong></div>'; // 인포윈도우에 표시될 내용입니다
+		        
+		        // 마커와 인포윈도우를 표시합니다
+		        displayMarker(locPosition, message);
+		            
+		      });
+		    
+		} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+		    
+		    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+		        message = 'geolocation을 사용할수 없어요..'
+		        
+		    displayMarker(locPosition, message);
+		}
+
+		// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+		function displayMarker(locPosition, message) {
+
+		    // 마커를 생성합니다
+		    var marker = new kakao.maps.Marker({  
+		        map: map, 
+		        position: locPosition
+		    }); 
+		    
+		    var iwContent = message, // 인포윈도우에 표시할 내용
+		        iwRemoveable = true;
+
+		    // 인포윈도우를 생성합니다
+		    var infowindow = new kakao.maps.InfoWindow({
+		        content : iwContent,
+		        removable : iwRemoveable
+		    });
+		    
+		    // 인포윈도우를 마커위에 표시합니다 
+		    infowindow.open(map, marker);
+		    
+		    // 지도 중심좌표를 접속위치로 변경합니다
+		    map.setCenter(locPosition);      
+		}    		
+		
+		
+		
+		
+		
 
 		// 마커를 표시할 위치와 title 객체 배열입니다 
 		var positions = [ {
@@ -438,7 +492,7 @@
 		for (var i = 0; i < positions.length; i++) {
 
 			// 마커 이미지의 이미지 크기 입니다
-			var imageSize = new kakao.maps.Size(24, 35);
+			var imageSize = new kakao.maps.Size(40, 60);
 
 			// 마커 이미지를 생성합니다    
 			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
@@ -449,18 +503,21 @@
 				position : positions[i].latlng, // 마커를 표시할 위치
 				title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 				image : markerImage
+				
 			// 마커 이미지 
 			});
 		}
+		
+		
 
 		for (var i = 0; i < positions.length; i++) {
 
 			//커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 			var content = '<div class="customoverlay">'
-					+ '  <a href="http://localhost:8082/store/getStore?storeNo='
-					+ positions[i].storeNo + '" target="_blank">'
+					+ '  <a href="#exampleModal" target="_blank" data-toggle="modal" data-value="'+positions[i].storeNo+'" onClick="fncGetStoreOnly(this)">'
 					+ '    <span class="title">' + positions[i].title
 					+ '</span>' + '  </a>' + '</div>';
+					
 
 			// 커스텀 오버레이가 표시될 위치입니다 
 			var position = positions[i].latlng;
@@ -472,7 +529,150 @@
 				content : content,
 				yAnchor : 1
 			});
+
 		}
+		
+		for (var i = 0; i < positions.length; i++) {
+		
+		//======간단 상점 조회=========//
+
+		function fncGetStoreOnly(e) {
+			
+			
+			var storeNo =  $(e).data("value");
+			
+		      var uri = "/store/getStoreOnly/"+storeNo
+
+		      $.get(uri, function(response) { 
+		         
+		            var getStoreHtmlBody = "";
+		            
+		            $(response.getStoreOnly).each(function(idx,store) {
+		            	          
+		               
+		            	getStoreHtmlBody += `
+		            	
+							<thead>
+
+							<tr>
+							<td></td>
+							<td></td>
+							<th scope="row" style="font-size: 20px"><span
+								style="font-size: 18px margin-right: 30px;">상점이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></th>
+							<td><span style="color: #2E2E2E; font-size: 15px "><strong>\${store.storeName}</strong></span></td>
+						</tr>
+						
+						</hr>
+
+							<tr>
+								<td></td>
+								<td></td>
+								<th scope="row" style="font-size: 20px"><span
+									style="font-size: 18px margin-right: 30px;">상점번호</span></th>
+								<td><span style="color: #2E2E2E; font-size: 15px"><strong>\${store.storePhone}</strong></span></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<th scope="row" style="font-size: 20px"><span
+									style="color: blsck; font-size: 30px margin-right: 25px;">상점주소</span></th>
+								<td><span style="color: #2E2E2E; font-size: 15px"><strong>\${store.storeAddr}</strong></span></td>
+
+							</tr>
+
+							<tr>
+								<td></td>
+								<td></td>
+								<th scope="row" style="font-size: 20px"><span
+									style="color: blsck; font-size: 30px margin-right: 25px;">업종</span></th>
+								<td><span style="color: #2E2E2E; font-size: 15px"><strong>\${store.storeType}</strong></span></td>
+								<td></td>
+								<td></td>
+							</tr>
+
+							<tr>
+								<td></td>
+								<td></td>
+								<th scope="row" style="font-size: 20px"><span
+									style="color: blsck; font-size: 18px margin-right: 25px;">영업시간</span></th>
+								<td><span style="color: #2E2E2E; font-size: 15px"><strong>\${store.startTime}~\${store.endTime}</strong></span></td>
+								<td></td>
+								<td></td>
+							</tr>
+
+							<tr>
+								<td></td>
+								<td></td>
+								<th scope="row" style="font-size: 20px"><span
+									style="color: blsck; font-size: 18px margin-right: 25px;">휴무일</span></th>
+								<td><span style="color: red; font-size: 15px"><strong>\${store.holiday}</strong></span></td>
+								<td></td>
+								<td></td>
+							</tr>
+
+							<tr>
+								<td></td>
+								<td></td>
+								<th scope="row" style="font-size: 20px"><span
+									style="color: blsck; font-size: 18px margin-right: 25px;">상점소개</span></th>
+								<td colspan="2"><span
+									style="color: #2E2E2E; font-size: 15px"><strong>\${store.storeIntro}</strong></span></td>
+							</tr>
+
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							
+							</hr>
+							
+						</tbody>
+
+
+		            	
+		            	
+		            	
+		               `;
+		            });
+		            
+		            
+		            $(".getStore").html(getStoreHtmlBody);
+		            //$(".userlisthead").html(blacklistHtmlBody);
+		         
+		      }, "json");
+
+		}
+		}
+		
+		
+		
+		  // 마커 클러스터러를 생성합니다 
+	    var clusterer = new kakao.maps.MarkerClusterer({
+	        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+	        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+	        minLevel: 10 // 클러스터 할 최소 지도 레벨 
+	    });
+		  
+		  
+	 // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	    var zoomControl = new kakao.maps.ZoomControl();
+	    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+	    // 지도가 확대 또는 축소되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+	    kakao.maps.event.addListener(map, 'zoom_changed', function() {        
+	        
+	        // 지도의 현재 레벨을 얻어옵니다
+	        var level = map.getLevel();
+	        
+	        var message = '현재 지도 레벨은 ' + level + ' 입니다';
+	        var resultDiv = document.getElementById('result');  
+	        resultDiv.innerHTML = message;
+	        
+	    });
 
 		//=============map 상점 정보 rest가져오기==================//
 
@@ -488,16 +688,72 @@
 		//============================================//
 	</script>
 
-
 	<!-- Modal -->
-	<div class="modal fade" id="staticBackdrop" data-backdrop="static"
-		data-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true"
-		style="width: 1000px height:500px">
-		<div class="getget"></div>
+	<div class="modal fade" id="exampleModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 800px; height: 450px; right: 150px;">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">
+						<strong>상점 간단 정보</strong>
+					</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+
+					<div class="row store" style="justify-content: space-evenly;">
+
+						<div class="imgborder">
+							<img
+								src="https://cdn.pixabay.com/photo/2016/11/29/11/14/business-1869127_960_720.jpg"
+								alt="My Image" width="300" height="300" style=margin-right: 80px;>
+						</div>
+
+
+						<table class="table table-borderless" style="width: 600px;"
+							id="storeInf">
+							<div class="getStore">
+							
+							</div>
+						</table>
+						
+													<tr>
+							<td></td>
+							<td></td>
+							<th scope="row" style="font-size: 20px"><span
+								style="color: blsck; font-size: 18px margin-right: 25px;"></span></th>
+							<td colspan="2"><span
+								style="color: #2E2E2E; font-size: 15px"><strong></strong></span></td>
+								<td></td>
+								<td><button type="button" class="btn btn-outline-dark btn-sm" onClick="location.href='http://localhost:8082/store/getStore?storeNo=10000'">상점상세</button></td>
+								<td><button type="button" class="btn btn-outline-dark btn-sm" onClick="location.href='PAGENAME.html'">길찾기</button></td>
+						</tr>
+						
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
 	</div>
 
 	<!-- Modal -->
+
+	<script type="text/javascript">
+   
+
+</script>
+
+
+
+
+
+
 
 
 </body>

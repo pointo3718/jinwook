@@ -27,7 +27,8 @@ public interface BoardService {
 	public int updateBoardInquiryHits(Integer boardNo);
 	//공지사항 조회수 증가v
 	public int updateBoardAnnouncementHits(Integer boardNo);
-	public int updateBoardInqStatus(Integer boardNo);
+	//1:1문의 답변완료로 변경
+	public boolean updateBoardInqStatus(int boardNo);
 	
 	// 게시판 첨부파일 조회
 	public Attach selectBoardAttachList(int boardNo) throws Exception;

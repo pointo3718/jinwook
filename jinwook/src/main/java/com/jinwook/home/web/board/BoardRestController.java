@@ -144,7 +144,7 @@ public class BoardRestController {
          
       }
 	
-	// 댓글 삭제 처리
+	// 레시피 댓글 삭제 처리
 	@GetMapping(value = "deleteRecipeComment/{commentNo}")
 	public JsonObject deleteRecipeComment(@PathVariable(value = "commentNo", required = false) int commentNo) {
 		System.out.println("/board/deleteRecipeComment: GET");
@@ -167,8 +167,31 @@ public class BoardRestController {
 		return jsonObj;
 	}
 	
+	// 레시피 댓글 삭제 처리
+	@GetMapping(value = "deleteInquiryComment/{commentNo}")
+	public JsonObject deleteInquiryComment(@PathVariable(value = "commentNo", required = false) int commentNo) {
+		System.out.println("/board/deleteInquiryComment: GET");
+		System.out.println("rest commentNo" + commentNo);
+		
+		JsonObject jsonObj = new JsonObject();
+		
+		try {
+			int result = boardService.deleteRecipeComment(commentNo);
+			System.out.println("result" + result);
+			jsonObj.addProperty("result", result);
+			
+		} catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+			
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+		System.out.println("jsonObj" + jsonObj);
+		return jsonObj;
+	}
+	
 	/* 상점 후기 등록 */
-	@PostMapping("/enroll")
+	@PostMapping(value = "enroll")
 	public void enrollReplyPOST(Orders orders) {
 		boardService.enrollReview(orders);
 	}

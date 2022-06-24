@@ -156,6 +156,12 @@ $(function() {
 ////////////////////////////////수정 시작///////////////////////////////////////
 	function fncUpdateUser() {
 		var name=$("input[name='userName']").val();
+		var password=$("input[name='password']").val();
+		
+		var num = pw.search(/[0-9]/g);
+		var eng = pw.search(/[a-z]/ig);
+		var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+		
 		
 		if(name == null || name.length <1){
 			alert("이름은  반드시 입력하셔야 합니다.");
@@ -173,6 +179,20 @@ $(function() {
 	$("input:hidden[name='birth']").val( value );
 	
 	$("#modifyUser").attr("method" , "POST").attr("action" , "/user/updateUser").submit();   
+	
+	
+	f(pw.length < 8 || pw.length > 25){
+		  alert("8자리 ~ 25자리 이내로 입력해주세요.");
+		  return false;
+		 }else if( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) ){
+		  alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+		  return false;
+		 }else {
+			console.log("통과");	 
+		 }
+
+	
+	
 }
 	
 	//개인정보 변경 페이지로 이동
@@ -330,7 +350,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="userId"
                                  class="form-control form-control" id="userId"
-                                 value="${user.userId}" readonly>
+                                 value="${user.userId}" readonly onKeyup="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -340,7 +360,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="password" name="password"
                                  class="form-control form-control" id="password"
-                                 value="" >
+                                 value=""  onKeyup="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -350,7 +370,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="password" name="password2"
                                  class="form-control form-control" id="password2"
-                                 value="" >
+                                 value="" onKeyup="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -360,7 +380,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="password" name="password3"
                                  class="form-control form-control" id="password3"
-                                 value="" >
+                                 value="" onKeyup="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -370,7 +390,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="userName"
                                  class="form-control form-control" id="userName"
-                                 value="${user.userName}" readonly>
+                                 value="${user.userName}" readonly onKeyup="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -380,7 +400,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="email"
                                  class="form-control form-control" id="email"
-                                 value="${user.email}" >
+                                 value="${user.email}" onKeyup="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -390,7 +410,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="nickName"
                                  class="form-control form-control" id="nickName"
-                                 value="${user.nickName}" >
+                                 value="${user.nickName}" onKeyup="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -428,7 +448,7 @@ $(function() {
                            <div class="col-sm-2">
                               <input type="text" name="birth_year"
                                  class="form-control form-control text-center" id="birth"
-                                 value="" placeholder="YYYY" size="4" maxlength="4" >
+                                 value="" placeholder="YYYY" size="4" maxlength="4" onKeyup="this.value=this.value.replace(' ','');">
                               <input type="hidden" name="birth"
                                  class="form-control form-control text-center" id="birth"
                                  value="">
@@ -436,12 +456,12 @@ $(function() {
                            <div class="col-sm-2">
                               <input type="text" name="birth_month"
                                  class="form-control form-control text-center" id="birth"
-                                 value="" pattern="[0-9]*"  placeholder="MM" size="2" maxlength="2">
+                                 value="" pattern="[0-9]*"  placeholder="MM" size="2" maxlength="2" onKeyup="this.value=this.value.replace(' ','');">
                            </div>
                            <div class="col-sm-2">
                               <input type="text" name="birth_day"
                                  class="form-control form-control text-center" id="birth"
-                                 value=""  placeholder="DD" size="2" maxlength="2" min="2">
+                                 value=""  placeholder="DD" size="2" maxlength="2" min="2" onKeyup="this.value=this.value.replace(' ','');"> 
                         </div>
                         </div>
                         
@@ -451,7 +471,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="phone"
                                  class="form-control form-control" id="phone"
-                                 value="${user.phone}" >
+                                 value="${user.phone}" onKeyup="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
                         

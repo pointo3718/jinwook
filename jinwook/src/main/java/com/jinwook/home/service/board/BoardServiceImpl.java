@@ -20,6 +20,7 @@ import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
+import com.jinwook.home.service.domain.Request;
 @Service
 public class BoardServiceImpl implements BoardService {
 
@@ -430,9 +431,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int updateBoardInqStatus(Integer boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean updateBoardInqStatus(int boardNo) {
+		int queryResult = 0;
+		queryResult = boardMapper.updateBoardInqStatus(boardNo);
+		
+		return (queryResult == 1) ? true : false;
+		
 	}
 
 	@Override

@@ -8,10 +8,6 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 
-$('#myModal').on('shown.bs.modal', function () {
-	  $('#myInput').trigger('focus')
-	})
-
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -41,26 +37,30 @@ $('#myModal').on('shown.bs.modal', function () {
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					</br>
+					<br>
 					<h3 class="modal-title" id="exampleModalLabel" style="color : #7fad39">
 						 <strong> 충전하기 </strong>
 					</h3>
 				</div>
-				<div class="modal-body top" style="font-size : 20px; margin-left : 20px; ">
-				</h3>
-					</br>
+				<div class="modal-body top" style="font-size : 19px; margin-left : 20px; ">
 					<div class="form-check">
+					<strong>결제상품</strong>  
+					</div>
+					<br>
+					<div class="col sm-12">
+					<strong style="font-size : 18px;">	진욱페이 </strong><span style="text-align:right;">값받아올거</span>
 					</div>
 				</div>
 				<hr>
-				<div class="modal-body middle" style="font-size : 20px; margin-left : 20px; ">
-				</h3>
-					</br>
-					<div class="form-check">
-					</div>
+				<div class="modal-body middle" style="font-size : 18px; margin-left : 20px; padding-top: 0px;padding-bottom: 0px;">
+					 <strong>결제금액</strong> <span>여기도 받아올거</span>
 				</div>
 				<hr>
-				<div class="modal-body bottom">
+				<div class="modal-body bottom" style="    padding-top: 0px; margin-left: 20px;">
+				 <strong style="font-size : 18px;">결제수단</strong>
+				 <br><br>
+				 <span>카드 간편결제</span>
+				  <br><br>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">닫기</button>
 					<button type="button" class="btn btn-primary" id="register">등록</button>
@@ -71,8 +71,7 @@ $('#myModal').on('shown.bs.modal', function () {
 
 <button type="button" class="btn btn-dark" id="preRegister"
 													data-toggle="modal" data-target="#exampleModal"
-													data-notifyid="${complain.userId}"
-													data-complainno="${complain.complainNo}">등록</button> <!--  data-toggle="modal" data-target="#exampleModal -->
+													>등록</button> <!--  data-toggle="modal" data-target="#exampleModal -->
 											</td>
 
 </body>
