@@ -21,6 +21,8 @@ public interface RequestMapper {
 	
 	public int updateRequestAddStore(int storeNo);					// 상점 등록 수락
 	
+	public int updateUserStoreYn(String userId);					// 사장님 상점유무 수정 (상점 등록/삭제 공용) 
+	
 	public int addRequestRefund(Request request);					// 환급 요청 등록
 
 	public int updateRequestRefund(Request request);				// 환급 요청 수락 (진욱페이 차감)
