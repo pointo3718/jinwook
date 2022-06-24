@@ -13,6 +13,8 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>상품등록</title>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- Google Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -252,7 +254,7 @@ label {
 
 	//============= "상품 삭제"  Event 연결 =============
 	function fncDeleteStoreProduct(e) {
-		if (!confirm('상품을 삭제하시겠습니까?')) {
+		if (!swal('상품을 삭제하시겠습니까?')) {
 			return false;
 		}
 
@@ -266,7 +268,7 @@ label {
 			dataType : "json",
 			success : function(result) {
 				if (result != null) {
-					alert("삭제완료");
+					swal("삭제완료","success");
 					self.location = "addStoreProduct?storeNo=" + STORENO
 				}
 			}
@@ -290,7 +292,7 @@ label {
 			method : "POST",
 			success : function(result) {
 				if (result != null) {
-					alert("매진 처리되었습니다.");
+					swal("매진 처리되었습니다.");
 					self.location = "addStoreProduct?storeNo=" + STORENO
 				}
 			}
@@ -313,7 +315,7 @@ label {
 			method : "POST",
 			success : function(result) {
 				if (result != null) {
-					alert("판매 처리되었습니다.");
+					swal("판매 처리되었습니다.");
 					self.location = "addStoreProduct?storeNo=" + STORENO
 				}
 			}
@@ -336,21 +338,21 @@ label {
 		var PRODORIGN = $(e).parent().parent().find("#prodOrign").val()
 
 		if (PRICE == null || PRICE.length < 1) {
-			alert("가격은 반드시 입력하여야 합니다.");
+			swal("가격은 반드시 입력해야 합니다.");
 			return;
 		}
 
 		if (PRODINFO == null || PRODINFO.length < 1) {
-			alert("상품소개는 반드시 입력하셔야 합니다.");
+			swal("상품소개는 반드시 입력해야 합니다.");
 			return;
 		}
 
 		//if (PRODIMG == null || PRODIMG.length < 1) {
-		//	alert("상품사진은 반드시 입력하셔야 합니다.");
+		//	swal("상품사진은 반드시 입력해야 합니다.");
 		//	return;
 		//}
 
-		alert(prodNo);
+
 
 		$.ajax({
 			url : "updateStoreProduct/" + prodNo + "/" + PRICE + "/"
@@ -367,7 +369,7 @@ label {
 			},
 			success : function(result) {
 				if (result != null) {
-					alert("수정 완료");
+					swal("수정 완료");
 					self.location = "addStoreProduct?storeNo=" + STORENO
 				}
 			}
@@ -406,26 +408,25 @@ label {
 		var soldout=true;
 
 		if (PRODNAME == null || PRODNAME.length < 1) {
-			alert("상품이름은 반드시 입력하여야 합니다.");
+			swal("상품이름은 반드시 입력해야 합니다.");
 			return;
 		}
 
 		if (PRICE == null || PRICE.length < 1) {
-			alert("가격은 반드시 입력하여야 합니다.");
+			swal("가격은 반드시 입력해야 합니다.");
 			return;
 		}
 
 		if (PRODINFO == null || PRODINFO.length < 1) {
-			alert("상품소개는 반드시 입력하셔야 합니다.");
+			swal("상품소개는 반드시 입력해야 합니다.");
 			return;
 		}
 
 		//if (PRODIMG == null || PRODIMG.length < 1) {
-		//   alert("상품사진은 반드시 입력하셔야 합니다.");
+		//   alert("상품사진은 반드시 입력해야 합니다.");
 		//   return;
 		//}
 
-		alert(STORENO + PRODNAME + PRICE + PRODINFO + PRODORIGN);
 
 		$.ajax({
 			url : "addStoreProduct/" + prodNo+"/"+STORENO+"/"+PRODNAME+"/"+PRICE+"/"+PRODINFO+"/"+PRODIMG+"/"+PRODORIGN+"/"+soldout,
@@ -433,7 +434,7 @@ label {
 			method:"post",
 			success : function(result) {
 				if (result != null) {
-					alert("등록이 완료되었습니다.");
+					swal("등록이 완료되었습니다.");
 					self.location = "addStoreProduct?storeNo=" + STORENO
 				}
 			}

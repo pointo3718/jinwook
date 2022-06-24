@@ -61,16 +61,16 @@ public class RequestServiceImpl implements RequestService {
 
 	
 	// ========== 상점 등록 요청 수락 ===========
-	// 1.reqStatus 변경  2. 상점 등록
+	// 1.reqStatus 변경  2. 상점 등록 3.사장님의 상점유무 상태 변경
 	@Override
 	public boolean updateRequestAddStore(int reqNo) {
 		requestMapper.updateRequestStatusToAccept(reqNo); // 1. reqStatus 변경
 		
 		int queryResult = 0;
-		Request request = requestMapper.getRequestStore(reqNo);
-		System.out.println(request);
-		queryResult = requestMapper.updateRequestAddStore(request.getStore().getStoreNo()); // 2. 상점 등록
-
+		Request request = requestMapper.getRequestStore(reqNo); // request 상세 가져오기
+		requestMapper.updateRequestAddStore(request.getStore().getStoreNo());  // 2. 상점 등록
+		queryResult = requestMapper.updateUserStoreYn(request.getStore().getUserId()); // 3. 상점유무 상태변경 
+		
 		return (queryResult == 1) ? true : false;
 	}
 	
@@ -126,16 +126,18 @@ public class RequestServiceImpl implements RequestService {
 	
 	
 	// ========== 상점 삭제 수락 ===========
-	// 1. reqStatus 변경   2. 상점 삭제
+	// 1. reqStatus 변경   2. 상점 삭제  3.사장님의 상점유무 상태 변경
 	@Override
 	public boolean deleteStore(Request request) {
 		requestMapper.updateRequestStatusToAccept(request.getReqNo()); // 1. reqStatus 변경
 			
 		int queryResult = 0;
-		queryResult = requestMapper.deleteStore(request); // 2. 상점 등록
+		requestMapper.deleteStore(request); // 2. 상점 삭제
+		queryResult = requestMapper.updateUserStoreYn(request.getUserId()); // 3. 상점유무 상태변경 
 
 		return (queryResult == 1) ? true : false;
 	}
+	
 
 	// ========== 광고 등록 신청 ===========
 	@Override

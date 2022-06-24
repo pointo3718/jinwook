@@ -378,8 +378,13 @@ $('#myModal').on('shown.bs.modal', function () {
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 80px;">진욱페이 </span>
+<<<<<<< HEAD
                               <strong style="margin-right : 65px;"> 5,500 원</strong>
                               <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >5,000원</button>
+=======
+                              <strong style="margin-right : 65px;" class="chargePay"> 5,500 원</strong>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal" data-won="5000" onclick="PwCheck(this)" >5,000원</button>
+>>>>>>> refs/remotes/origin/master
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
@@ -421,8 +426,7 @@ $('#myModal').on('shown.bs.modal', function () {
                      </div>
                   </div>
                </div>
-            
-            
+               
             <div class="modal" id="modal" style="z-index: 1060;">
                <div id='content'>
                   <!-- <input type='button' value='X' class="close" id='btnClose'/> -->
@@ -478,7 +482,9 @@ $('#myModal').on('shown.bs.modal', function () {
             btnClose.onclick = closeRtn; */
             
             function PwCheck(pw) {
-                const _this = this; 
+                const _this = this;
+                const wwww = $(pw).data('won');
+                console.log(wwww);
                 _this.pwStr = pw.toString(); // 문자, 숫자열을 모두 허용하기 위해 무조건 한가지 타입으로 맞춤
                 _this.password = []; // 지정된 패스워드
                 _this.passwordNumber = []; // 입력할 패스워드
@@ -515,7 +521,7 @@ $('#myModal').on('shown.bs.modal', function () {
                             _this.handleResult();
                         }
                     }
-                    console.log(_this.passwordNumber);
+                    /* console.log(_this.passwordNumber); */
                 }
 
                 // dot 활성화 
@@ -534,7 +540,16 @@ $('#myModal').on('shown.bs.modal', function () {
 
                 // 비밀번호 비교
                 _this.handleCheckPw = function(){
-                    let compare = JSON.stringify(_this.password) === JSON.stringify(_this.passwordNumber);
+                    ajax{
+                    	url : "/user/checkLogin",
+						type : "post",
+						dataType : "json",
+						data : {"jpPassword" : $("#password").val()},
+						success : function(data){
+						alert(data.password);
+						}
+					}
+				});
                     return compare; 
                 }
 
@@ -543,8 +558,10 @@ $('#myModal').on('shown.bs.modal', function () {
                     if(_this.handleCheckPw()) {
                        /*  _this.parent.classList.add('confirm');
                         _this.compChk = true; */
+                        console.log(wwww)
                         iamport();
                     } else {
+                    	 console.log(wwww)
                         _this.parent.classList.add('error');
                         // 입력상태 초기화 
                         _this.passwordNumber = [];
@@ -566,7 +583,7 @@ $('#myModal').on('shown.bs.modal', function () {
                 }();
             }
 
-            let pwCheck = new PwCheck(123456);
+            //let pwCheck = new PwCheck(123456);
            
             function iamport(){
                var jpBalance = $(iamportplus).val();

@@ -81,15 +81,15 @@ public class OrdersController {
       ordersService.addOrders(orders);
     
 //      Product product = new Product();
-//      product.set
+//      product.set	
       
 //      Cart cart = new Cart();
 //      cart.setProduct(product);
 //      
 //      orders.setCart(cart);
       
-      return "orders/addOrdersView";
-   }
+      return "redirect:/orders/getOrdersList";
+   }	
    
    @GetMapping(value= "addOrdersView")
    public String addOrdersView() throws Exception{

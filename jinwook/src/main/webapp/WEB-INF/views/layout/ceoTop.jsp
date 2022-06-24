@@ -520,7 +520,7 @@ document.detailForm.submit();
 
          <div class="row" style="justify-content: space-between;">
             <table class="table table-borderless"
-               style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
+               style="background-color: white; width: 350px; height: 197px; justify-content: space-around;">
                <thead>
                   <tr>
 
@@ -538,9 +538,11 @@ document.detailForm.submit();
                   </tr>
                   <tr>
 
-                     <td><span
-                        style="font-size: 25px; color: #7fad39; margin-left: 190px">${user.regDate}</span></td>
-
+                     <td>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-heart" aria-hidden="true" style="font-size:23px; color:#E6E6E6"></i><span
+                        style="font-size: 22px; color: #7fad39; font-weight:bold; padding-left:5px;">
+                        <fmt:formatDate value="${user.regDate}" dateStyle="full"/>
+                        </span><i class="fa fa-heart" aria-hidden="true" style="font-size:23px; color:#E6E6E6"></i></td>
+   
                   </tr>
                                     
 
@@ -549,7 +551,7 @@ document.detailForm.submit();
 
 
             <table class="table table-borderless"
-               style="background-color: white; width: 350px; height: 170px; justify-content: space-around">
+               style="background-color: white; width: 350px; height: 197px; justify-content: space-around">
                <thead>
                   <tr>
 
@@ -561,8 +563,8 @@ document.detailForm.submit();
                <tbody>
                   <tr>
 
-                     <td style="padding-top: 60px;"><span
-                        style="font-size: 25px; color: #7fad39; margin-left: 230px"><fmt:formatNumber
+                     <td style="padding-top: 50px;"><span
+                        style="font-size: 50px; color: #7fad39; margin-left: 150px"><fmt:formatNumber
                               value="${user.jpBalance}" /></span>원</td>
 
                   </tr>
@@ -570,13 +572,34 @@ document.detailForm.submit();
 
                </tbody>
             </table>
+            
+                  <c:if test="${user.storeYn==false}">
+                  <table class="table table-borderless"
+                     style="background-color: white; width: 350px; height: 197px; justify-content: space-around;">
+
+                     <tbody>
+                        <tr>
+
+                           <td></td>
+                           <td style="padding-top: 80px; padding-left: 90px;"><a
+                              id="userdetail" data-toggle="modal"
+                              href="#addRequestStoreModal" data-userid=""><strong
+                                 style="font-size: 25px">상점 등록</strong></a></td>
+                           <td></td>
+                        </tr>
 
 
-               <c:forEach var="store" items="${storeInfo}">
+                     </tbody>
+                  </table>
+                  </c:if>
+                       
+            
+			<c:if test="${user.storeYn==true}">
+              <c:forEach var="store" items="${storeInfo}">
                   <c:if test="${store.storeStatus=='2'}">
 
                      <table class="table table-borderless"
-                        style="background-color: white; width: 350px; height: 170px; justify-content: space-around table-layout:fixed">
+                        style="background-color: white; width: 350px; height: 197px; justify-content: space-around table-layout:fixed">
                         <thead>
                            <tr>
 
@@ -617,8 +640,8 @@ document.detailForm.submit();
 
                               <td><strong>총 매출액</strong></td>
                               <td colspan=2 style="padding-left: 80px; padding-right: 0px;"><span
-                                 style="font-size: 25px; color: #7fad39;"><fmt:formatNumber
-                                       value="${store.totalEarn}" /></span>원</td>
+                                 style="font-size: 25px; color: #7fad39;"><strong><fmt:formatNumber
+                                       value="${store.totalEarn}" /></strong></span>원</td>
                               <td></td>
                            </tr>
 
@@ -630,7 +653,7 @@ document.detailForm.submit();
 
                   <c:if test="${store.storeStatus=='1'}">
                      <table class="table table-borderless"
-                        style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
+                        style="background-color: white; width: 350px; height: 197px; justify-content: space-around;">
                         <thead>
                            <tr>
 
@@ -657,28 +680,9 @@ document.detailForm.submit();
                         </tbody>
                      </table>
                      </c:if>
+                     </c:forEach>
+                     </c:if>
 
-
-                  <c:if test="${store.storeStatus=='4'}">
-                  <table class="table table-borderless"
-                     style="background-color: white; width: 350px; height: 170px; justify-content: space-around;">
-
-                     <tbody>
-                        <tr>
-
-                           <td></td>
-                           <td style="padding-top: 60px; padding-left: 90px;"><a
-                              id="userdetail" data-toggle="modal"
-                              href="#addRequestStoreModal" data-userid=""><strong
-                                 style="font-size: 25px">상점 등록</strong></a></td>
-                           <td></td>
-                        </tr>
-
-
-                     </tbody>
-                  </table>
-                  </c:if>
-               </c:forEach>
 
          </div>
 
