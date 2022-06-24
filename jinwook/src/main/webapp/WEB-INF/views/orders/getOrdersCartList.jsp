@@ -252,15 +252,7 @@
 			
                
 	</script>
-	
-      <a href="/orders/getOrdersList">주문내역</a> <hr>
-      <a href="/orders/getOrdersJpayList">진욱페이내역</a> <hr>
-      <a href="/orders/getOrdersNoticeList">알림내역</a> <hr>
-      <a href="/orders/addOrdersJpayPassword">진욱페이비밀번호등록창</a> <hr>
-      <a href="/orders/addOrdersJpayPasswordCk">진욱페이비밀번호등록체크(일치여부)</a><hr>
-      <a href="/orders/updateOrdersJpayPassword">진욱페이비밀번호수정</a><hr>
-      <a href="/orders/addOrdersJpayCharge">충전창</a> <hr>
-      <a href="/orders/getOrdersJpayChargeList">금액설정창</a> <hr>
+
 </body>
 
 </html>

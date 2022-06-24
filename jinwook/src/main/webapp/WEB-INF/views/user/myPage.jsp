@@ -43,6 +43,10 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!-- 아래 제이쿼리는 1.0이상이면 원하는 버전을 사용하셔도 무방합니다. -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></scrip
+
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
    
@@ -346,7 +350,7 @@ $('#myModal').on('shown.bs.modal', function () {
 
                   <br/> <strong class="mytop01"><span style="font-size: 25px;">진욱페이 &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></strong>
                   &nbsp;&nbsp;<a href="#" id="preRegister" data-toggle="modal" data-target="#exampleModal" style="color:gray;">충전하기</a><br><br>
-                  <div><h2 class="mytop01-content " id="request" style="padding-left:170px;"><span class="countall">${sessionScope.user.jpBalance}</span></h2> 원</div>
+                  <div><h2 class="mytop01-content " id="request" style="padding-left:170px;"><span class="countall" id="iamportplus">${sessionScope.user.jpBalance}</span></h2> 원</div>
                   <br/> <br/>
                </div>
             </div>
@@ -365,6 +369,7 @@ $('#myModal').on('shown.bs.modal', function () {
                            <h5 >
                               <strong>충전하실 금액을 선택해주세요.</strong>               
                            </h5>
+                           <hr>
                         </div>
                         <div class="modal-body" style="font-size : 20px; margin-left : 0px; ">
                         <h3 class="h6" style="text-align: center; color: #F05441; font-weight:bold;"> 진욱페이는 결제금액에 10% 추가지급합니다. <br>
@@ -374,42 +379,42 @@ $('#myModal').on('shown.bs.modal', function () {
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 80px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 5,500 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;">5,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>5,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 11,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;">10,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>10,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 33,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;">30,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>30,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 55,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;">50,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>50,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 60px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 110,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;">100,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>100,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 60px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 330,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;">300,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"	>300,000원</button>
                               <br><br>
                            </div>
                         </div>
@@ -418,16 +423,10 @@ $('#myModal').on('shown.bs.modal', function () {
                </div>
             
             
-            
-            
-            
-            
-            
-            
-            
-            <div id='modal' style="z-index: 1060;">
-               <div id='content'>id='btnOpen' 등록하는애
-                  <input type='button' value='X' class="close" id='btnClose'/>
+            <div class="modal" id="modal" style="z-index: 1060;">
+               <div id='content'>
+                  <!-- <input type='button' value='X' class="close" id='btnClose'/> -->
+                  <input type="button" class="close" data-dismiss="modal" aria-label="Close" value="X">	
                   <div class="title">
                      <h2 class="h3">
                            <span style="color : #7fad39">진욱페이</span>
@@ -453,30 +452,30 @@ $('#myModal').on('shown.bs.modal', function () {
                           <button class="number">7</button>      
                           <button class="number">8</button>
                           <button class="number">9</button>
-                          <button class="number">초기화</button>
+                          <button class="number" disabled></button>
                           <button class="number">0</button>
-                          <button class="number">X</button>
+                          <button class="number" disabled>X</button>
                       </div>
                    </div>
                </div>
             </div>
             
             <script type="text/javascript">
-            var btnOpen  = document.getElementById('btnOpen');
-            var btnClose = document.getElementById('btnClose');
-            
+            /* var btnOpen  = document.getElementById('btnOpen'); */
+            /* var btnClose = document.getElementById('btnClose'); */
+            	
             // modal 창을 보여줌
-            btnOpen.onclick = function(){
+/*             btnOpen.onclick = function(){
             var modal = document.getElementById('modal');
                modal.style.display = 'block';
-            }
+            } */
             
             //modal 창을 감춤
-            var closeRtn = function(){
+           /*  var closeRtn = function(){
             var modal = document.getElementById('modal');
                modal.style.display = 'none';
             }
-            btnClose.onclick = closeRtn;
+            btnClose.onclick = closeRtn; */
             
             function PwCheck(pw) {
                 const _this = this; 
@@ -542,8 +541,9 @@ $('#myModal').on('shown.bs.modal', function () {
                 // 결과처리 
                 _this.handleResult = function(){
                     if(_this.handleCheckPw()) {
-                        _this.parent.classList.add('confirm');
-                        _this.compChk = true;
+                       /*  _this.parent.classList.add('confirm');
+                        _this.compChk = true; */
+                        iamport();
                     } else {
                         _this.parent.classList.add('error');
                         // 입력상태 초기화 
@@ -567,8 +567,39 @@ $('#myModal').on('shown.bs.modal', function () {
             }
 
             let pwCheck = new PwCheck(123456);
+           
+            function iamport(){
+            	var jpBalance = $(iamportplus).val();
+            	//가맹점 식별코드
+            	IMP.init('imp94304882'); // 콘솔에서 확인
+            	IMP.request_pay({
+            	    pg : 'kcp',
+            	    pay_method : 'card',
+            	    merchant_uid : 'merchant_' + new Date().getTime(),
+            	    name : '진욱페이 5500원' , //결제창에서 보여질 이름
+            	    amount : '5000', //실제 결제되는 가격
+            	    buyer_email : 'asd@naver.com',
+            	    buyer_name : '최인규',
+            	    buyer_tel : '010-1111-9990',
+            	}, function(rsp) {
+            		console.log(rsp);
+            	    if ( rsp.success ) {
+            	    	var msg = '결제가 완료되었습니다.';
+            	    	jpBalance = jpBalance+5000;
+            	        /* msg += '고유ID : ' + rsp.imp_uid;
+            	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+            	        msg += '결제 금액 : ' + rsp.paid_amount;
+            	        msg += '카드 승인번호 : ' + rsp.apply_num; */
+            	        self.location="";
+            	    } else {
+            	    	 var msg = '결제에 실패하였습니다.';
+            	         msg += '에러내용 : ' + rsp.error_msg;
+            	         self.location="";
+            	    }
+            	    alert(msg);
+            	});
+            }
             </script>
-            
             <div class="col-4">
                <div class="bg-white text-black mx-3" style="height: 153px;">
 
