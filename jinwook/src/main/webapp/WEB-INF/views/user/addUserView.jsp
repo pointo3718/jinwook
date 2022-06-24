@@ -198,6 +198,7 @@
 			
 		}
 			
+			
 		//==>"이메일" 유효성Check  Event 처리 및 연결
 		function checkEmail(){
 			$.ajax({
@@ -462,31 +463,34 @@
 		<hr><br>
 		    <label for="userId" class=" col-sm-3 control-label" >아 이 디</label>
 		    <div class="col-sm-6" >
-		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required oninput = "checkId()"  >
+		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required onkeyup="this.value=this.value.replace(' ','');" oninput = "checkId()" >
 					<span class="id_ok" >사용 가능한 아이디입니다.</span>
 					<span class="id_already">사용 중인 아이디입니다.</span>
 				<!-- <button class="idChk" type="button" id="idChk" onclick="checkId()" style="width:100px; height:50px;" value="N"  >중복확인</button> -->
+		    </div>
+		    <div class="">
+		      <button class="idChk site-btn" type="button" id="idChk " onclick="checkId()" value="N" style="margin-right:50px; margin-top:1px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="password" class=" col-sm-3 control-label"><a>비밀번호</a></label>
 		    <div class="col-sm-6" >
-		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" >
+		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" oninput="this.value=this.value.replace(' ','');">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="password2" class="col-sm-offset-0 col-sm-3 control-label"><a>비밀번호 확인</a></label>
 		    <div class="col-sm-6">
-		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" >
+		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" oninput="this.value=this.value.replace(' ','');">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-0 col-sm-3 control-label"><a>이름</a></label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='10' class="userName" id="userName" name="userName" placeholder="회원이름" >
+		      <input type="text" maxlength='10' class="userName" id="userName" name="userName" placeholder="회원이름" oninput="this.value=this.value.replace(' ','');">
 		    </div>
 		  </div>
 		  
@@ -501,20 +505,32 @@
 		  <div class="form-group">
 		    <label for="nickName" class="col-sm-offset-0 col-sm-3 control-label"><a>닉네임</a></label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='20' class="nickName" id="nickName" name="nickName" placeholder="닉네임" style=" display:inline-block">
+		      <input type="text" maxlength='20' class="nickName" id="nickName" name="nickName" placeholder="닉네임" style=" display:inline-block" oninput="this.value=this.value.replace(' ','');">
 		    </div>  
 		    <div class="">
 		      <button class="nickNameChk site-btn" type="button" id="nickNameChk " onclick="checkNickName()" value="N" style="margin-right:50px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button>
 		    </div>
 		  </div>
 		  
-		  <div class="form-group">
+		  <div class="form-group" style="display:flex;">
 		    <label for="phone" class="col-sm-offset-0 col-sm-3 control-label"><a>휴대폰번호</a></label>
 		     <div class="col-sm-6">
-		      <input type="text" class="phone" id="phone" name="phone" placeholder="휴대폰번호">
+		      <input type="text" class="phone" id="phone" name="phone" placeholder="휴대폰번호" style=" display:inline-block" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+		    </div>
+		    <div class="">
+		      <button class="phoneChk site-btn" type="button" id="phoneChk " onclick="checkPhone()" value="N" style="margin-right:50px; height:48px; width:113.52px; padding-left:10px; padding-right:10px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">인증번호 받기</button>
 		    </div>
 		  </div>
-		  
+		  <div class="form-group" style="display:flex;">
+		  <div class="adad col-sm-6" style="font-size:15px;">
+			<input type="hidden" id="phoneDoubleChk"/>
+			<input type="text" id="authNo1" class="authNo" placeholder="인증 번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+			</div>
+			<div>
+			<button class="send_btn site-btn" type="button" id="sned" style="width:113.52; margin-right:50px; height:48px; width:113.52px; padding-left:10px; padding-right:10px; color: #7fad39; background-color:white; border: 1px solid #7fad39;" >인증번호 확인</button>
+			</div>
+			</div>
+			<br>
 		  <!-- <div class="form-group">
 		    <label for="gender" class=" col-sm-3 control-label">성별</label>
 		    <div class="col-sm-2" style="display:flex; justify-center;">
@@ -561,7 +577,7 @@
 		   <div class="form-group">
 		    <label for="email" class=" col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="이메일">
+		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="이메일" oninput="this.value=this.value.replace(' ','');">
 		    </div>
 		    <div>
 		      <button class="emailChk site-btn" type="button" id="emailChk" onclick="checkEmail()" value="N" style="margin-right:50px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button> 
@@ -571,7 +587,7 @@
 		   <div class="form-group">
 		    <label for="rpId" class=" col-sm-3 control-label">추천인 아이디</label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='50' class="rpId" id="rpId" name="rpId" placeholder="추천인 아이디를 입력하세요.">
+		      <input type="text" maxlength='50' class="rpId" id="rpId" name="rpId" placeholder="추천인 아이디를 입력하세요." oninput="this.value=this.value.replace(' ','');">
 		    </div>
 		    <div>
 		      <button class="rpIdChk site-btn" type="button" id="rpIdChk" onclick="checkRpId()" value="N" style="margin-right:50px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button> 
@@ -580,13 +596,14 @@
 		 </c:if>
 		 <!-- 사용자 폼 끝 -->
 		  
+		  
 	 <!-- 사장님 폼  -->
 		<c:if test="${role=='사장님' }">
 		  <div class="form-group">
 		<hr><br>
 		    <label for="userId" class=" col-sm-3 control-label" >아 이 디</label>
 		    <div class="col-sm-6" >
-		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required oninput = "checkId()"  >
+		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required oninput = "checkId()" oninput="this.value=this.value.replace(' ','');" >
 					<span class="id_ok" >사용 가능한 아이디입니다.</span>
 					<span class="id_already">사용 중인 아이디입니다.</span>
 				<!-- <button class="idChk" type="button" id="idChk" onclick="checkId()" style="width:100px; height:50px;" value="N"  >중복확인</button> -->
@@ -596,21 +613,21 @@
 		  <div class="form-group">
 		    <label for="password" class=" col-sm-3 control-label"><a>비밀번호</a></label>
 		    <div class="col-sm-6" >
-		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" >
+		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" oninput="this.value=this.value.replace(' ','');">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="password2" class="col-sm-offset-0 col-sm-3 control-label"><a>비밀번호 확인</a></label>
 		    <div class="col-sm-6">
-		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" >
+		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" oninput="this.value=this.value.replace(' ','');" >
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-0 col-sm-3 control-label"><a>이름</a></label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='10' class="userName" id="userName" name="userName" placeholder="회원이름" >
+		      <input type="text" maxlength='10' class="userName" id="userName" name="userName" placeholder="회원이름" oninput="this.value=this.value.replace(' ','');">
 		    </div>
 		  </div>
 		  
@@ -624,7 +641,7 @@
 		  <div class="form-group">
 		    <label for="phone" class="col-sm-offset-0 col-sm-3 control-label"><a>휴대전화번호</a></label>
 		     <div class="col-sm-6">
-		      <input type="text" class="phone" id="phone" name="phone" placeholder="번호">
+		      <input type="text" class="phone" id="phone" name="phone" placeholder="번호" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 		    </div>
 		  </div>
 		  
@@ -648,7 +665,7 @@
 		   <div class="form-group" style="display:flex;">
 		    <label for="email" class=" col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4" >
-		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="이메일">
+		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="이메일" oninput="this.value=this.value.replace(' ','');">
 		      <button class="emailChk" type="button" id="emailChk" onclick="checkEmail()" value="N" >중복확인</button> 
 		    </div>
 		  </div>
@@ -656,7 +673,7 @@
 		   <div class="form-group">
 		    <label for="businessNo" class=" col-sm-3 control-label">사업자등록번호</label>
 		    <div class="col-sm-4">
-		      <input type="text" maxlength='50' class="businessNo" id="businessNo" name="businessNo" placeholder="사업자등록번호">
+		      <input type="text" maxlength='50' class="businessNo" id="businessNo" name="businessNo" placeholder="사업자등록번호" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 		      <button class="emailChk" type="button" id="emailChk" onclick="checkEmail()" value="N">중복확인</button> 
 		    </div>
 		  </div>

@@ -290,7 +290,7 @@ $(document).ready(function() {
 		<label for="userId " style="font-size:15px;" >아이디</label>	
 		</div>
 			<div class="aaa " style="font-size:15px;">
-			<input type="text" name="userId" class="userId" placeholder="이름을 입력해주세요.">
+			<input type="text" name="userId" class="userId" placeholder="이름을 입력해주세요." onKeyup="this.value=this.value.replace(' ','');">
 			</div>
 			<br>
 			
@@ -299,7 +299,7 @@ $(document).ready(function() {
 		<label for="email " style="font-size:15px;" >이메일</label>	
 		</div>
 			<div class="adad" style="font-size:15px;">
-			<input type="email" id="email" class="email" placeholder="이메일을 입력해주세요.">
+			<input type="email" id="email" class="email" placeholder="이메일을 입력해주세요." onKeyup="this.value=this.value.replace(' ','');">
 			</div>
 			<br>
 			<button class="send_btn site-btn" id="snedE" type="button" style="width:300px;">전송</button>
@@ -311,7 +311,7 @@ $(document).ready(function() {
 		<label for="phone " style="font-size:15px;" >휴대폰 번호</label>	
 		</div>
 			<div class="adad" style="font-size:15px;">
-			<input type="text" id="phone" class="phone" placeholder="휴대폰 번호를 입력해주세요.">
+			<input type="text" id="phone" class="phone" placeholder="휴대폰 번호를 입력해주세요." onKeyup="this.value=this.value.replace(' ','');">
 			</div>
 			<br>
 			<button class="send_btn site-btn" type="button" id="snedA" style="width:300px;" onclick="authNo()">인증번호 받기</button>
@@ -323,7 +323,7 @@ $(document).ready(function() {
 		</div>
 			<div class="adad" style="font-size:15px;">
 			<input type="hidden" id="phoneDoubleChk"/>
-			<input type="text" id="authNo1" class="authNo" placeholder="인증 번호를 입력해주세요.">
+			<input type="text" id="authNo1" class="authNo" placeholder="인증 번호를 입력해주세요." onKeyup="this.value=this.value.replace(' ','');">
 			</div>
 			<br>
 			<button class="send_btn site-btn" type="button" id="sned" style="width:300px;" >확인</button>
@@ -342,7 +342,7 @@ $(document).ready(function() {
 		<label for="password " style="font-size:15px; " >새 비밀번호 등록</label>	
 		</div>
 			<div class="aaa " style="font-size:15px;">
-			<input type="password" maxlength='50' id="password" name="password" class="password" placeholder="새 비밀번호를 입력해주세요.">
+			<input type="password" maxlength='50' id="password" name="password" class="password" placeholder="새 비밀번호를 입력해주세요." onKeyup="this.value=this.value.replace(' ','');">
 			</div>
 			<br>
 			
@@ -352,7 +352,7 @@ $(document).ready(function() {
 			<label for="password2 " style="font-size:15px;" >새 비밀번호 확인</label>	
 			</div>
 				<div class="adad" style="font-size:15px;">
-				<input type="password" id="password2" name="password2" class="password2" placeholder="새 비밀번호를 한 번 더 입력해주세요.">
+				<input type="password" id="password2" name="password2" class="password2" placeholder="새 비밀번호를 한 번 더 입력해주세요." onKeyup="this.value=this.value.replace(' ','');">
 				</div>
 				<br>
 				<button class="bts  site-btn"  id="bts" style="width:300px;">확인</button>

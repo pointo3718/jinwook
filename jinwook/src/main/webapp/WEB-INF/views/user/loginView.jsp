@@ -134,13 +134,13 @@
 		//============= "로그인"  Event 연결 =============
 		$( function() {
 			
+	
 			$("#userId").focus();
 			
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$(".button1").on("click" , function() {
 				var id=$(".userId").val();
 				var pw=$(".password").val();
-				
 				
 				if(id == null || id.length <1) {
 					swal("진욱이네", "ID를 입력해주세요.");
@@ -157,7 +157,7 @@
 				for(var i = 0; i < id.length; i++){
 					
 					var ch = id.charAt(i);
-					if(!(ch >= 'a' &&  ch <= 'z') || !(ch >= '0' && ch <= '9')){
+					if(!(ch >= 'a' &&  ch <= 'z') && !(ch >= '0' && ch <= '9')){
 					swal("진욱이네", "아이디는 영문 소문자로 입력해주세요.");
 					$(".userId").focus();
 					$(".userId").select();
@@ -194,23 +194,52 @@
 				 // 로그인할 때 검증 메세지
 				 const msg = "${msg}";
 					 
-				 swal("진욱이네",msg);
+				 /* swal("진욱이네",msg); */
+				 alert(msg);
 					 
 					 
 				 
 			});
 		});	
+			
 				// 테스트 중
-				 $("#userId").on("propertychange change keyup paste input" , function() {
+				
+					
+				/*  $("#userId").on("propertychange change keyup paste input" , function() {
 				
 					 $(".button1").css({
-							'border-bottom': '3px solid #E6E6E6',
-							'color' : 'gray'
+							'background-color': 'white',
 						});
 					 
 					 
-				 });
+				 }); */
 				 
+					/* //============아이디, 비밀번호 확인 ==============
+					$.ajax({
+						url : "/user/checkLogin",
+						type : "post",
+						dataType : "json",
+						data : {"userId" : $("#userId").val(),
+								"password" : $("#password").val()},
+						success : function(data){
+							alert(data.password);
+							if(data.userId == null){
+								$("input[name='userId']").focus();
+								swal("진욱이네", "아이디를 확인해주세요.");
+								return;
+							}else if($("#password").val() != data.password){
+								$("#password").focus();
+								swal("진욱이네", "비밀번호를 확인해주세요.");
+								return;
+							}else if( data.userByeStatus == true){
+								swal("진욱이네", "탈퇴한 계정입니다.");
+								return;								
+							}
+						}
+					}); */
+					
+
+		
 		
 		//============= 회원원가입화면이동 =============
 		$( function() {
@@ -251,14 +280,14 @@
 					  <div class="form-group">
 					    <label for="userId" class="col-sm-2 control-label"></label>
 					    <div class="col-sm-3" style="font-size:15px;">
-					      <input type=   "text" class="userId" name="userId" id="userId" placeholder="아이디를 입력해주세요." required="required" onKeyup="this.value=this.value.replace(' ','');"/>
+					      <input type=   "text" class="userId" name="userId" id="userId" placeholder="아이디를 입력해주세요." required="required" oninput="this.value=this.value.replace(' ','');"/>
 					    </div>
 					  </div>
 					  
 					  <div class="form-group">
 					    <label for="password" class="col-sm-2 control-label"></label>
 					    <div class="col-sm-6" style="font-size:15px;">
-					      <input type="password" class="password" name="password" id="password" placeholder="패스워드를 입력해주세요."  onKeyup="this.value=this.value.replace(' ','');" >
+					      <input type="password" class="password" name="password" id="password" placeholder="패스워드를 입력해주세요."  oninput="this.value=this.value.replace(' ','');" >
 					    </div>
 					  </div>
 					  	<br/><br/>
@@ -267,7 +296,7 @@
 					  </div>
 					  <div class="form-group" style="text-align: center">
 					    <div class="col-sm-offset-2 col-sm-5 text-center">
-					      <button type="button" class="button1 site-btn"  >로 &nbsp;그 &nbsp;인</button>
+					      <button type="button" class="button1 site-btn" >로 &nbsp;그 &nbsp;인</button>
 					    </div>
 					    </div>
 
