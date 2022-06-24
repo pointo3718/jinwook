@@ -38,4 +38,5 @@ public class User extends CommonDTO {
 	private Store store;
 	private int authNumber;
 	private ResponseEntity<Object> res;
+	private boolean storeYn;
 }

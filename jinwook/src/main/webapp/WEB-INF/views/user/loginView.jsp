@@ -157,7 +157,7 @@
 				for(var i = 0; i < id.length; i++){
 					
 					var ch = id.charAt(i);
-					if(!(ch >= 'a' &&  ch <= 'z') || !(ch >= '0' && ch <= '9')){
+					if(!(ch >= 'a' &&  ch <= 'z') && !(ch >= '0' && ch <= '9')){
 					swal("진욱이네", "아이디는 영문 소문자로 입력해주세요.");
 					$(".userId").focus();
 					$(".userId").select();

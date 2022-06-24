@@ -54,6 +54,8 @@ public interface StoreMapper {
 	
 	public List<Store> getStoreOnly(int storeNo);
 	
+	public void insertStoreFile(Map<String, Object> map);
+	
 		
 	public int getStoreMapTotalCount();
 	
