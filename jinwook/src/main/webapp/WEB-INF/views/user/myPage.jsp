@@ -378,13 +378,8 @@ $('#myModal').on('shown.bs.modal', function () {
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 80px;">진욱페이 </span>
-<<<<<<< HEAD
-                              <strong style="margin-right : 65px;"> 5,500 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >5,000원</button>
-=======
                               <strong style="margin-right : 65px;" class="chargePay"> 5,500 원</strong>
                               <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal" data-won="5000" onclick="PwCheck(this)" >5,000원</button>
->>>>>>> refs/remotes/origin/master
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
@@ -541,15 +536,15 @@ $('#myModal').on('shown.bs.modal', function () {
                 // 비밀번호 비교
                 _this.handleCheckPw = function(){
                     ajax{
-                    	url : "/user/checkLogin",
-						type : "post",
-						dataType : "json",
-						data : {"jpPassword" : $("#password").val()},
-						success : function(data){
-						alert(data.password);
-						}
-					}
-				});
+                       url : "/user/checkLogin",
+                  type : "post",
+                  dataType : "json",
+                  data : {"jpPassword" : $("#password").val()},
+                  success : function(data){
+                  alert(data.password);
+                  }
+               }
+            });
                     return compare; 
                 }
 
@@ -561,7 +556,7 @@ $('#myModal').on('shown.bs.modal', function () {
                         console.log(wwww)
                         iamport();
                     } else {
-                    	 console.log(wwww)
+                        console.log(wwww)
                         _this.parent.classList.add('error');
                         // 입력상태 초기화 
                         _this.passwordNumber = [];
