@@ -401,10 +401,6 @@ label {
 						</button>
 						<!-- Button trigger modal --> 
 					</td>
-                     <td><span style="color: #2E2E2E; font-size: 15px "><strong>${store.storePhone}</strong></span></td>
-                     <td><button type="button" class="btn btn-outline-success">
-                           <strong>상점후기</strong>
-                        </button></td>
                   </tr>
                </thead>
                <tbody>
