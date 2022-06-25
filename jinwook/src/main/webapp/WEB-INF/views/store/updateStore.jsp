@@ -276,42 +276,42 @@ label {
     
 
       if (storeIntro == null || storeIntro.length < 1) {
-         alert("상점소개 반드시 입력하여야 합니다.");
+         Swal.fire("상점 소개를 입력해주세요");
          return;
       }
 
       if (storePhone == null || storePhone.length < 1) {
-    	  alert("상품 전화번호는 반드시 입력하셔야 합니다.");
+    	  Swal.fire("상품 전화번호를 입력해주세요");
          return;
       }
 
       if (storeImage == null || storeImage.length < 1) {
-    	  alert("상점사진은 반드시 입력하셔야 합니다.");
+    	  Swal.fire("상점 사진을 입력해주세요");
          return;
       }
 
       if (startTime == null || startTime.length < 1) {
-    	  alert("영업시작시간은 반드시 입력하셔야 합니다.");
+    	  Swal.fire("영업시작시간을 입력해주세요");
          return;
       }
 
       if (endTime == null || endTime.length < 1) {
-    	  alert("영업종료시간은 반드시 입력하셔야 합니다.");
+    	  Swal.fire("영업종료시간을 입력해주세요");
          return;
       }
 
       if (bank == null || bank.length < 1) {
-    	  alert("은행명은 반드시 입력하셔야 합니다.");
+    	  Swal.fire("은행명을 입력해주세요");
          return;
       }
 
       if (holiday == null || holiday.length < 1) {
-    	  alert("상점휴일은 반드시 입력하셔야 합니다.");
+    	  Swal.fire("상점휴일을 입력해주세요");
          return;
       }
 
       if (accNo == null || accNo.length < 1) {
-    	  alert("계좌번호는 반드시 입력하셔야 합니다.");
+    	  Swal.fire("계좌번호를 입력해주세요");
          return;
       }
 
@@ -326,7 +326,13 @@ label {
          },
          success : function(result) {
             if (result != null) {
-            	alert("수정 완료되었습니다.");
+          	Swal.fire({
+          		title: '진욱이네',
+                text: "수정이 완료됐습니다.",
+                icon: 'sucess',
+                confirmButtonColor: '#7fad39',
+                confirmButtonText: '확인'
+          	});
                self.location = "updateStore?storeNo=" + storeNo;
             }
          }
@@ -335,6 +341,7 @@ label {
 
    }
 </script>
+
 
 
 </head>

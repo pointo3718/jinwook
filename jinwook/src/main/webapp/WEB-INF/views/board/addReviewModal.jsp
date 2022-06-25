@@ -11,7 +11,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>공지사항 등록</title>
+<title>상점후기 등록</title>
 
 <!-- Google Font -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,22 +40,25 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
 <style>
 *{font-family: 'Noto Sans KR', sans-serif;}
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  z-index: 10;
-}
+ .sticky {
+     position: -webkit-sticky;
+     position: sticky;
+     top: 0;
+     background: #ffffff;
+     z-index: 10;
+   }
+   
 
 .row {
-   display: flex;
-   justify-content: center;
-   align-items: flex-start;
-}
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
 
 .mytop01 {
 	padding-left: 20px;
@@ -85,12 +88,11 @@
 
 
 </style>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 $(function() {
 	$("button.btn.btn-success").on("click", function() {
-		fncAddBoardAnnouncement();
+		fncAddReview();
 	});
 });
 
@@ -100,27 +102,11 @@ $(function() {
 	});
 });
 
-function fncAddBoardAnnouncement() {
+function fncAddReview() {
 	
-	var boardTitle = $("input[name='boardTitle']").val();
-	var boardContent = $("textarea[name='boardContent']").val();
-
-	if (boardTitle == null || boardTitle.length < 1) {
-		alert("공지사항 제목은 반드시 입력하여야 합니다.");
-		return;
-	}
-	if (boardContent == null || boardContent.length < 1) {
-		alert("공지사항 내용은 반드시 입력하여야 합니다.");
-		return;
-	}
-	
-	$("form").attr("method", "POST").attr("action", "/board/addBoardAnnouncement").submit();
+	$("form").attr("method", "POST").attr("action", "/board/addReview").submit();
 }
 
-var cnt = 1;
-function fn_addFile() {
-	$("#d_file").append("<br>" + "<input type='file' name='file'" + cnt +"' />");
-}
 </script>
 
 
@@ -150,23 +136,26 @@ function fn_addFile() {
 				<!-- 상점 정보 수정 -->
 				<div>
 					<h4 class="text-left">
-						<strong><i class="bi bi-megaphone-fill"></i> &nbsp;공지사항 정보 등록</strong>
+						<strong><i class="bi bi-hand-index"></i>&nbsp; 상점후기 등록</strong>
 						<hr size="10px">
 					</h4>
 
-	<form name=addBoardAnnouncementForm method="post" action="addBoardAnnouncement" enctype="multipart/form-data">
 	
 	<div class="form-group">
-    <label for="boardTitle">공지사항 제목</label>
-    <input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력해주세요">
+    <label for="reviewTitle">제목</label>
+    <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" placeholder="제목">
   </div>
   <div class="form-group">
-    <label for="boardContent">공지사항 내용</label>
-    <textarea class="form-control" id="boardContent" name="boardContent" rows="3" placeholder="내용을 입력해주세요"></textarea>
+    <label for="reviewWriter">작성자</label>
+    <input type="text" class="form-control" id="reviewWriter" name="reviewWriter" placeholder="작성자">
   </div>
   <div class="form-group">
-    <label for="file">공지사항 사진 업로드</label>
-    <input type="file" class="form-control" id="file" name="file" multiple="multiple">
+    <label for="reviewStar">별점</label>
+    <input type="number" class="form-control" id="reviewStar" name="reviewStar" placeholder="별점">
+  </div>
+  <div class="form-group">
+    <label for="reviewContent">후기 내용</label>
+    <textarea class="form-control" id="reviewContent" name="reviewContent" rows="3" placeholder="후기 내용"></textarea>
   </div>
   <div class="form-group">
 	<div class="col-sm-offset-4  col-sm-4 text-center">
@@ -176,7 +165,6 @@ function fn_addFile() {
 					</div>
 				</div>
 				
-				</form>
 				<div class="text-center"></div>
 		</div>
 	</section>

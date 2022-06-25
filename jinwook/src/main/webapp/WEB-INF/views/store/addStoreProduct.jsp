@@ -268,8 +268,9 @@ label {
 			dataType : "json",
 			success : function(result) {
 				if (result != null) {
-					swal("삭제완료","success");
-					self.location = "addStoreProduct?storeNo=" + STORENO
+					swal("삭제완료", "success");
+					$("#point").load(
+							"/store/addStoreProduct/" + STORENO + " #point");
 				}
 			}
 
@@ -293,7 +294,7 @@ label {
 			success : function(result) {
 				if (result != null) {
 					swal("매진 처리되었습니다.");
-					self.location = "addStoreProduct?storeNo=" + STORENO
+					$("#point").load("/store/addStoreProduct/STORENO #point");
 				}
 			}
 
@@ -316,7 +317,7 @@ label {
 			success : function(result) {
 				if (result != null) {
 					swal("판매 처리되었습니다.");
-					self.location = "addStoreProduct?storeNo=" + STORENO
+					$("#point").load("/store/addStoreProduct/STORENO #point");
 				}
 			}
 
@@ -352,8 +353,6 @@ label {
 		//	return;
 		//}
 
-
-
 		$.ajax({
 			url : "updateStoreProduct/" + prodNo + "/" + PRICE + "/"
 					+ PRODORIGN + "/" + PRODINFO + "/" + PRODIMG,
@@ -370,7 +369,7 @@ label {
 			success : function(result) {
 				if (result != null) {
 					swal("수정 완료");
-					self.location = "addStoreProduct?storeNo=" + STORENO
+					$("#point").load("/store/addStoreProduct/STORENO #point");
 				}
 			}
 
@@ -387,7 +386,7 @@ label {
 										function() {
 											$('#plus')
 													.append(
-															'<form id="inputitem"><div class="form-row"><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <span class="btn btn-default btn-file"> <input type="file"></span></div><div class="col-md-2 mb-3"><label for="validationDefault02"></label><input type="text" class="form-control" id="addProdName" placeholder="상품이름" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addProdInfo" placeholder="예)100g당 가격" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addProdOrign" placeholder="원산지" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addPrice" placeholder="가격" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label><br><button type="button" id="validationDefault01" class="btn btn-warning" onClick="fncAddStoreProduct(this)">상품등록</button></div></div></div></form>'); // end append                            
+															'<form action="url" method="post" enctype="multipart/form-data"><div class="form-row"><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <span class="btn btn-default btn-file"> <input type="file"></span></div><div class="col-md-2 mb-3"><label for="validationDefault02"></label><input type="text" class="form-control" id="addProdName" placeholder="상품이름" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addProdInfo" placeholder="예)100g당 가격" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addProdOrign" placeholder="원산지" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addPrice" placeholder="가격" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label><br><button type="button" id="validationDefault01" class="btn btn-warning" onClick="fncAddStoreProduct(this)">상품등록</button></div></div></div></form>'); // end append                            
 										}); // end click                                            
 					}); // end ready
 
@@ -405,7 +404,7 @@ label {
 		//var PRODIMG = $(e).parent().parent().find("#addProdImg").val()
 		var PRODORIGN = $(e).parent().parent().find("#addProdOrign").val()
 		var PRODNAME = $(e).parent().parent().find("#addProdName").val()
-		var soldout=true;
+		var soldout = true;
 
 		if (PRODNAME == null || PRODNAME.length < 1) {
 			swal("상품이름은 반드시 입력해야 합니다.");
@@ -427,15 +426,19 @@ label {
 		//   return;
 		//}
 
-
 		$.ajax({
-			url : "addStoreProduct/" + prodNo+"/"+STORENO+"/"+PRODNAME+"/"+PRICE+"/"+PRODINFO+"/"+PRODIMG+"/"+PRODORIGN+"/"+soldout,
+			url : "addStoreProduct/" + prodNo + "/" + STORENO + "/" + PRODNAME
+					+ "/" + PRICE + "/" + PRODINFO + "/" + PRODIMG + "/"
+					+ PRODORIGN + "/" + soldout,
 			dataType : "json",
-			method:"post",
+			method : "post",
+			processData : false,
+			contentType : false,
+			enctype: 'multipart/form-data',
 			success : function(result) {
 				if (result != null) {
 					swal("등록이 완료되었습니다.");
-					self.location = "addStoreProduct?storeNo=" + STORENO
+					//$("#point").load("/store/addStoreProductView/STORENO #point");
 				}
 			}
 
@@ -524,8 +527,8 @@ label {
 									<table>
 										<thead>
 											<tr>
-												<th class="shoping__product" style=" width: 190px; height: 30px;
-												">상품사진</th>
+												<th class="shoping__product"
+													style="width: 190px; height: 30px;">상품사진</th>
 												<th class="text-center" style="width: 300px;">이름</th>
 												<th class="text-center" style="width: 700px;">상품설명</th>
 												<th class="text-center" style="width: 400px;">원산지</th>
@@ -536,7 +539,7 @@ label {
 												<th></th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody class="point">
 											<!--  /////////////////////////////////////////////////// -->
 											<c:set var="i" value="0" />
 											<c:set var="total" value="0" />
@@ -554,9 +557,7 @@ label {
 													<td><strong style="font-size: 20px;"> <c:if
 																test="${store.product.soldout=='false'}">
 																<span style="color: red;"><s>${store.product.prodName}</s></span>
-															</c:if> <c:if test="${store.product.soldout=='true'}">
-                                       ${store.product.prodName}
-                                       </c:if>
+															</c:if> <c:if test="${store.product.soldout=='true'}">${store.product.prodName}</c:if>
 
 
 													</strong></td>
@@ -603,6 +604,7 @@ label {
 
 												</tr>
 											</c:forEach>
+										</tbody>
 									</table>
 									<div id="plus">
 										<p class="original"></p>

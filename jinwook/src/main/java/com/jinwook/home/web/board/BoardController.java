@@ -53,6 +53,7 @@ import com.jinwook.home.service.domain.Comment;
 import com.jinwook.home.service.domain.Jjim;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Recipe;
+import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
 import com.jinwook.home.service.user.UserService;
@@ -486,24 +487,30 @@ public class BoardController {
 		//레시피 상세 조회 + 조회수 증가
 		//@RequestParam userId는 레시피 작성자 id
 		@GetMapping(value = "getRecipe")
-		public String getRecipe(Recipe recipe, @RequestParam(value = "rcpNo", required = false) Integer rcpNo, 
+		public String getRecipe(@ModelAttribute("recipe") Recipe recipe, @RequestParam(value = "rcpNo", required = false) Integer rcpNo, 
 											@RequestParam(value = "userId", required = false) String userId,
-											Model model,HttpSession session) throws Exception {
+											Model model) throws Exception {
 			System.out.println("/board/getRecipe : GET");
+
 			// 조회수 카운트
 			boardService.updateBoardRecipeHits(rcpNo);
 			//레시피 상세 조회
 			model.addAttribute("recipe", boardService.getRecipe(recipe.getRcpNo()));
-			
-			//첨부 파일 리스트 조회
-			//List<Map<String, Object>> fileList = boardService.selectRecipeAttachList(recipe.getRcpNo());
-			//댓글 조회
-			List<Comment> commentList = boardService.getRecipeComment(recipe.getRcpNo());
-			model.addAttribute("commentList", commentList);
-			//model.addAttribute("file", fileList);
 			//레시피 작성자 id
 			User user1 = userService.getUser(userId);
 			model.addAttribute("user1",user1);
+			
+			Attach attach = new Attach();
+			attach = boardService.selectRecipeAttachList(recipe.getRcpNo());
+			recipe.setAttach(attach);
+			model.addAttribute("attach", attach);
+			
+			System.out.println("+++++++++"+attach);
+			System.out.println("+++++++++"+recipe);
+			
+			//댓글 조회
+			List<Comment> commentList = boardService.getRecipeComment(recipe.getRcpNo());
+			model.addAttribute("commentList", commentList);
 			
 			return "board/getRecipe";
 		}
@@ -591,38 +598,21 @@ public class BoardController {
 			return recoCheck;
 		}
 		
-		//상점 후기 등록 화면
-		@GetMapping(value = "addReviewView") 
-		public String addReviewView(@RequestParam(value = "orderNo", required = false) Integer orderNo, 
-				@RequestParam(value = "userId", required = false) String userId, HttpSession session, Model model) throws Exception {
-			System.out.println("/board/addReviewView : GET");
-			
-			if (orderNo == null) {
-				model.addAttribute("orders", new Orders());
-			} else {
-				Orders orders = boardService.getReview(orderNo);
-				User user = userService.getUser(userId);
-				if (orders == null) {
-					return "redirect:/board/getReviewList";
-					//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
-				}
-			    
-				model.addAttribute("user", user);
-				model.addAttribute("orders", orders);
-				System.out.println(user);
-				System.out.println(orders);
-				
-			}
-			
-			return "board/addReviewView";
-		}
 		
 		//상점 후기 등록 -> 기존에 있는 것을 update하는 방식.
 		@PostMapping(value = "addReview")
-		public String addReview(@ModelAttribute("orders") Orders orders) {
+		public String addReview(Orders orders, Store store, HttpSession session) throws Exception {
 			System.out.println("/board/addReview : POST");
+			
+			String userId = ((User) session.getAttribute("user")).getUserId();
+			User user = new User();
+			user.setUserId(userId);
+			orders.setUser(user);
+			
+			System.out.println("정보 넘어온거 확인-----------------------");
 			boardService.addReview(orders);
-			return "redirect:/board/addReviewView";
+			System.out.println("정보 넘어온거 확인-----------------------");
+			return "redirect:/store/getStore?storeNo="+store.getStoreNo();
 		}
 		
 		//상점 후기 내용 조회
@@ -633,8 +623,8 @@ public class BoardController {
 			
 			User user = userService.getUser(userId);
 			model.addAttribute("user", user);
-			Orders orders = boardService.getReview(orderNo);
-			model.addAttribute("orders", orders);
+//			Orders orders = boardService.getReview(orderNo);
+//			model.addAttribute("orders", orders);
 			return "board/getReview";
 		}
 		

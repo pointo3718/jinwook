@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jinwook.home.service.board.BoardService;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Jpay;
 import com.jinwook.home.service.domain.Notice;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
+import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
 import com.jinwook.home.service.store.StoreService;
@@ -39,6 +41,10 @@ public class OrdersController {
    @Autowired
    @Qualifier("storeServiceImpl")
    private StoreService storeService;
+   @Autowired
+   
+   @Qualifier("boardServiceImpl")
+   private BoardService boardService;
    
    public OrdersController() {
       System.out.println(this.getClass());
@@ -121,6 +127,10 @@ public class OrdersController {
      User user = new User();
       user.setUserId(userid);
       orders.setUser(user);
+
+      List<Coupon> couponList = storeService.getCouponList(userid);
+      model.addAttribute("couponList", couponList);
+      
       
       System.out.println("/orders/getOrdersList : GET");
       List<Orders> getOrdersList = ordersService.getOrdersList(orders);

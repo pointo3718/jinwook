@@ -346,6 +346,21 @@
 		)
     </insert>
     
+
+	<insert id="insertProductFile" parameterType="hashMap">
+		INSERT INTO attach(
+			prod_no,
+			ORG_FILE_NAME,
+			STORED_FILE_NAME,
+			FILE_SIZE
+		)VALUES(
+			#{prodNo},
+			#{ORG_FILE_NAME},
+			#{STORED_FILE_NAME},
+			#{FILE_SIZE}
+		)
+    </insert>
+
     <!-- 첨부파일 조회 -->
     <select id="selectStoreAttachList" parameterType="int" resultType="attach">
 		SELECT 
@@ -359,6 +374,7 @@
 	   	ORDER BY 
 	   		attach_no ASC
 	</select>
+
 
 
 </mapper>

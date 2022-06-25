@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    
+<script>
+$(function(){
+	$("#addInquiryButton").on("click", function() {
+		self.location = "/board/addBoardInquiryView"
+	});
+});
+</script>    
     
 <!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -10,6 +16,7 @@
                     <div class="footer__about">
                         <div class="footer__about__logo">
                             <a href="./index.jsp"><img src="${path}/resources/static/img/footerlogo.png" alt="" style="height:120px;"></a>
+                            <div><button type="submit" class="site-btn" id="addInquiryButton" style="margin-top:20px;">1&nbsp;:&nbsp;1 ¹®ÀÇ </button></div>
                         </div>
 
                     </div>

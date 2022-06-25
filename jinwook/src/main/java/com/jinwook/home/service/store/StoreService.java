@@ -21,8 +21,8 @@ public interface StoreService {
 	
 	public boolean updateStore(Store store);
 	
-	public void addStoreProduct(Product Product);
-
+	public void addStoreProduct(Product Product, MultipartHttpServletRequest mpRequest) throws Exception;
+	
 	public boolean updateStoreProduct(Product product);
 	   
 	public boolean deleteStoreProduct(int prodNo);

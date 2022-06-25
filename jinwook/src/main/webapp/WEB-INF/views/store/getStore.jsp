@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -14,6 +15,7 @@
 <title>상점 상세</title>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
 
 <!-- Google Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -248,7 +250,6 @@ label {
    font-size: 15px;
    justify-content: top;
    text-align: left;
-   display: flex;
    align-items: left;
 }
 
@@ -271,6 +272,10 @@ label {
    background: white;
    cursor: inherit;
    display: block;
+}
+
+.modal-body {
+	text-align: left;
 }
 </style>
 
@@ -325,6 +330,18 @@ label {
          }
       });
    }
+   
+   function fncAddReview() {
+		
+		$("form").attr("method", "POST").attr("action", "/board/addReview").submit();
+	}
+   
+   $(function() {
+		$("button.btn.btn-success").on("click", function() {
+			fncAddReview();
+		});
+	});
+   
 </script>
 
 
@@ -377,6 +394,14 @@ label {
                      <th scope="row"><span style="color: red; font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
                            class="bi bi-telephone-fill"></i></span></th>
                      <td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storePhone}</strong></span></td>
+                     <td>
+                         <!-- Button trigger modal -->
+						<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalScrollable">
+  							<strong>상점후기</strong>
+						</button>
+						<!-- Button trigger modal --> 
+					</td>
+                     <td><span style="color: #2E2E2E; font-size: 15px "><strong>${store.storePhone}</strong></span></td>
                      <td><button type="button" class="btn btn-outline-success">
                            <strong>상점후기</strong>
                         </button></td>
@@ -387,7 +412,7 @@ label {
                      <td></td>
                      <td></td>
                      <th scope="row"><span style="color: blsck; font-size: 20px">상점주소</span></th>
-                     <td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storeAddr}</strong></span></td>
+                     <td><span style="color: #2E2E2E; font-size: 15px" ><strong>${store.storeAddr}</strong></span></td>
          
 
                      <td style="width: 94px;"><span
@@ -495,6 +520,7 @@ label {
                         <input type="number" class="count" id="count" name="count" data-count="${prodCount}" value="${store.cart.prodCount+0}"> 
                         <span class="plus bg-dark" onClick="plusCount(this)" data-prodno="${store.product.prodNo}">+</span>
                      </div>
+                     
                      <script type="text/javascript">
                         function minusCount(e){
                            console.log(e);
@@ -532,6 +558,73 @@ label {
    <!--  상품 목록 End-->
    </div>
    <!-- 상점 상세 End -->
+   
+<!-- Modal -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+    
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">상점후기 등록</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      <form action="addReview" method="post">
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewTitle">제목</label>
+					</div>
+					<div>
+						 <input type="text"
+							class="form-control" id="reviewTitle" name="reviewTitle">
+					</div>
+				</div>
+				
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewWriter">작성자</label> 
+					</div>
+					<div>
+						<input type="text" style="width:100px;"
+							class="form-control" id="reviewWriter" name="reviewWriter">
+					</div>
+				</div>
+				
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewStar">별점</label> 
+					</div>
+					<div>
+						<input type="number" style="width:50px;" min="1" max="5" step="0.1"
+							class="form-control" id="reviewStar" name="reviewStar">
+					</div>
+				</div>
+				
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewContent">후기 내용</label> 
+					</div>
+					<div>
+						<textarea class="form-control" id="reviewContent"
+							name="reviewContent" rows="3"></textarea>
+					</div>
+				</div>
+
+		</div><!-- Modal body 끝 -->
+      
+      <div class="modal-footer">
+      
+        <button type="button" class="btn btn-success">등 &nbsp;록</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취 소</button>
+      </div>
+      </form>
+      
+    </div>
+  </div>
+</div>			 
 
    <!-- Footer Begin -->
    <jsp:include page="../layout/footer.jsp" />

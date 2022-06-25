@@ -61,9 +61,10 @@ public interface BoardService {
 	public List<Board> getRankList(Board board);
 
 	//상점후기 등록v, 삭제v, 목록v
-	public int addReview(Orders orders);
+	public void addReview(Orders orders) throws Exception;
 	public int deleteReview(int ordersNo);
-	public Orders getReview(int ordersNo);
+	public Orders getReview(int orderNo);
+//	public Orders getReview(int ordersNo);
 	//상점후기가 상점 상세에 달려 있는 형태이므로 목록이 따로 존재하진 않음.
 	public List<Orders> getReviewList(Board board);
 	

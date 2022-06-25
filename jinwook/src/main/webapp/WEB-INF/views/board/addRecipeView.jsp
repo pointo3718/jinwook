@@ -133,6 +133,8 @@ var cnt = 1;
 function fn_addFile() {
 	$("#d_file").append("<br>" + "<input type='file' name='file'" + cnt +"' />");
 }
+
+
 </script>
 
 
