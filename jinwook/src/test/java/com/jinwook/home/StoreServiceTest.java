@@ -41,20 +41,20 @@ class StoreServiceTest {
 
 	}
 
-	@Test
-	public void addStoreProductTest() throws Exception {
-
-		Product product = new Product();
-		product.setStoreNo(10012);
-		product.setProdName("사과");
-		product.setPrice(1000);
-		product.setProdInfo("150g에 1000원");
-		product.setProdImg("사과.jpg");
-		product.setProdOrign("강원도");
-
-		storeService.addStoreProduct(product);
-
-	}
+//	@Test
+//	public void addStoreProductTest() throws Exception {
+//
+//		Product product = new Product();
+//		product.setStoreNo(10012);
+//		product.setProdName("사과");
+//		product.setPrice(1000);
+//		product.setProdInfo("150g에 1000원");
+//		product.setProdImg("사과.jpg");
+//		product.setProdOrign("강원도");
+//
+//		storeService.addStoreProduct(product);
+//
+//	}
 
 	@Test
 	public void updateStoreProductTest() throws Exception {
