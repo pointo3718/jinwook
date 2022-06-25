@@ -392,13 +392,8 @@ $(function() {
             <div class="col-4">
                <div class="bg-white text-black mx-3" style="height: 153px;">
 
-<<<<<<< HEAD
                   <br/> <strong class="mytop01"><span style="font-size: 25px;"><a data-toggle="modal" style="color:black;" href="#staticBackdrop">보유쿠폰</a>&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></strong> <br/> <br/>
                   <h2 class="mytop01-content " id="request"><span class="countall"><span class="countCoupon"></span></span></h2> 개 </br> </br>
-=======
-						<br/> <strong class="mytop01"><span style="font-size: 25px;"><a data-toggle="modal" style="color:black;" href="#staticBackdrop">보유쿠폰</a>&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></strong> <br/> <br/>
-						<h2 class="mytop01-content " id="request"><span class="countall"><span class="countCoupon"></span></span></h2> 개 </br> </br>
->>>>>>> refs/remotes/origin/master
 
                </div>
             </div>
@@ -539,160 +534,22 @@ $(function() {
                            <div class="col-sm-2" style="display:flex; margin-top:5px;">
                               <input type="radio" name="gender"
                                  class="form-control form-control" id="gender"
-<<<<<<< HEAD
                                  value="${user.gender }" style="font-size:10px; background: transparent;" onfocus="this.blur()">
                               <label for="" class="col-sm-1" style="margin-right:40px;">남</label>
-=======
-                                 value="남" style="font-size:10px; background: transparent;" onfocus="this.blur()">
-                           	<label for="" class="col-sm-1" style="margin-right:40px;">남</label>
->>>>>>> refs/remotes/origin/master
                            </div>
                            
                            <div class="col-sm-2" style="display:flex; text-align:center; margin-top:5px;">
                               <input type="radio" name="gender"
                                  class="form-control form-control" id="gender"
                                  value="여" style="font-size:10px;" onfocus="this.blur()">
-<<<<<<< HEAD
                               <label for="" class="col-sm-1" style="margin-right:40px;">여</label>
-=======
-                           	<label for="" class="col-sm-1" style="margin-right:40px;">여</label>
->>>>>>> refs/remotes/origin/master
                            </div>
                            
                            <div class="col-sm-2" style="display:flex; margin-top:5px;">
                               <input type="radio" name="gender"
                                  class="form-control form-control" id="gender"
                                  value="없음" style="font-size:10px;" onfocus="this.blur()">
-<<<<<<< HEAD
                               <label for="" class="col-sm-1" style="margin-right:40px;">X</label>
-=======
-                           	<label for="" class="col-sm-1" style="margin-right:40px;">X</label>
-                           </div>
-                           
-                        </div>
-
-                        <div class="form-group row" style="display:flex;">
-                           <label for="colFormLabel"
-                              class="col-sm-3 col-form-label col-form-label">생년월일</label>
-                          
-                           <div class="col-sm-2">
-                              <input type="text" name="birth_year"
-                                 class="form-control form-control text-center" id="birth"
-                                 value="" placeholder="YYYY" size="4" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                              <input type="hidden" name="birth"
-                                 class="form-control form-control text-center" id="birth"
-                                 value="">
-                           </div>
-                           <div class="col-sm-2">
-                              <input type="text" name="birth_month"
-                                 class="form-control form-control text-center" id="birth"
-                                 value="" pattern="[0-9]*"  placeholder="MM" size="2" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                           </div>
-                           <div class="col-sm-2">
-                              <input type="text" name="birth_day"
-                                 class="form-control form-control text-center" id="birth"
-                                 value=""  placeholder="DD" size="2" maxlength="2" min="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 
-                        </div>
-                        </div>
-                        
-                        <div class="form-group row">
-                           <label for="colFormLabel"
-                              class="col-sm-3 col-form-label col-form-label">휴대폰 번호</label>
-                           <div class="col-sm-6">
-                              <input type="text" name="phone"
-                                 class="form-control form-control" id="phone"
-                                 value="${user.phone}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                           </div>
-                        </div>
-                        </c:if>
-                        
-                        
-	            <c:if test="${sessionScope.user.role == '사장님' }">
-
-                        <div class="form-group row">
-                           <label for="colFormLabel"
-                              class="col-sm-3 col-form-label col-form-label">아이디</label>
-                           <div class="col-sm-6">
-                              <input type="text" name="userId"
-                                 class="form-control form-control" id="userId"
-                                 value="${user.userId}" readonly oninput="this.value=this.value.replace(' ','');">
-                           </div>
-                        </div>
-
-                        <div class="form-group row">
-                           <label for="colFormLabel"
-                              class="col-sm-3 col-form-label col-form-label">비밀번호</label>
-                           <div class="col-sm-6">
-                              <input type="password" name="password"
-                                 class="form-control form-control" id="password"
-                                 value=""  oninput="this.value=this.value.replace(' ','');">
-                           </div>
-                        </div>
-
-                        <div class="form-group row">
-                           <label for="colFormLabel"
-                              class="col-sm-3 col-form-label col-form-label">새 비밀번호</label>
-                           <div class="col-sm-6">
-                              <input type="password" name="password2"
-                                 class="form-control form-control" id="password2"
-                                 value="" oninput="this.value=this.value.replace(' ','');">
-                           </div>
-                        </div>
-
-                        <div class="form-group row">
-                           <label for="colFormLabel"
-                              class="col-sm-3 col-form-label col-form-label">새 비밀번호 확인</label>
-                           <div class="col-sm-6">
-                              <input type="password" name="password3"
-                                 class="form-control form-control" id="password3"
-                                 value="" oninput="this.value=this.value.replace(' ','');">
-                           </div>
-                        </div>
-
-                        <div class="form-group row">
-                           <label for="colFormLabel"
-                              class="col-sm-3 col-form-label col-form-label">이름</label>
-                           <div class="col-sm-6">
-                              <input type="text" name="userName"
-                                 class="form-control form-control" id="userName"
-                                 value="${user.userName}" readonly oninput="this.value=this.value.replace(' ','');">
-                           </div>
-                        </div>
-
-                        <div class="form-group row">
-                           <label for="colFormLabel"
-                              class="col-sm-3 col-form-label col-form-label">이메일</label>
-                           <div class="col-sm-6">
-                              <input type="text" name="email"
-                                 class="form-control form-control" id="email"
-                                 value="${user.email}" oninput="this.value=this.value.replace(' ','');">
-                           </div>
-                        </div>
-
-                        <div class="form-group row" >
-                           <label for="colFormLabel" 
-                              class="col-sm-3 col-form-label col-form-label">성별</label>
-                              
-                           <div class="col-sm-2" style="display:flex; margin-top:5px;">
-                              <input type="radio" name="gender"
-                                 class="form-control form-control" id="gender"
-                                 value="남" style="font-size:10px; background: transparent;" onfocus="this.blur()">
-                           	<label for="" class="col-sm-1" style="margin-right:40px;">남</label>
-                           </div>
-                           
-                           <div class="col-sm-2" style="display:flex; text-align:center; margin-top:5px;">
-                              <input type="radio" name="gender"
-                                 class="form-control form-control" id="gender"
-                                 value="여" style="font-size:10px;" onfocus="this.blur()">
-                           	<label for="" class="col-sm-1" style="margin-right:40px;">여</label>
-                           </div>
-                           
-                           <div class="col-sm-2" style="display:flex; margin-top:5px;">
-                              <input type="radio" name="gender"
-                                 class="form-control form-control" id="gender"
-                                 value="없음" style="font-size:10px;" onfocus="this.blur()">
-                           	<label for="" class="col-sm-1" style="margin-right:40px;">X</label>
->>>>>>> refs/remotes/origin/master
                            </div>
                            
                         </div>
@@ -733,7 +590,6 @@ $(function() {
                         
                         <div class="form-group row">
                            <label for="colFormLabel"
-<<<<<<< HEAD
                               class="col-sm-3 col-form-label col-form-label">추천인 아이디</label>
                            <div class="col-sm-6">
                               <input type="text" name="rpId"
@@ -869,8 +725,6 @@ $(function() {
                         
                         <div class="form-group row">
                            <label for="colFormLabel"
-=======
->>>>>>> refs/remotes/origin/master
                               class="col-sm-3 col-form-label col-form-label">사업자등록번호</label>
                            <div class="col-sm-6">
                               <input type="text" name="businessNo"
@@ -896,30 +750,18 @@ $(function() {
                      &nbsp;&nbsp;&nbsp;
                      <button type="button" id="deleteUser" class="btn btn-outline-danger">회원 탈퇴</button>
                   </div>
-<<<<<<< HEAD
             <!— 회원 탈퇴 버튼 End —>
-=======
-				<!— 회원 탈퇴 버튼 End —>
->>>>>>> refs/remotes/origin/master
          </div>
       </div>
    </section>
    <!—   Blog Section End —>
    
-<<<<<<< HEAD
                 <!-- 쿠폰 Modal 시작  -->
             <div class="modal fade" id="staticBackdrop" data-backdrop="static"
                data-keyboard="false" tabindex="-1"
                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-=======
-    				<!-- 쿠폰 Modal 시작  -->
-				<div class="modal fade" id="staticBackdrop" data-backdrop="static"
-					data-keyboard="false" tabindex="-1"
-					aria-labelledby="staticBackdropLabel" aria-hidden="true">
->>>>>>> refs/remotes/origin/master
 
 
-<<<<<<< HEAD
                <div class="modal-dialog">
                   <div class="modal-content"
                      style="width: 802px;height: 500px;align-items: center;right: 150px;">
@@ -979,67 +821,6 @@ $(function() {
 
             </div> 
             <!-- 쿠폰 Modal 끝 -->
-=======
-					<div class="modal-dialog">
-						<div class="modal-content"
-							style="width: 802px;height: 500px;align-items: center;right: 150px;">
-							<div class="modal-header">
-								<h5 class="modal-title" id="staticBackdropLabel">
-									<strong style="padding-right: 550px;"><img
-										src="${path}/resources/static/img/coupon.png"
-										style="width: 50px; height: 40px;">&nbsp;&nbsp;&nbsp;쿠폰
-										목록 조회</strong></strong>
-								</h5>
-							</div>
-							<div class="modal-body">
-								<div>
-
-									<table class="table" style="width: 700px">
-										<thead>
-											<tr>
-												<th scope="col">#</th>
-												<th scope="col">쿠폰종류</th>
-												<th scope="col">쿠폰할인율</th>
-												<th scope="col">유효기간</th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="coupon" items="${couponList}">
-												<c:set var="i" value="${ i+1 }" />
-
-												<tr>
-													<th scope="row">${i}</th>
-													<td><c:if test="${coupon.couponType==1}">
-      								고객님의 회원가입을 축하합니다. (회원가입 쿠폰)
-      							</c:if> <c:if test="${coupon.couponType==2}">
-      								고객님의 첫 구매를 축하합니다. (첫구매 쿠폰)
-      							</c:if> <c:if test="${coupon.couponType==3}">
-     								고객님의 생일을 축하합니다. (생일축하 쿠폰)
-      							</c:if> <c:if test="${coupon.couponType==4}">
-     								고객님께 소중한 쿠폰 배달왔습니다. (추천인 쿠폰)
-      							</c:if></td>
-													<td style="padding-left: 35px;"><fmt:formatNumber value="${coupon.couponDc*100}" />%</td>
-													<td>${coupon.couponValidDate}</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</div>
-
-
-
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-
-
-				</div> 
-				<!-- 쿠폰 Modal 끝 -->
->>>>>>> refs/remotes/origin/master
    
 
    <!--  Footer Begin  --> 
