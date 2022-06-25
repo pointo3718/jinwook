@@ -53,7 +53,7 @@ public class RequestController {
 	// ========== 상점 등록 요청 !!!!!!! 요청 목록 만들고 다시 !!!!!!!===========
 	@PostMapping(value = "addRequestAddStore")
 	
-	public String addRequestAddStore(Store store, HttpSession session, MultipartHttpServletRequest mpRequest, @RequestParam("storeNo") int storeNo
+	public String addRequestAddStore(Store store, HttpSession session, MultipartHttpServletRequest mpRequest
 										) throws Exception {
 		
 		System.out.println("/request/addRequestAddStore : POST");
@@ -123,7 +123,9 @@ public class RequestController {
 	
 	// ========== 광고 등록 신청 폼 ===========
 	@GetMapping(value = "addRequestAd")
-	public String addRequestAdView(@RequestParam("userId") String userId, Model model) {
+	public String addRequestAdView(Model model, HttpSession session) {
+		String userId = ((User) session.getAttribute("user")).getUserId();
+
 		List<Store> storeInfo = storeService.getStoreInfo(userId);
 		model.addAttribute("storeInfo", storeInfo);
 		return "/request/addRequestAdView";

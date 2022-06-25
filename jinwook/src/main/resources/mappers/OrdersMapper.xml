@@ -46,8 +46,9 @@
    
    <resultMap type="user" id="userSelectMap">
          <result property="userId"            column="user_id"      jdbcType="VARCHAR"/>
-         <result property="grade"            column="grade"         jdbcType="VARCHAR"/>
-         <result property="jpBalance"         column="jp_-balance"   jdbcType="INTEGER"/>
+         <result property="grade"         	  column="grade"        jdbcType="VARCHAR"/>
+         <result property="jpBalance"         column="jp_balance"   jdbcType="INTEGER"/>
+         <result property="jpPassword"		  column="jp_password"	jdbcType="VARCHAR"/>
    </resultMap>
    
     <resultMap type="jpay" id="jpaySelectMap">
@@ -292,6 +293,13 @@
      AND s.user_id = o.user_id
      AND s.user_id = #{userId} 
    </update>
+   
+   <select id="checkJpPassword" parameterType="String" resultType="int">
+   	SELECT COUNT(*)
+   	FROM users
+   	WHERE jp_password = #{jpPassword}
+   	
+   </select>
 </mapper>
    
    

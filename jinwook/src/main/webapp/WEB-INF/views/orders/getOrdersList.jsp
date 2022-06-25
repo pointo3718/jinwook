@@ -90,14 +90,14 @@
 
          <thead>
           <tr>
-            <th align="center">주문번호</th>
-            <th align="left" >주문날짜</th>
-            <th align="left" >상품사진</th>
+            <th align="left">주문번호</th>
+            <th align="left">주문날짜</th>
+            <th align="left">상품사진</th>
             <th align="left">상품이름</th>
             <th align="left">주문금액</th>
             <th align="left">픽업시간</th>
             <th align="left">주문현황</th>
-            <th align="left">임시 </th>
+            <th align="left">&nbsp;<th>
           </tr>
        </thead>
         
@@ -107,7 +107,7 @@
         <c:forEach var="orders" items="${getOrdersList}">
          <c:set var="i" value="${ i+1 }" />
          <tr>
-           <td align="center" value="${orders.orderNo}">${orders.orderNo}</td>
+           <td align="left">${orders.orderNo}</td>
            <td align="left"><fmt:formatDate value="${orders.orderDate}" dateStyle="full"/></td>
            <td align="left">${orders.product.prodImg}</td>
            <td align="left">${orders.product.prodName}</td>
@@ -120,6 +120,7 @@
            <c:if test="${orders.orderStatus eq '4'}">주문 취소</c:if>
            <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
            </td>
+           <td><a href="/getOrders?orderNo=${orders.orderNo}"><i class="bi bi-caret-right"></i></a></td>
          </tr>
           </c:forEach>
             

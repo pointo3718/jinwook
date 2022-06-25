@@ -44,7 +44,7 @@ public interface AdminMapper {
 	
 	public int getBlacklistTotalCount(User user);					// 블랙리스트 목록 개수
 	
-	public List<Store> getStoreList(String storeType);						// 카테고리별 상점 목록
+	public List<Store> getStoreList(String storeType);				// 카테고리별 상점 목록
 	
 	
 	//////// 차트 ////////

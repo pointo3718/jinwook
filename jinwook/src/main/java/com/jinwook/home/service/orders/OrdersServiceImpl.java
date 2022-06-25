@@ -195,5 +195,11 @@ public class OrdersServiceImpl implements OrdersService{
 		return ordersMapper.updateOrdersCeoEarn(store);
 	}
 
+	@Override
+	public int checkJpPassword(User user) {
+		
+		return ordersMapper.checkJpPassword(user);
+	}
+
 
 }

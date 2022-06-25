@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -43,6 +44,28 @@
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+
+/////////////// 가지고 있는 쿠폰 개수 ///////////////
+$(function() {
+  getCouponCount();
+});
+
+function getCouponCount() {
+
+  var uri = "/store/getCouponCount";
+
+  $.get(uri, function(response) {
+  
+        var countCouponHtml = "";
+
+        countCouponHtml += `
+              <span>\${response.getCouponCount}</span>
+           `;
+
+        $(".countCoupon").html(countCouponHtml);
+     
+  }, "json");
+}
    
    function movePage(uri, queryString) {
       location.href = uri + queryString;
@@ -252,7 +275,7 @@ $(function() {
 				<div class="col-4">
 					<div class="bg-white text-black mx-3" style="height: 153px;">
 
-						<br/> <strong class="mytop01"><span style="font-size: 25px;">보유쿠폰 &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></strong> <br/> <br/>
+						<br/> <strong class="mytop01"><span style="font-size: 25px;"><a data-toggle="modal" style="color:black;" href="#staticBackdrop">보유쿠폰</a> &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></strong> <br/> <br/>
 						<h2 class="mytop01-content " id="request"><span class="countall"><span class="countCoupon"></span></span></h2> 개 </br> </br>
 
 					</div>
@@ -351,16 +374,82 @@ $(function() {
                    <hr style="height:20px;">
 
                   <div class="text-center">
-                     <button type="button" id="button" class="btn site-btn" onClick="fncUpdateUser()">
+                     <button type="button" id="button11" class="site-btn" style="border-radius:4px;" onClick="fncUpdateUser()">
                         확인</button>
                   </div>
                   <!--비밀번호 확인 End-->
          </div>
       </div>
    </section>
-   <!--   Blog Section End -->
+   <!-- Blog Section End -->
+   
+         				<!-- 쿠폰 Modal 시작  -->
+				<div class="modal fade" id="staticBackdrop" data-backdrop="static"
+					data-keyboard="false" tabindex="-1"
+					aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
-   <!--  Footer Begin -->
+
+					<div class="modal-dialog">
+						<div class="modal-content"
+							style="width: 802px;height: 500px;align-items: center;right: 150px;">
+							<div class="modal-header">
+								<h5 class="modal-title" id="staticBackdropLabel">
+									<strong style="padding-right: 550px;"><img
+										src="${path}/resources/static/img/coupon.png"
+										style="width: 50px; height: 40px;">&nbsp;&nbsp;&nbsp;쿠폰
+										목록 조회</strong></strong>
+								</h5>
+							</div>
+							<div class="modal-body">
+								<div>
+
+									<table class="table" style="width: 700px">
+										<thead>
+											<tr>
+												<th scope="col">#</th>
+												<th scope="col">쿠폰종류</th>
+												<th scope="col">쿠폰할인율</th>
+												<th scope="col">유효기간</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="coupon" items="${couponList}">
+												<c:set var="i" value="${ i+1 }" />
+
+												<tr>
+													<th scope="row">${i}</th>
+													<td><c:if test="${coupon.couponType==1}">
+      								고객님의 회원가입을 축하합니다. (회원가입 쿠폰)
+      							</c:if> <c:if test="${coupon.couponType==2}">
+      								고객님의 첫 구매를 축하합니다. (첫구매 쿠폰)
+      							</c:if> <c:if test="${coupon.couponType==3}">
+     								고객님의 생일을 축하합니다. (생일축하 쿠폰)
+      							</c:if> <c:if test="${coupon.couponType==4}">
+     								고객님께 소중한 쿠폰 배달왔습니다. (추천인 쿠폰)
+      							</c:if></td>
+													<td style="padding-left: 35px;"><fmt:formatNumber value="${coupon.couponDc*100}" />%</td>
+													<td>${coupon.couponValidDate}</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+
+
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+
+
+				</div> 
+				<!-- 쿠폰 Modal 끝 -->
+
+   <!-- Footer Begin --> 
    <jsp:include page="../layout/footer.jsp" />
    <!-- Footer End -->
 

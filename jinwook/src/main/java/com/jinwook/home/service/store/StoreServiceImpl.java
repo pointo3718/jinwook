@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.jinwook.home.common.FileUtils;
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.StoreMapper;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Request;
@@ -42,9 +43,19 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void addStoreProduct(Product product) {
+	public void addStoreProduct(Product product, MultipartHttpServletRequest mpRequest)throws Exception {
 
 		storeMapper.addStoreProduct(product);
+
+		List<Map<String,Object>> list = fileUtils.parseInsertProductFileInfo(product, mpRequest); 
+		int size = list.size();
+		
+		for(int i=0; i<size; i++){ 
+			storeMapper.insertProductFile(list.get(i)); 
+		}		
+
+		
+		
 	}
 	
 
@@ -166,9 +177,10 @@ public class StoreServiceImpl implements StoreService {
 
 		List<Store> getStoreWallet = Collections.emptyList();
 
-		int storeTotalCount = storeMapper.getStoreWalletTotalCount();
+		int getStoreWalletTotalCount = storeMapper.getStoreWalletTotalCount();
+		
 
-		if (storeTotalCount > 0) {
+		if (getStoreWalletTotalCount > 0) {
 			getStoreWallet = storeMapper.getStoreWallet(store);
 		}
 
@@ -218,6 +230,11 @@ public class StoreServiceImpl implements StoreService {
 		return getStoreOnly;
 	}
 	
-
+	
+	// 상점 사진 조회
+	@Override
+	public Attach selectStoreAttachList(int storeNo){
+		return storeMapper.selectStoreAttachList(storeNo);
+	}
 
 }

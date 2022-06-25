@@ -97,14 +97,6 @@ public class OrdersController {
       return "redirect:/orders/getOrdersList";
    }	
    
-   @GetMapping(value= "addOrdersView")
-   public String addOrdersView() throws Exception{
-	   
-	   System.out.println("orders/addOrdersView : POST");
-	   
-	   return null;
-   }
-   
    @PostMapping(value = "updateOrders")
    public String updateOrders(@ModelAttribute("orders") Orders orders, Model model) throws Exception {
       
@@ -135,6 +127,10 @@ public class OrdersController {
      User user = new User();
       user.setUserId(userid);
       orders.setUser(user);
+
+      List<Coupon> couponList = storeService.getCouponList(userid);
+      model.addAttribute("couponList", couponList);
+      
       
       System.out.println("/orders/getOrdersList : GET");
       List<Orders> getOrdersList = ordersService.getOrdersList(orders);

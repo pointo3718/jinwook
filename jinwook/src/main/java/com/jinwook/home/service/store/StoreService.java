@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jinwook.home.common.Criteria;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
@@ -20,8 +21,8 @@ public interface StoreService {
 	
 	public boolean updateStore(Store store);
 	
-	public void addStoreProduct(Product Product);
-
+	public void addStoreProduct(Product Product, MultipartHttpServletRequest mpRequest) throws Exception;
+	
 	public boolean updateStoreProduct(Product product);
 	   
 	public boolean deleteStoreProduct(int prodNo);
@@ -35,6 +36,9 @@ public interface StoreService {
 	public boolean addOrdersCoupon(int couponNo);
 	
 	public List<Store> getStoreOnly(int storeNo);
+	
+	public Attach selectStoreAttachList(int storeNo); 	// 상점 사진 조회
+
 	
 	public List<Coupon> getCouponList(String userId);
 	

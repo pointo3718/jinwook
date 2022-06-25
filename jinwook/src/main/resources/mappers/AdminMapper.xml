@@ -82,8 +82,10 @@
       FROM 
       	  store s, orders o,
       	  (SELECT ROUND(AVG(review_star),1) review_star FROM orders)vt
-      WHERE s.store_type= #{storeType}
-      GROUP BY store_no
+      WHERE
+      	  s.store_type= #{storeType}
+      GROUP BY 
+      	  store_no
    </select>
 
 	<!-- 유저 상세 -->
@@ -162,9 +164,28 @@
 				, #{userId} <!-- 신고당한 아이디 -->
 				, #{complainId} <!-- 신고한 아이디 (세션)-->
 				, SYSDATE()
-				, #{complainCode}
-				, #{complainTarget} <!-- reqNo, commentNo,  -->
-				, #{complainTargetNo} <!-- 컬럼 추가해야 할듯 ... reqNo, commentNo, reviewNo 받는 -->
+				<if test= 'complainCode == "욕설"'>
+				, '욕설' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "비방"'>
+				, '비방' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "도배"'>
+				, '도배' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "음란성"'>
+				, '음란성' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "불법도용"'>
+				, '불법도용' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "광고성"'>
+				, '광고성' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "기타"'>
+				, '기타' <!-- reqNo, commentNo,  -->
+				</if>
+				, #{r} <!-- 컬럼 추가해야 할듯 ... reqNo, commentNo, reviewNo 받는 -->
 				, false
 				, false
 			)
@@ -298,74 +319,76 @@
 	<!-- 차트 -->
 	<!-- 월별 회원가입 -->
 	<select id="getJoinForMonthChart" resultType="Chart">
-	SELECT 
-		CONCAT(YEAR(reg_date), '-', MONTH(reg_date)) AS ym, count(*) AS count
-	FROM 
-		users
-	WHERE 
-		YEAR(reg_date) = 2022
-	GROUP BY 
-		ym
-	ORDER BY 
-		ym
+		SELECT 
+			CONCAT(YEAR(reg_date), '-', MONTH(reg_date)) AS ym, count(*) AS count
+		FROM 
+			users
+		WHERE 
+			YEAR(reg_date) = 2022
+		GROUP BY 
+			ym
+		ORDER BY 
+			ym
 	</select>
 	
 	<!-- 역할별 사용자 -->
  	<select id="getUserByRole" resultType="Chart">
-	SELECT DISTINCT 
-		(SELECT COUNT(*) FROM users WHERE role = '사용자')AS user_count, 
-		(SELECT COUNT(*) FROM users WHERE role = '사장님')AS ceo_count, 
-		(SELECT COUNT(*) FROM users WHERE role = '관리자')AS admin_count
-	FROM 
-		users;
+		SELECT DISTINCT 
+			(SELECT COUNT(*) FROM users WHERE role = '사용자')AS user_count, 
+			(SELECT COUNT(*) FROM users WHERE role = '사장님')AS ceo_count, 
+			(SELECT COUNT(*) FROM users WHERE role = '관리자')AS admin_count
+		FROM 
+			users;
 	</select> 
 	
 	<!-- 월별 주문수 / 주문금액 -->
  	<select id="getOrderCountAndPrice" resultType="Chart">
-	SELECT 
-		CONCAT(YEAR(order_date), '-', MONTH(order_date)) AS ym,
-		count(*) AS count, 
-		SUM(order_price)/10000 AS sum_price
-	FROM 
-		orders
-	WHERE 
-		YEAR(order_date) = 2022
-	GROUP BY 
-		ym
-	ORDER BY 
-		ym
+		SELECT 
+			CONCAT(YEAR(order_date), '-', MONTH(order_date)) AS ym,
+			count(*) AS count, 
+			SUM(order_price)/10000 AS sum_price
+		FROM 
+			orders
+		WHERE 
+			YEAR(order_date) = 2022
+		GROUP BY 
+			ym
+		ORDER BY 
+			ym
 	</select> 
 	
 	<!-- 사용자 구분(일반/블랙/탈퇴) -->
  	<select id="getUserType" resultType="Chart">
-	SELECT DISTINCT
-		(SELECT 
-			COUNT(*) 
-		 FROM 
-		 	users
-		 WHERE 
-		 	user_bye_status = false AND blacklist_status = FALSE
-		) AS user_count,
-		
-		(SELECT 
-			COUNT(*) 
-		 FROM 
-		 	users
-		 WHERE 
-		 	user_bye_status = false AND blacklist_status = TRUE
-		) AS blacklist_count,
-		
-		(SELECT 
-			COUNT(*) 
-		 FROM 
-		 	users
-		 WHERE 
-		 	user_bye_status = TRUE
-		)AS bye_user_count
-		
-	FROM 
-		users;
+		SELECT DISTINCT
+			(SELECT 
+				COUNT(*) 
+			 FROM 
+			 	users
+			 WHERE 
+			 	user_bye_status = false AND blacklist_status = FALSE
+			) AS user_count,
+			
+			(SELECT 
+				COUNT(*) 
+			 FROM 
+			 	users
+			 WHERE 
+			 	user_bye_status = false AND blacklist_status = TRUE
+			) AS blacklist_count,
+			
+			(SELECT 
+				COUNT(*) 
+			 FROM 
+			 	users
+			 WHERE 
+			 	user_bye_status = TRUE
+			)AS bye_user_count
+			
+		FROM 
+			users;
 	</select> 
+	
+	
 	
 
 </mapper>
