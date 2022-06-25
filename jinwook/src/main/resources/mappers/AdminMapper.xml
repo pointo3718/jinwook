@@ -164,9 +164,28 @@
 				, #{userId} <!-- 신고당한 아이디 -->
 				, #{complainId} <!-- 신고한 아이디 (세션)-->
 				, SYSDATE()
-				, #{complainCode}
-				, #{complainTarget} <!-- reqNo, commentNo,  -->
-				, #{complainTargetNo} <!-- 컬럼 추가해야 할듯 ... reqNo, commentNo, reviewNo 받는 -->
+				<if test= 'complainCode == "욕설"'>
+				, '욕설' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "비방"'>
+				, '비방' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "도배"'>
+				, '도배' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "음란성"'>
+				, '음란성' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "불법도용"'>
+				, '불법도용' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "광고성"'>
+				, '광고성' <!-- reqNo, commentNo,  -->
+				</if>
+				<if test= 'complainCode == "기타"'>
+				, '기타' <!-- reqNo, commentNo,  -->
+				</if>
+				, #{r} <!-- 컬럼 추가해야 할듯 ... reqNo, commentNo, reviewNo 받는 -->
 				, false
 				, false
 			)
@@ -368,6 +387,8 @@
 		FROM 
 			users;
 	</select> 
+	
+	
 	
 
 </mapper>

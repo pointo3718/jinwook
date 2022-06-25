@@ -111,6 +111,13 @@
 			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=4");
 		});
 	});
+	/////////////// 통계 화면 이동 ////////////////
+		$(function() {
+	 	$( ".list-group-item:contains('통계')").on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/admin/chart");
+		});
+	});
 
 	
 	 /////////////// 요청대기 COUNT REST 시작 ////////////////
@@ -774,6 +781,8 @@ a{
 									class="list-group-item list-group-item-action">
 								1:1 문의내역
 								</button>
+								 <button type="button"
+			                          class="list-group-item list-group-item-action">통계</button>
 							</div>
 
 						</div>
@@ -1211,7 +1220,7 @@ $(document).ready(function(){
 			   }, "json");
 			}
 
-	//모달 창 오픈할 때 해당 유저아이디 전달 //
+	//모달 창 오픈할 때 해당 유저아이디 전달//
 	$(document).ready(function() {     
 
 		$('#getRequestAddStore').on('show.bs.modal', function(event) {          

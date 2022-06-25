@@ -123,7 +123,9 @@ public class RequestController {
 	
 	// ========== 광고 등록 신청 폼 ===========
 	@GetMapping(value = "addRequestAd")
-	public String addRequestAdView(@RequestParam("userId") String userId, Model model) {
+	public String addRequestAdView(Model model, HttpSession session) {
+		String userId = ((User) session.getAttribute("user")).getUserId();
+
 		List<Store> storeInfo = storeService.getStoreInfo(userId);
 		model.addAttribute("storeInfo", storeInfo);
 		return "/request/addRequestAdView";
