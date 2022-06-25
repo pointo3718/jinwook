@@ -106,10 +106,11 @@ function movePage(uri, queryString) {
                 
                 <div class="imgborder">
                 <form name="readForm" role="form" method="post">
-					<img width="400" height="400"
-						src="/resources/static/${board.attach.orgFileName}"
-						alt="..." width="300" height="300" style="margin-left:20px; "
-						onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'">
+                <img attachNo="${attach.attachNo}" width="400" height="400"
+					src="/resources/static/${attach.orgFileName}" alt="..."
+					onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" 
+					width="300" height="300" style="margin-left: 20px; margin-bottom: 20px;"/>
+					
 						<%-- <div class="form-group">
  				<c:forEach var="file" items="${file}">
  				<input type="hidden" id="attach_no" name="attach_no" value="">

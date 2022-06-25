@@ -58,6 +58,8 @@ public interface StoreMapper {
 	public Attach selectStoreAttachList(int storeNo); 	// 상점 사진 조회
 	
 	
+	public void insertStoreFile(Map<String, Object> map);
+		
 	public int getStoreMapTotalCount();
 	
 	public int getStoreTotalCount();

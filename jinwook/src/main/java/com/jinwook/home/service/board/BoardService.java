@@ -94,7 +94,7 @@ public interface BoardService {
 	//레시피 댓글 등록
 	public void addRecipeComment(Comment comment) throws Exception;
 	//레시피 댓글 수정
-	public int updateRecipeComment(Comment comment) throws Exception;
+	public void updateRecipeComment(Comment comment) throws Exception;
 	//레시피 댓글 삭제
 	public int deleteRecipeComment(int commentNo) throws Exception;
 	//선택된 레시피 댓글 조회

@@ -2,297 +2,297 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jinwook.home.mapper.OrdersMapper">
-	
-	<resultMap type="orders" id="ordersSelectMap">
-			<result property="orderNo"				column="order_no"		jdbcType="INTEGER"/>
-			<result property="buyerName"			column="buyer_name"		jdbcType="VARCHAR"/>
-			<result property="buyerPhone"			column="buyer_phone"	jdbcType="VARCHAR"/>
-			<result property="orderDate"			column="order_date"		jdbcType="DATE"/>
-			<result property="pickupTime"			column="pickup_time"	jdbcType="TIME"/>
-			<result property="orderReq"				column="order_req"		jdbcType="VARCHAR"/>
-			<result property="orderStatus"			column="order_status"	jdbcType="VARCHAR"/>
-			<result property="finalPrice"			column="final_price"	jdbcType="INTEGER"/>
-			<result property="prodCount"			column="prod_count"		jdbcType="INTEGER"/>
-			<result property="orderPrice"			column="order_price"	jdbcType="INTEGER"/>
-			<result property="store.storeNo"		column="store_no"		jdbcType="INTEGER"/>
-			<result property="store.storeName"		column="store_name"		jdbcType="VARCHAR"/>
-			<result property="user.userId"			column="user_id"		jdbcType="VARCHAR"/>
-			<result property="user.grade"			column="grade"			jdbcType="VARCHAR"/>
-			<result property="product.prodName"		column="prod_name"		jdbcType="VARCHAR"/>
-			<result property="product.prodInfo"		column="prod_info"		jdbcType="VARCHAR"/>
-			<result property="product.price"		column="price"			jdbcType="INTEGER"/>
-			<result property="product.prodImg"		column="prod_img"		jdbcType="VARCHAR"/>
-			<result property="coupon.couponNo"		column="coupon_no"		jdbcType="INTEGER"/>
-			<result property="coupon.couponType"	column="coupon_type"	jdbcType="VARCHAR"/>
-			<result property="coupon.couponDc"		column="coupon_dc"		jdbcType="INTEGER"/>
-	</resultMap>
-	
-	<resultMap type="cart" id="cartSelectMap">
-			<result property="cartNo"				column="cart_no"		jdbcType="INTEGER"/>
-			<result property="userId"				column="user_id"		jdbcType="VARCHAR"/>
-			<result property="user.grade"			column="grade"			jdbcType="VARCHAR"/>
-			<result property="orders.orderNo"		column="order_no"		jdbcType="INTEGER"/>
-			<result property="orders.orderPrice"	column="order_price"	jdbcType="INTEGER"/>
-			<result property="storeNo"				column="store_no"		jdbcType="INTEGER"/>
-			<result property="storeName"			column="store_name"		jdbcType="VARCHAR"/>
-			<result property="prodCount"			column="prod_count"		jdbcType="INTEGER"/>
-			<result property="cartStatus"			column="cart_status"	jdbcType="VARCHAR"/>
-			<result property="product.prodNo"		column="prod_no"		jdbcType="INTEGER"/>
-			<result property="product.prodName"		column="prod_name"		jdbcType="VARCHAR"/>
-			<result property="product.prodImg"		column="prod_img"		jdbcType="VARCHAR"/>
-			<result property="product.prodInfo"		column="prod_info"		jdbcType="VARCHAR"/>
-			<result property="product.price"		column="price"			jdbcType="INTEGER"/>
-	</resultMap>
-	
-	<resultMap type="user" id="userSelectMap">
-			<result property="userId"				column="user_id"		jdbcType="VARCHAR"/>
-			<result property="grade"				column="grade"			jdbcType="VARCHAR"/>
-			<result property="jpBalance"			column="jp_-balance"	jdbcType="INTEGER"/>
-	</resultMap>
-	
-	 <resultMap type="jpay" id="jpaySelectMap">
-			<result property="jpNo"					column="jp_no"			jdbcType="INTEGER"/>
-			<result property="userId"				column="user_id"		jdbcType="VARCHAR"/>
-			<result property="orders.orderNo"		column="order_no"		jdbcType="VARCHAR"/>
-			<result property="jpStatus"				column="jp_status"		jdbcType="INTEGER"/>
-			<result property="finalPrice"			column="final_price"	jdbcType="INTEGER"/>
-			<result property="chargePay"			column="charge_pay"		jdbcType="INTEGER"/>
-			<result property="jpDate"				column="jp_date"		jdbcType="DATE"/>
-			<result property="orders.store.storeName" 	column="store_name" jdbcType="VARCHAR"/>
-	</resultMap>
-	
-	<resultMap type="notice" id="noticeSelectMap">
-			<result property="notiNo"				column="noti_no"		jdbcType="INTEGER"/>
-			<result property="sendId"				column="send_id"		jdbcType="VARCHAR"/>
-			<result property="receiveId"			column="receive_id"		jdbcType="VARCHAR"/>
-			<result property="orderNo"				column="order_no"		jdbcType="INTEGER"/>
-			<result property="notiType"				column="noti_type"		jdbcType="VARCHAR"/>
-			<result property="notiContent"			column="noti_content"	jdbcType="VARCHAR"/>
-			<result property="storeName"			column="store_name"		jdbcType="VARCHAR"/>
-			<result property="buyerName"			column="buyer_name"		jdbcType="VARCHAR"/>
-			<result property="notiDate"				column="noti_date"		jdbcType="DATE"/>
-	</resultMap> 
-	
-	<insert id="addOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderNo">
-		INSERT 
-		INTO orders(user_id,store_no,buyer_name,buyer_phone,pickup_time,order_req,order_price,prod_count,order_date,order_status,final_price)
-		VALUES(#{user.userId:VARCHAR} , #{cart.storeNo:INTEGER} , #{buyerName:VARCHAR} , #{buyerPhone:VARCHAR} , #{pickupTime:TIME} , #{orderReq:VARCHAR}
-			, #{orderPrice:INTEGER} , #{prodCount} , #{pickupTime} , 1 ,#{finalPrice})
-	</insert>
-	
-	<update id="updateOrders">
-		UPDATE orders
-		<set>
-			order_status = #{orderStatus:VARCHAR}
-		</set>
-		WHERE order_no = #{orderNo}
-	</update>
-	
-	<delete id="deleteOrders">
-		DELETE FROM 
-		orders
-		WHERE order_no = #{orderNo}
-	</delete>
-	
-	<select id="getOrders" parameterType="int" resultMap="ordersSelectMap" >
-		SELECT o.user_id,o.order_no,p.prod_name,o.prod_count,p.price,p.prod_info,s.store_name,o.order_date,o.order_price,o.buyer_name,o.buyer_phone,o.order_req,o.pickup_time,o.order_status,p.prod_img
-		FROM orders o, product p, store s
-		WHERE o.store_no = p.store_no
-		AND o.store_no = s.store_no
-		AND order_no = #{orderNo}
-	</select>
-		
-	<select id="getOrdersList" parameterType="orders" resultMap="ordersSelectMap">
-		SELECT o.user_id,o.order_no,o.order_price,o.order_status,o.pickup_time,o.order_date,p.prod_name,p.prod_img
-		FROM orders o ,product p 
-		WHERE o.store_no = p.store_no
-		AND o.user_id = #{user.userId}
-		GROUP BY order_no
-		LIMIT
+   
+   <resultMap type="orders" id="ordersSelectMap">
+         <result property="orderNo"            column="order_no"      jdbcType="INTEGER"/>
+         <result property="buyerName"         column="buyer_name"      jdbcType="VARCHAR"/>
+         <result property="buyerPhone"         column="buyer_phone"   jdbcType="VARCHAR"/>
+         <result property="orderDate"         column="order_date"      jdbcType="DATE"/>
+         <result property="pickupTime"         column="pickup_time"   jdbcType="TIME"/>
+         <result property="orderReq"            column="order_req"      jdbcType="VARCHAR"/>
+         <result property="orderStatus"         column="order_status"   jdbcType="VARCHAR"/>
+         <result property="finalPrice"         column="final_price"   jdbcType="INTEGER"/>
+         <result property="prodCount"         column="prod_count"      jdbcType="INTEGER"/>
+         <result property="orderPrice"         column="order_price"   jdbcType="INTEGER"/>
+         <result property="store.storeNo"      column="store_no"      jdbcType="INTEGER"/>
+         <result property="store.storeName"      column="store_name"      jdbcType="VARCHAR"/>
+         <result property="user.userId"         column="user_id"      jdbcType="VARCHAR"/>
+         <result property="user.grade"         column="grade"         jdbcType="VARCHAR"/>
+         <result property="product.prodName"      column="prod_name"      jdbcType="VARCHAR"/>
+         <result property="product.prodInfo"      column="prod_info"      jdbcType="VARCHAR"/>
+         <result property="product.price"      column="price"         jdbcType="INTEGER"/>
+         <result property="product.prodImg"      column="prod_img"      jdbcType="VARCHAR"/>
+         <result property="coupon.couponNo"      column="coupon_no"      jdbcType="INTEGER"/>
+         <result property="coupon.couponType"   column="coupon_type"   jdbcType="VARCHAR"/>
+         <result property="coupon.couponDc"      column="coupon_dc"      jdbcType="INTEGER"/>
+   </resultMap>
+   
+   <resultMap type="cart" id="cartSelectMap">
+         <result property="cartNo"            column="cart_no"      jdbcType="INTEGER"/>
+         <result property="userId"            column="user_id"      jdbcType="VARCHAR"/>
+         <result property="user.grade"         column="grade"         jdbcType="VARCHAR"/>
+         <result property="orders.orderNo"      column="order_no"      jdbcType="INTEGER"/>
+         <result property="orders.orderPrice"   column="order_price"   jdbcType="INTEGER"/>
+         <result property="storeNo"            column="store_no"      jdbcType="INTEGER"/>
+         <result property="storeName"         column="store_name"      jdbcType="VARCHAR"/>
+         <result property="prodCount"         column="prod_count"      jdbcType="INTEGER"/>
+         <result property="cartStatus"         column="cart_status"   jdbcType="VARCHAR"/>
+         <result property="product.prodNo"      column="prod_no"      jdbcType="INTEGER"/>
+         <result property="product.prodName"      column="prod_name"      jdbcType="VARCHAR"/>
+         <result property="product.prodImg"      column="prod_img"      jdbcType="VARCHAR"/>
+         <result property="product.prodInfo"      column="prod_info"      jdbcType="VARCHAR"/>
+         <result property="product.price"      column="price"         jdbcType="INTEGER"/>
+   </resultMap>
+   
+   <resultMap type="user" id="userSelectMap">
+         <result property="userId"            column="user_id"      jdbcType="VARCHAR"/>
+         <result property="grade"            column="grade"         jdbcType="VARCHAR"/>
+         <result property="jpBalance"         column="jp_-balance"   jdbcType="INTEGER"/>
+   </resultMap>
+   
+    <resultMap type="jpay" id="jpaySelectMap">
+         <result property="jpNo"               column="jp_no"         jdbcType="INTEGER"/>
+         <result property="userId"            column="user_id"      jdbcType="VARCHAR"/>
+         <result property="orders.orderNo"      column="order_no"      jdbcType="VARCHAR"/>
+         <result property="jpStatus"            column="jp_status"      jdbcType="INTEGER"/>
+         <result property="finalPrice"         column="final_price"   jdbcType="INTEGER"/>
+         <result property="chargePay"         column="charge_pay"      jdbcType="INTEGER"/>
+         <result property="jpDate"            column="jp_date"      jdbcType="DATE"/>
+         <result property="orders.store.storeName"    column="store_name" jdbcType="VARCHAR"/>
+   </resultMap>
+   
+   <resultMap type="notice" id="noticeSelectMap">
+         <result property="notiNo"            column="noti_no"      jdbcType="INTEGER"/>
+         <result property="sendId"            column="send_id"      jdbcType="VARCHAR"/>
+         <result property="receiveId"         column="receive_id"      jdbcType="VARCHAR"/>
+         <result property="orderNo"            column="order_no"      jdbcType="INTEGER"/>
+         <result property="notiType"            column="noti_type"      jdbcType="VARCHAR"/>
+         <result property="notiContent"         column="noti_content"   jdbcType="VARCHAR"/>
+         <result property="storeName"         column="store_name"      jdbcType="VARCHAR"/>
+         <result property="buyerName"         column="buyer_name"      jdbcType="VARCHAR"/>
+         <result property="notiDate"            column="noti_date"      jdbcType="DATE"/>
+   </resultMap> 
+   
+   <insert id="addOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderNo">
+      INSERT 
+      INTO orders(user_id,store_no,buyer_name,buyer_phone,pickup_time,order_req,order_price,prod_count,order_date,order_status,final_price)
+      VALUES(#{user.userId:VARCHAR} , #{cart.storeNo:INTEGER} , #{buyerName:VARCHAR} , #{buyerPhone:VARCHAR} , #{pickupTime:TIME} , #{orderReq:VARCHAR}
+         , #{orderPrice:INTEGER} , #{prodCount} , #{pickupTime} , 1 ,#{finalPrice})
+   </insert>
+   
+   <update id="updateOrders">
+      UPDATE orders
+      <set>
+         order_status = #{orderStatus:VARCHAR}
+      </set>
+      WHERE order_no = #{orderNo}
+   </update>
+   
+   <delete id="deleteOrders">
+      DELETE FROM 
+      orders
+      WHERE order_no = #{orderNo}
+   </delete>
+   
+   <select id="getOrders" parameterType="int" resultMap="ordersSelectMap" >
+      SELECT o.user_id,o.order_no,p.prod_name,o.prod_count,p.price,p.prod_info,s.store_name,o.order_date,o.order_price,o.buyer_name,o.buyer_phone,o.order_req,o.pickup_time,o.order_status,p.prod_img
+      FROM orders o, product p, store s
+      WHERE o.store_no = p.store_no
+      AND o.store_no = s.store_no
+      AND order_no = #{orderNo}
+   </select>
+      
+   <select id="getOrdersList" parameterType="orders" resultMap="ordersSelectMap">
+      SELECT o.user_id,o.order_no,o.order_price,o.order_status,o.pickup_time,o.order_date,p.prod_name,p.prod_img
+      FROM orders o ,product p 
+      WHERE o.store_no = p.store_no
+      AND o.user_id = #{user.userId}
+      GROUP BY order_no
+      LIMIT
          #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
-	</select>
-	
-	<select id="getOrdersTotalCount" resultType="int">
-		SELECT COUNT(*)
-		FROM orders
-		WHERE user_id =#{user.userId}
-	</select>
-	
-	<insert id="addOrdersCart" useGeneratedKeys="true" keyProperty="cartNo">
-		INSERT
-		INTO cart(user_id,prod_no,prod_count,store_no,store_name,cart_status)
-		VALUES(#{userId},#{product.prodNo},#{prodCount:VARCHAR},#{storeNo},#{storeName},#{cartStatus})
-	</insert>
-	
-	<update id="updateOrdersCart">
-		UPDATE cart
-		<set>
-			prod_count = #{prodCount}
-		</set>
-		WHERE user_id = #{userId}
-		AND cart_no	= #{cartNo}
-	</update>
-	
-	<update id="deleteOrdersCartAfter">
-		UPDATE cart c ,orders o
-		<set>
-			c.order_no = #{orders.orderNo},
-			c.cart_status = #{cartStatus}
-		</set>
-		WHERE c.user_id = o.user_id
-		AND c.user_id = #{userId}
-		AND c.cart_no	= #{cartNo}
-	</update>
-	
-	<delete id="deleteOrdersCart" parameterType="int">
-		DELETE FROM 
-		cart
-		WHERE cart_no = #{cartNo}
-	</delete>
-	
-	<delete id="deleteOrdersCartAll">
-		DELETE FROM 
-		cart
-		WHERE cart_status = #{cartStatus}
-	</delete>
-	
-	<select id="getOrdersCartList" parameterType="cart" resultMap="cartSelectMap">
-	SELECT c.store_no,c.store_name,p.prod_img,p.prod_name,p.prod_info,c.prod_count,p.price,o.order_price,c.cart_no
-		FROM cart c , product p , orders o
-		WHERE c.prod_no = p.prod_no
+   </select>
+   
+   <select id="getOrdersTotalCount" resultType="int">
+      SELECT COUNT(*)
+      FROM orders
+      WHERE user_id =#{user.userId}
+   </select>
+   
+   <insert id="addOrdersCart" useGeneratedKeys="true" keyProperty="cartNo">
+      INSERT
+      INTO cart(user_id,prod_no,prod_count,store_no,store_name,cart_status)
+      VALUES(#{userId},#{product.prodNo},#{prodCount:VARCHAR},#{storeNo},#{storeName},#{cartStatus})
+   </insert>
+   
+   <update id="updateOrdersCart">
+      UPDATE cart
+      <set>
+         prod_count = #{prodCount}
+      </set>
+      WHERE user_id = #{userId}
+      AND cart_no   = #{cartNo}
+   </update>
+   
+   <update id="deleteOrdersCartAfter">
+      UPDATE cart c ,orders o
+      <set>
+         c.order_no = #{orders.orderNo},
+         c.cart_status = #{cartStatus}
+      </set>
+      WHERE c.user_id = o.user_id
+      AND c.user_id = #{userId}
+      AND c.cart_no   = #{cartNo}
+   </update>
+   
+   <delete id="deleteOrdersCart" parameterType="int">
+      DELETE FROM 
+      cart
+      WHERE cart_no = #{cartNo}
+   </delete>
+   
+   <delete id="deleteOrdersCartAll">
+      DELETE FROM 
+      cart
+      WHERE cart_status = #{cartStatus}
+   </delete>
+   
+   <select id="getOrdersCartList" parameterType="cart" resultMap="cartSelectMap">
+   SELECT c.store_no,c.store_name,p.prod_img,p.prod_name,p.prod_info,c.prod_count,p.price,o.order_price,c.cart_no
+      FROM cart c , product p , orders o
+      WHERE c.prod_no = p.prod_no
         AND   c.user_id = o.user_id
-		AND	  c.user_id = #{userId}
-		AND   c.cart_status = #{cartStatus}
+      AND     c.user_id = #{userId}
+      AND   c.cart_status = #{cartStatus}
         GROUP BY cart_no;
-	</select>
+   </select>
 
-	<select id="getCartTotalCount" resultType="int">
-		SELECT COUNT(*)
-		FROM cart
-		WHERE cart_status = 0
-	</select>
-	
-	<update id="addOrdersJpayPassword">
-		UPDATE users
-		<set>
-			jp_password = #{jpPassword}
-		</set>
-		WHERE user_id = #{userId}
-	</update>
-	
-	<update id="updateOrdersJpayPassword">
-		UPDATE users
-		<set>
-			jp_password = #{jpPassword}
-		</set>
-		WHERE user_id = #{userId}
-	</update>
-	
-	<update id="addOrdersjBCharge">
-		UPDATE users u, jpay j
-    	<if test="jpStatus==0">
-    	<set>
+   <select id="getCartTotalCount" resultType="int">
+      SELECT COUNT(*)
+      FROM cart
+      WHERE cart_status = 0
+   </select>
+   
+   <update id="addOrdersJpayPassword">
+      UPDATE users
+      <set>
+         jp_password = #{jpPassword}
+      </set>
+      WHERE user_id = #{userId}
+   </update>
+   
+   <update id="updateOrdersJpayPassword">
+      UPDATE users
+      <set>
+         jp_password = #{jpPassword}
+      </set>
+      WHERE user_id = #{userId}
+   </update>
+   
+   <update id="addOrdersjBCharge">
+      UPDATE users u, jpay j
+       <if test="jpStatus==0">
+       <set>
            u.jp_balance = (SELECT * FROM(SELECT u.jp_balance + j.charge_pay
                        FROM users u, jpay j
                        WHERE u.user_id = j.user_id 
                        AND u.user_id = #{userId}
                        AND j.jp_no =#{jpNo})as vt)
-     	</set>
-     	</if>
-     	<if test="jpStatus==1">
-     	<set>
+        </set>
+        </if>
+        <if test="jpStatus==1">
+        <set>
            u.jp_balance = (SELECT * FROM(SELECT u.jp_balance - o.final_price
                        FROM users u, orders o
                        WHERE u.user_id = o.user_id 
                        AND u.user_id = #{userId}
                        AND o.order_no = #{orderNo})as vt)
-     	</set>
-     	</if>                
-      	WHERE u.user_id = j.user_id
-      	AND u.user_id = #{userId} 
-	</update>
-	
-	<insert id="addOrdersJpayCharge" useGeneratedKeys="true" keyProperty="jpNo">
-		INSERT
-		INTO jpay(user_id,order_no,jp_status,final_price,charge_pay,jp_date)
-		VALUES(#{userId},#{orders.orderNo:INTEGER},#{jpStatus},#{finalPrice:INTEGER},#{chargePay:INTEGER},SYSDATE())
-	</insert>
-	
-	<select id="getOrdersJpayList" parameterType="jpay" resultMap="jpaySelectMap">
-		SELECT j.jp_no,j.jp_date,j.jp_status,j.charge_pay,j.final_price,c.store_name
-		FROM jpay j ,cart c, orders o
-		WHERE j.user_id = c.user_id
+        </set>
+        </if>                
+         WHERE u.user_id = j.user_id
+         AND u.user_id = #{userId} 
+   </update>
+   
+   <insert id="addOrdersJpayCharge" useGeneratedKeys="true" keyProperty="jpNo">
+      INSERT
+      INTO jpay(user_id,order_no,jp_status,final_price,charge_pay,jp_date)
+      VALUES(#{userId},#{orders.orderNo:INTEGER},#{jpStatus},#{finalPrice:INTEGER},#{chargePay:INTEGER},SYSDATE())
+   </insert>
+   
+   <select id="getOrdersJpayList" parameterType="jpay" resultMap="jpaySelectMap">
+      SELECT j.jp_no,j.jp_date,j.jp_status,j.charge_pay,j.final_price,c.store_name
+      FROM jpay j ,cart c, orders o
+      WHERE j.user_id = c.user_id
         AND j.user_id = o.user_id
         AND c.order_no = o.order_no
-		AND j.user_id = #{userId}
-		GROUP BY j.jp_no
-		LIMIT
+      AND j.user_id = #{userId}
+      GROUP BY j.jp_no
+      LIMIT
          #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
-	</select> 
+   </select> 
 
-	<select id="getOrdersJpayListTotalCount" resultType="int">
-		SELECT COUNT(*)
-		FROM jpay
-		WHERE user_id = #{userId}
-	</select>
-	
-	<insert id="addOrdersNotice" useGeneratedKeys="true" keyProperty="notiNo">
-		INSERT
-		INTO notice(send_id,receive_id,order_no,noti_type,noti_content,noti_date,store_name,buyer_name)
-		VALUES (#{sendId},#{receiveId},#{orderNo},#{notiType},#{notiContent},SYSDATE(),#{storeName},#{buyerName})
-	</insert>
-	
-	<delete id="deleteOrdersNotice">
-		DELETE 
-		FROM notice
-		WHERE noti_no = #{notiNo}
-	</delete>
-	
-	<select id="getOrdersNoticeList" resultMap="noticeSelectMap">
-		SELECT noti_no,send_id,receive_id,order_no,noti_type,noti_content,noti_date,store_name,buyer_name
-		FROM notice
-		WHERE receive_id = #{receiveId}
-		LIMIT
+   <select id="getOrdersJpayListTotalCount" resultType="int">
+      SELECT COUNT(*)
+      FROM jpay
+      WHERE user_id = #{userId}
+   </select>
+   
+   <insert id="addOrdersNotice" useGeneratedKeys="true" keyProperty="notiNo">
+      INSERT
+      INTO notice(send_id,receive_id,order_no,noti_type,noti_content,noti_date,store_name,buyer_name)
+      VALUES (#{sendId},#{receiveId},#{orderNo},#{notiType},#{notiContent},SYSDATE(),#{storeName},#{buyerName})
+   </insert>
+   
+   <delete id="deleteOrdersNotice">
+      DELETE 
+      FROM notice
+      WHERE noti_no = #{notiNo}
+   </delete>
+   
+   <select id="getOrdersNoticeList" resultMap="noticeSelectMap">
+      SELECT noti_no,send_id,receive_id,order_no,noti_type,noti_content,noti_date,store_name,buyer_name
+      FROM notice
+      WHERE receive_id = #{receiveId}
+      LIMIT
          #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
-	</select>
-	
-	<select id="getOrdersNoticeListTotalCount" resultType="int">
-		SELECT COUNT(*)
-		FROM notice
-	</select>
-	
-	<update id="updateOrdersCeoJb">
-	UPDATE users u, jpay j,orders o
-	<if test="orders.orderStatus==5">
-    	<set>
+   </select>
+   
+   <select id="getOrdersNoticeListTotalCount" resultType="int">
+      SELECT COUNT(*)
+      FROM notice
+   </select>
+   
+   <update id="updateOrdersCeoJb">
+   UPDATE users u, jpay j,orders o
+   <if test="orders.orderStatus==5">
+       <set>
            u.jp_balance = (SELECT * FROM(SELECT u.jp_balance + o.order_price
                        FROM users u, orders o
                        WHERE u.user_id = o.user_id 
                        AND u.user_id = #{userId}
                        AND o.order_no = #{orders.orderNo})as vt)
-     	</set>
+        </set>
      </if>
      WHERE u.user_id = j.user_id
      AND u.user_id = o.user_id
      AND u.user_id = #{userId} 
-	</update>
-	
-	<update id="updateOrdersCeoEarn">
-	UPDATE store s,orders o
-	<if test="orders.orderStatus==5">
-    	<set>
+   </update>
+   
+   <update id="updateOrdersCeoEarn">
+   UPDATE store s,orders o
+   <if test="orders.orderStatus==5">
+       <set>
            s.total_earn = (SELECT * FROM(SELECT s.total_earn + o.order_price
                        FROM store s, orders o
                        WHERE s.user_id = o.user_id 
                        AND s.user_id = #{userId}
                        AND o.order_no = #{orders.orderNo})as vt)
-    	</set>
+       </set>
      </if>
      WHERE s.user_id = o.user_id
      AND s.user_id = o.user_id
      AND s.user_id = #{userId} 
-	</update>
+   </update>
 </mapper>
-	
-	
-	
+   
+   
+   

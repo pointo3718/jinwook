@@ -350,7 +350,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="userId"
                                  class="form-control form-control" id="userId"
-                                 value="${user.userId}" readonly onKeyup="this.value=this.value.replace(' ','');">
+                                 value="${user.userId}" readonly oninput="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -360,7 +360,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="password" name="password"
                                  class="form-control form-control" id="password"
-                                 value=""  onKeyup="this.value=this.value.replace(' ','');">
+                                 value=""  oninput="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -370,7 +370,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="password" name="password2"
                                  class="form-control form-control" id="password2"
-                                 value="" onKeyup="this.value=this.value.replace(' ','');">
+                                 value="" oninput="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -380,7 +380,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="password" name="password3"
                                  class="form-control form-control" id="password3"
-                                 value="" onKeyup="this.value=this.value.replace(' ','');">
+                                 value="" oninput="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -390,7 +390,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="userName"
                                  class="form-control form-control" id="userName"
-                                 value="${user.userName}" readonly onKeyup="this.value=this.value.replace(' ','');">
+                                 value="${user.userName}" readonly oninput="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -400,7 +400,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="email"
                                  class="form-control form-control" id="email"
-                                 value="${user.email}" onKeyup="this.value=this.value.replace(' ','');">
+                                 value="${user.email}" oninput="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -410,7 +410,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="nickName"
                                  class="form-control form-control" id="nickName"
-                                 value="${user.nickName}" onKeyup="this.value=this.value.replace(' ','');">
+                                 value="${user.nickName}" oninput="this.value=this.value.replace(' ','');">
                            </div>
                         </div>
 
@@ -448,7 +448,7 @@ $(function() {
                            <div class="col-sm-2">
                               <input type="text" name="birth_year"
                                  class="form-control form-control text-center" id="birth"
-                                 value="" placeholder="YYYY" size="4" maxlength="4" onKeyup="this.value=this.value.replace(' ','');">
+                                 value="" placeholder="YYYY" size="4" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                               <input type="hidden" name="birth"
                                  class="form-control form-control text-center" id="birth"
                                  value="">
@@ -456,12 +456,12 @@ $(function() {
                            <div class="col-sm-2">
                               <input type="text" name="birth_month"
                                  class="form-control form-control text-center" id="birth"
-                                 value="" pattern="[0-9]*"  placeholder="MM" size="2" maxlength="2" onKeyup="this.value=this.value.replace(' ','');">
+                                 value="" pattern="[0-9]*"  placeholder="MM" size="2" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                            </div>
                            <div class="col-sm-2">
                               <input type="text" name="birth_day"
                                  class="form-control form-control text-center" id="birth"
-                                 value=""  placeholder="DD" size="2" maxlength="2" min="2" onKeyup="this.value=this.value.replace(' ','');"> 
+                                 value=""  placeholder="DD" size="2" maxlength="2" min="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 
                         </div>
                         </div>
                         
@@ -471,7 +471,7 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="phone"
                                  class="form-control form-control" id="phone"
-                                 value="${user.phone}" onKeyup="this.value=this.value.replace(' ','');">
+                                 value="${user.phone}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                            </div>
                         </div>
                         

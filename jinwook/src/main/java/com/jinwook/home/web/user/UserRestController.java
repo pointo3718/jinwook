@@ -254,6 +254,25 @@ public class UserRestController {
 		
 		//문자인증 만료 시간 
 		
+		
+		//로그인 아이디, 비밀번호 체크 
+		@PostMapping("checkLogin")
+		public User checkLogin(@ModelAttribute("user") User user, HttpSession session) throws Exception{
+			
+			User dbUser = userService.getUser(user.getUserId());
+			
+			System.out.println(dbUser+"123123123123123123123123213123");
+			user = dbUser;
+			
+			if(user != null) {
+				session.setAttribute("user", user);
+			}
+			System.out.println(user+"--------------------------------------------------------");
+			
+			System.out.println("로그인 아이디, 비밀번호 체크 성공 ");
+			
+			return user;
+		}
 	
 	// 인증번호 보내기
 //	@PostMapping("/send/authNum")

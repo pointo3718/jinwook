@@ -13,12 +13,14 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>상점수정</title>
 
+
 <!-- Google Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
    rel="stylesheet">
+
 
 <!-- Css Styles -->
 <link rel="stylesheet"
@@ -264,13 +266,14 @@ label {
 
       const storeNo = $(e).data("value");
       var storeIntro = $("input[id='storeIntro']").val();
-      var storePhone = $("input[id='storePhone']").val();
+		var storePhone = $(e).parent().parent().find("#storePhone").val()      
       var storeImage = $("input[id='storeImage']").val();
       var startTime = $("input[id='startTime']").val();
       var endTime = $("input[id='endTime']").val();
       var bank = $("#bank option:selected").val();
       var holiday = $("input[id='holiday']").val();
-      var accNo = $("input[id='accNo']").val();
+    var accNo = $(e).parent().parent().find("#accNo").val()  
+    
 
       if (storeIntro == null || storeIntro.length < 1) {
          alert("상점소개 반드시 입력하여야 합니다.");
@@ -278,37 +281,37 @@ label {
       }
 
       if (storePhone == null || storePhone.length < 1) {
-         alert("상품 전화번호는 반드시 입력하셔야 합니다.");
+    	  alert("상품 전화번호는 반드시 입력하셔야 합니다.");
          return;
       }
 
       if (storeImage == null || storeImage.length < 1) {
-         alert("상점사진은 반드시 입력하셔야 합니다.");
+    	  alert("상점사진은 반드시 입력하셔야 합니다.");
          return;
       }
 
       if (startTime == null || startTime.length < 1) {
-         alert("영업시작시간은 반드시 입력하셔야 합니다.");
+    	  alert("영업시작시간은 반드시 입력하셔야 합니다.");
          return;
       }
 
       if (endTime == null || endTime.length < 1) {
-         alert("영업종료시간은 반드시 입력하셔야 합니다.");
+    	  alert("영업종료시간은 반드시 입력하셔야 합니다.");
          return;
       }
 
       if (bank == null || bank.length < 1) {
-         alert("은행명은 반드시 입력하셔야 합니다.");
+    	  alert("은행명은 반드시 입력하셔야 합니다.");
          return;
       }
 
       if (holiday == null || holiday.length < 1) {
-         alert("상점휴일은 반드시 입력하셔야 합니다.");
+    	  alert("상점휴일은 반드시 입력하셔야 합니다.");
          return;
       }
 
       if (accNo == null || accNo.length < 1) {
-         alert("계좌번호는 반드시 입력하셔야 합니다.");
+    	  alert("계좌번호는 반드시 입력하셔야 합니다.");
          return;
       }
 
@@ -323,7 +326,7 @@ label {
          },
          success : function(result) {
             if (result != null) {
-               alert("수정 완료되었습니다.");
+            	alert("수정 완료되었습니다.");
                self.location = "updateStore?storeNo=" + storeNo;
             }
          }
@@ -416,7 +419,7 @@ label {
                   <table class="table table-hover"
                      style="width: 730px; heigh: 300px;">
 
-                     <form class="form-horizontal" id="profileUpdate">
+                     <form class="form-horizontal" id="profileUpdate" enctype="multipart/form-data">
 
 
                         <div class="form-group row">
@@ -511,13 +514,13 @@ label {
                            </div>
                         </div>
                         
-                            <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+                            
 
                         <span class="btn btn-default btn-file"
                            style="padding-left: 260px; padding-bottom: 15px;"> 사진변경
                            <input type="file" name="file">
                         </span>
-                        </form>
+
 
                         <div class="form-group row">
                            <label for="colFormLabelLg"

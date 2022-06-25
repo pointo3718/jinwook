@@ -108,6 +108,10 @@ public class StoreController {
 
       return "store/updateStore";
    }
+   
+   
+   
+
 
    @PostMapping(value = "addStoreProduct")
    public String addStoreProduct(@ModelAttribute("product") Product product) {

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -110,7 +111,7 @@ public class StoreRestController {
 
          try {
             if (store != null) {
-               System.out.println("product 객체에 값 넣어줌");
+               System.out.println("store 객체에 값 넣어줌");
                store.setStoreNo(storeNo);
                store.setStoreIntro(storeIntro);
                store.setStorePhone(storePhone);
