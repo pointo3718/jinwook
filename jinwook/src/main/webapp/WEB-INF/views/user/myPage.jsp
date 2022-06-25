@@ -734,71 +734,71 @@ $('#myModal').on('shown.bs.modal', function () {
    </section>
    <!--   Blog Section End -->
    
-   				<!-- 쿠폰 Modal 시작  -->
-				<div class="modal fade" id="staticBackdrop" data-backdrop="static"
-					data-keyboard="false" tabindex="-1"
-					aria-labelledby="staticBackdropLabel" aria-hidden="true">
+               <!-- 쿠폰 Modal 시작  -->
+            <div class="modal fade" id="staticBackdrop" data-backdrop="static"
+               data-keyboard="false" tabindex="-1"
+               aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
 
-					<div class="modal-dialog">
-						<div class="modal-content"
-							style="width: 802px;height: 500px;align-items: center;right: 150px;">
-							<div class="modal-header">
-								<h5 class="modal-title" id="staticBackdropLabel">
-									<strong style="padding-right: 550px;"><img
-										src="${path}/resources/static/img/coupon.png"
-										style="width: 50px; height: 40px;">&nbsp;&nbsp;&nbsp;쿠폰
-										목록 조회</strong></strong>
-								</h5>
-							</div>
-							<div class="modal-body">
-								<div>
+               <div class="modal-dialog">
+                  <div class="modal-content"
+                     style="width: 802px;height: 500px;align-items: center;right: 150px;">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">
+                           <strong style="padding-right: 550px;"><img
+                              src="${path}/resources/static/img/coupon.png"
+                              style="width: 50px; height: 40px;">&nbsp;&nbsp;&nbsp;쿠폰
+                              목록 조회</strong></strong>
+                        </h5>
+                     </div>
+                     <div class="modal-body">
+                        <div>
 
-									<table class="table" style="width: 700px">
-										<thead>
-											<tr>
-												<th scope="col">#</th>
-												<th scope="col">쿠폰종류</th>
-												<th scope="col">쿠폰할인율</th>
-												<th scope="col">유효기간</th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="coupon" items="${couponList}">
-												<c:set var="i" value="${ i+1 }" />
+                           <table class="table" style="width: 700px">
+                              <thead>
+                                 <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">쿠폰종류</th>
+                                    <th scope="col">쿠폰할인율</th>
+                                    <th scope="col">유효기간</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <c:forEach var="coupon" items="${couponList}">
+                                    <c:set var="i" value="${ i+1 }" />
 
-												<tr>
-													<th scope="row">${i}</th>
-													<td><c:if test="${coupon.couponType==1}">
-      								고객님의 회원가입을 축하합니다. (회원가입 쿠폰)
-      							</c:if> <c:if test="${coupon.couponType==2}">
-      								고객님의 첫 구매를 축하합니다. (첫구매 쿠폰)
-      							</c:if> <c:if test="${coupon.couponType==3}">
-     								고객님의 생일을 축하합니다. (생일축하 쿠폰)
-      							</c:if> <c:if test="${coupon.couponType==4}">
-     								고객님께 소중한 쿠폰 배달왔습니다. (추천인 쿠폰)
-      							</c:if></td>
-													<td style="padding-left: 35px;"><fmt:formatNumber value="${coupon.couponDc*100}" />%</td>
-													<td>${coupon.couponValidDate}</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</div>
-
-
-
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
+                                    <tr>
+                                       <th scope="row">${i}</th>
+                                       <td><c:if test="${coupon.couponType==1}">
+                              고객님의 회원가입을 축하합니다. (회원가입 쿠폰)
+                           </c:if> <c:if test="${coupon.couponType==2}">
+                              고객님의 첫 구매를 축하합니다. (첫구매 쿠폰)
+                           </c:if> <c:if test="${coupon.couponType==3}">
+                             고객님의 생일을 축하합니다. (생일축하 쿠폰)
+                           </c:if> <c:if test="${coupon.couponType==4}">
+                             고객님께 소중한 쿠폰 배달왔습니다. (추천인 쿠폰)
+                           </c:if></td>
+                                       <td style="padding-left: 35px;"><fmt:formatNumber value="${coupon.couponDc*100}" />%</td>
+                                       <td>${coupon.couponValidDate}</td>
+                                    </tr>
+                                 </c:forEach>
+                              </tbody>
+                           </table>
+                        </div>
 
 
-				</div> 
-				<!-- 쿠폰 Modal 끝 -->
+
+                     </div>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                           data-dismiss="modal">Close</button>
+                     </div>
+                  </div>
+               </div>
+
+
+            </div> 
+            <!-- 쿠폰 Modal 끝 -->
    
    
    

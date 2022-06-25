@@ -167,7 +167,7 @@ public class BoardRestController {
 		return jsonObj;
 	}
 	
-	// 레시피 댓글 삭제 처리
+	// 1:1문의 답변 삭제 처리
 	@GetMapping(value = "deleteInquiryComment/{commentNo}")
 	public JsonObject deleteInquiryComment(@PathVariable(value = "commentNo", required = false) int commentNo) {
 		System.out.println("/board/deleteInquiryComment: GET");

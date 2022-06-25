@@ -17,6 +17,7 @@ import lombok.ToString;
 public class Orders extends CommonDTO{
 
    private Store store;         //상점
+   private int storeNo;
    private User user;            //유저      |유저(세트로 위 주석 받아사용 예정)
    private Cart cart;            //카트      |카트
    private Coupon coupon;         //쿠폰
@@ -34,6 +35,7 @@ public class Orders extends CommonDTO{
    private int orderPrice;         //주문금액      |장바구니
    private String reviewTitle;      //리뷰제목      |주문리뷰
    private String reviewContent;   //리뷰내용      |주문리뷰
+   private String reviewWriter; //리뷰작성자
    private Date reviewDate;   //리뷰날짜      |주문리뷰
    private double reviewStar;         //별점      |주문리뷰
    private String reviewImg1;      //리뷰사진 1   |주문리뷰
