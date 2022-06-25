@@ -53,7 +53,7 @@ public class RequestController {
 	// ========== 상점 등록 요청 !!!!!!! 요청 목록 만들고 다시 !!!!!!!===========
 	@PostMapping(value = "addRequestAddStore")
 	
-	public String addRequestAddStore(Store store, HttpSession session, MultipartHttpServletRequest mpRequest, @RequestParam("storeNo") int storeNo
+	public String addRequestAddStore(Store store, HttpSession session, MultipartHttpServletRequest mpRequest
 										) throws Exception {
 		
 		System.out.println("/request/addRequestAddStore : POST");

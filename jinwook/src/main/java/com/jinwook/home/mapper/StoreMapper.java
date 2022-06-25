@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jinwook.home.common.Criteria;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Request;
@@ -38,7 +39,7 @@ public interface StoreMapper {
 	
 	public List<Coupon> getCouponList(String userId);
 	
-	public int getCouponCount(String userId);		// 갖고있는 쿠폰개수
+	public int getCouponCount(String userId);		  // 갖고있는 쿠폰개수
 	
 	public List<Store> getStore(int storeNo);
 	
@@ -54,7 +55,9 @@ public interface StoreMapper {
 	
 	public List<Store> getStoreOnly(int storeNo);
 	
-		
+	public Attach selectStoreAttachList(int storeNo); 	// 상점 사진 조회
+	
+	
 	public int getStoreMapTotalCount();
 	
 	public int getStoreTotalCount();
