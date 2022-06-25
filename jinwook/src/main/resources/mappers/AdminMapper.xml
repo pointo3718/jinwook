@@ -185,9 +185,9 @@
 				<if test= 'complainCode == "기타"'>
 				, '기타' <!-- reqNo, commentNo,  -->
 				</if>
-				, #{r} <!-- 컬럼 추가해야 할듯 ... reqNo, commentNo, reviewNo 받는 -->
-				, false
-				, false
+				, #{rcpNo} <!-- 컬럼 추가해야 할듯 ... reqNo, commentNo, reviewNo 받는 -->
+				, #{commentNo}
+				, #{reviewNo}
 			)
 			<!-- 해당 게시글로 넘어갈 수 있는 메서드 필요... board에 있을듯 ... -->
 	</insert>
