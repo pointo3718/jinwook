@@ -183,6 +183,45 @@ public class UserController {
       //Business Logic
       User dbUser=userService.getUser(user.getUserId());
       
+      System.out.println("/user/updateUser : POST");
+      //Business Logic
+      userService.updateUser(user);
+      
+      String sessionId=((User)session.getAttribute("user")).getUserId();
+      if(sessionId.equals(user.getUserId())){
+         session.setAttribute("user", user);
+      }
+      
+      return "redirect:/user/updateUser";
+   }
+   
+   
+   @GetMapping("login")
+   public String login(HttpSession session) throws Exception{
+      
+      System.out.println("/user/logon : GET");
+      User user = (User)session.getAttribute("user");
+      if(user != null) {
+         return "redirect:/user/index";
+      }
+
+      if(dbUser == null) {
+         model.addAttribute("msg", "아이디와 비밀번호를 확인해주세요.");
+         return "/user/loginView";
+      }
+      
+      System.out.println(dbUser.isUserByeStatus());
+      return "/user/loginView";
+   }
+   
+   @PostMapping("login" )
+   public String login(@ModelAttribute("user") User user , HttpSession session, Model model ) throws Exception{
+      
+      System.out.println("/user/login : POST");
+      System.out.println(user.getUserId()+"112312312321321312321312");
+      //Business Logic
+      User dbUser=userService.getUser(user.getUserId());
+      
 
       if(dbUser == null) {
          model.addAttribute("msg", "아이디와 비밀번호를 확인해주세요.");

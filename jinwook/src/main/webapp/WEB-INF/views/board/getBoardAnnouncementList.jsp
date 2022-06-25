@@ -68,6 +68,8 @@
 
 	/*]]>*/
 	
+	
+	
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 function fncDeleteAnnouncement(e) {
 	if (!confirm('게시글을 삭제하시겠어요?')) {
@@ -382,6 +384,12 @@ $(function() {
 })
 //////////////// 일반 유저 목록 REST 끝 /////////////////
 
+$(function(){
+	$("#addAnnouncementButton").on("click", function() {
+		self.location = "/board/addBoardAnnouncementView"
+	});
+});
+
 </script>
 
 <style>
@@ -573,6 +581,9 @@ color: #7fad39;
 				<div>
 					<h4 class="text-left">
 						<strong>공지사항 목록</strong>
+						<c:if test="${sessionScope.user.role == '관리자'}">
+							<div><button type="submit" class="site-btn" id="addAnnouncementButton" style="margin-top:20px;">공지사항 등록 </button></div>
+						</c:if>
 						<p class="text-muted" style="display: inline; font-size: 12px;">
 						</p>
 						<!-- <div class="btn-group btn-group-toggle" data-toggle="buttons" style="left:300px;">
@@ -601,7 +612,9 @@ color: #7fad39;
 								<th scope="col">공지사항 제목</th>
 								<th scope="col">작성일</th>
 								<th scope="col">조회수</th>
+								<c:if test="${sessionScope.user.role == '관리자'}">
 								<th scope="col">삭제</th>
+								</c:if>
 							</tr>
 						</thead>
 
@@ -616,7 +629,9 @@ color: #7fad39;
 									<td align="left" data-param="${board.boardNo}">${board.boardTitle}</td>
 									<td align="left">${board.writeDate}</td>
 									<td align="left">${board.boardHits}</td>
+									<c:if test="${sessionScope.user.role == '관리자'}">
 									<td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteAnnouncement(this)">X</button></td>
+									</c:if>
 								</tr>
 							</c:forEach>
 							</tr>

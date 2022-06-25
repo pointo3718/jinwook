@@ -52,4 +52,7 @@ public int addOrders(Orders orders);
    public int updateOrdersCeoJb(Jpay jpay);
    
    public int updateOrdersCeoEarn(Store store);
+   
+   public int checkJpPassword(User user);
+
 }

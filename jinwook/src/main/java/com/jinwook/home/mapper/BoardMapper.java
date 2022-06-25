@@ -68,11 +68,15 @@ public interface BoardMapper {
 	//전체 랭킹 리스트 조인 필요: store, comment, recipe
 	public List<Board> getRankList(Board board);
 	
-	//상점 후기 등록: Orders
-	public int addReview(Orders orders);
+	//상점 후기 등록
+	public void addReview(Orders orders) throws Exception;
+	//상점 후기 삭제
 	public int deleteReview(int ordersNo);
-	public Orders getReview(int ordersNo);
+	//상점 후기 조회 => getStore할 때 값을 넘겨주자.
+	public Orders getReview(int orderNo);
+//	public Orders getReview(int ordersNo);
 	public List<Orders> getReviewList(Board board);
+	
 	//상점 후기 정보 얻어와서 보내주기
 	//상품정보=후기정보, 상품id=후기번호(주문번호)
 	public Orders getReviewInfo(int orderNo);

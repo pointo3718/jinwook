@@ -30,6 +30,10 @@
     <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+
 <style>
 *{font-family: 'Noto Sans KR', sans-serif;}
 
@@ -115,13 +119,17 @@ function fncDeleteRecipe(e) {
 }
 
 function fncgetRecipe(rcpNo) {
-
-
     //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
     //==> 레시피 리스트에서 레시피 상세로 이동
        self.location = "/board/getRecipe?rcpNo="+rcpNo;
     }
 
+<!-- 레시피 등록하러가기 버튼 이벤트 -->
+$(function(){
+	$("#addRecipeButton").on("click", function() {
+		self.location = "/board/addRecipeView"
+	});
+});
 
 </script>   
 </head>
@@ -135,6 +143,7 @@ function fncgetRecipe(rcpNo) {
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-7">
+                    <div><button type="submit" class="btn btn-success" id="addRecipeButton">레시피 등록하기</button></div>
                     <div class="row">
                         	<c:set var="i" value="0" />
             					<c:forEach var="recipe" items="${getRecipeList}">
@@ -142,7 +151,7 @@ function fncgetRecipe(rcpNo) {
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
-										<img width="400" height="400"
+										<img width="400" height="400" style="margin-top:20px;"
 											src="/resources/static/${recipe.attach.orgFileName}" alt="..."
 											onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" />
                                 </div>

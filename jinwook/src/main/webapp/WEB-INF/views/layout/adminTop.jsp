@@ -105,7 +105,7 @@
 		});
 	});
 	
-	/////////////// 광고 요청 목록 이동 ////////////////
+	/////////////// 통계 화면 이동 ////////////////
 		$(function() {
 	 	$( ".list-group-item:contains('통계')").on("click" , function() {
 	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)

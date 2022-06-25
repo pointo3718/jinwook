@@ -158,11 +158,11 @@ function fn_addFile() {
 	
 	<div class="form-group">
     <label for="boardTitle">공지사항 제목</label>
-    <input type="text" class="form-control" id="boardTitle" name="boardTitle" >
+    <input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력해주세요">
   </div>
   <div class="form-group">
     <label for="boardContent">공지사항 내용</label>
-    <textarea class="form-control" id="boardContent" name="boardContent" rows="3"></textarea>
+    <textarea class="form-control" id="boardContent" name="boardContent" rows="3" placeholder="내용을 입력해주세요"></textarea>
   </div>
   <div class="form-group">
     <label for="file">공지사항 사진 업로드</label>
@@ -170,8 +170,7 @@ function fn_addFile() {
   </div>
   <div class="form-group">
 	<div class="col-sm-offset-4  col-sm-4 text-center">
-		<button type="submit" class="btn btn-success"
-								>등 &nbsp;록</button>
+		<button type="submit" class="btn btn-success">등 &nbsp;록</button>
 		<a class="btn btn-primary btn" href="#" role="button">취소</a>
 						</div>
 					</div>

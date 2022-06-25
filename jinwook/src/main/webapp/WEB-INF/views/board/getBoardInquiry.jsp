@@ -203,6 +203,7 @@ function movePage(uri, queryString) {
                     </div>
                     <hr/>
                     <!-- 댓글 작성폼 start -->
+                  <c:if test="${sessionScope.user.role == '관리자'}">
 					<div class="card mb-2" style="margin-left:20px;">
 						<!-- 댓글 헤더 -->
 						<div class="card-header bg-light">
@@ -224,6 +225,7 @@ function movePage(uri, queryString) {
 						</div>
 					</div>
 					</form>
+				</c:if>
 					<!-- 댓글 작성폼 end -->
 					
 					<!-- 댓글 리스트 조회 폼 start -->

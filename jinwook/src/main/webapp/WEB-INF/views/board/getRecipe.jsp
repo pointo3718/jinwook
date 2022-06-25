@@ -124,7 +124,7 @@ function getCommentList() {
 
 <!-- 레시피 댓글 수정 버튼 이벤트 -->
 function fncUpdateBtn(commentNo, commentContent) {
-	
+	console.log("들어옴?");
 	var updateUrl = "/board/commentUpdate/";
 	var commentContent = $("#commentContentInfo").val(); //어디서 불러와?
 	
@@ -141,8 +141,24 @@ function fncUpdateBtn(commentNo, commentContent) {
 	});
 };
 
+//삭제 버튼 클릭 
+$("#btnDelete").click(function(){
+    // 댓글이 존재하는 게시물의 삭제처리 방지
+    var count = "${count}";
+    // 댓글의 수가 0보다 크면 팝업, 함수 종료
+    if(count > 0) {
+        alert("댓글이 있는 게시물은 삭제할 수 없습니다.")
+        return;
+    }
+    // 댓글의 수가 0이면 삭제처리
+    if(confirm("삭제하시겠습니까?")){
+        document.form1.action = "${path}/board/delete.do";
+        document.form1.submit();
+        }
+});
 
-<!-- 레시피 삭제 -->
+
+<!-- 레시피 게시물 삭제 -->
 function fncDeleteRecipe(e) {
 	if (!confirm('레시피를 삭제하시겠어요?')) {
 		return false;
@@ -155,7 +171,7 @@ function fncDeleteRecipe(e) {
 			dataType : "json",
 			success : function(result){
 				if(result != null){
-					swal("진욱이네","삭제완료");
+					swal("진욱이네","레시피 삭제가 완료되었습니다.");
 					self.location = "/board/getRecipeList";
 				}
 			}
@@ -176,7 +192,7 @@ function fncDeleteRecipeComment(e) {
 			dataType : "json",
 			success : function(result){
 				if(result != null){
-					swal("진욱이네","삭제완료");
+					swal("진욱이네","댓글 삭제가 완료되었습니다.");
 					self.location = "/board/getRecipe?rcpNo=${recipe.rcpNo}";
 				}
 			}
@@ -220,7 +236,7 @@ var rcpNo = ${recipe.rcpNo};
 		dataType : "json",
 		data : {'rcpNo' : rcpNo},
 		error : function() {
-			swal("진욱이네","통신 에러");
+			swal("진욱이네","로그인 후 이용해주세요.");
 		},
 		success : function(recoCheck) {
 			if (recoCheck == 0) {
@@ -228,7 +244,7 @@ var rcpNo = ${recipe.rcpNo};
 				location.reload();
 			}
 			else if (recoCheck == 2) {
-				swal("진욱이네","이미 추천하셨습니다");
+				swal("진욱이네","이미 추천하셨습니다..");
 				location.reload();
 					}
 				}
@@ -271,14 +287,92 @@ var rcpNo = ${recipe.rcpNo};
    <jsp:include page="../layout/top.jsp" />
     <!-- Header Section Begin -->
 
+	<!-- 신고하기 Modal Begin -->
+
+	<div class="modal fade" id="complainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content" style="font-size: 15px;">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel"><strong>신고사유</strong></h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      <div class="container">
+                  <div>
+                     <i class="fa fa-check" aria-hidden="true"></i> &nbsp;신고 사유를 선택해주세요.
+                  </div>
+                  <div>
+                     <i class="fa fa-check" aria-hidden="true"></i> &nbsp;신고등록 후 관리자의 확인절차에 따라 해당 회원이 블랙리스트로 지정됩니다.
+                  </div>
+                  
+          </div>
+          <hr>
+	        <br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="blackPeriod" value="욕설" checked> <label
+							class="form-check-label" for="exampleRadios1"> 욕설 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios2" value="비방"> <label
+							class="form-check-label" for="exampleRadios2"> 비방 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios1" value="도배"> <label
+							class="form-check-label" for="exampleRadios1"> 도배 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios1" value="음란성"> <label
+							class="form-check-label" for="exampleRadios1"> 음란성 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios1" value="불법도용"> <label
+							class="form-check-label" for="exampleRadios1"> 불법도용 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios1" value="광고성"> <label
+							class="form-check-label" for="exampleRadios1"> 광고성 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios1" value="기타"> <label
+							class="form-check-label" for="exampleRadios1"> 기타 </label>
+					</div>
+					<br/>				
+				</div>
+	      
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-primary">신고하기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- 신고하기 Modal End -->
+
+
 
     <!-- Contact Form Begin -->
     <div class="contact-form spad">
         <div class="container" style="background-color: #F2F2F2;">
             <div class="row rcp" >
-                <div class="col-lg-12" style="background-color: #F2F2F2;">
+                <div class="col-lg-12" style="background-color: #F2F2F2; text-align: center;">
                     <div class="contact__form__title">
-                        <h3 style="margin-top:20px;"><input type="text" readonly="readonly" value="${recipe.rcpTitle}" style="width:500px; height:100px; text-align:center;"></h3>
+                        <h3 style="margin-top:20px;"><input class="form-control" type="text" readonly="readonly" value="${recipe.rcpTitle}" style="width:500px; height:100px; text-align:center; background-color: #ffffff;"></h3>
                     </div>
                 </div>
             </div>
@@ -286,14 +380,11 @@ var rcpNo = ${recipe.rcpNo};
                 <div class="row rcp" style="background-color: #F2F2F2;">
                 
                 <div class="imgborder">
-					<img src="https://media.istockphoto.com/photos/kimchi-stir-fried-with-pork-and-vegetables-sprinkle-sesame-seeds-on-picture-id1206518905?b=1&k=20&m=1206518905&s=170667a&w=0&h=9qzoXifvJg_E220JqkrDKmdWbGcSoOA47jz-gFMlFl0="
-						alt="My Image" width="400" height="400" style="margin-left:20px;">
-						<div class="form-group">
-						
-						<%-- <img width="400" height="400"
-											src="/resources/static/${recipe.attach.orgFileName}" alt="..."
-											onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" /> --%>
- 						</div>
+					<!-- <img src="https://media.istockphoto.com/photos/kimchi-stir-fried-with-pork-and-vegetables-sprinkle-sesame-seeds-on-picture-id1206518905?b=1&k=20&m=1206518905&s=170667a&w=0&h=9qzoXifvJg_E220JqkrDKmdWbGcSoOA47jz-gFMlFl0="
+						alt="..." width="400" height="400" style="margin-left:20px;"> -->
+						 <img width="400" height="400"
+						src="/resources/static/${attach.orgFileName}" alt="..."
+						onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" />
 				</div>
                 
                     <div class="col-sm-4 col-sm-4" style="width:100px; height:50px;">
@@ -305,6 +396,7 @@ var rcpNo = ${recipe.rcpNo};
  						<button type="button" class="btn btn-success" id="reco_btn" 
  						style="width:50px; height:30px; background-color: green; font-size: 12px;" onclick="updateRecipeReco();"><i class="bi bi-hand-thumbs-up"></i>${recipe.recommendCount}</button>
  						&nbsp;<a href="#" onclick="clip(); return false;"><i class="bi bi-share-fill"></i></a>
+ 						<br/><a type="button" class="badge badge-danger" data-toggle="modal" data-target="#complainModal" style="font-size:15px;">신고하기</a>
                     </div>
  						<br/><br/><br/>
                     
@@ -353,10 +445,11 @@ var rcpNo = ${recipe.rcpNo};
 								<c:forEach items="${commentList}" var="recipe">
 									<li id="comment--1" class="list-group-item d-flex justify-content-between">
 											<div class="font-itatlic">작성자 :${recipe.comment.commentWriter} | &nbsp;</div><br/>
+										<!-- 댓글 리스트 div -->
 										<div class="d-flex">
-											<div id="commentContentInfo">${recipe.comment.commentContent}</div>&nbsp;&nbsp;&nbsp;
+											<div class="commentContentInfo">${recipe.comment.commentContent}</div>&nbsp;&nbsp;&nbsp;
 											
-											<button type="button" class="btn btn-outline-success" id="replyupdateBtn" data-rno="${recipe.comment.commentNo}" onclick="fncUpdateBtn();">댓글 수정</button>
+											<%-- <button type="button" class="btn btn-outline-success" id="replyupdateBtn" data-rno="${recipe.comment.commentNo}" onclick="fncUpdateBtn();">댓글 수정</button> --%>
 											<button data-value="${recipe.comment.commentNo}" id="buttons" type="button" class="btn btn-primary" 
 											onClick="fncDeleteRecipeComment(this)">X</button>
 										</div>

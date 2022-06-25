@@ -31,74 +31,74 @@
 
 	<!-- 상점 등록 (미수락 상태) -->
 	<insert id="addRequestAddStore" parameterType="Store">
-			INSERT INTO store 
-			VALUES (
-				  NULL
-				, #{userId}
-				, #{storeName}
-				, #{storeAddr}
-				, #{storeType}
-				, 1 <!-- storeStatus (대기중) -->
-				, #{storePhone}
-				, #{storeIntro}
-				, #{storeStart}
-				, NULL
-				, NULL
-				, NULL
-				, #{businessCard}
-				, #{storeImage}
-				, #{accNo}
-				, #{bank}
-				, 0 <!-- totalEarn -->
-				, 0 <!-- isOpen -->
-				, 0
-				, 0
-			)
+		INSERT INTO store 
+		VALUES (
+			  NULL
+			, #{userId}
+			, #{storeName}
+			, #{storeAddr}
+			, #{storeType}
+			, 1 <!-- storeStatus (대기중) -->
+			, #{storePhone}
+			, #{storeIntro}
+			, #{storeStart}
+			, NULL
+			, NULL
+			, NULL
+			, #{businessCard}
+			, #{storeImage}
+			, #{accNo}
+			, #{bank}
+			, 0 <!-- totalEarn -->
+			, 0 <!-- isOpen -->
+			, 0
+			, 0
+		)
 	</insert>
 	
 	<insert id="insertStoreFile" parameterType="hashMap">
 		INSERT INTO attach(
 			store_no,
-			ORG_FILE_NAME,
-			STORED_FILE_NAME,
-			FILE_SIZE
+			org_file_name,
+			stored_file_name,
+			file_size
 		)VALUES(
 			#{storeNo},
-			#{ORG_FILE_NAME},
-			#{STORED_FILE_NAME},
-			#{FILE_SIZE}
+			#{orgFileName},
+			#{storedFileName},
+			#{fileSize}
 		)
     </insert>
 	
 	
 	<!-- 최근 등록된 상점 가져오기 -->
 	<select id="getNewStore"  resultType="Store">
-			SELECT * 
-			FROM 
-				store
-			ORDER BY 
-				store_no DESC 
-			LIMIT 1
+		SELECT * 
+		FROM 
+			store
+		ORDER BY 
+			store_no DESC 
+		LIMIT 1
 	</select>
 	
 	
 	<!-- 상점 등록 요청 등록 -->
 	<insert id="addRequestAddStoreForAdmin" parameterType="Request">
-			INSERT INTO request 
-			VALUES (
-				  NULL
-				, #{userId}
-				, #{storeNo}
-				, 1 <!-- 상점등록요청 -->
-				, 1 <!-- 대기중 -->
-				, NULL
-				, SYSDATE()  
-				, NULL
-				, NULL
-				, NULL
-				, NULL
-				, false
-			)
+		INSERT INTO request 
+		VALUES (
+			  NULL
+			, #{userId}
+			, #{storeNo}
+			, 1 <!-- 상점등록요청 -->
+			, 1 <!-- 대기중 -->
+			, NULL
+			, SYSDATE()  
+			, NULL
+			, NULL
+			, NULL
+			, NULL
+			, false
+		)
 	</insert>
 	
 	
@@ -155,21 +155,21 @@
 	
 	<!-- 환급 신청 -->
 	<insert id="addRequestRefund" parameterType="Request">
-			INSERT INTO request 
-			VALUES (
-				  NULL
-				, #{userId}
-				, #{storeNo}
-				, 3 <!-- 환급요청 -->
-				, 1 <!-- 수락전 -->
-				, NULL
-				, SYSDATE()  
-				, #{refundMoney}
-				, NULL
-				, NULL
-				, NULL
-				, false
-			)
+		INSERT INTO request 
+		VALUES (
+			  NULL
+			, #{userId}
+			, #{storeNo}
+			, 3 <!-- 환급요청 -->
+			, 1 <!-- 수락전 -->
+			, NULL
+			, SYSDATE()  
+			, #{refundMoney}
+			, NULL
+			, NULL
+			, NULL
+			, false
+		)
 	</insert>
 
 
@@ -188,21 +188,21 @@
 
 	<!-- 상점 삭제 신청 -->
 	<insert id="addRequestDeleteStore" parameterType="Request">
-			INSERT INTO request 
-			VALUES (
-				  NULL
-				, #{userId}
-				, #{storeNo}
-				, 2 <!-- 상점삭제요청 -->
-				, 1 <!-- 수락전 -->
-				, NULL
-				, SYSDATE()  
-				, NULL
-				, NULL
-				, NULL
-				, NULL
-				, false
-			)
+		INSERT INTO request 
+		VALUES (
+			  NULL
+			, #{userId}
+			, #{storeNo}
+			, 2 <!-- 상점삭제요청 -->
+			, 1 <!-- 수락전 -->
+			, NULL
+			, SYSDATE()  
+			, NULL
+			, NULL
+			, NULL
+			, NULL
+			, false
+		)
 	</insert>
 	
 	
@@ -234,21 +234,21 @@
 
 	<!-- 광고 등록 신청 -->
 	<insert id="addRequestAd" parameterType="Request">
-			INSERT INTO request 
-			VALUES (
-				  NULL
-				, #{userId}
-				, #{storeNo}
-				, 4 <!-- 광고등록요청 -->
-				, 1 <!-- 수락전 -->
-				, NULL
-				, SYSDATE()  
-				, NULL
-				, #{adTitle}
-				, #{adContent}
-				, #{adImg}
-				, false
-			)
+		INSERT INTO request 
+		VALUES (
+			  NULL
+			, #{userId}
+			, #{storeNo}
+			, 4 <!-- 광고등록요청 -->
+			, 1 <!-- 수락전 -->
+			, NULL
+			, SYSDATE()  
+			, NULL
+			, #{adTitle}
+			, #{adContent}
+			, #{adImg}
+			, false
+		)
 	</insert>
 
 
