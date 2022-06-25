@@ -45,7 +45,7 @@
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <!-- 아래 제이쿼리는 1.0이상이면 원하는 버전을 사용하셔도 무방합니다. -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></scrip
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -490,12 +490,12 @@ $('#myModal').on('shown.bs.modal', function () {
                 _this.dots = document.querySelectorAll('.dot');
                 _this.numbers = document.querySelectorAll('.number');
 
-                // 비밀번호를 배열에 넣음 
+            /*     // 비밀번호를 배열에 넣음 
                 _this.getPw = function(){
                     for(let i=0; i<_this.pwStr.length; i++) {
                         _this.password[i] = _this.pwStr[i];
                     }
-                }
+                } */
 
                 // 숫자버튼 click이벤트 연동
                 _this.handleListener = function(){
@@ -535,19 +535,17 @@ $('#myModal').on('shown.bs.modal', function () {
 
                 // 비밀번호 비교
                 _this.handleCheckPw = function(){
-                    ajax{
-                       url : "/user/checkLogin",
-                  type : "post",
-                  dataType : "json",
-                  data : {"jpPassword" : $("#password").val()},
-                  success : function(data){
-                  alert(data.password);
-                  }
-               }
-            });
-                    return compare; 
+                	consloe.log("_this.passwordNumber")
+	            	$.ajax({
+						url : "/orders/checkJpPassword",
+	            		type : "post",
+	                 	dataType : "json",
+	                  	data : {"jpPassword" : _this.passwordNumber},
+	                  	success : function(result){
+	           			}
+	           		});
+                return compare; 
                 }
-
                 // 결과처리 
                 _this.handleResult = function(){
                     if(_this.handleCheckPw()) {
@@ -666,9 +664,9 @@ $('#myModal').on('shown.bs.modal', function () {
                        <!-- List Table Start -->
             <div>
                <h4 class="text-left">
-                  <strong>구매 내역</strong>
+                  <strong>주문 내역</strong>
                   <p class="text-muted" style="display: inline; font-size: 12px;">
-                  구매 내역을 조회할 수 있습니다
+                  주문 내역을 조회할 수 있습니다
                   </p>                   
                      
                   <hr size="10px">
@@ -692,7 +690,7 @@ $('#myModal').on('shown.bs.modal', function () {
             <!-- <th align="left" >상품사진</th> -->
             <th align="left">픽업시간</th>
             <th align="left">주문현황</th>
-            <!-- <th align="left">&nbsp; </th> -->
+            <th align="left">&nbsp;</th>
           </tr>
        </thead>
         
@@ -714,6 +712,7 @@ $('#myModal').on('shown.bs.modal', function () {
            <c:if test="${orders.orderStatus eq '4'}">주문 취소</c:if>
            <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
            </td>
+           <td><a href="/orders/getOrders?orderNo=${orders.orderNo}" class="bi bi-caret-right"style="font-size :18px; text-decoration:none; color: #7fad39;"></a></td>
          <%--   <td><div class="reply_button_wrap">
                <button value="${orders.orderNo}">리뷰 작성</button>
             </div>
@@ -723,7 +722,7 @@ $('#myModal').on('shown.bs.modal', function () {
           </tbody>
  
                </table>
-            </div>
+          </div>
             <div class="text-center">
                <!-- PageNavigation Start... -->
                <jsp:include page="../common/pageNavigator_new.jsp" />
@@ -735,10 +734,9 @@ $('#myModal').on('shown.bs.modal', function () {
    </section>
    <!--   Blog Section End -->
 
-   <!—  Footer Begin —>
-   <jsp:include page="../layout/footer.jsp" />
-   <!— Footer End —>
-
+	<!-- Footer Begin -->   
+	<jsp:include page="../layout/footer.jsp" />
+	<!-- Footer End  -->
 </body>
 
    
