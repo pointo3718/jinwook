@@ -266,15 +266,7 @@
       // 마커를 표시할 위치와 title 객체 배열입니다 
       var positions = [ {
          title : '진욱이네',
-<<<<<<< HEAD
          latlng : new kakao.maps.LatLng(37.49152497274, 127.03445074263),
-=======
-<<<<<<< HEAD
-         latlng : new kakao.maps.LatLng(37.493989668463, 127.07981094747),
-=======
-         latlng : new kakao.maps.LatLng(37.49152497274, 127.03445074263),
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/heads/master
          storeNo : 10000,
          prodName : '청포도',
          price : 1000
@@ -459,27 +451,11 @@
          title : '소',
          latlng : new kakao.maps.LatLng(37.503234579183, 127.03430146721),
          storeNo : 10061
-<<<<<<< HEAD
       },/*  {
          title : '채채네',
          latlng : new kakao.maps.LatLng(37.49152497274, 127.03445074263),
          storeNo : 10062
       },  */{
-=======
-<<<<<<< HEAD
-      }, {
-         title : '채채네',
-         latlng : new kakao.maps.LatLng(37.49152497274, 127.03445074263),
-         storeNo : 10062
-      }, {
-=======
-      },/*  {
-         title : '채채네',
-         latlng : new kakao.maps.LatLng(37.49152497274, 127.03445074263),
-         storeNo : 10062
-      },  */{
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/heads/master
          title : '재재네수산',
          latlng : new kakao.maps.LatLng(37.506230588876, 127.03816740507),
          storeNo : 10063
@@ -587,23 +563,10 @@
                      <div class="row store" style="justify-content: space-evenly;">
 
                      <div class="imgborder">
-<<<<<<< HEAD
                      <img
                      src="/resources/static/\${store.attach.orgFileName}"
                         onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
                      alt="My Image" width="300" height="300">
-=======
-<<<<<<< HEAD
-                        <img
-                           src="https://cdn.pixabay.com/photo/2016/11/29/11/14/business-1869127_960_720.jpg"
-                           alt="My Image" width="300" height="300">
-=======
-                     <img
-                     src="/resources/static/\${store.attach.orgFileName}"
-                        onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
-                     alt="My Image" width="300" height="300">
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/heads/master
                      </div>
                      
                      <table class="table table-borderless" style="width: 600px;margin-top: 15px;"
@@ -701,15 +664,7 @@
                      <td></td>
                      <td><button type="button" style="margin-right: 140px;"
                            class="btn btn-light"
-<<<<<<< HEAD
                            onClick="window.open('https://map.kakao.com/link/to/\${store.storeName},\${store.latitude},\${store.longitude}/from/현재위치,\${lat},\${lon}','new','scrollbars=yes,resizable=no width=900 height=750, left=500,top=150')">길찾기&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i></button></td>
-=======
-<<<<<<< HEAD
-                           onClick="window.open('https://map.kakao.com/link/to/\${store.storeName},\${store.latitude},\${store.longitude}/from/현재위치,\${lat},\${lon}','new','scrollbars=yes,resizable=no width=1200 height=750, left=345,top=150')">길찾기&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i></button></td>
-=======
-                           onClick="window.open('https://map.kakao.com/link/to/\${store.storeName},\${store.latitude},\${store.longitude}/from/현재위치,\${lat},\${lon}','new','scrollbars=yes,resizable=no width=900 height=750, left=500,top=150')">길찾기&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i></button></td>
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/heads/master
                   </tr>
 
                </div>
