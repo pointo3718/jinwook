@@ -158,11 +158,11 @@ function fn_addFile() {
 	
 	<div class="form-group">
     <label for="boardTitle">1:1문의 제목</label>
-    <input type="text" class="form-control" id="boardTitle" name="boardTitle" >
+    <input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력해주세요">
   </div>
   <div class="form-group">
     <label for="boardContent">1:1문의 내용</label>
-    <textarea class="form-control" id="boardContent" name="boardContent" rows="3"></textarea>
+    <textarea class="form-control" id="boardContent" name="boardContent" rows="3" placeholder="문의내용을 입력해주세요"></textarea>
   </div>
   <div class="form-group">
     <label for="file">1:1문의 사진 업로드</label>
@@ -183,18 +183,6 @@ function fn_addFile() {
 	</section>
 	<!-- Blog Section End -->
 	
-	<div class="container">
-	<div class="form-group">
-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-			1:1문의 답변
-				<tr>
-					<td style="border-bottom:none;" valign="middle"><br><br></td>
-					<td><input type="text" style="height:100px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "commentText"></td>
-					<td><br><br><input type="submit" class="btn-primary pull" value="댓글 작성"></td>
-				</tr>
-			</table>
-	</div>
-</div>
 
 	<!-- Footer Begin -->
 	<jsp:include page="../layout/footer.jsp" />

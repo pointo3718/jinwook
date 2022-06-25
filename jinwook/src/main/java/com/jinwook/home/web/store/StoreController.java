@@ -16,13 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jinwook.home.service.board.BoardService;
 import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
+import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.store.StoreService;
+import com.jinwook.home.service.user.UserService;
 
 @Controller
 @RequestMapping("/store/*")
@@ -31,6 +34,14 @@ public class StoreController {
    @Autowired
    @Qualifier("storeServiceImpl")
    private StoreService storeService;
+   
+   @Autowired
+	@Qualifier("boardServiceImpl")
+	private BoardService boardService;
+   @Autowired
+   
+   @Qualifier("userServiceImpl")
+   private UserService userService;
 
    public StoreController() {
       System.out.println(this.getClass());
@@ -174,11 +185,28 @@ public class StoreController {
    }
 
    @GetMapping(value = "getStore")
-   public String getStore(@RequestParam("storeNo") int storeNo, Model model) {
+   public String getStore(Store store, @RequestParam("storeNo") int storeNo, 
+		   @RequestParam(value = "orderNo", required = false) Integer orderNo,
+		   @RequestParam(value = "userId", required = false) String userId,
+		   Model model) throws Exception {
+	   
+	   if (orderNo == null) {
+			model.addAttribute("orders", new Orders());
+		} else {
+			Orders orders = boardService.getReview(orderNo);
+			User user = userService.getUser(userId);
+			if (orders == null) {
+				return "redirect:/board/getRecipeList";
+				// getRecipe 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
+			}
+			model.addAttribute("user", user);
+			model.addAttribute("orders", orders);
+			System.out.println(user);
+			System.out.println(orders);
+		}
 
       List<Store> getStore = storeService.getStore(storeNo);
       model.addAttribute("getStore", getStore);
-
 
       return "store/getStore";
    }

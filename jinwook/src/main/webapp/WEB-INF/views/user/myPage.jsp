@@ -45,7 +45,7 @@
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <!-- 아래 제이쿼리는 1.0이상이면 원하는 버전을 사용하셔도 무방합니다. -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></scrip
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -725,15 +725,15 @@ $('#myModal').on('shown.bs.modal', function () {
                </table>
             </div>
             <div class="text-center">
-               <!-- PageNavigation Start... -->
+               <!— PageNavigation Start… —>
                <jsp:include page="../common/pageNavigator_new.jsp" />
-               <!-- PageNavigation End... -->
+               <!— PageNavigation End… —>
             </div>
 
          </div>
       </div>
    </section>
-   <!--   Blog Section End -->
+   <!—   Blog Section End —>
 
    <!—  Footer Begin —>
    <jsp:include page="../layout/footer.jsp" />

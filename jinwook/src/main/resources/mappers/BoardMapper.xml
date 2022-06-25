@@ -50,6 +50,7 @@
 <resultMap type="orders" id="ordersSelectMap">
 	<result property="orderNo"			column="order_no"			jdbcType="INTEGER"/>
 	<result property="user.userId"		column="user_id"			jdbcType="VARCHAR"/>
+	<result property="store.storeNo"	column="store_no"			jdbcType="INTEGER"/>
 	<result property="store.storeName"	column="store_name"			jdbcType="VARCHAR"/>
 	<result property="reviewTitle"		column="review_title"		jdbcType="VARCHAR"/>
 	<result property="reviewContent"	column="review_content"		jdbcType="VARCHAR"/>
@@ -457,21 +458,28 @@
 			rcp_no = #{rcpNo}
 	</delete>
 	
-	<!-- Review insert -->
-	<update id="addReview" parameterType="Orders">
-	UPDATE orders
-	SET
-	  store_name = #{storeName:VARCHAR}
-	, user_id = #{userId:VARCHAR}	
-	, review_title = #{reviewTitle:VARCHAR}
-	, review_content = #{reviewContent:VARCHAR}
-	, review_date = SYSDATE()
-	, review_star = #{reviewStar:INTEGER}
-	, review_img1 = #{reviewImg1:VARCHAR}
-	, review_img2 = #{reviewImg2:VARCHAR}
-	, review_img3 = #{reviewImg3:VARCHAR}
-	WHERE order_no = #{orderNo}
-	</update>
+	<!-- 리뷰 등록 -->
+	<insert id="addReview" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderNo">
+	INSERT INTO orders (
+		order_no, store_no, user_id, review_title, review_content, review_writer, review_star
+	) VALUES (
+		#{orderNo:INTEGER}
+		, #{store.storeNo:INTEGER}
+		, #{user.userId:VARCHAR}
+		, #{reviewTitle:VARCHAR}
+		, #{reviewContent:VARCHAR}
+		, #{reviewWriter:VARCHAR}
+		, #{reviewStar:INTEGER}
+	)
+	</insert>
+	
+	<!-- 리뷰 조회 -->
+	<select id="getReview" parameterType="int" resultType="Orders" resultMap="ordersSelectMap">
+    	SELECT
+    		  order_no, store_no, user_id, review_title, review_content, review_writer, review_star
+    	 FROM orders
+    	WHERE store_no = #{storeNo}
+	</select>
 	
 	<!--  Review delete -->
 	<delete id="deleteReview" parameterType="int">
@@ -481,7 +489,7 @@
 			order_no = #{orderNo}
 	</delete>
 	
-	<!-- Review 상세 조회 -->
+	<!--  Review 상세 조회
 	<select id="getReview" parameterType="int" resultType="Orders" resultMap="ordersSelectMap">
 		SELECT
 			o.order_no, s.store_name, o.user_id, o.review_title, o.review_content, o.review_date, o.review_star, o.review_img1, o.review_img2, o.review_img3
@@ -489,7 +497,7 @@
 			orders o, store s
 		WHERE o.store_no = s.store_no
 		AND o.order_no = #{orderNo}
-	</select>
+	</select> -->
 	
 	<!-- 상점후기 목록 개수 -->
 	<select id="getReviewTotalCount" parameterType="Orders" resultType="int">

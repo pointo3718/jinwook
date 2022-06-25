@@ -158,7 +158,8 @@
                                  <a class="dropdown-item" href="/user/login">마이페이지</a> <a
                                     class="dropdown-item" href="/orders/getOrdersList">구매내역</a> <a
                                     class="dropdown-item" href="#">개인정보</a> <a
-                                    class="dropdown-item" href="#">1:1문의</a> <a
+                                    class="dropdown-item" href="/board/getBoardInquiryList">1:1문의</a> <a
+                                    class="dropdown-item" href="/board/getBoardAnnouncementList">공지사항</a> <a
                                     class="dropdown-item" href="#">작성한글</a> <a
                                     class="dropdown-item" href="#"></a> <a class="dropdown-item"
                                     href="#">로그아웃</a>
@@ -186,7 +187,7 @@
                                     class="dropdown-item" href="#">내가 한 요청</a> <a
                                     class="dropdown-item"
                                     href="/store/getStoreWallet?storeNo=10000">지갑</a> <a
-                                    class="dropdown-item" href="#">1:1 문의</a> <a
+                                    class="dropdown-item" href="/board/getBoardInquiryList">1:1 문의</a> <a
                                     class="dropdown-item" href="#"></a> <a class="dropdown-item"
                                     href="#">로그아웃</a>
                               </div>
@@ -213,10 +214,11 @@
                                     href="/request/getRequestListForAdmin?reqCode=3">환급 요청</a> <a
                                     class="dropdown-item"
                                     href="/request/getRequestListForAdmin?reqCode=4">광고 등록
-                                    요청</a> <a class="dropdown-item"
-                                    href="/request/getRequestListForAdmin?reqCode=4">문의 내역</a> <a
-                                    class="dropdown-item" href="#"></a> <a class="dropdown-item"
-                                    href="#">로그아웃</a>
+                                    요청</a> 
+                                    <a class="dropdown-item" href="/request/getRequestListForAdmin?reqCode=4">문의 내역</a> 
+                                    <a class="dropdown-item" href="/board/getBoardInquiryList">1:1 문의</a> 
+                                    <a class="dropdown-item" href="/board/getBoardAnnouncementList">공지사항</a> 
+                                    <a class="dropdown-item" href="#">로그아웃</a>
                               </div>
                            </div>
                         </c:if>
