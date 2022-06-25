@@ -590,7 +590,7 @@ document.detailForm.submit();
                   </c:if>
                        
             
-			<c:if test="${user.storeYn==true}">
+         <c:if test="${user.storeYn==true}">
               <c:forEach var="store" items="${storeInfo}">
                   <c:if test="${store.storeStatus=='2'}">
 
