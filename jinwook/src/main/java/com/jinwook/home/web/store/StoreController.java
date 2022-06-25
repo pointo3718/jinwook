@@ -113,15 +113,15 @@ public class StoreController {
    
 
 
-   @PostMapping(value = "addStoreProduct")
-   public String addStoreProduct(@ModelAttribute("product") Product product) {
-
-      product.setSoldout(true);
-      storeService.addStoreProduct(product);
-
-      return "store/addStoreProduct";
-
-   }
+//   @PostMapping(value = "addStoreProduct")
+//   public String addStoreProduct(@ModelAttribute("product") Product product) {
+//
+//      product.setSoldout(true);
+//      storeService.addStoreProduct(product);
+//
+//      return "store/addStoreProduct";
+//
+//   }
 
 //   @PostMapping(value = "updateStoreProduct")
 //   public String updateStoreProduct(@RequestParam("prodNo") int prodNo , Product product, Model model) {
@@ -184,7 +184,7 @@ public class StoreController {
    }
 
    @GetMapping(value = "getStoreWallet")
-   public String getStoreWallet(@RequestParam("storeNo") int storeNo, Store store, Model model, HttpSession session) {
+   public String getStoreWallet(@RequestParam("storeNo") int storeNo, @ModelAttribute("store") Store store, Model model, HttpSession session) {
 
       String userid = ((User) session.getAttribute("user")).getUserId();
 
@@ -229,6 +229,23 @@ public class StoreController {
 
 
       return "store/getCouponList";
+   }
+   
+   @GetMapping(value = "getCouponCount1")
+   public String getCouponCount(@RequestParam("userId") String userId, Model model, HttpSession session) {
+
+      Store store = new Store();
+
+      String userid = ((User) session.getAttribute("user")).getUserId();
+
+      store.setUserId(userid);
+
+      int getCouponCount = storeService.getCouponCount(userId);
+      model.addAttribute("getCouponCount", getCouponCount);
+      
+
+
+      return "store/getCouponCount";
    }
 
 }

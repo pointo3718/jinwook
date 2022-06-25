@@ -42,9 +42,19 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void addStoreProduct(Product product) {
+	public void addStoreProduct(Product product, MultipartHttpServletRequest mpRequest)throws Exception {
 
 		storeMapper.addStoreProduct(product);
+
+		List<Map<String,Object>> list = fileUtils.parseInsertProductFileInfo(product, mpRequest); 
+		int size = list.size();
+		
+		for(int i=0; i<size; i++){ 
+			storeMapper.insertProductFile(list.get(i)); 
+		}		
+
+		
+		
 	}
 	
 
@@ -166,9 +176,10 @@ public class StoreServiceImpl implements StoreService {
 
 		List<Store> getStoreWallet = Collections.emptyList();
 
-		int storeTotalCount = storeMapper.getStoreWalletTotalCount();
+		int getStoreWalletTotalCount = storeMapper.getStoreWalletTotalCount();
+		
 
-		if (storeTotalCount > 0) {
+		if (getStoreWalletTotalCount > 0) {
 			getStoreWallet = storeMapper.getStoreWallet(store);
 		}
 

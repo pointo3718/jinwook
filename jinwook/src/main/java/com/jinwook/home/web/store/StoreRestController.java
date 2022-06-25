@@ -1,11 +1,15 @@
 package com.jinwook.home.web.store;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
@@ -20,11 +24,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.domain.Product;
+import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
@@ -47,13 +53,13 @@ public class StoreRestController {
    }
 
    
-   @PostMapping(value = "addStoreProduct/{prodNo}/{storeNo}/{prodName}/{price}/{prodInfo}/{prodImg}/{prodOrign}/{soldout}")
+   @RequestMapping(value = "addStoreProduct/{prodNo}/{storeNo}/{prodName}/{price}/{prodInfo}/{prodImg}/{prodOrign}/{soldout}")
    public JsonObject addStoreProduct(@PathVariable(value = "storeNo", required = false) int storeNo,
                               @PathVariable(value = "prodName", required = false) String prodName,
                               @PathVariable(value = "price", required = false) int price,
                               @PathVariable(value = "prodInfo", required = false) String prodInfo,
                               @PathVariable(value = "prodImg", required = false) String prodImg,
-                              @PathVariable(value = "prodOrign", required = false) String prodOrign) {
+                              @PathVariable(value = "prodOrign", required = false) String prodOrign, MultipartHttpServletRequest mpRequest) {
 
        System.out.println("/store/addStoreProduct : Post ");
 
@@ -75,7 +81,35 @@ public class StoreRestController {
          
          System.out.println("컨트롤러에서의 Product :: "+product);
 
-          storeService.addStoreProduct(product);
+          
+  		//////// 파일 업로드 ///////
+  		List<MultipartFile> fileList = mpRequest.getFiles("file");
+          String src = mpRequest.getParameter("src");
+
+          String path = "C:\\Users\\sujin\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\";
+
+          for (MultipartFile mf : fileList) {
+              String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+              long fileSize = mf.getSize(); // 파일 사이즈
+
+              System.out.println("originFileName : " + originFileName);
+              System.out.println("fileSize : " + fileSize);
+
+              String safeFile = path + originFileName;
+              System.out.println(safeFile);
+              try {
+                  mf.transferTo(new File(safeFile));
+                  storeService.addStoreProduct(product, mpRequest);//레시피 등록
+              } catch (IllegalStateException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+              } catch (IOException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+              }
+          }
+  		
+  		///////////////////////////
 
       } catch (DataAccessException e) {
          jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
@@ -519,6 +553,7 @@ public class StoreRestController {
 
             return jsonObj;
          }
+      
       @GetMapping( value="getStoreOnly/{storeNo}")
       public JsonObject getStoreOnly(@PathVariable(value="storeNo",required = false) int storeNo) throws Exception{
     	  
@@ -545,8 +580,6 @@ public class StoreRestController {
     	  return jsonObj;
       }
       
-
       
-
 
 }

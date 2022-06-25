@@ -129,6 +129,10 @@ public class OrdersController {
      User user = new User();
       user.setUserId(userid);
       orders.setUser(user);
+
+      List<Coupon> couponList = storeService.getCouponList(userid);
+      model.addAttribute("couponList", couponList);
+      
       
       System.out.println("/orders/getOrdersList : GET");
       List<Orders> getOrdersList = ordersService.getOrdersList(orders);

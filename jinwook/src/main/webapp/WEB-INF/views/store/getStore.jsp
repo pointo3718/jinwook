@@ -376,7 +376,7 @@ label {
                      <td></td>
                      <th scope="row"><span style="color: red; font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
                            class="bi bi-telephone-fill"></i></span></th>
-                     <td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storePhone}</strong></span></td>
+                     <td><span style="color: #2E2E2E; font-size: 15px "><strong>${store.storePhone}</strong></span></td>
                      <td><button type="button" class="btn btn-outline-success">
                            <strong>상점후기</strong>
                         </button></td>
@@ -387,7 +387,7 @@ label {
                      <td></td>
                      <td></td>
                      <th scope="row"><span style="color: blsck; font-size: 20px">상점주소</span></th>
-                     <td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storeAddr}</strong></span></td>
+                     <td><span style="color: #2E2E2E; font-size: 15px" ><strong>${store.storeAddr}</strong></span></td>
          
 
                      <td style="width: 94px;"><span

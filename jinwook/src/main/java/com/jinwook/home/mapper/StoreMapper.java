@@ -55,8 +55,7 @@ public interface StoreMapper {
 	public List<Store> getStoreOnly(int storeNo);
 	
 	public void insertStoreFile(Map<String, Object> map);
-	
-		
+			
 	public int getStoreMapTotalCount();
 	
 	public int getStoreTotalCount();
@@ -70,5 +69,7 @@ public interface StoreMapper {
 	public int getRequestTotalCount();
 	
 	public int getStoreListTotalCount();
+
+	public void insertProductFile(Map<String, Object> map) throws Exception;
 
 }
