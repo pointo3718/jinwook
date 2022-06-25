@@ -177,11 +177,10 @@ function movePage(uri, queryString) {
                 <div class="row" style="background-color: #F2F2F2;">
                 
                 <div class="imgborder">
-                <img width="400" height="400"
-					src="/resources/static/${board.attach.orgFileName}" alt="..."
+                <img attachNo="${attach.attachNo}" width="400" height="400"
+					src="/resources/static/${attach.orgFileName}" alt="..."
 					onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" 
 					width="300" height="300" style="margin-left: 20px; margin-bottom: 20px;"/>
-					                ${board.attach.orgFileName}
 				</div>
                 
                     <div class="col-sm-4 col-sm-4" style="width:100px; height:50px;">

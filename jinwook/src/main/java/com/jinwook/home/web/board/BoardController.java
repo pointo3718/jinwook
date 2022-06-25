@@ -247,12 +247,12 @@ public class BoardController {
 		
 	//1:1문의 목록 조회
 	@GetMapping(value = "getBoardInquiryList")
-	public String getBoardInquiryList(@ModelAttribute("board") Board board, Model model, HttpSession session) throws Exception {
+	public String getBoardInquiryList(@ModelAttribute("board") Board board, Model model) throws Exception {
 	
-		String userId = ((User) session.getAttribute("user")).getUserId();
-		User user = new User();
-		user.setUserId(userId);
-		board.setUser(user);
+//		String userId = ((User) session.getAttribute("user")).getUserId();
+//		User user = new User();
+//		user.setUserId(userId);
+//		board.setUser(user);
 		
 		List<Board> getBoardInquiryList = boardService.getBoardInquiryList(board);
 		model.addAttribute("getBoardInquiryList", getBoardInquiryList);//jsp foreach items
@@ -288,9 +288,10 @@ public class BoardController {
 			Attach attach=new Attach();
 			attach = boardService.selectBoardAttachList(board.getBoardNo());
 			board.setAttach(attach);
+			model.addAttribute("attach",attach);
+			
 			System.out.println("--------------"+attach);
 			System.out.println("------------"+board);
-	
 		
 //		List<Map<String, Object>> fileList = boardService.selectBoardAttachList(board.getBoardNo());
 //		System.out.println(fileList);
@@ -334,6 +335,7 @@ public class BoardController {
 			Attach attach = new Attach();
 			attach = boardService.selectBoardAttachList(board.getBoardNo());
 			board.setAttach(attach);
+			model.addAttribute("attach", attach);
 		
 		System.out.println("--------------"+attach);
 		System.out.println("------------"+board);
@@ -521,26 +523,23 @@ public class BoardController {
 			return "redirect:/board/getRecipe?boardNo="+comment.getRcpNo();
 		}
 		
-		//레시피 댓글 수정 화면 GET
-		@RequestMapping(value="commentUpdateView", method = RequestMethod.GET)
-		public String commentUpdateView(Comment comment, Model model) throws Exception {
-			System.out.println("레시피 댓글수정: GET");
-			
-			model.addAttribute("commentUpdate", boardService.selectRecipeComment(comment.getCommentNo()));
-			
-			return "board/commentUpdateView";
-		}
-		
 		//레시피 댓글 수정 처리 POST
-		@RequestMapping(value="commentUpdate", method = RequestMethod.POST)
-		public String commentUpdate(Comment comment, RedirectAttributes rttr) throws Exception {
+		@PostMapping("/commentUpdate{commentNo}/{commentContent}")
+		public Map<String, Object> commentUpdate(@PathVariable int commentNo, @PathVariable String commentContent) throws Exception {
 			System.out.println("레시피 댓글수정처리: POST");
-			
-			boardService.updateRecipeComment(comment);
-			
-			rttr.addAttribute("rcpNo", comment.getRcpNo());
-			
-			return "redirect:/board/getRecipe";
+			Map<String, Object> map = new HashMap<String, Object>();
+			try {
+				Comment comment = new Comment();
+				comment.setCommentNo(commentNo);
+				comment.setCommentContent(commentContent);
+				boardService.updateRecipeComment(comment);
+				
+				map.put("result", "success");
+			} catch(Exception e) {
+				e.printStackTrace();
+				map.put("result", "fail");
+			}
+			return map;
 		}
 		
 		//댓글 삭제 GET

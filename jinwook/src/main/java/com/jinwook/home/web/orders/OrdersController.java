@@ -91,14 +91,6 @@ public class OrdersController {
       return "redirect:/orders/getOrdersList";
    }	
    
-   @GetMapping(value= "addOrdersView")
-   public String addOrdersView() throws Exception{
-	   
-	   System.out.println("orders/addOrdersView : POST");
-	   
-	   return null;
-   }
-   
    @PostMapping(value = "updateOrders")
    public String updateOrders(@ModelAttribute("orders") Orders orders, Model model) throws Exception {
       

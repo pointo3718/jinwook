@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.jinwook.home.common.FileUtils;
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.StoreMapper;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Request;
@@ -229,6 +230,11 @@ public class StoreServiceImpl implements StoreService {
 		return getStoreOnly;
 	}
 	
-
+	
+	// 상점 사진 조회
+	@Override
+	public Attach selectStoreAttachList(int storeNo){
+		return storeMapper.selectStoreAttachList(storeNo);
+	}
 
 }

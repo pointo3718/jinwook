@@ -1,6 +1,7 @@
 package com.jinwook.home.service.user;
 
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -144,6 +145,8 @@ public class UserServiceImpl implements UserService{
 			System.out.println("==============sendIdEmail================");
 		try {
 	         
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
 	         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
 	         mimeMessageHelper.setTo(user.getEmail());
 	         
@@ -157,7 +160,7 @@ public class UserServiceImpl implements UserService{
 	        content += "<br><br> ";
 	        content += user.getUserId();
 	        content += "<br><br> ";
-	        content += "가입일 "+user.getRegDate()+"\n ";
+	        content += "가입일 "+sdf.format(user.getRegDate())+"\n ";
 	        content += "<br><br> ";
 //	         StringBuffer sb = new StringBuffer();
 //			 sb.append(user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n"

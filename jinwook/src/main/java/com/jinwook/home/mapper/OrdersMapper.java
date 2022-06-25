@@ -62,5 +62,7 @@ public interface OrdersMapper {
    public int updateOrdersCeoJb(Jpay jpay);      //사장님 jb증가
    
    public int updateOrdersCeoEarn(Store store);   //사장님 매출액 증가
+   
+   public int checkJpPassword(User user); // 결제비밀번호 일치체크
 }
  

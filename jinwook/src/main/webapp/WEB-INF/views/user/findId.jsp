@@ -265,7 +265,7 @@ $(document).ready(function() {
 		<label for="userName " style="font-size:15px; " >이름</label>	
 		</div>
 			<div class="aaa " style="font-size:15px;">
-			<input type="text" name="userName" class="userName" placeholder="이름을 입력해주세요.">
+			<input type="text" name="userName" class="userName" placeholder="이름을 입력해주세요." onKeyup="this.value=this.value.replace(' ','');">
 			</div>
 			<br>
 			
@@ -274,7 +274,7 @@ $(document).ready(function() {
 		<label for="email " style="font-size:15px;" >이메일</label>	
 		</div>
 			<div class="adad" style="font-size:15px;">
-			<input type="email" id="email" class="email" placeholder="이메일을 입력해주세요.">
+			<input type="email" id="email" class="email" placeholder="이메일을 입력해주세요." onKeyup="this.value=this.value.replace(' ','');">
 			</div>
 			<br>
 			<button class="send_btn site-btn" id="snedE" type="button" style="width:300px;">전송</button>
@@ -286,7 +286,7 @@ $(document).ready(function() {
 		<label for="phone " style="font-size:15px;" >휴대폰 번호</label>	
 		</div>
 			<div class="adad" style="font-size:15px;">
-			<input type="text" id="phone" class="phone" placeholder="휴대폰 번호를 입력해주세요.">
+			<input type="text" id="phone" class="phone" placeholder="휴대폰 번호를 입력해주세요." onKeyup="this.value=this.value.replace(' ','');">
 			</div>
 			<br>
 			<button class="send_btn site-btn" type="button" id="snedA" style="width:300px;" onclick="authNo()">인증번호 받기</button>
@@ -298,7 +298,7 @@ $(document).ready(function() {
 		</div>
 			<div class="adad" style="font-size:15px;">
 			<input type="hidden" id="phoneDoubleChk"/>
-			<input type="text" id="authNo1" class="authNo" placeholder="인증 번호를 입력해주세요.">
+			<input type="text" id="authNo1" class="authNo" placeholder="인증 번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 			</div>
 			<br>
 			<button class="send_btn site-btn" type="button" id="sned" style="width:300px;" >확인</button>

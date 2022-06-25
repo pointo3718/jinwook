@@ -38,6 +38,10 @@ public class OrdersRestController {
 	@Qualifier("ordersServiceImpl")
 	private OrdersService ordersService;
 	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
+	
 	public OrdersRestController(){
 		System.out.println(this.getClass());
 	}
@@ -168,6 +172,19 @@ public class OrdersRestController {
 		ordersService.deleteOrdersNotice(notiNo);
 
 		return "orders/getOrdersNoticelist";
+	}
+	
+	@RequestMapping(value="checkJpPassword")
+	public int checkJpPassword(@RequestParam("user") User user) throws Exception {
+		   
+		System.out.println("/orders/checkJpPassword");
+		
+		int result = ordersService.checkJpPassword(user);
+//		String day = lesson.getLessonDay();
+//		String[] splitDay = day.split(",");
+//		String lessonDay = String.join("", splitDay);
+		
+		return result;
 	}
 	
 

@@ -198,9 +198,6 @@ public class StoreController {
 
       List<Store> storeInfo = storeService.getStoreInfo(userid);
       model.addAttribute("storeInfo", storeInfo);
-      
-      
-
 
       return "store/getStoreWallet";
    }
@@ -225,8 +222,6 @@ public class StoreController {
 
       List<Coupon> couponList = storeService.getCouponList(userId);
       model.addAttribute("couponList", couponList);
-      
-
 
       return "store/getCouponList";
    }

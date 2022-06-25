@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="${path}/resources/static/css/style.css" type="text/css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">    
  
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
 
@@ -79,6 +80,68 @@ function movePage(uri, queryString) {
    location.href = uri + queryString;
 }
 
+<!-- 레시피 댓글 리스트 불러오는 함수 -->
+$(document).on(function(){
+	getCommentList();
+});
+
+<!-- 레시피 댓글 리스트 함수 -->
+function getCommentList() {
+	var commentUrl = "/board/commentList/";
+	var rcpNo = $('#rcpNo').val();
+		
+	$.ajax({
+		url: commentUrl+rcpNo,
+		type: 'POST',
+		dataType: 'json',
+		success : function(result) {
+			var comments = "";
+			if(result.length<1) {
+				comments = "등록된 댓글이 없습니다.";
+			}else {
+				$(result).each(function(){
+					comments += '<br/>';
+					comments += '<strong>';
+					comments += '작성자 : '+this.commentWriter;
+					comments += '</strong>&nbsp;&nbsp;&nbsp;&nbsp;';
+					comments += '작성 날짜 : '+this.commentDate;
+					comments += '<br/> <p>';
+					comments += '댓글 내용 : &nbsp;&nbsp;&nbsp;';
+					comments += this.commentContent;
+					comments += '</p>';
+					comments += '<br/>';
+					comments += '<button type="button" class="btn btn-outline-success" id="replyupdateBtn"';
+					comments += 'data-rno='+this.commentNo+'>'
+					comments += '댓글수정';
+					comments += '</button>';
+					comments += '<br/>';
+				});
+			}
+				$("#replylist").html(comments);
+		}
+	});
+}
+
+<!-- 레시피 댓글 수정 버튼 이벤트 -->
+function fncUpdateBtn(commentNo, commentContent) {
+	
+	var updateUrl = "/board/commentUpdate/";
+	var commentContent = $("#commentContentInfo").val(); //어디서 불러와?
+	
+	$.ajax({
+		url: updateUrl+commentNo+'/'+commentContent,
+		type: 'POST',
+		dataType: 'json',
+		success: function(result) {
+			getCommentList();//답변 리스트?
+		}
+		, error: function(error) {
+			swal("진욱이네","에러 : "+error);
+		}
+	});
+};
+
+
 <!-- 레시피 삭제 -->
 function fncDeleteRecipe(e) {
 	if (!confirm('레시피를 삭제하시겠어요?')) {
@@ -92,7 +155,7 @@ function fncDeleteRecipe(e) {
 			dataType : "json",
 			success : function(result){
 				if(result != null){
-					alert("삭제완료");
+					swal("진욱이네","삭제완료");
 					self.location = "/board/getRecipeList";
 				}
 			}
@@ -113,7 +176,7 @@ function fncDeleteRecipeComment(e) {
 			dataType : "json",
 			success : function(result){
 				if(result != null){
-					alert("삭제완료");
+					swal("진욱이네","삭제완료");
 					self.location = "/board/getRecipe?rcpNo=${recipe.rcpNo}";
 				}
 			}
@@ -157,15 +220,15 @@ var rcpNo = ${recipe.rcpNo};
 		dataType : "json",
 		data : {'rcpNo' : rcpNo},
 		error : function() {
-			alert("통신 에러");
+			swal("진욱이네","통신 에러");
 		},
 		success : function(recoCheck) {
 			if (recoCheck == 0) {
-				alert("추천 완료!");
+				swal("진욱이네","추천 완료!");
 				location.reload();
 			}
 			else if (recoCheck == 2) {
-				alert("이미 추천하셨습니다");
+				swal("진욱이네","이미 추천하셨습니다");
 				location.reload();
 					}
 				}
@@ -208,14 +271,92 @@ var rcpNo = ${recipe.rcpNo};
    <jsp:include page="../layout/top.jsp" />
     <!-- Header Section Begin -->
 
+	<!-- 신고하기 Modal Begin -->
+
+	<div class="modal fade" id="complainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content" style="font-size: 15px;">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel"><strong>신고사유</strong></h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      <div class="container">
+                  <div>
+                     <i class="fa fa-check" aria-hidden="true"></i> &nbsp;신고 사유를 선택해주세요.
+                  </div>
+                  <div>
+                     <i class="fa fa-check" aria-hidden="true"></i> &nbsp;신고등록 후 관리자의 확인절차에 따라 해당 회원이 블랙리스트로 지정됩니다.
+                  </div>
+                  
+          </div>
+          <hr>
+	        <br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="blackPeriod" value="욕설" checked> <label
+							class="form-check-label" for="exampleRadios1"> 욕설 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios2" value="비방"> <label
+							class="form-check-label" for="exampleRadios2"> 비방 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios1" value="도배"> <label
+							class="form-check-label" for="exampleRadios1"> 도배 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios1" value="음란성"> <label
+							class="form-check-label" for="exampleRadios1"> 음란성 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios1" value="불법도용"> <label
+							class="form-check-label" for="exampleRadios1"> 불법도용 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios1" value="광고성"> <label
+							class="form-check-label" for="exampleRadios1"> 광고성 </label>
+					</div>
+					<br/>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="blackPeriod"
+							id="exampleRadios1" value="기타"> <label
+							class="form-check-label" for="exampleRadios1"> 기타 </label>
+					</div>
+					<br/>				
+				</div>
+	      
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-primary">신고하기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- 신고하기 Modal End -->
+
+
 
     <!-- Contact Form Begin -->
     <div class="contact-form spad">
         <div class="container" style="background-color: #F2F2F2;">
             <div class="row rcp" >
-                <div class="col-lg-12" style="background-color: #F2F2F2;">
+                <div class="col-lg-12" style="background-color: #F2F2F2; text-align: center;">
                     <div class="contact__form__title">
-                        <h3 style="margin-top:20px;"><input type="text" readonly="readonly" value="${recipe.rcpTitle}" style="width:500px; height:100px; text-align:center;"></h3>
+                        <h3 style="margin-top:20px;"><input class="form-control" type="text" readonly="readonly" value="${recipe.rcpTitle}" style="width:500px; height:100px; text-align:center; background-color: #ffffff;"></h3>
                     </div>
                 </div>
             </div>
@@ -230,14 +371,6 @@ var rcpNo = ${recipe.rcpNo};
 						<%-- <img width="400" height="400"
 											src="/resources/static/${recipe.attach.orgFileName}" alt="..."
 											onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" /> --%>
-						
- 				<%-- <c:forEach var="file" items="${file}">
- 				<input type="hidden" id="attach_no" name="attach_no" value="">
- 					<a href="#" onclick="fn_fileDown('${attach.attachNo}'); return false;">${attach.orgFileName}</a>(${attach.fileSize})<br>
- 					<img attachNo="${ attach.attachNo }" width="400" height="400" src="/resources/static/${attach.orgFileName}" alt="..." 
-               onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"/>
- 				</c:forEach> --%>
- 				
  						</div>
 				</div>
                 
@@ -250,6 +383,7 @@ var rcpNo = ${recipe.rcpNo};
  						<button type="button" class="btn btn-success" id="reco_btn" 
  						style="width:50px; height:30px; background-color: green; font-size: 12px;" onclick="updateRecipeReco();"><i class="bi bi-hand-thumbs-up"></i>${recipe.recommendCount}</button>
  						&nbsp;<a href="#" onclick="clip(); return false;"><i class="bi bi-share-fill"></i></a>
+ 						<br/><a type="button" class="badge badge-danger" data-toggle="modal" data-target="#complainModal" style="font-size:15px;">신고하기</a>
                     </div>
  						<br/><br/><br/>
                     
@@ -266,7 +400,7 @@ var rcpNo = ${recipe.rcpNo};
                         <button type="button" class="btn btn-success" id="updateButton">수 정</button>&nbsp;
                         <button data-value="${recipe.rcpNo}" id="buttons" type="button" class="btn btn-danger" onClick="fncDeleteRecipe(this)">삭 제</button>
                     </div>
-
+					
 					<!-- 댓글 작성폼 start -->
 					<div class="card mb-2" style="margin-left:20px;">
 						<!-- 댓글 헤더 -->
@@ -297,13 +431,11 @@ var rcpNo = ${recipe.rcpNo};
 							<ul id="comment" class="commentList">
 								<c:forEach items="${commentList}" var="recipe">
 									<li id="comment--1" class="list-group-item d-flex justify-content-between">
-											<div class="font-itatlic">작성자 :${recipe.comment.commentWriter} | &nbsp;</div>
-											<br/>
+											<div class="font-itatlic">작성자 :${recipe.comment.commentWriter} | &nbsp;</div><br/>
 										<div class="d-flex">
-										<div>${recipe.comment.commentContent}</div>&nbsp;&nbsp;&nbsp;
-											<%-- <button type="button" id="button" class="btn btn-outline-success"
-                        					data-value="${recipe.comment.commentNo}" onClick="fncUpdateRecipeComment(this)">수정</button>&nbsp;&nbsp;&nbsp; --%>
+											<div id="commentContentInfo">${recipe.comment.commentContent}</div>&nbsp;&nbsp;&nbsp;
 											
+											<button type="button" class="btn btn-outline-success" id="replyupdateBtn" data-rno="${recipe.comment.commentNo}" onclick="fncUpdateBtn();">댓글 수정</button>
 											<button data-value="${recipe.comment.commentNo}" id="buttons" type="button" class="btn btn-primary" 
 											onClick="fncDeleteRecipeComment(this)">X</button>
 										</div>

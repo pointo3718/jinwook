@@ -40,7 +40,7 @@ public class Store extends CommonDTO {
    private String orderDateEnd;
    private double latitude;
    private double longitude;
-
+   private Attach attach;
    
    
    public Store(){

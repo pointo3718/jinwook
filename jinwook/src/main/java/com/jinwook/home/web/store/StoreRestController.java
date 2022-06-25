@@ -29,8 +29,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Request;
+import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
@@ -557,18 +559,21 @@ public class StoreRestController {
       @GetMapping( value="getStoreOnly/{storeNo}")
       public JsonObject getStoreOnly(@PathVariable(value="storeNo",required = false) int storeNo) throws Exception{
     	  
-    	  
-    	  Store store= new Store();
-    	  
-    	  store.setStoreNo(storeNo);
-    	  
-    	  
-    	  
+          Store store= new Store();
+          
+          store.setStoreNo(storeNo);
+
+
     	  System.out.println("/store/getStoreOnly : GET ");
     	  
     	  JsonObject jsonObj = new JsonObject();
     	  
     	  List<Store> getStoreOnly = storeService.getStoreOnly(storeNo);
+    	  
+    	  Attach attach=new Attach();
+		  attach = storeService.selectStoreAttachList(storeNo);
+		  
+    	  getStoreOnly.get(0).setAttach(attach);	// 리스트에 store객체 하나 들어있어서 괜찮음
     	  
     	  if (CollectionUtils.isEmpty(getStoreOnly) == false) {
     		  com.google.gson.JsonArray jsonArr = new Gson().toJsonTree(getStoreOnly).getAsJsonArray();
