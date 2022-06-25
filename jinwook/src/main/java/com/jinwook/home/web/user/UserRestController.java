@@ -257,20 +257,39 @@ public class UserRestController {
 		
 		//로그인 아이디, 비밀번호 체크 
 		@PostMapping("checkLogin")
-		public User checkLogin(@ModelAttribute("user") User user, HttpSession session) throws Exception{
+		public User checkLogin(@ModelAttribute("user") User user) throws Exception{
+			User dbUser = new User();
+//			int one = userService.checkId(user.getUserId()); 
+//			return one;
 			
-			User dbUser = userService.getUser(user.getUserId());
+			dbUser = userService.getUser(user.getUserId());
+			System.out.println(dbUser.getUserId()+"1111111111111111111111111111111");
 			
 			System.out.println(dbUser+"123123123123123123123123213123");
 			user = dbUser;
 			
-			if(user != null) {
-				session.setAttribute("user", user);
-			}
 			System.out.println(user+"--------------------------------------------------------");
 			
 			System.out.println("로그인 아이디, 비밀번호 체크 성공 ");
 			
+			return user;
+		}
+		
+		//회원가입 인증번호 보내기 
+		@GetMapping("authNoSend")
+		public User authNoSend(@RequestParam("phone") String phone) throws Exception {
+			int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+			
+			User user = new User();
+			
+			userService.certifiedPhoneNumber(phone,randomNumber);
+			int result = userService.checkPhone(phone);
+			System.out.println(result);
+			if(result !=1) {
+				
+				user.setAuthNumber(randomNumber);
+			}
+			System.out.println(user.getAuthNumber());
 			return user;
 		}
 	
