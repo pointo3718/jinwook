@@ -28,8 +28,10 @@
 	   	<set>
 	   		nick_name 		= #{nickName} ,
 			phone			= #{phone},
+			birth			= #{birth},
+			gender			= #{gender},
 			business_no 	= #{businessNo} ,
-			email			=	#{email},
+			email			= #{email},
 			password		= #{password},
 			user_bye_status = #{userByeStatus}
 	   	</set>

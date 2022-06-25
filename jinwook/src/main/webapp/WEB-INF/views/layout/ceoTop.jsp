@@ -167,7 +167,6 @@ $(function() {
 function fncAddRequestStore(){
 //Form 유효성 검증
 
-
 document.detailForm.action='/request/addRequestAddStore';
 document.detailForm.submit();
 }
@@ -242,7 +241,7 @@ document.detailForm.submit();
 <body>
 
 
-   <!-- 상점 등록 Modal -->
+<!-- 상점 등록 Modal -->
    <div class="modal" id="addRequestStoreModal" aria-hidden="true"
       style="display: none; z-index: 1060;">
       <div class="modal-dialog modal-xl">
@@ -281,8 +280,8 @@ document.detailForm.submit();
                <hr>
 
                <form name="detailForm" method="post" enctype="multipart/form-data">
-                  <input type="hidden" name="userId" value="${param.userId}" /> <input
-                     type="hidden" name="businessCard" value="파일업로드_언제하지.jpg" />
+                  <input type="hidden" name="businessCard" value="파일업로드_언제하지.jpg" />
+                  <input type="hidden" name="storeNo" value="10000" />
 
 
                   <div class="form-group row">
@@ -315,7 +314,7 @@ document.detailForm.submit();
                      <label for="colFormLabelLg"
                         class="col-sm-2 col-form-label col-form-label">상점주소</label>
                      <div class="col-sm-6">
-                        <input type="text" name="address"
+                        <input type="text" name="storeAddr"
                            class="form-control form-control" id="address_kakao" value=""
                            placeholder="상점 주소 검색" readonly>
                      </div>
@@ -327,11 +326,7 @@ document.detailForm.submit();
                  
                   <script>
                   window.onload = function(){
-                      document.getElementById("storeAddr_main").addEventListener("click", function(){ //주소입력칸을 클릭하면
-                          //카카오 지도 발생
-                          new daum.Postcode({
-                              oncomplete: function(data) { //선택시 입력값 세팅
-                                  document.getElementById("storeAddr_main").value = data.address; // 주소 넣기
+                    
                       document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
                           //카카오 지도 발생
                           new daum.Postcode({
@@ -342,6 +337,8 @@ document.detailForm.submit();
                           }).open();
                       });
                   }
+
+                      
                   </script>
                   <!--  카카오 주소 API 끝 -->
 
@@ -358,7 +355,7 @@ document.detailForm.submit();
                      <label for="colFormLabelLg"
                         class="col-sm-2 col-form-label col-form-label">상점시작날짜</label>
                      <div class="col-sm-6">
-                        <input type="text" name="storeStart"
+                        <input type="date" name="storeStart"
                            class="form-control form-control" id="storeStart" value=""
                            placeholder="상점시작날짜">
                      </div>
@@ -450,7 +447,7 @@ document.detailForm.submit();
                      <div class="col-sm-6" style="padding-left: 0px;">
                         <div class="col-sm-6">
                            <div class="wrapper">
-                              <select size="5">
+                              <select size="5" name="bank">
 
                                  <option selected>은행명</option>
                                  <option value="1">카카오뱅크</option>
@@ -496,9 +493,8 @@ document.detailForm.submit();
                <br />
                <br />
                <div class="form-group row">
-                  <button id="requestAdd" class="btn btn-success"
-                     style="background-color: #7fad39; border-color: #7fad39; width: 126px;">등록
-                     요청</button>
+                  <button type="button" id="requestAdd" class="btn btn-success"
+                     style="background-color: #7fad39; border-color: #7fad39; width: 126px;">등록 요청</button>
                </div>
                <br />
 
@@ -594,7 +590,7 @@ document.detailForm.submit();
                   </c:if>
                        
             
-			<c:if test="${user.storeYn==true}">
+         <c:if test="${user.storeYn==true}">
               <c:forEach var="store" items="${storeInfo}">
                   <c:if test="${store.storeStatus=='2'}">
 
