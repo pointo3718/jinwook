@@ -167,7 +167,6 @@ $(function() {
 function fncAddRequestStore(){
 //Form 유효성 검증
 
-
 document.detailForm.action='/request/addRequestAddStore';
 document.detailForm.submit();
 }
