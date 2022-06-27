@@ -71,22 +71,21 @@
 
     /*]]>*/
     
+    
+    
     </script>
 </head>
 <body>
-
 <form class="form-horizontal" name="getOrdersList">
 <!-- Header Begin -->
 <%--    <jsp:include page="../layout/top.jsp" /> --%>
    <!-- Header End -->
    
    <h2 class="text-center">주문내역</h2>
-
+   
    <table class="table table-hover table-striped" >
          <br><br><br><br>
-
-         <!-- 리뷰 div -->
-         <!-- 리뷰 div -->
+	
 
          <thead>
           <tr>
@@ -98,6 +97,7 @@
             <th align="left">픽업시간</th>
             <th align="left">주문현황</th>
             <th align="left">&nbsp;<th>
+            
           </tr>
        </thead>
         
@@ -127,7 +127,12 @@
     </tbody>
       
 </table>
+
 </form>
+
+
+
+
 
 <jsp:include page="../common/pageNavigator_new.jsp"/>
 <%-- <jsp:include page="../layout/footer.jsp" /> --%>

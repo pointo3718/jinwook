@@ -151,7 +151,7 @@ $(function(){
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
-										<img width="400" height="400" style="margin-top:20px;"
+										<img width="300" height="300" style="margin-top:20px;"
 											src="/resources/static/${recipe.attach.orgFileName}" alt="..."
 											onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" />
                                 </div>

@@ -133,11 +133,11 @@ public class BoardServiceImpl implements BoardService {
       return boardMapper.getRankList(board);
    }
 
-   //상점후기 등록
-   @Override
-   public void addReview(Orders orders) throws Exception {
-      boardMapper.addReview(orders);
-   }
+//   //상점후기 등록
+//   @Override
+//   public void addReview(Orders orders) throws Exception {
+//      boardMapper.addReview(orders);
+//   }
 
    //상점후기 삭제
    @Override
@@ -159,13 +159,13 @@ public class BoardServiceImpl implements BoardService {
    
    //상점후기 목록 조회
    @Override
-   public List<Orders> getReviewList(Board board) {
+   public List<Orders> getReviewList(Orders orders) {
       List<Orders> reviewList = Collections.emptyList();
 
-      int reviewTotalCount = boardMapper.getReviewTotalCount(board);
+      int reviewTotalCount = boardMapper.getReviewTotalCount(orders);
 
       if (reviewTotalCount > 0) {
-         reviewList = boardMapper.getReviewList(board);
+         reviewList = boardMapper.getReviewList(orders);
       }
 
       return reviewList;
@@ -480,6 +480,11 @@ public class BoardServiceImpl implements BoardService {
 		
 		int result = boardMapper.enrollReview(orders);
 		return result;
+	}
+
+	@Override
+	public void updateReview(Orders orders) {
+		boardMapper.updateReview(orders);
 	}
 
 	

@@ -331,17 +331,32 @@ label {
       });
    }
    
-   function fncAddReview() {
-		
-		$("form").attr("method", "POST").attr("action", "/board/addReview").submit();
-	}
-   
-   $(function() {
+   $('#myModal').on('shown.bs.modal', function () {
+	     $('#myInput').trigger('focus')
+	   })
+
+/* 	$(function() {
 		$("button.btn.btn-success").on("click", function() {
-			fncAddReview();
+			fncReviewList();
 		});
-	});
+	});	
    
+   function fncReviewList() {
+		alert(STORENO);
+		$('input[name=storeNo]').attr('value', STORENO);
+		$("#reviewForm").attr("method", "GET").attr("action", "/board/getReviewList").submit();
+	}
+	
+   //storeno를 가져옴
+	var STORENO;
+	$(document).ready(function() {
+
+		$('#reviewModal').on('show.bs.modal', function(event) {
+			STORENO = $(event.relatedTarget).data('storeno');
+			alert(STORENO);
+		});
+	}); */
+
 </script>
 
 
@@ -396,8 +411,11 @@ label {
                      <td><span style="color: #2E2E2E; font-size: 15px"><strong>${store.storePhone}</strong></span></td>
                      <td>
                          <!-- Button trigger modal -->
-						<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalScrollable">
+						<!-- <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalScrollable">
   							<strong>상점후기</strong>
+						</button> -->
+						<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#reviewModal" data-storeno="${store.storeNo}">
+  							상점후기
 						</button>
 						<!-- Button trigger modal --> 
 					</td>
@@ -556,72 +574,60 @@ label {
    <!-- 상점 상세 End -->
    
 <!-- Modal -->
-<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:1060;">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document" style="z-index:1060;">
     <div class="modal-content">
     
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">상점후기 등록</h5>
+        <h5 class="modal-title" id="exampleModalScrollableTitle">상점후기</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       
+      <!-- modal body 시작 -->
       <div class="modal-body">
-      <form action="addReview" method="post">
-				<div>
-					<div style="text-align:left;">
-						<label for="reviewTitle">제목</label>
-					</div>
-					<div>
-						 <input type="text"
-							class="form-control" id="reviewTitle" name="reviewTitle">
-					</div>
-				</div>
-				
-				<div>
-					<div style="text-align:left;">
-						<label for="reviewWriter">작성자</label> 
-					</div>
-					<div>
-						<input type="text" style="width:100px;"
-							class="form-control" id="reviewWriter" name="reviewWriter">
-					</div>
-				</div>
-				
-				<div>
-					<div style="text-align:left;">
-						<label for="reviewStar">별점</label> 
-					</div>
-					<div>
-						<input type="number" style="width:50px;" min="1" max="5" step="0.1"
-							class="form-control" id="reviewStar" name="reviewStar">
-					</div>
-				</div>
-				
-				<div>
-					<div style="text-align:left;">
-						<label for="reviewContent">후기 내용</label> 
-					</div>
-					<div>
-						<textarea class="form-control" id="reviewContent"
-							name="reviewContent" rows="3"></textarea>
-					</div>
-				</div>
+      <input type="hidden" id="storeNo" name="storeNo" value=""/>
+		<!-- Modal body 끝 -->
+                        <!-- List Table Start -->
+            <div>
 
-		</div><!-- Modal body 끝 -->
-      
+               <table class="table table-hover"
+                  style="width: 730px; heigh: 300px; font-size: small;">
+
+         <thead>
+          <tr>
+            <th align="left">리뷰 작성자</th>
+            <th align="left" style="width:500px;">리뷰 내용</th>
+            <!-- <th align="left" >작성일</th> -->
+            <th align="center">별점</th>
+          </tr>
+       </thead>
+        
+      <tbody>
+        <c:set var="i" value="0" />
+        <c:forEach var="orders" items="${getReviewList}">
+         <c:set var="i" value="${ i+1 }" />
+         <tr>
+           <td align="center">${orders.reviewWriter}</td>
+           <td align="left">${orders.reviewContent}</td>
+           <%-- <td align="left"><fmt:formatDate value="${orders.reviewDate}" dateStyle="full"/></td> --%>
+           <td align="center">${orders.reviewStar}</td>
+         </tr>
+          </c:forEach>      
+          </tbody>
+ 
+               </table>
+            </div>
       <div class="modal-footer">
-      
-        <button type="button" class="btn btn-success">등 &nbsp;록</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취 소</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫 기</button>
       </div>
-      </form>
       
     </div>
   </div>
-</div>			 
-
+</div>	 
+	 </div>
+	
    <!-- Footer Begin -->
    <jsp:include page="../layout/footer.jsp" />
    <!-- Footer End -->
