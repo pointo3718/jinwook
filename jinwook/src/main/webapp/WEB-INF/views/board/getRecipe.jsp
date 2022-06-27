@@ -80,6 +80,25 @@ function movePage(uri, queryString) {
    location.href = uri + queryString;
 }
 
+///// 레시피 신고 등록 시작 /////
+$(function() {
+   $( "#addComplain:contains('신고하기')" ).on("click" , function() {
+      fncAddComplain();
+   });
+});
+
+function fncAddComplain(){
+//Form 유효성 검증
+
+document.detailForm.action='/admin/addComplainRecipe';
+document.detailForm.submit();
+
+swal("진욱이네","신고가 등록되었습니다.");
+
+}
+///// 레시피 신고 등록 끝 /////
+
+
 <!-- 레시피 댓글 리스트 불러오는 함수 -->
 $(document).on(function(){
 	getCommentList();
@@ -288,7 +307,6 @@ var rcpNo = ${recipe.rcpNo};
     <!-- Header Section Begin -->
 
 	<!-- 신고하기 Modal Begin -->
-
 	<div class="modal fade" id="complainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content" style="font-size: 15px;">
@@ -304,64 +322,68 @@ var rcpNo = ${recipe.rcpNo};
                      <i class="fa fa-check" aria-hidden="true"></i> &nbsp;신고 사유를 선택해주세요.
                   </div>
                   <div>
-                     <i class="fa fa-check" aria-hidden="true"></i> &nbsp;신고등록 후 관리자의 확인절차에 따라 해당 회원이 블랙리스트로 지정됩니다.
+                     <i class="fa fa-check" aria-hidden="true"></i> &nbsp;관리자의 확인절차에 따라 해당 회원이 블랙리스트로 지정됩니다.
                   </div>
                   
           </div>
           <hr>
-	        <br/>
+	         <form name="detailForm" method="post" enctype="multipart/form-data">
+	         <input type="hidden" name="rcpNo" value="${param.rcpNo}">	         	        
+	         <input type="hidden" name="userId" value="${sessionScope.user.userId}">	         	        
+	         <input type="hidden" name="complainId" value="${recipe.userId}">	         	        
+	        <div style="margin-left: 30px; font-size: 18px;">
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="blackPeriod"
+						<input class="form-check-input" type="radio" name="complainCode"
 							id="blackPeriod" value="욕설" checked> <label
 							class="form-check-label" for="exampleRadios1"> 욕설 </label>
 					</div>
 					<br/>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="blackPeriod"
+						<input class="form-check-input" type="radio" name="complainCode"
 							id="exampleRadios2" value="비방"> <label
 							class="form-check-label" for="exampleRadios2"> 비방 </label>
 					</div>
 					<br/>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="blackPeriod"
+						<input class="form-check-input" type="radio" name="complainCode"
 							id="exampleRadios1" value="도배"> <label
 							class="form-check-label" for="exampleRadios1"> 도배 </label>
 					</div>
 					<br/>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="blackPeriod"
+						<input class="form-check-input" type="radio" name="complainCode"
 							id="exampleRadios1" value="음란성"> <label
 							class="form-check-label" for="exampleRadios1"> 음란성 </label>
 					</div>
 					<br/>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="blackPeriod"
+						<input class="form-check-input" type="radio" name="complainCode"
 							id="exampleRadios1" value="불법도용"> <label
 							class="form-check-label" for="exampleRadios1"> 불법도용 </label>
 					</div>
 					<br/>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="blackPeriod"
+						<input class="form-check-input" type="radio" name="complainCode"
 							id="exampleRadios1" value="광고성"> <label
 							class="form-check-label" for="exampleRadios1"> 광고성 </label>
 					</div>
 					<br/>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="blackPeriod"
+						<input class="form-check-input" type="radio" name="complainCode"
 							id="exampleRadios1" value="기타"> <label
 							class="form-check-label" for="exampleRadios1"> 기타 </label>
 					</div>
 					<br/>				
 				</div>
+				</form>
+			</div>
 	      
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary">신고하기</button>
+	      <div class="modal-footer" >
+	        <button type="button" id="addComplain" class="btn btn-primary" style="background-color: #7fad39; margin-right:200px; border-color: #7fad39;">신고하기</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-	
 	<!-- 신고하기 Modal End -->
 
 
@@ -372,7 +394,7 @@ var rcpNo = ${recipe.rcpNo};
             <div class="row rcp" >
                 <div class="col-lg-12" style="background-color: #F2F2F2; text-align: center;">
                     <div class="contact__form__title">
-                        <h3 style="margin-top:20px;"><input class="form-control" type="text" readonly="readonly" value="${recipe.rcpTitle}" style="width:500px; height:100px; text-align:center; background-color: #ffffff;"></h3>
+                        <h3 style="margin-top:20px;"><input class="form-control" type="text" readonly="readonly" value="${recipe.rcpTitle}" style="width:500px; height:100px; text-align:center; background-color: #ffffff;  margin-left:300px;"></h3>
                     </div>
                 </div>
             </div>
@@ -388,20 +410,20 @@ var rcpNo = ${recipe.rcpNo};
 				</div>
                 
                     <div class="col-sm-4 col-sm-4" style="width:100px; height:50px;">
-                        
-                    </div>
-                    <div class="col-sm-4 col-sm-4">
-                        <i class="bi bi-eye"></i> ${recipe.rcpHits}<br/>
+                       <i class="bi bi-eye"></i> ${recipe.rcpHits}<br/>
  						<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${recipe.rcpDate}" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 						<br/>
  						<button type="button" class="btn btn-success" id="reco_btn" 
  						style="width:50px; height:30px; background-color: green; font-size: 12px;" onclick="updateRecipeReco();"><i class="bi bi-hand-thumbs-up"></i>${recipe.recommendCount}</button>
  						&nbsp;<a href="#" onclick="clip(); return false;"><i class="bi bi-share-fill"></i></a>
- 						<br/><a type="button" class="badge badge-danger" data-toggle="modal" data-target="#complainModal" style="font-size:15px;">신고하기</a>
+ 						<br/>
+ 						<br/><a type="button" class="badge badge-danger" data-toggle="modal" data-target="#complainModal" style="font-size:15px;">신고하기</a> 
                     </div>
- 						<br/><br/><br/>
+                   
+ 					
                     
                     <div class="col-lg-12 text-center">
-                    	<textarea readonly="readonly">${recipe.rcpInfo}</textarea>
+                    	<textarea readonly="readonly" style="margin-top: 50px;">${recipe.rcpInfo}</textarea>
                     </div>
                     
                     <div class="col-lg-12 text-center">

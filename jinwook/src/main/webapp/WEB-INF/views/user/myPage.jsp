@@ -165,7 +165,39 @@ function getCouponCount() {
 
 $('#myModal').on('shown.bs.modal', function () {
      $('#myInput').trigger('focus')
-   }) 
+   })
+
+<!-- 상품 리뷰 등록 -->
+$(function() {
+	$("button.btn.btn-success").on("click", function() {
+		fncAddReview();
+	});
+});
+
+$(function() {
+	$("a[href='#' ]").on("click", function() {
+		$("form")[0].reset();
+	});
+});
+
+function fncAddReview() {
+	alert(ORDERNO);
+	$('input[name=orderNo]').attr('value', ORDERNO);
+	$("#reviewForm").attr("method", "POST").attr("action", "/board/addReview").submit();
+}
+
+var ORDERNO;
+$(document).ready(function() {     
+
+	   $('#reviewModal').on('show.bs.modal', function(event) {          
+	      ORDERNO = $(event.relatedTarget).data('orderno');
+	      alert(ORDERNO);
+
+	    });
+	});
+<!-- 상품 리뷰 등록 -->	
+	
+
 </script>
 
 <style>
@@ -379,42 +411,42 @@ $('#myModal').on('shown.bs.modal', function () {
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 80px;">진욱페이 </span>
                               <strong style="margin-right : 65px;" class="chargePay"> 5,500 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal" data-won="5000" onclick="PwCheck(this)" >5,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal" data-won="5000" onclick="PwCheck(this)">5,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 11,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >10,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal" data-won="10000" onclick="PwCheck(this)">10,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 33,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >30,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal" data-won="30000" onclick="PwCheck(this)">30,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 70px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 55,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >50,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal" data-won="50000" onclick="PwCheck(this)">50,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 60px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 110,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >100,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal" data-won="100000" onclick="PwCheck(this)">100,000원</button>
                            </div>
                            <br>
                            <div class="form-check" style="font-size: 18px;">
                               <i class="bi bi-coin"></i>
                               <span class="form-check-label" style="margin-right : 60px;">진욱페이 </span>
                               <strong style="margin-right : 65px;"> 330,000 원</strong>
-                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal"   >300,000원</button>
+                              <button type="button" class="buttonType" style=" width: 110px;" data-toggle="modal" data-target="#modal" data-dismiss="modal" data-won="300000" onclick="PwCheck(this)">300,000원</button>
                               <br><br>
                            </div>
                         </div>
@@ -478,13 +510,17 @@ $('#myModal').on('shown.bs.modal', function () {
             
             function PwCheck(pw) {
                 const _this = this;
-                const wwww = $(pw).data('won');
-                console.log(wwww);
+                const cash = $(pw).data('won');
+                var jpBalance = "${sessionScope.user.jpBalance}";
+                var userName = "${sessionScope.user.userName}";
+                var email	= "${sessionScope.user.email}";
+                var phone	= "${sessionScope.user.phone}";
                 _this.pwStr = pw.toString(); // 문자, 숫자열을 모두 허용하기 위해 무조건 한가지 타입으로 맞춤
                 _this.password = []; // 지정된 패스워드
                 _this.passwordNumber = []; // 입력할 패스워드
                 _this.cnt = 0; // 입력횟수 체크
                 _this.compChk = false; // 입력완료 체크 
+                
 
                 _this.parent = document.querySelector('.pwWrap');
                 _this.dots = document.querySelectorAll('.dot');
@@ -535,26 +571,57 @@ $('#myModal').on('shown.bs.modal', function () {
 
                 // 비밀번호 비교
                 _this.handleCheckPw = function(){
-                   consloe.log("_this.passwordNumber")
+                var compare ;
                   $.ajax({
                   url : "/orders/checkJpPassword",
                      type : "post",
                        dataType : "json",
+                       async: false,
                         data : {"jpPassword" : _this.passwordNumber},
                         success : function(result){
+                        	compare = result;
                        }
                     });
+                  console.log(compare)
                 return compare; 
                 }
                 // 결과처리 
                 _this.handleResult = function(){
-                    if(_this.handleCheckPw()) {
+                    if(_this.handleCheckPw() === 1) {
                        /*  _this.parent.classList.add('confirm');
                         _this.compChk = true; */
-                        console.log(wwww)
-                        iamport();
+                    	 //가맹점 식별코드
+                        IMP.init('imp94304882'); // 콘솔에서 확인
+                        IMP.request_pay({
+                            pg : 'kcp',
+                            pay_method : 'card',
+                            merchant_uid : 'merchant_' + new Date().getTime(),
+                            name : '진욱페이'+(100*1.1) , //결제창에서 보여질 이름
+                            amount :100, //실제 결제되는 가격
+                            buyer_email : email,
+                            buyer_name : userName,
+                            buyer_tel : phone,
+                        }, function(rsp) {
+                           console.log(rsp);
+                            if ( rsp.success ) {
+                            	alert(rsp.success)
+                               var msg = '결제가 완료되었습니다.';
+                               jpBalance = Number(jpBalance)+(100*1.1);
+                               console.log(jpBalance);
+                               
+                                /* msg += '고유ID : ' + rsp.imp_uid;
+                                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                                msg += '결제 금액 : ' + rsp.paid_amount;
+                                msg += '카드 승인번호 : ' + rsp.apply_num; */
+                                self.location="";
+                            } else {
+                                var msg = '결제에 실패하였습니다.';
+                                 msg += '에러내용 : ' + rsp.error_msg;
+                                 self.location="";
+                            }
+                            alert(msg);
+                        });
                     } else {
-                        console.log(wwww)
                         _this.parent.classList.add('error');
                         // 입력상태 초기화 
                         _this.passwordNumber = [];
@@ -572,43 +639,11 @@ $('#myModal').on('shown.bs.modal', function () {
 
                 _this.init = function(){
                     _this.handleListener();
-                    _this.getPw();
+                    /* _this.getPw(); */
                 }();
             }
 
             //let pwCheck = new PwCheck(123456);
-           
-            function iamport(){
-               var jpBalance = $(iamportplus).val();
-               //가맹점 식별코드
-               IMP.init('imp94304882'); // 콘솔에서 확인
-               IMP.request_pay({
-                   pg : 'kcp',
-                   pay_method : 'card',
-                   merchant_uid : 'merchant_' + new Date().getTime(),
-                   name : '진욱페이 5500원' , //결제창에서 보여질 이름
-                   amount : '5000', //실제 결제되는 가격
-                   buyer_email : 'asd@naver.com',
-                   buyer_name : '최인규',
-                   buyer_tel : '010-1111-9990',
-               }, function(rsp) {
-                  console.log(rsp);
-                   if ( rsp.success ) {
-                      var msg = '결제가 완료되었습니다.';
-                      jpBalance = jpBalance+5000;
-                       /* msg += '고유ID : ' + rsp.imp_uid;
-                       msg += '상점 거래ID : ' + rsp.merchant_uid;
-                       msg += '결제 금액 : ' + rsp.paid_amount;
-                       msg += '카드 승인번호 : ' + rsp.apply_num; */
-                       self.location="";
-                   } else {
-                       var msg = '결제에 실패하였습니다.';
-                        msg += '에러내용 : ' + rsp.error_msg;
-                        self.location="";
-                   }
-                   alert(msg);
-               });
-            }
             </script>
             <div class="col-4">
                <div class="bg-white text-black mx-3" style="height: 153px;">
@@ -653,6 +688,7 @@ $('#myModal').on('shown.bs.modal', function () {
                            class="list-group-item list-group-item-action" class="addStore"><span class="addStore">작성한 글 
                            </span>
                             </button>
+                        <button type="button" class="list-group-item list-group-item-action" onclick="location.href='/orders/getOrdersJpayList'">진욱페이 내역</button>
                      </div>
 
                   </div>
@@ -667,8 +703,9 @@ $('#myModal').on('shown.bs.modal', function () {
                   <strong>주문 내역</strong>
                   <p class="text-muted" style="display: inline; font-size: 12px;">
                   주문 내역을 조회할 수 있습니다
-                  </p>                   
-                     
+                  </p>                  
+                  <!-- Button trigger modal -->
+				
                   <hr size="10px">
                </h4>
             
@@ -677,9 +714,6 @@ $('#myModal').on('shown.bs.modal', function () {
                   style="width: 730px; heigh: 300px; font-size: small;">
                  
 
-         <!-- 리뷰 div -->
-         
-         <!-- 리뷰 div -->
 
          <thead>
           <tr>
@@ -691,6 +725,7 @@ $('#myModal').on('shown.bs.modal', function () {
             <th align="left">픽업시간</th>
             <th align="left">주문현황</th>
             <th align="left">&nbsp;</th>
+            <th align="left">후기</th>
           </tr>
        </thead>
         
@@ -713,10 +748,11 @@ $('#myModal').on('shown.bs.modal', function () {
            <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
            </td>
            <td><a href="/orders/getOrders?orderNo=${orders.orderNo}" class="bi bi-caret-right"style="font-size :18px; text-decoration:none; color: #7fad39;"></a></td>
-         <%--   <td><div class="reply_button_wrap">
-               <button value="${orders.orderNo}">리뷰 작성</button>
-            </div>
-         </td> --%>
+           <td>
+                <button type="button" class="site-btn" data-toggle="modal" data-target="#reviewModal" data-orderno="${orders.orderNo}">
+  					후기 등록
+				</button> 
+         </td>
          </tr>
           </c:forEach>      
           </tbody>
@@ -733,6 +769,74 @@ $('#myModal').on('shown.bs.modal', function () {
       </div>
    </section>
    <!--   Blog Section End -->
+   
+<!-- Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+    
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">상점후기 등록</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      <form id="reviewForm" action="addReview" method="post">
+      <input type="hidden" id="orderNo" name="orderNo" value=""/>
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewTitle">제목</label>
+					</div>
+					<div>
+						 <input type="text"
+							class="form-control" id="reviewTitle" name="reviewTitle">
+					</div>
+				</div>
+				
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewWriter">작성자</label> 
+					</div>
+					<div>
+						<input type="text" style="width:100px;"
+							class="form-control" id="reviewWriter" name="reviewWriter">
+					</div>
+				</div>
+				
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewStar">별점</label> 
+					</div>
+					<div>
+						<input type="number" style="width:100px;" min="1" max="5" step="0.1"
+							class="form-control" id="reviewStar" name="reviewStar">
+					</div>
+				</div>
+				
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewContent">후기 내용</label> 
+					</div>
+					<div>
+						<textarea class="form-control" id="reviewContent"
+							name="reviewContent" rows="3"></textarea>
+					</div>
+				</div>
+
+		</div><!-- Modal body 끝 -->
+      
+      <div class="modal-footer">
+      
+        <button type="button" class="btn btn-success">등 &nbsp;록</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취 소</button>
+      </div>
+      </form>
+      
+    </div>
+  </div>
+</div>		
    
                <!-- 쿠폰 Modal 시작  -->
             <div class="modal fade" id="staticBackdrop" data-backdrop="static"
@@ -769,15 +873,15 @@ $('#myModal').on('shown.bs.modal', function () {
 
                                     <tr>
                                        <th scope="row">${i}</th>
-                                       <td><c:if test="${coupon.couponType==1}">
-                              고객님의 회원가입을 축하합니다. (회원가입 쿠폰)
-                           </c:if> <c:if test="${coupon.couponType==2}">
-                              고객님의 첫 구매를 축하합니다. (첫구매 쿠폰)
-                           </c:if> <c:if test="${coupon.couponType==3}">
-                             고객님의 생일을 축하합니다. (생일축하 쿠폰)
-                           </c:if> <c:if test="${coupon.couponType==4}">
-                             고객님께 소중한 쿠폰 배달왔습니다. (추천인 쿠폰)
-                           </c:if></td>
+			                                       <td><c:if test="${coupon.couponType==1}">
+			                              고객님의 회원가입을 축하합니다. (회원가입 쿠폰)
+			                           </c:if> <c:if test="${coupon.couponType==2}">
+			                              고객님의 첫 구매를 축하합니다. (첫구매 쿠폰)
+			                           </c:if> <c:if test="${coupon.couponType==3}">
+			                             고객님의 생일을 축하합니다. (생일축하 쿠폰)
+			                           </c:if> <c:if test="${coupon.couponType==4}">
+			                             고객님께 소중한 쿠폰 배달왔습니다. (추천인 쿠폰)
+			                           </c:if></td>
                                        <td style="padding-left: 35px;"><fmt:formatNumber value="${coupon.couponDc*100}" />%</td>
                                        <td>${coupon.couponValidDate}</td>
                                     </tr>

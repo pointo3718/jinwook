@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 
@@ -17,11 +18,13 @@ public interface RequestMapper {
 	
 	public Store getNewStore();  									// 최근 등록된 상점 
 	
+	public Request getNewReq();  									// 최근 등록된 요청 
+	
 	public Request getRequestStore(int reqNo);						// 상점 등록 요청 보기
 	
 	public int updateRequestAddStore(int storeNo);					// 상점 등록 수락
 	
-	public int updateUserStoreYn(String userId);					// 사장님 상점유무 수정 (상점 등록/삭제 공용) 
+	public int updateUserStoreYnTrue(String userId);				// 사장님 상점유무 수정 (true) 
 	
 	public int addRequestRefund(Request request);					// 환급 요청 등록
 
@@ -32,6 +35,8 @@ public interface RequestMapper {
 	public Request countPickup (int storeNo);						// 남은 픽업 준비중 개수
 	
 	public int deleteStore(Request request);						// 상점 삭제 수락
+	
+	public int updateUserStoreYnFalse(String userId);				// 사장님 상점유무 설정 (false)
 	
 	public int addRequestAd(Request request);						// 광고 등록 신청
 	
@@ -53,10 +58,20 @@ public interface RequestMapper {
 		
 	public Store checkStoreStatus(int storeNo);  					// ***삭제예정*** (상점 등록 수락 확인을 위한 method)
 	
-	// 대기중인 요청 목록 개수
 	public int CountRequestWaiting(String reqCode);					// 대기중인 요청목록 개수 (뱃지로 띄워줄 예정)
 
-	// 상점등록 시 사진 업로드
+	
+	// 상점등록시 사진 업로드
 	public void insertStoreFile(Map<String, Object> map) throws Exception;
+	
+	// 광고등록시 사진 업로드
+	public void insertAdFile(Map<String, Object> map) throws Exception;
+	
+	// 상점 등록 요청 첨부파일 조회
+	public Attach selectStoreAttachList(int storeNo);    	
+	
+	// 광고 등록 요청 첨부파일 조회
+	public Attach selectReqAttachList(int storeNo);    			
+
 
 }

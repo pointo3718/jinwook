@@ -123,7 +123,8 @@
           <div class="cartListstoreName">
             	<c:forEach var="cart" items="${getCartList}" begin="0" end="0">
 				<strong style="font-size: 35px;">${cart.storeName}</strong>
-				<td hidden="storeNo" id="storeNo" name="storeNo" value="${cart.storeNo}"></td><
+				<input hidden="storeNo" id="storeNo" name="storeNo" value="${cart.storeNo}">
+				 <c:set var="cartStoreNo" value="${cart.storeNo}" />
 				</c:forEach>
 				<br><br><br><br>
 			</div>
@@ -196,7 +197,7 @@
                          id="button" name="orderPrice" value="${total}">주문하기</button></a>
                    </div>       
                 <div class="shoping__cart__btns col-lg-6 text-right">
-                        <a href="#" class="primary-btn cart-btn" role="button">더 담으러 가기</a>
+                        <a href="/store/getStore?storeNo=${cartStoreNo}" class="primary-btn cart-btn" role="button">더 담으러 가기</a>
                        
                     </div>
             </div>

@@ -280,7 +280,7 @@ document.detailForm.submit();
                <hr>
 
                <form name="detailForm" method="post" enctype="multipart/form-data">
-                  <input type="hidden" name="businessCard" value="파일업로드_언제하지.jpg" />
+                  <input type="hidden" name="businessCard" value="영업신고증.jpg" />
                   <input type="hidden" name="storeNo" value="10000" />
 
 
@@ -301,11 +301,11 @@ document.detailForm.submit();
                      <div class="col-sm-6">
                         <select size="5">
                            <option selected>업종을 선택하세요</option>
-                           <option value="1">정육</option>
-                           <option value="2">수산</option>
-                           <option value="3">채소</option>
-                           <option value="4">과일</option>
-                           <option value="5">종합</option>
+                           <option value="정육">정육</option>
+                           <option value="수산">수산</option>
+                           <option value="채소">채소</option>
+                           <option value="과일">과일</option>
+                           <option value="종합">종합</option>
                         </select>
             
                      </div>
@@ -367,8 +367,7 @@ document.detailForm.submit();
                      <div class="col-sm-6">
                         <textarea class="form-control" id="storeIntro" name="storeIntro"
                            cols="20" rows="5"
-                           placeholder="상점 소개를 50자 내로 입력해주세요. &#13;&#10; &#13;&#10; ex) 진욱이네는 산지직송 당일판매를 원칙으로 합니다. &#13;&#10; ex) 진욱이네 오픈 기념 10% 할인 해드려요~">
-                              </textarea>
+                           placeholder="상점 소개를 50자 내로 입력해주세요. &#13;&#10; &#13;&#10; ex) 진욱이네는 산지직송 당일판매를 원칙으로 합니다. &#13;&#10; ex) 진욱이네 오픈 기념 10% 할인 해드려요~"></textarea>
                         <div class="text-right" id="test_cnt">(0 / 50)</div>
                      </div>
                   </div>
@@ -401,10 +400,10 @@ document.detailForm.submit();
                      <div class="col-sm-6">
                         <span class="btn btn-default btn-file"
                            style="padding-left: 0px; padding-bottom: 15px;"> <input
-                           type="file" name="file" value="" />
+                           id="input_img" type="file" name="file" value="" />
                            <div>
                               <div class="img_wrap">
-                                 <img id="img" />
+                                 <img id="img"/>
                               </div>
                            </div>
                         </span>
@@ -421,23 +420,6 @@ document.detailForm.submit();
                            placeholder="사업자등록번호" readonly>
                      </div>
                   </div>
-
-                  <div class="form-group row">
-                     <label for="colFormLabelLg"
-                        class="col-sm-2 col-form-label col-form-label">영업신고증</label>
-                     <div class="col-sm-6">
-                        <span class="btn btn-default btn-file"
-                           style="padding-left: 0px; padding-bottom: 15px;"> <input
-                           type="file" id="input_img" />
-                           <div>
-                              <div class="img_wrap">
-                                 <img id="img" />
-                              </div>
-                           </div>
-                        </span>
-                     </div>
-                  </div>
-
 
 
                   <div class="form-group row">
@@ -499,7 +481,7 @@ document.detailForm.submit();
                <br />
 
                <div class="modal-footer">
-                  <a href="#" data-dismiss="modal" class="btn">닫기</a>
+                  <a href="#" data-dismiss="modal" class="btn" style="color:black;">닫기</a>
                </div>
             </div>
          </div>

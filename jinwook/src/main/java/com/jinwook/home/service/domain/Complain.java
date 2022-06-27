@@ -17,7 +17,9 @@ public class Complain extends CommonDTO {
 	private String complainId;
 	private Date complainDate;
 	private String complainCode;
-	private String complainTarget;
+	private int rcpNo;
+	private int orderNo;
+	private int commentNo;
 	private boolean complainStatus;
 	private boolean complainDeleteYn;
 	

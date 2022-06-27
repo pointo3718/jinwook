@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.OrdersMapper;
 import com.jinwook.home.service.domain.Cart;
+import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Jpay;
 import com.jinwook.home.service.domain.Notice;
 import com.jinwook.home.service.domain.Orders;
@@ -25,9 +26,25 @@ public class OrdersServiceImpl implements OrdersService{
 	
 	@Override
 	public int addOrders(Orders orders) {
+		
+		ordersMapper.addOrders(orders);
 		System.out.println(orders);
-		System.out.println(2);
-		return ordersMapper.addOrders(orders);
+		Orders newOrders = ordersMapper.getNewOrders();
+		System.out.println("newOrders"+newOrders);
+		int orderNo= newOrders.getOrderNo();
+		String userId = newOrders.getUserId();
+		Cart cart = new Cart();
+		cart.setOrders(newOrders);
+		cart.setUserId(userId);
+		Coupon coupon = new Coupon();
+		coupon.setUserId(userId);
+		coupon.getCouponNo();
+		System.out.println(coupon);
+		ordersMapper.updateOrdersCoupon(coupon);
+		System.out.println(cart);
+		int result = ordersMapper.deleteOrdersCartAfter(cart);
+		System.out.println(result);
+		return result;
 	}
 
 	@Override
@@ -199,6 +216,12 @@ public class OrdersServiceImpl implements OrdersService{
 	public int checkJpPassword(User user) {
 		
 		return ordersMapper.checkJpPassword(user);
+	}
+
+	@Override
+	public int updateOrdersCoupon(Coupon coupon) {
+		
+		return ordersMapper.updateOrdersCoupon(coupon);
 	}
 
 

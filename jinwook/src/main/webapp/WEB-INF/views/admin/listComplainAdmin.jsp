@@ -234,7 +234,7 @@ $(function() {
 				<!-- UserList Table Start -->
 				<div>
 					<h4 class="text-left">
-						<strong>신고 접수 ㅋ목록</strong>
+						<strong>신고 접수 목록</strong>
 						<p class="text-muted" style="display: inline; font-size: 12px;">
 							신고 접수건 조회와 블랙리스트 지정이 가능합니다.</p>
 						<hr size="10px">
@@ -272,7 +272,9 @@ $(function() {
 										<td align="left">${complain.complainDate}</td>
 										<!-- a:  -->
 										<td align="left">${complain.complainCode}</td>
-										<td align="left">${complain.complainTarget}</td>
+										<c:if test="${complain.rcpNo != 0}">
+										<td align="left" data-rcpNo="${complain.rcpNo}"><a href="/board/getRecipe?rcpNo=${complain.rcpNo}">레시피</a></td>
+										</c:if>
 										<c:if test="${complain.complainStatus == false}">
 											<td align="left">
 												<button type="button" class="btn btn-dark" id="preRegister"

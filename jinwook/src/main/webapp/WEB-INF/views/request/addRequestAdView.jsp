@@ -395,7 +395,7 @@ label {
                <div><i class="fa fa-check" aria-hidden="true"></i> &nbsp;광고 관련 문의 및 요청 사항은 1:1문의/고객센터(1644-0000)로 문의 바랍니다.</div>
          </div>
           <hr size="10px">
-				<form name="detailForm" id="adForm" method="post">		
+				<form name="detailForm" id="adForm" method="post" enctype="multipart/form-data">		
 				<input type="hidden" name="userId" value="test01" />
 				<input type="hidden" name="storeNo" value="${param.storeNo}" />
 				  
@@ -413,7 +413,7 @@ label {
 				
 				  <div class="form-group">
 					 <label for="exampleFormControlFile1"><strong>사진</strong></label>
-					 <input type="file" class="form-control-file" id="adImage" name="adImage">
+					 <input type="file" class="form-control-file" id="file" name="file">
 				  	<small id="emailHelp" class="form-text text-muted">사진 확인 후 절차에 따라 관리자의 연락이 갈 수 있습니다.</small>
 				  	
 				  </div>

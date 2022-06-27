@@ -1,8 +1,12 @@
 package com.jinwook.home.web.store;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jinwook.home.service.board.BoardService;
+import com.jinwook.home.service.domain.Attach;
+import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Complain;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Orders;
@@ -38,8 +46,8 @@ public class StoreController {
    @Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
-   @Autowired
    
+   @Autowired
    @Qualifier("userServiceImpl")
    private UserService userService;
 
@@ -59,6 +67,7 @@ public class StoreController {
       Store store1 = new Store();
 
       String userid = ((User) session.getAttribute("user")).getUserId();
+      
 
       store1.setUserId(userid);
 
@@ -68,7 +77,13 @@ public class StoreController {
       }
 
       List<Store> storeInfo = storeService.getStoreInfo(userid);
-
+      
+		for (Store store11 : storeInfo) {
+			Attach attach = new Attach();
+			attach = storeService.selectStoreAttachList(storeNo);
+			store11.setAttach(attach);
+		}
+      
       model.addAttribute("storeInfo", storeInfo);
 
       List<Store> store = storeService.getStore(storeNo);
@@ -99,6 +114,12 @@ public class StoreController {
       model.addAttribute("storeInfo", storeInfo);
 
       List<Store> store = storeService.getStore(storeNo);
+      
+		for (Store store11 : store) {
+			Attach attach = new Attach();
+			attach = storeService.selectProductAttachList(store11.getProduct().getProdNo());
+			store11.setAttach(attach);
+		}
 
       model.addAttribute("store", store);
       
@@ -125,14 +146,86 @@ public class StoreController {
 
 
 //   @PostMapping(value = "addStoreProduct")
-//   public String addStoreProduct(@ModelAttribute("product") Product product) {
+//   public String addStoreProduct(Product product, MultipartHttpServletRequest mpRequest) throws Exception {
 //
-//      product.setSoldout(true);
-//      storeService.addStoreProduct(product);
 //
-//      return "store/addStoreProduct";
+//	System.out.println("/store/addStoreProduct : POST");
+//      
+//		//////// 파일 업로드 ///////
+//		List<MultipartFile> fileList = mpRequest.getFiles("file");
+//      String src = mpRequest.getParameter("src");
+//
+//      String path = "C:\\Users\\sujin\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\";
+//
+//      for (MultipartFile mf : fileList) {
+//          String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+//          long fileSize = mf.getSize(); // 파일 사이즈
+//
+//          System.out.println("originFileName : " + originFileName);
+//          System.out.println("fileSize : " + fileSize);
+//
+//          String safeFile = path + originFileName;
+//          System.out.println(safeFile);
+//          try {
+//              mf.transferTo(new File(safeFile));
+//              storeService.addStoreProduct(product, mpRequest);//상품 등록
+//          } catch (IllegalStateException e) {
+//              // TODO Auto-generated catch block
+//              e.printStackTrace();
+//          } catch (IOException e) {
+//              // TODO Auto-generated catch block
+//              e.printStackTrace();
+//          }
+//      }
+//		
+//		///////////////////////////
+//
+//      return "store/addStoreProduct?storeNo=10000";
 //
 //   }
+   
+   
+	@PostMapping(value = "addStoreProduct")
+	
+	public String addStoreProduct(@ModelAttribute Product product, MultipartHttpServletRequest mpRequest) throws Exception {
+		
+		System.out.println("/store/addStoreProduct : POST");
+
+		//////// 파일 업로드 ///////
+		List<MultipartFile> fileList = mpRequest.getFiles("file");
+       String src = mpRequest.getParameter("src");
+
+       String path = "C:\\Users\\sujin\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\";
+
+       for (MultipartFile mf : fileList) {
+           String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+           long fileSize = mf.getSize(); // 파일 사이즈
+
+           System.out.println("originFileName : " + originFileName);
+           System.out.println("fileSize : " + fileSize);
+
+           String safeFile = path + originFileName;
+           System.out.println(safeFile);
+           try {
+               mf.transferTo(new File(safeFile));
+               storeService.addStoreProduct(product, mpRequest);//상점 등록
+           } catch (IllegalStateException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+           } catch (IOException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+           }
+       }
+		
+		///////////////////////////
+		
+		return "/store/addStoreProduct";
+	}
+   
+   
+   
+   
 
 //   @PostMapping(value = "updateStoreProduct")
 //   public String updateStoreProduct(@RequestParam("prodNo") int prodNo , Product product, Model model) {
@@ -186,31 +279,40 @@ public class StoreController {
 
    @GetMapping(value = "getStore")
    public String getStore(Store store, @RequestParam("storeNo") int storeNo, 
-		   @RequestParam(value = "orderNo", required = false) Integer orderNo,
 		   @RequestParam(value = "userId", required = false) String userId,
+		   @ModelAttribute("orders") Orders orders,
 		   Model model) throws Exception {
-	   
-	   if (orderNo == null) {
-			model.addAttribute("orders", new Orders());
-		} else {
-			Orders orders = boardService.getReview(orderNo);
-			User user = userService.getUser(userId);
-			if (orders == null) {
-				return "redirect:/board/getRecipeList";
-				// getRecipe 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
+	   	   
+			   
+	   		List<Store> getStore = storeService.getStore(storeNo);
+         
+			for (Store store1 : getStore) {
+				Attach attach = new Attach();
+				attach = storeService.selectProductAttachList(store1.getProduct().getProdNo());
+				store1.setAttach(attach);
 			}
-			model.addAttribute("user", user);
-			model.addAttribute("orders", orders);
-			System.out.println(user);
-			System.out.println(orders);
-		}
-
-      List<Store> getStore = storeService.getStore(storeNo);
-      model.addAttribute("getStore", getStore);
+			
+			model.addAttribute("getStore", getStore);
+			
+			List<Store> getStore1 = storeService.getStore(storeNo);
+			
+			for (Store store11 : getStore1) {
+				Attach attach = new Attach();
+				attach = storeService.selectStoreAttachList(storeNo);
+				store11.setAttach(attach);
+			}
+			
+			model.addAttribute("getStore1", getStore1);
+			
+			System.out.println(getStore);
+	   
+      List<Orders> getReviewList = boardService.getReviewList(orders);
+      model.addAttribute("getReviewList", getReviewList);
 
       return "store/getStore";
    }
 
+   
    @GetMapping(value = "getStoreWallet")
    public String getStoreWallet(@RequestParam("storeNo") int storeNo, @ModelAttribute("store") Store store, Model model, HttpSession session) {
 
@@ -269,6 +371,20 @@ public class StoreController {
 
 
       return "store/getCouponCount";
+   }
+   
+   @GetMapping(value = "getStoreNo")
+   public String getStoreNo( @ModelAttribute("store") Store store, Model model, HttpSession session) {
+
+      String userId = ((User) session.getAttribute("user")).getUserId();
+
+      store.setUserId(userId);
+
+      List<Store> getStoreNo = storeService.getStoreNo(userId);
+      model.addAttribute("getStoreNo", getStoreNo);
+
+
+      return "store/getStoreNo";
    }
 
 }

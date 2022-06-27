@@ -10,25 +10,27 @@ import com.jinwook.home.service.domain.User;
 
 public interface AdminService {
 
-		public User getUserAdmin(String userId); // 유저 상세 
+		public User getUserAdmin(String userId);						// 유저 상세 
 
-		public List<User> getUserListAdmin(User user);	// 유저 목록
+		public List<User> getUserListAdmin(User user);					// 유저 목록
 		
-		public List<Store> getStoreListAdmin(Store store);	// 상점 목록
+		public List<Store> getStoreListAdmin(Store store);				// 상점 목록
+		
+		public boolean addComplainRecipe(Complain complain);				// 레시피 신고 등록
 		
 		public List<Complain> getComplainListAdmin(Complain complain);	// 신고 목록
 		
-		public boolean deleteComplain(int complainNo);	// 신고 목록 삭제
+		public boolean deleteComplain(int complainNo);					// 신고 목록 삭제
 		
-		public List<User> getBlacklistAdmin(User user);	// 블랙리스트 목록 
+		public List<User> getBlacklistAdmin(User user);					// 블랙리스트 목록 
 		
-		public boolean	updateBlacklist(Complain complain);	// 블랙리스트 등록 
+		public boolean	updateBlacklist(Complain complain);				// 블랙리스트 등록 
 		
-		public int	getComplainTotalCount();	// 대기중인 신고목록 개수 
+		public int	getComplainTotalCount();							// 대기중인 신고목록 개수 
 		
-		public int	getWatingInquiryCount();	// 대기중인 문의목록 개수
+		public int	getWatingInquiryCount();							// 대기중인 문의목록 개수
 		
-		public List<Store> getStoreList(String storeType);		// 카테고리별 상점 목록
+		public List<Store> getStoreList(String storeType);				// 카테고리별 상점 목록
 
 
 		// 통계
