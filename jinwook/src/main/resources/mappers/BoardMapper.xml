@@ -50,7 +50,7 @@
 <resultMap type="orders" id="ordersSelectMap">
 	<result property="orderNo"			column="order_no"			jdbcType="INTEGER"/>
 	<result property="user.userId"		column="user_id"			jdbcType="VARCHAR"/>
-	<result property="store.storeNo"	column="store_no"			jdbcType="INTEGER"/>
+	<result property="storeNo"			column="store_no"			jdbcType="INTEGER"/>
 	<result property="store.storeName"	column="store_name"			jdbcType="VARCHAR"/>
 	<result property="reviewTitle"		column="review_title"		jdbcType="VARCHAR"/>
 	<result property="reviewContent"	column="review_content"		jdbcType="VARCHAR"/>
@@ -459,19 +459,17 @@
 	</delete>
 	
 	<!-- 리뷰 등록 -->
-	<insert id="addReview" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderNo">
-	INSERT INTO orders (
-		order_no, store_no, user_id, review_title, review_content, review_writer, review_star
-	) VALUES (
-		#{orderNo:INTEGER}
-		, #{store.storeNo:INTEGER}
-		, #{user.userId:VARCHAR}
-		, #{reviewTitle:VARCHAR}
-		, #{reviewContent:VARCHAR}
-		, #{reviewWriter:VARCHAR}
-		, #{reviewStar:INTEGER}
-	)
-	</insert>
+	<update id="updateReview" parameterType="Orders" useGeneratedKeys="true" keyProperty="orderNo">
+	UPDATE orders
+	SET 
+		review_content = #{reviewContent:VARCHAR}
+		,review_writer = #{reviewWriter:VARCHAR}
+		,review_star = #{reviewStar:INTEGER}
+		,review_date = SYSDATE()
+	WHERE
+		order_no = #{orderNo}	
+	</update>
+		
 	
 	<!-- 리뷰 조회 -->
 	<select id="getReview" parameterType="int" resultType="Orders" resultMap="ordersSelectMap">
@@ -508,17 +506,18 @@
 		ORDER BY order_no	
 	</select>
 	
-	<!--   -->
+	<!-- 상점후기 리스트  -->
 	<select id="getReviewList" parameterType="Orders" resultType="Orders">
 		SELECT
-			*
+			review_content, review_star, review_writer
 		FROM
 			orders
 		WHERE
-			order_no = #{orderNo}
-		LIMIT
-         #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
-	</select>
+			store_no = #{storeNo}
+		 AND review_writer IS NOT NULL	
+		<!-- LIMIT
+         #{paginationInfo.firstRecordIndex}, #{recordsPerPage} -->
+	</select> 
 	
 	<select id="getReviewInfo" resultType="Orders">
 		SELECT review_title, review_content, review_date, review_star 

@@ -165,7 +165,39 @@ function getCouponCount() {
 
 $('#myModal').on('shown.bs.modal', function () {
      $('#myInput').trigger('focus')
-   }) 
+   })
+
+<!-- 상품 리뷰 등록 -->
+$(function() {
+	$("button.btn.btn-success").on("click", function() {
+		fncAddReview();
+	});
+});
+
+$(function() {
+	$("a[href='#' ]").on("click", function() {
+		$("form")[0].reset();
+	});
+});
+
+function fncAddReview() {
+	alert(ORDERNO);
+	$('input[name=orderNo]').attr('value', ORDERNO);
+	$("#reviewForm").attr("method", "POST").attr("action", "/board/addReview").submit();
+}
+
+var ORDERNO;
+$(document).ready(function() {     
+
+	   $('#reviewModal').on('show.bs.modal', function(event) {          
+	      ORDERNO = $(event.relatedTarget).data('orderno');
+	      alert(ORDERNO);
+
+	    });
+	});
+<!-- 상품 리뷰 등록 -->	
+	
+
 </script>
 
 <style>
@@ -671,8 +703,9 @@ $('#myModal').on('shown.bs.modal', function () {
                   <strong>주문 내역</strong>
                   <p class="text-muted" style="display: inline; font-size: 12px;">
                   주문 내역을 조회할 수 있습니다
-                  </p>                   
-                     
+                  </p>                  
+                  <!-- Button trigger modal -->
+				
                   <hr size="10px">
                </h4>
             
@@ -681,9 +714,6 @@ $('#myModal').on('shown.bs.modal', function () {
                   style="width: 730px; heigh: 300px; font-size: small;">
                  
 
-         <!-- 리뷰 div -->
-         
-         <!-- 리뷰 div -->
 
          <thead>
           <tr>
@@ -695,6 +725,7 @@ $('#myModal').on('shown.bs.modal', function () {
             <th align="left">픽업시간</th>
             <th align="left">주문현황</th>
             <th align="left">&nbsp;</th>
+            <th align="left">후기</th>
           </tr>
        </thead>
         
@@ -717,10 +748,11 @@ $('#myModal').on('shown.bs.modal', function () {
            <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
            </td>
            <td><a href="/orders/getOrders?orderNo=${orders.orderNo}" class="bi bi-caret-right"style="font-size :18px; text-decoration:none; color: #7fad39;"></a></td>
-         <%--   <td><div class="reply_button_wrap">
-               <button value="${orders.orderNo}">리뷰 작성</button>
-            </div>
-         </td> --%>
+           <td>
+                <button type="button" class="site-btn" data-toggle="modal" data-target="#reviewModal" data-orderno="${orders.orderNo}">
+  					후기 등록
+				</button> 
+         </td>
          </tr>
           </c:forEach>      
           </tbody>
@@ -737,6 +769,74 @@ $('#myModal').on('shown.bs.modal', function () {
       </div>
    </section>
    <!--   Blog Section End -->
+   
+<!-- Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+    
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">상점후기 등록</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      <form id="reviewForm" action="addReview" method="post">
+      <input type="hidden" id="orderNo" name="orderNo" value=""/>
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewTitle">제목</label>
+					</div>
+					<div>
+						 <input type="text"
+							class="form-control" id="reviewTitle" name="reviewTitle">
+					</div>
+				</div>
+				
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewWriter">작성자</label> 
+					</div>
+					<div>
+						<input type="text" style="width:100px;"
+							class="form-control" id="reviewWriter" name="reviewWriter">
+					</div>
+				</div>
+				
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewStar">별점</label> 
+					</div>
+					<div>
+						<input type="number" style="width:100px;" min="1" max="5" step="0.1"
+							class="form-control" id="reviewStar" name="reviewStar">
+					</div>
+				</div>
+				
+				<div>
+					<div style="text-align:left;">
+						<label for="reviewContent">후기 내용</label> 
+					</div>
+					<div>
+						<textarea class="form-control" id="reviewContent"
+							name="reviewContent" rows="3"></textarea>
+					</div>
+				</div>
+
+		</div><!-- Modal body 끝 -->
+      
+      <div class="modal-footer">
+      
+        <button type="button" class="btn btn-success">등 &nbsp;록</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취 소</button>
+      </div>
+      </form>
+      
+    </div>
+  </div>
+</div>		
    
                <!-- 쿠폰 Modal 시작  -->
             <div class="modal fade" id="staticBackdrop" data-backdrop="static"

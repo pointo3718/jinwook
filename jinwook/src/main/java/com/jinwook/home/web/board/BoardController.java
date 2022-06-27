@@ -598,20 +598,16 @@ public class BoardController {
 		}
 		
 		
-		//상점 후기 등록 -> 기존에 있는 것을 update하는 방식.
+		//상점 후기 등록: update data : 성공
 		@PostMapping(value = "addReview")
-		public String addReview(Orders orders, Store store, HttpSession session) throws Exception {
-			System.out.println("/board/addReview : POST");
+		public String addReview(@ModelAttribute("orders")Orders orders, Model model) {
+			System.out.println("/board/addReview: POST");
 			
-			String userId = ((User) session.getAttribute("user")).getUserId();
-			User user = new User();
-			user.setUserId(userId);
-			orders.setUser(user);
+			//주문번호로 리뷰내용 업데이트
+			boardService.updateReview(orders);
+			System.out.println("상점 후기 등록 완료!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111");
 			
-			System.out.println("정보 넘어온거 확인-----------------------");
-			boardService.addReview(orders);
-			System.out.println("정보 넘어온거 확인-----------------------");
-			return "redirect:/store/getStore?storeNo="+store.getStoreNo();
+			return "redirect:/orders/getOrdersList";
 		}
 		
 		//상점 후기 내용 조회
@@ -625,6 +621,24 @@ public class BoardController {
 //			Orders orders = boardService.getReview(orderNo);
 //			model.addAttribute("orders", orders);
 			return "board/getReview";
+		}
+		
+		//상점후기 목록 조회 - 상점상세에서 상점후기버튼
+		@GetMapping(value = "getReviewList")
+		public String getReviewList(@ModelAttribute("orders") Orders orders, HttpSession session, Model model) throws Exception {
+			List<Orders> getReviewList = boardService.getReviewList(orders);
+			
+			System.out.println(getReviewList.size());
+			Store store = new Store();
+			
+			String userId = ((User) session.getAttribute("user")).getUserId();
+			store.setUserId(userId);
+			
+			model.addAttribute("getReviewList", getReviewList);
+			System.out.println("후기 목록 조회 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+getReviewList);
+			
+			
+			return "store/getStore?storeNo="+store.getStoreNo();
 		}
 		
 		//상점 후기 삭제 처리
@@ -648,29 +662,5 @@ public class BoardController {
 			return params;
 		}
 		
-			//리뷰 연습용 컨트롤러
-		   @GetMapping(value = "getOrdersList2")//리뷰날짜가 null이아닐경우 후기버튼 지움
-		   public String getOrdersList(@ModelAttribute("orders") Orders orders,HttpSession session,Model model) throws Exception {
-//		     String userid = ((User) session.getAttribute("user")).getUserId();
-//		     User user = new User();
-//		      user.setUserId(userid);
-//		      orders.setUser(user);
-		      
-		      System.out.println("/orders/getOrdersList : GET");
-		      List<Orders> getOrdersList = ordersService.getOrdersList(orders);
-		      System.out.println(orders);
-		      
-		      model.addAttribute("getOrdersList", getOrdersList);
-		      
-		      return "board/getOrdersList2";
-		   }
-		   
-		   @GetMapping("/replyEnroll/{orderNo}")
-		   	public String replyEnrollWindowGET(@PathVariable("orderNo") int orderNo,  Model model) {
-			   Orders order = boardService.getReviewInfo(orderNo);
-			   model.addAttribute("order", order); //주문내역의 후기 정보
-			   
-			   return "board/replyEnroll";
-		   }
 		
 }//class

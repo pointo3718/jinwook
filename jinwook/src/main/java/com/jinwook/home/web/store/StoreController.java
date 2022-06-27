@@ -279,26 +279,11 @@ public class StoreController {
 
    @GetMapping(value = "getStore")
    public String getStore(Store store, @RequestParam("storeNo") int storeNo, 
-		   @RequestParam(value = "orderNo", required = false) Integer orderNo,
 		   @RequestParam(value = "userId", required = false) String userId,
+		   @ModelAttribute("orders") Orders orders,
 		   Model model) throws Exception {
 	   	   
 			   
-	   if (orderNo == null) {
-			model.addAttribute("orders", new Orders());
-		} else {
-			Orders orders = boardService.getReview(orderNo);
-			User user = userService.getUser(userId);
-			if (orders == null) {
-				return "redirect:/board/getRecipeList";
-				// getRecipe 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
-			}
-			model.addAttribute("user", user);
-			model.addAttribute("orders", orders);
-			System.out.println(user);
-			System.out.println(orders);
-		}
-
 	   		List<Store> getStore = storeService.getStore(storeNo);
          
 			for (Store store1 : getStore) {
@@ -320,7 +305,11 @@ public class StoreController {
 			model.addAttribute("getStore1", getStore1);
 			
 			System.out.println(getStore);
-			return "store/getStore";
+	   
+      List<Orders> getReviewList = boardService.getReviewList(orders);
+      model.addAttribute("getReviewList", getReviewList);
+
+      return "store/getStore";
    }
 
    

@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class Store extends CommonDTO {
 
-   private int storeNo;
+   private Integer storeNo;
    private User user;
    private Orders orders;
    private Cart cart;
