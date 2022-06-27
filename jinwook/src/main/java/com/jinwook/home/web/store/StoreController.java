@@ -46,8 +46,8 @@ public class StoreController {
    @Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
-   @Autowired
    
+   @Autowired
    @Qualifier("userServiceImpl")
    private UserService userService;
 

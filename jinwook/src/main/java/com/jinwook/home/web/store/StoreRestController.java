@@ -55,6 +55,7 @@ public class StoreRestController {
    }
 
    
+
 //   @PostMapping(value = "addStoreProduct/{prodNo}/{storeNo}/{prodName}/{price}/{prodInfo}/{prodImg}/{prodOrign}/{soldout}")
 //   public JsonObject addStoreProduct(@RequestParam(value = "storeNo", required = false) int storeNo,
 //                              @RequestParam(value = "prodName", required = false) String prodName,
@@ -125,6 +126,77 @@ public class StoreRestController {
 //      return jsonObj;
 //      
 //  }
+
+   @RequestMapping(value = "addStoreProduct/{prodNo}/{storeNo}/{prodName}/{price}/{prodInfo}/{prodImg}/{prodOrign}/{soldout}")
+   public JsonObject addStoreProduct(@PathVariable(value = "storeNo", required = false) int storeNo,
+                              @PathVariable(value = "prodName", required = false) String prodName,
+                              @PathVariable(value = "price", required = false) int price,
+                              @PathVariable(value = "prodInfo", required = false) String prodInfo,
+                              @PathVariable(value = "prodImg", required = false) String prodImg,
+                              @PathVariable(value = "prodOrign", required = false) String prodOrign, MultipartHttpServletRequest mpRequest) {
+
+      System.out.println("/store/addStoreProduct : Post ");
+
+      JsonObject jsonObj = new JsonObject();
+      
+      Product product= new Product();
+      product.setProdName(prodName);
+      product.setPrice(price);
+      product.setProdInfo(prodInfo);
+      product.setProdImg(prodImg);
+      product.setProdOrign(prodOrign);
+
+      try {
+         if (product != null) {
+            System.out.println("product 객체에 값 넣어줌");
+            product.setStoreNo(storeNo);
+         }
+         
+         System.out.println("컨트롤러에서의 Product :: "+product);
+
+          
+  		//////// 파일 업로드 ///////
+  		List<MultipartFile> fileList = mpRequest.getFiles("file");
+          String src = mpRequest.getParameter("src");
+
+          String path = "C:\\Users\\sujin\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\";
+
+          for (MultipartFile mf : fileList) {
+              String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+              long fileSize = mf.getSize(); // 파일 사이즈
+
+              System.out.println("originFileName : " + originFileName);
+              System.out.println("fileSize : " + fileSize);
+
+              String safeFile = path + originFileName;
+              System.out.println(safeFile);
+              try {
+                  mf.transferTo(new File(safeFile));
+                  storeService.addStoreProduct(product, mpRequest);//레시피 등록
+              } catch (IllegalStateException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+              } catch (IOException e) {
+                  // TODO Auto-generated catch block
+                  e.printStackTrace();
+              }
+          }
+  		
+  		///////////////////////////
+
+      } catch (DataAccessException e) {
+         jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+      } catch (Exception e) {
+         jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+      }
+      
+        System.out.println("상품 등록 컨트롤러 통과");
+        
+      return jsonObj;
+      
+  }
+
    
 
      

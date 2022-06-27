@@ -56,6 +56,7 @@
 		)
 	</insert>
 	
+	<!-- 상점등록시 사진 등록 -->
 	<insert id="insertStoreFile" parameterType="hashMap">
 		INSERT INTO attach(
 			store_no,
@@ -81,6 +82,15 @@
 		LIMIT 1
 	</select>
 	
+	<!-- 최근 등록된 요청 가져오기 -->
+	<select id="getNewReq"  resultType="Request">
+		SELECT * 
+		FROM 
+			request
+		ORDER BY 
+			req_no DESC 
+		LIMIT 1
+	</select>
 	
 	<!-- 상점 등록 요청 등록 -->
 	<insert id="addRequestAddStoreForAdmin" parameterType="Request">
@@ -115,7 +125,7 @@
 			and 
 			u.user_id = r.user_id
 			and 
-			r.req_no = #{reqNo};
+			r.req_no = #{reqNo}
 	</select>
 
 
@@ -128,15 +138,10 @@
 			store_no = #{storeNo} 
 	</update>
 	
-	<update id="updateUserStoreYn" parameterType="String">
-		UPDATE user
+	<update id="updateUserStoreYnTrue" parameterType="String">
+		UPDATE users
 		SET
-		<if test= 'store_yn == false'>
 			store_yn = true
-		</if>
-		<if test= 'store_yn == true'>
-			store_yn = false
-		</if>
 		WHERE
 			user_id = #{userId} 
 	</update>
@@ -231,6 +236,13 @@
 			<!-- store_yn false로 변경 -->
 	</update>
 
+	<update id="updateUserStoreYnFalse" parameterType="String">
+		UPDATE users
+		SET
+			store_yn = false
+		WHERE
+			user_id = #{userId} 
+	</update>
 
 	<!-- 광고 등록 신청 -->
 	<insert id="addRequestAd" parameterType="Request">
@@ -250,12 +262,27 @@
 			, false
 		)
 	</insert>
+	
+	<!-- 광고등록시 사진 등록 -->
+	<insert id="insertAdFile" parameterType="hashMap">
+		INSERT INTO attach(
+			req_no,
+			org_file_name,
+			stored_file_name,
+			file_size
+		)VALUES(
+			#{reqNo},
+			#{orgFileName},
+			#{storedFileName},
+			#{fileSize}
+		)
+    </insert>
 
 
 	<!-- 광고 등록 요청 보기 -->
 	<select id="getRequestAd" parameterType="int" resultMap="requestSelectMap">
 		SELECT
-			r.ad_title, u.user_name, r.req_date, r.ad_content, r.ad_img
+			r.ad_title, u.user_name, r.req_date, r.ad_content, r.ad_img, r.store_no
 		FROM
 			request r, users u
 		WHERE
@@ -383,6 +410,34 @@
 			req_status = 1
 			AND
 			req_delete_yn = false
+	</select>
+	
+	 <!-- 상점 첨부파일 조회 -->
+    <select id="selectStoreAttachList" parameterType="int" resultType="attach">
+		SELECT 
+			attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
+	  	FROM 
+	  		attach
+	  	WHERE 
+	  		store_no = #{storeNo}
+	   		AND 
+	   		del_gb = 'N'
+	   	ORDER BY 
+	   		attach_no ASC
+	</select>
+	
+	<!-- 광고 첨부파일 조회 -->
+    <select id="selectReqAttachList" parameterType="int" resultType="attach">
+		SELECT 
+			attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
+	  	FROM 
+	  		attach
+	  	WHERE 
+	  		req_no = #{reqNo}
+	   		AND 
+	   		del_gb = 'N'
+	   	ORDER BY 
+	   		attach_no ASC
 	</select>
 
 </mapper>
