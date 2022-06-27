@@ -115,7 +115,10 @@
                  <div class="col-lg-4">
                      <div class="blog__item">
                          <div class="blog__item__pic">
-                             <img src="${path}/resources/static/img/blog/blog-2.jpg" alt="">
+		                     <img
+		                     src="/resources/static/${store.attach.orgFileName}"
+		                        onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
+		                     alt="My Image" width="300" height="300">
                          </div>
                          <div class="blog__item__text">
                              <ul>
@@ -124,7 +127,7 @@
                              </ul>
                              <h5><a href="#">${store.storeName}</a></h5>
                              <p>${store.storeIntro} </p>
-                             <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                             <a href="/store/getStore?storeNo=${store.storeNo}" class="blog__btn"><strong>구경하기</strong> <span class="arrow_right"></span></a>
                          </div>
                     </div>
                 </div>
@@ -134,7 +137,6 @@
         </div>
     </section>
     <!-- Blog Section End -->
-	
 	
 	<!-- Footer Begin -->
 	<jsp:include page="../layout/footer.jsp" />

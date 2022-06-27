@@ -63,7 +63,7 @@ public class StoreRestController {
                               @PathVariable(value = "prodImg", required = false) String prodImg,
                               @PathVariable(value = "prodOrign", required = false) String prodOrign, MultipartHttpServletRequest mpRequest) {
 
-       System.out.println("/store/addStoreProduct : Post ");
+      System.out.println("/store/addStoreProduct : Post ");
 
       JsonObject jsonObj = new JsonObject();
       
@@ -78,7 +78,6 @@ public class StoreRestController {
          if (product != null) {
             System.out.println("product 객체에 값 넣어줌");
             product.setStoreNo(storeNo);
-
          }
          
          System.out.println("컨트롤러에서의 Product :: "+product);

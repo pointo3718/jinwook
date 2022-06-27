@@ -92,8 +92,7 @@ public class RequestController {
 		
 		return "redirect:/request/getRequestAdStoreList";
 	}
-	
-	
+
 	
 	// ============ 환급 요청 등록 =============   /////// 모든 등록 이렇게 수정 (예외 적용)
 	@PostMapping(value = "addRequestRefund")
@@ -117,9 +116,7 @@ public class RequestController {
 		}
 		return "/store/getStoreWallet?storeNo=" +request.getStoreNo();
 	}
-	
-	
-	
+
 	
 	// ========== 광고 등록 신청 폼 ===========
 	@GetMapping(value = "addRequestAd")
@@ -133,12 +130,12 @@ public class RequestController {
 	
 	// ========== 광고 등록 신청 ===========
 	@PostMapping(value = "addRequestAd")
-	public String addRequestAd(@ModelAttribute("request") Request request, HttpSession session) {
+	public String addRequestAd(Request request, HttpSession session, MultipartHttpServletRequest mpRequest) throws Exception {
 		String sessionUserId = ((User) session.getAttribute("user")).getUserId();
 		request.setUserId(sessionUserId);
 		
 		try {
-			boolean result = requestService.addRequestAd(request);
+			boolean result = requestService.addRequestAd(request, mpRequest);
 			if (result == false) {
 				// TODO => 등록에 실패하였다는 메시지를 전달
 			}
@@ -148,6 +145,33 @@ public class RequestController {
 		} catch (Exception e) {
 			// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
 		}
+		
+		//////// 파일 업로드 ///////
+		List<MultipartFile> fileList = mpRequest.getFiles("file");
+		String src = mpRequest.getParameter("src");
+
+		String path = "C:\\Users\\ghdtj\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\";
+
+	       for (MultipartFile mf : fileList) {
+	           String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+	           long fileSize = mf.getSize(); // 파일 사이즈
+	
+	           System.out.println("originFileName : " + originFileName);
+	           System.out.println("fileSize : " + fileSize);
+	
+	           String safeFile = path + originFileName;
+	           System.out.println(safeFile);
+	           try {
+	               mf.transferTo(new File(safeFile));
+	               requestService.addRequestAd(request, mpRequest);//광고 등록
+	           } catch (IllegalStateException e) {
+	               // TODO Auto-generated catch block
+	               e.printStackTrace();
+	           } catch (IOException e) {
+	               // TODO Auto-generated catch block
+	               e.printStackTrace();
+	           }
+	       }
 		return "redirect:/request/getRequestAdStoreList?storeNo=" + request.getStoreNo() + "&userId=" +sessionUserId;
 	}
 	

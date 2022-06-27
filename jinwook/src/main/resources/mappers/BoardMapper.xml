@@ -408,7 +408,7 @@
 	</insert>
 	
 	<!-- Recipe getRecipe -->
-	<select id="getRecipe" parameterType="int" resultType="Recipe" resultMap="recipeSelectMap">
+	<select id="getRecipe" parameterType="int" resultType="Recipe">
 		SELECT
 			rcp_no, user_id, rcp_title, rcp_content, rcp_date, rcp_ingredient, rcp_thumb, rcp_info, rcp_hits, comment_count, rcp_jjimcnt, recommend_count
 		FROM

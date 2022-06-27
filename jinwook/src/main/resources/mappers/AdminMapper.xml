@@ -74,6 +74,10 @@
 		, user_bye_status
 	</sql>
 	
+	<!-- 장바구니 담은 상품 개수 -->
+	
+	
+	
 	<!--  카테고리별 상점 목록  -->
    <select id="getStoreList" parameterType="String" resultMap="storeSelectMap2">
  	  SELECT
@@ -156,8 +160,8 @@
 	</select>
 	
 	
-	<!-- 신고 등록 -->
-	<insert id="addComplain" parameterType="Complain">
+	<!-- 레시피 신고 등록 -->
+	<insert id="addComplainRecipe" parameterType="Complain">
 			INSERT INTO complain 
 			VALUES (
 				  NULL
@@ -186,8 +190,10 @@
 				, '기타' <!-- reqNo, commentNo,  -->
 				</if>
 				, #{rcpNo} <!-- 컬럼 추가해야 할듯 ... reqNo, commentNo, reviewNo 받는 -->
-				, #{commentNo}
-				, #{reviewNo}
+				, null
+				, null
+				,0
+				,0
 			)
 			<!-- 해당 게시글로 넘어갈 수 있는 메서드 필요... board에 있을듯 ... -->
 	</insert>

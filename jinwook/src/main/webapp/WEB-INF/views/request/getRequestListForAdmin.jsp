@@ -111,6 +111,7 @@
 			$(self.location).attr("href","/request/getRequestListForAdmin?reqCode=4");
 		});
 	});
+	
 	/////////////// 통계 화면 이동 ////////////////
 		$(function() {
 	 	$( ".list-group-item:contains('통계')").on("click" , function() {
@@ -118,7 +119,7 @@
 			$(self.location).attr("href","/admin/chart");
 		});
 	});
-
+	
 	
 	 /////////////// 요청대기 COUNT REST 시작 ////////////////
 	 
@@ -480,8 +481,6 @@ a{
          </div>
           <hr size="10px">
 				<form name="detailForm" id="adForm" method="post">		
-				<input type="hidden" name="userId" value="test01" />
-				<input type="hidden" name="storeNo" value="${param.storeNo}" />
 				  
 				   <div class="form-group">
 				    <label for="exampleInputEmail1"><strong>제목</strong></label>
@@ -490,28 +489,29 @@ a{
 				  
 				  <div class="form-group">
 				    <label for="exampleFormControlTextarea1"><strong>내용</strong></label>
-				    <textarea class="form-control" id="adContent" rows="6"
+				    <textarea class="form-control" id="adContent" name="adContent" rows="6"
 				    ></textarea>
 				  </div>
 				  
 				
 				  <div class="form-group">
 					 <label for="exampleFormControlFile1"><strong>사진</strong></label>
-					 <input type="file" class="form-control-file" id="adImage" name="adImage">
-				  	<small id="emailHelp" class="form-text text-muted">사진 확인 후 절차에 따라 관리자의 연락이 갈 수 있습니다.</small>
+				  	
+				  	 <div class="img_wrap_fir">
+                      <img name="adImage"
+				         src=""
+				         onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
+				         alt="My Image" width="700" height="400">
+                     </div>
 				  	
 				  </div>
 					
 				  <br/><br/>
-          			<div class="form-group row">
-	          			<button type="button" id="requestAd" class="btn btn-success" style="background-color: #7fad39; border-color: #7fad39; width: 126px;">등록 요청</button>
-          			</div>
-         			<br/>
 				  
 				</form>
 				               
             </div>
-            <!-- 광고 등록 End -->
+            <!-- 광고 등록 보기 End -->
         </div>
 
             <div class="modal-footer">
@@ -547,7 +547,7 @@ a{
                            <div class="col-sm-6">
                               <input type="text" name="userIdForStore"
                                  class="form-control form-control" id="userIdForStore"
-                                 value="" placeholder="상점이름(상호명)을 입력해주세요." readonly>
+                                 value="" readonly>
                            </div>
                         </div>
                         
@@ -557,7 +557,7 @@ a{
                            <div class="col-sm-6">
                               <input type="text" name="userNameForStore"
                                  class="form-control form-control" id="userNameForStore"
-                                 value="" placeholder="상점이름(상호명)을 입력해주세요." readonly>
+                                 value="" readonly>
                            </div>
                         </div>
               
@@ -569,7 +569,7 @@ a{
                            <div class="col-sm-6">
                               <input type="text" name="storeName"
                                  class="form-control form-control" id="storeName"
-                                 value="" placeholder="상점이름(상호명)을 입력해주세요." readonly>
+                                 value="" readonly>
                            </div>
                         </div>
 <!-- onchange="this.form.submit()" -->
@@ -579,7 +579,7 @@ a{
                            <div class="col-sm-6">
                            <input type="text" name="storeType"
                                  class="form-control form-control" id="storeType"
-                                 value="" placeholder="상점이름(상호명)을 입력해주세요." readonly>
+                                 value="" readonly>
 
                            </div>
                         </div>
@@ -602,7 +602,7 @@ a{
                            <div class="col-sm-6">
                            <input type="text" name="storeStart"
                                  class="form-control form-control" id="storeType"
-                                 value="" placeholder="상점이름(상호명)을 입력해주세요." readonly>
+                                 value="" readonly>
 
                            </div>
                         </div>
@@ -622,7 +622,7 @@ a{
                            <div class="col-sm-6">
                               <input type="text" name="storePhone"
                                  class="form-control form-control" id="storePhone"
-                                 value="" placeholder="상점전화번호" readonly>
+                                 value="" readonly>
                            </div>
                         </div>
 
@@ -632,32 +632,17 @@ a{
                            <div class="col-sm-6">
                               <span class="btn btn-default btn-file"
                                     style="padding-left: 0px; padding-bottom: 15px;">
-                                 <input type="file" id="storeImage" name="storeImage"/>
                                  <div>
                                       <div class="img_wrap_fir">
-                                       <img id="img_fir" />
+                                       <img name="storeImage"
+					                     src=""
+					                     onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
+					                     alt="My Image" width="300" height="300">
                                       </div>
                                   </div>
                               </span>
                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                           <label for="colFormLabelLg"
-                              class="col-sm-2 col-form-label col-form-label">영업신고증</label>
-                           <div class="col-sm-6">
-                              <span class="btn btn-default btn-file"
-                                    style="padding-left: 0px; padding-bottom: 15px;">
-                                 <input type="file" id="businessCard" name="businessCard" />
-                                 <div>
-                                      <div class="img_wrap_sec">
-                                       <img id="img_sec" />
-                                      </div>
-                                  </div>
-                              </span>
-                           </div>
-                        </div>                                  
-                        
+                        </div>                                                    
 
                         <div class="form-group row">
                            <label for="colFormLabelLg"
@@ -667,7 +652,7 @@ a{
                               <div class="col-sm-6">
                                <input type="text" name="bank"
                                  class="form-control form-control" id="bank"
-                                 value="" placeholder=" '-' 없이 입력해주세요" readonly>
+                                 value="" readonly>
                               </div>
                            </div>
                         </div>
@@ -678,7 +663,7 @@ a{
                            <div class="col-sm-6">
                               <input type="text" name="accNo"
                                  class="form-control form-control" id="accNo"
-                                 value="" placeholder=" '-' 없이 입력해주세요" readonly>
+                                 value="" readonly>
                            </div>
                         </div>
                         </form>
@@ -1211,8 +1196,7 @@ $(document).ready(function(){
 				 $('input[name=storeStart]').attr('value',`\${response.store.storeStart}`);
 				 $("textarea#storeIntro").val(`\${response.store.storeIntro}`);
 				 $('input[name=storePhone]').attr('value',`\${response.store.storePhone}`);
-				 $('input[name=storeImage]').attr('value',`\${response.store.storeImage}`);
-				 $('input[name=businessCard]').attr('value',`\${response.store.businessCard}`);
+				 $('img[name=storeImage]').attr('src',`/resources/static/\${response.attach.orgFileName}`);
 				 $('input[name=bank]').attr('value',`\${response.store.bank}`);
 				 $('input[name=accNo]').attr('value',`\${response.store.accNo}`);
 				 $('input[name=userIdForStore]').attr('value',`\${response.userId}`);
@@ -1220,6 +1204,9 @@ $(document).ready(function(){
 			   }, "json");
 			}
 
+	
+	
+	
 	//모달 창 오픈할 때 해당 유저아이디 전달//
 	$(document).ready(function() {     
 
@@ -1240,6 +1227,7 @@ $(document).ready(function(){
 		  $.get(uri, function(response) { 
 				 $('input[name=adTitle]').attr('value',`\${response.adTitle}`);
 				 $("textarea#adContent").val(`\${response.adContent}`);
+				 $('img[name=adImage]').attr('src',`/resources/static/\${response.attach.orgFileName}`);
 				 $('input[name=userName]').attr('value',`\${response.user.userName}`);		
 			   }, "json");
 			}

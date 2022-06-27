@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.request.RequestService;
@@ -49,15 +50,20 @@ public class RequestRestController {
 	@GetMapping( value={"/getRequestStore/{reqNo}"})
 	public JSONObject getRequestStore( @PathVariable(value = "reqNo", required = false) int reqNo,  @ModelAttribute("request") Request request ) throws Exception {
 		
-		  System.out.println("/request/getRequestStore : GET ");
-	      Gson gson = new Gson();      
-	      request = requestService.getRequestStore(reqNo);
-				
-	      String requestObj = gson.toJson(request);
-	      JSONParser parser = new JSONParser();
-	      JSONObject jsonObj = (JSONObject)parser.parse(requestObj);
+	  System.out.println("/request/getRequestStore : GET ");
+      Gson gson = new Gson();      
+      request = requestService.getRequestStore(reqNo);
+	  
+      Attach attach=new Attach();
+	  attach = requestService.selectStoreAttachList(request.getStoreNo());
+	  request.setAttach(attach);
+	  
+      String requestObj = gson.toJson(request);
+      JSONParser parser = new JSONParser();
+      JSONObject jsonObj = (JSONObject)parser.parse(requestObj);
+     
 			
-		return jsonObj;
+	  return jsonObj;
 	}
 	
 	
@@ -94,11 +100,6 @@ public class RequestRestController {
 									@PathVariable(value = "storeNo", required = false) int storeNo,
 									@PathVariable(value = "refundMoney", required = false) int refundMoney) {
 		
-		System.out.println("==================request :: ");
-		System.out.println("왜 안지나가지 ....................................");
-		System.out.println("왜 안지나가지 ....................................");
-		System.out.println("왜 안지나가지 ....................................");
-		
 		Request request = new Request();
 		request.setUserId(userId);
 		request.setStoreNo(storeNo);
@@ -106,8 +107,7 @@ public class RequestRestController {
 		
 		JsonObject jsonObj = new JsonObject();
 		
-		try { 
-			
+		try { 			
 			boolean result = requestService.addRequestRefund(request);
 			jsonObj.addProperty("result", result);
 
@@ -124,8 +124,6 @@ public class RequestRestController {
 	}
 	
 
-	
-	
 	// ========== 환급 요청 수락 ===========
 	@ResponseBody
 	@PatchMapping(value={"updateRequestRefund/{reqNo}/{userId}"})
@@ -186,6 +184,7 @@ public class RequestRestController {
 	        
 			return jsonObj;
 	   }
+	 
 	 
 	// ========== 상점 삭제 신청 ===========
 	@PostMapping(value = {"addRequestDeleteStore/{userId}/{storeNo}"})
@@ -280,7 +279,11 @@ public class RequestRestController {
 		System.out.println("/request/getRequestAd : GET ");
 	      Gson gson = new Gson();      
 	      request = requestService.getRequestAd(reqNo);
-				
+		  
+	      Attach attach=new Attach();
+		  attach = requestService.selectReqAttachList(reqNo);
+		  request.setAttach(attach);
+	      
 	      String requestObj = gson.toJson(request);
 	      JSONParser parser = new JSONParser();
 	      JSONObject jsonObj = (JSONObject)parser.parse(requestObj);

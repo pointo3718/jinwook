@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.jinwook.home.common.FileUtils;
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.RequestMapper;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 
@@ -61,15 +62,15 @@ public class RequestServiceImpl implements RequestService {
 
 	
 	// ========== 상점 등록 요청 수락 ===========
-	// 1.reqStatus 변경  2. 상점 등록 3.사장님의 상점유무 상태 변경
+	// 1.reqStatus 변경  2.상점 등록  3.사장님의 상점유무 상태 변경
 	@Override
 	public boolean updateRequestAddStore(int reqNo) {
 		requestMapper.updateRequestStatusToAccept(reqNo); // 1. reqStatus 변경
 		
 		int queryResult = 0;
 		Request request = requestMapper.getRequestStore(reqNo); // request 상세 가져오기
-		requestMapper.updateRequestAddStore(request.getStore().getStoreNo());  // 2. 상점 등록
-		queryResult = requestMapper.updateUserStoreYn(request.getStore().getUserId()); // 3. 상점유무 상태변경 
+		requestMapper.updateRequestAddStore(request.getStoreNo());  // 2. 상점 등록
+		queryResult = requestMapper.updateUserStoreYnTrue(request.getUserId()); // 3. 상점유무 상태변경 
 		
 		return (queryResult == 1) ? true : false;
 	}
@@ -133,7 +134,7 @@ public class RequestServiceImpl implements RequestService {
 			
 		int queryResult = 0;
 		requestMapper.deleteStore(request); // 2. 상점 삭제
-		queryResult = requestMapper.updateUserStoreYn(request.getUserId()); // 3. 상점유무 상태변경 
+		queryResult = requestMapper.updateUserStoreYnFalse(request.getUserId()); // 3. 상점유무 상태변경 
 
 		return (queryResult == 1) ? true : false;
 	}
@@ -141,10 +142,18 @@ public class RequestServiceImpl implements RequestService {
 
 	// ========== 광고 등록 신청 ===========
 	@Override
-	public boolean addRequestAd(Request request) {
+	public boolean addRequestAd(Request request, MultipartHttpServletRequest mpRequest) throws Exception {
 		int queryResult = 0;
 		queryResult = requestMapper.addRequestAd(request);
-
+		
+		Request req = requestMapper.getNewReq();	
+		
+		List<Map<String,Object>> list = fileUtils.parseInsertAdFileInfo(req, mpRequest); 
+		int size = list.size();
+		
+		for(int i=0; i<size; i++){ 
+			requestMapper.insertAdFile(list.get(i)); // reqNo 어떻게 줄지 ...????????
+		}				
 		return (queryResult == 1) ? true : false;
 	}
 	
@@ -217,4 +226,15 @@ public class RequestServiceImpl implements RequestService {
 	}
 	
 
+	// ================ 상점요청 사진 조회 ==================
+	@Override
+	public Attach selectStoreAttachList(int storeNo){
+		return requestMapper.selectStoreAttachList(storeNo);
+	}
+	
+	// ================ 광고요청 사진 조회 ==================
+	@Override
+	public Attach selectReqAttachList(int reqNo){
+		return requestMapper.selectReqAttachList(reqNo);
+	}
 }
