@@ -134,15 +134,22 @@
       AND cart_no   = #{cartNo}
    </update>
    
+   <select id="getNewOrders" resultType="Orders">
+   		SELECT *
+   		FROM orders
+   		ORDER BY order_no DESC
+   		LIMIT 1
+   </select>
+   
    <update id="deleteOrdersCartAfter">
       UPDATE cart c ,orders o
       <set>
          c.order_no = #{orders.orderNo},
-         c.cart_status = #{cartStatus}
+         c.cart_status = 1 
       </set>
       WHERE c.user_id = o.user_id
       AND c.user_id = #{userId}
-      AND c.cart_no   = #{cartNo}
+      AND c.cart_status = 0
    </update>
    
    <delete id="deleteOrdersCart" parameterType="int">
@@ -297,9 +304,20 @@
    <select id="checkJpPassword" parameterType="String" resultType="int">
    	SELECT COUNT(*)
    	FROM users
-   	WHERE jp_password = #{jpPassword}
+   	WHERE user_id = #{userId}
+   	AND jp_password = #{jpPassword}
    	
    </select>
+   
+   <update id="updateOrdersCoupon">
+      UPDATE coupon c , orders o
+      <set>
+         c.coupon_status= 1 
+      </set>
+      WHERE c.user_id = o.user_id 
+      AND c.user_id = #{userId}
+      AND c.coupon_no = #{couponNo}
+   </update>
 </mapper>
    
    

@@ -79,7 +79,7 @@
 			pick.focus();
 		    return false;
 		});
-	}	
+	}
 	/* document.addPurchase.submit(); action="/purchase/addPurchase*/
 	$("form").attr("method" , "POST").attr("action" , "/orders/addOrders").submit();
 	
@@ -163,18 +163,22 @@
                                     	<c:if test="${coupon.couponType == '1'}">
                                     	<c:set var="cpDc" value="${coupon.couponDc}"/>
                                     		고객님의 회원가입을 축하합니다.(회원가입 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
+                                    		<input type=hidden value="${coupon.couponNo}">
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '2'}">
                                     	<c:set var="cpDc" value="${coupon.couponDc}"/>
                                     		고객님의 첫구매를 축하합니다.(첫구매 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
+                                    		<input type=hidden value="${coupon.couponNo}">
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '3'}">
                                     	<c:set var="cpDc" value="${coupon.couponDc}"/>
                                     		고객님의 생일을 축하합니다.(생일축하 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
+                                    		<input type=hidden value="${coupon.couponNo}">
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '4'}">
                                     	<c:set var="cpDc" value="${coupon.couponDc}"/>
                                     		고객님께 소중한 쿠폰 배달왔습니다.(추천인 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
+                                    		<input type=hidden value="${coupon.couponNo}">
                                     	</c:if>
                                     	</option>
                                     </c:forEach>
@@ -251,8 +255,7 @@
 								 <div class="checkout__order__total" > 실결제금액<span id=finalPrice style="color: black;">${cart.orders.orderPrice-total}원</span></div>
 								 <input type=hidden name="finalPrice" value="${cart.orders.orderPrice-total}">
 								 <input type=hidden name="finalPrice2" value="${cart.orders.orderPrice-total}">
-								 
-                                <button type="submit" id="order" class="site-btn" >주문하기</button>
+                                <button type="submit" id="order" class="site-btn" value="${cart.cartStatus}" >주문하기</button>
                             </div>
                         </div>
                     </div>
