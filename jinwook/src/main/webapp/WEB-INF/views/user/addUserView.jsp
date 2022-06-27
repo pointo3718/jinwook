@@ -315,7 +315,6 @@
 		
 		
 		function fncAddUser() {
-			
 			var id=$("input[name='userId']").val();
 			var pw=$("input[name='password']").val();
 			var pw_confirm=$("input[name='password2']").val();
@@ -352,11 +351,14 @@
 				swal("[진욱이네]", "한글만 입력해주세요.");
 				return;
 			}
-			
-			if(nickName == null || nickName.length <1){
-				swal("진욱이네", "닉네임은  반드시 입력하셔야 합니다.");
-				nickName.focus();
-				return;
+		
+			if("${role}" != "사장님"){
+				
+				if(nickName == null || nickName.length <1){
+					swal("진욱이네", "닉네임은  반드시 입력하셔야 합니다.");
+					nickName.focus();
+					return;
+				}
 			}
 			
 			if(email == null || email.length <1){
@@ -409,8 +411,22 @@
 			if(!regexPhone.test(phone)){
 				swal("[진욱이네]", "휴대폰 번호는 숫자만 입력해주세요.");
 				return;
-			}	
-				
+			}
+			
+			if ($("input[name=gender]:radio:checked").length < 1) {
+	            alert("성별을 반드시 선택해주세요");
+	            return;
+	          }
+			
+			 var value = "";   
+			   if( $("input[name='birth_year']").val() != ""  &&  $("input[name='birth_month']").val() != "" &&  $("input[name='birth_day']").val() != ""){
+			      var value = $("input[name='birth_year']").val()  
+			                     + $("input[name='birth_month']").val() 
+			                     + $("input[name='birth_day']").val();
+			   }
+			   
+			   $("input:hidden[name='birth']").val( value );
+			
 			/* var value = "";	
 			if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
 				var value = $("option:selected").val() + "-" 
@@ -539,13 +555,13 @@
 		    </div>
 		  </div>
 		  
-		  <div class="form-group">
+		 <!--  <div class="form-group">
 		    <label for="birth" class="col-sm-offset-0 col-sm-3 control-label"><a>생년월일</a></label>
 		    <div class="col-sm-6">
 		      <input type="text" maxlength='8' class="birth" id="birth" name="birth" placeholder="생년월일" >
-		      <input type="hidden" maxlength='8' class="role" id="role" name="role" value=${role } placeholder="role" >
 		    </div>
-		  </div>
+		  </div> -->
+		  
 		  
 		  <div class="form-group">
 		    <label for="nickName" class="col-sm-offset-0 col-sm-3 control-label"><a>닉네임</a></label>
@@ -556,6 +572,32 @@
 		      <button class="nickNameChk site-btn" type="button" id="nickNameChk " onclick="checkNickName()" value="N" style="border-radius:4px; margin-right:50px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button>
 		    </div>
 		  </div>
+		  
+		  <div class="form-group ">
+             <label for="birth"
+                class="col-sm-offset-0 col-sm-3 control-label">생년월일</label>
+            
+             <div class="col-sm-2">
+                <input type="text" name="birth_year"
+                   class="text-center" id="birth" style="width:80px; text-indent: 0em;"
+                   value="" placeholder="YYYY" size="4" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+		      <input type="hidden" maxlength='8' class="role" id="role" name="role" value=${role } placeholder="role" >
+                <input type="hidden" name="birth"
+                   class="form-control form-control text-center" id="birth"
+                   value="">
+             </div>
+             <div class="col-sm-2">
+                <input type="text" name="birth_month" style="width:80px; text-indent: 0em;"
+                   class="text-center" id="birth"
+                   value="" pattern="[0-9]*"  placeholder="MM" size="2" maxlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+             </div>
+             <div class="col-sm-2">
+                <input type="text" name="birth_day" style="width:80px; text-indent: 0em;"
+                   class="birth text-center" id="birth"
+                   value=""  placeholder="DD" size="2" maxlength="2" min="2" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> 
+          </div>
+          </div>
+		  
 		  
 		  <div class="form-group" >
 		    <label for="phone" class="col-sm-offset-0 col-sm-3 control-label"><a>휴대폰번호</a></label>
@@ -571,7 +613,7 @@
 		    <label for="" class="col-sm-offset-0 col-sm-3 control-label"><a></a></label>
 		  <div class="adad col-sm-6" style="font-size:15px;">
 			<input type="hidden" id="phoneDoubleChk"/>
-			<input type="text" id="authNo1" class="authNo" placeholder="인증 번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+			<input type="text" id="authNo1" class="authNo" placeholder="인증 번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 			</div>
 		<div>
 			<button class="send_btn site-btn" type="button" id="sned" style="width:113.52; border-radius:4px; margin-right:48px; height:44; width:113.52px; padding-left:10px; padding-right:10px; color: #7fad39; background-color:white; border: 1px solid #7fad39;" >인증번호 확인</button>
@@ -599,14 +641,14 @@
              <div class="col-sm-2" style="display:flex; text-align:center; height:48px;">
                 <input type="radio" name="gender"
                    class="form-control form-control" id="gender"
-                   value="여" style="font-size:10px;">
+                   value="여" style="font-size:10px;" onfocus="this.blur()">
              	<label for="" class="col-sm-1" style="margin-right:40px;">여</label>
              </div>
              
              <div class="col-sm-2" style="display:flex; height:48px;">
                 <input type="radio" name="gender"
                    class="form-control form-control" id="gender"
-                   value="없음" style="font-size:10px;">
+                   value="없음" style="font-size:10px;" onfocus="this.blur()">
              	<label for="" class="col-sm-1" style="margin-right:40px;">X</label>
              </div>
              
@@ -681,19 +723,47 @@
 		      <input type="text" maxlength='10' class="userName" id="userName" name="userName" placeholder="회원이름" oninput="this.value=this.value.replace(' ','');">
 		    </div>
 		  </div>
-		  
+		  <%-- 
 		  <div class="form-group">
 		    <label for="birth" class="col-sm-offset-0 col-sm-3 control-label"><a>생년월일</a></label>
 		    <div class="col-sm-6">
 		      <input type="text" maxlength='8' class="birth" id="birth" name="birth" placeholder="생년월일" >
 		      <input type="hidden" maxlength='8' class="role" id="role" name="role" value=${role } placeholder="role" >
 		    </div>
-		  </div>
+		  </div> --%>
+		  
+		  
+		   <div class="form-group ">
+             <label for="birth"
+                class="col-sm-offset-0 col-sm-3 control-label">생년월일</label>
+            
+             <div class="col-sm-2">
+                <input type="text" name="birth_year"
+                   class="text-center" id="birth" style="width:80px; text-indent: 0em;"
+                   value="" pattern="[0-9]{4}" placeholder="YYYY" size="4" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+		      <input type="hidden" maxlength='8' class="role" id="role" name="role" value=${role } placeholder="role" >
+                <input type="hidden" name="birth"
+                   class="form-control form-control text-center" id="birth"
+                   value="">
+             </div>
+             <div class="col-sm-2">
+                <input type="text" name="birth_month" style="width:80px; text-indent: 0em;"
+                   class="text-center" id="birth"
+                   value="" pattern="0[0-9]|1[0-2]"  placeholder="MM" size="2" maxlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+             </div>
+             <div class="col-sm-2">
+                <input type="text" name="birth_day" style="width:80px; text-indent: 0em;" max="31"
+                   class="birth text-center" id="birth"
+                   value=""  placeholder="DD" size="2" maxlength="2" min="2" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> 
+          </div>
+          </div>
+		  
+		  
 		  
 		  <div class="form-group" >
 		    <label for="phone" class="col-sm-offset-0 col-sm-3 control-label"><a>휴대폰번호</a></label>
 		     <div class="col-sm-6">
-		      <input type="text" class="phone" id="phone" name="phone" placeholder="휴대폰번호" style=" display:inline-block" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+		      <input type="text" class="phone" id="phone" name="phone" placeholder="휴대폰번호" style=" display:inline-block" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 		    </div>
 		    <div class="">
 		      <button class="phoneChk site-btn" type="button" id="phoneChk " onclick="checkPhone()" value="N" style="margin-right:50px; height:48px; width:113.52px; padding-left:10px;
@@ -704,12 +774,41 @@
 		    <label for="" class="col-sm-offset-0 col-sm-3 control-label"><a></a></label>
 		  <div class="adad col-sm-6" style="font-size:15px;">
 			<input type="hidden" id="phoneDoubleChk"/>
-			<input type="text" id="authNo1" class="authNo" placeholder="인증 번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+			<input type="text" id="authNo1" class="authNo" placeholder="인증 번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 			</div>
 		<div>
 			<button class="send_btn site-btn" type="button" id="sned" style="width:113.52; border-radius:4px; margin-right:48px; height:44; width:113.52px; padding-left:10px; padding-right:10px; color: #7fad39; background-color:white; border: 1px solid #7fad39;" >인증번호 확인</button>
 				</div>
 		</div>
+		  
+		  
+		   <div class="form-group" >
+             <label for="gender" 
+                class="col-sm-offset-0 col-sm-3 control-label"><a>성별</a></label>
+              
+            <div class=" col-sm-2" style="display:flex; margin-left:30px; height:48px;">
+                <input type="radio" name="gender"
+                   class="form-control " id="gender"
+                   value="남" style="font-size:10px; border:none; outline:none; background: transparent;" onfocus="this.blur()">
+             	<label for="" class="col-sm-1" style="margin-right:40px;">남</label>
+             </div>
+             
+             <div class="col-sm-2" style="display:flex; text-align:center; height:48px;">
+                <input type="radio" name="gender"
+                   class="form-control form-control" id="gender"
+                   value="여" style="font-size:10px;" onfocus="this.blur()">
+             	<label for="" class="col-sm-1" style="margin-right:40px;">여</label>
+             </div>
+             
+             <div class="col-sm-2" style="display:flex; height:48px;">
+                <input type="radio" name="gender"
+                   class="form-control form-control" id="gender"
+                   value="없음" style="font-size:10px;" onfocus="this.blur()">
+             	<label for="" class="col-sm-1" style="margin-right:40px;">X</label>
+             </div>
+             
+          </div>
+		  
 		  
 		   <div class="form-group">
 		    <label for="email" class=" col-sm-3 control-label">이메일</label>
@@ -724,7 +823,7 @@
 		   <div class="form-group">
 		    <label for="businessNo" class=" col-sm-3 control-label">사업자등록번호</label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='50' class="businessNo" id="businessNo" name="businessNo" placeholder="사업자등록번호를 입력하세요." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+		      <input type="text" maxlength='50' class="businessNo" id="businessNo" name="businessNo"  placeholder="사업자등록번호를 입력하세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 		    </div>
 		    <div>
 		      <button class="rpIdChk site-btn" type="button" id="rpIdChk" onclick="checkRpId()" value="N" style="margin-right:50px; border-radius:4px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button> 

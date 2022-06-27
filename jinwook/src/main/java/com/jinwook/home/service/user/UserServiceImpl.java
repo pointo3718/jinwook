@@ -152,10 +152,10 @@ public class UserServiceImpl implements UserService{
 	         
 	         mimeMessageHelper.setSubject("[진욱이네] 아이디 안내를 드립니다.");
 	         String content= " ";
-	         content = user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r ";
+	         content = "<html><body><div class='text-center'>"+user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r</div></body></html>  ";
 	         content += "<br><br> ";
-	         content += "<img src=\"+${path}+"+"/resources/static/img/logo.png\"> ";
-	         content += "<br><br> ";
+	         content += "<img src=\'${path}/resources/static/img/logo.png\'> ";
+	         content += "<br><br>";
 	        content += "요청하신 아이디를 안내드립니다.\n ";
 	        content += "<br><br> ";
 	        content += user.getUserId();
@@ -291,14 +291,18 @@ public class UserServiceImpl implements UserService{
 		String api_key = "NCSSFG2Q5MODW2A2";
 	    String api_secret = "HHYIQMHQW3JGYVN9HIDMKA70H32RYZYM";
 	    Message coolsms = new Message(api_key, api_secret);
-
+	    if(randomNumber == 0) {
+	    	System.out.println("return=====");
+	    	return;
+	    }
+	    System.out.println("?????????");
 	    // 4 params(to, from, type, text) are mandatory. must be filled
 	    HashMap<String, String> params = new HashMap<String, String>();
 	    params.put("to", userPhoneNumber);    // 수신전화번호
 	    params.put("from", "01082582676");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
 	    params.put("type", "SMS");
-	    params.put("text", "[진욱이네] 인증번호는" + "["+randomNumber+"]" + "입니다."); // 문자 내용 입력
-	    params.put("app_version", "test app 1.2"); // application name and version
+	    params.put("text", "인증번호는" + "["+randomNumber+"]" + "입니다."); // 문자 내용 입력
+	    params.put("app_version", "[진욱이네]"); // application name and version
 
 	    try {
 	        JSONObject obj = (JSONObject) coolsms.send(params);

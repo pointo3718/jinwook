@@ -155,9 +155,9 @@
                                  class="fa fa-star" aria-hidden="true"></i>${sessionScope.user.grade }
                                  ${sessionScope.user.nickName } 님</a>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                 <a class="dropdown-item" href="/user/login">마이페이지</a> <a
+                                 <a class="dropdown-item" href="/orders/getOrdersList">마이페이지</a> <a
                                     class="dropdown-item" href="/orders/getOrdersList">구매내역</a> <a
-                                    class="dropdown-item" href="#">개인정보</a> <a
+                                    class="dropdown-item" href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보</a> <a
                                     class="dropdown-item" href="/board/getBoardInquiryList">1:1문의</a> <a
                                     class="dropdown-item" href="/board/getBoardAnnouncementList">공지사항</a> <a
                                     class="dropdown-item" href="#">작성한글</a> <a
@@ -180,7 +180,7 @@
                                     class="dropdown-item" href="#">주문내역</a> <a
                                     class="dropdown-item"
                                     href="/store/updateStore?storeNo=10000">상점정보수정</a> <a
-                                    class="dropdown-item" href="#">개인정보수정</a> <a
+                                    class="dropdown-item" href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보수정</a> <a
                                     class="dropdown-item"
                                     href="/store/addStoreProduct?storeNo=10000">상품등록</a> <a
                                     class="dropdown-item" href="#">광고등록</a> <a
@@ -255,7 +255,7 @@
                         <a href="/user/kakaoLogout">Logout <i class="fa fa-sign-out"
                            aria-hidden="true"></i></a>
                     	</c:if>
-                    	<c:if test="${sessionScope.access_Token eq null}">
+                    	<c:if test="${sessionScope.user ne null}">
                         <a href="/user/logout">로그아웃 <i class="fa fa-sign-out"
                            aria-hidden="true"></i></a> 
                         </c:if>

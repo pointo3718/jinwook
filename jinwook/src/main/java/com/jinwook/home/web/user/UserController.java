@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jinwook.home.service.domain.Coupon;
+import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.store.StoreService;
 import com.jinwook.home.service.user.KakaoService;
@@ -129,8 +130,8 @@ public class UserController {
    }
    
 
-   @GetMapping("updateUser")
-   public String updateUserView(@RequestParam("userid") String userId , Model model, HttpSession session ) throws Exception{
+   @GetMapping("updateUserView")
+   public String updateUserView(@RequestParam("userId") String userId , Model model, HttpSession session ) throws Exception{
 
       System.out.println("/user/updateUser : GET");
       //Business Logic
@@ -142,9 +143,9 @@ public class UserController {
          
       List<Coupon> couponList = storeService.getCouponList(userid);
       model.addAttribute("couponList", couponList);
+      session.setAttribute("user", dbUser);
       
-      
-      return "/user/updateUser";
+      return "/user/updateUserView";
    }
 
    @PostMapping("updateUser")
@@ -154,12 +155,16 @@ public class UserController {
       //Business Logic
       userService.updateUser(user);
       
+      System.out.println(user);
       String sessionId=((User)session.getAttribute("user")).getUserId();
+      System.out.println("확인");
       if(sessionId.equals(user.getUserId())){
-         session.setAttribute("user", user);
+    	  System.out.println("확인2");
       }
-      
-      return "redirect:/user/updateUser";
+      session.setAttribute("user", user);
+      model.addAttribute("user", user);
+      System.out.println("확인3");
+      return "redirect:/user/updateUserView?userId="+sessionId;
    }
    
    
@@ -180,7 +185,15 @@ public class UserController {
       
       System.out.println("/user/login : POST");
       System.out.println(user.getUserId()+"112312312321321312321312");
+     
       //Business Logic
+      try {
+    	  userService.getUser(user.getUserId());
+    	  
+      }catch (Exception e) {
+    	  return null;
+      }
+      
       User dbUser=userService.getUser(user.getUserId());
       
 
@@ -228,12 +241,17 @@ public class UserController {
       System.out.println("=============DELETE USER=============");
       
       System.out.println(user.getUserId());
-      user.setUserByeStatus(false);
-      userService.updateUser(user);
+//      System.out.println(user.getStore().getStoreStatus());
+      
+//      if(user.getStore().getStoreStatus() != "2") {
+    	  
+    	  user.setUserByeStatus(true);
+    	  userService.updateUser(user);
+//      }
       session.invalidate();
       System.out.println(user.getUserId());
       
-      return "index2";
+      return "index";
    }
    
 //   @RequestMapping( value="checkDuplication", method=RequestMethod.POST )
@@ -279,13 +297,13 @@ public class UserController {
       User dbUser = userService.getUser("userId");
       model.addAttribute("user", dbUser);
       
-      String userid = ((User) session.getAttribute("user")).getUserId();
+      String userId = ((User) session.getAttribute("user")).getUserId();
          
-      List<Coupon> couponList = storeService.getCouponList(userid);
+      List<Coupon> couponList = storeService.getCouponList(userId);
       model.addAttribute("couponList", couponList);
       
       System.out.println(user.getUserId());
-      return "/user/updateUser";
+      return "/user/updateUserView";
    }
    
    @GetMapping("findId")

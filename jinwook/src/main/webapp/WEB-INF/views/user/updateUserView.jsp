@@ -40,7 +40,7 @@
    type="text/css">
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
@@ -200,12 +200,8 @@ $(function() {
 		var regexName = /^[가-힣]*$/; // 이름 한글만
 		var regexPhone = /^[0-9+]{6,12}$/; // 휴대폰 번호 숫자만
 		
-		if(id == null || id.length <1){
-			alert("아이디는 반드시 입력하셔야 합니다.");
-			return;
-		}
 		if(pw == null || pw.length <1){
-			alert("패스워드는  반드시 입력하셔야 합니다.");
+			swal("진욱이네", "비밀번호는 반드시 입력하셔야 합니다.");
 			return;
 		}
 		/* if(pw_confirm == null || pw_confirm.length <1){
@@ -213,15 +209,6 @@ $(function() {
 			return;
 		} */
 		
-		if(name == null || name.length <1){
-			alert("이름은  반드시 입력하셔야 합니다.");
-			return;
-		}
-		
-		if(!regexName.test(name)){
-			swal("[진욱이네]", "한글만 입력해주세요.");
-			return;
-		}
 		
 		if(nickName == null || nickName.length <1){
 			swal("진욱이네", "닉네임은  반드시 입력하셔야 합니다.");
@@ -231,14 +218,17 @@ $(function() {
 		
 		if(email == null || email.length <1){
 			swal("진욱이네", "이메일은  반드시 입력하셔야 합니다.");
-			email.focus();
+			return;
+		}
+		
+		if(phone == null || phone.length <1){
+			swal("진욱이네", "휴대폰번호는 반드시 입력하셔야 합니다.");
 			return;
 		}
 		
 		if (!regexEmail.test(email)) {
           swal("진욱이네", "잘못된 이메일 형식입니다.");
           email = "";
-          email.focus();
           return;
       }
 		
@@ -246,7 +236,6 @@ $(function() {
          var ch = email.charAt(i)
           if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z') && !(ch >= 'A' && ch <= 'Z') && ch == '@' && ch == '.') {
               swal("진욱이네", "이메일은 영문 대소문자, 숫자만 입력가능합니다.");
-              email.focus();
               email.select();
               return;
           }
@@ -264,6 +253,8 @@ $(function() {
 			
 		} */
 		
+		checkPassword();
+		
 		if (password == id) {
           swal("진욱이네", "아이디와 비밀번호가 같습니다.")
           password.focus();
@@ -280,7 +271,11 @@ $(function() {
 			swal("[진욱이네]", "휴대폰 번호는 숫자만 입력해주세요.");
 			return;
 		}
-      
+      	
+		if ($("input[name=gender]:radio:checked").length < 1) {
+            alert("성별을 반드시 선택해주세요");
+            return;
+          }
    
 	   var value = "";   
 	   if( $("input[name='birth_year']").val() != ""  &&  $("input[name='birth_month']").val() != "" &&  $("input[name='birth_day']").val() != ""){
@@ -292,6 +287,7 @@ $(function() {
 	   $("input:hidden[name='birth']").val( value );
 	   
 	   $("#modifyUser").attr("method" , "POST").attr("action" , "/user/updateUser").submit();   
+}
    
    
    /* f(pw.length < 8 || pw.length > 25){
@@ -306,7 +302,127 @@ $(function() {
 
    
    
-}
+     //============닉네임 중복 확인 ==============
+		function checkNickName(){
+		$.ajax({
+			url : "/user/checkNickName",
+			type : "post",
+			dataType : "json",
+			data : {"nickName" : $("#nickName").val()},
+			success : function(data){
+				if($("#nickName").val().length <1){
+					alert("닉네임을 입력해주세요.")
+				}else if(data == 1){
+					alert("중복된 닉네임입니다.");
+				}else if(data == 0){
+					$("#nickNameChk").attr("value", "Y");
+					alert("사용가능한 닉네임입니다.");
+				}
+			}
+		});
+		
+	}
+		
+     //============비밀번호 중복 확인 ==============
+		function checkPassword(){
+		$.ajax({
+			url : "/user/checkPassword",
+			type : "post",
+			dataType : "json",
+			data : {"userId" : $("#userId").val(),
+					"password" : $("#password").val()},
+			success : function(data){
+				if(data == 1){
+					alert("비밀번호입니다.");
+				}else if(data == 0){
+					alert("비밀번호를 다시 확인해주세요.");
+					return;
+				}
+			}
+		});
+		
+	}
+		
+		
+	//==>"이메일" 유효성Check  Event 처리 및 연결
+	function checkEmail(){
+		$.ajax({
+			url : "/user/checkEmail",
+			type : "post",
+			dataType : "json",
+			data : {"email" : $("#email").val()},
+			success : function(data){
+				if($("#email").val() != "" && ($("#email").val().indexOf('@') < 1 || $("#email").val().indexOf('.') == -1) ){
+					alert("이메일 형식이 아닙니다.");
+				}
+				else if($("#email").val().length <1){
+					alert("이메일을 입력해주세요.")
+				}else if(data == 1){
+					alert("중복된 이메일입니다.");
+				}else if(data == 0){
+					$("#emailChk").attr("value", "Y");
+					alert("사용가능한 이메일입니다.");
+				}
+			}
+		});
+		
+	}
+       
+    
+	//휴대폰 인증
+	$(function() {
+		$( "#phoneC1" ).on("click" , function() {
+		$("#phoneChk").show();
+		$("#phoneChk1").hide();
+			
+		});
+	});
+	
+	
+		$(function() {
+			$( "#phoneC" ).on("click" , function() {	
+			var phone = $("#phone").val();
+			
+			$.ajax({
+		        type:"GET",
+		        url:"authNoSend?phone=" + phone,
+		        cache : false,
+		        success:function(data){
+		        	alert("인증번호 : "+data.authNumber);
+		        	if(data.authNumber == 0){
+						swal("진욱이네", "이미 등록된 휴대폰 번호 입니다.");
+		        		
+		        	}else{	        		
+						swal("진욱이네", "인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
+						$("#pch").show();		
+						$("#phoneDoubleChk").val(data.authNumber); 
+		        	}
+		        }
+		    });
+		});
+	});
+	
+	 $(function() {
+			$( "#sned" ).on("click" , function() {
+				const phone2 = $("#authNo1").val();
+				const data = $("#phoneDoubleChk").val();
+			    console.log(data);
+			    if(phone2 == null || phone2 == ""){
+					swal("진욱이네", "휴대폰으로 발송된 인증번호를 입력해주세요.");
+			    } else{     
+			       if(phone2 == data){
+					swal("진욱이네", "인증 완료");
+			        }
+			        else {
+			           alert("실패");
+			        }    
+			    }					
+				
+			});
+		});	
+	//휴대폰 인증 끝
+       
+       
    
    //개인정보 변경 페이지로 이동
    function confirm() {
@@ -465,6 +581,7 @@ $(function() {
                                  class="form-control form-control" id="userId"
                                  value="${user.userId}" readonly oninput="this.value=this.value.replace(' ','');">
                            </div>
+                           <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row">
@@ -475,6 +592,7 @@ $(function() {
                                  class="form-control form-control" id="password"
                                  value=""  oninput="this.value=this.value.replace(' ','');">
                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row">
@@ -485,6 +603,7 @@ $(function() {
                                  class="form-control form-control" id="password2"
                                  value="" oninput="this.value=this.value.replace(' ','');">
                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row">
@@ -495,6 +614,7 @@ $(function() {
                                  class="form-control form-control" id="password3"
                                  value="" oninput="this.value=this.value.replace(' ','');">
                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row">
@@ -505,6 +625,7 @@ $(function() {
                                  class="form-control form-control" id="userName"
                                  value="${user.userName}" readonly oninput="this.value=this.value.replace(' ','');">
                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row">
@@ -514,6 +635,10 @@ $(function() {
                               <input type="text" name="email"
                                  class="form-control form-control" id="email"
                                  value="${user.email}" oninput="this.value=this.value.replace(' ','');">
+                           </div>
+                           <div class="col-sm-3">
+                           	<button class="emailChk site-btn" type="button" id="emailChk" onclick="checkEmail()" value="N" style="border-radius:4px; height:38px; margin-right:50px;
+                           			padding:5px; width:113px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button> 
                            </div>
                         </div>
 
@@ -525,6 +650,10 @@ $(function() {
                                  class="form-control form-control" id="nickName"
                                  value="${user.nickName}" oninput="this.value=this.value.replace(' ','');">
                            </div>
+                            <div class="col-sm-3">
+                            	<button class="emailChk site-btn" type="button" id="nickNameChk" onclick="checkNickName()" value="N" style="border-radius:4px; height:38px; margin-right:50px;
+                           			padding:5px; width:113px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button>
+                            </div>
                         </div>
 
                         <div class="form-group row" >
@@ -551,7 +680,7 @@ $(function() {
                                  value="없음" style="font-size:10px;" onfocus="this.blur()">
                               <label for="" class="col-sm-1" style="margin-right:40px;">X</label>
                            </div>
-                           
+                            <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row" style="display:flex;">
@@ -561,7 +690,7 @@ $(function() {
                            <div class="col-sm-2">
                               <input type="text" name="birth_year"
                                  class="form-control form-control text-center" id="birth"
-                                 value="" placeholder="YYYY" size="4" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                 value="" placeholder="YYYY" size="4" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                               <input type="hidden" name="birth"
                                  class="form-control form-control text-center" id="birth"
                                  value="">
@@ -569,24 +698,58 @@ $(function() {
                            <div class="col-sm-2">
                               <input type="text" name="birth_month"
                                  class="form-control form-control text-center" id="birth"
-                                 value="" pattern="[0-9]*"  placeholder="MM" size="2" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                 value="" pattern="[0-9]*"  placeholder="MM" size="2" maxlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                            </div>
                            <div class="col-sm-2">
                               <input type="text" name="birth_day"
                                  class="form-control form-control text-center" id="birth"
-                                 value=""  placeholder="DD" size="2" maxlength="2" min="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 
+                                 value=""  placeholder="DD" size="2" maxlength="2" min="2" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> 
                         </div>
+                         <div class="col-sm-3"></div>
                         </div>
                         
-                        <div class="form-group row">
+                        <div class="form-group row" id="phoneChk1">
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">휴대폰 번호</label>
                            <div class="col-sm-6">
                               <input type="text" name="phone"
-                                 class="form-control form-control" id="phone"
-                                 value="${user.phone}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                 class="form-control form-control" id="phone1"
+                                 value="${user.phone}" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" readonly>
                            </div>
+                            <div class="col-sm-3">
+                            	<button class="phoneChk1 site-btn" type="button" id="phoneC1" value="N" style="border-radius:4px; height:38px; margin-right:50px;
+                           			padding:5px; width:113px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">다른번호 인증</button>
+                            </div>
                         </div>
+                            
+                         <div class="form-group row" id="phoneChk" style="display:none;">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label">휴대폰 번호</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="phone1"
+                                 class="form-control form-control" id="phone"
+                                 value="" placeholder="휴대폰번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                           </div>
+                            <div class="col-sm-3">
+                            	<button class="phoneChk site-btn" type="button" id="phoneC" value="N" style="border-radius:4px; height:38px; margin-right:50px;
+                           			padding:5px; width:113px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">인증번호 받기</button>
+                            </div>   
+                          </div>
+                            
+                         <div class="form-group row" id="pch" style="display:none;">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label"></label>
+                           <div class="col-sm-6">
+                              <input type="text" name="authNo1"
+                                 class="form-control form-control" id="authNo1"
+                                 value="" placeholder="인증번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                          <input type="hidden" id="phoneDoubleChk"/>
+                           </div>
+                            <div class="col-sm-3">
+                            	<button class="phoneChk site-btn" type="button" id="sned" value="N" style="border-radius:4px; height:38px; margin-right:50px;
+                           			padding:5px; width:113px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">인증번호 확인</button>
+                            </div>   
+                          </div>
                         
                         <div class="form-group row">
                            <label for="colFormLabel"
@@ -594,13 +757,14 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="rpId"
                                  class="form-control form-control" id="rpId"
-                                 value="${user.rpId}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
+                                 value="${user.rpId}" placeholder="x" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
                         </c:if>
                         
                         
-               <c:if test="${sessionScope.user.role == '사장님' }">
+               		<c:if test="${sessionScope.user.role == '사장님' }">
 
                         <div class="form-group row">
                            <label for="colFormLabel"
@@ -610,6 +774,7 @@ $(function() {
                                  class="form-control form-control" id="userId"
                                  value="${user.userId}" readonly oninput="this.value=this.value.replace(' ','');">
                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row">
@@ -620,6 +785,7 @@ $(function() {
                                  class="form-control form-control" id="password"
                                  value=""  oninput="this.value=this.value.replace(' ','');">
                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row">
@@ -630,6 +796,7 @@ $(function() {
                                  class="form-control form-control" id="password2"
                                  value="" oninput="this.value=this.value.replace(' ','');">
                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row">
@@ -640,6 +807,7 @@ $(function() {
                                  class="form-control form-control" id="password3"
                                  value="" oninput="this.value=this.value.replace(' ','');">
                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row">
@@ -650,6 +818,7 @@ $(function() {
                                  class="form-control form-control" id="userName"
                                  value="${user.userName}" readonly oninput="this.value=this.value.replace(' ','');">
                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row">
@@ -659,6 +828,10 @@ $(function() {
                               <input type="text" name="email"
                                  class="form-control form-control" id="email"
                                  value="${user.email}" oninput="this.value=this.value.replace(' ','');">
+                           </div>
+                           <div class="col-sm-3">
+                           	<button class="emailChk site-btn" type="button" id="emailChk" onclick="checkEmail()" value="N" style="border-radius:4px; height:38px; margin-right:50px;
+                           			padding:5px; width:113px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button> 
                            </div>
                         </div>
 
@@ -686,7 +859,7 @@ $(function() {
                                  value="없음" style="font-size:10px;" onfocus="this.blur()">
                               <label for="" class="col-sm-1" style="margin-right:40px;">X</label>
                            </div>
-                           
+                            <div class="col-sm-3"></div>
                         </div>
 
                         <div class="form-group row" style="display:flex;">
@@ -696,7 +869,7 @@ $(function() {
                            <div class="col-sm-2">
                               <input type="text" name="birth_year"
                                  class="form-control form-control text-center" id="birth"
-                                 value="" placeholder="YYYY" size="4" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                 value="" placeholder="YYYY" size="4" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                               <input type="hidden" name="birth"
                                  class="form-control form-control text-center" id="birth"
                                  value="">
@@ -704,24 +877,57 @@ $(function() {
                            <div class="col-sm-2">
                               <input type="text" name="birth_month"
                                  class="form-control form-control text-center" id="birth"
-                                 value="" pattern="[0-9]*"  placeholder="MM" size="2" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                 value="" pattern="[0-9]*"  placeholder="MM" size="2" maxlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                            </div>
                            <div class="col-sm-2">
                               <input type="text" name="birth_day"
                                  class="form-control form-control text-center" id="birth"
-                                 value=""  placeholder="DD" size="2" maxlength="2" min="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 
+                                 value=""  placeholder="DD" size="2" maxlength="2" min="2" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> 
                         </div>
+                         <div class="col-sm-3"></div>
                         </div>
                         
-                        <div class="form-group row">
+                        <div class="form-group row" id="phoneChk1">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label">휴대폰 번호</label>
+                           <div class="col-sm-6">
+                              <input type="text" name="phone1"
+                                 class="form-control form-control" id="phone1"
+                                 value="${user.phone}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
+                           </div>
+                            <div class="col-sm-3">
+                            	<button class="phoneChk1 site-btn" type="button" id="phoneC1" value="N" style="border-radius:4px; height:38px; margin-right:50px;
+                           			padding:5px; width:113px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">다른번호 인증</button>
+                            </div>
+                        </div>
+                            
+                         <div class="form-group row" id="phoneChk" style="display:none;">
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">휴대폰 번호</label>
                            <div class="col-sm-6">
                               <input type="text" name="phone"
                                  class="form-control form-control" id="phone"
-                                 value="${user.phone}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                 value="" placeholder="휴대폰번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                            </div>
-                        </div>
+                            <div class="col-sm-3">
+                            	<button class="phoneChk site-btn" type="button" id="phoneC" value="N" style="border-radius:4px; height:38px; margin-right:50px;
+                           			padding:5px; width:113px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">인증번호 받기</button>
+                            </div>   
+                          </div>
+                            
+                         <div class="form-group row" id="pch" style="display:none;">
+                           <label for="colFormLabel"
+                              class="col-sm-3 col-form-label col-form-label"></label>
+                           <div class="col-sm-6">
+                              <input type="text" name="phone"
+                                 class="form-control form-control" id="authNo1"
+                                 value="" placeholder="인증번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                           </div>
+                            <div class="col-sm-3">
+                            	<button class="phoneChk site-btn" type="button" id="sned" value="N" style="border-radius:4px; height:38px; margin-right:50px;
+                           			padding:5px; width:113px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">인증번호 확인</button>
+                            </div>   
+                          </div>
                         
                         <div class="form-group row">
                            <label for="colFormLabel"
@@ -729,8 +935,9 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="businessNo"
                                  class="form-control form-control" id="businessNo"
-                                 value="${user.businessNo}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
+                                 value="${user.businessNo}" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" readonly>
                            </div>
+                            <div class="col-sm-3"></div>
                         </div>
                         </c:if>
                     </form>

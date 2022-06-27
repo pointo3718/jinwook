@@ -348,7 +348,7 @@ $(function() {
                               class="col-sm-3 col-form-label col-form-label">아이디</label>
                            <div class="col-sm-6">
                               <input type="text" name="userId"
-                                 class="form-control form-control" id="userId"
+                                 class="form-control form-control" id="userId" style="background-color:white; border:none;"
                                  value="${user.userId}" readonly>
                            </div>
                         </div>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -143,6 +144,28 @@ public class UserRestController {
 		return cnt;
 	}
 	
+	//정보 수정 시 비밀번호 중복 확인
+	@PostMapping("checkPassword")
+	public int checkPassword(@RequestParam("userId") String userId, @RequestParam("password") String password) throws Exception {
+		User user = new User();
+		
+		user.setUserId(userId);
+		user.setPassword(password);
+		
+		
+		int cnt = userService.confirmPassword(user);
+		
+		return cnt;
+	}
+	
+//	//휴대폰 번호 중복 확인 
+//	@PostMapping("checkPhone")
+//	public int checkPhone(@RequestParam("phone") String phone) throws Exception {
+//		int cnt = userService.checkPhone(phone);
+//		
+//		return cnt;
+//	}
+	
 	//아이디 찾기 - 이메일 인증 보내기
 	@PostMapping("findIdEmail")
 	public ResponseEntity<Object> findIdEmail(@ModelAttribute("user") User user) throws Exception{
@@ -275,21 +298,22 @@ public class UserRestController {
 			return user;
 		}
 		
-		//회원가입 인증번호 보내기 
+		//회원가입, 정보 수정 인증번호 보내기 
 		@GetMapping("authNoSend")
 		public User authNoSend(@RequestParam("phone") String phone) throws Exception {
 			int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
 			
 			User user = new User();
 			
-			userService.certifiedPhoneNumber(phone,randomNumber);
 			int result = userService.checkPhone(phone);
 			System.out.println(result);
 			if(result !=1) {
-				
 				user.setAuthNumber(randomNumber);
+				return user;
 			}
+			userService.certifiedPhoneNumber(phone,randomNumber);
 			System.out.println(user.getAuthNumber());
+			System.out.println("인증완료? ");
 			return user;
 		}
 	

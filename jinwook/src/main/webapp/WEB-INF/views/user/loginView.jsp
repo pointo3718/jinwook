@@ -132,58 +132,34 @@
 	    }	
 	
 		//============= "로그인"  Event 연결 =============
-		function checkLogin(){
-			
+		
+				$(function() {
+					$( "#button1" ).on("click" , function() {
 	
 			
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 				
+				var id=$("input[name='userId']").val();
+				var pw=$("input[name='password']").val();
 				
-				
- 			 
+				if(id == null || id.length <1){
+					swal("진욱이네","아이디는 반드시 입력하셔야 합니다.");
+					return;
+				}
+				if(pw == null || pw.length <1){
+					swal("진욱이네","비밀번호는 반드시 입력하셔야 합니다.");
+					return;
+				}
 				 
-				
-				 //============아이디, 비밀번호 확인 ==============
-				
-				 $.ajax({
-					url : "/user/checkLogin",
-					type : "post",
-					dataType : "json",
-					data : {"userId" : $("#userId").val(),
-							"password" : $("#password").val()},
-					cache : false,
-					success : function(data){
-						/* alert(data);
-						if(data == 0){
-							alert("아이디를 확인해주세요.");
-							return;
-						
-						}else if(data == 1){
-							alert("비밀번호를 확인해주세요.");
-							return;
-						} */
-						alert(data);
-						if( data.userByeStatus == true){
-							alert("탈퇴한 계정입니다.");
-							return;								
-						}else if(data.userId == null){
-							alert("비밀번호를 확인해주세요.");
-								return;
-						}else if(data ==null){
-							$("input[name='userId']").focus();
-							alert("아이디를 확인해주세요.");
-							return;
-						} 
-					}
-				}); 
-			 
-			 
+				checkLogin();
 				
 				
 				$(".form-horizontal").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 				
 					
-			}
+			});
+		});
+					
 		// 테스트 중
 				/*  $("#userId").on("propertychange change keyup paste input" , function() {
 				
@@ -194,7 +170,45 @@
 					 
 				 }); */
 				 
-		
+				 //============아이디, 비밀번호 확인 ==============
+					function checkLogin(){
+						 
+					 $.ajax({
+						url : "/user/checkLogin",
+						type : "post",
+						dataType : "json",
+						data : {"userId" : $("#userId").val(),
+								"password" : $("#password").val()},
+						cache : false,
+						success : function(data){
+							/* alert(data);
+							if(data == 0){
+								alert("아이디를 확인해주세요.");
+								return;
+							
+							}else if(data == 1){
+								alert("비밀번호를 확인해주세요.");
+								return;
+							} */
+							if($("#userId").val() == data.userId && $("#password").val() == data.password && data.userByeStatus == true){
+								alert("탈퇴한 계정입니다.");
+								return;								
+							}else if($("#userId").val() == data.userId && $("#password").val() != data.password){
+								alert("비밀번호를 확인해주세요.");
+									return;
+							}else if($("#userId").val() == data.userId && $("#password").val() == data.password){
+								alert("환영합니다");
+							}else{
+								alert("아이디를 확인해주세요.");
+								return;
+							}
+						}
+					}); 
+				 
+				 }	
+					
+				 
+				 
 		//============= 회원원가입화면이동 =============
 		$( function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -250,7 +264,7 @@
 					  </div>
 					  <div class="form-group" style="text-align: center">
 					    <div class="col-sm-offset-2 col-sm-5 text-center">
-					      <button type="button" class="button1 site-btn" id="button1" onclick="checkLogin()">로 &nbsp;그 &nbsp;인</button>
+					      <button type="button" class="button1 site-btn" id="button1" >로 &nbsp;그 &nbsp;인</button>
 					    </div>
 					    </div>
 
