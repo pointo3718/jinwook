@@ -97,9 +97,9 @@ public class OrdersRestController {
 	cart.setUserId(user.getUserId());
 	cart.setStoreNo(storeNo);
 	cart.setStoreName(storeName);
-	System.out.println(storeNo+"우우우우우우우");
-	System.out.println(storeName+"으으으으으으");
-	System.out.println(cart+"킼");
+	System.out.println(storeNo);
+	System.out.println(storeName);
+	System.out.println(cart);
 	int result = ordersService.addOrdersCart(cart);
 	       return result;
 	}
@@ -174,18 +174,39 @@ public class OrdersRestController {
 		return "orders/getOrdersNoticelist";
 	}
 	
-	@RequestMapping(value="checkJpPassword")
-	public int checkJpPassword(@RequestParam("user") User user) throws Exception {
+	@PostMapping(value="checkJpPassword")
+	public int checkJpPassword(@ModelAttribute("user") User user,HttpSession session) throws Exception {
 		   
 		System.out.println("/orders/checkJpPassword");
+		String userid = ((User) session.getAttribute("user")).getUserId();
+		user.setUserId(userid);
+		System.out.println(user);
+		String jpPassword = user.getJpPassword();
+		String[] jpPass = jpPassword.split(",");
+		String jpPw = String.join("", jpPass);
+		System.out.println("야얌"+jpPw);
+		user.setJpPassword(jpPw);
+		
 		
 		int result = ordersService.checkJpPassword(user);
-//		String day = lesson.getLessonDay();
-//		String[] splitDay = day.split(",");
-//		String lessonDay = String.join("", splitDay);
-		
+//		int nes = Integer.parseInt(jpPw);
+		System.out.println(result+"야야얍");
 		return result;
+		
+//		if(result == 1) {
+//			String jpPassword = user.getJpPassword();
+//			String[] jpPass = jpPassword.split(",");
+//			String jpPw = String.join("", jpPass);
+//			
+//			int nes = Integer.parseInt(jpPw);
+//			System.out.println(nes);
+//			return nes;
+//		}
+//		for(int i=0 ; i<user.getJpPassword().length() ; i++) {
+//			
+//		}
+//		user.getJpPassword().replace(0, 0);
+		
 	}
 	
-
 }
