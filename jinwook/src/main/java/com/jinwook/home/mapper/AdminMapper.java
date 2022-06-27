@@ -20,7 +20,7 @@ public interface AdminMapper {
 	
 	public List<Store> getStoreListAdmin(Store store);				// 상점 목록
 	
-	public int addComplain();										// 신고 등록
+	public int addComplainRecipe(Complain complain);				// 신고 등록
 	
 	public List<Complain> getComplainListAdmin(Complain complain);	// 신고 목록
 	

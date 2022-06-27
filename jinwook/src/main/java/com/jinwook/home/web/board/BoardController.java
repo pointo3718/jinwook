@@ -102,7 +102,6 @@ public class BoardController {
 			model.addAttribute("board", board);
 			System.out.println(user);
 			System.out.println(board);
-			
 		}
 		return "board/addBoardInquiryView"; //보여줄 화면: .jsp
 	}

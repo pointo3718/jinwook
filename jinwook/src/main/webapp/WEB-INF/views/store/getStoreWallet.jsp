@@ -210,13 +210,13 @@ label {
 
 
 <script type="text/javascript">
-   /*<![CDATA[*/
+
    function movePage(uri, queryString) {
       location.href = uri + queryString;
    }
 
-   var storeNo = $("input[id='storeNo']").val();
-   /*]]>*/
+  
+  
 
    $(function() {
       $(".list-group-item:contains('주문 내역')").on("click", function() {
@@ -251,9 +251,9 @@ label {
       $(".list-group-item:contains('광고 등록')").on(
             "click",
             function() {
-               //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-               $(self.location).attr("href",
-                     "../request/addRequestAd?storeNo=10011");
+            	 var storeNo = $("input[id='storeNo']").val();              
+            	 $(self.location).attr("href",
+                     "/request/addRequestAd?storeNo="+storeNo);
             });
    });
 

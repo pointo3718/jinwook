@@ -3,6 +3,7 @@ package com.jinwook.home.service.orders;
 import java.util.List;
 
 import com.jinwook.home.service.domain.Cart;
+import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Jpay;
 import com.jinwook.home.service.domain.Notice;
 import com.jinwook.home.service.domain.Orders;
@@ -54,5 +55,7 @@ public int addOrders(Orders orders);
    public int updateOrdersCeoEarn(Store store);
    
    public int checkJpPassword(User user);
+   
+   public int updateOrdersCoupon(Coupon coupon);
 
 }

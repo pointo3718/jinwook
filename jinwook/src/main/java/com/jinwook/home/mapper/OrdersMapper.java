@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.jinwook.home.service.domain.Cart;
+import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Jpay;
 import com.jinwook.home.service.domain.Notice;
 import com.jinwook.home.service.domain.Orders;
@@ -42,7 +43,7 @@ public interface OrdersMapper {
    public int addOrdersJpayPassword(User user);   //진욱페이 비밀번호 등록
    
    public int updateOrdersJpayPassword(User user); //진욱페이 비밀번호 수정
-   
+   		
    public int addOrdersJpayCharge(Jpay jpay);      //진욱페이 충전
    
    public int addOrdersjBCharge(Object object);   //진욱페이 잔액 
@@ -64,5 +65,9 @@ public interface OrdersMapper {
    public int updateOrdersCeoEarn(Store store);   //사장님 매출액 증가
    
    public int checkJpPassword(User user); // 결제비밀번호 일치체크
+   
+   public Orders getNewOrders();
+   
+   public int updateOrdersCoupon(Coupon coupon);
 }
  

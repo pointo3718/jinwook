@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 
@@ -25,7 +26,7 @@ public interface RequestService {
 	
 	public boolean deleteStore(Request request);						// 상점 삭제 수락
 	
-	public boolean addRequestAd(Request request);						// 광고 등록 신청
+	public boolean addRequestAd(Request request, MultipartHttpServletRequest mpRequest) throws Exception;  							// 광고 등록 신청
 	
 	public Request getRequestAd(int reqNo);								// 광고 등록 신청 보기
 	
@@ -38,8 +39,11 @@ public interface RequestService {
 	public List<Request> getRequestListForAdmin(Request request);  		// 요청 목록
 		
 	public int deleteRequest(int reqNo);								// 요청 목록 삭제 (상태변경)
-			
-	// 대기중인 요청 목록 개수
+				
 	public int CountRequestWaiting(String reqCode);						// 대기중인 요청목록 개수 (뱃지로 띄워줄 예정)
+
+	public Attach selectStoreAttachList(int storeNo); 					// 상점 사진 조회
+	
+	public Attach selectReqAttachList(int reqNo); 						// 광고 사진 조회
 
 }

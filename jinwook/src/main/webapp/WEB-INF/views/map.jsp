@@ -566,7 +566,7 @@
                      <img
                      src="/resources/static/\${store.attach.orgFileName}"
                         onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
-                     alt="My Image" width="300" height="300">
+                     alt="My Image" width="300" height="300" style="border-radius : 10px;">
                      </div>
                      
                      <table class="table table-borderless" style="width: 600px;margin-top: 15px;"

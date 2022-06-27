@@ -49,6 +49,8 @@ public interface StoreMapper {
    
    public List<Store> getStoreRefund(int storeNo);
    
+   public List<Store> getStoreNo(String userId);
+   
    public List<Store> getStoreListByOrderCount();
    
    public List<Store> getStoreMap();
@@ -56,6 +58,8 @@ public interface StoreMapper {
    public List<Store> getStoreOnly(int storeNo);
    
    public Attach selectStoreAttachList(int storeNo);    // 상점 사진 조회
+   
+   public Attach selectProductAttachList(int prodNo);    // 상품 사진 조회
    
    
    public void insertStoreFile(Map<String, Object> map);

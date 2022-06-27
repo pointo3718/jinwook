@@ -13,6 +13,7 @@ public class Coupon {
    
    private int couponNo;
    private User user;
+   private String userId;
    private String couponType;
    private boolean couponStatus; 
    private Date couponValidDate; 

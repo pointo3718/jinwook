@@ -76,11 +76,11 @@ public class OrdersController {
       String userid = ((User) session.getAttribute("user")).getUserId();
       User user = new User();
       user.setUserId(userid);
+      cart.setCartStatus(true);
       orders.setCart(cart);
       orders.setUser(user);
       orders.setPickupTime(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Seoul")).plusMinutes(plusTime).plusHours(9)));
-//    ZoneId zoneId = ZoneId.of("Asia/Seoul");
-//    orders.setPickupTime(LocalDateTime.now(zoneId).plusMinutes(plusTime));
+      ordersService.deleteOrdersCartAfter(cart);
       System.out.println(cart);
       System.out.println(user);
       System.out.println(orders);
@@ -252,7 +252,7 @@ public class OrdersController {
    public String getOrdersJpayChargeList() throws Exception{
 	   
 	   System.out.println("/orders/getOrdersJpayChargeList : GET");
-	   
+	   	
 	return "orders/getOrdersJpayChargeList";
    }
    

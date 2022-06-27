@@ -102,8 +102,7 @@
                   <strong>회원 목록</strong>
                   <p class="text-muted" style="display: inline; font-size: 12px;">
                   회원 목록을 조회할 수 있습니다
-                  </p>
-                     
+                  </p>                    
                     
                    <!--   <label class="btn btn-light active" style="font-size: 13px;"> 
                      <input type="radio" name="options" id="option1" checked>
@@ -126,7 +125,8 @@
 				<!--///////////////// 검색 시작 ////////////////////-->
 				
 				<div class="blog__sidebar__search" style="text-align:right; margin-bottom: 0px;">
-                        <input type="text" id="mainSearchKeyword" value="${user.searchKeyword}" placeholder="ID or 이름 검색..." style="width: 300px; height: 30px;" />
+                        <input type="text" id="mainSearchKeyword" value="${user.searchKeyword}" placeholder="ID or 이름 검색..." style="width: 300px; height: 30px;" 
+                        	onKeypress="javascript:if(event.keyCode==13) {searchBoard(null)}"/>
                         <button onclick="searchBoard(null)"><span class="icon_search"></span></button>
                  </div>
 								<div >

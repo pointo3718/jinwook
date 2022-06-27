@@ -11,6 +11,7 @@ import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.AdminMapper;
 import com.jinwook.home.service.domain.Chart;
 import com.jinwook.home.service.domain.Complain;
+import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 
@@ -21,7 +22,7 @@ public class AdminServiceImpl implements AdminService{
 	private AdminMapper adminMapper;
 	
 	
-	////////////// 카텍리별 상점 목록 ///////////////
+	////////////// 카테고리별 상점 목록 ///////////////
 	@Override
 	public List<Store> getStoreList(String storeType) {
 		List<Store> storeList = Collections.emptyList();
@@ -77,6 +78,16 @@ public class AdminServiceImpl implements AdminService{
 		return storeList;
 	}
 	
+	///////////////// 레시피 신고 등록 ///////////////
+	@Override
+	public boolean addComplainRecipe(Complain complain) {
+		int queryResult = 0;
+		queryResult = adminMapper.addComplainRecipe(complain);
+		
+		return (queryResult == 1) ? true : false;
+	}
+	
+	
 	///////////////// 신고 목록 //////////////////
 	@Override
 	public List<Complain> getComplainListAdmin(Complain complain) {
@@ -110,7 +121,6 @@ public class AdminServiceImpl implements AdminService{
 	
 	
 	///////////////// 블랙리스트 목록 //////////////////
-	
 	@Override
 	public List<User> getBlacklistAdmin(User user) {
 		List<User> blacklist = Collections.emptyList();
@@ -139,10 +149,9 @@ public class AdminServiceImpl implements AdminService{
 		if (complain != null && complain.getUser().isBlacklistStatus() == false) {
 			adminMapper.updateBlacklist(complain);
 			System.out.println("블랙리스트 등록 서비스 통과");
-
 		}
 		
-		queryResult = adminMapper.updateComplainStatus(complain.getComplainNo());		// 신고 상태 변경
+		queryResult = adminMapper.updateComplainStatus(complain.getComplainNo());	// 신고 상태 변경
 
 		return (queryResult == 1) ? true : false;
 	}
@@ -160,6 +169,10 @@ public class AdminServiceImpl implements AdminService{
 		return adminMapper.getWatingInquiryCount();
 	}
 
+	
+	
+	
+	// 통계
 	//=============== 월별 회원가입 수 =================	
 	@Override
 	public List<Chart> getJoinForMonthChart() {
