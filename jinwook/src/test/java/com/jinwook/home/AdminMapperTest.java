@@ -115,7 +115,6 @@ public class AdminMapperTest {
 					System.out.println(complain.getComplainId());
 					System.out.println(complain.getComplainDate());
 					System.out.println(complain.getComplainCode());
-					System.out.println(complain.getComplainTarget());
 					System.out.println("=========================");
 				}
 			}

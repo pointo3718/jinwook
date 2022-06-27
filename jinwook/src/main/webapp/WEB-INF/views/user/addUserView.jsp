@@ -23,7 +23,10 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>회원가입</title>
 	
-
+	<!-- Google Font -->
+	<link
+	   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+	   rel="stylesheet">
 	<!-- Google Font -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +50,8 @@
 	   href="${path}/resources/static/css/slicknav.min.css" type="text/css">
 	<link rel="stylesheet" href="${path}/resources/static/css/style.css"
 	   type="text/css">
-	
+	<link rel="stylesheet"
+	   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<!--  ///////////////////////// CSS ////////////////////////// -->
@@ -319,6 +323,7 @@
 			var phone=$("input[name='phone']").val();
 			var email=$("input[name='email']").val();
 			var rpId=$("input[name='rpId']").val();
+			var businessNo=$("input[name='businessNo']").val();
 			
 			
 			var regexEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/; // 이메일 유효성 검사
@@ -360,6 +365,11 @@
 			if(email == null || email.length <1){
 				swal("진욱이네", "이메일은  반드시 입력하셔야 합니다.");
 				email.focus();
+				return;
+			}
+			
+			if(businessNo == null || businessNo.length <1){
+				swal("진욱이네", "사업자등록번호는 반드시 입력하셔야 합니다.");
 				return;
 			}
 			
@@ -435,105 +445,55 @@
 			$(".form-horizontal").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 		}
 		
-		
-		
-		///////////// 사업자 등록번호 진위여부 시작 ////////////
-		$(function() {
-			$("#bNo")
-					.on(
-							"click",
-						function() {
-						var	bNo = $("input:text[name='bNo']").val()
-						//document.detailForm.bNo.value;
-						//var bNo = "1021652315" // 성공
-						var	data = {
-								"b_no" : [ bNo ]
-							// 배열 
-							};
 
-							$.ajax({
-								url : "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=CpyfKTgQgOMvT2Qd7SEtoIGdHU9kDSNvpw1Tb1reppPnvCjdAwmQJHB1dD4AfmlMyUc5FfDjJOztKQq0Q6n0mA%3D%3D", // serviceKey 값을 xxxxxx에 입력
-								type : "POST",
-								data : JSON.stringify(data), // json 을 string으로 변환하여 전송
-								dataType : "JSON",
-								contentType : "application/json",
-								accept : "application/json",
-								success : function(result) {
-									console.log(result);
-									console.log(result.match_cnt);
-									if(result.match_cnt==1){
-									$('#checkBno').modal('hide');
-									
-									$('input[name=businessNo]').attr('value',bNo);
-									swal("진욱이네", "진위여부 확인되었습니다. 가입을 진행해주세요.");
-									$(".modal-backdrop.in").remove(); 
-									}else{
-										alert("존재하지 않는 사업자 번호입니다.");
-									}
-								},
-								error : function(result) {
-									console.log(result.responseText); //responseText의 에러메세지 확인
-								}
-							});
-							
-						
-				
-					});
-			});
-		///////////// 사업자 등록번호 진위여부 끝 ////////////
-			
-	
-		
-		
-		
-		
-	   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	   //==> 주민번호 유효성 check 는 이해정도로....
-		/* function checkSsn() {
-			var ssn1, ssn2; 
-			var nByear, nTyear; 
-			var today; 
-	
-			ssn = document.detailForm.ssn.value;
-			// 유효한 주민번호 형식인 경우만 나이 계산 진행, PortalJuminCheck 함수는 CommonScript.js 의 공통 주민번호 체크 함수임 
-			if(!PortalJuminCheck(ssn)) {
-				alert("잘못된 주민번호입니다.");
-				return false;
-			}
-		} */
-	
-		/* function PortalJuminCheck(fieldValue){
-		    var pattern = /^([0-9]{6})-?([0-9]{7})$/; 
-			var num = fieldValue;
-		    if (!pattern.test(num)) return false; 
-		    num = RegExp.$1 + RegExp.$2;
-	
-			var sum = 0;
-			var last = num.charCodeAt(12) - 0x30;
-			var bases = "234567892345";
-			for (var i=0; i<12; i++) {
-				if (isNaN(num.substring(i,i+1))) return false;
-				sum += (num.charCodeAt(i) - 0x30) * (bases.charCodeAt(i) - 0x30);
-			}
-			var mod = sum % 11;
-			return ((11 - mod) % 10 == last) ? true : false;
-		} */
-		 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-		 
-		//==>"ID중복확인" Event 처리 및 연결
-		/*  $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 $("button.btn.btn-info").on("click" , function() {
-				popWin 
-				= window.open("/user/checkDuplication.jsp",
-											"popWin", 
-											"left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
-											"scrollbars=no,scrolling=no,menubar=no,resizable=no");
-			});
-		});	 */
-////////////////////////////사용자 사장님 구분에 따른 폼////////////////////////////
+	      ///////////// 사업자 등록번호 진위여부 시작 ////////////
+	      $(function() {
+	         $("#bNo")
+	               .on(
+	                     "click",
+	                  function() {
+	                  var   bNo = $("input:text[name='bNo']").val()
+	                  //document.detailForm.bNo.value;
+	                  //var bNo = "1021652315" // 성공
+	                  var   data = {
+	                        "b_no" : [ bNo ]
+	                     // 배열 
+	                     };
 
+	                     $.ajax({
+	                        url : "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=CpyfKTgQgOMvT2Qd7SEtoIGdHU9kDSNvpw1Tb1reppPnvCjdAwmQJHB1dD4AfmlMyUc5FfDjJOztKQq0Q6n0mA%3D%3D", // serviceKey 값을 xxxxxx에 입력
+	                        type : "POST",
+	                        data : JSON.stringify(data), // json 을 string으로 변환하여 전송
+	                        dataType : "JSON",
+	                        contentType : "application/json",
+	                        accept : "application/json",
+	                        success : function(result) {
+	                           console.log(result);
+	                           console.log(result.match_cnt);
+	                           if(result.match_cnt==1){
+	                           $('#checkBno').modal('hide');
+	                           
+	                           $('input[name=businessNo]').attr('value',bNo);
+	                           swal("진욱이네", "진위여부 확인되었습니다. 가입을 진행해주세요.");
+	                           $(".modal-backdrop.in").remove(); 
+	                           }else{
+	                              alert("존재하지 않는 사업자 번호입니다.");
+	                           }
+	                        },
+	                        error : function(result) {
+	                           console.log(result.responseText); //responseText의 에러메세지 확인
+	                        }
+	                     });
+	                     
+	                  
+	            
+	               });
+	         });
+	      ///////////// 사업자 등록번호 진위여부 끝 ////////////
+	         
+		
+		
+	  
 
 	</script>		
     
@@ -544,17 +504,17 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="../layout/top.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
-
-	<!-- 사업자등록번호 Check Modal -->
-	<!-- Modal -->
-	<div class="modal" id="checkBno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content" style="font-size: 17px;">
-	      <div class="modal-header">
-	        <h1 class="modal-title" id="myModalLabel"><strong>사업자 등록번호 진위여부 확인</strong></h1>
-	      </div>
-	      <div class="modal-body"  style="text-align: left;">
-   	      <div class="container" style="font-size: 15px; margin-right: 60px;">
+	
+	   <!-- 사업자등록번호 Check Modal -->
+   <!-- Modal -->
+   <div class="modal" id="checkBno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content" style="font-size: 17px;">
+         <div class="modal-header">
+           <h1 class="modal-title" id="myModalLabel"><strong>사업자 등록번호 진위여부 확인</strong></h1>
+         </div>
+         <div class="modal-body"  style="text-align: left;">
+            <div class="container" style="font-size: 15px; margin-right: 60px;">
              <div style="margin-right:154px;">
                 <i class="fa fa-check" aria-hidden="true"></i> &nbsp;사업자 등록번호를 입력해주세요.
              </div>
@@ -566,16 +526,16 @@
           
           <input type="text" name="bNo" placeholder="사업자 등록번호를 '-'없이 입력해주세요." maxlength='10' style="margin-left: 60px;">
           
-	      </div>
-	      <div class="modal-footer" style="font-size: 20px;">
-	        <button type="button" class="bts site-btn exit" data-dismiss="modal" style="font-size: 13px; background-color: gray; border-radius:4px;">닫기</button>
-	        <button type="button" id="bNo" class="bts site-btn" style="font-size: 13px; background-color: #7fad39; font-color: white; border-color: #7fad39; border-radius:4px;">확인</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<!-- 사업자등록번호 Check Modal -->
-
+         </div>
+         <div class="modal-footer" style="font-size: 20px;">
+           <button type="button" class="bts site-btn exit" data-dismiss="modal" style="font-size: 13px; background-color: gray; border-radius:4px;">닫기</button>
+           <button type="button" id="bNo" class="bts site-btn" style="font-size: 13px; background-color: #7fad39; font-color: white; border-color: #7fad39; border-radius:4px;">확인</button>
+         </div>
+       </div>
+     </div>
+   </div>
+   <!-- 사업자등록번호 Check Modal -->
+	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
@@ -584,22 +544,18 @@
 	   	 	
 	 	 	<div class="col-md-8" >
 	 	 	
-	 	 		<br/>
-		 	 	<br/>
-				<br/>
+		 	 	<br/><br/>
+				
 				<div class="form-group">	 
-		<h1 class="ss text-center"><strong>회 원 가 입</strong></h1>
-		<br/>
-		<br/>
-		<br/>
-	
+		<h1 class="ss text-center">회 원 가 입</h1>
+		<br><br>
 	<!--  	//////////form Start ///////////////////////////////////// -->
 		<form class="form-horizontal" style="font-size:15px;">
 	<!-- 사용자  -->
 	<c:if test="${role=='사용자' }">
 
 		  <div class="form-group">
-		
+		<hr><br>
 		    <label for="userId" class=" col-sm-3 control-label" >아 이 디</label>
 		    <div class="col-sm-6" >
 		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required onkeyup="this.value=this.value.replace(' ','');" oninput = "checkId()" >
@@ -760,7 +716,8 @@
 		    </div>
 		  </div>
 		 </c:if>
-	
+		 <br>
+		 <br>
 		 <!-- 사용자 폼 끝 -->
 		  
 		  
@@ -897,19 +854,15 @@
 		    </div>
 		  </div>
 		  
-		   <div class="form-group">
-		    <label for="businessNo" class=" col-sm-3 control-label">사업자등록번호</label>
-		    <div class="col-sm-6">
-<<<<<<< HEAD
-		      <input type="text" maxlength='50' class="businessNo" id="businessNo" name="businessNo"  placeholder="사업자등록번호를 입력하세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-=======
-		      <input readonly class="businessNo" id="businessNo" name="businessNo" placeholder="진위 확인을 통해 입력 가능합니다." value="">
->>>>>>> refs/remotes/origin/master
-		    </div>
-		    <div>
-		      <button class="rpIdChk site-btn" type="button" data-toggle="modal" data-target="#checkBno" style="margin-right:50px; border-radius:4px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">진위확인</button> 
-		    </div>
-		  </div>
+		  <div class="form-group">
+          <label for="businessNo" class=" col-sm-3 control-label">사업자등록번호</label>
+          <div class="col-sm-6">
+            <input readonly class="businessNo" id="businessNo" name="businessNo" placeholder="진위 확인을 통해 입력 가능합니다." value="">
+          </div>
+          <div>
+            <button class="rpIdChk site-btn" type="button" data-toggle="modal" data-target="#checkBno" style="margin-right:50px; border-radius:4px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">진위확인</button> 
+          </div>
+        </div>
 		 </c:if>
 		 <br>
 		 <br>
@@ -917,7 +870,7 @@
 		  <!-- 사장님 폼 끝 -->
 		  <div class="form-group">
 		    <div class="col-sm-offset-3  col-sm-6 text-center">
-		      <button type="button" id="addUser" class="bts site-btn"  style="width:200px; font-size:20px; border-radius:4px; ">가입하기</button>
+		      <button type="button" class="bts site-btn" id="addUser" style="width:200px; font-size:20px; border-radius:4px; ">가입하기</button>
 			<!--   <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a> -->
 		<br><br><br><br><br><br>
 		    </div>
