@@ -18,6 +18,7 @@ public class Product {
    private String prodOrign; 
    private String prodInfo; 
    private boolean isSoldout; 
+   private Attach attach;
    
    
    public Product(){

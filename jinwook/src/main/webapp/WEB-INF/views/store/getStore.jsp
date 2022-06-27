@@ -360,20 +360,22 @@ label {
 
       <!--상점 정보 Begin-->
       <hr>
-      <c:forEach var="store" items="${getStore}" begin="0" end="0">
+      <c:forEach var="store" items="${getStore1}" begin="0" end="0">
 
          <div class="row store">
 
             <div class="imgborder">
-               <img
-                  src="https://cdn.pixabay.com/photo/2016/11/29/11/14/business-1869127_960_720.jpg"
-                  alt="My Image" width="500" height="500">
+             <img src="/resources/static/${store.attach.orgFileName}"
+                        onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
+                     alt="My Image" width="500" height="500">
             </div>
 
 
             <table class="table table-borderless" style="width: 600px;"
                id="storeInf">
                <thead>
+               
+               	
 
                   <tr>
                      <td><span  id="stoNo" data-valuese="${store.storeNo}"></span></td>
@@ -489,9 +491,10 @@ label {
 
          <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="product__item">
-               <div class="product__item__pic set-bg"
-                  data-setbg="${path}/resources/static/img/product/product-2.jpg"
-                  width="300" height="300">
+               <div class="product__item__pic set-bg">
+                      <img src="/resources/static/${store.attach.orgFileName}"
+                        onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
+                     alt="My Image" width="300" height="300">
                   <ul class="product__item__pic__hover">
                      <li><i class="fa fa-cart-arrow-down" data-value="${store.product.prodNo}" 
                         onClick="fncAddOrdersCart(this)" style="font-size:25px;"></i></li>

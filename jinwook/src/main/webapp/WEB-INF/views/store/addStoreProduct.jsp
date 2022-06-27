@@ -384,67 +384,127 @@ label {
 						$('.btn.btn-outline-success')
 								.click(
 										function() {
+
+											var STORENO = $(
+													"input[name='storeNo']")
+													.val();
+
 											$('#plus')
 													.append(
-															'<form action="url" method="post" enctype="multipart/form-data"><div class="form-row"><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <span class="btn btn-default btn-file"> <input type="file"></span></div><div class="col-md-2 mb-3"><label for="validationDefault02"></label><input type="text" class="form-control" id="addProdName" placeholder="상품이름" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addProdInfo" placeholder="예)100g당 가격" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addProdOrign" placeholder="원산지" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" id="addPrice" placeholder="가격" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label><br><button type="button" id="validationDefault01" class="btn btn-warning" onClick="fncAddStoreProduct(this)">상품등록</button></div></div></div></form>'); // end append                            
+															'<form id="detailForm" name="detailForm" method="post" enctype="multipart/form-data"><input type="hidden" name="prodImg" value="상품.jpg"><div class="form-row"><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <span class="btn btn-default btn-file"> <input type="file" id="file" name="file" multiple="multiple"></span></div><div class="col-md-2 mb-3"><label for="validationDefault02"></label><input type="text" class="form-control" name="prodName" placeholder="상품이름" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" name="prodInfo" placeholder="예)100g당 가격" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" name="prodOrign" placeholder="원산지" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label> <input type="text" class="form-control" name="price" placeholder="가격" required></div><div class="col-md-2 mb-3"><label for="validationDefault01"></label><br><button type="button" name="addStoreProduct" id="addStoreProduct" class="btn btn-warning" onClick="fncAddStoreProduct()" >상품등록</button></div></div></div></form>'); // end append                            
 										}); // end click                                            
 					}); // end ready
 
-	//상품 등록//
+	//===============상품 등록===============//
+	/*
+	 function fncAddStoreProduct(e) {
 
-	function fncAddStoreProduct(e) {
+	 console.log(e);
 
-		console.log(e);
+	 var PRICE = $(e).parent().parent().find("#addPrice").val()
+	 var STORENO = $("input[name='storeNo']").val();
+	 var prodNo = null;
+	 var PRODINFO = $(e).parent().parent().find("#addProdInfo").val()
+	 var PRODIMG = "사진.jpg";
+	 //var PRODIMG = $(e).parent().parent().find("#addProdImg").val()
+	 var PRODORIGN = $(e).parent().parent().find("#addProdOrign").val()
+	 var PRODNAME = $(e).parent().parent().find("#addProdName").val()
+	 var soldout = true;
 
-		var PRICE = $(e).parent().parent().find("#addPrice").val()
-		var STORENO = $("input[name='storeNo']").val();
-		var prodNo = null;
-		var PRODINFO = $(e).parent().parent().find("#addProdInfo").val()
-		var PRODIMG = "사진.jpg";
-		//var PRODIMG = $(e).parent().parent().find("#addProdImg").val()
-		var PRODORIGN = $(e).parent().parent().find("#addProdOrign").val()
-		var PRODNAME = $(e).parent().parent().find("#addProdName").val()
-		var soldout = true;
+	 if (PRODNAME == null || PRODNAME.length < 1) {
+	 swal("상품이름은 반드시 입력해야 합니다.");
+	 return;
+	 }
 
-		if (PRODNAME == null || PRODNAME.length < 1) {
-			swal("상품이름은 반드시 입력해야 합니다.");
-			return;
-		}
+	 if (PRICE == null || PRICE.length < 1) {
+	 swal("가격은 반드시 입력해야 합니다.");
+	 return;
+	 }
 
-		if (PRICE == null || PRICE.length < 1) {
-			swal("가격은 반드시 입력해야 합니다.");
-			return;
-		}
+	 if (PRODINFO == null || PRODINFO.length < 1) {
+	 swal("상품소개는 반드시 입력해야 합니다.");
+	 return;
+	 }
+	
+	 alert(formData)
 
-		if (PRODINFO == null || PRODINFO.length < 1) {
-			swal("상품소개는 반드시 입력해야 합니다.");
-			return;
-		}
+	 //if (PRODIMG == null || PRODIMG.length < 1) {
+	 //   alert("상품사진은 반드시 입력해야 합니다.");
+	 //   return;
+	 //}
 
-		//if (PRODIMG == null || PRODIMG.length < 1) {
-		//   alert("상품사진은 반드시 입력해야 합니다.");
-		//   return;
-		//}
+	 $.ajax({
+	 url : "addStoreProduct/" + prodNo + "/" + STORENO + "/" + PRODNAME
+	 + "/" + PRICE + "/" + PRODINFO + "/" + PRODIMG + "/"
+	 + PRODORIGN + "/" + soldout,
+	 dataType : "json",
+	 method : "post",
+	 processData : false,
+	 contentType : false,
+	 enctype: 'multipart/form-data',
+	 success : function(result) {
+	 if (result != null) {
+	 swal("등록이 완료되었습니다.");
+	 //$("#point").load("/store/addStoreProductView/STORENO #point");
+	 }
+	 }
 
-		$.ajax({
-			url : "addStoreProduct/" + prodNo + "/" + STORENO + "/" + PRODNAME
-					+ "/" + PRICE + "/" + PRODINFO + "/" + PRODIMG + "/"
-					+ PRODORIGN + "/" + soldout,
-			dataType : "json",
-			method : "post",
-			processData : false,
-			contentType : false,
-			enctype: 'multipart/form-data',
-			success : function(result) {
-				if (result != null) {
-					swal("등록이 완료되었습니다.");
-					//$("#point").load("/store/addStoreProductView/STORENO #point");
-				}
-			}
+	 });
 
-		});
+	 }
+	 */
 
+	/*	
+	 function fncAddStoreProduct(e) {
+	
+	 var price = $(e).parent().parent().find("#addPrice").val()
+	 var storeNo = $("input[name='storeNo']").val();
+	 var prodNo = null;
+	 var prodInfo = $(e).parent().parent().find("#addProdInfo").val()
+	 var prodImg = "사진.jpg";
+	 //var PRODIMG = $(e).parent().parent().find("#addProdImg").val()
+	 var prodOrign = $(e).parent().parent().find("#addProdOrign").val()
+	 var prodName = $(e).parent().parent().find("#addProdName").val()
+	 var soldout = true;
+	
+	 alert(price+prodName+storeNo+prodNo+prodInfo+prodImg+prodOrign+prodName+soldout)
+
+	 if (prodName == null || prodName.length < 1) {
+	 swal("상품이름은 반드시 입력해야 합니다.");
+	 return;
+	 }
+
+	 if (price == null || price.length < 1) {
+	 swal("가격은 반드시 입력해야 합니다.");
+	 return;
+	 }
+
+	 if (prodInfo == null || prodInfo.length < 1) {
+	 swal("상품소개는 반드시 입력해야 합니다.");
+	 return;
+	 }
+	
+	 $("form").attr("method", "POST").attr("action", "/store/addStoreProduct")
+	 .submit();
+	 }
+	
+	 var cnt = 1;
+	 function fn_addFile() {
+	 $("#d_file").append("<br>" + "<input type='file' name='file'" + cnt +"' />");
+	 }
+
+	 */
+
+	/////////////// 상점 등록 시작 //////////////////////
+
+	function fncAddStoreProduct() {
+		//Form 유효성 검증
+
+		document.detailForm.action = '/store/addStoreProduct';
+		$('#detailForm').submit();
 	}
+
+	/////////////// 상점 등록 끝 ///////////////////////
 </script>
 
 
@@ -553,7 +613,9 @@ label {
 															value="${store.product.prodNo}">
 													</div>
 													<td class="shoping__cart__item"><img
-														src="${path}/resources/static/img/cart/cart-1.jpg"></td>
+														src="/resources/static/${store.attach.orgFileName}"
+														onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
+														alt="My Image" width="150" height="150" style="border-radius : 20px;"></td>
 													<td><strong style="font-size: 20px;"> <c:if
 																test="${store.product.soldout=='false'}">
 																<span style="color: red;"><s>${store.product.prodName}</s></span>

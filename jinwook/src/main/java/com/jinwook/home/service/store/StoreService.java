@@ -21,7 +21,7 @@ public interface StoreService {
 	
 	public boolean updateStore(Store store);
 	
-	public void addStoreProduct(Product Product, MultipartHttpServletRequest mpRequest) throws Exception;
+	public void addStoreProduct(Product product, MultipartHttpServletRequest mpRequest) throws Exception; 
 	
 	public boolean updateStoreProduct(Product product);
 	   
@@ -38,7 +38,8 @@ public interface StoreService {
 	public List<Store> getStoreOnly(int storeNo);
 	
 	public Attach selectStoreAttachList(int storeNo); 	// 상점 사진 조회
-
+	
+	public Attach selectProductAttachList(int prodNo); 	// 상품 사진 조회
 	
 	public List<Coupon> getCouponList(String userId);
 	
@@ -55,6 +56,8 @@ public interface StoreService {
 	public List<Store> getStoreListByOrderCount();
 	
 	public List<Store> getStoreMap();
+	
+	public List<Store> getStoreNo(String userId);
 
 	
 

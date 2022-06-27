@@ -329,35 +329,19 @@
       FROM
       request
    </select>
-   
-       <insert id="insertStoreFile" parameterType="hashMap">
-		INSERT INTO MP_FILE(
-			FILE_NO,
-			store_no,
-			ORG_FILE_NAME,
-			STORED_FILE_NAME,
-			FILE_SIZE
-		)VALUES(
-			SEQ_MP_FILE_NO.NEXTVAL,
-			#{store_no},
-			#{ORG_FILE_NAME},
-			#{STORED_FILE_NAME},
-			#{FILE_SIZE}
-		)
-    </insert>
     
 
 	<insert id="insertProductFile" parameterType="hashMap">
 		INSERT INTO attach(
 			prod_no,
-			ORG_FILE_NAME,
-			STORED_FILE_NAME,
-			FILE_SIZE
+			org_file_name,
+			stored_file_name,
+			file_size
 		)VALUES(
 			#{prodNo},
-			#{ORG_FILE_NAME},
-			#{STORED_FILE_NAME},
-			#{FILE_SIZE}
+			#{orgFileName},
+			#{storedFileName},
+			#{fileSize}
 		)
     </insert>
 
@@ -374,6 +358,28 @@
 	   	ORDER BY 
 	   		attach_no ASC
 	</select>
+	
+    <!-- 상품 첨부파일 조회 -->
+    <select id="selectProductAttachList" parameterType="int" resultType="attach">
+		SELECT 
+			attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
+	  	FROM 
+	  		attach
+	  	WHERE 
+	  		prod_no = #{prodNo}
+	   		AND 
+	   		del_gb = 'N'
+	   	ORDER BY 
+	   		attach_no ASC
+	</select>
+	
+	<!-- id가 가진 storeNo 조회 -->	
+    <select id="getStoreNo" parameterType="String"
+      resultMap="storeSelectMap">
+	SELECT store_no FROM store WHERE user_id =#{userID}
+   </select>
+	
+	
 
 
 

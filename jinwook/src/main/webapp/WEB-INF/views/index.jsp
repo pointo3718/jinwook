@@ -695,6 +695,7 @@ function getStoreListByOrderCount() {
 
 //=============map 상점 정보 rest가져오기==================//
 
+/*
 $.ajax({
 url: "/store/getStoreMap",
 dataType: "json"
@@ -703,6 +704,7 @@ console.log(data);
 var storeList = data;
 console.log(storeList);
 });
+*/
 
 
 //============================================//

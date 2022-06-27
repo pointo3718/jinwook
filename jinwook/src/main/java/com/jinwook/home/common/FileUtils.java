@@ -222,7 +222,7 @@ public class FileUtils {
       return list;
    }
    
-   //상품사진 사진첨부정보
+   // 상품 등록시 사진첨부 정보
    public List<Map<String, Object>> parseInsertProductFileInfo(Product product, 
          MultipartHttpServletRequest mpRequest) throws Exception{
       
@@ -251,7 +251,6 @@ public class FileUtils {
             storedFileName = getRandomString() + originalFileExtension;
             
             file = new File(filePath + storedFileName);
-            multipartFile.transferTo(file);
             listMap = new HashMap<String, Object>();
             listMap.put("prodNo", prodNo);
             listMap.put("orgFileName", originalFileName);
