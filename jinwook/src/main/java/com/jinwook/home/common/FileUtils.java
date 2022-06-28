@@ -51,7 +51,7 @@ public class FileUtils {
             storedFileName = getRandomString() + originalFileExtension;
             
             file = new File(filePath + storedFileName);
-            multipartFile.transferTo(file);
+//            multipartFile.transferTo(file);
             listMap = new HashMap<String, Object>();
             listMap.put("boardNo", boardNo);
             listMap.put("orgFileName", originalFileName);
@@ -128,7 +128,7 @@ public class FileUtils {
             storedFileName = getRandomString() + originalFileExtension;
             
             file = new File(filePath + storedFileName);
-            multipartFile.transferTo(file);
+//            multipartFile.transferTo(file);
             listMap = new HashMap<String, Object>();
             listMap.put("rcpNo", rcpNo);
             listMap.put("orgFileName", originalFileName);

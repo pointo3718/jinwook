@@ -600,10 +600,11 @@ label {
 
          <thead>
           <tr>
+            <th align="left">No</th>
             <th align="left">리뷰 작성자</th>
             <th align="left" style="width:500px;">리뷰 내용</th>
             <!-- <th align="left" >작성일</th> -->
-            <th align="center">별점</th>
+            <th align="center"><i class="bi bi-star"></i> 별점</th>
           </tr>
        </thead>
         
@@ -612,6 +613,7 @@ label {
         <c:forEach var="orders" items="${getReviewList}">
          <c:set var="i" value="${ i+1 }" />
          <tr>
+           <td align="center">${i}</td>
            <td align="center">${orders.reviewWriter}</td>
            <td align="left">${orders.reviewContent}</td>
            <%-- <td align="left"><fmt:formatDate value="${orders.reviewDate}" dateStyle="full"/></td> --%>

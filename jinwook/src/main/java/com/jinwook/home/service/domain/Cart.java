@@ -14,10 +14,10 @@ public class Cart {
 	private User user;
 	private Product product;	//prod_no,prod_name,prod_img,prod_info,price
 	private Orders orders;
-	private int storeNo;
-	private String storeName;
+	private int storeNo;//
+	private String storeName;//
 	private int prodCount;
-	private boolean cartStatus;
+	private boolean cartStatus;//
 	public Cart() {
 		// TODO Auto-generated constructor stub
 	}

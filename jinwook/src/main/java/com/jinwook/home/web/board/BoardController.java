@@ -140,7 +140,7 @@ public class BoardController {
             }
         }
 		
-		return "redirect:/board/getBoardInquiryList";
+		return "redirect:/board/listBoardInquiry";
 	}
 	
 	// 1:1문의 수정 화면v
@@ -166,7 +166,7 @@ public class BoardController {
 		
 		boardService.updateBoardInquiry(board);
 		
-		return "redirect:/board/getBoardInquiryList";
+		return "redirect:/board/listBoardInquiry";
 	}
 	
 	//공지사항 등록 화면
@@ -180,7 +180,7 @@ public class BoardController {
 				Board board = boardService.getBoardAnnouncement(boardNo);
 				User user = userService.getUser(userId);
 				if (board == null) {
-					return "redirect:/board/list";
+					return "redirect:/board/listBoardAnnouncement";
 					//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
 				}
 				model.addAttribute("user", user);
@@ -205,9 +205,31 @@ public class BoardController {
 			user.setUserId(userId);
 			board.setUser(user);
 			
-			boardService.addBoardAnnouncement(board, mpRequest);
-			
-			return "redirect:/board/getBoardAnnouncementList";
+			List<MultipartFile> fileList = mpRequest.getFiles("file");
+	        String src = mpRequest.getParameter("src");
+
+	        String path = "C:\\Users\\impri\\git\\jinwook\\jinwook\\src\\main\\webapp\\resources\\static\\";
+
+	        for (MultipartFile mf : fileList) {
+	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+	            long fileSize = mf.getSize(); // 파일 사이즈
+
+	            System.out.println("originFileName : " + originFileName);
+	            System.out.println("fileSize : " + fileSize);
+
+	            String safeFile = path + originFileName;
+	            try {
+	                mf.transferTo(new File(safeFile));
+	                boardService.addBoardAnnouncement(board, mpRequest);
+	            } catch (IllegalStateException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            } catch (IOException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            }
+	        }
+			return "redirect:/board/listBoardAnnouncement";
 		}
 		
 		// 공지사항 수정 화면v
@@ -223,7 +245,7 @@ public class BoardController {
 				Board board = boardService.getBoardAnnouncement(boardNo);
 //				User user = userService.getUser(userId);
 				if (board == null) {
-					return "redirect:/board/getBoardAnnouncementList";
+					return "redirect:/board/listBoardAnnouncement";
 					//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
 				}
 //				String sessionUserId = ((User) session.getAttribute("user")).getUserId();
@@ -242,7 +264,7 @@ public class BoardController {
 				@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
 			System.out.println("/board/updateBoardAnnouncement: POST");
 			boardService.updateBoardAnnouncement(board);
-			return "redirect:/board/getBoardAnnouncementList";
+			return "redirect:/board/listBoardAnnouncement";
 		}
 		
 	//1:1문의 목록 조회
@@ -267,7 +289,7 @@ public class BoardController {
 		List<Board> getBoardAnnouncementList = boardService.getBoardAnnouncementList(board);
 		model.addAttribute("getBoardAnnouncementList", getBoardAnnouncementList);
 		
-		return "board/getBoardAnnouncementList";
+		return "board/listBoardAnnouncement";
 	}
 	
 	//1:1문의 상세 조회
@@ -362,11 +384,11 @@ public class BoardController {
 	public String deleteBoardAnnouncement(@RequestParam(value = "boardNo", required = false) Integer boardNo) {
 		if (boardNo == null) {
 			// TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
-			return "redirect:/board/getBoardAnnouncementList";
+			return "redirect:/board/listBoardAnnouncement";
 		}
 		int isDeleted = boardService.deleteBoardAnnouncement(boardNo);
 		
-		return "redirect:/board/getBoardAnnouncementList";
+		return "redirect:/board/listBoardAnnouncement";
 	}
 	
 	
@@ -382,7 +404,7 @@ public class BoardController {
 			Recipe recipe = boardService.getRecipe(rcpNo);
 			User user = userService.getUser(userId);
 			if (recipe == null) {
-				return "redirect:/board/getRecipeList";
+				return "redirect:/board/listBoardRecipe";
 				// getRecipe 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
 			}
 			model.addAttribute("user", user);
@@ -390,7 +412,7 @@ public class BoardController {
 			System.out.println(user);
 			System.out.println(recipe);
 		}
-		return "board/addRecipeView"; // 보여줄 화면: .jsp
+		return "board/addBoardRecipeView"; // 보여줄 화면: .jsp
 	}
 	
 	
@@ -445,7 +467,7 @@ public class BoardController {
 //		    List<Map<String, Object>> fileList = boardService.selectRecipeAttachList(recipe.getRcpNo());
 //		    model.addAttribute("file", fileList);
 		    
-			return "board/updateRecipeView"; // 보여줄 화면: .jsp
+			return "board/updateBoardRecipeView"; // 보여줄 화면: .jsp
 		}
 		
 		//레시피 수정 처리v
@@ -454,7 +476,7 @@ public class BoardController {
 				@RequestParam(value = "rcpNo", required = false) Integer rcpNo, Model model) {
 			System.out.println("/board/updateRecipe: POST");
 			boardService.updateRecipe(recipe);
-			return "redirect:/board/getRecipeList?rcpNo="+recipe.getRcpNo();
+			return "redirect:/board/listBoardRecipe?rcpNo="+recipe.getRcpNo();
 		}
 		
 		//레시피 삭제 처리v
@@ -480,7 +502,7 @@ public class BoardController {
 			
 			model.addAttribute("getRecipeList", getRecipeList);
 			System.out.println(getRecipeList);
-			return "board/getRecipeList";
+			return "board/listBoardRecipe";
 		}
 		
 		//레시피 상세 조회 + 조회수 증가
@@ -511,7 +533,7 @@ public class BoardController {
 			List<Comment> commentList = boardService.getRecipeComment(recipe.getRcpNo());
 			model.addAttribute("commentList", commentList);
 			
-			return "board/getRecipe";
+			return "board/getBoardRecipe";
 		}
 		
 		// 레시피(댓글) 작성
@@ -526,7 +548,7 @@ public class BoardController {
 			
 			rttr.addAttribute("rcpNo", comment.getRcpNo());
 			
-			return "redirect:/board/getRecipe?boardNo="+comment.getRcpNo();
+			return "redirect:/board/getBoardRecipe?boardNo="+comment.getRcpNo();
 		}
 		
 		//레시피 댓글 수정 처리 POST
@@ -548,15 +570,6 @@ public class BoardController {
 			return map;
 		}
 		
-		//댓글 삭제 GET
-		@RequestMapping(value="commentDeleteView", method = RequestMethod.GET)
-		public String commentDeleteView(Comment comment, Model model) throws Exception {
-			System.out.println("레시피 댓글삭제화면: GET");
-			
-			model.addAttribute("commentDelete", boardService.selectRecipeComment(comment.getCommentNo()));
-
-			return "board/commentDeleteView";
-		}
 		
 //		//댓글 삭제
 //		@RequestMapping(value="commentDelete", method = RequestMethod.POST)

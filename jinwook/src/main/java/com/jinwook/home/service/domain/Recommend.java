@@ -20,6 +20,7 @@ public class Recommend {
 	private LocalDate recoDate;
 	private int recommendCount;
 	
+	
 	public Recommend() {
 	}
 }

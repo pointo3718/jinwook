@@ -169,7 +169,7 @@ function movePage(uri, queryString) {
             <div class="row">
                 <div class="col-lg-12" style="background-color: #F2F2F2;">
                     <div class="contact__form__title">
-                        <h2><i class="bi bi-question-lg"></i>&nbsp;1:1문의 상세</h2>
+                        <h2><i class="bi bi-question-lg"></i>&nbsp;1:1문의</h2>
                     </div>
                 </div>
             </div>
@@ -183,8 +183,8 @@ function movePage(uri, queryString) {
 					width="300" height="300" style="margin-left: 20px; margin-bottom: 20px;"/>
 				</div>
                 
-                    <div class="col-sm-4 col-sm-4" style="width:100px; height:50px;">
-                        <input type="text" readonly="readonly" value="${board.boardTitle}" style="text-align:center;">
+                    <div class="col-sm-4 col-sm-4" >
+                        <input type="text" readonly="readonly" value="${board.boardTitle}" style="text-align:center; width:500px;">
                     </div>`
                     <div class="col-sm-4 col-sm-4">
                         <i class="bi bi-eye"></i> ${board.boardHits}<br/>
@@ -201,7 +201,7 @@ function movePage(uri, queryString) {
                     <div class="col-lg-12 text-center">
                         <button type="button" class="btn btn-success" id="updateButton">수 &nbsp;정</button>
                     </div>
-                    <hr/>
+                    <br/><br/><br/>
                     <!-- 댓글 작성폼 start -->
                   <c:if test="${sessionScope.user.role == '관리자'}">
 					<div class="card mb-2" style="margin-left:20px;">
@@ -241,8 +241,10 @@ function movePage(uri, queryString) {
 											<%-- <button type="button" id="button" class="btn btn-outline-success"
                         					data-value="${recipe.comment.commentNo}" onClick="fncUpdateRecipeComment(this)">수정</button>&nbsp;&nbsp;&nbsp; --%>
 											
+											<c:if test="${sessionScope.user.role == '관리자'}">
 											<button data-value="${board.comment.commentNo}" id="buttons" type="button" class="btn btn-primary" 
 											onClick="fncDeleteInquiryComment(this)">X</button>
+											</c:if>
 										</div>
 									</li>
 								</c:forEach>

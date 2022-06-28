@@ -97,7 +97,7 @@ function movePage(uri, queryString) {
             <div class="row">
                 <div class="col-lg-12" style="background-color: #F2F2F2;">
                     <div class="contact__form__title">
-                        <h2><i class="bi bi-megaphone-fill"></i>&nbsp; 공지사항 상세</h2>
+                        <h2><i class="bi bi-megaphone-fill"></i>&nbsp; 공지사항</h2>
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@ function movePage(uri, queryString) {
 				</div>
                 
                     <div class="col-sm-4 col-sm-4" style="width:100px; height:50px;">
-                        <input type="text" readonly="readonly" value="${board.boardTitle}" style="text-align:center;">
+                        <input type="text" readonly="readonly" value="${board.boardTitle}" style="text-align:center; width:500px;">
                     </div>`
                     <div class="col-sm-4 col-sm-4">
                         <i class="bi bi-eye"></i> ${board.boardHits}<br/>
@@ -136,7 +136,9 @@ function movePage(uri, queryString) {
                     
                     
                     <div class="col-lg-12 text-center">
+                    <c:if test="${sessionScope.user.role == '관리자'}">
                         <button type="button" class="btn btn-success" id="updateButton">수 &nbsp;정</button>
+                    </c:if>    
                     </div>
                 </div>
             </form>

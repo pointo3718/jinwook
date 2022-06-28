@@ -13,6 +13,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+//객체 빼고 다 써줌.
 public class Board extends CommonDTO {
 
 	private int boardNo;

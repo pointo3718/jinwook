@@ -181,7 +181,6 @@ $(function() {
 });
 
 function fncAddReview() {
-	alert(ORDERNO);
 	$('input[name=orderNo]').attr('value', ORDERNO);
 	$("#reviewForm").attr("method", "POST").attr("action", "/board/addReview").submit();
 }
@@ -191,7 +190,6 @@ $(document).ready(function() {
 
 	   $('#reviewModal').on('show.bs.modal', function(event) {          
 	      ORDERNO = $(event.relatedTarget).data('orderno');
-	      alert(ORDERNO);
 
 	    });
 	});
@@ -785,7 +783,7 @@ $(document).ready(function() {
       <div class="modal-body">
       <form id="reviewForm" action="addReview" method="post">
       <input type="hidden" id="orderNo" name="orderNo" value=""/>
-				<div>
+				<!-- <div>
 					<div style="text-align:left;">
 						<label for="reviewTitle">제목</label>
 					</div>
@@ -793,11 +791,11 @@ $(document).ready(function() {
 						 <input type="text"
 							class="form-control" id="reviewTitle" name="reviewTitle">
 					</div>
-				</div>
+				</div> -->
 				
 				<div>
 					<div style="text-align:left;">
-						<label for="reviewWriter">작성자</label> 
+						<label for="reviewWriter"><i class="bi bi-pencil-fill"></i> 작성자</label> 
 					</div>
 					<div>
 						<input type="text" style="width:100px;"
@@ -807,7 +805,7 @@ $(document).ready(function() {
 				
 				<div>
 					<div style="text-align:left;">
-						<label for="reviewStar">별점</label> 
+						<label for="reviewStar"><i class="bi bi-star"></i> 별점</label> 
 					</div>
 					<div>
 						<input type="number" style="width:100px;" min="1" max="5" step="0.1"
