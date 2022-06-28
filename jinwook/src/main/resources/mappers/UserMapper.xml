@@ -6,6 +6,40 @@
     	<result property="email" column="email" jdbcType="VARCHAR" />
     </resultMap>
 	
+	<resultMap type="recipe" id="recipeSelectMap">
+	   <result property="rcpNo"            column="rcp_no"          jdbcType="INTEGER"/>   
+	   <result property="user.userId"      column="user_id"         jdbcType="VARCHAR"/>   
+	   <result property="rcpTitle"         column="rcp_title"       jdbcType="VARCHAR"/>   
+	   <result property="rcpContent"       column="rcp_content"     jdbcType="VARCHAR"/>   
+	   <result property="rcpDate"          column="rcp_date"        jdbcType="DATE"/>   
+	   <result property="rcpIngredient"    column="rcp_ingredient"  jdbcType="VARCHAR"/>   
+	   <result property="rcpThumb"         column="rcp_thumb"       jdbcType="VARCHAR"/>   
+	   <result property="rcpInfo"          column="rcp_info"        jdbcType="VARCHAR"/>   
+	   <result property="rcpHits"          column="rcp_hits"        jdbcType="INTEGER"/>   
+	   <result property="commentCount"     column="comment_count"   jdbcType="INTEGER"/>   
+	   <result property="rcpJjimCnt"       column="rcp_jjimcnt"     jdbcType="INTEGER"/>   
+	   <result property="recommendCount"   column="recommend_count" jdbcType="INTEGER"/>   
+	</resultMap>
+	
+	<resultMap type="board" id="boardSelectMap">
+	   <result property="boardNo"            column="board_no"         jdbcType="INTEGER"/>   
+	   <result property="user.userId"        column="user_id"          jdbcType="VARCHAR"/>   
+	   <result property="user.role"          column="role"             jdbcType="VARCHAR"/>   
+	   <result property="boardTitle"         column="board_title"      jdbcType="VARCHAR"/>   
+	   <result property="boardContent"       column="board_content"    jdbcType="VARCHAR"/>   
+	   <result property="boardHits"          column="board_hits"       jdbcType="INTEGER"/>   
+	   <result property="boardCode"          column="board_code"       jdbcType="CHAR"/>   
+	   <result property="writeDate"          column="write_date"       jdbcType="DATE"/>   
+	   <result property="boardImg1"          column="board_img1"       jdbcType="VARCHAR"/>   
+	   <result property="boardImg2"          column="board_img2"       jdbcType="VARCHAR"/>   
+	   <result property="boardImg3"          column="board_img3"       jdbcType="VARCHAR"/>   
+	   <result property="boardInqStatus"     column="board_inq_status" jdbcType="BOOLEAN"/>   
+	   <result property="comment.commentNo"     	 column="comment_no"       jdbcType="INTEGER"/>   
+	   <result property="comment.commentContent"     column="comment_content"  jdbcType="VARCHAR"/>   
+	   <result property="comment.commentWriter"      column="comment_writer"   jdbcType="VARCHAR"/>   
+	   <result property="comment.commentDate"        column="comment_date"     jdbcType="DATE"/>   
+	</resultMap>
+	
 	<insert 	id="addUser"		parameterType="user" >
 	 	INSERT
 		INTO users( user_id, user_name, password, birth, gender, email, role, phone, rp_id, notice_status
@@ -80,6 +114,13 @@
 		WHERE user_Id = #{userId} AND password = #{password}
 	 </select>
 	 
+	<select 	id="checkBusinessNo"	parameterType="String" resultType="int">
+		SELECT
+		COUNT(*)	
+		FROM users 
+		WHERE business_no = #{businessNo}
+	 </select>
+	 
 	 <select 	id="findIdPhone"	parameterType="user"	resultType="user">
 		SELECT
 		*	
@@ -108,30 +149,6 @@
 		WHERE user_id = #{userId} AND email = #{email}
 	 </select>
 	 
-	 
-	 <select id="emailCheck" resultType="String">
-    SELECT	1 result 
-    FROM 	DUAL 
-    WHERE EXISTS(
-        SELECT	1 
-        FROM 	users 
-        WHERE 	user_name = #{userName } 
-        AND 	email = #{email }
-    ) 
-</select>
- 
- 
-<select id="phoneCheck" resultType="String">
-    SELECT	1 result 
-    FROM 	DUAL 
-    WHERE EXISTS(
-        SELECT	1 
-        FROM 	users 
-        WHERE 	user_name = #{userName } 
-        AND 	PHONE = #{phone }
-    )
-</select>
-	 
 	 <update id= "updatePassword" >
 		UPDATE users 
 		<set>
@@ -139,5 +156,27 @@
 		</set>
 		WHERE user_id = #{userId} 
 	 </update>
+	 
+	 <select id="getMyRecipe" parameterType="Recipe" resultMap="recipeSelectMap">
+		SELECT
+			rcp_no, rcp_title, rcp_date, rcp_hits, recommend_count
+		FROM
+			recipe
+		WHERE
+			user_id = #{userId}
+	</select>
+	 
+	 <select id="getMyInquiry" parameterType="Board" resultType="Board">
+		SELECT
+			board_no, board_title, write_date, board_inq_status
+		FROM
+			board
+		WHERE
+			board_code = 0
+		AND
+			(board_inq_status = false OR board_inq_status = true)
+		AND 
+			user_id = #{userId}
+	</select>
 	 
 </mapper>

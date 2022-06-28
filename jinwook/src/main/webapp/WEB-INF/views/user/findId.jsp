@@ -130,10 +130,16 @@
         		$("#phone").attr("readonly",true);
         		code2 = data; */
         		$("#phoneDoubleChk").val(data.authNumber); 
+        		$("#snedA").hide();
+        		$("#authNo").show();
         		$("#userid").val(data.userId);
         		$("#regDate").val(data.regDate);
         		console.log();
         	}
+        },
+        error : function(){
+				swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
+        	
         }
     });
 });
@@ -180,8 +186,8 @@ $(document).ready(function() {
 				return;
 			} */
 	 		alert(email);
-			if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1 )){
-		swal("진욱이네", "이메일 형식이 아닙니다.");
+			if(email == "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1 )|| (userName == "" && userName.length() < 1)) {
+		swal("진욱이네", "다시 확인해주세요.");
 				return;
 			}
 			
@@ -189,19 +195,23 @@ $(document).ready(function() {
 				url: "/user/findIdEmail",
 				type: "POST",
 				data: {email: email,
-						userName : userName}
-	
-			})
+						userName : userName},
+				success : function(){
+				swal("진욱이네", "이메일로 전송되었습니다.");
 				
-			.fail(function() {
+				},
+				error : function(){
+					
 				alert("다시 확인해주세요.");
 				return;
-			})
+				}
+				
+	
+			});
+				
 		location.href="/user/login";
-		})
+		});
 	 
-		$(document).on("click", ".back_btn", function() {
-		})
 	})
 	
 	// 버튼 클릭 이벤트 - 이메일 인증 버튼	
@@ -236,11 +246,11 @@ $(document).ready(function() {
 		
 	}
 	
-	function authNo(){
+	/* function authNo(){
 		$("#snedA").hide();
 		$("#authNo").show();
 		
-	}
+	} */
 	
 	
 	</script>		
@@ -289,7 +299,7 @@ $(document).ready(function() {
 			<input type="text" id="phone" class="phone" placeholder="휴대폰 번호를 입력해주세요." onKeyup="this.value=this.value.replace(' ','');">
 			</div>
 			<br>
-			<button class="send_btn site-btn" type="button" id="snedA" style="width:300px;" onclick="authNo()">인증번호 받기</button>
+			<button class="send_btn site-btn" type="button" id="snedA" style="width:300px;" >인증번호 받기</button>
 	</div>		
 	<div class="text-center" id="authNo" style="display:none;">
 		<div class="text-center " style="margin-right:240px;">

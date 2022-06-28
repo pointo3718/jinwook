@@ -369,7 +369,12 @@ $(document).ready(function() {
 
                   <br/> <button type="button" class="btn btn-outline-success" style="margin-left: 20px; margin-bottom: 10px; color:#7fad39; border-color:#7fad39;" disabled>${sessionScope.user.grade}</button>
                   <span>
+                  <c:if test="${sessionScope.user.role == '사용자' }">
                   <strong class="mytop01"><span style="font-size: 30px;">${sessionScope.user.nickName}</span>&nbsp;님&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></strong><br/>
+                  </c:if>
+                  <c:if test="${sessionScope.user.role == '사장님' }">
+                  <strong class="mytop01"><span style="font-size: 30px;">${sessionScope.user.userName}</span>&nbsp;사장님&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></strong><br/>
+                  </c:if>
                   </span>
                   <h1 class="mytop01-content " id="inquiry"><span class="countinq"></span></h1>
                   <a href="#" style="color: gray;">전체등급보기</a> <br/> <br/>
@@ -685,8 +690,7 @@ $(document).ready(function() {
                         <button type="button"
                            class="list-group-item list-group-item-action" onclick="location.href='/board/getBoardInquiryList'">1:1문의</button>
                         <button type="button"
-                           class="list-group-item list-group-item-action" class="addStore"><span class="addStore">작성한 글 
-                           </span>
+                           class="list-group-item list-group-item-action" onclick="location.href='/user/myArticle?userId=${sessionScope.user.userId }'">작성한 글 
                             </button>
                         <button type="button" class="list-group-item list-group-item-action" onclick="location.href='/orders/getOrdersJpayList'">진욱페이 내역</button>
                      </div>

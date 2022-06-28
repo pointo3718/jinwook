@@ -98,7 +98,6 @@
 	//비밀번호 찾기 문자 인증 
 	$(document).ready(function() {
 		$("#snedA").click(function(){
-			swal("진욱이네", "인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
 		var phone = $("#phone").val();
 		USERID = $(".userId").val();
 		$('#userid').attr('value', USERID);
@@ -112,10 +111,17 @@
 					swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
 	        		
 	        	}else{	      
-	        		
+					swal("진욱이네", "인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
+					$("#snedA").hide();
+					$("#authNo").show();
 	        		$("#phoneDoubleChk").val(data.authNumber); 
 	        	}
+    	    },
+    	    error:function(){
+					swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
+    	    	
     	    }
+    	    
 	    });
 	});
 });
@@ -260,11 +266,11 @@ $(document).ready(function() {
 		
 	}
 	
-	function authNo(){
+	/* function authNo(){
 		$("#snedA").hide();
 		$("#authNo").show();
 		
-	}
+	} */
 	
 	
 	</script>		

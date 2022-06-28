@@ -1,9 +1,12 @@
 package com.jinwook.home.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.jinwook.home.service.domain.Board;
+import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.User;
 
 @Mapper
@@ -36,6 +39,9 @@ public interface UserMapper {
 	//CHECK DUPLICATION PASSWORD
 	public int checkPassword(User user) throws Exception;
 	
+	//CHECK DUPLICATION BUSINESSNO
+	public int checkBusinessNo(String businessNo) throws Exception;
+	
 	//FIND ID PHONE
 	public User findIdPhone(User user) throws Exception;
 	
@@ -51,15 +57,10 @@ public interface UserMapper {
 //	//UPDATE PASSWORD
 	public int updatePassword(User user) throws Exception; 
 
+	public List<Recipe> getMyRecipe(Recipe recipe) throws Exception;
 	
+	public List<Board> getMyInquiry(Board board)throws Exception;
 //	public int getTotalCount(Search search) throws Exception ;
 	
-	//---------------------------------------------
-	public String emailCheck(Map<String, Object> map) throws Exception;
-	 
-	public String phoneCheck(Map<String, Object> map) throws Exception;
-	
-
-	//---------------------------------------------
 	
 }

@@ -3,6 +3,10 @@ package com.jinwook.home.service.user;
 
 
 
+import java.util.List;
+
+import com.jinwook.home.service.domain.Board;
+import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.User;
 
 
@@ -24,6 +28,8 @@ public interface UserService {
 		
 		public int checkEmail(String email) throws Exception;
 		
+		public int checkBusinessNo(String businessNo) throws Exception;
+
 		public int confirmPassword(User user) throws Exception;
 		
 		public User findIdPhone(User user) throws Exception;
@@ -42,11 +48,9 @@ public interface UserService {
 		
 		public void sendAuthNum(String email, String authNum) throws Exception;
 		
-		//----------------------------------
-		public boolean emailCheck(String username, String email) throws Exception;
-		 
-		public boolean phoneCheck(String username, String phone) throws Exception;
-		//----------------------------------
 		public void certifiedPhoneNumber(String userPhoneNumber, int randomNumber);
 		
+		public List<Recipe> getMyRecipe(Recipe recipe)throws Exception;
+		
+		public List<Board> getMyInquiry(Board board) throws Exception;
 }

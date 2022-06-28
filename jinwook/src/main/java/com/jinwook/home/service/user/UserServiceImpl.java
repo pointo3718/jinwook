@@ -3,6 +3,7 @@ package com.jinwook.home.service.user;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.jinwook.home.mapper.UserMapper;
+import com.jinwook.home.service.domain.Board;
+import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.User;
 
 import net.nurigo.java_sdk.api.Message;
@@ -97,6 +100,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int checkEmail(String email) throws Exception {
 		int result = userMapper.checkEmail(email);
+		return result;
+	}
+	
+	public int checkBusinessNo(String businessNo) throws Exception{
+		int result = userMapper.checkBusinessNo(businessNo);
 		return result;
 	}
 	
@@ -260,33 +268,8 @@ public class UserServiceImpl implements UserService{
 	    }).start();
 	    
 	}
-	//-----------------------------------------
-	@Override
-	public boolean emailCheck(String username, String email) throws Exception{
-	    Map<String, Object> map = new HashMap<>();
-	    map.put("username", username);
-	    map.put("email", email);
-	    String result = userMapper.emailCheck(map);
-	    if("1".equals(result)) {
-	        return true;
-	    }
-	    return false;
-	}
-	 
-	 
-	@Override
-	public boolean phoneCheck(String username, String phone) throws Exception {
-	    Map<String, Object> map = new HashMap<>();
-	    map.put("username", username);
-	    map.put("phone", phone);
-	    System.out.println(map);
-	    String result = userMapper.phoneCheck(map);
-	    if("1".equals(result)) {
-	        return true;
-	    }
-	    return false;
-	}
-	//-----------------------------------------
+	
+	//coolSMS 문자 전송
 	public void certifiedPhoneNumber(String userPhoneNumber, int randomNumber) {
 		String api_key = "NCSSFG2Q5MODW2A2";
 	    String api_secret = "HHYIQMHQW3JGYVN9HIDMKA70H32RYZYM";
@@ -313,5 +296,16 @@ public class UserServiceImpl implements UserService{
 	      }
 	    
 	}
+	public List<Recipe> getMyRecipe(Recipe recipe)throws Exception{
+		
+		List<Recipe> recipeList = userMapper.getMyRecipe(recipe);
+		
+		return recipeList;
+	}
 	
+	public List<Board> getMyInquiry(Board board) throws Exception{
+		List<Board> boardList = userMapper.getMyInquiry(board);
+		
+		return boardList;
+	}
 }

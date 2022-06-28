@@ -420,7 +420,7 @@
 	<!-- ?Recipe selectList? -->
 	<select id="getRecipeList" parameterType="Recipe" resultMap="recipeSelectMap">
 		SELECT
-			rcp_no, rcp_title, rcp_date, rcp_hits
+			rcp_no, rcp_title, rcp_date, rcp_hits, recommend_count
 		FROM
 			recipe
 		ORDER BY

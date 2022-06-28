@@ -44,71 +44,6 @@ public class UserRestController {
 		System.out.println(this.getClass());
 	}
 	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml ���� �Ұ�
-//		//==> �Ʒ��� �ΰ��� �ּ��� Ǯ�� �ǹ̸� Ȯ�� �Ұ�
-//		@Value("#{commonProperties['pageUnit']}")
-//		//@Value("#{commonProperties['pageUnit'] ?: 3}")
-//		int pageUnit;
-//		
-//		@Value("#{commonProperties['pageSize']}")
-//		//@Value("#{commonProperties['pageSize'] ?: 2}")
-//		int pageSize;
-	
-	@RequestMapping( value="json/getUser/{userId}", method=RequestMethod.GET )
-	public User getUser( @PathVariable String userId ) throws Exception{
-		
-		System.out.println("/user/json/getUser : GET");
-		
-		//Business Logic
-		return userService.getUser(userId);
-	}
-
-	@RequestMapping( value="json/login", method=RequestMethod.POST )
-	public User login(	@RequestBody User user,
-									HttpSession session ) throws Exception{
-	
-		System.out.println("/user/json/login : POST");
-		//Business Logic
-		System.out.println("::"+user);
-		User dbUser=userService.getUser(user.getUserId());
-		
-		if( user.getPassword().equals(dbUser.getPassword())){
-			session.setAttribute("user", dbUser);
-		}
-		
-		return dbUser;
-	}
-	
-	@RequestMapping(value="json/addUser", method=RequestMethod.POST )
-	public User addUser(@RequestBody User user) throws Exception {
-
-		System.out.println("/addUser");
-		
-		
-		userService.addUser(user);
-		
-		 return user;
-	}
-	
-	@RequestMapping( value="json/updateUser", method=RequestMethod.POST )
-	public User updateUser( @RequestBody User user ) throws Exception{
-		
-//		System.out.println("-------------"+body);
-		
-		System.out.println("/user/updateUser : POST");
-		//Business Logic
-		System.out.println("========"+user);
-		userService.updateUser(user);
-		
-//		String sessionId=((User)session.getAttribute("user")).getUserId();
-//		if(sessionId.equals(user.getUserId())){
-//			
-//			System.out.println("====================="+user);
-//			session.setAttribute("user", user);
-//		}
-		System.out.println("====================="+user);
-		return user;
-	}
 	
 	
 	//아이디 중복 확인 
@@ -155,6 +90,14 @@ public class UserRestController {
 		
 		int cnt = userService.confirmPassword(user);
 		
+		return cnt;
+	}
+	
+	//사업자등록번호 중복 확인 
+	@PostMapping("checkBusinessNo")
+	public int checkBusinessNo(@RequestParam("businessNo") String businessNo) throws Exception{
+		
+		int cnt = userService.checkBusinessNo(businessNo);
 		return cnt;
 	}
 	

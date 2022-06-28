@@ -196,13 +196,15 @@
 							}else if($("#userId").val() == data.userId && $("#password").val() != data.password){
 								alert("비밀번호를 확인해주세요.");
 									return;
-							}else if($("#userId").val() == data.userId && $("#password").val() == data.password){
-								alert("환영합니다");
 							}else{
 								alert("아이디를 확인해주세요.");
 								return;
 							}
-						}
+						},
+						error : function(result) {
+								alert("아이디와 비밀번호를 확인해주세요.");
+								location.href="/user/login"
+	                        }
 					}); 
 				 
 				 }	

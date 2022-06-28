@@ -156,6 +156,46 @@ function getCouponCount() {
 
 
 
+   
+      
+		
+		function pwCheck1(){
+			$('.pw_ok').css("display","inline-block");
+			$('.pw_ok').css("color","black");
+		}
+		
+		function pwCheck(){
+			var pwJ = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+			var pw=$("input[name='password2']").val();
+			
+			if(pwJ.test(pw)){
+				$('.pw_ok').css("display","inline-block");
+				$('.pw_ok').css("color","#7fad39");
+			}else{
+				$('.pw_ok').css("color","red");
+			}
+		}
+		
+		function pw1Check1(){
+			$('.pw2_ok').css("display","inline-block");
+			$('.pw2_ok').css("color","black");
+		}
+		
+		function pw1Check(){
+			var pwJ = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+			var pw=$("input[name='password2']").val();
+			var pw_confirm=$("input[name='password3']").val();
+			
+			if(pw == pw_confirm){
+				$('.pw2_ok').css("display","inline-block");
+				$('.pw2_ok').css("color","#7fad39");
+			}else{
+				$('.pw2_ok').css("color","red");
+			}
+		}
+   
+   
+   
 //============= "탈퇴"  Event 처리 및  연결 =============
 $(function() {
    $("#deleteUser").on("click" , function() {
@@ -332,10 +372,8 @@ $(function() {
 			data : {"userId" : $("#userId").val(),
 					"password" : $("#password").val()},
 			success : function(data){
-				if(data == 1){
-					alert("비밀번호입니다.");
-				}else if(data == 0){
-					alert("비밀번호를 다시 확인해주세요.");
+				 if(data == 0){
+					alert("현재 비밀번호를 다시 확인해주세요.");
 					return;
 				}
 			}
@@ -429,6 +467,52 @@ $(function() {
       location.href="/user/confirmPasswordView?userId=${user.userId}"
    }
    
+   ///////////// 사업자 등록번호 진위여부 시작 ////////////
+   $(function() {
+      $("#bNo")
+            .on(
+                  "click",
+               function() {
+               var   bNo = $("input:text[name='bNo']").val()
+               //document.detailForm.bNo.value;
+               //var bNo = "1021652315" // 성공
+               var   data = {
+                     "b_no" : [ bNo ]
+                  // 배열 
+                  };
+
+                  $.ajax({
+                     url : "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=CpyfKTgQgOMvT2Qd7SEtoIGdHU9kDSNvpw1Tb1reppPnvCjdAwmQJHB1dD4AfmlMyUc5FfDjJOztKQq0Q6n0mA%3D%3D", // serviceKey 값을 xxxxxx에 입력
+                     type : "POST",
+                     data : JSON.stringify(data), // json 을 string으로 변환하여 전송
+                     dataType : "JSON",
+                     contentType : "application/json",
+                     accept : "application/json",
+                     success : function(result) {
+                        console.log(result);
+                        console.log(result.match_cnt);
+                        if(result.match_cnt==1){
+                        $('#checkBno').modal('hide');
+                        
+                        $('input[name=businessNo]').attr('value',bNo);
+                        swal("진욱이네", "진위여부 확인되었습니다. 가입을 진행해주세요.");
+                        $(".modal-backdrop.in").remove(); 
+                        }else{
+                           alert("존재하지 않는 사업자 번호입니다.");
+                        }
+                     },
+                     error : function(result) {
+                        console.log(result.responseText); //responseText의 에러메세지 확인
+                     }
+                  });
+                  
+               
+         
+            });
+      });
+   ///////////// 사업자 등록번호 진위여부 끝 ////////////
+	
+	
 </script>
 
 <style>
@@ -465,6 +549,13 @@ $(function() {
     justify-content: center;
    align-items: flex-start;
 }
+
+#pw {color:#7fad39;
+        		display: none;
+        		font-size:12px;
+        		text-align:left;
+            justify-content: left;
+        }
 
 
 </style>
@@ -556,6 +647,38 @@ $(function() {
                </div>
             </div>
 
+<!-- 사업자등록번호 Check Modal -->
+   <!-- Modal -->
+   <div class="modal" id="checkBno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content" style="font-size: 20px;">
+         <div class="modal-header">
+           <h1 class="modal-title" id="myModalLabel"><strong>사업자 등록번호 진위여부 확인</strong></h1>
+         </div>
+         <div class="modal-body"  style="text-align: left;">
+            <div class="container" style="font-size: 15px; margin-right: 60px;">
+             <div style="margin-right:154px;">
+                <i class="fa fa-check" aria-hidden="true"></i> &nbsp;사업자 등록번호를 입력해주세요.
+             </div>
+             <div>
+                <i class="fa fa-check" aria-hidden="true"></i> &nbsp;절차에 따라 사업자번호 진위여부 확인후 가입 가능합니다.
+             </div>
+             <hr>
+          </div>
+          
+          <input type="text" name="bNo" placeholder="사업자 등록번호를 '-'없이 입력해주세요." maxlength='10' style="margin-left: 60px; ">
+          
+         </div>
+         <div class="modal-footer" style="font-size: 20px;">
+           <button type="button" class="bts site-btn exit" data-dismiss="modal" style="font-size: 13px; background-color: gray; border-radius:4px;">닫기</button>
+           <button type="button" id="bNo" class="bts site-btn" style="font-size: 13px; background-color: #7fad39; font-color: white; border-color: #7fad39; border-radius:4px;">확인</button>
+         </div>
+       </div>
+     </div>
+   </div>
+   <!-- 사업자등록번호 Check Modal -->
+			
+
             <!-- 개인 정보 수정 Start -->
             <div>
                <h4 class="text-left">
@@ -590,9 +713,10 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="password" name="password"
                                  class="form-control form-control" id="password"
-                                 value=""  oninput="this.value=this.value.replace(' ','');">
+                                 value=""  onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
                            </div>
                             <div class="col-sm-3"></div>
+                            	 
                         </div>
 
                         <div class="form-group row">
@@ -601,9 +725,11 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="password" name="password2"
                                  class="form-control form-control" id="password2"
-                                 value="" oninput="this.value=this.value.replace(' ','');">
+                                 value="" onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
                            </div>
-                            <div class="col-sm-3"></div>
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="pw_ok " id="pw" >8자 이상의 영문/숫자/특수문자 조합</div>
                         </div>
 
                         <div class="form-group row">
@@ -612,9 +738,10 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="password" name="password3"
                                  class="form-control form-control" id="password3"
-                                 value="" oninput="this.value=this.value.replace(' ','');">
+                                 value="" onkeyup="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
                            </div>
                             <div class="col-sm-3"></div>
+                             <div class="pw2_ok" id="pw">동일한 비밀번호를 입력해주세요.</div>
                         </div>
 
                         <div class="form-group row">
@@ -677,7 +804,7 @@ $(function() {
                            <div class="col-sm-2" style="display:flex; margin-top:5px;">
                               <input type="radio" name="gender"
                                  class="form-control form-control" id="gender"
-                                 value="없음" style="font-size:10px;" onfocus="this.blur()">
+                                 value="없음" style="font-size:10px;" onfocus="this.blur()" checked>
                               <label for="" class="col-sm-1" style="margin-right:40px;">X</label>
                            </div>
                             <div class="col-sm-3"></div>
@@ -856,7 +983,7 @@ $(function() {
                            <div class="col-sm-2" style="display:flex; margin-top:5px;">
                               <input type="radio" name="gender"
                                  class="form-control form-control" id="gender"
-                                 value="없음" style="font-size:10px;" onfocus="this.blur()">
+                                 value="없음" style="font-size:10px;" onfocus="this.blur()" checked>
                               <label for="" class="col-sm-1" style="margin-right:40px;">X</label>
                            </div>
                             <div class="col-sm-3"></div>
@@ -935,9 +1062,13 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="text" name="businessNo"
                                  class="form-control form-control" id="businessNo"
-                                 value="${user.businessNo}" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" readonly>
+                                 value="${user.businessNo}"  readonly>
                            </div>
-                            <div class="col-sm-3"></div>
+                            <div class="col-sm-3">
+                            	 <button class="rpIdChk site-btn" type="button" data-toggle="modal" data-target="#checkBno"
+                            	  style="border-radius:4px; height:38px; margin-right:50px;
+                           			padding:5px; width:113px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">진위확인</button> 
+                            </div>
                         </div>
                         </c:if>
                     </form>

@@ -68,17 +68,18 @@
             align-items: center;
             text-align: center;
         }
-        .id_ok {color:#7fad39;
+        #id {color:#7fad39;
         		display: none;
-        		font-size:10px;
+        		font-size:12px;
         		text-align:left;
             justify-content: left;
         }
-		.id_already{color:red;
-					 display: none;
-					 font-size:10px;
-					 text-align: left;
-		 }
+        #pw {color:#7fad39;
+        		display: none;
+        		font-size:12px;
+        		text-align:left;
+            justify-content: left;
+        }
 		.control-label{
 			whidth:250px;
 			text-align: center;
@@ -147,25 +148,93 @@
 				self.location="index";
 			});
 		});	
-	
+		
+		function idCheck1(){
+			$('.id_ok').css("display","inline-block");
+			$('.id_already').css("display", "inline-block");
+			$('.id_already').css("color", "black");
+			$('.id_ok').css("color","black");
+		}
+		
+		function idCheck(){
+			var idJ = /^[a-z0-9]{8,30}$/;
+			var userId=$("input[name='userId']").val();
+			
+			if(idJ.test(userId)){
+				$('.id_ok').css("display","inline-block");
+				$('.id_already').css("display", "inline-block");
+				$('.id_already').css("color", "red");
+				$('.id_ok').css("color","#7fad39");
+			}else{
+				$('.id_ok').css("color","red");
+				$('.id_already').css("color", "red");
+			}
+		}
+		
+		function pwCheck1(){
+			$('.pw_ok').css("display","inline-block");
+			$('.pw_already').css("display", "inline-block");
+			$('.pw_already').css("color", "black");
+			$('.pw_ok').css("color","black");
+		}
+		
+		function pwCheck(){
+			var pwJ = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+			var pw=$("input[name='password']").val();
+			
+			if(pwJ.test(pw)){
+				$('.pw_ok').css("display","inline-block");
+				$('.pw_already').css("display", "inline-block");
+				$('.pw_already').css("color", "red");
+				$('.pw_ok').css("color","#7fad39");
+			}else{
+				$('.pw_ok').css("color","red");
+				$('.pw_already').css("color", "red");
+			}
+		}
+		
+		function pw1Check1(){
+			$('.pw2_ok').css("display","inline-block");
+			$('.pw2_ok').css("color","black");
+		}
+		
+		function pw1Check(){
+			var pwJ = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+			var pw=$("input[name='password']").val();
+			var pw_confirm=$("input[name='password2']").val();
+			
+			if(pw == pw_confirm){
+				$('.pw2_ok').css("display","inline-block");
+				$('.pw2_ok').css("color","#7fad39");
+			}else{
+				$('.pw2_ok').css("color","red");
+			}
+		}
+		
+		
 		//============아이디 중복 확인 ==============
 		function checkId(){
+			var id=$("input[name='userId']").val();
+			
 			$.ajax({
 				url : "/user/checkId",
 				type : "post",
 				dataType : "json",
 				data : {"userId" : $("#userId").val()},
 				success : function(data){
-					 if(data != 1){
-					 /* $("#idChk").attr("value", "Y");
-						alert("사용가능한 아이디입니다."); */
-						$('.id_ok').css("display","inline-block"); 
-		                $('.id_already').css("display", "none");
+					if(id.length < 1 || id == ""){
+						alert("아이디를 입력해주세요.");
+					}else if(data == 0){
+					/*  $("#idChk").attr("value", "Y"); */
+						alert("사용가능한 아이디입니다."); 
+						$('.id_already').css("color", "#7fad39");
+					/* 	$('.id_ok').css("display","inline-block"); 
+		                $('.id_already').css("display", "none"); */
 						
 					}else {
-						/* alert("중복된 아이디입니다."); */
-						$('.id_already').css("display","inline-block");
-	                    $('.id_ok').css("display", "none");
+						alert("중복된 아이디입니다."); 
+						/* $('.id_already').css("display","inline-block");
+	                    $('.id_ok').css("display", "none"); */
 					}
 				},
 				 error:function(){
@@ -558,10 +627,11 @@
 		<hr><br>
 		    <label for="userId" class=" col-sm-3 control-label" >아 이 디</label>
 		    <div class="col-sm-6" >
-		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required onkeyup="this.value=this.value.replace(' ','');" oninput = "checkId()" >
-					<span class="id_ok" >사용 가능한 아이디입니다.</span>
-					<span class="id_already">사용 중인 아이디입니다.</span>
-				<!-- <button class="idChk" type="button" id="idChk" onclick="checkId()" style="width:100px; height:50px;" value="N"  >중복확인</button> -->
+		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required onkeyup="this.value=this.value.replace(' ','');" oninput="idCheck()" onclick="idCheck1()">
+				 <div class="" style="">
+				 <div class="id_ok " id="id" >8자 이상의 영문 소문혹은 영문과 숫자를 조합</div>
+				 </div>
+					<div class="id_already" id="id">아이디 중복확인</div>
 		    </div>
 		    <div class="">
 		      <button class="idChk site-btn" type="button" id="idChk " onclick="checkId()" value="N" style="border-radius:4px; margin-right:50px; margin-top:1px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button>
@@ -571,14 +641,20 @@
 		  <div class="form-group">
 		    <label for="password" class=" col-sm-3 control-label"><a>비밀번호</a></label>
 		    <div class="col-sm-6" >
-		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" oninput="this.value=this.value.replace(' ','');">
+		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
+		    	<div class="" style="">
+				 <div class="pw_ok " id="pw" >8자 이상의 영문/숫자/특수문자 조합</div>
+				 </div>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="password2" class="col-sm-offset-0 col-sm-3 control-label"><a>비밀번호 확인</a></label>
 		    <div class="col-sm-6">
-		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" oninput="this.value=this.value.replace(' ','');">
+		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" oninput="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
+		    <div class="" style="">
+		    <div class="pw2_ok" id="id">동일한 비밀번호를 입력해주세요.</div>
+		    </div>
 		    </div>
 		  </div>
 		  
@@ -682,7 +758,7 @@
              <div class="col-sm-2" style="display:flex; height:48px;">
                 <input type="radio" name="gender"
                    class="form-control form-control" id="gender"
-                   value="없음" style="font-size:10px;" onfocus="this.blur()">
+                   value="없음" style="font-size:10px;" onfocus="this.blur()" checked>
              	<label for="" class="col-sm-1" style="margin-right:40px;">X</label>
              </div>
              
@@ -699,7 +775,7 @@
 		   <div class="form-group">
 		    <label for="email" class=" col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="이메일" oninput="this.value=this.value.replace(' ','');">
+		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="이메일" onkeyup="this.value=this.value.replace(' ','');" >
 		    </div>
 		    <div>
 		      <button class="emailChk site-btn" type="button" id="emailChk" onclick="checkEmail()" value="N" style="border-radius:4px;  margin-right:50px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button> 
@@ -727,10 +803,11 @@
 		<hr><br>
 		    <label for="userId" class=" col-sm-3 control-label" >아 이 디</label>
 		    <div class="col-sm-6" >
-		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required onkeyup="this.value=this.value.replace(' ','');" oninput = "checkId()" >
-					<span class="id_ok" >사용 가능한 아이디입니다.</span>
-					<span class="id_already">사용 중인 아이디입니다.</span>
-				<!-- <button class="idChk" type="button" id="idChk" onclick="checkId()" style="width:100px; height:50px;" value="N"  >중복확인</button> -->
+		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required onkeyup="this.value=this.value.replace(' ','');" oninput="idCheck()" onclick="idCheck1()">
+				 <div class="" style="">
+				 <div class="id_ok " id="id" >8자 이상의 영문 소문혹은 영문과 숫자를 조합</div>
+				 </div>
+					<div class="id_already" id="id">아이디 중복확인</div>
 		    </div>
 		    <div class="">
 		      <button class="idChk site-btn" type="button" id="idChk " onclick="checkId()" value="N" style="border-radius:4px; margin-right:50px; margin-top:1px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button>
@@ -740,14 +817,20 @@
 		  <div class="form-group">
 		    <label for="password" class=" col-sm-3 control-label"><a>비밀번호</a></label>
 		    <div class="col-sm-6" >
-		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" oninput="this.value=this.value.replace(' ','');">
+		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
+		    	<div class="" style="">
+				 <div class="pw_ok " id="pw" >8자 이상의 영문/숫자/특수문자 조합</div>
+				 </div>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="password2" class="col-sm-offset-0 col-sm-3 control-label"><a>비밀번호 확인</a></label>
 		    <div class="col-sm-6">
-		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" oninput="this.value=this.value.replace(' ','');">
+		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" oninput="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
+		    <div class="" style="">
+		    <div class="pw2_ok" id="id">동일한 비밀번호를 입력해주세요.</div>
+		    </div>
 		    </div>
 		  </div>
 		  
@@ -837,7 +920,7 @@
              <div class="col-sm-2" style="display:flex; height:48px;">
                 <input type="radio" name="gender"
                    class="form-control form-control" id="gender"
-                   value="없음" style="font-size:10px;" onfocus="this.blur()">
+                   value="없음" style="font-size:10px;" onfocus="this.blur()" checked>
              	<label for="" class="col-sm-1" style="margin-right:40px;">X</label>
              </div>
              

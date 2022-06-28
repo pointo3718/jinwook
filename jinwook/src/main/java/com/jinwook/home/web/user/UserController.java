@@ -23,7 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jinwook.home.service.board.BoardService;
+import com.jinwook.home.service.domain.Board;
 import com.jinwook.home.service.domain.Coupon;
+import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.store.StoreService;
@@ -49,6 +52,10 @@ public class UserController {
    private StoreService storeService;
    
    @Autowired
+   @Qualifier("boardServiceImpl")
+   private BoardService boardService;
+   
+   @Autowired
    private KakaoService kakaoService;
    
    
@@ -69,7 +76,7 @@ public class UserController {
       return "index";
    }
    @GetMapping("addUser")
-   public String addUser(@RequestParam(value="role" ,required = false) String role, Model model) throws Exception{
+   public String addUserView(@RequestParam(value="role" ,required = false) String role, Model model) throws Exception{
    
       System.out.println("/user/addUserView : GET");
       User user = new User();
@@ -96,7 +103,7 @@ public class UserController {
    }
    
    @GetMapping("addUserSelec")
-   public String addUserSelec()throws Exception{
+   public String addUserSelecView()throws Exception{
       System.out.println("zzzzzzzzzzz");
       
       return "/user/addUserSelec";
@@ -169,7 +176,7 @@ public class UserController {
    
    
    @GetMapping("login")
-   public String login(HttpSession session) throws Exception{
+   public String loginView(HttpSession session) throws Exception{
       
       System.out.println("/user/logon : GET");
       User user = (User)session.getAttribute("user");
@@ -316,44 +323,18 @@ public class UserController {
    
    //---------------------------------------
    // 5분동안 유저확인 세션생성 (인증완료 X)
-   @PostMapping("auth")
-   public ResponseEntity<Object> authenticateUser(String username, HttpSession session) {
-       Map<String, Object> authStatus = new HashMap<>();
-       authStatus.put("username", username);
-       authStatus.put("status", false);
-       
-       session.setMaxInactiveInterval(300);
-       session.setAttribute("authStatus", authStatus);
-       return new ResponseEntity<Object>(username, HttpStatus.OK);
-   }
-
-   // 인증번호 보내기 페이지
-   @GetMapping("auth")
-   public String auth(String username, HttpSession session) {
-       Map<String, Object> authStatus = (Map<String, Object>) session.getAttribute("authStatus");
-       if(authStatus == null || !username.equals(authStatus.get("username"))) {
-           return "/user/findPassword";
-       }
-       
-       return "/user/auth";
-   }
-
-   // username의 이메일이 맞는지 확인
-   @GetMapping("emailCheck")
-   public ResponseEntity<Boolean> emailCheck(String username, String email) throws Exception {
-       boolean emailCheck = userService.emailCheck(username, email);
-       return new ResponseEntity<Boolean>(emailCheck, HttpStatus.OK);
-   }
-    
-    
-//   // username의 전화번호가 맞는지 확인
-//   @GetMapping("phoneCheck")
-//   public ResponseEntity<Boolean> phoneCheck(String username, String phone)  throws Exception {
-//       boolean phoneCheck = userService.phoneCheck(username, phone);
-//       return new ResponseEntity<Boolean>(phoneCheck,HttpStatus.OK);
+//   @PostMapping("auth")
+//   public ResponseEntity<Object> authenticateUser(String username, HttpSession session) {
+//       Map<String, Object> authStatus = new HashMap<>();
+//       authStatus.put("username", username);
+//       authStatus.put("status", false);
+//       
+//       session.setMaxInactiveInterval(300);
+//       session.setAttribute("authStatus", authStatus);
+//       return new ResponseEntity<Object>(username, HttpStatus.OK);
 //   }
 
-
+    
    //---------------------------------------
       // 비밀번호 재설정 페이지로 이동
       @GetMapping("updatePasswordView")
@@ -414,7 +395,10 @@ public class UserController {
       @GetMapping("kakaoLogin")
       public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
          System.out.println("#########" + code);
+         String randomNumber1 = String.valueOf((int)((Math.random()* (9999 - 1000 + 1)) + 1000));
+         String randomNumber2 = String.valueOf((int)((Math.random()* (9999 - 1000 + 1)) + 1000));
          
+         String phone ="010"+randomNumber1+randomNumber2; 
          // code를 보내 access_Token 얻기
          String access_Token = kakaoService.getAccessToken(code);
          System.out.println("123123123123123");
@@ -426,6 +410,14 @@ public class UserController {
          user.setNickName("kakao_"+(String)userInfo.get("nickname"));
          user.setEmail((String)userInfo.get("email"));
          user.setRole("사용자");
+         
+//         while(userService.checkPhone(phone)==0) {
+//        	 user.setPhone(phone);
+//         }
+//         if(userService.checkPhone(phone)==0) {
+//        	 
+//        	 user.setPhone(phone);
+//         }
          user.setRegDate(date);
          
          System.out.println(userInfo);
@@ -471,4 +463,21 @@ public class UserController {
 //      return null;
 //   }
    
+    //내가 작성한 글 목록 보기
+    @GetMapping("myArticle")
+   	public String listMyArticle(@RequestParam("userId") String userId, @ModelAttribute("recipe") Recipe recipe, @ModelAttribute("board") Board board, HttpSession session, Model model) throws Exception {
+//   		userId = ((User) session.getAttribute("user")).getUserId();
+   		System.out.println(recipe+"5555555555555555555555555555555555");
+   		System.out.println(board+"66666666666666666666666666");
+   		System.out.println(userId+"dkdkdkdkdldldlzlzlzlfdkdjsdkjfjslkfhkjsdhfkljjasdkfh;ksdjhfklad;jf");
+   		List<Recipe> myRecipe = userService.getMyRecipe(recipe);
+   		System.out.println(myRecipe+"dmldmldmldmldmldmaldasdasdmlamdqowdj");
+   		List<Board> myInquiry = userService.getMyInquiry(board);
+   	     session.setAttribute("userId", userId);
+   	    model.addAttribute("myRecipe", myRecipe);
+   		model.addAttribute("myInquiry", myInquiry);
+
+   		return "/user/myArticle";
+   	} 
+       
 }

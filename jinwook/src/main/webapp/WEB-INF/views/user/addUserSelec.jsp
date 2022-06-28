@@ -155,7 +155,7 @@
 			<input type="hidden" id="useruser">
 			<button type="button" id="role1" class="" name="사용자" value="사용자" aria-hidden="true" style="background-color:white; margin-right:50px; border:none; color:#E6E6E6; font-size:300px;" >
 			<img src="${path}/resources/static/affection.png"></button><br><br>
-			 일반회원 회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <strong>일반회원 회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
 		</div> 
 		<!-- <div class="">
 		  <input type="radio" id="role" name="role" class="d-none" value="사용자">
@@ -166,7 +166,7 @@
 			<button type="button" id="role2" class="" name="사장님" value="사장님" aria-hidden="true" style="background-color:white; padding-left:50px; border-left:1px solid #E6E6E6; font-size:300px; border-top:none; border-right:none; border-bottom:none; 
 			 color:#E6E6E6 
 			"><img src="${path}/resources/static/change.png"></button><br><br>
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사장님 회원가입</div>	
+			 <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사장님 회원가입</strong></div>	
 			 </div>
 			<%--  <img src="${path}/resources/static/ceo.png"
          alt="">	 --%>

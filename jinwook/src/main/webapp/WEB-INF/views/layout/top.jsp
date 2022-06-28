@@ -157,9 +157,9 @@
                                     class="dropdown-item" href="/board/getBoardInquiryList">1:1문의</a>
                                  <a class="dropdown-item"
                                     href="/board/getBoardAnnouncementList">공지사항</a> <a
-                                    class="dropdown-item" href="#">작성한글</a> <a
+                                    class="dropdown-item" href="/user/myArticle?userId=${sessionScope.user.userId }">작성한글</a> <a
                                     class="dropdown-item" href="#"></a> <a class="dropdown-item"
-                                    href="#">로그아웃</a>
+                                    href="/user/logout">로그아웃</a>
                               </div>
                            </div>
                         </c:if>
@@ -191,7 +191,7 @@
                                        href="/store/getStoreWallet?storeNo=10000">지갑</a> <a
                                        class="dropdown-item" href="/board/getBoardInquiryList">1:1
                                        문의</a> <a class="dropdown-item" href="#"></a> <a
-                                       class="dropdown-item" href="#">로그아웃</a>
+                                       class="dropdown-item" href="/user/logout">로그아웃</a>
                                  </div>
 
 
@@ -261,7 +261,7 @@
                            <a href="/user/kakaoLogout">Logout <i
                               class="fa fa-sign-out" aria-hidden="true"></i></a>
                         </c:if>
-                        <c:if test="${sessionScope.user ne null}">
+                        <c:if test="${sessionScope.user ne null && sessionScope.access_Token eq null}">
                            <a href="/user/logout">로그아웃 <i class="fa fa-sign-out"
                               aria-hidden="true"></i></a>
                         </c:if>
