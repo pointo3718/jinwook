@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,12 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jinwook.home.service.board.BoardService;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Jpay;
 import com.jinwook.home.service.domain.Notice;
 import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
+import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
@@ -70,12 +73,19 @@ public class OrdersController {
    
    @PostMapping(value = "addOrders") 
    public String addOrders(@ModelAttribute("orders") Orders orders,@ModelAttribute("cart") Cart cart
-         ,@RequestParam(value="plusTime", required = false)int plusTime,HttpSession session) throws Exception {
+         ,@RequestParam(value="plusTime", required = false)int plusTime,HttpSession session,@RequestParam(value="couponNo",required = false)int couponNo) throws Exception {
       
       System.out.println("/orders/addOrders: POST");
       String userid = ((User) session.getAttribute("user")).getUserId();
+      String role = ((User) session.getAttribute("user")).getRole();
       User user = new User();
+      Coupon coupon = new Coupon();
+      coupon.setUserId(userid);
+      coupon.setCouponNo(couponNo);
+      System.out.println(coupon);
+      ordersService.updateOrdersCoupon(coupon);
       user.setUserId(userid);
+      user.setRole(role);
       cart.setCartStatus(true);
       orders.setCart(cart);
       orders.setUser(user);
@@ -86,14 +96,6 @@ public class OrdersController {
       System.out.println(orders);
       ordersService.addOrders(orders);
     
-//      Product product = new Product();
-//      product.set	
-      
-//      Cart cart = new Cart();
-//      cart.setProduct(product);
-//      
-//      orders.setCart(cart);
-      
       return "redirect:/orders/getOrdersList";
    }	
    
@@ -124,6 +126,7 @@ public class OrdersController {
    @GetMapping(value = "getOrdersList")//리뷰날짜가 null이아닐경우 후기버튼 지움
    public String getOrdersList(@ModelAttribute("orders") Orders orders,HttpSession session,Model model) throws Exception {
      String userid = ((User) session.getAttribute("user")).getUserId();
+     
      User user = new User();
       user.setUserId(userid);
       orders.setUser(user);
@@ -142,11 +145,12 @@ public class OrdersController {
    }
    
    @GetMapping(value = "getOrders")
-   public String getOrders(@RequestParam("orderNo") int orderNo, Model model) throws Exception {
+   public String getOrders(@RequestParam("orderNo") int orderNo, Model model,@ModelAttribute("cart")Cart cart) throws Exception {
       
       System.out.println("/orders/getOrders : GET");
       
       List<Orders> getOrders = ordersService.getOrders(orderNo);
+      System.out.println("후훗"+getOrders);
       
       model.addAttribute("getOrders", getOrders);
       
@@ -160,9 +164,15 @@ public class OrdersController {
       cart.setUserId(userid);
       System.out.println("cart"+cart);
       List<Cart> getCartList = ordersService.getOrdersCartList(cart);
+      System.out.println("getCartList악"+getCartList);
+      for (Cart cart2 : getCartList) {
+			Attach attach = new Attach();
+			attach = ordersService.selectFileList(cart2.getProduct().getProdNo());
+			cart2.setAttach(attach);
+		}
+     
       model.addAttribute("getCartList", getCartList);
-      
-      System.out.println("getCartList"+getCartList);
+      System.out.println("getCartList억"+getCartList);
       return "orders/getOrdersCartList";
    }
    
@@ -233,20 +243,20 @@ public class OrdersController {
       return  "orders/getOrdersJpayList";
    }
    
-   @GetMapping(value ="getOrdersNoticeList")
-   public String getOrdersNoticeList(@ModelAttribute("notice") Notice notice,HttpSession session,Model model) throws Exception {
-      
-      System.out.println("/orders/getOrdersNoticeList : GET");
-      
-      String userid = ((User) session.getAttribute("user")).getUserId();
-      notice.setReceiveId(userid);
-//      ordersService.getOrdersNoticeList(notice);
-      
-      List<Notice> noticeList = ordersService.getOrdersNoticeList(notice);
-      model.addAttribute("noticeList", noticeList);
-      
-      return "orders/getOrdersNoticeList";
-   }
+//   @GetMapping(value ="getOrdersNoticeList")
+//   public String getOrdersNoticeList(@ModelAttribute("notice") Notice notice,HttpSession session,Model model) throws Exception {
+//      
+//      System.out.println("/orders/getOrdersNoticeList : GET");
+//      
+//      String userid = ((User) session.getAttribute("user")).getUserId();
+//      notice.setReceiveId(userid);
+////      ordersService.getOrdersNoticeList(notice);
+//      
+//      List<Notice> noticeList = ordersService.getOrdersNoticeList(notice);
+//      model.addAttribute("noticeList", noticeList);
+//      
+//      return "orders/getOrdersNoticeList";
+//   }
    
    @GetMapping(value="getOrdersJpayChargeList")
    public String getOrdersJpayChargeList() throws Exception{
@@ -256,12 +266,12 @@ public class OrdersController {
 	return "orders/getOrdersJpayChargeList";
    }
    
-   @GetMapping(value="addOrdersJpayPasswordCk")
-   public String addOrdersJpayPasswordCk() throws Exception {
-	   
-	   System.out.println("/orders/addOrdersJpayPasswordCk : GET");
-	   
-       return "orders/addOrdersJpayPasswordCk";
-   }
+//   @GetMapping(value="addOrdersJpayPasswordCk")
+//   public String addOrdersJpayPasswordCk() throws Exception {
+//	   
+//	   System.out.println("/orders/addOrdersJpayPasswordCk : GET");
+//	   
+//       return "orders/addOrdersJpayPasswordCk";
+//   }
 
 }

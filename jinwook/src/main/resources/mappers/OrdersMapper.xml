@@ -96,11 +96,13 @@
    </delete>
    
    <select id="getOrders" parameterType="int" resultMap="ordersSelectMap" >
-      SELECT o.user_id,o.order_no,p.prod_name,o.prod_count,p.price,p.prod_info,s.store_name,o.order_date,o.order_price,o.buyer_name,o.buyer_phone,o.order_req,o.pickup_time,o.order_status,p.prod_img
-      FROM orders o, product p, store s
-      WHERE o.store_no = p.store_no
-      AND o.store_no = s.store_no
-      AND order_no = #{orderNo}
+      SELECT o.user_id,o.order_no,p.prod_name,c.prod_count,p.price,p.prod_info,c.store_name,o.order_date,o.order_price,o.buyer_name,o.buyer_phone,o.order_req,o.pickup_time,o.order_status
+      FROM orders o, product p,cart c
+      WHERE o.store_no = c.store_no
+      AND c.store_no = p.store_no
+      AND o.order_no = c.order_no
+      AND p.prod_no = c.prod_no
+      AND c.order_no = #{orderNo}
    </select>
       
    <select id="getOrdersList" parameterType="orders" resultMap="ordersSelectMap">
@@ -108,7 +110,8 @@
       FROM orders o ,product p 
       WHERE o.store_no = p.store_no
       AND o.user_id = #{user.userId}
-      GROUP BY order_no
+      GROUP BY order_no 
+      ORDER BY order_no DESC
       LIMIT
          #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
    </select>
@@ -165,7 +168,7 @@
    </delete>
    
    <select id="getOrdersCartList" parameterType="cart" resultMap="cartSelectMap">
-   SELECT c.store_no,c.store_name,p.prod_img,p.prod_name,p.prod_info,c.prod_count,p.price,o.order_price,c.cart_no
+   SELECT c.store_no,c.store_name,p.prod_no,p.prod_img,p.prod_name,p.prod_info,c.prod_count,p.price,o.order_price,c.cart_no
       FROM cart c , product p , orders o
       WHERE c.prod_no = p.prod_no
         AND   c.user_id = o.user_id
@@ -309,7 +312,7 @@
    	
    </select>
    
-   <update id="updateOrdersCoupon">
+   <update id="updateOrdersCoupon" parameterType="int">
       UPDATE coupon c , orders o
       <set>
          c.coupon_status= 1 
@@ -318,6 +321,20 @@
       AND c.user_id = #{userId}
       AND c.coupon_no = #{couponNo}
    </update>
+   
+    <!-- 상품 첨부파일 조회 -->
+    <select id="selectFileList" parameterType="int" resultType="attach">
+		SELECT 
+			attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
+	  	FROM 
+	  		attach
+	  	WHERE 
+	  		prod_no = #{prodNo}
+	   		AND 
+	   		del_gb = 'N'
+	   	ORDER BY 
+	   		attach_no ASC
+	</select>
 </mapper>
    
    

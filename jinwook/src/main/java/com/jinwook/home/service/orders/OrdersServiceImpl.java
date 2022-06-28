@@ -2,6 +2,7 @@ package com.jinwook.home.service.orders;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.OrdersMapper;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Jpay;
@@ -37,8 +39,6 @@ public class OrdersServiceImpl implements OrdersService{
 		cart.setOrders(newOrders);
 		cart.setUserId(userId);
 		Coupon coupon = new Coupon();
-		coupon.setUserId(userId);
-		coupon.getCouponNo();
 		System.out.println(coupon);
 		ordersMapper.updateOrdersCoupon(coupon);
 		System.out.println(cart);
@@ -224,5 +224,11 @@ public class OrdersServiceImpl implements OrdersService{
 		return ordersMapper.updateOrdersCoupon(coupon);
 	}
 
+	// 첨부파일 조회
+		@Override
+		public Attach selectFileList(int prodNo) throws Exception {
+			// TODO Auto-generated method stub
+			return ordersMapper.selectFileList(prodNo);
+		}
 
 }

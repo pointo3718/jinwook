@@ -5,28 +5,20 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Jpay;
-import com.jinwook.home.service.domain.Notice;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
-import com.jinwook.home.service.store.StoreService;
 import com.jinwook.home.service.user.UserService;
 
 @RestController
@@ -114,15 +106,15 @@ public class OrdersRestController {
 		return result;
 	}
 	
-	@PostMapping(value = "deleteOrdersCartAll")
-	public int deleteOrdersCartAll(@RequestParam("cartStatus") boolean cartStatus)  throws Exception {
-		
-		System.out.println("/orders/deleteOrdersCartAll : POST");
-		
-		int result = ordersService.deleteOrdersCartAll(false);
-		
-		return result;
-	}
+//	@PostMapping(value = "deleteOrdersCartAll")
+//	public int deleteOrdersCartAll(@RequestParam("cartStatus") boolean cartStatus)  throws Exception {
+//		
+//		System.out.println("/orders/deleteOrdersCartAll : POST");
+//		
+//		int result = ordersService.deleteOrdersCartAll(false);
+//		
+//		return result;
+//	}
 	
 	@PostMapping(value = "addOrdersjBCharge")
 	public int addOrdersjBCharge(@ModelAttribute("jpay") Jpay jpay) throws Exception {
@@ -154,25 +146,25 @@ public class OrdersRestController {
 		return result;
 	}
 	
-	@PostMapping(value = "addOrdersNotice") 
-	public int addOrdersNotice(@ModelAttribute("notice") Notice notice) throws Exception {
-		
-		System.out.println("/orders/addOrdersNotice : POST");
-		
-		int result = ordersService.addOrdersNotice(notice);
-		
-		return result;
-	}
-	
-	@PostMapping(value = "deleteOrdersNotice") 
-	public String deleteOrdersNotice(@RequestParam("notiNo") int notiNo) throws Exception {
-		
-		System.out.println("/orders/deleteOrdersNotice : POST");
-		
-		ordersService.deleteOrdersNotice(notiNo);
-
-		return "orders/getOrdersNoticelist";
-	}
+//	@PostMapping(value = "addOrdersNotice") 
+//	public int addOrdersNotice(@ModelAttribute("notice") Notice notice) throws Exception {
+//		
+//		System.out.println("/orders/addOrdersNotice : POST");
+//		
+//		int result = ordersService.addOrdersNotice(notice);
+//		
+//		return result;
+//	}
+//	
+//	@PostMapping(value = "deleteOrdersNotice") 
+//	public String deleteOrdersNotice(@RequestParam("notiNo") int notiNo) throws Exception {
+//		
+//		System.out.println("/orders/deleteOrdersNotice : POST");
+//		
+//		ordersService.deleteOrdersNotice(notiNo);
+//
+//		return "orders/getOrdersNoticelist";
+//	}
 	
 	@PostMapping(value="checkJpPassword")
 	public int checkJpPassword(@ModelAttribute("user") User user,HttpSession session) throws Exception {
@@ -189,23 +181,8 @@ public class OrdersRestController {
 		
 		
 		int result = ordersService.checkJpPassword(user);
-//		int nes = Integer.parseInt(jpPw);
 		System.out.println(result+"야야얍");
 		return result;
-		
-//		if(result == 1) {
-//			String jpPassword = user.getJpPassword();
-//			String[] jpPass = jpPassword.split(",");
-//			String jpPw = String.join("", jpPass);
-//			
-//			int nes = Integer.parseInt(jpPw);
-//			System.out.println(nes);
-//			return nes;
-//		}
-//		for(int i=0 ; i<user.getJpPassword().length() ; i++) {
-//			
-//		}
-//		user.getJpPassword().replace(0, 0);
 		
 	}
 	

@@ -39,68 +39,11 @@
    justify-content: center;
    align-items: center;
 }
+
+
 </style>
 
-<!-- Humberger Begin -->
-<div class="humberger__menu__overlay"></div>
-<div class="humberger__menu__wrapper">
-   <div class="humberger__menu__logo">
-      <a href="#"><img src="${path}/resources/static/img/logo.png"
-         alt=""></a>
-   </div>
-   <div class="humberger__menu__cart">
-      <ul>
-         <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-         <li><a href="/orders/getOrdersCartList"><i
-               class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-      </ul>
-      <div class="header__cart__price">
-         item: <span>$150.00</span>
-      </div>
-   </div>
-   <div class="humberger__menu__widget">
-      <div class="header__top__right__language">
-         <img src="${path}/resources/static/img/language.png" alt="">
-         <div>English</div>
-         <span class="arrow_carrot-down"></span>
-         <ul>
-            <li><a href="#">Spanis</a></li>
-            <li><a href="#">English</a></li>
-         </ul>
-      </div>
-      <div class="header__top__right__auth">
-         <a href="/user/login"><i class="fa fa-user"></i> Login</a>
-      </div>
-   </div>
-   <nav class="humberger__menu__nav mobile-menu">
-      <ul>
-         <li class="active"><a href="./index.html">Home</a></li>
-         <li><a href="./shop-grid.html">Shop</a></li>
-         <li><a href="#">Pages</a>
-            <ul class="header__menu__dropdown">
-               <li><a href="./shop-details.html">Shop Details</a></li>
-               <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-               <li><a href="./checkout.html">Check Out</a></li>
-               <li><a href="./blog-details.html">Blog Details</a></li>
-            </ul></li>
-         <li><a href="/admin/blog">마이페이지</a></li>
-         <li><a href="./contact.html">Contact</a></li>
-      </ul>
-   </nav>
-   <div id="mobile-menu-wrap"></div>
-   <div class="header__top__right__social">
-      <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-         class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a>
-      <a href="#"><i class="fa fa-pinterest-p"></i></a>
-   </div>
-   <div class="humberger__menu__contact">
-      <ul>
-         <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-         <li>Free Shipping for all Order of $99</li>
-      </ul>
-   </div>
-</div>
-<!-- Humberger End -->
+
 
 <!-- Header Section Begin -->
 <header class="header">
@@ -152,7 +95,7 @@
                                  ${sessionScope.user.nickName } 님</a>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                  <a class="dropdown-item" href="/orders/getOrdersList">마이페이지</a> <a
-                                    class="dropdown-item" href="/orders/getOrdersList">구매내역</a>
+                                    class="dropdown-item" href="/orders/getOrdersList">주문내역</a>
                                  <a class="dropdown-item" href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보</a> <a
                                     class="dropdown-item" href="/board/getBoardInquiryList">1:1문의</a>
                                  <a class="dropdown-item"
@@ -179,7 +122,7 @@
                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item"
                                        href="/store/addStoreProduct?storeNo=10000">사장님페이지</a> <a
-                                       class="dropdown-item" href="#">주문내역</a> <a
+                                       class="dropdown-item" href="/orders/getOrdersList">주문내역</a> <a
                                        class="dropdown-item"
                                        href="/store/updateStore?storeNo=10000">상점정보수정</a> <a
                                        class="dropdown-item" href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보수정</a> <a
@@ -310,52 +253,46 @@
                   </ul>
                </div>
             </div>
-            <div class="col-lg-5" style="top: 10px;">
+            <div class="col-lg-7" style="top: 10px;">
                <nav class="header__menu"
                   style="padding-top: 0px; padding-bottom: 15px; position: sticky;">
                   <ul style="margin-left: 60px;">
-
-                     <li><a href="/store/getStore?storeNo=10000"><span
-                           style="font-size: 18px;">Shop</span></a></li>
-                     <li><a href="/board/getRecipeList"><span
-                           style="font-size: 18px;">레시피</span></a>
-                        <ul class="header__menu__dropdown">
+                     <li><a href="/board/getRecipeList" ><span
+                           style="font-size: 18px;"> #레시피</span></a></li>
+                     <li><a class="scroll_move" href="#scroll1"><span
+                           style="font-size: 18px;"> #구경하기</span></a>
+                        <!-- <ul class="header__menu__dropdown">
                            <li><a href="/store/addStoreProduct?storeNo=10000">Shop
                                  Details</a></li>
                            <li><a href="./shoping-cart.html">Shoping Cart</a></li>
                            <li><a href="./checkout.html">Check Out</a></li>
                            <li><a href="./blog-details.html">Blog Details</a></li>
-                        </ul></li>
-                     <li><a href="/admin/blog"><span style="font-size: 18px;">랭킹</span></a></li>
-                     <li><a href="./contact.html"><span
-                           style="font-size: 18px;">이벤트</span></a></li>
+                        </ul> --></li>
+                     <li><a class="scroll_move" href="#scroll2"><span style="font-size: 18px;"> #화제의 레시피</span></a></li>
+                     <li><a class="scroll_move" href="#scroll3"><span
+                           style="font-size: 18px;"> #광고</span></a></li>
                   </ul>
                </nav>
             </div>
 
-            <div class="col-lg-2">
-
-               <div class="hero__search" style="width: 200px;">
-                  <div class="hero__search__form" style="width: 232px; bottom: 5px">
-                     <form action="#" style="width: 230px; font-size: small;">
-
-                        <input type="text"
-                           style="font-size: x-small; padding-left: 10px;"
-                           placeholder="재료를 검색해보세요!">
-                        <button type="submit" class="site-btn"
-                           style="width: 80px; font-size: x-small; left: 120px;">검색</button>
-                     </form>
-                  </div>
-               </div>
-            </div>
-
-            <div class="col-lg-2" style="bottom: 15px; right: 15px;">
+            <div class="col-lg-2" style="bottom: 15px; right: 50px;">
                <div class="header__cart"
                   style="padding-bottom: 0px; margin-top: 10px">
                   <ul>
-                     <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>&nbsp;&nbsp;
-                     <li><a href="/orders/getOrdersCartList"><i
-                           class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                  	 
+                     <li><a href="#" style="top: 1px;"><i style="font-size: 25px;" class="fa fa-heart"></i> 
+                     <c:if test="${sessionScope.user ne null}">
+                     <span class="countorders" style="width: 16px; height: 16px;"></span>
+                     </c:if>
+                     </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                     
+                     
+                     
+                     <li><a href="/orders/getOrdersCartList"><i style="font-size: 25px;" class="fa fa-shopping-bag"></i> 
+                     <c:if test="${sessionScope.user ne null and sessionScope.user.role eq '사용자'}">
+                     <span class="countCart" style="width: 16px; height: 16px;"></span>
+                     </c:if>
+                     </a></li>
                   </ul>
                </div>
             </div>
@@ -400,7 +337,60 @@
 
          }   
    
-   
 */   
+
+
+
+////////////////주문내역 카운트 REST 시작   /////////////////
+
+	$(function() {
+	countOrders();
+	});
+	
+	function countOrders() {
+	
+	var uri = "../admin/countOrders";
+	
+	$.get(uri, function(response) {
+	
+	
+	$(".countorders").text(`\${response.countOrders}`);
+	
+	}, "json");
+	}
+
+////////////////주문내역 카운트 REST 끝   /////////////////
+
+
+////////////////장바구니 카운트 REST 시작   ////////////////
+
+	$(function() {
+	countCart();
+	});
+	
+	function countCart() {
+	
+	var uri = "../admin/countCart";
+	
+	$.get(uri, function(response) {
+	
+	
+	$(".countCart").text(`\${response.countCart}`);
+	
+	}, "json");
+	}
+	
+////////////////장바구니 카운트 REST 끝   /////////////////
+
+//////////////// 스크롤 이동   /////////////////
+$(document).ready(function($) {
+            $(".scroll_move").click(function(event){
+                console.log(".scroll_move");         
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+            });
+
+        }); 
+
       
    </script>
