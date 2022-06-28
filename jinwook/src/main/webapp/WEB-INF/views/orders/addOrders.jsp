@@ -58,7 +58,7 @@
 	const phone=$("input[name='buyerPhone']").val();
 	const pick=$("input[name='plusTime']").val();
 	const storeNo=$("input[name='storeNo']").val();
-	
+	const couponNo=$("#couponNo").val();
 	if(name == null || name.length <1){
 		swal("진욱이네","이름은 반드시 입력하셔야 합니다.","error");
 			name.focus();
@@ -156,36 +156,44 @@
                             </div>
                             <div class="checkout__input">
                                 <p>쿠폰<span></span></p>
-                                <select size="10" name="couponType" id="couponType" style="color: black;" data-coupon="${coupon.couponDc}" onchange="selectBoxChange(this);"> 
+                                <select size="10" name="couponType" id="couponType" style="color: black;" data-coupon="${coupon.couponDc}" name="couponNo"onchange="selectBoxChange(this);"> 
                                 <option id="chargeType" selected>할인쿠폰을 선택하세요</option>
+                                	<c:if test="${couponList != null}">
 	                                    <c:forEach var="coupon" items="${couponList}">
                                     	<option value="${coupon.couponType}">
                                     	<c:if test="${coupon.couponType == '1'}">
+                                    	<c:set var="cpNo" value="${coupon.couponNo}"/>
                                     	<c:set var="cpDc" value="${coupon.couponDc}"/>
                                     		고객님의 회원가입을 축하합니다.(회원가입 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
-                                    		<input type=hidden value="${coupon.couponNo}">
+                                    		<%-- <input type=hidden value="${coupon.couponNo}"> --%>
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '2'}">
+                                    	<c:set var="cpNo" value="${coupon.couponNo}"/>
                                     	<c:set var="cpDc" value="${coupon.couponDc}"/>
                                     		고객님의 첫구매를 축하합니다.(첫구매 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
-                                    		<input type=hidden value="${coupon.couponNo}">
+                                    		<%-- <input type=hidden value="${coupon.couponNo}"> --%>
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '3'}">
+                                    	<c:set var="cpNo" value="${coupon.couponNo}"/>
                                     	<c:set var="cpDc" value="${coupon.couponDc}"/>
                                     		고객님의 생일을 축하합니다.(생일축하 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
-                                    		<input type=hidden value="${coupon.couponNo}">
+                                    		<%-- <input type=hidden value="${coupon.couponNo}"> --%>
                                     	</c:if>
                                     	<c:if test="${coupon.couponType == '4'}">
+                                    	<c:set var="cpNo" value="${coupon.couponNo}"/>
                                     	<c:set var="cpDc" value="${coupon.couponDc}"/>
                                     		고객님께 소중한 쿠폰 배달왔습니다.(추천인 쿠폰 <fmt:formatNumber value="${coupon.couponDc*100}" />%할인)
-                                    		<input type=hidden value="${coupon.couponNo}">
+                                    		<%-- <input type=hidden value="${coupon.couponNo}"> --%>
                                     	</c:if>
                                     	</option>
                                     </c:forEach>
+                                   </c:if>
                                 </select>
+                                <input type="hidden" id="couponNo" name="couponNo" value="${cpNo}">
                              	<script>
                              	/* var selectBoxChange = function(value){ */
                              	 function selectBoxChange(e){
+                             	
 									const va = e.value
 									let finpr = $(e).parent().parent().parent().find("input[name='finalPrice2']").val();
 									const ffinalprice =
@@ -220,14 +228,15 @@
                                 <h4>고객님 주문리스트</h4>
                                 <div class="row">
                                 <div class="checkout__order__products col-sm-4" style="text-align: left;">상 품</div>
-                                <div class="checkout__order__products col-sm-4" style="text-align: center;">수 량</div>
+                                <div class="checkout__order__products col-sm-4" style="text-align: center; ">수 량</div>
                                 <div class="checkout__order__products col-sm-4" style="text-align: right;">총 액</div> 
                                 <ul>
                                 <c:forEach var="cart" items="${getCartList}">
                                 	<input type=hidden id="storeNo" name="storeNo" value="${cart.storeNo}">
                                     <div class="col-sm-4" style="text-align: left; font-size:18px; width: 180px;">${cart.product.prodName}</div>
                                     <div class="col-sm" hidden="price" value="${cart.product.price}"></div>
-                                    <div class="col-sm-4" style="text-align: center; font-size:18px;">${cart.prodCount}</div>
+                                    <div class="col-sm-4" style="text-align: center; font-size:18px;" >${cart.prodCount}</div>
+                                    <input type="hidden" value="${cart.prodCount}" name="cart.prodCount">
                                     <div class="col-sm-4" style="text-align: right; font-size:18px;">${cart.product.price*cart.prodCount}원</div>
                                 	<c:set var="total" value="${total + (cart.product.price*cart.prodCount) }" />
                                 </c:forEach>

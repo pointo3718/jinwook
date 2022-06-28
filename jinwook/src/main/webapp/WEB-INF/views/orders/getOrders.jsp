@@ -296,47 +296,111 @@ $('#myModal').on('shown.bs.modal', function () {
 
                </div>
             </div>
-
+			 
+				
                        <!-- List Table Start -->
             <div>
-            	<div>
-					<div>
-						<strong class="text-left col-sm-8">주문내역 상세</strong>
-						<p class="text-muted" style="display: inline; font-size: 12px;">
-						주문내역 상세를 조회할 수 있습니다
-						</p>
+            <c:forEach var="orders" items="${getOrders}" begin="0" end="0">
+            	<div class="top1" style="font-size:18px;">
+					<div style="float: left;">
+						<strong class="text-left">주문내역 상세</strong>
 					</div>	
-					<div class="text-right" style="text-align: right;">                 
-						<strong class="text-right col-sm-4" style="text-align: right; align-items: right;">진욱이네</strong>
- 					</div>	           	
+					<div class="text-right" style="float: right;">
+					
+					
+						<strong class="text-right" style="text-align: right; align-items: right;">${orders.store.storeName}</strong>
+						
+ 					</div>
+ 					<br>           	
             	</div>
-
-				<table class="table table-hover" style="width: 730px; heigh: 300px; font-size: small;">
+            	<div class="top2">
+					<div style="float:left;"><strong>주문번호 : ${orders.orderNo}</strong></div>            	
+            		<div style="float:right;"><strong>${orders.orderDate}(<fmt:formatDate value="${orders.pickupTime}" type="time" timeStyle="short"/>)</strong></div>
+            	</div>
+				</c:forEach>
+				<table class="table table-hover" style="width: 730px; heigh: 300px; font-size: small; ">
 					<thead>
 						<tr>
-							<th align="left">상품사진</th>
 					        <th align="left">상품이름</th>
 						    <th align="left">상품가격</th>
-						    <th align="left">상품갯수</th>
+						    <th align="left">상품수량</th>
 						    <th align="left">상품설명</th>
+						    <th align="left">총액</th>
 						</tr>
 					</thead>	
 			        
 					<tbody>
-						<c:forEach var="orders" items="${getOrdersList}">
+						<c:forEach var="orders" items="${getOrders}">
 							<tr>
-								<td align="left">${orders.product.prodImg}</td>
 								<td align="left">${orders.product.prodName}</td>
 								<td align="left">${orders.product.price}</td>
-								<td align="left">${orders.cart.prodCount}</td>
+								<td align="left">${orders.prodCount}</td>
 								<td align="left">${orders.product.prodInfo}</td>
+								<td align="left">${orders.product.price*orders.prodCount}</td>
 				        	</tr>
 						</c:forEach>    
 					</tbody>
 				</table>
 				<hr>
 				<div>
-				
+				<c:forEach var="orders" items="${getOrders}" begin="0" end="0">
+					<div>
+						<div class="buyer col-sm-4" style="float:left;"><strong style="font-size:18px;">구매자 정보</strong>
+							<div style="font-size:14px;">구매자 이름 : ${orders.buyerName}</div>
+							<div style="font-size:14px;">구매자 전화번호 : ${orders.buyerPhone}</div>
+							<div style="font-size:14px;">요청사항 : ${orders.orderReq}</div>
+							<div style="font-size:14px;">픽업시간 : <fmt:formatDate value="${orders.pickupTime}" type="time" timeStyle="short"/></div>						
+						</div>
+						<%--  <c:if test="${role==사용자}"> --%>
+						<div class="buyer col-sm-2" style="float:left; font-size:15Spx;">
+						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주문 금액<div class="text-center">${orders.orderPrice}</div>
+						</div>
+						<div class="buyer col-sm-2" style="float:left; font-size:15px;">
+						<br>쿠폰할인 금액<div>${orders.coupon.couponType}</div>
+						</div>
+						<div class="buyer col-sm-2" style="float:left; font-size:15px;">
+						<br>회원등급 할인<div value="${user.grade}"></div>
+							                               	<c:choose>
+										<c:when test="${user.grade=='프랜즈'}">
+											<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${orders.orderPrice*0.01}"/>${total}원</td>
+											<input type="hidden" value=${"total"}>
+										</c:when>
+									    <c:when test="${user.grade=='패밀리'}">
+											<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${orders.orderPrice*0.03}"/>${total}원</td>
+									    	<input type="hidden" value=${"total"}>
+									    </c:when>
+									    <c:when test="${user.grade=='퍼스트'}">
+									    	<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${orders.orderPrice*0.05}"/>${total}원</td>
+									    	<input type="hidden" value=${"total"}>
+									    </c:when>
+										<c:when test="${user.grade=='일반'}">
+								    	<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${orders.orderPrice*0}"/>${total}원</td>
+									    	<input type="hidden" value=${"total"}>
+									    </c:when>
+								     </c:choose>
+						</div>
+						<div class="buyer col-sm-2" style="float:left; font-size:15px;">
+						<br>결제금액<div value="${orders.finalPrice }">${orders.orderPrice-total}</div>
+						</div>
+						<%-- </c:if> --%>
+						<%--  <c:if test="${rola==사장님}">
+						<div class="buyer col-sm-2" style="float:left; font-size:15Spx;">
+						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주문 금액<div class="text-center">${orders.orderPrice}</div>
+						</div>
+						<div class="buyer col-sm-3 text-right" style="float:left; font-size:15px; ">
+						<br>
+							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 90px; height: 50px; font-size:17px;">주문수락</button>
+						</div>
+						<div class="buyer col-sm-3" style="float:left; font-size:15px;">
+						<br>
+							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 90px; height: 50px; font-size:17px;">주문거절</button>
+						</div>
+						
+						</c:if>  --%>    
+
+    
+					</div>
+				</c:forEach>
 				</div>
 			</div>
 		</div>
