@@ -97,7 +97,7 @@ $(function() {
 });
 
 $(function() {
-	$("a[href='#' ]").on("click", function() {
+	$("#cancel").on("click", function() {
 		$("form")[0].reset();
 	});
 });
@@ -192,9 +192,8 @@ function fn_addFile() {
   </div>
   <div class="form-group">
 	<div class="col-sm-offset-4  col-sm-4 text-center">
-		<button type="submit" class="btn btn-success"
-								>등 &nbsp;록</button>
-		<a class="btn btn-primary btn" href="#" role="button">취소</a>
+		<button type="submit" class="btn btn-success" style="text-align:center;">등 &nbsp;록</button>
+		<!-- <input type="button" class="btn btn-danger" id="cancel" value="취소"/> -->
 						</div>
 					</div>
 				</div>

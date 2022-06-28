@@ -10,6 +10,8 @@
 
 <html lang="ko">
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={e53eaf4dd896374cd449da869e2ddcdc}"></script>
 
 <title>ceoTop</title>
@@ -183,8 +185,6 @@ document.detailForm.submit();
          const btnElement = document.getElementById('open');
          var open = true
 
-         alert(open)
-
          console.log(open);
          var storeNo = $("#open").data("value");
 
@@ -194,7 +194,8 @@ document.detailForm.submit();
             method : "post",
             success : function(result) {
                if (result != null) {
-                  alert("상점이 오픈되었습니다.");
+                  swal("상점이 오픈되었습니다.");
+					$( "#point" ).load(window.location.href + " #point" );
                }
             }
 
@@ -211,8 +212,6 @@ document.detailForm.submit();
          const btnElement = document.getElementById('close');
          var open = false
 
-         alert(open)
-
          console.log(open);
          var storeNo = $("#close").data("value");
 
@@ -222,7 +221,8 @@ document.detailForm.submit();
             method : "post",
             success : function(result) {
                if (result != null) {
-                  alert("상점이 마감되었습니다.");
+                   swal("상점이 마감되었습니다.");
+					$( "#point" ).load(window.location.href + " #point" );
                }
             }
 
@@ -533,7 +533,7 @@ document.detailForm.submit();
                <thead>
                   <tr>
 
-                     <th scope="col"><span style="font-size: 20px;">진욱페이&nbsp;<i
+                     <th scope="col"><span style="font-size: 20px;"><a href="/store/getStoreWallet?storeNo=10000" style="color:black">진욱페이&nbsp;<i
                            class="fa fa-chevron-right" aria-hidden="true"></i></span></th>
 
                   </tr>
@@ -575,7 +575,7 @@ document.detailForm.submit();
          <c:if test="${user.storeYn==true}">
               <c:forEach var="store" items="${storeInfo}">
                   <c:if test="${store.storeStatus=='2'}">
-
+					<div id="point" name="point" class="point">
                      <table class="table table-borderless"
                         style="background-color: white; width: 350px; height: 197px; justify-content: space-around table-layout:fixed">
                         <thead>
@@ -583,7 +583,7 @@ document.detailForm.submit();
 
 
                               <th scope="col" style="width: 124px;"><span
-                                 style="font-size: 20px;">${store.storeName}&nbsp;<i
+                                 style="font-size: 20px;"><a href="/store/getStore?storeNo=10000" style="color:black;">${store.storeName}&nbsp;<i
                                     class="fa fa-chevron-right" aria-hidden="true"></i></span></th>
 
                               <th scope="col"
@@ -625,6 +625,7 @@ document.detailForm.submit();
 
                         </tbody>
                      </table>
+                     </div>
 
                   </c:if>
 

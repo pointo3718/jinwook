@@ -2,6 +2,8 @@ package com.jinwook.home.web.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.admin.AdminService;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Chart;
 import com.jinwook.home.service.domain.Complain;
+import com.jinwook.home.service.domain.Recipe;
+import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.request.RequestService;
 
@@ -48,7 +53,7 @@ public class AdminRestController {
    }
    
    
-	///////////////// 일반 유저 목록 //////////////////
+	///////////////// 일반 유저목록 //////////////////
    @GetMapping( value="/listUserAdmin" )
    @ResponseBody
    public JsonObject listUserAdmin(@ModelAttribute("user") User user) throws Exception{
@@ -328,6 +333,93 @@ public class AdminRestController {
 	
 	   return jsonObj;
 	}
+	
+	
+	///////////////// 레시피 추천수 순 목록 //////////////////
+	   @GetMapping( value="/getRecipeHits" )
+	   @ResponseBody
+	   public JsonObject getRecipeHits(@ModelAttribute("recipe") Recipe recipe) throws Exception{
+	      
+	      System.out.println("/admin/getRecipeHits : GET ");
+	  
+	      JsonObject jsonObj = new JsonObject();
+	      
+	      List<Recipe> recipelist = adminService.getRecipeHits();
+	      
+		  	for (Recipe recipe2 : recipelist) {
+				int i=0;
+				Attach attach = new Attach();
+				attach = adminService.selectRcpAttachList(recipe2.getRcpNo());
+				recipe2.setAttach(attach);
+				recipelist.get(i).setAttach(attach);
+				i++;
+			}
+	      
+	      
+	      if (CollectionUtils.isEmpty(recipelist) == false) {
+	         JsonArray jsonArr = new Gson().toJsonTree(recipelist).getAsJsonArray();
+	         jsonObj.add("recipelist", jsonArr);
+	      	      }
+
+	      return jsonObj;
+	   }
+	   
+	   
+		//////////////// 주문내역 카운트 (사용자/사장님) ////////////////
+		@GetMapping( value={"/countOrders"} )
+		public JsonObject countOrders(HttpSession session)throws Exception{
+		
+		User user = ((User) session.getAttribute("user"));
+		
+		System.out.println("USER ::" +user);
+
+		
+		JsonObject jsonObj = new JsonObject();
+		
+		try { 	
+			int countOrders= adminService.countOrders(user);
+			System.out.println("USER ::" +user);
+
+			jsonObj.addProperty("countOrders", countOrders);
+		
+			} catch (DataAccessException e) {
+				jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+		
+			} catch (Exception e) {
+				jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+			}
+			
+		 System.out.println("문의대기 개수 컨트롤러 통과");
+		 
+			return jsonObj;
+		}
+		
+		//////////////// 장바구니 카운트 (사용자/사장님) ////////////////
+		@GetMapping( value={"/countCart"} )
+		public JsonObject countCart(HttpSession session)throws Exception{
+		
+		User user = ((User) session.getAttribute("user"));
+				
+		JsonObject jsonObj = new JsonObject();
+		
+		try { 	
+			int countCart= adminService.countCart(user);
+			System.out.println("USER ::" +user);
+
+			jsonObj.addProperty("countCart", countCart);
+		
+			} catch (DataAccessException e) {
+				jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+		
+			} catch (Exception e) {
+				jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+			}
+			
+		 System.out.println("문의대기 개수 컨트롤러 통과");
+		 
+			return jsonObj;
+		}
 }
+
 
    

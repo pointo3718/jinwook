@@ -17,7 +17,7 @@ import com.jinwook.home.service.domain.User;
 
 public interface BoardService {
 	
-	//상점후기정보 불러오기
+	//상점후기정보 불러오기xxx
 	public Orders getReviewInfo(int orderNo);
 	public int enrollReview(Orders orders);
 	
@@ -27,86 +27,100 @@ public interface BoardService {
 	public int updateBoardInquiryHits(Integer boardNo);
 	//공지사항 조회수 증가v
 	public int updateBoardAnnouncementHits(Integer boardNo);
-	//1:1문의 답변완료로 변경
+	//1:1문의 답변완료로 변경v
 	public boolean updateBoardInqStatus(int boardNo);
 	
-	// 게시판 첨부파일 조회
+	// 게시판 첨부파일 조회v
 	public Attach selectBoardAttachList(int boardNo) throws Exception;
-	// 레시피 첨부파일 조회
+	// 레시피 첨부파일 조회v
 	public Attach selectRecipeAttachList(int rcpNo) throws Exception;
-	// 게시판 첨부파일 다운
+	
+	// 게시판 첨부파일 다운xxx
 	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
+	
 	//1:1문의 등록v
 	public void addBoardInquiry(Board board, MultipartHttpServletRequest mpRequest) throws Exception;
 	//공지사항 등록v
 	public void addBoardAnnouncement(Board board, MultipartHttpServletRequest mpRequest) throws Exception;
+	//레시피 등록v
+	public void addRecipe(Recipe rcp, MultipartHttpServletRequest mpRequest) throws Exception;
+	
 	//1:1문의 수정v
 	public void updateBoardInquiry(Board board) throws Exception;
 	//공지사항 수정v
 	public int updateBoardAnnouncement(Board board);
+	//레시피 수정v
+	public void updateRecipe(Recipe rcp);
+	
 	//1:1문의 삭제v
 	public int deleteBoardInquiry(Integer boardNo);
 	//공지사항 삭제v
 	public int deleteBoardAnnouncement(Integer boardNo);
+	//레시피 삭제v
+	public int deleteRecipe(Integer rcpNo);
+	
 	//1:1문의 상세 조회v
 	public Board getBoardInquiry(Integer boardNo);
 	//공지사항 상세 조회v
 	public Board getBoardAnnouncement(Integer boardNo);
+	//레시피 상세 조회v
+	public Recipe getRecipe(Integer rcpNo);
+	
 	//1:1문의 목록 조회v
 	public List<Board> getBoardInquiryList(Board board);
 	//공지사항 목록 조회v
 	public List<Board> getBoardAnnouncementList(Board board);
+	//레시피 목록 조회v
+	public List<Recipe> getRecipeList(Recipe rcp);
 	
-	//랭킹 리스트 조회?
+	//랭킹 리스트 조회?xxx
 	public List<Board> getRankList(Board board);
 
 	//상점후기 등록v, 삭제v, 목록v
 //	public void addReview(Orders orders) throws Exception;
-	//상점후기 등록
+	
+	//상점후기 등록v
 	public void updateReview(Orders orders);
 	public int deleteReview(int ordersNo);
 	public Orders getReview(int orderNo);
 //	public Orders getReview(int ordersNo);
-	//상점후기가 상점 상세에 달려 있는 형태이므로 목록이 따로 존재하진 않음.
+	//상점후기가 상점 상세에 달려 있는 형태이므로 목록이 따로 존재하진 않음.vv
 	public List<Orders> getReviewList(Orders orders);
 	
-	//레시피 등록v
-	public void addRecipe(Recipe rcp, MultipartHttpServletRequest mpRequest) throws Exception;
-	//레시피 수정v
-	public void updateRecipe(Recipe rcp);
-	//레시피 삭제v
-	public int deleteRecipe(Integer rcpNo);
-	//레시피 상세 조회v
-	public Recipe getRecipe(Integer rcpNo);
+	
+
+
+
 //	//레시피 목록 조회v
 //	public List<Recipe> getRecipeList(PaginationInfo pInfo);
-	//레시피 목록 조회v
-	public List<Recipe> getRecipeList(Recipe rcp);
+
 	
 	//댓글 등록v이면서 수정v, 삭제v, 목록조회v
 //	public boolean addComment(Comment comment);
 //	public int deleteComment(Integer commentNo);
 //	public List<Comment> getCommentList(Comment comment);
 	
-	//댓글 조회
+	//1:1 답변 조회
 	public List<Comment> getInquiryComment(int boardNo) throws Exception;
-	//댓글 조회
+	//레시피 댓글 조회
 	public List<Comment> getRecipeComment(int rcpNo) throws Exception;
-	//댓글 등록
+	
+	//댓글 등록v
 	public void addComment(Comment comment) throws Exception;
-	//레시피 댓글 등록
+	//레시피 댓글 등록v
 	public void addRecipeComment(Comment comment) throws Exception;
-	//레시피 댓글 수정
+	//레시피 댓글 수정xxx
 	public void updateRecipeComment(Comment comment) throws Exception;
-	//레시피 댓글 삭제
+	//레시피 댓글 삭제xxx
 	public int deleteRecipeComment(int commentNo) throws Exception;
-	//선택된 레시피 댓글 조회
+	
+	//선택된 레시피 댓글 조회 xxx
 	public Comment selectRecipeComment(int commentNo) throws Exception;
 	
-	//답변 상태 변화
+	//답변 상태 변화xxx
 	public boolean updateBoardInqStatus(Board board);
 	
-	// 찜
+	// 찜xxx
 	public boolean addStoreJjim(Jjim jjim);
 	public boolean addRecipeJjim(Jjim jjim);
 
@@ -123,26 +137,32 @@ public interface BoardService {
 	public int updateRecipeReco(int rcpNo);
 	// 댓글 추천
 	public void updateCommentReco(int commentNo);
+	
 	// 레시피 추천 취소
 	public void updateRecipeRecoCancel(int rcpNo);
 	// 댓글 추천 취소
 	public void updateCommentRecoCancel(int commentNo);
+	
 	// 레시피 추천 테이블에 add
 	public int addRecipeReco(int rcpNo, String userId);
 	// 댓글 추천 테이블에 add
 	public void addCommentReco(int commentNo, String userId);
+	
 	// 레시피 추천 테이블에서 delete
 	public void deleteRecipeReco(int rcpNo, String userId);
 	// 댓글 추천 테이블에서 delete
 	public void deleteCommentReco(int commentNo, String userId);
+	
 	// 레시피 추천 시 recocheck를 1로 만들어서 중복방지
 	public int updateRecipeRecoCheck(int rcpNo, String userId);
 	// 댓글 추천 시 recocheck를 1로 만들어서 중복방지
 	public void updateCommentRecoCheck(int commentNo, String userId);
+	
 	// 레시피 추천취소 시 다시 0
 	public void updateRecipeRecoCheckCancel(int rcpNo, String userId);
 	// 댓글 추천취소 시 다시 0
 	public void updateCommentRecoCheckCancel(int commentNo, String userId);
+	
 	// 레시피 추천 중복방지 select문
 	public int recipeRecoCheck(int rcpNo, String userId);
 	// 댓글 추천 중복방지 select문

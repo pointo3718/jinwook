@@ -514,7 +514,7 @@
 			orders
 		WHERE
 			store_no = #{storeNo}
-		 AND review_writer IS NOT NULL	
+		 AND review_writer IS NOT NULL
 		<!-- LIMIT
          #{paginationInfo.firstRecordIndex}, #{recordsPerPage} -->
 	</select> 

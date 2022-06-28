@@ -152,7 +152,9 @@
                                  <td hidden="cartNo" id="cartNo" name="cartNo" value="${cart.cartNo}">${cart.cartNo}</td>
                                   <td hidden="storeNo" id="storeNo" name="storeNo" value="${cart.storeNo}">${cart.storeNo}</td>                    
                                  <td class="shoping__cart__item">
-                                        <img src="${path}/resources/static/img/cart/cart-1.jpg" style="margin-right: 30px;">
+                                 <input type="hidden" value="${cart.product.prodNo}">
+                                        <img width="100" height="100" src="/resources/static/${cart.attach.orgFileName}" alt="..."
+											onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" />
                                         <strong style="font-size: 20px;">${cart.product.prodName}</strong>
                                     </td>
                                     <td> <strong style="font-size: 20px;">${cart.product.prodInfo}</strong> </td>

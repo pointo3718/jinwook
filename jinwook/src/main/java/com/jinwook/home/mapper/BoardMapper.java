@@ -25,6 +25,7 @@ public interface BoardMapper {
 	public int updateBoardAnnouncementHits(Integer boardNo);
 	//답변상태 변화시키기
 	public int updateBoardInqStatus(int boardNo);
+	
 	//게시판 사진 업로드
 	public void insertBoardFile(Map<String, Object> map) throws Exception;
 	//레시피 사진 업로드
@@ -35,9 +36,9 @@ public interface BoardMapper {
 	// 레시피 첨부파일 조회
 	public Attach selectRecipeAttachList(int rcpNo) throws Exception;
 	
-	// 첨부파일 다운
+	// 첨부파일 다운x
 	public Map<String, Object> selectAttachInfo(Map<String, Object> map) throws Exception;
-	// 첨부파일 수정
+	// 첨부파일 수정x
 	public void updateAttach(Map<String, Object> map) throws Exception;
 //	//게시판 사진 업로드
 //	public int fileBoardInsert(FileVO file) throws Exception;
@@ -48,37 +49,47 @@ public interface BoardMapper {
 	public int addBoardInquiry(Board board);
 	//공지사항 등록
 	public int addBoardAnnouncement(Board board);
+	public int addRecipe(Recipe rcp);
+	
 	//1:1문의 수정
 	public void updateBoardInquiry(Board board) throws Exception;
 	//공지사항 수정
 	public int updateBoardAnnouncement(Board board);
-	//1:1문의 삭제
+	public void updateRecipe(Recipe rcp);
+	
+	//1:1문의 삭제x
 	public int deleteBoardInquiry(Integer boardNo);
-	//공지사항 삭제
+	//공지사항 삭제x
 	public int deleteBoardAnnouncement(Integer boardNo);
+	public int deleteRecipe(Integer rcpNo);
 	
 	//조인 필요: board, comment 1:1문의 상세 조회 시 답변상태 false/true로 표시.
 	public Board getBoardInquiry(Integer boardNo);
+	public Recipe getRecipe(Integer rcpNo);
 	//조인 필요: board, comment 공지사항 상세 조회
 	public Board getBoardAnnouncement(Integer boardNo);
+	
 	//1:1문의 목록 조회
 	public List<Board> getBoardInquiryList(Board board);
 	//공지사항 목록 조회
 	public List<Board> getBoardAnnouncementList(Board board);
+	public List<Recipe> getRecipeList(Recipe rcp);
+	
 	//전체 랭킹 리스트 조인 필요: store, comment, recipe
 	public List<Board> getRankList(Board board);
-	
+		
 //	public void addReview(Orders orders) throws Exception;
-	//상점 후기 등록
-	public void updateReview(Orders orders);
 	
-	//상점 후기 삭제
+	//상점 후기 등록v
+	public void updateReview(Orders orders);
+	//상점 후기 리스트v
+	public List<Orders> getReviewList(Orders orders);
+	
+	//상점 후기 삭제xx
 	public int deleteReview(int ordersNo);
-	//상점 후기 조회 => getStore할 때 값을 넘겨주자.
+	//상점 후기 조회 => getStore할 때 값을 넘겨주자.xx
 	public Orders getReview(int orderNo);
 //	public Orders getReview(int ordersNo);
-	//상점 후기 리스트
-	public List<Orders> getReviewList(Orders orders);
 	
 	//상점 후기 정보 얻어와서 보내주기
 	//상품정보=후기정보, 상품id=후기번호(주문번호)
@@ -87,12 +98,10 @@ public interface BoardMapper {
 	public int enrollReview(Orders orders);
 	
 	//레시피
-	public int addRecipe(Recipe rcp);
-	public void updateRecipe(Recipe rcp);
-	public int deleteRecipe(Integer rcpNo);
-	//조인 필요: recipe, comment, recommend
-	public Recipe getRecipe(Integer rcpNo);
-	public List<Recipe> getRecipeList(Recipe rcp);
+	
+	
+	
+	
 	
 	//댓글 등록
 //	public int addComment(Comment comment);

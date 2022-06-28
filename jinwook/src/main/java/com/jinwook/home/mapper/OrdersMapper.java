@@ -1,8 +1,11 @@
 package com.jinwook.home.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Jpay;
@@ -52,7 +55,7 @@ public interface OrdersMapper {
    
    public int getOrdersJpayListTotalCount(Jpay jpay);      //진욱페이 내역카운트
    
-   public int addOrdersNotice(Notice notice);      //알림등록
+   public int addOrdersNotice(Notice notice);      //알림등록 
    
    public int deleteOrdersNotice(int notiNo);      //알림삭제
    
@@ -69,5 +72,7 @@ public interface OrdersMapper {
    public Orders getNewOrders();
    
    public int updateOrdersCoupon(Coupon coupon);
+   
+   public Attach selectFileList(int prodNo) throws Exception;
 }
  

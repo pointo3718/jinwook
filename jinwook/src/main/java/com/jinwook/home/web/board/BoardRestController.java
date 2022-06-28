@@ -199,11 +199,5 @@ public class BoardRestController {
 		return commentList;
 	}
 	
-	/* 상점 후기 등록 */
-	@PostMapping(value = "enroll")
-	public void enrollReplyPOST(Orders orders) {
-		boardService.enrollReview(orders);
-	}
-
 	
 }

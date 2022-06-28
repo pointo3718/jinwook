@@ -24,7 +24,7 @@ public class Comment {
 //	private LocalDate commentDate;//등록날짜
 //	private int recommendCount; //추천수
 	
-	private int commentNo;//댓글 번호
+	private int commentNo;//댓글 번호v
 	private User user;
 	private String userId;
 	private Board board;//게시판 번호

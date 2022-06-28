@@ -414,7 +414,7 @@ var rcpNo = ${recipe.rcpNo};
  						<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${recipe.rcpDate}" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  						<br/>
  						<button type="button" class="btn btn-success" id="reco_btn" 
- 						style="width:50px; height:30px; background-color: green; font-size: 12px;" onclick="updateRecipeReco();"><i class="bi bi-hand-thumbs-up"></i>${recipe.recommendCount}</button>
+ 						style="width:60px; height:40px; background-color: green; font-size: 12px;" onclick="updateRecipeReco();"><i class="bi bi-hand-thumbs-up"></i>${recipe.recommendCount}</button>
  						&nbsp;<a href="#" onclick="clip(); return false;"><i class="bi bi-share-fill"></i></a>
  						<br/>
  						<br/><a type="button" class="badge badge-danger" data-toggle="modal" data-target="#complainModal" style="font-size:15px;">신고하기</a> 
@@ -435,7 +435,7 @@ var rcpNo = ${recipe.rcpNo};
                         <button type="button" class="btn btn-success" id="updateButton">수 정</button>&nbsp;
                         <button data-value="${recipe.rcpNo}" id="buttons" type="button" class="btn btn-danger" onClick="fncDeleteRecipe(this)">삭 제</button>
                     </div>
-					
+					<br/><br/>
 					<!-- 댓글 작성폼 start -->
 					<div class="card mb-2" style="margin-left:20px;">
 						<!-- 댓글 헤더 -->

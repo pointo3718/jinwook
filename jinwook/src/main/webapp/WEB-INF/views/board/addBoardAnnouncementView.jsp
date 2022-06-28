@@ -171,7 +171,6 @@ function fn_addFile() {
   <div class="form-group">
 	<div class="col-sm-offset-4  col-sm-4 text-center">
 		<button type="submit" class="btn btn-success">등 &nbsp;록</button>
-		<a class="btn btn-primary btn" href="#" role="button">취소</a>
 						</div>
 					</div>
 				</div>
