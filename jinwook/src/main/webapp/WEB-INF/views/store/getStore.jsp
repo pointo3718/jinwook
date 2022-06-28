@@ -510,8 +510,14 @@ label {
                         onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
                      alt="My Image" width="300" height="300">
                   <ul class="product__item__pic__hover">
-                     <li><i class="fa fa-cart-arrow-down" data-value="${store.product.prodNo}" 
-                        onClick="fncAddOrdersCart(this)" style="font-size:25px;"></i></li>
+                     <li>
+                     <c:choose>
+                     <c:when test="${store.open==false}"></c:when>
+                     <c:when test="${store.product.soldout==false}"></c:when>
+                     <c:otherwise><i class="fa fa-cart-arrow-down" style="color:white; font-size:50px" data-value="${store.product.prodNo}" 
+                        onClick="fncAddOrdersCart(this)" style="font-size:25px;"></i></c:otherwise>
+                        </c:choose>                     
+                     </li>
                   </ul>
                </div>
                <div class="product__item__text">
