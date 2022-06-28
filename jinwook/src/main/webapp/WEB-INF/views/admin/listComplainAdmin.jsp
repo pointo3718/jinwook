@@ -273,7 +273,10 @@ $(function() {
 										<!-- a:  -->
 										<td align="left">${complain.complainCode}</td>
 										<c:if test="${complain.rcpNo != 0}">
-										<td align="left" data-rcpNo="${complain.rcpNo}"><a href="/board/getRecipe?rcpNo=${complain.rcpNo}">레시피</a></td>
+										<td align="left" data-rcpNo="${complain.rcpNo}"><a href="/board/getRecipe?rcpNo=${complain.rcpNo}">바로가기 <i class="fa fa-location-arrow" aria-hidden="true"></i> </a></td>
+										</c:if>
+										<c:if test="${complain.rcpNo == 0}">
+										<td align="left">&nbsp;</td>
 										</c:if>
 										<c:if test="${complain.complainStatus == false}">
 											<td align="left">

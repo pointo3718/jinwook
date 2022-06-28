@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 import com.jinwook.home.common.Criteria;
 import com.jinwook.home.common.PaginationInfo;
 import com.jinwook.home.mapper.AdminMapper;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Chart;
 import com.jinwook.home.service.domain.Complain;
+import com.jinwook.home.service.domain.Orders;
+import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.Request;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
@@ -215,6 +218,35 @@ public class AdminServiceImpl implements AdminService{
 		usertypelist = adminMapper.getUserType();
 		
 		return usertypelist;
+	}
+	
+	///////////////// 레시피 목록 //////////////////
+	@Override
+	public List<Recipe> getRecipeHits() {
+		List<Recipe> recipelist = Collections.emptyList();		
+		
+		recipelist = adminMapper.getRecipeHits();
+	
+		return recipelist;
+	}
+	
+	// ================ 레시피 사진 조회 ==================
+	@Override
+	public Attach selectRcpAttachList(int rcpNo){
+		return adminMapper.selectRcpAttachList(rcpNo);
+	}
+	
+	
+	//=============== 주문내역 카운트 (사용자/사장님) =================
+	@Override
+	public int countOrders(User user) {
+		return adminMapper.countOrders(user);
+	}
+	
+	//=============== 장바구니 카운트 (사용자/사장님) =================
+	@Override
+	public int countCart(User user) {
+		return adminMapper.countCart(user);
 	}
 }
 

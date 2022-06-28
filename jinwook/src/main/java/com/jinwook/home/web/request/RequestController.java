@@ -179,7 +179,7 @@ public class RequestController {
 	
 	// ========== 상점/광고 신청 목록 (사장님용) ============ /////////// 다시
 	@GetMapping(value = "getRequestAdStoreList")
-	public String listUserAdmin(HttpSession session, Model model) {
+	public String getRequestAdStoreList(HttpSession session, Model model) {
 		String userId = ((User) session.getAttribute("user")).getUserId();
 		List<Request> requestList = requestService.getRequestAdStoreList(userId);
 		

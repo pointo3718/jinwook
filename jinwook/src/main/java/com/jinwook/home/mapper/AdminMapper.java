@@ -5,8 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.jinwook.home.common.Criteria;
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Chart;
 import com.jinwook.home.service.domain.Complain;
+import com.jinwook.home.service.domain.Orders;
+import com.jinwook.home.service.domain.Recipe;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 
@@ -55,6 +58,19 @@ public interface AdminMapper {
 	public List<Chart> getOrderCountAndPrice();						// 월별 주문수/주문금액 통계
 	
 	public List<Chart> getUserType();								// 사용자 유형 (일반/블랙/탈퇴)
+	
+	
+	//////// 메인 ////////
+	public List<Recipe>  getRecipeHits();							// 레시피 조회수 순
+
+	public Attach selectRcpAttachList(int rcpNo);    				// 레시피 사진 조회
+	
+	public int countOrders(User user);    						// 주문내역 카운트 (사용자/사장님)
+	
+	public int countCart(User user);    						// 장바구니 카운트
+
+	
+	
 
 
 	
