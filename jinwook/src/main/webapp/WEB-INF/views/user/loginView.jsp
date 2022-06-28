@@ -196,9 +196,6 @@
 							}else if($("#userId").val() == data.userId && $("#password").val() != data.password){
 								alert("비밀번호를 확인해주세요.");
 									return;
-							}else{
-								alert("아이디를 확인해주세요.");
-								return;
 							}
 						},
 						error : function(result) {
