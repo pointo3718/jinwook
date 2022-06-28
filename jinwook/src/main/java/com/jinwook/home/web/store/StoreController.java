@@ -220,7 +220,7 @@ public class StoreController {
 		
 		///////////////////////////
 		
-		return "/store/addStoreProduct";
+		return "/store/addStoreProduct?storeNo=10000";
 	}
    
    
@@ -267,15 +267,15 @@ public class StoreController {
       return "common/myPageTop";
    }
 
-   @PostMapping(value = "addOrdersCoupon")
-   public String addOrdersCoupon(@RequestParam("couponNo") int couponNo, Model model) {
-
-      storeService.addOrdersCoupon(couponNo);
-
-      model.addAttribute("couponNo", couponNo);
-
-      return "orders/addOrders";
-   }
+//   @PostMapping(value = "addOrdersCoupon")
+//   public String addOrdersCoupon(@RequestParam("couponNo") int couponNo, Model model) {
+//
+//      storeService.addOrdersCoupon(couponNo);
+//
+//      model.addAttribute("couponNo", couponNo);
+//
+//      return "orders/addOrders";
+//   }
 
    @GetMapping(value = "getStore")
    public String getStore(Store store, @RequestParam("storeNo") int storeNo, 

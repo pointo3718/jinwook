@@ -747,9 +747,10 @@ $(document).ready(function() {
            </td>
            <td><a href="/orders/getOrders?orderNo=${orders.orderNo}" class="bi bi-caret-right"style="font-size :18px; text-decoration:none; color: #7fad39;"></a></td>
            <td>
-                <button type="button" class="site-btn" data-toggle="modal" data-target="#reviewModal" data-orderno="${orders.orderNo}">
+                <button type="button" class="site-btn" data-toggle="modal" data-target="#reviewModal" data-orderno="${orders.orderNo}" style="padding-left: 10px; padding-right: 10px; padding-bottom: 8px; padding-top: 8px;" >
   					후기 등록
 				</button> 
+    
          </td>
          </tr>
           </c:forEach>      

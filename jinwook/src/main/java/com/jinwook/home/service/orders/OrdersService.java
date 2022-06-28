@@ -1,7 +1,9 @@
 package com.jinwook.home.service.orders;
 
 import java.util.List;
+import java.util.Map;
 
+import com.jinwook.home.service.domain.Attach;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Coupon;
 import com.jinwook.home.service.domain.Jpay;
@@ -57,5 +59,8 @@ public int addOrders(Orders orders);
    public int checkJpPassword(User user);
    
    public int updateOrdersCoupon(Coupon coupon);
+   
+   // 첨부파일 조회
+	public Attach selectFileList(int prodNo) throws Exception;
 
 }

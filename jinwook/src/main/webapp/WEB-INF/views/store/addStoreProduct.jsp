@@ -269,8 +269,8 @@ label {
 			success : function(result) {
 				if (result != null) {
 					swal("삭제완료", "success");
-					$("#point").load(
-							"/store/addStoreProduct/" + STORENO + " #point");
+					self.location = "addStoreProduct?storeNo=" + STORENO
+//					$( "#point" ).load(window.location.href + " #point" );
 				}
 			}
 
@@ -294,7 +294,8 @@ label {
 			success : function(result) {
 				if (result != null) {
 					swal("매진 처리되었습니다.");
-					$("#point").load("/store/addStoreProduct/STORENO #point");
+					self.location = "addStoreProduct?storeNo=" + STORENO
+//					$( "#point" ).load(window.location.href + " #point" );
 				}
 			}
 
@@ -317,7 +318,8 @@ label {
 			success : function(result) {
 				if (result != null) {
 					swal("판매 처리되었습니다.");
-					$("#point").load("/store/addStoreProduct/STORENO #point");
+					self.location = "addStoreProduct?storeNo=" + STORENO
+//					$( "#point" ).load(window.location.href + " #point" );
 				}
 			}
 
@@ -369,7 +371,8 @@ label {
 			success : function(result) {
 				if (result != null) {
 					swal("수정 완료");
-					$("#point").load("/store/addStoreProduct/STORENO #point");
+					self.location = "addStoreProduct?storeNo=" + STORENO
+//					$( "#point" ).load(window.location.href + " #point" );
 				}
 			}
 
@@ -584,6 +587,7 @@ label {
 							style="justify-content: space-between; width: 1150px;">
 							<div class="col-lg-9">
 								<div class="shoping__cart__table">
+													<div id="point" name="point" class="point">
 									<table>
 										<thead>
 											<tr>
@@ -599,7 +603,8 @@ label {
 												<th></th>
 											</tr>
 										</thead>
-										<tbody class="point">
+									
+										<tbody>
 											<!--  /////////////////////////////////////////////////// -->
 											<c:set var="i" value="0" />
 											<c:set var="total" value="0" />
@@ -667,7 +672,9 @@ label {
 												</tr>
 											</c:forEach>
 										</tbody>
+									
 									</table>
+									</div>
 									<div id="plus">
 										<p class="original"></p>
 									</div>

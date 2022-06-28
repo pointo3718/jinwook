@@ -524,12 +524,6 @@ label {
 
 
 
-								<span class="btn btn-default btn-file"
-									style="padding-left: 260px; padding-bottom: 15px;"> 사진변경
-									<input type="file" name="file">
-								</span>
-
-
 								<div class="form-group row">
 									<label for="colFormLabelLg"
 										class="col-sm-2 col-form-label col-form-label">영업시작시간</label>

@@ -394,7 +394,56 @@
 			users;
 	</select> 
 	
+	<!-- 메인 레시피 추천순 -->
+	<select id="getRecipeHits" resultType="Recipe">
+		   SELECT 
+		   	  *
+      	   FROM 
+      	   	  recipe
+      	   ORDER BY 
+      	   	  rcp_hits desc
+      	   LIMIT 
+      	   	  8
+	</select>
 	
+	<!-- 레시피 첨부파일 조회 -->
+    <select id="selectRcpAttachList" parameterType="int" resultType="attach">
+		SELECT 
+			attach_no, org_file_name, ROUND(file_size/1024,1) AS file_size
+	  	FROM 
+	  		attach
+	  	WHERE 
+	  		rcp_no = #{rcpNo}
+	   		AND 
+	   		del_gb = 'N'
+	   	ORDER BY 
+	   		attach_no ASC
+	</select>
 	
-
+	<!-- 메인 주문내역 카운트  -->
+	<select id="countOrders" parameterType="User" resultType="int">
+		SELECT COUNT(*)
+     	FROM 
+     		orders
+      	WHERE 
+      		user_id =#{userId}
+      		AND 
+			<if test= 'role == "사용자"'>
+      		order_status= '3'
+      		</if>
+			<if test= 'role == "사장님"'>
+      		order_status= '1'
+      		</if>      		
+	</select>
+	
+	<!-- 메인 장바구니 카운트  -->
+	<select id="countCart" parameterType="User" resultType="int">
+		SELECT COUNT(*)
+		FROM 
+			cart
+		WHERE
+			user_id = #{userId}
+			AND
+			cart_status = false
+	</select>
 </mapper>
