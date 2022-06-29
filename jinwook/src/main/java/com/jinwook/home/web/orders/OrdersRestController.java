@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.JsonObject;
 import com.jinwook.home.service.domain.Cart;
 import com.jinwook.home.service.domain.Jpay;
+import com.jinwook.home.service.domain.Orders;
 import com.jinwook.home.service.domain.Product;
 import com.jinwook.home.service.domain.Store;
 import com.jinwook.home.service.domain.User;
 import com.jinwook.home.service.orders.OrdersService;
 import com.jinwook.home.service.user.UserService;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 
 @RestController
 @RequestMapping("/orders/*")
@@ -218,5 +220,17 @@ public class OrdersRestController {
 	      session.setAttribute("user", user);
 	      
 	      return result;
+	   }
+	   
+	   @PostMapping(value="updateOrdersStatus")
+	   public int updateOrdersStatus(@ModelAttribute("orders")Orders orders,HttpSession session) throws Exception{
+		   
+		   System.out.println("/orders/updateOrdersStatus : POST");
+		   String userid = ((User) session.getAttribute("user")).getUserId();
+		   orders.setUserId(userid);
+		   System.out.println(orders);
+		   int result = ordersService.updateOrdersStatus(orders);
+		   
+		   return result;
 	   }
 }

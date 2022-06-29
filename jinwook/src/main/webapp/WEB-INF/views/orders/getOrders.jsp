@@ -404,16 +404,20 @@ $('#myModal').on('shown.bs.modal', function () {
 				</div>
 				<div>
 				<br><br><br>
-					<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px; height: 36px; font-size:17px; float:right; padding-top: 0px;padding-bottom: 0px; margin-right: 33px;" onclick="">주문거절</button>
+					<input type="hidden" value="${orders.orderStatus}" id="orderStatus">
+					<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px; height: 36px; font-size:17px; float:right; padding-top: 0px;padding-bottom: 0px; margin-right: 33px;" onclick="updateOrdersStatus(this)">주문거절</button>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- <script type="text/javascript">
-		function(){
+	<script type="text/javascript">
+		function updateOrdersStatus(e){
+			
+			const orderStatus = ${"#orderStatus"}
+			
 			
 		}
-	</script> -->
+	</script>
 	
 
 	<!-- Footer Begin -->   

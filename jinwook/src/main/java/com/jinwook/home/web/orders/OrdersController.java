@@ -163,7 +163,7 @@ public class OrdersController {
       System.out.println(orders);
       
       model.addAttribute("getOrdersList", getOrdersList);
-      
+      System.out.println(getOrdersList);
       return "orders/getOrdersListCeo";
    }
    
@@ -173,7 +173,7 @@ public class OrdersController {
       System.out.println("/orders/getOrders : GET");
       
       List<Orders> getOrders = ordersService.getOrders(orderNo);
-      System.out.println("후훗"+getOrders);
+      System.out.println(getOrders);
       
       model.addAttribute("getOrders", getOrders);
       
@@ -186,7 +186,7 @@ public class OrdersController {
       System.out.println("/orders/getOrders : GET");
       
       List<Orders> getOrders = ordersService.getOrders(orderNo);
-      System.out.println("후훗"+getOrders);
+      System.out.println(getOrders);
       
       String userid = ((User) session.getAttribute("user")).getUserId();
       List<Store> storeInfo = storeService.getStoreInfo(userid);

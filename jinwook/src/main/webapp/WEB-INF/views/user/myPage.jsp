@@ -829,7 +829,7 @@ $(document).ready(function() {
         <c:set var="i" value="0" />
         <c:forEach var="orders" items="${getOrdersList}">
          <c:set var="i" value="${ i+1 }" />
-         <tr>
+         <tr >
            <td align="center" value="${orders.orderNo}">${orders.orderNo}</td>
            <td align="left">${orders.product.prodName}</td>
            <td align="left">${orders.orderPrice}</td>

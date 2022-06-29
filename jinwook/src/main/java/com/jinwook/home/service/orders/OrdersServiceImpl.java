@@ -235,5 +235,11 @@ public class OrdersServiceImpl implements OrdersService{
 		
 		return ordersMapper.importJpayCharge(user);
 	}
+	
+	@Override
+	public int updateOrdersStatus(Orders orders) {
+	
+		return ordersMapper.updateOrdersStatus(orders);
+	}
 
 }

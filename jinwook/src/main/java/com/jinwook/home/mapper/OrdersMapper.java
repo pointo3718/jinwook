@@ -76,5 +76,7 @@ public interface OrdersMapper {
    public int importJpayCharge(User user); //아임포트 충전시 잔액추가
    
    public Attach selectFileList(int prodNo) throws Exception; //파일업로드된거 불러오는)
+   
+   public int updateOrdersStatus(Orders orders); // 주문 수락순서 
 }
  
