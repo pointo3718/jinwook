@@ -190,75 +190,6 @@ label {
 <script type="text/javascript">
 
 
-
-
-   /*<![CDATA[*/
-   function movePage(uri, queryString) {
-      location.href = uri + queryString;
-   }
-
-   var storeNo = $("input[id='storeNo']").val();
-   /*]]>*/
-
-   $(function() {
-      $(".list-group-item:contains('주문 내역')").on("click", function() {
-         $(self.location).attr("href", "/admin/blog");
-      });
-   });
-
-   $(function() {
-      $(".list-group-item:contains('상점 정보 수정')").on("click", function() {
-         $(self.location).attr("href", "/store/updateStore?storeNo=10000");
-      });
-   });
-
-   $(function() {
-      $(".list-group-item:contains('개인 정보 수정')").on("click", function() {
-         //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-         $(self.location).attr("href", "/admin/listComplainAdmin");
-      });
-   });
-
-   $(function() {
-      $(".list-group-item:contains('상품 등록')").on(
-            "click",
-            function() {
-               //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-               $(self.location).attr("href",
-                     "/store/addStoreProduct?storeNo=10000");
-            });
-   });
-
-   $(function() {
-      $(".list-group-item:contains('광고 등록')").on(
-            "click",
-            function() {
-               //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-               $(self.location).attr("href",
-                     "/request/getRequestListForAdmin?reqCode=1");
-            });
-   });
-
-   $(function() {
-      $(".list-group-item:contains('지갑')").on(
-            "click",
-            function() {
-               //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-               $(self.location).attr("href",
-                     "/store/getStoreWallet?storeNo=10000");
-            });
-   });
-
-   $(function() {
-      $(".list-group-item:contains('1:1 문의내역')").on(
-            "click",
-            function() {
-               //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-               $(self.location).attr("href",
-                     "/request/getRequestListForAdmin?reqCode=2");
-            });
-   });
-
    //============= "수정"  Event 연결 =============
    function fncUpdateStore(e) {
 
@@ -372,39 +303,7 @@ label {
 							</h5>
 							<br />
 
-
-
-							<div class="list-group text-center" style="font-size: 15px;">
-								<button type="button"
-									class="list-group-item list-group-item-action"
-									aria-current="true">주문 내역</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">상점 정보
-									수정</button>
-								<button type="button"
-									class="list-group-item list-group-item-action" class="addStore">
-									<span class="addStore">개인 정보 수정</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="deleteStore">상품 등록</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="refundStore">광고 등록</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="adStore">내가 한 요청</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="adStore">지갑</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">1:1
-									문의내역</button>
-							</div>
+							<div class="getStoreNo"></div>
 
 						</div>
 
@@ -413,41 +312,41 @@ label {
 				</div>
 
 				<!-- 상점 정보 수정 Begin-->
-				<div>
-					<h4 class="text-left">
-						<strong>상점 정보 수정</strong>
+					<div>
+						<h4 class="text-left">
+							<strong>상점 정보 수정</strong>
 
-						<hr size="10px">
-					</h4>
+							<hr size="10px">
+						</h4>
 
-					<c:forEach var="store" items="${storeInfo}" begin="0" end="0">
-
-
-						<table class="table table-hover"
-							style="width: 730px; heigh: 300px;">
-
-							<form class="form-horizontal" id="profileUpdate"
-								enctype="multipart/form-data">
+						<c:forEach var="store" items="${storeInfo}" begin="0" end="0">
 
 
-								<div class="form-group row">
-									<label for="colFormLabel"
-										class="col-sm-2 col-form-label col-form-label">상점이름</label>
-									<div class="col-sm-6">
-										<input type="text" name="storeName"
-											class="form-control form-control" id="storeName"
-											value="${store.storeName}" placeholder="상점이름" readonly>
+							<table class="table table-hover"
+								style="width: 730px; heigh: 300px;">
+
+								<form class="form-horizontal" id="profileUpdate"
+									enctype="multipart/form-data">
+
+
+									<div class="form-group row">
+										<label for="colFormLabel"
+											class="col-sm-2 col-form-label col-form-label">상점이름</label>
+										<div class="col-sm-6">
+											<input type="text" name="storeName"
+												class="form-control form-control" id="storeName"
+												value="${store.storeName}" placeholder="상점이름" readonly>
+										</div>
 									</div>
-								</div>
 
 
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">상점업종</label>
-									<div class="col-sm-6">
-										<input type="email" name="storeType"
-											class="form-control form-control" id="storeType"
-											value="
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label">상점업종</label>
+										<div class="col-sm-6">
+											<input type="email" name="storeType"
+												class="form-control form-control" id="storeType"
+												value="
                                  
                                  <c:if test="${store.storeType.trim()=='1'}">
                                         정육         
@@ -464,182 +363,186 @@ label {
                                     <c:if test="${store.storeType.trim()=='5'}">
                                         종합         
                                     </c:if>"
-											placeholder="상점업종" readonly>
-									</div>
-								</div>
-
-
-
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">상점주소</label>
-									<div class="col-sm-6">
-										<input type="text" name="storeAddr"
-											class="form-control form-control" id="storeAddr"
-											value="${store.storeAddr}" placeholder="상점주소" readonly>
-									</div>
-								</div>
-
-
-
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">상점시작날짜</label>
-									<div class="col-sm-6">
-										<input type="text" name="storeStart"
-											class="form-control form-control" id="storeStart"
-											value="${store.storeStart}" placeholder="상점시작날짜" readonly>
-									</div>
-								</div>
-
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">상점소개</label>
-									<div class="col-sm-6">
-										<input type="text" name="storeIntro"
-											class="form-control form-control" id="storeIntro"
-											value="${store.storeIntro}" placeholder="상점소개">
-									</div>
-								</div>
-
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">상점전화번호</label>
-									<div class="col-sm-6">
-										<input type="text" name="storePhone"
-											class="form-control form-control" id="storePhone"
-											value="${store.storePhone}" placeholder="상점전화번호">
-									</div>
-								</div>
-
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">상점사진</label>
-									<div class="col-sm-6">
-										<img src="/resources/static/${store.attach.orgFileName}"
-											onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
-											alt="My Image" width="300" height="300">
-									</div>
-								</div>
-
-
-
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">영업시작시간</label>
-									<div class="col-sm-6">
-										<input type="time" name="startTime"
-											class="form-control form-control" id="startTime"
-											value="${store.startTime}" placeholder="영업시작시간">
-									</div>
-								</div>
-
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">영업종료시간</label>
-									<div class="col-sm-6">
-										<input type="time" name="endTime"
-											class="form-control form-control" id="endTime"
-											value="${store.endTime}" placeholder="영업종료시간">
-									</div>
-								</div>
-
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">상점휴무일</label>
-									<div class="col-sm-6">
-										<input type="text" name="holiday"
-											class="form-control form-control" id="holiday"
-											value="${store.holiday}" placeholder="상점휴무일">
-									</div>
-								</div>
-
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label"
-										style="padding-right: 4px;">사업자등록번호</label>
-									<div class="col-sm-6">
-										<input type="text" name="businessNo"
-											class="form-control form-control" id="businessNo"
-											value="${store.user.businessNo}" placeholder="사업자등록번호"
-											readonly>
-									</div>
-								</div>
-
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">은행명</label>
-									<div class="col-sm-6" style="padding-left: 0px;">
-										<div class="col-sm-6">
-											<select id="bank">
-												<option>${store.bank}</option>
-												<option>카카오뱅크</option>
-												<option>농협</option>
-												<option>신한</option>
-												<option>IBK기업</option>
-												<option>하나</option>
-												<option>우리</option>
-												<option>국민</option>
-												<option>SC제일</option>
-												<option>대구</option>
-												<option>부산</option>
-												<option>광주</option>
-												<option>새마을금고</option>
-												<option>경남</option>
-												<option>전북</option>
-												<option>제주</option>
-												<option>산업</option>
-												<option>우체국</option>
-												<option>신협</option>
-												<option>수협</option>
-												<option>씨티</option>
-												<option>케이뱅크</option>
-												<option>토스뱅크</option>
-												<option>산림조합</option>
-												<option>저축은행</option>
-											</select>
+												placeholder="상점업종" readonly>
 										</div>
 									</div>
-								</div>
 
 
-								<div class="form-group row">
-									<label for="colFormLabelLg"
-										class="col-sm-2 col-form-label col-form-label">계좌번호</label>
-									<div class="col-sm-6">
-										<input type="text" name="accNo"
-											class="form-control form-control" id="accNo"
-											value="${store.accNo}" placeholder="계좌번호">
+
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label">상점주소</label>
+										<div class="col-sm-6">
+											<input type="text" name="storeAddr"
+												class="form-control form-control" id="storeAddr"
+												value="${store.storeAddr}" placeholder="상점주소" readonly>
+										</div>
 									</div>
-								</div>
 
 
 
-							</form>
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label">상점시작날짜</label>
+										<div class="col-sm-6">
+											<input type="text" name="storeStart"
+												class="form-control form-control" id="storeStart"
+												value="${store.storeStart}" placeholder="상점시작날짜" readonly>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label">상점소개</label>
+										<div class="col-sm-6">
+											<input type="text" name="storeIntro"
+												class="form-control form-control" id="storeIntro"
+												value="${store.storeIntro}" placeholder="상점소개">
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label">상점전화번호</label>
+										<div class="col-sm-6">
+											<input type="text" name="storePhone"
+												class="form-control form-control" id="storePhone"
+												value="${store.storePhone}" placeholder="상점전화번호">
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label">상점사진</label>
+										<div class="col-sm-6">
+											<img src="/resources/static/${store.attach.orgFileName}"
+												onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
+												alt="My Image" width="300" height="300">
+										</div>
+									</div>
 
 
 
-						</table>
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label">영업시작시간</label>
+										<div class="col-sm-6">
+											<input type="time" name="startTime"
+												class="form-control form-control" id="startTime"
+												value="${store.startTime}" placeholder="영업시작시간">
+										</div>
+									</div>
 
-						<!-- 상점 정보 수정 End-->
-						<!-- 수정, 삭제신청 버튼 Begin -->
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label">영업종료시간</label>
+										<div class="col-sm-6">
+											<input type="time" name="endTime"
+												class="form-control form-control" id="endTime"
+												value="${store.endTime}" placeholder="영업종료시간">
+										</div>
+									</div>
 
-						<hr size="10px">
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label">상점휴무일</label>
+										<div class="col-sm-6">
+											<input type="text" name="holiday"
+												class="form-control form-control" id="holiday"
+												value="${store.holiday}" placeholder="상점휴무일">
+										</div>
+									</div>
 
-						<div style="padding-left: 320px;">
-							<button type="button" id="button" class="btn btn-outline-success"
-								data-value="${store.storeNo}" onClick="fncUpdateStore(this)">
-								수정</button>
-							&nbsp;&nbsp;&nbsp;
-							<button type="button" id="confirmStart"
-								class="btn btn-outline-danger">상점삭제신청</button>
-							<input type="hidden" id="userid"
-								value="${sessionScope.user.userId}" /> <input type="hidden"
-								id="storeno" value="${param.storeNo}" />
-						</div>
-						<!-- 수정, 삭제신청 버튼 End -->
-					</c:forEach>
-				</div>
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label"
+											style="padding-right: 4px;">사업자등록번호</label>
+										<div class="col-sm-6">
+											<input type="text" name="businessNo"
+												class="form-control form-control" id="businessNo"
+												value="${store.user.businessNo}" placeholder="사업자등록번호"
+												readonly>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label">은행명</label>
+										<div class="col-sm-6" style="padding-left: 0px;">
+											<div class="col-sm-6">
+												<select id="bank">
+													<option>${store.bank}</option>
+													<option>카카오뱅크</option>
+													<option>농협</option>
+													<option>신한</option>
+													<option>IBK기업</option>
+													<option>하나</option>
+													<option>우리</option>
+													<option>국민</option>
+													<option>SC제일</option>
+													<option>대구</option>
+													<option>부산</option>
+													<option>광주</option>
+													<option>새마을금고</option>
+													<option>경남</option>
+													<option>전북</option>
+													<option>제주</option>
+													<option>산업</option>
+													<option>우체국</option>
+													<option>신협</option>
+													<option>수협</option>
+													<option>씨티</option>
+													<option>케이뱅크</option>
+													<option>토스뱅크</option>
+													<option>산림조합</option>
+													<option>저축은행</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="form-group row">
+										<label for="colFormLabelLg"
+											class="col-sm-2 col-form-label col-form-label">계좌번호</label>
+										<div class="col-sm-6">
+											<input type="text" name="accNo"
+												class="form-control form-control" id="accNo"
+												value="${store.accNo}" placeholder="계좌번호">
+										</div>
+									</div>
+
+
+
+								</form>
+
+
+
+							</table>
+
+							<!-- 상점 정보 수정 End-->
+							<!-- 수정, 삭제신청 버튼 Begin -->
+
+							<hr size="10px">
+
+							<div style="padding-left: 320px;">
+								<button type="button" id="button"
+									class="btn btn-outline-success" data-value="${store.storeNo}"
+									onClick="fncUpdateStore(this)">수정</button>
+								&nbsp;&nbsp;&nbsp;
+								<button type="button" id="confirmStart"
+									class="btn btn-outline-danger">상점삭제신청</button>
+								<input type="hidden" id="userid"
+									value="${sessionScope.user.userId}" /> <input type="hidden"
+									id="storeno" value="${param.storeNo}" />
+							</div>
+							<!-- 수정, 삭제신청 버튼 End -->
+						</c:forEach>
+					</div>
+
+
+
+
 
 
 
@@ -667,8 +570,7 @@ $().ready(function () {
        
        STORENO = $("input[id='storeno']").val();
        USERID = $("input[id='userid']").val();
-          alert(STORENO);
-          alert(USERID);
+
         Swal.fire({
              title: '정말로 상점 삭제 요청을 하시겠습니까?',
             text: "확인 절차에 따라 관리자의 연락이 갑니다.",
@@ -725,6 +627,78 @@ function fncAddRequestDeleteStore() {
 }
 /////////////////// 상점 삭제 신청 끝 /////////////////////
 
+</script>
+	<script type="text/javascript">
+   
+   //======페이지 이동 상점번호 받아오기=========//
+   
+      $(function() {
+            getStoreNo();
+         });
+      
+
+         function getStoreNo() {
+                 
+               var userId = $("#userId").val();
+            
+               var uri = "/store/getStoreNo/"+userId
+               
+
+               $.get(uri, function(response) { 
+                  
+                     var getStoreNoHtmlBody = "";
+                     
+                     $(response.getStoreNo).each(function(idx,store) {              
+
+                        getStoreNoHtmlBody += `
+ 
+							<div class="list-group text-center" style="font-size: 15px;">
+							<button type="button"
+								class="list-group-item list-group-item-action"
+								aria-current="true"><a href="/orders/getOrdersList" style="color:black">주문 내역</button>
+							<button type="button"
+								class="list-group-item list-group-item-action"><a href="/store/updateStore?storeNo=\${store.storeNo}" style="color:black">상점 정보
+								수정</button>
+							<button type="button"
+								class="list-group-item list-group-item-action" class="addStore">
+								<span class="addStore"><a href="/user/confirmPasswordView?userId=${sessionScope.user.userId}" style="color:black">개인 정보 수정</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="deleteStore"><a href="/store/addStoreProduct?storeNo=\${store.storeNo}" style="color:black"> 상품 등록</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="refundStore"><a href="/request/addRequestAd?storeNo=\${store.storeNo}" style="color:black"> 광고 등록</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="adStore"><a href="/request/getRequestAdStoreList?storeNo=\${store.storeNo}&userId=${sessionScope.user.userId}" style="color:black"> 내가 한 요청</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="adStore"><a href="/store/getStoreWallet?storeNo=\${store.storeNo}" style="color:black"> 지갑</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action"><a href="/store/getStore?storeNo=\${store.storeNo}" style="color:black">내 상점 가기</button>
+							<button type="button"
+								class="list-group-item list-group-item-action"><a href="/board/getBoardInquiryList" style="color:black">1:1
+								문의내역</button>
+						</div>
+
+                         
+                            
+                        `;
+                     });
+                     
+                     
+                     $(".getStoreNo").html(getStoreNoHtmlBody);
+                     //$(".userlisthead").html(blacklistHtmlBody);
+                  
+               }, "json");
+
+         }   
+     
 </script>
 </body>
 

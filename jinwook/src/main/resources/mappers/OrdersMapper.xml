@@ -335,6 +335,14 @@
 	   	ORDER BY 
 	   		attach_no ASC
 	</select>
+	
+	<update id="importJpayCharge">
+		UPDATE users
+		<set>
+			jp_balance = #{jpBalance}
+		</set>
+		WHERE user_id = #{userId}
+	</update>
 </mapper>
    
    

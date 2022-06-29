@@ -346,6 +346,18 @@ $(document).ready(function() {
      padding: 6px;
      border-radius: 1em;
      outline:none;
+     
+   /* Chrome, Safari, Edge, Opera */
+	/* input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+	  -webkit-appearance: none;
+	  margin: 0;
+	}
+	input::-webkit-inner-spin-button {
+	  appearance: none;
+	  -moz-appearance: none;
+	  -webkit-appearance: none;
+	} */
   }
 </style>
 
@@ -380,15 +392,85 @@ $(document).ready(function() {
                </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-4" id="updateepoint">
                <div class="bg-white text-black mx-3" style="height: 153px;">
 
                   <br/> <strong class="mytop01"><span style="font-size: 25px;">진욱페이 &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span></strong>
-                  &nbsp;&nbsp;<a href="#" id="preRegister" data-toggle="modal" data-target="#exampleModal" style="color:gray;">충전하기</a><br><br>
-                  <div><h2 class="mytop01-content " id="request" style="padding-left:170px;"><span class="countall" id="iamportplus">${sessionScope.user.jpBalance}</span></h2> 원</div>
+                  &nbsp;&nbsp;<c:if test="${user.jpPassword != null}"><a href="#" id="preRegister" data-toggle="modal" data-target="#exampleModal" style="color:gray;">충전하기</a></c:if>
+                  <c:if test="${user.jpPassword == null}"><a href="#" id="AddjpPassword" data-toggle="modal" data-target="#addPwModal" style="color:gray;">비밀번호등록하기</a></c:if>
+                  <br><br>
+                  <div><h2 class="mytop01-content " id="request" style="padding-left:170px;"><span class="countall" id="iamportplus">${user.jpBalance}</span></h2> 원</div>
                   <br/> <br/>
                </div>
             </div>
+            <div class="modal fade" id="addPwModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">진욱페이 결제비밀번호 등록</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <form>
+				          <div class="form-group">
+				            <label for="recipient-name" class="col-form-label">새 결제비밀번호</label>
+				            <input type="text" class="form-control" maxlength="6" placeholder="비밀번호 6자리 입력바랍니다." id="newJpPassword" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+				          </div>
+				          <div class="form-group">
+				            <label for="message-text" class="col-form-label">새 결제비밀번호 확인</label>
+				            <input type="text" class="form-control" maxlength="6" placeholder="비밀번호 6자리 입력바랍니다." id="newJpPasswordCk" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+				          </div>
+				        </form>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				        <button type="button" class="btn btn-primary" onclick="AddJpPassword(this)">비밀번호 등록하기</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+            <div>
+            
+            <script type="text/javascript">
+            
+            function AddJpPassword(e) {
+            	 const jpPassword = $("#newJpPassword").val();
+            	 const jpPasswordCk = $("#newJpPasswordCk").val();
+            	
+            	 if(jpPassword == null || jpPassword.length <5){
+            		 swal("진욱이네","결제비밀번호는 6자리 반드시 입력하셔야 합니다.");
+     				return;
+     			}
+     			if(jpPasswordCk == null || jpPasswordCk.length <5){
+     				swal("진욱이네","결제비밀번호는 확인은 6자리 반드시 입력하셔야 합니다.");
+     				return;
+     			}
+     			console.log(jpPassword)
+     			console.log(jpPasswordCk)
+            	 if(jpPassword == jpPasswordCk){
+            		 $.ajax({
+						 url : "/orders/addOrdersJpayPassword",   
+                         type : "post",
+                         dataType : "json",
+                         async: false,
+                         data : {"jpPassword" : jpPassword },
+                         success : function(result){
+                        	 alert(jpPassword)
+                         	self.location="";
+                         	/* $("#updateepoint").load("/user/myPage #updatepoint"); */
+                        	}
+                        });
+     			}else{
+     				swal("진욱이네","비빌번호가 일치하지 않습니다. 다시입력해주세요","warning")
+     			}
+            }
+            
+            </script>
+            
+            </div>
+            
                <div class="modal fade" id="exampleModal" data-toggle="modal" 
                   tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog " style="width: 530px; heigh: 300px;">
@@ -599,24 +681,36 @@ $(document).ready(function() {
                             pg : 'kcp',
                             pay_method : 'card',
                             merchant_uid : 'merchant_' + new Date().getTime(),
-                            name : '진욱페이'+(100*1.1) , //결제창에서 보여질 이름
-                            amount :100, //실제 결제되는 가격
+                            name : '진욱페이'+(cash*1.1) , //결제창에서 보여질 이름jpBalance
+                            amount :cash, //실제 결제되는 가격
                             buyer_email : email,
                             buyer_name : userName,
                             buyer_tel : phone,
                         }, function(rsp) {
+                           jpBalance = Number(jpBalance)+(cash*1.1)
+                           alert(jpBalance)
                            console.log(rsp);
                             if ( rsp.success ) {
-                            	alert(rsp.success)
-                               var msg = '결제가 완료되었습니다.';
-                               jpBalance = Number(jpBalance)+(100*1.1);
-                               console.log(jpBalance);
-                               
+                              alert(rsp.success)
+                            	var msg = '결제가 완료되었습니다.';
+                              $.ajax({
+								url : "/orders/importJpayCharge",   
+                                type : "post",
+                                dataType : "json",
+                                async: false,
+                                data : {"jpBalance" : jpBalance },
+                                success : function(result){
+                                	alert(result)
+                                	self.location="";
+                                	/* $("#updateepoint").load("/user/myPage #updatepoint"); */
+                               	}
+                               });
+                              self.location="";
                                 /* msg += '고유ID : ' + rsp.imp_uid;
                                 msg += '상점 거래ID : ' + rsp.merchant_uid;
                                 msg += '결제 금액 : ' + rsp.paid_amount;
                                 msg += '카드 승인번호 : ' + rsp.apply_num; */
-                                self.location="";
+                                
                             } else {
                                 var msg = '결제에 실패하였습니다.';
                                  msg += '에러내용 : ' + rsp.error_msg;
@@ -804,7 +898,7 @@ $(document).ready(function() {
 					</div>
 					<div>
 						<input type="text" style="width:100px;"
-							class="form-control" id="reviewWriter" name="reviewWriter">
+							class="form-control" id="reviewWriter" name="reviewWriter" value="${user.userId}" placeholder="${user.userId}" readonly="readonly">
 					</div>
 				</div>
 				
@@ -813,14 +907,14 @@ $(document).ready(function() {
 						<label for="reviewStar"><i class="bi bi-star"></i> 별점</label> 
 					</div>
 					<div>
-						<input type="number" style="width:100px;" min="1" max="5" step="0.1"
+						<input type="number" style="width:100px;" min="1" max="5" step="0.5"
 							class="form-control" id="reviewStar" name="reviewStar">
 					</div>
 				</div>
 				
 				<div>
 					<div style="text-align:left;">
-						<label for="reviewContent">후기 내용</label> 
+						<label for="reviewContent"><i class="bi bi-card-text"></i> 후기 내용</label> 
 					</div>
 					<div>
 						<textarea class="form-control" id="reviewContent"

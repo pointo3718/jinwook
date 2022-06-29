@@ -82,7 +82,7 @@
    <select id="getStoreList" parameterType="String" resultMap="storeSelectMap2">
  	  SELECT
 	      s.store_no, s.store_phone, s.store_name, s.store_type, s.store_addr,
-	      s.store_intro, vt.review_star
+	      s.store_intro, vt.review_star, is_open
       FROM 
       	  store s, orders o,
       	  (SELECT ROUND(AVG(review_star),1) review_star FROM orders)vt
@@ -113,7 +113,7 @@
 			user_bye_status = 0 
 		<include refid="CommonMapper.search" />		
 		ORDER BY 
-			reg_date
+			reg_date DESC
 		<include refid="CommonMapper.paging" />
 		
 	</select>
@@ -143,7 +143,7 @@
 			s.store_status = 2
 				
 		ORDER BY 
-			s.store_no
+			s.store_no DESC
 		<include refid="CommonMapper.paging" />
 	</select>
 	
@@ -189,13 +189,13 @@
 				<if test= 'complainCode == "기타"'>
 				, '기타' <!-- reqNo, commentNo,  -->
 				</if>
-				, #{rcpNo} <!-- 컬럼 추가해야 할듯 ... reqNo, commentNo, reviewNo 받는 -->
+				, #{rcpNo} 
 				, null
 				, null
 				,0
 				,0
 			)
-			<!-- 해당 게시글로 넘어갈 수 있는 메서드 필요... board에 있을듯 ... -->
+			<!-- 해당 게시글로 넘어갈 수 있는 메서드 필요... board에... -->
 	</insert>
 
 
@@ -208,7 +208,7 @@
 		WHERE
 			complain_delete_yn = false
 		ORDER BY 
-			complain_no
+			complain_date
 		LIMIT
 			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
@@ -295,6 +295,8 @@
 			u.blacklist_status = true
 		GROUP BY
 			u.user_id
+		ORDER BY
+			blacklist_regdate DESC
 	</select>
 	
 	

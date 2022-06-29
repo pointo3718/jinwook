@@ -123,7 +123,12 @@
                          <div class="blog__item__text">
                              <ul>
                                  <li><i class="fa fa-calendar-o"></i>${store.orders.reviewStar}</li>
-                                 <li><i class="fa fa-comment-o"></i> 운영중</li>
+                                 <c:if test="${store.open == true }">
+                                 <li><i class="fa fa-comment-o"></i>운영중</li>
+                                 </c:if>
+                                 <c:if test="${store.open == false }">
+                                 <li><i class="fa fa-comment-o"></i>운영종료</li>
+                                 </c:if>
                              </ul>
                              <h5><a href="#">${store.storeName}</a></h5>
                              <p>${store.storeIntro} </p>

@@ -46,7 +46,6 @@ public class RequestController {
 	// ========== 마이페이지 폼 ===========
 	@GetMapping(value = "myPage")
 	public String mypage() {
-		
 		return "/user/myPage";
 	}
 	

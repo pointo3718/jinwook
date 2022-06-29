@@ -190,6 +190,8 @@ public class StoreController {
 	public String addStoreProduct(@ModelAttribute Product product, MultipartHttpServletRequest mpRequest) throws Exception {
 		
 		System.out.println("/store/addStoreProduct : POST");
+		
+		Store store=new Store();
 
 		//////// 파일 업로드 ///////
 		List<MultipartFile> fileList = mpRequest.getFiles("file");
@@ -208,7 +210,7 @@ public class StoreController {
            System.out.println(safeFile);
            try {
                mf.transferTo(new File(safeFile));
-               storeService.addStoreProduct(product, mpRequest);//상점 등록
+               storeService.addStoreProduct(product, mpRequest);//상품 등록
            } catch (IllegalStateException e) {
                // TODO Auto-generated catch block
                e.printStackTrace();
@@ -220,7 +222,7 @@ public class StoreController {
 		
 		///////////////////////////
 		
-		return "/store/addStoreProduct?storeNo=10000";
+       return "redirect:/store/addStoreProduct?storeNo=10000";
 	}
    
    
@@ -330,6 +332,15 @@ public class StoreController {
       model.addAttribute("storeInfo", storeInfo);
 
       return "store/getStoreWallet";
+   }
+   
+   @GetMapping(value = "storeNo")
+   public String storeNo( HttpSession session) {
+
+      String userid = ((User) session.getAttribute("user")).getUserId();
+
+
+      return "store/storeNo";
    }
 
 //   @GetMapping(value = "getStoreRefund")

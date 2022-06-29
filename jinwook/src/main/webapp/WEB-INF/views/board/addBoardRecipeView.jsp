@@ -149,7 +149,7 @@ function fn_addFile() {
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-section set-bg"
-		style="background-color: #F2F2F2">
+		style="background-color: #F2F2F2;">
 
 
 
@@ -163,7 +163,7 @@ function fn_addFile() {
 
 				<!-- 상점 정보 수정 -->
 				<div>
-					<h4 class="text-left">
+					<h4 class="text-left" style="margin-top:30px;">
 						<strong><i class="bi bi-hand-index"></i>&nbsp; 레시피 정보 등록</strong>
 						<hr size="10px">
 					</h4>

@@ -39,8 +39,6 @@
    justify-content: center;
    align-items: center;
 }
-
-
 </style>
 
 
@@ -94,36 +92,50 @@
                                  class="fa fa-star" aria-hidden="true"></i>${sessionScope.user.grade }
                                  ${sessionScope.user.nickName } 님</a>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                 <a class="dropdown-item" href="/orders/getOrdersList">마이페이지</a> <a
-                                    class="dropdown-item" href="/orders/getOrdersList">주문내역</a>
-                                 <a class="dropdown-item" href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보</a> <a
-                                    class="dropdown-item" href="/board/getBoardInquiryList">1:1문의</a>
+                                 <a class="dropdown-item" href="/orders/getOrdersList">마이페이지</a>
+                                 <a class="dropdown-item" href="/orders/getOrdersList">주문내역</a>
+                                 <a class="dropdown-item"
+                                    href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보</a>
+                                 <a class="dropdown-item" href="/board/getBoardInquiryList">1:1문의</a>
                                  <a class="dropdown-item"
                                     href="/board/getBoardAnnouncementList">공지사항</a> <a
-                                    class="dropdown-item" href="/user/myArticle?userId=${sessionScope.user.userId }">작성한글</a> <a
-                                    class="dropdown-item" href="#"></a> <a class="dropdown-item"
-                                    href="/user/logout">로그아웃</a>
+                                    class="dropdown-item"
+                                    href="/user/myArticle?userId=${sessionScope.user.userId }">작성한글</a>
+                                 <a class="dropdown-item" href="#"></a> <a
+                                    class="dropdown-item" href="/user/logout">로그아웃</a>
                               </div>
                            </div>
                         </c:if>
                         <c:if test="${sessionScope.user.role == '사장님'}">
-                           <input type="hidden" name="userId" id="userId"
-                              value=${sessionScope.user.userId }>
-                           <div class="dropdown">
-                              <a href="/admin/blog"
-                                 style="word-break: break-all; margin-right: 20px;"
-                                 class="dropdown-toggle" role="button" id="dropdownMenuLink"
-                                 data-toggle="dropdown" aria-expanded="false"><i
-                                 class="fa fa-thumbs-o-up" aria-hidden="true"></i>${sessionScope.user.userName }
-                                 사장님</a>
+                           <c:if test="${sessionScope.user.storeYn == true}">
+                              <input type="hidden" name="userId" id="userId"
+                                 value=${sessionScope.user.userId }>
+                              <div class="dropdown">
+                                 <a href="/admin/blog"
+                                    style="word-break: break-all; margin-right: 20px;"
+                                    class="dropdown-toggle" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-expanded="false"><i
+                                    class="fa fa-thumbs-o-up" aria-hidden="true"></i>${sessionScope.user.userName }
+                                    사장님</a>
 
-                              <tbody class="getStoreNo">
+                                 <div class="getStoreNoNo" name="getStoreNoNo"
+                                    id="getStoreNoNo"></div>
+                              </div>
+                           </c:if>
 
+                           <c:if test="${sessionScope.user.storeYn == false}">
+
+                              <div class="dropdown">
+                                 <a href="/admin/blog"
+                                    style="word-break: break-all; margin-right: 20px;"
+                                    class="dropdown-toggle" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-expanded="false"><i
+                                    class="fa fa-heart" aria-hidden="true"></i>${sessionScope.user.userName }
+                                    사장님</a>
                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item"
-                                       href="/store/addStoreProduct?storeNo=10000">사장님페이지</a> <a
-                                       class="dropdown-item" href="/orders/getOrdersList">주문내역</a> <a
+                                    <a class="dropdown-item" href="/store/storeNo">사장님페이지</a> <a
                                        class="dropdown-item"
+<<<<<<< HEAD
                                        href="/store/updateStore?storeNo=10000">상점정보수정</a> <a
                                        class="dropdown-item" href="/user/confirmPasswordViewC?userId=${sessionScope.user.userId}">개인정보수정</a> <a
                                        class="dropdown-item"
@@ -135,12 +147,19 @@
                                        class="dropdown-item" href="/board/getBoardInquiryList">1:1
                                        문의</a> <a class="dropdown-item" href="#"></a> <a
                                        class="dropdown-item" href="/user/logout">로그아웃</a>
+=======
+                                       href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보수정</a>
+                                    <a class="dropdown-item" href="/board/getBoardInquiryList">1:1
+                                       문의내역</a>
+>>>>>>> refs/remotes/origin/master
                                  </div>
+                              </div>
+                           </c:if>
 
-
-                              </tbody>
-                           </div>
                         </c:if>
+
+
+
                         <c:if test="${sessionScope.user.role == '관리자'}">
                            <div class="dropdown">
                               <a href="/admin/blog"
@@ -162,11 +181,8 @@
                                     href="/request/getRequestListForAdmin?reqCode=3">환급 요청</a> <a
                                     class="dropdown-item"
                                     href="/request/getRequestListForAdmin?reqCode=4">광고 등록
-                                    요청</a> <a class="dropdown-item"
-                                    href="/request/getRequestListForAdmin?reqCode=4">문의 내역</a> <a
-                                    class="dropdown-item" href="/board/getBoardInquiryList">1:1
-                                    문의</a> <a class="dropdown-item"
-                                    href="/board/getBoardAnnouncementList">공지사항</a> <a
+                                    요청</a><a class="dropdown-item" href="/board/getBoardInquiryList">1:1
+                                    문의내역</a> <a class="dropdown-item" href="/admin/chart">통계</a> <a
                                     class="dropdown-item" href="#">로그아웃</a>
                               </div>
                            </div>
@@ -204,7 +220,8 @@
                            <a href="/user/kakaoLogout">Logout <i
                               class="fa fa-sign-out" aria-hidden="true"></i></a>
                         </c:if>
-                        <c:if test="${sessionScope.user ne null && sessionScope.access_Token eq null}">
+                        <c:if
+                           test="${sessionScope.user ne null && sessionScope.access_Token eq null}">
                            <a href="/user/logout">로그아웃 <i class="fa fa-sign-out"
                               aria-hidden="true"></i></a>
                         </c:if>
@@ -257,18 +274,18 @@
                <nav class="header__menu"
                   style="padding-top: 0px; padding-bottom: 15px; position: sticky;">
                   <ul style="margin-left: 60px;">
-                     <li><a href="/board/getRecipeList" ><span
+                     <li><a href="/board/getRecipeList"><span
                            style="font-size: 18px;"> #레시피</span></a></li>
                      <li><a class="scroll_move" href="#scroll1"><span
-                           style="font-size: 18px;"> #구경하기</span></a>
-                        <!-- <ul class="header__menu__dropdown">
+                           style="font-size: 18px;"> #구경하기</span></a> <!-- <ul class="header__menu__dropdown">
                            <li><a href="/store/addStoreProduct?storeNo=10000">Shop
                                  Details</a></li>
                            <li><a href="./shoping-cart.html">Shoping Cart</a></li>
                            <li><a href="./checkout.html">Check Out</a></li>
                            <li><a href="./blog-details.html">Blog Details</a></li>
                         </ul> --></li>
-                     <li><a class="scroll_move" href="#scroll2"><span style="font-size: 18px;"> #화제의 레시피</span></a></li>
+                     <li><a class="scroll_move" href="#scroll2"><span
+                           style="font-size: 18px;"> #화제의 레시피</span></a></li>
                      <li><a class="scroll_move" href="#scroll3"><span
                            style="font-size: 18px;"> #광고</span></a></li>
                   </ul>
@@ -279,20 +296,20 @@
                <div class="header__cart"
                   style="padding-bottom: 0px; margin-top: 10px">
                   <ul>
-                  	 
-                     <li><a href="#" style="top: 1px;"><i style="font-size: 25px;" class="fa fa-heart"></i> 
-                     <c:if test="${sessionScope.user ne null}">
-                     <span class="countorders" style="width: 16px; height: 16px;"></span>
-                     </c:if>
-                     </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                     
-                     
-                     
-                     <li><a href="/orders/getOrdersCartList"><i style="font-size: 25px;" class="fa fa-shopping-bag"></i> 
-                     <c:if test="${sessionScope.user ne null and sessionScope.user.role eq '사용자'}">
-                     <span class="countCart" style="width: 16px; height: 16px;"></span>
-                     </c:if>
-                     </a></li>
+
+                     <li><a href="#" style="top: 1px;"><i
+                           style="font-size: 25px;" class="fa fa-heart"></i> <c:if
+                              test="${sessionScope.user ne null}">
+                              <span class="countorders" style="width: 16px; height: 16px;"></span>
+                           </c:if> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+
+
+
+                     <li><a href="/orders/getOrdersCartList"><i
+                           style="font-size: 25px;" class="fa fa-shopping-bag"></i> <c:if
+                              test="${sessionScope.user ne null and sessionScope.user.role eq '사용자'}">
+                              <span class="countCart" style="width: 16px; height: 16px;"></span>
+                           </c:if> </a></li>
                   </ul>
                </div>
             </div>
@@ -303,83 +320,101 @@
 
 
    <script type="text/javascript">
-/*   
+   
       $(function() {
             getStoreNo();
          });
-       
+      
 
          function getStoreNo() {
                  
                var userId = $("#userId").val();
             
-               var uri = "/store/getStoreNo/userId"
+               var uri = "/store/getStoreNo/"+userId
+               
 
                $.get(uri, function(response) { 
                   
-                     var getStoreNoHtmlBody = "";
+                     var getStoreNoNoHtmlBody = "";
                      
                      $(response.getStoreNo).each(function(idx,store) {              
 
-                        getStoreNoHtmlBody += `
-                        
+                        getStoreNoNoHtmlBody += `
+ 
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item"
+                               href="/store/addStoreProduct?storeNo=\${store.storeNo}">사장님페이지</a> <a
+                               class="dropdown-item" href="/orders/getOrdersListCeo">주문내역</a> <a
+                               class="dropdown-item"
+                               href="/store/updateStore?storeNo=\${store.storeNo}">상점정보수정</a> <a
+                               class="dropdown-item" href="/user/confirmPasswordViewC?userId=${sessionScope.user.userId}">개인정보수정</a> <a
+                               class="dropdown-item"
+                               href="/store/addStoreProduct?storeNo=\${store.storeNo}">상품등록</a> <a
+                               class="dropdown-item" href="/request/addRequestAd?storeNo=\${store.storeNo}">광고등록</a> <a
+                               class="dropdown-item" href="/request/getRequestAdStoreList?storeNo=\${store.storeNo}&userId=${sessionScope.user.userId}">내가 한 요청</a> <a
+                               class="dropdown-item"
+                               href="/store/getStoreWallet?storeNo=\${store.storeNo}">지갑</a> <a
+                               class="dropdown-item" href="/board/getBoardInquiryList">1:1
+                               문의</a> <a class="dropdown-item" href="#"></a> <a
+                               class="dropdown-item" href="/user/logout">로그아웃</a>
+                         </div>
 
                          
                             
                         `;
+                        
                      });
                      
                      
-                     $(".getStoreNo").html(getStoreNoHtmlBody);
-                     //$(".userlisthead").html(blacklistHtmlBody);
+                     $(".getStoreNoNo").html(getStoreNoNoHtmlBody);
                   
                }, "json");
 
          }   
    
-*/   
+  
 
 
 
 ////////////////주문내역 카운트 REST 시작   /////////////////
 
-	$(function() {
-	countOrders();
-	});
-	
-	function countOrders() {
-	
-	var uri = "../admin/countOrders";
-	
-	$.get(uri, function(response) {
-	
-	
-	$(".countorders").text(`\${response.countOrders}`);
-	
-	}, "json");
-	}
+   $(function() {
+   countOrders();
+   });
+   
+   function countOrders() {
+   
+   var uri = "../admin/countOrders";
+   
+   $.get(uri, function(response) {
+   
+   
+   $(".countorders").text(`\${response.countOrders}`);
+   
+   }, "json");
+   }
 
 ////////////////주문내역 카운트 REST 끝   /////////////////
 
 
 ////////////////장바구니 카운트 REST 시작   ////////////////
 
-	$(function() {
-	countCart();
-	});
-	
-	function countCart() {
-	
-	var uri = "../admin/countCart";
-	
-	$.get(uri, function(response) {
-	
-	
-	$(".countCart").text(`\${response.countCart}`);
-	
-	}, "json");
-	}
-	
+   $(function() {
+   countCart();
+   });
+   
+   function countCart() {
+   
+   var uri = "../admin/countCart";
+   
+   $.get(uri, function(response) {
+   
+   
+   $(".countCart").text(`\${response.countCart}`);
+   
+   }, "json");
+   }
+   
 ////////////////장바구니 카운트 REST 끝   /////////////////
 
 //////////////// 스크롤 이동   /////////////////

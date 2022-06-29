@@ -167,27 +167,29 @@ function movePage(uri, queryString) {
     <div class="contact-form spad">
         <div class="container" style="background-color: #F2F2F2;">
             <div class="row">
+            
                 <div class="col-lg-12" style="background-color: #F2F2F2;">
                     <div class="contact__form__title">
-                        <h2><i class="bi bi-question-lg"></i>&nbsp;1:1문의</h2>
+                        <h2 style="margin-top:20px;"><i class="bi bi-telegram"></i></i>&nbsp;1:1문의</h2>
                     </div>
                 </div>
             </div>
             <form>
-                <div class="row" style="background-color: #F2F2F2;">
-                
-                <div class="imgborder">
-                <img attachNo="${attach.attachNo}" width="400" height="400"
-					src="/resources/static/${attach.orgFileName}" alt="..."
-					onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" 
-					width="300" height="300" style="margin-left: 20px; margin-bottom: 20px;"/>
-				</div>
-                
-                    <div class="col-sm-4 col-sm-4" >
-                        <input type="text" readonly="readonly" value="${board.boardTitle}" style="text-align:center; width:500px;">
-                    </div>`
+                <div class="row" style="background-color: #F2F2F2; padding-bottom:100px; padding-right:30px; padding-left:30px;">
+                <div>
+                	<div class="col-sm-5 col-sm-5" style="margin: auto;">
+                        <input type="text" readonly="readonly" value="${board.boardTitle}" style="text-align:center; width:500px; margin-left:50px; font-weight:bold;">
+                    </div>
+                <div style="margin:auto;">
+                	<img attachNo="${attach.attachNo}" width="400" height="400" 
+						src="/resources/static/${attach.orgFileName}" alt="..."
+						onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" 
+						width="300" height="300" style="margin-left: 300px; margin-bottom: 20px;"/>
+					</div>
+                </div>
+                    
                     <div class="col-sm-4 col-sm-4">
-                        <i class="bi bi-eye"></i> ${board.boardHits}<br/>
+                        <i class="bi bi-eye"></i> ${board.boardHits}<br/><br/>
  						<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  						
                     </div>
@@ -206,7 +208,7 @@ function movePage(uri, queryString) {
                   <c:if test="${sessionScope.user.role == '관리자'}">
 					<div class="card mb-2" style="margin-left:20px;">
 						<!-- 댓글 헤더 -->
-						<div class="card-header bg-light">
+						<div class="card-header bg-light" style="font-weight:bold;">
 							<i class="fa fa-comment fa"></i> 1:1문의 답변
 						</div>
 					<form name="replyForm" method="post" action="addInquiryComment">
@@ -229,7 +231,7 @@ function movePage(uri, queryString) {
 					<!-- 댓글 작성폼 end -->
 					
 					<!-- 댓글 리스트 조회 폼 start -->
-					<div class="card">
+					<div class="card" style="margin-left:30px;">
 						<div class="card-header">답변 내역</div>
 							<ul id="comment" class="commentList">
 								<c:forEach items="${commentList}" var="board">
@@ -242,8 +244,8 @@ function movePage(uri, queryString) {
                         					data-value="${recipe.comment.commentNo}" onClick="fncUpdateRecipeComment(this)">수정</button>&nbsp;&nbsp;&nbsp; --%>
 											
 											<c:if test="${sessionScope.user.role == '관리자'}">
-											<button data-value="${board.comment.commentNo}" id="buttons" type="button" class="btn btn-primary" 
-											onClick="fncDeleteInquiryComment(this)">X</button>
+											<button data-value="${board.comment.commentNo}" id="buttons" type="button" class="site-btn" 
+											onClick="fncDeleteInquiryComment(this)" style="padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px;">X</button>
 											</c:if>
 										</div>
 									</li>
@@ -252,30 +254,7 @@ function movePage(uri, queryString) {
 					</div>
 					<!-- 댓글 조회 폼 end -->
                     
-                   <%--  <!-- 답변 리스트 조회 -->
-					<div class="replies" style="margin-left:20px; margin-top:20px; margin-bottom:20px;">
-						<div class="reply">
-							<div class="content">
-								<ol class="commentList">
-									<c:forEach items="${commentList}" var="board">
-										<li>
-											<p>
-												작성자 : ${board.comment.commentWriter}<br />
-											</p>
-											<p>
-												작성 날짜 :
-												<fmt:formatDate value="${board.comment.commentDate}"
-													pattern="yyyy-MM-dd" />
-											</p>
-
-											<p>댓글: ${board.comment.commentContent}</p>
-										</li>
-									</c:forEach>
-								</ol>
-							</div>
-						</div>
-					</div> --%>
-                    
+                                      
                 </div>
         </div>
     </div>
