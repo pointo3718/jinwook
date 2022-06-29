@@ -641,49 +641,19 @@ label {
 							<div style="font-size:14px;">요청사항 : ${orders.orderReq}</div>
 							<div style="font-size:14px;">픽업시간 : <fmt:formatDate value="${orders.pickupTime}" type="time" timeStyle="short"/></div>						
 						</div>
-						<%--  <c:if test="${role==사용자}"> --%>
-						<div class="buyer col-sm-2" style="float:left; font-size:15Spx;">
-						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주문 금액<div class="text-center">${orders.orderPrice}</div>
-						</div>
-						<div class="buyer col-sm-2" style="float:left; font-size:15px;">
-						<br>쿠폰할인 금액<div>${orders.coupon.couponType}</div>
-						</div>
-						<div class="buyer col-sm-2" style="float:left; font-size:15px;">
-						<br>회원등급 할인<div value="${user.grade}"></div>
-							                               	<c:choose>
-										<c:when test="${user.grade=='프랜즈'}">
-											<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${orders.orderPrice*0.01}"/>${total}원</td>
-											<input type="hidden" value=${"total"}>
-										</c:when>
-									    <c:when test="${user.grade=='패밀리'}">
-											<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${orders.orderPrice*0.03}"/>${total}원</td>
-									    	<input type="hidden" value=${"total"}>
-									    </c:when>
-									    <c:when test="${user.grade=='퍼스트'}">
-									    	<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${orders.orderPrice*0.05}"/>${total}원</td>
-									    	<input type="hidden" value=${"total"}>
-									    </c:when>
-										<c:when test="${user.grade=='일반'}">
-								    	<td align="left" ><fmt:formatNumber var="total" pattern="###" value="${orders.orderPrice*0}"/>${total}원</td>
-									    	<input type="hidden" value=${"total"}>
-									    </c:when>
-								     </c:choose>
-						</div>
-						<div class="buyer col-sm-2" style="float:left; font-size:15px;">
-						<br>결제금액<div value="${orders.finalPrice }">${orders.orderPrice-total}</div>
-						</div>
 							
 						<div class="buyer col-sm-2" style="float:left; font-size:15Spx;">
 						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주문 금액<div class="text-center">${orders.orderPrice}</div>
+						<input type="hidden" value="${orders.orderStatus}" id="orderStatus" date-status="${orders.orderStatus}">
 						</div>
 						<c:if test="${orders.orderStatus == '1'}">
 						<div class="buyer col-sm-3 text-right" style="float:left; font-size:15px; ">
 						<br>
-							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px; height: 36px; font-size:17px;">주문수락</button>
+							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px; height: 36px; font-size:17px;  padding-top: 0px;padding-bottom: 0px;" onclick="updateOrdersStatus(this)">주문수락</button>
 						</div>
 						<div class="buyer col-sm-3" style="float:left; font-size:15px;">
 						<br>
-							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px; height: 36px; font-size:17px;">주문거절</button>
+							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px; height: 36px; font-size:17px;  padding-top: 0px;padding-bottom: 0px;" onclick="updateOrdersStatus(this)">주문거절</button>
 						</div>
 						</c:if>
 <%-- 						<c:if test="${orders.orderStatus == '2' || orders.orderStatus == '4'}">
@@ -692,7 +662,7 @@ label {
 						<c:if test="${orders.orderStatus == '3'}">
 							<div class="buyer col-sm-3" style="float:left; font-size:15px;">
 						<br>
-							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px; height: 36px; font-size:17px;">픽업완료</button>
+							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px; height: 36px; font-size:17px;  padding-top: 0px;padding-bottom: 0px;" onclick="updateOrdersStatus(this)">픽업완료</button>
 						</div>
 						</c:if>
 						<c:if test="${orders.orderStatus == '5'}">
@@ -702,19 +672,30 @@ label {
 						</div>
 				</c:forEach>
 				</div>
-				<div>
-				<br><br><br>
-					<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px; height: 36px; font-size:17px; float:right; padding-top: 0px;padding-bottom: 0px; margin-right: 33px;" onclick="">주문거절</button>
-				</div>
 			</div>
 		</div>
 		</div>
 	</section>
-	<!-- <script type="text/javascript">
-		function(){
+	<script type="text/javascript">
+		function updateOrdersStatus(e){
+			
+			const orderStatus = $(e).data('status');
+/* 			const orderStatus = ${"#orderStatus"} */
+			alert(orderStatus)
+			$.ajax({
+				url : "/orders/updateOrdersStatus",
+				type : "post",
+				dataType : "json",
+				async : false,
+				data : {"orderStatus" : orderStatus},
+				success : function(result){
+					self.location="";
+				}
+			});
+			
 			
 		}
-	</script> -->
+	</script>
 	
 
 	<!-- Footer Begin -->   

@@ -312,6 +312,7 @@ label {
          'prodCount' : prodCount
          /* 'prodCount' : prodCount */
       };
+      
       console.log(storeNo);
       console.log(prodNo);
       console.log(storeName);
@@ -330,7 +331,7 @@ label {
          }
       });
    }
-   
+  
    $('#myModal').on('shown.bs.modal', function () {
 	     $('#myInput').trigger('focus')
 	   })
