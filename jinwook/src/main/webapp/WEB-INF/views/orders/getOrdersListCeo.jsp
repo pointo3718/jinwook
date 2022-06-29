@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -43,7 +43,8 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
@@ -181,13 +182,14 @@ label {
 	cursor: inherit;
 	display: block;
 }
-     body {
-            padding-top : 0px;
-        }
-        
-     .rating svg:nth-chiled(-n+3) {
-     	color:#f05522;
-     }   
+
+body {
+	padding-top: 0px;
+}
+
+.rating svg:nth-chiled(-n+3) {
+	color: #f05522;
+}
 </style>
 
 
@@ -548,38 +550,7 @@ label {
 							<br />
 
 
-
-							<div class="list-group text-center" style="font-size: 15px;">
-								<button type="button"
-									class="list-group-item list-group-item-action"
-									aria-current="true">주문 내역</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">상점 정보
-									수정</button>
-								<button type="button"
-									class="list-group-item list-group-item-action" class="addStore">
-									<span class="addStore">개인 정보 수정</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="deleteStore">상품 등록</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="refundStore">광고 등록</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="adStore">내가 한 요청</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="adStore">지갑</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">1:1
-									문의내역</button>
-							</div>
+							<div class="getStoreNo"></div>
 
 						</div>
 
@@ -587,74 +558,149 @@ label {
 					</div>
 				</div>
 				<!-- 상품등록  Begin -->
-			<div>
-               <h4 class="text-left">
-                  <strong>주문 내역</strong>
-                  <p class="text-muted" style="display: inline; font-size: 12px;">
-                  주문 내역을 조회할 수 있습니다
-                  </p>                  
-                  <!-- Button trigger modal -->
-				
-                  <hr size="10px">
-               </h4>
-            
+				<div>
+					<h4 class="text-left">
+						<strong>주문 내역</strong>
+						<p class="text-muted" style="display: inline; font-size: 12px;">
+							주문 내역을 조회할 수 있습니다</p>
+						<!-- Button trigger modal -->
 
-               <table class="table table-hover"
-                  style="width: 730px; heigh: 300px; font-size: small;">
+						<hr size="10px">
+					</h4>
 
-         <thead>
-          <tr>
-            <th align="center">주문번호</th>
-            <th align="left">상품이름</th>
-            <th align="left">주문금액</th>
-            <th align="left" >주문날짜</th>
-            <!-- <th align="left" >상품사진</th> -->
-            <th align="left">픽업시간</th>
-            <th align="left">주문현황</th>
-            <th align="left">&nbsp;</th>
-          </tr>
-       </thead>
-        
-      <tbody>
-        <c:set var="i" value="0" />
-        <c:forEach var="orders" items="${getOrdersList}">
-         <c:set var="i" value="${ i+1 }" />
-         <tr>
-           <td align="center" value="${orders.orderNo}">${orders.orderNo}</td>
-           <td align="left">${orders.product.prodName}</td>
-           <td align="left">${orders.orderPrice}</td>
-           <td align="left"><fmt:formatDate value="${orders.orderDate}" dateStyle="full"/></td>
-           <%-- <td align="left">${orders.product.prodImg}</td> --%>
-           <td align="left"><fmt:formatDate value="${orders.pickupTime}" type="time" pattern="a hh:mm"/></td>
-           <td align="left">
-           <c:if test="${orders.orderStatus eq '1'}">주문 접수중</c:if>
-           <c:if test="${orders.orderStatus eq '2'}">주문 거절</c:if>
-           <c:if test="${orders.orderStatus eq '3'}">픽업 준비중</c:if>
-           <c:if test="${orders.orderStatus eq '4'}">주문 취소</c:if>
-           <c:if test="${orders.orderStatus eq '5'}">픽업 완료</c:if>
-           </td>
-           <td><a href="/orders/getOrdersCeo?orderNo=${orders.orderNo}" class="bi bi-caret-right"style="font-size :18px; text-decoration:none; color: #7fad39;"></a></td>
-         </tr>
-          </c:forEach>      
-          </tbody>
-               </table>
-			</div>
-			<div class="text-center">
-               <!-- PageNavigation Start... -->
-               <jsp:include page="../common/pageNavigator_new.jsp" />
-               <!-- PageNavigation End... -->
-            </div>		
-				
-            <!--  /////////////////////////////////////////////////// -->
+
+					<table class="table table-hover"
+						style="width: 730px; heigh: 300px; font-size: small;">
+
+						<thead>
+							<tr>
+								<th align="center">주문번호</th>
+								<th align="left">상품이름</th>
+								<th align="left">주문금액</th>
+								<th align="left">주문날짜</th>
+								<!-- <th align="left" >상품사진</th> -->
+								<th align="left">픽업시간</th>
+								<th align="left">주문현황</th>
+								<th align="left">&nbsp;</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<c:set var="i" value="0" />
+							<c:forEach var="orders" items="${getOrdersList}">
+								<c:set var="i" value="${ i+1 }" />
+								<tr>
+									<td align="center" value="${orders.orderNo}">${orders.orderNo}</td>
+									<td align="left">${orders.product.prodName}</td>
+									<td align="left">${orders.orderPrice}</td>
+									<td align="left"><fmt:formatDate
+											value="${orders.orderDate}" dateStyle="full" /></td>
+									<%-- <td align="left">${orders.product.prodImg}</td> --%>
+									<td align="left"><fmt:formatDate
+											value="${orders.pickupTime}" type="time" pattern="a hh:mm" /></td>
+									<td align="left"><c:if test="${orders.orderStatus eq '1'}">주문 접수중</c:if>
+										<c:if test="${orders.orderStatus eq '2'}">주문 거절</c:if> <c:if
+											test="${orders.orderStatus eq '3'}">픽업 준비중</c:if> <c:if
+											test="${orders.orderStatus eq '4'}">주문 취소</c:if> <c:if
+											test="${orders.orderStatus eq '5'}">픽업 완료</c:if></td>
+									<td><a
+										href="/orders/getOrdersCeo?orderNo=${orders.orderNo}"
+										class="bi bi-caret-right"
+										style="font-size: 18px; text-decoration: none; color: #7fad39;"></a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<div class="text-center">
+					<!-- PageNavigation Start... -->
+					<jsp:include page="../common/pageNavigator_new.jsp" />
+					<!-- PageNavigation End... -->
+				</div>
+
+				<!--  /////////////////////////////////////////////////// -->
 			</div>
 		</div>
-				<!-- 상품등록 End -->
+		<!-- 상품등록 End -->
 	</section>
 	<!-- ceoLeft Section End -->
 
 	<!-- Footer Begin -->
 	<jsp:include page="../layout/footer.jsp" />
 	<!-- Footer End -->
+
+
+	<script type="text/javascript">
+   
+   //======페이지 이동 상점번호 받아오기=========//
+     $(function() {
+            getStoreNo();
+         });
+      
+
+         function getStoreNo() {
+                 
+               var userId = $("#userId").val();
+            
+               var uri = "/store/getStoreNo/"+userId
+               
+
+               $.get(uri, function(response) { 
+                  
+                     var getStoreNoHtmlBody = "";
+                     
+                     $(response.getStoreNo).each(function(idx,store) {              
+
+                        getStoreNoHtmlBody += `
+ 
+							<div class="list-group text-center" style="font-size: 15px;">
+							<button type="button"
+								class="list-group-item list-group-item-action"
+								aria-current="true"><a href="/orders/getOrdersListCeo" style="color:black">주문 내역</button>
+							<button type="button"
+								class="list-group-item list-group-item-action"><a href="/store/updateStore?storeNo=\${store.storeNo}" style="color:black">상점 정보
+								수정</button>
+							<button type="button"
+								class="list-group-item list-group-item-action" class="addStore">
+								<span class="addStore"><a href="/user/confirmPasswordViewC?userId=${sessionScope.user.userId}" style="color:black">개인 정보 수정</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="deleteStore"><a href="/store/addStoreProduct?storeNo=\${store.storeNo}" style="color:black"> 상품 등록</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="refundStore"><a href="/request/addRequestAd?storeNo=\${store.storeNo}" style="color:black"> 광고 등록</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="adStore"><a href="/request/getRequestAdStoreList?storeNo=\${store.storeNo}&userId=${sessionScope.user.userId}" style="color:black"> 내가 한 요청</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="adStore"><a href="/store/getStoreWallet?storeNo=\${store.storeNo}" style="color:black"> 지갑</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action"><a href="/store/getStore?storeNo=\${store.storeNo}" style="color:black">내 상점 가기</button>
+							<button type="button"
+								class="list-group-item list-group-item-action"><a href="/board/getBoardInquiryList" style="color:black">1:1
+								문의내역</button>
+						</div>
+
+                         
+                            
+                        `;
+                     });
+                     
+                     
+                     $(".getStoreNo").html(getStoreNoHtmlBody);
+                     //$(".userlisthead").html(blacklistHtmlBody);
+                  
+               }, "json");
+
+         }     
+     
+</script>
 
 </body>
 

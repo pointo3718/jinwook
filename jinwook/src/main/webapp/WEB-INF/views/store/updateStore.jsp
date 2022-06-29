@@ -655,13 +655,13 @@ function fncAddRequestDeleteStore() {
 							<div class="list-group text-center" style="font-size: 15px;">
 							<button type="button"
 								class="list-group-item list-group-item-action"
-								aria-current="true"><a href="/orders/getOrdersList" style="color:black">주문 내역</button>
+								aria-current="true"><a href="/orders/getOrdersListCeo" style="color:black">주문 내역</button>
 							<button type="button"
 								class="list-group-item list-group-item-action"><a href="/store/updateStore?storeNo=\${store.storeNo}" style="color:black">상점 정보
 								수정</button>
 							<button type="button"
 								class="list-group-item list-group-item-action" class="addStore">
-								<span class="addStore"><a href="/user/confirmPasswordView?userId=${sessionScope.user.userId}" style="color:black">개인 정보 수정</span>
+								<span class="addStore"><a href="/user/confirmPasswordViewC?userId=${sessionScope.user.userId}" style="color:black">개인 정보 수정</span>
 							</button>
 							<button type="button"
 								class="list-group-item list-group-item-action">
