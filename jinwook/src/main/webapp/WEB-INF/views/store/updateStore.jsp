@@ -346,23 +346,7 @@ label {
 										<div class="col-sm-6">
 											<input type="email" name="storeType"
 												class="form-control form-control" id="storeType"
-												value="
-                                 
-                                 <c:if test="${store.storeType.trim()=='1'}">
-                                        정육         
-                                    </c:if>
-                                    <c:if test="${store.storeType.trim()=='2'}">
-                                        수산         
-                                    </c:if>
-                                    <c:if test="${store.storeType.trim()=='3'}">
-                                        채소         
-                                    </c:if>
-                                    <c:if test="${store.storeType.trim()=='4'}">
-                                        과일         
-                                    </c:if>
-                                    <c:if test="${store.storeType.trim()=='5'}">
-                                        종합         
-                                    </c:if>"
+												value="${store.storeType}"
 												placeholder="상점업종" readonly>
 										</div>
 									</div>

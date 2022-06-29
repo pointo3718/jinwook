@@ -279,20 +279,22 @@
 		<div class="container">
 			<div class="row">
 
-				<iframe width="360" height="315" class='preview_div'
-					src="https://www.youtube.com/embed/AlK2Gl6kHZI?autoplay=0&mute=1&showinfo=0&controls=0&autohide=1"
+				<iframe width="360" height="315" style="border-radius:50px;" class='preview_div'
+					src="https://www.youtube.com/embed/AlK2Gl6kHZI?autoplay=1&mute=1&showinfo=0&controls=0&autohide=1"
 					title="YouTube video player" frameborder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen></iframe>&nbsp;&nbsp;&nbsp;&nbsp;
+					allowfullscreen></iframe>
+				&nbsp;&nbsp;&nbsp;&nbsp;
 
-				<iframe width="360" height="315" class='preview_div'
-					src="https://www.youtube.com/embed/oe_WhcK2X4Q?autoplay=0&mute=1&showinfo=0&controls=0&autohide=1"
+				<iframe width="360" height="315" style="border-radius:50px;"
+					src="https://www.youtube.com/embed/0cvI3iAk8Z0?autoplay=1&mute=1&showinfo=0&controls=0&autohide=1"
 					title="YouTube video player" frameborder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen></iframe>&nbsp;&nbsp;&nbsp;&nbsp;
+					allowfullscreen></iframe>
+					&nbsp;&nbsp;&nbsp;&nbsp;
 
-				<iframe width="360" height="315" class='preview_div'
-					src="https://www.youtube.com/embed/rEnnfMFAijU?autoplay=0&mute=1&showinfo=0&controls=0&autohide=1"
+				<iframe width="360" height="315" style="border-radius:50px;" class='preview_div'
+					src="https://www.youtube.com/embed/rEnnfMFAijU?autoplay=1&mute=1&showinfo=0&controls=0&autohide=1"
 					title="YouTube video player" frameborder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen></iframe>
@@ -389,7 +391,7 @@ console.log(storeList);
 										 <img
 					                     src="/resources/static/\${recipe.attach.orgFileName}"
 					                        onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
-					                     alt="My Image" width="210" height="270"  style="border-radius:5px;">
+					                     alt="My Image" width="210" height="210"  style="border-radius:5px;">
 												
 											
 											<div class="featured__item__text" style="margin-right: 40px;">

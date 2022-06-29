@@ -966,10 +966,10 @@ $(document).ready(function() {
                               </thead>
                               <tbody>
                                  <c:forEach var="coupon" items="${couponList}">
-                                    <c:set var="i" value="${ i+1 }" />
+                                    <c:set var="l" value="${ l+1 }" />
 
                                     <tr>
-                                       <th scope="row">${i}</th>
+                                       <th scope="row">${l}</th>
 			                                       <td><c:if test="${coupon.couponType==1}">
 			                              고객님의 회원가입을 축하합니다. (회원가입 쿠폰)
 			                           </c:if> <c:if test="${coupon.couponType==2}">
