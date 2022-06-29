@@ -307,30 +307,13 @@
 						swal("진욱이네", "추천인 아이디를 입력해주세요..");
 						$("#rpId").focus();
 						return;
-					}
-					
-					for(var i = 0; i < rpId.length; i++){
-						
-						var ch = rpId.charAt(i);
-						if(!(ch >= 'a' &&  ch <= 'z') || !(ch >= '0' && ch <= '9')){
-						swal("진욱이네", "추천인 아이디는 영문 소문자로 입력해주세요.");
-						$(".rpId").focus();
-						$(".rpId").select();
-						return;
-						}
-						
-					}
-					
-					 if(data != 1){
-					 /* $("#idChk").attr("value", "Y");
-						alert("사용가능한 아이디입니다."); */
-						$('.id_ok').css("display","inline-block"); 
-		                $('.id_already').css("display", "none");
+					}else if(!regexId.test(rpId)){
+						swal("진욱이네", "추천인 아이디를 다시 확인해주세요.");
+					}else if(data != 1){
+						alert("사용가능한 아이디입니다.");
 						
 					}else {
-						/* alert("중복된 아이디입니다."); */
-						$('.id_already').css("display","inline-block");
-	                    $('.id_ok').css("display", "none");
+						alert("중복된 아이디입니다.");
 					}
 				},
 				 error:function(){
@@ -394,7 +377,7 @@
 			var rpId=$("input[name='rpId']").val();
 			var businessNo=$("input[name='businessNo']").val();
 			
-			
+			var	regexId = /^[a-zA-Z0-9]{8,20}$/;
 			var regexEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/; // 이메일 유효성 검사
 			var regexName = /^[가-힣]*$/; // 이름 한글만
 			var regexPhone = /^[0-9+]{6,12}$/; // 휴대폰 번호 숫자만
@@ -437,9 +420,11 @@
 				return;
 			}
 			
-			if(businessNo == null || businessNo.length <1){
-				swal("진욱이네", "사업자등록번호는 반드시 입력하셔야 합니다.");
-				return;
+			if("${role}" != "사용자"){
+				if(businessNo == null || businessNo.length <1){
+					swal("진욱이네", "사업자등록번호는 반드시 입력하셔야 합니다.");
+					return;
+				}
 			}
 			
 			if (!regexEmail.test(email)) {
@@ -450,7 +435,7 @@
 	        }
 			
 			for (var i = 0; i < email.length; i++) {
-	           var ch = email.charAt(i)
+	           var ch = email.charAt(i);
 	            if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z') && !(ch >= 'A' && ch <= 'Z') && ch == '@' && ch == '.') {
 	                swal("진욱이네", "이메일은 영문 대소문자, 숫자만 입력가능합니다.");
 	                email.focus();
@@ -459,18 +444,7 @@
 	            }
 	        }
 			
-			for(var i = 0; i < rpId.length; i++){
 				
-				var ch = rpId.charAt(i);
-				if(!(ch >= 'a' &&  ch <= 'z') || !(ch >= '0' && ch <= '9')){
-				swal("진욱이네", "아이디는 영문 소문자로 입력해주세요.");
-				$(".rpId").focus();
-				$(".rpId").select();
-				return;
-				}
-				
-			}
-			
 			if (password == id) {
 	            swal("진욱이네", "아이디와 비밀번호가 같습니다.")
 	            password.focus();
@@ -629,7 +603,7 @@
 		    <div class="col-sm-6" >
 		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required onkeyup="this.value=this.value.replace(' ','');" oninput="idCheck()" onclick="idCheck1()">
 				 <div class="" style="">
-				 <div class="id_ok " id="id" >8자 이상의 영문 소문혹은 영문과 숫자를 조합</div>
+				 <div class="id_ok " id="id" >8자 이상의 영문 소문자/영문과 숫자를 조합</div>
 				 </div>
 					<div class="id_already" id="id">아이디 중복확인</div>
 		    </div>
@@ -651,7 +625,7 @@
 		  <div class="form-group">
 		    <label for="password2" class="col-sm-offset-0 col-sm-3 control-label"><a>비밀번호 확인</a></label>
 		    <div class="col-sm-6">
-		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" oninput="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
+		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" onkeyup="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
 		    <div class="" style="">
 		    <div class="pw2_ok" id="id">동일한 비밀번호를 입력해주세요.</div>
 		    </div>
@@ -814,7 +788,7 @@
 		    </div>
 		  </div>
 		  
-		  <div class="form-group">
+		 <div class="form-group">
 		    <label for="password" class=" col-sm-3 control-label"><a>비밀번호</a></label>
 		    <div class="col-sm-6" >
 		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
@@ -827,7 +801,7 @@
 		  <div class="form-group">
 		    <label for="password2" class="col-sm-offset-0 col-sm-3 control-label"><a>비밀번호 확인</a></label>
 		    <div class="col-sm-6">
-		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" oninput="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
+		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" onkeyup="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
 		    <div class="" style="">
 		    <div class="pw2_ok" id="id">동일한 비밀번호를 입력해주세요.</div>
 		    </div>

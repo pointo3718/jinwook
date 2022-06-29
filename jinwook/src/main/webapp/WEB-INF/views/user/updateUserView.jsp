@@ -166,7 +166,7 @@ function getCouponCount() {
 		
 		function pwCheck(){
 			var pwJ = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
-			var pw=$("input[name='password2']").val();
+			var pw=$("input[name='password']").val();
 			
 			if(pwJ.test(pw)){
 				$('.pw_ok').css("display","inline-block");
@@ -183,7 +183,7 @@ function getCouponCount() {
 		
 		function pw1Check(){
 			var pwJ = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
-			var pw=$("input[name='password2']").val();
+			var pw=$("input[name='password']").val();
 			var pw_confirm=$("input[name='password3']").val();
 			
 			if(pw == pw_confirm){
@@ -221,14 +221,14 @@ $(function() {
    function fncUpdateUser() {
 	    var id=$("input[name='userId']").val();
 		var pw=$("input[name='password']").val();
-		var pw2=$("input[name='password2']").val();
+		var pw2=$("input[name='password3']").val();
 		var pw_confirm=$("input[name='password3']").val();
 		var name=$("input[name='userName']").val();
 		var nickName=$("input[name='nickName']").val();
 		var phone=$("input[name='phone']").val();
 		var email=$("input[name='email']").val();
      	var password=$("input[name='password']").val();
-      
+     	var pwJ = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
       
       if(name == null || name.length <1){
          alert("이름은  반드시 입력하셔야 합니다.");
@@ -250,9 +250,32 @@ $(function() {
 		} */
 		
 		
-		if(nickName == null || nickName.length <1){
-			swal("진욱이네", "닉네임은  반드시 입력하셔야 합니다.");
-			nickName.focus();
+		if("${user.role}" != "사장님"){
+			
+			if(nickName == null || nickName.length <1){
+				swal("진욱이네", "닉네임은  반드시 입력하셔야 합니다.");
+				nickName.focus();
+				return;
+			}
+		}
+		
+		if("${user.role}" != "사용자"){
+			if(businessNo == null || businessNo.length <1){
+				swal("진욱이네", "사업자등록번호는 반드시 입력하셔야 합니다.");
+				return;
+			}
+		}
+		
+		
+		/* if(!checkPassword()){
+			return false;
+		}else{
+			return checkPassword();
+		} */
+		
+		
+		if(!pwJ.test(pw) ){
+			swal("진욱이네","새 비밀번호를 확인해주세요.");
 			return;
 		}
 		
@@ -292,8 +315,10 @@ $(function() {
 			}
 			
 		} */
+		function checkPassword(){
+			
+		}
 		
-		checkPassword();
 		
 		if (password == id) {
           swal("진욱이네", "아이디와 비밀번호가 같습니다.")
@@ -370,11 +395,12 @@ $(function() {
 			type : "post",
 			dataType : "json",
 			data : {"userId" : $("#userId").val(),
-					"password" : $("#password").val()},
+					"password" : $("#password1").val()},
 			success : function(data){
 				 if(data == 0){
-					alert("현재 비밀번호를 다시 확인해주세요.");
-					return;
+					swal("현재 비밀번호를 다시 확인해주세요.");
+					$("#password1").focus();
+					
 				}
 			}
 		});
@@ -711,9 +737,9 @@ $(function() {
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">비밀번호</label>
                            <div class="col-sm-6">
-                              <input type="password" name="password"
-                                 class="form-control form-control" id="password"
-                                 value=""  onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
+                              <input type="password" name="password1"
+                                 class="form-control form-control" id="password1"
+                                 value=""  onkeyup="this.value=this.value.replace(' ','');" >
                            </div>
                             <div class="col-sm-3"></div>
                             	 
@@ -723,7 +749,7 @@ $(function() {
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">새 비밀번호</label>
                            <div class="col-sm-6">
-                              <input type="password" name="password2"
+                              <input type="password" name="password"
                                  class="form-control form-control" id="password2"
                                  value="" onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
                            </div>
@@ -908,22 +934,25 @@ $(function() {
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">비밀번호</label>
                            <div class="col-sm-6">
-                              <input type="password" name="password"
-                                 class="form-control form-control" id="password"
-                                 value=""  oninput="this.value=this.value.replace(' ','');">
+                              <input type="password" name="password1"
+                                 class="form-control form-control" id="password1"
+                                 value=""  onkeyup="this.value=this.value.replace(' ','');" >
                            </div>
                             <div class="col-sm-3"></div>
+                            	 
                         </div>
 
                         <div class="form-group row">
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">새 비밀번호</label>
                            <div class="col-sm-6">
-                              <input type="password" name="password2"
+                              <input type="password" name="password"
                                  class="form-control form-control" id="password2"
-                                 value="" oninput="this.value=this.value.replace(' ','');">
+                                 value="" onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
                            </div>
-                            <div class="col-sm-3"></div>
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="pw_ok " id="pw" >8자 이상의 영문/숫자/특수문자 조합</div>
                         </div>
 
                         <div class="form-group row">
@@ -932,9 +961,10 @@ $(function() {
                            <div class="col-sm-6">
                               <input type="password" name="password3"
                                  class="form-control form-control" id="password3"
-                                 value="" oninput="this.value=this.value.replace(' ','');">
+                                 value="" onkeyup="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
                            </div>
                             <div class="col-sm-3"></div>
+                             <div class="pw2_ok" id="pw">동일한 비밀번호를 입력해주세요.</div>
                         </div>
 
                         <div class="form-group row">
@@ -1014,13 +1044,13 @@ $(function() {
                          <div class="col-sm-3"></div>
                         </div>
                         
-                        <div class="form-group row" id="phoneChk1">
+                         <div class="form-group row" id="phoneChk1">
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">휴대폰 번호</label>
                            <div class="col-sm-6">
-                              <input type="text" name="phone1"
+                              <input type="text" name="phone"
                                  class="form-control form-control" id="phone1"
-                                 value="${user.phone}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
+                                 value="${user.phone}" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" readonly>
                            </div>
                             <div class="col-sm-3">
                             	<button class="phoneChk1 site-btn" type="button" id="phoneC1" value="N" style="border-radius:4px; height:38px; margin-right:50px;
@@ -1032,7 +1062,7 @@ $(function() {
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">휴대폰 번호</label>
                            <div class="col-sm-6">
-                              <input type="text" name="phone"
+                              <input type="text" name="phone1"
                                  class="form-control form-control" id="phone"
                                  value="" placeholder="휴대폰번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                            </div>
@@ -1046,9 +1076,10 @@ $(function() {
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label"></label>
                            <div class="col-sm-6">
-                              <input type="text" name="phone"
+                              <input type="text" name="authNo1"
                                  class="form-control form-control" id="authNo1"
                                  value="" placeholder="인증번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                          <input type="hidden" id="phoneDoubleChk"/>
                            </div>
                             <div class="col-sm-3">
                             	<button class="phoneChk site-btn" type="button" id="sned" value="N" style="border-radius:4px; height:38px; margin-right:50px;

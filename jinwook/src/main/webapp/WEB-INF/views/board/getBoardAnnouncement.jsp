@@ -95,35 +95,29 @@ function movePage(uri, queryString) {
     <div class="contact-form spad">
         <div class="container" style="background-color: #F2F2F2;">
             <div class="row">
+            
                 <div class="col-lg-12" style="background-color: #F2F2F2;">
                     <div class="contact__form__title">
-                        <h2><i class="bi bi-megaphone-fill"></i>&nbsp; 공지사항</h2>
+                        <h2 style="margin-top:20px;"><i class="bi bi-megaphone-fill"></i>&nbsp; 공지사항</h2>
                     </div>
                 </div>
             </div>
             <form action="#">
-                <div class="row" style="background-color: #F2F2F2;">
-                
-                <div class="imgborder">
-                <form name="readForm" role="form" method="post">
-                <img attachNo="${attach.attachNo}" width="400" height="400"
-					src="/resources/static/${attach.orgFileName}" alt="..."
-					onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" 
-					width="300" height="300" style="margin-left: 20px; margin-bottom: 20px;"/>
-					
-						<%-- <div class="form-group">
- 				<c:forEach var="file" items="${file}">
- 				<input type="hidden" id="attach_no" name="attach_no" value="">
- 					<a href="#" onclick="fn_fileDown('${file.attach_no}'); return false;">${file.org_file_name}</a>(${file.file_size}kb)<br>
- 					<img attachNo="${ file.attach_no }" width="400" height="400" src="../static/img/${file.org_file_name}" alt="..." />
- 					<!-- onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" -->
- 				</c:forEach>
- 						</div> --%>
+                <div class="row" style="background-color: #F2F2F2; padding-bottom:100px; padding-right:30px; padding-left:30px;">
+                <div>
+                	 <div class="col-sm-5 col-sm-5" style="margin: auto;">
+                        <input type="text" readonly="readonly" value="${board.boardTitle}" style="text-align:center; width:500px; margin-left:50px; font-weight:bold;">
+                    </div>
+                <div style="margin:auto;">
+                	<img attachNo="${attach.attachNo}" width="400" height="400"
+						src="/resources/static/${attach.orgFileName}" alt="..."
+						onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" 
+						width="300" height="300" style="margin-left: 320px; margin-bottom: 20px;"/>
+					</div>
 				</div>
                 
-                    <div class="col-sm-4 col-sm-4" style="width:100px; height:50px;">
-                        <input type="text" readonly="readonly" value="${board.boardTitle}" style="text-align:center; width:500px;">
-                    </div>`
+                   
+                    
                     <div class="col-sm-4 col-sm-4">
                         <i class="bi bi-eye"></i> ${board.boardHits}<br/>
  						<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -141,7 +135,6 @@ function movePage(uri, queryString) {
                     </c:if>    
                     </div>
                 </div>
-            </form>
         </div>
     </div>
     <!-- Contact Form End -->

@@ -140,7 +140,7 @@ public class BoardController {
             }
         }
 		
-		return "redirect:/board/listBoardInquiry";
+		return "redirect:/board/getBoardInquiryList";
 	}
 	
 	// 1:1문의 수정 화면v
@@ -166,7 +166,7 @@ public class BoardController {
 		
 		boardService.updateBoardInquiry(board);
 		
-		return "redirect:/board/listBoardInquiry";
+		return "redirect:/board/getBoardInquiryList";
 	}
 	
 	//공지사항 등록 화면
@@ -180,7 +180,7 @@ public class BoardController {
 				Board board = boardService.getBoardAnnouncement(boardNo);
 				User user = userService.getUser(userId);
 				if (board == null) {
-					return "redirect:/board/listBoardAnnouncement";
+					return "redirect:/board/getBoardAnnouncementList";
 					//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
 				}
 				model.addAttribute("user", user);
@@ -229,7 +229,7 @@ public class BoardController {
 	                e.printStackTrace();
 	            }
 	        }
-			return "redirect:/board/listBoardAnnouncement";
+			return "redirect:/board/getBoardAnnouncementList";
 		}
 		
 		// 공지사항 수정 화면v
@@ -245,7 +245,7 @@ public class BoardController {
 				Board board = boardService.getBoardAnnouncement(boardNo);
 //				User user = userService.getUser(userId);
 				if (board == null) {
-					return "redirect:/board/listBoardAnnouncement";
+					return "redirect:/board/getBoardAnnouncementList";
 					//getBoard 실행결과가 null이면 게시글 리스트 페이지로 리다이렉트
 				}
 //				String sessionUserId = ((User) session.getAttribute("user")).getUserId();
@@ -264,7 +264,7 @@ public class BoardController {
 				@RequestParam(value = "boardNo", required = false) Integer boardNo, Model model) {
 			System.out.println("/board/updateBoardAnnouncement: POST");
 			boardService.updateBoardAnnouncement(board);
-			return "redirect:/board/listBoardAnnouncement";
+			return "redirect:/board/getBoardAnnouncementList";
 		}
 		
 	//1:1문의 목록 조회
@@ -280,7 +280,7 @@ public class BoardController {
 		model.addAttribute("getBoardInquiryList", getBoardInquiryList);//jsp foreach items
 		
 		System.out.println("------------------------------------------------"+getBoardInquiryList);
-		return "board/getBoardInquiryList";
+		return "board/listBoardInquiry";
 	}
 	
 	//공지사항 목록 조회
@@ -388,7 +388,7 @@ public class BoardController {
 		}
 		int isDeleted = boardService.deleteBoardAnnouncement(boardNo);
 		
-		return "redirect:/board/listBoardAnnouncement";
+		return "redirect:/board/getBoardAnnouncementList";
 	}
 	
 	
@@ -476,7 +476,7 @@ public class BoardController {
 				@RequestParam(value = "rcpNo", required = false) Integer rcpNo, Model model) {
 			System.out.println("/board/updateRecipe: POST");
 			boardService.updateRecipe(recipe);
-			return "redirect:/board/listBoardRecipe?rcpNo="+recipe.getRcpNo();
+			return "redirect:/board/getRecipeList";
 		}
 		
 		//레시피 삭제 처리v
@@ -548,7 +548,7 @@ public class BoardController {
 			
 			rttr.addAttribute("rcpNo", comment.getRcpNo());
 			
-			return "redirect:/board/getBoardRecipe?boardNo="+comment.getRcpNo();
+			return "redirect:/board/getRecipe?boardNo="+comment.getRcpNo();
 		}
 		
 		//레시피 댓글 수정 처리 POST
