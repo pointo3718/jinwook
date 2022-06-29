@@ -2,17 +2,16 @@ package com.jinwook.home.web.user;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.validator.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -70,11 +69,11 @@ public class UserController {
 //   @Value("#{commonProperties['pageSize']}")
 //   int pageSize;
    
-   @GetMapping("index")
-   public String index1(HttpSession session) throws Exception{
-      System.out.println("==========index===========");
-      return "index";
-   }
+//   @GetMapping("index")
+//   public String index1(HttpSession session) throws Exception{
+//      System.out.println("==========index===========");
+//      return "index";
+//   }
    @GetMapping("addUser")
    public String addUserView(@RequestParam(value="role" ,required = false) String role, Model model) throws Exception{
    
@@ -96,6 +95,7 @@ public class UserController {
       //Business Logic
       //사용자, 사장님, 관리자 구분 가입
       System.out.println("=====================12312312312312312312312");
+      user.setGrade("일반");
       userService.addUser(user);
       
       
@@ -172,6 +172,43 @@ public class UserController {
       model.addAttribute("user", user);
       System.out.println("확인3");
       return "redirect:/user/updateUserView?userId="+sessionId;
+   }
+   
+   @GetMapping("updateUserViewC")
+   public String updateUserViewC(@RequestParam("userId") String userId , Model model, HttpSession session ) throws Exception{
+	   
+	   System.out.println("/user/updateUser : GET");
+	   //Business Logic
+	   User dbUser = userService.getUser(userId);
+	   // Model    View     
+	   model.addAttribute("user", dbUser);
+	   
+	   String userid = ((User) session.getAttribute("user")).getUserId();
+	   
+	   List<Coupon> couponList = storeService.getCouponList(userid);
+	   model.addAttribute("couponList", couponList);
+	   session.setAttribute("user", dbUser);
+	   
+	   return "/user/updateUserViewC";
+   }
+   
+   @PostMapping("updateUserC")
+   public String updateUserC( @ModelAttribute("user") User user , Model model , HttpSession session) throws Exception{
+	   
+	   System.out.println("/user/updateUser : POST");
+	   //Business Logic
+	   userService.updateUser(user);
+	   
+	   System.out.println(user);
+	   String sessionId=((User)session.getAttribute("user")).getUserId();
+	   System.out.println("확인");
+	   if(sessionId.equals(user.getUserId())){
+		   System.out.println("확인2");
+	   }
+	   session.setAttribute("user", user);
+	   model.addAttribute("user", user);
+	   System.out.println("확인3");
+	   return "redirect:/user/updateUserViewC?userId="+sessionId;
    }
    
    
@@ -261,20 +298,6 @@ public class UserController {
       return "index";
    }
    
-//   @RequestMapping( value="checkDuplication", method=RequestMethod.POST )
-//   public String checkDuplication( @RequestParam("userId") String userId , Model model ) throws Exception{
-//      
-//      System.out.println("/user/checkDuplication : POST");
-//      //Business Logic
-//      boolean result=userService.checkId(userId);
-//      // Model    View     
-//      model.addAttribute("result", new Boolean(result));
-//      model.addAttribute("userId", userId);
-//
-//      return "forward:/user/checkDuplication.jsp";
-//   }
-
-   
    
    @GetMapping("confirmPasswordView")
    public String comfirmPasswordView(@ModelAttribute("user") User user, HttpSession session, Model model) throws Exception {
@@ -290,6 +313,25 @@ public class UserController {
       model.addAttribute("couponList", couponList);
       
       return "/user/confirmPasswordView";
+   }
+   
+   @GetMapping("confirmPasswordViewC")
+   public String comfirmPasswordViewC(@ModelAttribute("user") User user, HttpSession session, Model model) throws Exception {
+	   
+	   System.out.println(user);
+	   user = userService.getUser(user.getUserId());
+	   System.out.println(user);
+	   System.out.println("===========CONFIRM PASSWORD PAGE===========");
+	   String userId = ((User) session.getAttribute("user")).getUserId();
+	   
+	   List<Coupon> couponList = storeService.getCouponList(userId);
+	   model.addAttribute("couponList", couponList);
+	   session.setAttribute("user", user);
+	   model.addAttribute("user", user);
+	   List<Store> storeInfo = storeService.getStoreInfo(userId);
+	   model.addAttribute("storeInfo", storeInfo);
+	   
+	   return "/user/confirmPasswordViewC";
    }
    
    @PostMapping("confirmPassword")
@@ -311,6 +353,27 @@ public class UserController {
       
       System.out.println(user.getUserId());
       return "/user/updateUserView";
+   }
+   
+   @PostMapping("confirmPasswordC")
+   public String comfirmPasswordC(@ModelAttribute("user") User user ,  HttpSession session, Model model ) throws Exception {
+	   System.out.println("===========CONFIRM PASSWORD=========");
+	   System.out.println(user);
+//      user.setUserId( ((User)session.getAttribute("user")).getUserId());
+	   int result = userService.confirmPassword(user);
+	   if(result==0) {
+		   return "/user/confirmPasswordViewC";
+	   }
+	   User dbUser = userService.getUser("userId");
+	   model.addAttribute("user", dbUser);
+	   
+	   String userId = ((User) session.getAttribute("user")).getUserId();
+	   
+	   List<Store> storeInfo = storeService.getStoreInfo(userId);
+	   model.addAttribute("storeInfo", storeInfo);
+	   
+	   System.out.println(user.getUserId());
+	   return "/user/updateUserViewC";
    }
    
    @GetMapping("findId")
@@ -353,17 +416,8 @@ public class UserController {
          System.out.println(user);
          model.addAttribute("userId", user.getUserId());
          
+         
          System.out.println("ksdjahflskdhfjksadhfkjlhsadkjfhkjdahfkjshdlkfhsdakjfhk");
-//         session.setAttribute("user", user.getUserId());
-//         System.out.println(session.getAttribute("user"));
-//         System.out.println(session.getAttribute(user.getUserId()));
-//         System.out.println(session.getAttribute(user.getUserName()));
-//         System.out.println(session.getAttribute(user.getPhone()));
-//          session.setAttribute("userId", user.getUserId());
-//          // 페이지에 왔을때 인증이 안되있다면
-//          if(!(boolean) authStatus.get("status")) {
-//              return "/user/findPassword";
-//          }
           return "/user/updatePassword";
       }
       
@@ -378,7 +432,6 @@ public class UserController {
             System.out.println("패스워드 변경");
          }
          
-            
          return "/user/loginView";
       }
       
@@ -405,20 +458,34 @@ public class UserController {
          HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
          Date date = new Date();
          User user = new User();
-         user.setUserId((String)userInfo.get("email"));
+         String idString = (String)userInfo.get("email");
+         int idx = idString.indexOf("@");
+         String email = idString.substring(0, idx);
+         System.out.println("asdasdasdadasd"+email+"1111111111111111111111");
+         if(userService.checkId("kakao_"+email)==1 || userService.checkEmail((String)userInfo.get("email"))==1
+        		 				|| userService.checkPhone(phone)==1 || userService.checkNickName("kakao_"+(String)userInfo.get("nickname"))==1) {
+        	 user =  userService.getUser("kakao_"+email);
+        	 session.setAttribute("user", user);
+        	 session.setAttribute("access_Token", access_Token);
+         }else {
+         user.setUserId("kakao_"+email);
+         user.setPassword("1111");
          user.setUserName((String)userInfo.get("nickname"));
          user.setNickName("kakao_"+(String)userInfo.get("nickname"));
          user.setEmail((String)userInfo.get("email"));
+         user.setBirth("20000000");
          user.setRole("사용자");
-         
+         user.setPhone(phone);
+         user.setRegDate(date);
+         user.setGender("남");
+         user.setGrade("일반");
+         userService.addUser(user);
 //         while(userService.checkPhone(phone)==0) {
-//        	 user.setPhone(phone);
 //         }
 //         if(userService.checkPhone(phone)==0) {
 //        	 
 //        	 user.setPhone(phone);
 //         }
-         user.setRegDate(date);
          
          System.out.println(userInfo);
          System.out.println("45645456456456456");
@@ -432,6 +499,7 @@ public class UserController {
          session.setAttribute("user", user);
          
          session.setAttribute("access_Token", access_Token);
+         }
          return "index";
        }
       //카카오 로그아웃
@@ -450,18 +518,6 @@ public class UserController {
            modelMap.addAttribute("message",message);
            return "index";
        }
-//   @PostMapping("findIdEmail")
-//   public String findIdEmail(@ModelAttribute("user") User user, HttpSession session) throws Exception {
-//      
-//      user.setUserName( ((User)session.getAttribute("user")).getUserName());
-//      
-//      int result = userService.findIdEmail(user);
-//      
-//      if(result != 0) {
-//         
-//      }
-//      return null;
-//   }
    
     //내가 작성한 글 목록 보기
     @GetMapping("myArticle")

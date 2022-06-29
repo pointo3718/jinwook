@@ -125,7 +125,7 @@
                                        class="dropdown-item" href="/orders/getOrdersList">주문내역</a> <a
                                        class="dropdown-item"
                                        href="/store/updateStore?storeNo=10000">상점정보수정</a> <a
-                                       class="dropdown-item" href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보수정</a> <a
+                                       class="dropdown-item" href="/user/confirmPasswordViewC?userId=${sessionScope.user.userId}">개인정보수정</a> <a
                                        class="dropdown-item"
                                        href="/store/addStoreProduct?storeNo=10000">상품등록</a> <a
                                        class="dropdown-item" href="#">광고등록</a> <a

@@ -654,25 +654,25 @@ $(document).ready(function() {
             	$("#rcpLi").show();
             	$("#inqLi").hide();
             	$("#rcpL").css("color","white");
-            	$("#rcpL").css("border-right", "1px solid white");
-            	$("#inqL").css("border-left","1px solid white");
-            	$("#rcpL").css("background-color","#7fad39");
-            	$("#rcpL").css("border","2px solid #E6E6E6");
-            	$("#inqL").css("color","gray");
-            	$("#inqL").css("background-color","white");
             	$("#inqL").css("border","2px solid #E6E6E6");
+            	$("#rcpL").css("border","2px solid #E6E6E6");
+            	$("#rcpL").css("border-right", "none");
+            	$("#inqL").css("border-left","none");
+            	$("#rcpL").css("background-color","#7fad39");
+            	$("#inqL").css("background-color","white");
+            	$("#inqL").css("color","gray");
             }
             
             function inqL(){
             	$("#rcpLi").hide();
+            	$("#inqL").css("border","2px solid #E6E6E6");
             	$("#rcpL").css("color","gray");
-            	$("#rcpL").css("border-right","1px solid white");
-            	$("#inqL").css("border-left","1px solid white");
-            	$("#rcpL").css("background-color","white");
             	$("#rcpL").css("border","2px solid #E6E6E6");
+            	$("#rcpL").css("border-right","none");
+            	$("#inqL").css("border-left","none");
+            	$("#rcpL").css("background-color","white");
             	$("#inqL").css("color","white");
             	$("#inqL").css("background-color","#7fad39");
-            	$("#inqL").css("border","2px solid #E6E6E6");
             	
             	$("#inqLi").show();
             }
@@ -755,9 +755,9 @@ $(document).ready(function() {
                <!--지갑조회 주문내역 테이블 start-->
                <h6 class="text-center" style="display:flex;">
                	<button  type="button" class="rcpL site-btn" id="rcpL" onclick="rcpL()" 
-               	style="width:430px; background-color:#7fad39; border-right:white; color:white; outline:none;"><strong>레시피 내역</strong></button>
+               	style="width:430px; background-color:#7fad39; border-right:none; color:white; outline:none;"><strong>레시피 내역</strong></button>
 				<button  type="button" class="inqL site-btn" id="inqL" onclick="inqL()" 
-				style="width:430px; border: 2px solid #E6E6E6; border-left:white; background-color:white; color:gray; outline:none; ">1:1 문의 내역</button>
+				style="width:430px; border: 2px solid #E6E6E6; border-left:none; background-color:white; color:gray; outline:none; ">1:1 문의 내역</button>
                </h6>
 <br>
                <table class="table table-hover " id="rcpLi">
