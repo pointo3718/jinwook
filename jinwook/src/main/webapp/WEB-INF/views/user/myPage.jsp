@@ -898,7 +898,7 @@ $(document).ready(function() {
 					</div>
 					<div>
 						<input type="text" style="width:100px;"
-							class="form-control" id="reviewWriter" name="reviewWriter">
+							class="form-control" id="reviewWriter" name="reviewWriter" value="${user.userId}" placeholder="${user.userId}" readonly="readonly">
 					</div>
 				</div>
 				
@@ -907,14 +907,14 @@ $(document).ready(function() {
 						<label for="reviewStar"><i class="bi bi-star"></i> 별점</label> 
 					</div>
 					<div>
-						<input type="number" style="width:100px;" min="1" max="5" step="0.1"
+						<input type="number" style="width:100px;" min="1" max="5" step="0.5"
 							class="form-control" id="reviewStar" name="reviewStar">
 					</div>
 				</div>
 				
 				<div>
 					<div style="text-align:left;">
-						<label for="reviewContent">후기 내용</label> 
+						<label for="reviewContent"><i class="bi bi-card-text"></i> 후기 내용</label> 
 					</div>
 					<div>
 						<textarea class="form-control" id="reviewContent"

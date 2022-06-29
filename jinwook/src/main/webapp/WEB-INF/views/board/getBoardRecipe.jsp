@@ -392,27 +392,30 @@ var rcpNo = ${recipe.rcpNo};
     <div class="contact-form spad">
         <div class="container" style="background-color: #F2F2F2;">
             <div class="row rcp" >
+            
                 <div class="col-lg-12" style="background-color: #F2F2F2; text-align: center;">
                     <div class="contact__form__title">
-                        <h3 style="margin-top:20px;"><input class="form-control" type="text" readonly="readonly" value="${recipe.rcpTitle}" style="width:500px; height:100px; text-align:center; background-color: #ffffff;  margin-left:300px;"></h3>
+                        <strong style="text-align:center; width:500px; margin-left:50px; ">
+                        <input class="form-control" type="text" readonly="readonly" value="${recipe.rcpTitle}" style="width:500px; height:100px; text-align:center; background-color: #ffffff;  margin-left:300px; font-weight:bold; font-size:30px;"></strong>
                     </div>
                 </div>
             </div>
+            
             <form action="#">
-                <div class="row rcp" style="background-color: #F2F2F2;">
+                <div class="row rcp" style="background-color:#F2F2F2; padding-bottom:50px;">
                 
                 <div class="imgborder">
 					<!-- <img src="https://media.istockphoto.com/photos/kimchi-stir-fried-with-pork-and-vegetables-sprinkle-sesame-seeds-on-picture-id1206518905?b=1&k=20&m=1206518905&s=170667a&w=0&h=9qzoXifvJg_E220JqkrDKmdWbGcSoOA47jz-gFMlFl0="
 						alt="..." width="400" height="400" style="margin-left:20px;"> -->
-						 <img width="400" height="400"
+						 <img width="400" height="400" style="margin-left:360px;"
 						src="/resources/static/${attach.orgFileName}" alt="..."
 						onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'" />
 				</div>
                 
                     <div class="col-sm-4 col-sm-4" style="width:100px; height:50px;">
-                       <i class="bi bi-eye"></i> ${recipe.rcpHits}<br/>
+                       <i class="bi bi-eye"></i> ${recipe.rcpHits}<br/><br/>
  						<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${recipe.rcpDate}" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 						<br/>
+ 						<br/><br/>
  						<button type="button" class="btn btn-success" id="reco_btn" 
  						style="width:60px; height:40px; background-color: green; font-size: 12px;" onclick="updateRecipeReco();"><i class="bi bi-hand-thumbs-up"></i>${recipe.recommendCount}</button>
  						&nbsp;<a href="#" onclick="clip(); return false;"><i class="bi bi-share-fill"></i></a>
@@ -430,7 +433,7 @@ var rcpNo = ${recipe.rcpNo};
                     	<textarea readonly="readonly">${recipe.rcpIngredient}</textarea>
                     </div>
                     
-                    <div class="col-lg-12 text-center">
+                    <div class="col-lg-12 text-center" style="margin-bottom:30px;">
                         <textarea readonly="readonly">${recipe.rcpContent}</textarea>
                         <button type="button" class="btn btn-success" id="updateButton">수 정</button>&nbsp;
                         <button data-value="${recipe.rcpNo}" id="buttons" type="button" class="btn btn-danger" onClick="fncDeleteRecipe(this)">삭 제</button>
@@ -449,7 +452,7 @@ var rcpNo = ${recipe.rcpNo};
 									<input type="hidden" id="rcpNo" name="rcpNo" value="${recipe.rcpNo}"/>
 									<div class="form-inline mb-2">
 										<label for="commentWriter"><i class="fa fa-user-circle-o fa-2x"></i></label> 
-										<input type="text" class="form-control ml-2" id="commentWriter" name="commentWriter"> 
+										<input type="text" class="form-control ml-2" id="commentWriter" name="commentWriter" placeholder="${user.userId}" readonly="readonly"> 
 									</div> 
 									<textarea class="form-control" id="commentContent" name="commentContent" rows="3"></textarea>
 									<button type="submit" class="btn btn-dark mt-3" id="replyWriteBtn">댓글 작성</button>
@@ -461,19 +464,19 @@ var rcpNo = ${recipe.rcpNo};
 					<!-- 댓글 작성폼 end -->
 					
 					<!-- 댓글 리스트 조회 폼 start -->
-					<div class="card">
+					<div class="card" style="left:20px;">
 						<div class="card-header">댓글 리스트</div>
 							<ul id="comment" class="commentList">
 								<c:forEach items="${commentList}" var="recipe">
 									<li id="comment--1" class="list-group-item d-flex justify-content-between">
-											<div class="font-itatlic">작성자 :${recipe.comment.commentWriter} | &nbsp;</div><br/>
+											<div class="font-itatlic">작성자 :${user.userId} | &nbsp;</div><br/>
 										<!-- 댓글 리스트 div -->
 										<div class="d-flex">
 											<div class="commentContentInfo">${recipe.comment.commentContent}</div>&nbsp;&nbsp;&nbsp;
 											
 											<%-- <button type="button" class="btn btn-outline-success" id="replyupdateBtn" data-rno="${recipe.comment.commentNo}" onclick="fncUpdateBtn();">댓글 수정</button> --%>
-											<button data-value="${recipe.comment.commentNo}" id="buttons" type="button" class="btn btn-primary" 
-											onClick="fncDeleteRecipeComment(this)">X</button>
+											<button data-value="${recipe.comment.commentNo}" id="buttons" type="button" class="site-btn" 
+											onClick="fncDeleteRecipeComment(this)" style="padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px;">X</button>
 										</div>
 									</li>
 								</c:forEach>
