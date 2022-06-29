@@ -135,23 +135,9 @@
                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item" href="/store/storeNo">사장님페이지</a> <a
                                        class="dropdown-item"
-<<<<<<< HEAD
-                                       href="/store/updateStore?storeNo=10000">상점정보수정</a> <a
-                                       class="dropdown-item" href="/user/confirmPasswordViewC?userId=${sessionScope.user.userId}">개인정보수정</a> <a
-                                       class="dropdown-item"
-                                       href="/store/addStoreProduct?storeNo=10000">상품등록</a> <a
-                                       class="dropdown-item" href="#">광고등록</a> <a
-                                       class="dropdown-item" href="#">내가 한 요청</a> <a
-                                       class="dropdown-item"
-                                       href="/store/getStoreWallet?storeNo=10000">지갑</a> <a
-                                       class="dropdown-item" href="/board/getBoardInquiryList">1:1
-                                       문의</a> <a class="dropdown-item" href="#"></a> <a
-                                       class="dropdown-item" href="/user/logout">로그아웃</a>
-=======
-                                       href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보수정</a>
+                                       href="/user/confirmPasswordViewC?userId=${sessionScope.user.userId}">개인정보수정</a>
                                     <a class="dropdown-item" href="/board/getBoardInquiryList">1:1
                                        문의내역</a>
->>>>>>> refs/remotes/origin/master
                                  </div>
                               </div>
                            </c:if>
