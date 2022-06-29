@@ -5,11 +5,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.JsonObject;
@@ -176,14 +178,45 @@ public class OrdersRestController {
 		String jpPassword = user.getJpPassword();
 		String[] jpPass = jpPassword.split(",");
 		String jpPw = String.join("", jpPass);
-		System.out.println("야얌"+jpPw);
+		System.out.println("jpPw"+jpPw);
 		user.setJpPassword(jpPw);
 		
 		
 		int result = ordersService.checkJpPassword(user);
-		System.out.println(result+"야야얍");
+		System.out.println("result"+result);
 		return result;
 		
 	}
 	
+	@PostMapping(value="importJpayCharge")
+	public int importJpayCharge(@RequestParam("jpBalance")int jpBalance,HttpSession session, Model model)throws Exception{
+		
+		System.out.println("/orders/importJpayCharge");
+		User user = ((User) session.getAttribute("user"));
+		user.setUserId(user.getUserId());
+		user.setJpBalance(jpBalance);
+		int result = ordersService.importJpayCharge(user);
+		session.setAttribute("user", user);		
+		
+//		user = userService.getUser(user.getUserId());
+		
+//		model.addAttribute("user", user);
+//		session.setAttribute("jpBalance", user.getJpBalance());
+//		System.out.println("유유"+user);
+//		System.out.println(result);
+		return result;
+	}
+	
+	   @PostMapping(value = "addOrdersJpayPassword")
+	   public int addOrdersJpayPassword(@RequestParam("jpPassword")String jpPassword,HttpSession session) throws Exception {
+	      
+	      System.out.println("/orders/addOrdersJpayPassword : POST");
+	      User user = ((User) session.getAttribute("user"));
+	      user.setUserId(user.getUserId());
+	      user.setJpPassword(jpPassword);
+	      int result = ordersService.addOrdersJpayPassword(user);
+	      session.setAttribute("user", user);
+	      
+	      return result;
+	   }
 }
