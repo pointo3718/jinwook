@@ -604,7 +604,8 @@ color: #7fad39;
 										<c:if test="${board.boardInqStatus == false}">답변대기중</c:if>
 										<c:if test="${board.boardInqStatus == true}">답변완료</c:if>
 									</td>
-									<td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteInquiry(this)">X</button></td>
+									<td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="site-btn" onClick="fncDeleteInquiry(this)" style="padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px;">X
+									</button></td>
 								</tr>
 							</c:forEach>
 							</tr>

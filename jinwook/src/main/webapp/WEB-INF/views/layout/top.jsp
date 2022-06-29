@@ -133,7 +133,8 @@
                                        class="dropdown-item"
                                        href="/store/getStoreWallet?storeNo=10000">지갑</a> <a
                                        class="dropdown-item" href="/board/getBoardInquiryList">1:1
-                                       문의</a> <a class="dropdown-item" href="#"></a> <a
+                                       문의</a> <a class="dropdown-item" href="/board/getBoardAnnouncementList">공지사항</a>
+                                        <a class="dropdown-item" href="#"></a> <a
                                        class="dropdown-item" href="/user/logout">로그아웃</a>
                                  </div>
 

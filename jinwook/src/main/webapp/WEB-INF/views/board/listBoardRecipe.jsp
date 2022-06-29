@@ -143,7 +143,7 @@ $(function(){
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-7">
-                    <div><button type="submit" class="btn btn-success" id="addRecipeButton">레시피 등록하기</button></div>
+                    <div><button type="submit" class="site-btn" id="addRecipeButton" style="padding-left: 30px; padding-right: 30px; padding-bottom: 10px; padding-top: 10px;">레시피 등록하기</button></div>
                     
                     <div class="row">
                         	<c:set var="i" value="0" />

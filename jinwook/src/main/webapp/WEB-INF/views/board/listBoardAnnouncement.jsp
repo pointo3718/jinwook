@@ -630,7 +630,8 @@ color: #7fad39;
 									<td align="left">${board.writeDate}</td>
 									<td align="left">${board.boardHits}</td>
 									<c:if test="${sessionScope.user.role == '관리자'}">
-									<td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="btn btn-primary" onClick="fncDeleteAnnouncement(this)">X</button></td>
+									<td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="site-btn" onClick="fncDeleteAnnouncement(this)" style="padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px;">
+										X</button></td>
 									</c:if>
 								</tr>
 							</c:forEach>
