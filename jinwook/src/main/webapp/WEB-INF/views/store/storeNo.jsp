@@ -226,10 +226,6 @@ label {
 									<span class="addStore"><a href="/user/confirmPasswordView?userId=${sessionScope.user.userId}" style="color:black">개인 정보 수정</span>
 								</button>
 								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="adStore"><a href="/request/getRequestAdStoreList?storeNo=\${store.storeNo}&userId=${sessionScope.user.userId}" style="color:black">내가 한 요청</span>
-								</button>
-								<button type="button"
 									class="list-group-item list-group-item-action"><a href="/board/getBoardInquiryList" style="color:black">1:1
 									문의내역</button>
 							</div>

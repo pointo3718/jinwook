@@ -135,7 +135,7 @@
                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item" href="/store/storeNo">사장님페이지</a> <a
                                        class="dropdown-item"
-                                       href="/user/confirmPasswordViewC?userId=${sessionScope.user.userId}">개인정보수정</a>
+                                       href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보수정</a>
                                     <a class="dropdown-item" href="/board/getBoardInquiryList">1:1
                                        문의내역</a>
                                  </div>

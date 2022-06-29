@@ -64,5 +64,7 @@ public int addOrders(Orders orders);
    
    // 첨부파일 조회
 	public Attach selectFileList(int prodNo) throws Exception;
+	
+	public int updateOrdersStatus(Orders orders);
 
 }

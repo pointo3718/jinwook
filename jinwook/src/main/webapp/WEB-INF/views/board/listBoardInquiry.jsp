@@ -40,6 +40,8 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	/*<![CDATA[*/
@@ -506,58 +508,15 @@ color: #7fad39;
 					style="width: 200px; margin-right: 30px;">
 					<div class="blog__sidebar" style="width: 200px;">
 
-						<div class="blog__sidebar__item">
-
-							<h5 class="text-center" style="margin-bottom: 0px;">
-								<strong>관리자 페이지</strong>
-							</h5>
-
-							</br>
-
-							<div class="list-group text-center" style="font-size: 15px;">
-								<button type="button"
-									class="list-group-item list-group-item-action"
-									aria-current="true">회원 목록</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">상점 목록</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">신고 접수 목록</button>
-								<button type="button"
-									class="list-group-item list-group-item-action"><span class="addStore">상점 등록 요청</span>
-									 </button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="deleteStore">상점 삭제 요청 
-									</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="refundStore">
-									환급 요청
-									</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="adStore">
-									광고 등록 요청
-									</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-								1:1 문의내역
-								</button>
-							</div>
-
-						</div>
 
 
 					</div>
 				</div>
 
 				<!-- UserList Table Start -->
-				<div>
+				<div style="margin-right: 180px;">
 					<h4 class="text-left">
-						<strong>1:1문의사항 목록</strong>
+						<i class="bi bi-telegram"></i><strong> 1:1문의사항 목록</strong>
 						<p class="text-muted" style="display: inline; font-size: 12px;">
 						</p>
 						<!-- <div class="btn-group btn-group-toggle" data-toggle="buttons" style="left:300px;">
@@ -623,7 +582,7 @@ color: #7fad39;
 <c:set var="params" value="${board}"/>
 
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
-      <div class="product__pagination blog__pagination" style="padding-top: 0px; bottom: 100px;">
+      <div class="product__pagination blog__pagination" style="padding-top: 0px; bottom: 100px; right:100px">
             <!--  <<== ÁÂÃø nav -->
             <a   
                href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(1)}');"

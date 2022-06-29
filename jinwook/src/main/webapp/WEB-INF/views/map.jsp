@@ -266,16 +266,10 @@
       // 마커를 표시할 위치와 title 객체 배열입니다 
       var positions = [ {
          title : '진욱이네',
-         latlng : new kakao.maps.LatLng(37.49152497274, 127.03445074263),
+         latlng : new kakao.maps.LatLng(37.492214173992, 127.03259052214),
          storeNo : 10000,
          prodName : '청포도',
          price : 1000
-      }, {
-         title : '진욱이네',
-         latlng : new kakao.maps.LatLng(37.493989668463, 127.07981094747),
-         storeNo : 10000,
-         prodName : '레몬',
-         price : 40000
       }, {
          title : '인규네',
          latlng : new kakao.maps.LatLng(37.48022206234, 127.07175873858),
