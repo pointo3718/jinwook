@@ -966,10 +966,9 @@ $(document).ready(function() {
                               </thead>
                               <tbody>
                                  <c:forEach var="coupon" items="${couponList}">
-                                    <c:set var="l" value="${ l+1 }" />
+                                    <c:set var="i" value="${ i+1 }" />
 
                                     <tr>
-<<<<<<< HEAD
                                        <th scope="row">${i}</th>
                                                 <td><c:if test="${coupon.couponType==1}">
                                        고객님의 회원가입을 축하합니다. (회원가입 쿠폰)
@@ -980,18 +979,6 @@ $(document).ready(function() {
                                     </c:if> <c:if test="${coupon.couponType==4}">
                                       고객님께 소중한 쿠폰 배달왔습니다. (추천인 쿠폰)
                                     </c:if></td>
-=======
-                                       <th scope="row">${l}</th>
-			                                       <td><c:if test="${coupon.couponType==1}">
-			                              고객님의 회원가입을 축하합니다. (회원가입 쿠폰)
-			                           </c:if> <c:if test="${coupon.couponType==2}">
-			                              고객님의 첫 구매를 축하합니다. (첫구매 쿠폰)
-			                           </c:if> <c:if test="${coupon.couponType==3}">
-			                             고객님의 생일을 축하합니다. (생일축하 쿠폰)
-			                           </c:if> <c:if test="${coupon.couponType==4}">
-			                             고객님께 소중한 쿠폰 배달왔습니다. (추천인 쿠폰)
-			                           </c:if></td>
->>>>>>> refs/remotes/origin/master
                                        <td style="padding-left: 35px;"><fmt:formatNumber value="${coupon.couponDc*100}" />%</td>
                                        <td>${coupon.couponValidDate}</td>
                                     </tr>
