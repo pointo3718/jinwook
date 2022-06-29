@@ -60,6 +60,8 @@ public int addOrders(Orders orders);
    
    public int updateOrdersCoupon(Coupon coupon);
    
+   public int importJpayCharge(User user);
+   
    // 첨부파일 조회
 	public Attach selectFileList(int prodNo) throws Exception;
 

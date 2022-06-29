@@ -382,30 +382,39 @@ $('#myModal').on('shown.bs.modal', function () {
 						<div class="buyer col-sm-2" style="float:left; font-size:15px;">
 						<br>결제금액<div value="${orders.finalPrice }">${orders.orderPrice-total}</div>
 						</div>
-						<%-- </c:if> --%>
+							
+						
+						<%-- </c:if>
 						<%--  <c:if test="${rola==사장님}">
 						<div class="buyer col-sm-2" style="float:left; font-size:15Spx;">
 						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주문 금액<div class="text-center">${orders.orderPrice}</div>
 						</div>
 						<div class="buyer col-sm-3 text-right" style="float:left; font-size:15px; ">
 						<br>
-							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 90px; height: 50px; font-size:17px;">주문수락</button>
+							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px;height: 36px; font-size:17px;">주문수락</button>
 						</div>
 						<div class="buyer col-sm-3" style="float:left; font-size:15px;">
 						<br>
-							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 90px; height: 50px; font-size:17px;">주문거절</button>
+							<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px;height: 36px; font-size:17px;">주문거절</button>
 						</div>
 						
 						</c:if>  --%>    
-
-    
 					</div>
 				</c:forEach>
+				</div>
+				<div>
+				<br><br><br>
+					<button class="site-btn" style="padding-left: 5px; padding-right: 5px; width: 80px; height: 36px; font-size:17px; float:right; padding-top: 0px;padding-bottom: 0px; margin-right: 33px;" onclick="">주문거절</button>
 				</div>
 			</div>
 		</div>
 	</section>
-   <!--   Blog Section End -->
+	<!-- <script type="text/javascript">
+		function(){
+			
+		}
+	</script> -->
+	
 
 	<!-- Footer Begin -->   
 	<jsp:include page="../layout/footer.jsp" />

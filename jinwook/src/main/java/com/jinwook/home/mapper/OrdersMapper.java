@@ -69,10 +69,12 @@ public interface OrdersMapper {
    
    public int checkJpPassword(User user); // 결제비밀번호 일치체크
    
-   public Orders getNewOrders();
+   public Orders getNewOrders(); // 
    
-   public int updateOrdersCoupon(Coupon coupon);
+   public int updateOrdersCoupon(Coupon coupon); //쿠폰사용 처리
    
-   public Attach selectFileList(int prodNo) throws Exception;
+   public int importJpayCharge(User user); //아임포트 충전시 잔액추가
+   
+   public Attach selectFileList(int prodNo) throws Exception; //파일업로드된거 불러오는)
 }
  

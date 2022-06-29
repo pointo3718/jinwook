@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -89,15 +90,15 @@
 
          <thead>
           <tr>
-            <th align="left">주문번호</th>
-            <th align="left">주문날짜</th>
-            <th align="left">상품사진</th>
+            <th align="center">주문번호</th>
             <th align="left">상품이름</th>
             <th align="left">주문금액</th>
+            <th align="left" >주문날짜</th>
+            <!-- <th align="left" >상품사진</th> -->
             <th align="left">픽업시간</th>
             <th align="left">주문현황</th>
-            <th align="left">&nbsp;<th>
-            
+            <th align="left">&nbsp;</th>
+            <th align="left">후기</th>
           </tr>
        </thead>
         
