@@ -120,7 +120,11 @@
 
                               <div class="getStoreNoNo" name="getStoreNoNo" id="getStoreNoNo">
 
+
                               </div>
+
+                                
+
                            </div>
                         </c:if>
                         
@@ -168,11 +172,10 @@
                                     href="/request/getRequestListForAdmin?reqCode=3">환급 요청</a> <a
                                     class="dropdown-item"
                                     href="/request/getRequestListForAdmin?reqCode=4">광고 등록
-                                    요청</a> <a class="dropdown-item"
-                                    href="/request/getRequestListForAdmin?reqCode=4">문의 내역</a> <a
+                                    요청</a><a
                                     class="dropdown-item" href="/board/getBoardInquiryList">1:1
-                                    문의</a> <a class="dropdown-item"
-                                    href="/board/getBoardAnnouncementList">공지사항</a> <a
+                                    문의내역</a> <a class="dropdown-item"
+                                    href="/admin/chart">통계</a> <a
                                     class="dropdown-item" href="#">로그아웃</a>
                               </div>
                            </div>
@@ -287,7 +290,7 @@
                   <ul>
                   	 
                      <li><a href="#" style="top: 1px;"><i style="font-size: 25px;" class="fa fa-heart"></i> 
-                     <c:if test="${sessionScope.user ne null}">
+                     <c:if test="${sessionScope.user ne null and sessionScope.user.role ne '관리자' }">
                      <span class="countorders" style="width: 16px; height: 16px;"></span>
                      </c:if>
                      </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
@@ -333,7 +336,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item"
                                href="/store/addStoreProduct?storeNo=\${store.storeNo}">사장님페이지</a> <a
-                               class="dropdown-item" href="/orders/getOrdersList">주문내역</a> <a
+                               class="dropdown-item" href="/orders/getOrdersListCeo">주문내역</a> <a
                                class="dropdown-item"
                                href="/store/updateStore?storeNo=\${store.storeNo}">상점정보수정</a> <a
                                class="dropdown-item" href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보수정</a> <a

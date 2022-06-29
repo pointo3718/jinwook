@@ -926,10 +926,7 @@ a{
 	</section>
 	<!-- Blog Section End -->
 	
-	<div class="container">
 
-	<a href="#" title="Homzzang.com" data-toggle="popover" data-trigger="hover" data-placement="top"  data-content="홈페이지제작관리">홈짱닷컴</a>
-	</div>
 	
 	<!-- Footer Begin -->
 	<jsp:include page="../layout/footer.jsp" />
@@ -951,10 +948,8 @@ $(document).ready(function(){
 	
 	function updateRequestAddStore(REQNO) {
 
-	alert(REQNO);
 
 	var uri = "/request/updateRequestAddStore/" + REQNO;
-	alert(uri);
 	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
 
 		$.ajax({
@@ -966,10 +961,10 @@ $(document).ready(function(){
 			success: function(response) {
 								
 				if (response.result == false) {
-					alert("요청 수락에 실패하였습니다.");
+					swal("요청 수락에 실패하였습니다.");
 					return false;
 				}
-				alert(REQNO+"번 요청을 수락했습니다.");
+				swal(REQNO+"번 요청을 수락했습니다.");
 				location.reload();
 			},
 			error: function(xhr, status, error) {
@@ -983,11 +978,8 @@ $(document).ready(function(){
 ////////////////// 상점 삭제 REST ////////////////////
 	function deleteStore(REQNO, STORENO) {
 
-	alert(REQNO);
-	alert(STORENO);
 
 	var uri = "/request/deleteStore/" + REQNO + "/" + STORENO;
-	alert(uri);
 	var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
 
 		$.ajax({
@@ -1002,7 +994,7 @@ $(document).ready(function(){
 					alert("요청 수락에 실패하였습니다.");
 					return false;
 				}
-				alert(REQNO+"번 요청을 수락했습니다.");
+				swal(REQNO+"번 요청을 수락했습니다.");
 				location.reload();
 			},
 			error: function(xhr, status, error) {
@@ -1016,8 +1008,6 @@ $(document).ready(function(){
 //////////////////환급 수락 REST ///////////////////////
 	function updateRequestRefund(REQNO, USERID) {
 
-	alert(REQNO);
-	alert(USERID);
 	
 	swal("요청을 수락할까요?", "", "warning");
 	
@@ -1052,8 +1042,6 @@ $(document).ready(function(){
 
 ////////////////// 광고 수락 REST ///////////////////////
 	function updateRequestStatusToAccept(REQNO, USERID) {
-
-	alert(REQNO);
 	
 	var uri = "/request/updateRequestStatusToAccept/" + REQNO;
 	
@@ -1087,8 +1075,6 @@ $(document).ready(function(){
 
 ////////////////// 요청 거절 REST ///////////////////////
 	function updateRequestStatusToRefuse(REQNO) {
-
-	alert(REQNO);
 
        
 			var uri = "/request/updateRequestStatusToRefuse/" + REQNO;

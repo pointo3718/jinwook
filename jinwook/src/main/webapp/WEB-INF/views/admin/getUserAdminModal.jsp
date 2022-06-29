@@ -106,7 +106,6 @@ $(document).ready(function() {
 
 	$('#myModal2').on('show.bs.modal', function(event) {          
 		USERID = $(event.relatedTarget).data('userid');
-		alert(USERID);
 	    getUser();
 
 	 });

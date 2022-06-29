@@ -338,6 +338,7 @@
 			r.req_code = ${reqCode}
 			AND
 			r.req_delete_yn=false
+		ORDER BY req_date
 		LIMIT
 			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>

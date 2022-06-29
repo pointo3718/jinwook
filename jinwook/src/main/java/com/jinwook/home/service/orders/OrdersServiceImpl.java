@@ -230,5 +230,10 @@ public class OrdersServiceImpl implements OrdersService{
 			// TODO Auto-generated method stub
 			return ordersMapper.selectFileList(prodNo);
 		}
+	@Override
+	public int importJpayCharge(User user) {
+		
+		return ordersMapper.importJpayCharge(user);
+	}
 
 }

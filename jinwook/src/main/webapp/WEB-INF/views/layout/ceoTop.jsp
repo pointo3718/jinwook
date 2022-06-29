@@ -501,7 +501,6 @@ document.detailForm.submit();
                style="background-color: white; width: 350px; height: 197px; justify-content: space-around;">
                <thead>
                   <tr>
-
                      <th scope="col"><strong class="mytop01"
                         style="font-size: 20px;">${user.userName} 사장님</strong></th>
 

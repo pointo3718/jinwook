@@ -144,6 +144,29 @@ public class OrdersController {
       return "user/myPage";
    }
    
+   @GetMapping(value = "getOrdersListCeo")//리뷰날짜가 null이아닐경우 후기버튼 지움
+   public String getOrdersListCeo(@ModelAttribute("orders") Orders orders,HttpSession session,Model model) throws Exception {
+     String userid = ((User) session.getAttribute("user")).getUserId();
+     
+     User user = new User();
+      user.setUserId(userid);
+      orders.setUser(user);
+
+      List<Coupon> couponList = storeService.getCouponList(userid);
+      model.addAttribute("couponList", couponList);
+      
+      List<Store> storeInfo = storeService.getStoreInfo(userid);
+      model.addAttribute("storeInfo", storeInfo);
+      
+      System.out.println("/orders/getOrdersList : GET");
+      List<Orders> getOrdersList = ordersService.getOrdersList(orders);
+      System.out.println(orders);
+      
+      model.addAttribute("getOrdersList", getOrdersList);
+      
+      return "orders/getOrdersListCeo";
+   }
+   
    @GetMapping(value = "getOrders")
    public String getOrders(@RequestParam("orderNo") int orderNo, Model model,@ModelAttribute("cart")Cart cart) throws Exception {
       
@@ -156,6 +179,24 @@ public class OrdersController {
       
       return "orders/getOrders";
    }
+   
+   @GetMapping(value = "getOrdersCeo")
+   public String getOrdersCeo(@RequestParam("orderNo") int orderNo, Model model,@ModelAttribute("cart")Cart cart,HttpSession session) throws Exception {
+      
+      System.out.println("/orders/getOrders : GET");
+      
+      List<Orders> getOrders = ordersService.getOrders(orderNo);
+      System.out.println("후훗"+getOrders);
+      
+      String userid = ((User) session.getAttribute("user")).getUserId();
+      List<Store> storeInfo = storeService.getStoreInfo(userid);
+      model.addAttribute("storeInfo", storeInfo);
+      
+      model.addAttribute("getOrders", getOrders);
+      
+      return "orders/getOrdersCeo";
+   }
+   
    
    @GetMapping(value = "getOrdersCartList")
    public String getOrdersCartList(@ModelAttribute("cart") Cart cart, Model model,HttpSession session) throws Exception {
@@ -182,16 +223,6 @@ public class OrdersController {
       System.out.println("/orders/addOrdersJpayPassword : GET");
       
       return  "orders/addOrdersJpayPassword";
-   }
-   
-   @PostMapping(value = "addOrdersJpayPassword")///MyPage
-   public String addOrdersJpayPassword(@ModelAttribute("user") User user) throws Exception {
-      
-      System.out.println("/orders/addOrdersJpayPassword : POST");
-      
-      ordersService.addOrdersJpayPassword(user);
-      
-      return  "myPage";
    }
    
    @GetMapping(value = "updateOrdersJpayPassword")
@@ -243,6 +274,14 @@ public class OrdersController {
       return  "orders/getOrdersJpayList";
    }
    
+   @GetMapping(value="getOrdersJpayChargeList")
+   public String getOrdersJpayChargeList() throws Exception{
+	   
+	   System.out.println("/orders/getOrdersJpayChargeList : GET");
+	   
+	   return "orders/getOrdersJpayChargeList";
+   }
+   
 //   @GetMapping(value ="getOrdersNoticeList")
 //   public String getOrdersNoticeList(@ModelAttribute("notice") Notice notice,HttpSession session,Model model) throws Exception {
 //      
@@ -258,13 +297,6 @@ public class OrdersController {
 //      return "orders/getOrdersNoticeList";
 //   }
    
-   @GetMapping(value="getOrdersJpayChargeList")
-   public String getOrdersJpayChargeList() throws Exception{
-	   
-	   System.out.println("/orders/getOrdersJpayChargeList : GET");
-	   	
-	return "orders/getOrdersJpayChargeList";
-   }
    
 //   @GetMapping(value="addOrdersJpayPasswordCk")
 //   public String addOrdersJpayPasswordCk() throws Exception {
