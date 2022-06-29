@@ -513,8 +513,8 @@
 		FROM
 			orders
 		WHERE
-			store_no = #{storeNo}
-		 AND review_writer IS NOT NULL
+			store_no = #{storeNo} AND
+			review_content IS NOT NULL
 		<!-- LIMIT
          #{paginationInfo.firstRecordIndex}, #{recordsPerPage} -->
 	</select> 

@@ -111,8 +111,6 @@
 	background:
 		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
 }
-
-
 </style>
 
 
@@ -124,37 +122,43 @@
 </head>
 <body>
 
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 
 	<!-- Header Begin -->
 	<jsp:include page="./layout/top.jsp" />
 	<!-- Header End -->
-<div class="row">
-<div class="scroll1" id="scroll1"></div>
-<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" style="width:1100px; height:200px; right:20px;">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="${path}/resources/static/img/banner/선경이네.png" class="d-block w-100" class="img-responsive displayed" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="${path}/resources/static/img/banner/지호네.png" class="d-block w-100" alt="..."  style="width:1100px; height:200px;">
-    </div>
-    <div class="carousel-item">
-      <img src="${path}/resources/static/img/banner/진욱이생일.png" class="d-block w-100" alt="...">
-    </div>
-  </div>
+	<div class="row">
+		<div class="scroll1" id="scroll1"></div>
+		<div id="carouselExampleFade" class="carousel slide carousel-fade"
+			data-ride="carousel"
+			style="width: 1100px; height: 200px; right: 20px;">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="${path}/resources/static/img/banner/선경이네.png"
+						class="d-block w-100" class="img-responsive displayed" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="${path}/resources/static/img/banner/지호네.png"
+						class="d-block w-100" alt="..."
+						style="width: 1100px; height: 200px;">
+				</div>
+				<div class="carousel-item">
+					<img src="${path}/resources/static/img/banner/진욱이생일.png"
+						class="d-block w-100" alt="...">
+				</div>
+			</div>
 
-</div>
-</div>
-	
-	
-		<!-- Blog Section Begin -->
+		</div>
+	</div>
+
+
+	<!-- Blog Section Begin -->
 	<section class="from-blog spad" style="padding-bottom: 0px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12" >
-					<div class="section-title from-blog__title "  >
+				<div class="col-lg-12">
+					<div class="section-title from-blog__title ">
 						<h2>진욱이네 상점 구경하기</h2>
 						</a>
 					</div>
@@ -168,13 +172,13 @@
 		<div class="row" style="align-items: flex-start;">
 
 			<!-- 지도를 표시할 div 입니다 -->
-		
-			
-			<div id="map" style="width: 500px; height: 500px; right: 50px;">	
+
+
+			<div id="map" style="width: 500px; height: 500px; right: 50px;">
 			</div>
 			<div>
-		
-		
+
+
 				<h3 class="text-left">
 					<strong style="font-size: 22px;">진욱이네 상점 TOP 7</strong><span
 						style="font-size: 13px; color: #A4A4A4; padding-left: 220px;">*주문수
@@ -197,14 +201,14 @@
 					</tbody>
 
 				</table>
-				
+
 			</div>
-			
-					<jsp:include page="map.jsp" />
-					
+
+			<jsp:include page="map.jsp" />
+
 		</div>
 
-		
+
 
 
 	</section>
@@ -218,28 +222,28 @@
 					<div class="section-title">
 						<h2>화제의 레시피</h2>
 					</div>
-				
+
 				</div>
 			</div>
-				<div class="row featured__filter recipelistBody">
-						
-						<!-- 컨텐츠 들어가는 부분 -->
-			   
-				</div>
+			<div class="row featured__filter recipelistBody">
+
+				<!-- 컨텐츠 들어가는 부분 -->
+
 			</div>
-		
+		</div>
+
 	</section>
 	<!-- Featured Section End -->
 
 	<!-- Banner Begin -->
 	<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title">
-						<h2>광고</h2>
-					</div>
-				
-				</div>
+		<div class="col-lg-12">
+			<div class="section-title">
+				<h2>광고</h2>
 			</div>
+
+		</div>
+	</div>
 	<div class="scroll3" id="scroll3"></div>
 	<div class="banner">
 		<div class="container">
@@ -261,11 +265,51 @@
 	</div>
 	<!-- Banner End -->
 
+	<!-- Youtube Begin -->
+	<div class="row" style="margin-top: 80px;">
+		<div class="col-lg-12">
+			<div class="section-title">
+				<h2>화제의 동영상</h2>
+			</div>
+
+		</div>
+	</div>
+	<div class="scroll3" id="scroll3"></div>
+	<div class="banner">
+		<div class="container">
+			<div class="row">
+
+				<iframe width="360" height="315" class='preview_div'
+					src="https://www.youtube.com/embed/AlK2Gl6kHZI?autoplay=0&mute=1&showinfo=0&controls=0&autohide=1"
+					title="YouTube video player" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen></iframe>&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<iframe width="360" height="315" class='preview_div'
+					src="https://www.youtube.com/embed/oe_WhcK2X4Q?autoplay=0&mute=1&showinfo=0&controls=0&autohide=1"
+					title="YouTube video player" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen></iframe>&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<iframe width="360" height="315" class='preview_div'
+					src="https://www.youtube.com/embed/rEnnfMFAijU?autoplay=0&mute=1&showinfo=0&controls=0&autohide=1"
+					title="YouTube video player" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen></iframe>
+
+
+			</div>
+		</div>
+	</div>
+	<!-- Youtube End -->
 
 
 
-	
-	<br><br><br>
+
+
+	<br>
+	<br>
+	<br>
 
 	<script type="text/javascript">
 	
@@ -374,6 +418,28 @@ console.log(storeList);
 
 	<!-- Blog Section End -->
 	<jsp:include page="layout/footer.jsp" />
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+		type="text/javascript"></script>
+	<script>
+      // 마우스 진입 이벤트
+      $(document).on('mouseenter', '.preview_div', function(){
+        // 재생 버튼 감추기
+        $(this).find('img').hide();
+        // 썸네일 이미지를  gif 이미지로 변경
+        $(this).css('background-image', 'url(https://t1.daumcdn.net/cfile/tistory/99D4F34B5BE6C2CE01?v='+Math.random()+')');
+      });
+      // 마우스 아웃 이벤트
+      $(document).on('mouseleave', '.preview_div', function(){
+        // 재생 버튼 보아기
+        $(this).find('img').show();
+        // gif 이미지를  썸네일 이미지로 변경
+        $(this).css('background-image', 'url(https://t1.daumcdn.net/cfile/tistory/99AEF8505BE6BF582D)');
+      });
+    </script>
+
+
+
 </body>
 
 </html>

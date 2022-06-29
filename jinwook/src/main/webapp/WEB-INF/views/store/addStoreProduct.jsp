@@ -185,72 +185,7 @@ label {
 
 
 <script type="text/javascript">
-	/*<![CDATA[*/
-	function movePage(uri, queryString) {
-		location.href = uri + queryString;
-	}
 
-	var storeNo = $("input[id='storeNo']").val();
-	/*]]>*/
-
-	$(function() {
-		$(".list-group-item:contains('주문 내역')").on("click", function() {
-			$(self.location).attr("href", "/admin/blog");
-		});
-	});
-
-	$(function() {
-		$(".list-group-item:contains('상점 정보 수정')").on("click", function() {
-			$(self.location).attr("href", "/store/updateStore?storeNo=10000");
-		});
-	});
-
-	$(function() {
-		$(".list-group-item:contains('개인 정보 수정')").on("click", function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href", "/admin/listComplainAdmin");
-		});
-	});
-
-	$(function() {
-		$(".list-group-item:contains('상품 등록')").on(
-				"click",
-				function() {
-					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-					$(self.location).attr("href",
-							"/store/addStoreProduct?storeNo=10000");
-				});
-	});
-
-	$(function() {
-		$(".list-group-item:contains('광고 등록')").on(
-				"click",
-				function() {
-					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-					$(self.location).attr("href",
-							"/request/getRequestListForAdmin?reqCode=1");
-				});
-	});
-
-	$(function() {
-		$(".list-group-item:contains('지갑')").on(
-				"click",
-				function() {
-					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-					$(self.location).attr("href",
-							"/store/getStoreWallet?storeNo=10000");
-				});
-	});
-
-	$(function() {
-		$(".list-group-item:contains('1:1 문의내역')").on(
-				"click",
-				function() {
-					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-					$(self.location).attr("href",
-							"/request/getRequestListForAdmin?reqCode=2");
-				});
-	});
 
 	//============= "상품 삭제"  Event 연결 =============
 	function fncDeleteStoreProduct(e) {
@@ -269,8 +204,8 @@ label {
 			success : function(result) {
 				if (result != null) {
 					swal("삭제완료", "success");
-					self.location = "addStoreProduct?storeNo=" + STORENO
-//					$( "#point" ).load(window.location.href + " #point" );
+//					self.location = "addStoreProduct?storeNo=" + STORENO
+					$( "#pp" ).load(window.location.href + " #pp" );
 				}
 			}
 
@@ -294,8 +229,8 @@ label {
 			success : function(result) {
 				if (result != null) {
 					swal("매진 처리되었습니다.");
-					self.location = "addStoreProduct?storeNo=" + STORENO
-//					$( "#point" ).load(window.location.href + " #point" );
+//					self.location = "addStoreProduct?storeNo=" + STORENO
+					$( "#pp" ).load(window.location.href + " #pp" );
 				}
 			}
 
@@ -318,8 +253,8 @@ label {
 			success : function(result) {
 				if (result != null) {
 					swal("판매 처리되었습니다.");
-					self.location = "addStoreProduct?storeNo=" + STORENO
-//					$( "#point" ).load(window.location.href + " #point" );
+//					self.location = "addStoreProduct?storeNo=" + STORENO
+					$( "#pp" ).load(window.location.href + " #pp" );
 				}
 			}
 
@@ -371,8 +306,8 @@ label {
 			success : function(result) {
 				if (result != null) {
 					swal("수정 완료");
-					self.location = "addStoreProduct?storeNo=" + STORENO
-//					$( "#point" ).load(window.location.href + " #point" );
+//					self.location = "addStoreProduct?storeNo=" + STORENO
+					$( "#pp" ).load(window.location.href + " #pp" );
 				}
 			}
 
@@ -505,6 +440,7 @@ label {
 
 		document.detailForm.action = '/store/addStoreProduct';
 		$('#detailForm').submit();
+		swal("등록이 완료됐습니다");
 	}
 
 	/////////////// 상점 등록 끝 ///////////////////////
@@ -541,157 +477,135 @@ label {
 							<br />
 
 
-
-							<div class="list-group text-center" style="font-size: 15px;">
-								<button type="button"
-									class="list-group-item list-group-item-action"
-									aria-current="true">주문 내역</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">상점 정보
-									수정</button>
-								<button type="button"
-									class="list-group-item list-group-item-action" class="addStore">
-									<span class="addStore">개인 정보 수정</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="deleteStore">상품 등록</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="refundStore">광고 등록</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="adStore">내가 한 요청</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="adStore">지갑</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">1:1
-									문의내역</button>
-							</div>
+							<div class="getStoreNo"></div>
 
 						</div>
 
 
 					</div>
 				</div>
+				
+
 				<!-- 상품등록  Begin -->
-				<div class="shoping-cart spad"
-					style="width: 900px; padding-top: 0px;">
-					<div class="container" style="width: 830px;">
-						<div class="row"
-							style="justify-content: space-between; width: 1150px;">
-							<div class="col-lg-9">
-								<div class="shoping__cart__table">
-													<div id="point" name="point" class="point">
-									<table>
-										<thead>
-											<tr>
-												<th class="shoping__product"
-													style="width: 190px; height: 30px;">상품사진</th>
-												<th class="text-center" style="width: 300px;">이름</th>
-												<th class="text-center" style="width: 700px;">상품설명</th>
-												<th class="text-center" style="width: 400px;">원산지</th>
-												<th class="text-center" style="width: 200px;">가격</th>
-												<th class="text-center" style="width: 200px;"></th>
-												<th class="text-center" style="width: 200px;"></th>
-												<th class="text-center" style="width: 100px;"></th>
-												<th></th>
-											</tr>
-										</thead>
-									
-										<tbody>
-											<!--  /////////////////////////////////////////////////// -->
-											<c:set var="i" value="0" />
-											<c:set var="total" value="0" />
-											<c:forEach var="store" items="${store}">
-												<c:set var="i" value="${ i+1 }" />
-												<tr>
+					<div class="shoping-cart spad"
+						style="width: 900px; padding-top: 0px;">
+						<div class="container" style="width: 830px;">
+							<div class="row"
+								style="justify-content: space-between; width: 1150px;">
+								<div class="col-lg-9">
+									<div class="shoping__cart__table">
+										<div id="pp" name="pp" class="pp">
+											<table>
+												<thead>
+													<tr>
+														<th class="shoping__product"
+															style="width: 190px; height: 30px;">상품사진</th>
+														<th class="text-center" style="width: 300px;">이름</th>
+														<th class="text-center" style="width: 700px;">상품설명</th>
+														<th class="text-center" style="width: 400px;">원산지</th>
+														<th class="text-center" style="width: 200px;">가격</th>
+														<th class="text-center" style="width: 200px;"></th>
+														<th class="text-center" style="width: 200px;"></th>
+														<th class="text-center" style="width: 100px;"></th>
+														<th></th>
+													</tr>
+												</thead>
 
-													<div>
-														<input type="hidden" name="prodNo"
-															class="form-control form-control" id="prodNo"
-															value="${store.product.prodNo}">
-													</div>
-													<td class="shoping__cart__item"><img
-														src="/resources/static/${store.attach.orgFileName}"
-														onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
-														alt="My Image" width="150" height="150" style="border-radius : 20px;"></td>
-													<td><strong style="font-size: 20px;"> <c:if
-																test="${store.product.soldout=='false'}">
-																<span style="color: red;"><s>${store.product.prodName}</s></span>
-															</c:if> <c:if test="${store.product.soldout=='true'}">${store.product.prodName}</c:if>
+												<tbody>
+													<!--  /////////////////////////////////////////////////// -->
+													<c:set var="i" value="0" />
+													<c:set var="total" value="0" />
+													<c:forEach var="store" items="${store}">
+														<c:set var="i" value="${ i+1 }" />
+														<tr>
 
-
-													</strong></td>
+															<div>
+																<input type="hidden" name="prodNo"
+																	class="form-control form-control" id="prodNo"
+																	value="${store.product.prodNo}">
+															</div>
+															<td class="shoping__cart__item"><img
+																src="/resources/static/${store.attach.orgFileName}"
+																onerror="this.src='https://dummyimage.com/280x250/1af0d4/000000.gif'"
+																alt="My Image" width="150" height="150"
+																style="border-radius: 20px;"></td>
+															<td><strong style="font-size: 20px;"> <c:if
+																		test="${store.product.soldout=='false'}">
+																		<span style="color: red;"><s>${store.product.prodName}</s></span>
+																	</c:if> <c:if test="${store.product.soldout=='true'}">${store.product.prodName}</c:if>
 
 
-													<td><strong style="font-size: 20px;"><input
-															type="text" name="storeName"
-															class="form-control form-control" id="prodInfo"
-															value="${store.product.prodInfo}" placeholder="상품설명"></strong></td>
-													<td class="shoping__cart__price"><input type="text"
-														name="storeName" class="form-control form-control"
-														id="prodOrign" value="${store.product.prodOrign}"
-														placeholder="원산지"></strong></td>
-													<td class="shoping__cart__price"><input type="text"
-														name="storeName" class="form-control form-control"
-														id="price" value="${store.product.price}" placeholder="가격"></strong>
-													</td>
-													<td class="shoping__cart__price">
-														<button type="button" data-value="${store.product.prodNo}"
-															name="buttons" class="btn btn-primary btn-sm"
-															onClick="fncUpdateStoreProduct(this)">수정</button>
-													</td>
+															</strong></td>
 
 
-													<td class="shoping__cart__price">
-														<button type="button" id="sell" name="sell"
-															data-value="${store.product.prodNo}"
-															class="btn btn-success btn-sm sell"
-															onClick="fncIsSell(this)">판매</button>
-														<button type="button" id="soldout" name="soldout"
-															data-value="${store.product.prodNo}"
-															class="btn btn-danger btn-sm soldout"
-															onClick="fncIsSoldout(this)">매진</button>
+															<td><strong style="font-size: 20px;"><input
+																	type="text" name="storeName"
+																	class="form-control form-control" id="prodInfo"
+																	value="${store.product.prodInfo}" placeholder="상품설명"></strong></td>
+															<td class="shoping__cart__price"><input type="text"
+																name="storeName" class="form-control form-control"
+																id="prodOrign" value="${store.product.prodOrign}"
+																placeholder="원산지"></strong></td>
+															<td class="shoping__cart__price"><input type="text"
+																name="storeName" class="form-control form-control"
+																id="price" value="${store.product.price}"
+																placeholder="가격"></strong></td>
+															<td class="shoping__cart__price">
+																<button type="button"
+																	data-value="${store.product.prodNo}" name="buttons"
+																	class="btn btn-primary btn-sm"
+																	onClick="fncUpdateStoreProduct(this)">수정</button>
+															</td>
 
-													</td>
-													<td class="shoping__cart__price">
-														<button type="button" data-value="${store.product.prodNo}"
-															name="buttons" class="btn btn-light btn-sm"
-															onClick="fncDeleteStoreProduct(this)">X</button> <input
-														type="hidden" id="storeNo" name="storeNo"
-														data-store="${store.storeNo}" value="${store.storeNo}" />
 
-													</td>
+															<td class="shoping__cart__price">
+																<button type="button" id="sell" name="sell"
+																	data-value="${store.product.prodNo}"
+																	class="btn btn-success btn-sm sell"
+																	onClick="fncIsSell(this)">판매</button>
+																<button type="button" id="soldout" name="soldout"
+																	data-value="${store.product.prodNo}"
+																	class="btn btn-danger btn-sm soldout"
+																	onClick="fncIsSoldout(this)">매진</button>
 
-												</tr>
-											</c:forEach>
-										</tbody>
-									
-									</table>
+															</td>
+															<td class="shoping__cart__price">
+																<button type="button"
+																	data-value="${store.product.prodNo}" name="buttons"
+																	class="btn btn-light btn-sm"
+																	onClick="fncDeleteStoreProduct(this)">X</button> <input
+																type="hidden" id="storeNo" name="storeNo"
+																data-store="${store.storeNo}" value="${store.storeNo}" />
+
+															</td>
+
+														</tr>
+													</c:forEach>
+												</tbody>
+
+											</table>
+										</div>
+										<div id="plus">
+											<p class="original"></p>
+										</div>
+
+										<div class="col-lg-2"
+											style="justify-content: space-around; margin-left: 410px;">
+											<button type="button" id="plus2"
+												class="btn btn-outline-success"
+												style="border-color: #eeeeee;" value="Add">+</button>
+										</div>
+
+										<!--  /////////////////////////////////////////////////// -->
 									</div>
-									<div id="plus">
-										<p class="original"></p>
-									</div>
-
-									<div class="col-lg-2"
-										style="justify-content: space-around; margin-left: 410px;">
-										<button type="button" id="plus2"
-											class="btn btn-outline-success"
-											style="border-color: #eeeeee;" value="Add">+</button>
-									</div>
-
-									<!--  /////////////////////////////////////////////////// -->
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+
+
+
+
 
 
 				<!-- 상품등록 End -->
@@ -703,6 +617,79 @@ label {
 	<!-- Footer Begin -->
 	<jsp:include page="../layout/footer.jsp" />
 	<!-- Footer End -->
+
+	<script type="text/javascript">
+   
+   //======페이지 이동 상점번호 받아오기=========//
+   
+      $(function() {
+            getStoreNo();
+         });
+      
+
+         function getStoreNo() {
+                 
+               var userId = $("#userId").val();
+            
+               var uri = "/store/getStoreNo/"+userId
+               
+
+               $.get(uri, function(response) { 
+                  
+                     var getStoreNoHtmlBody = "";
+                     
+                     $(response.getStoreNo).each(function(idx,store) {              
+
+                        getStoreNoHtmlBody += `
+ 
+							<div class="list-group text-center" style="font-size: 15px;">
+							<button type="button"
+								class="list-group-item list-group-item-action"
+								aria-current="true"><a href="/orders/getOrdersList" style="color:black">주문 내역</button>
+							<button type="button"
+								class="list-group-item list-group-item-action"><a href="/store/updateStore?storeNo=\${store.storeNo}" style="color:black">상점 정보
+								수정</button>
+							<button type="button"
+								class="list-group-item list-group-item-action" class="addStore">
+								<span class="addStore"><a href="/user/confirmPasswordView?userId=${sessionScope.user.userId}" style="color:black">개인 정보 수정</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="deleteStore"><a href="/store/addStoreProduct?storeNo=\${store.storeNo}" style="color:black"> 상품 등록</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="refundStore"><a href="/request/addRequestAd?storeNo=\${store.storeNo}" style="color:black"> 광고 등록</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="adStore"><a href="/request/getRequestAdStoreList?storeNo=\${store.storeNo}&userId=${sessionScope.user.userId}" style="color:black"> 내가 한 요청</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action">
+								<span class="adStore"><a href="/store/getStoreWallet?storeNo=\${store.storeNo}" style="color:black"> 지갑</span>
+							</button>
+							<button type="button"
+								class="list-group-item list-group-item-action"><a href="/store/getStore?storeNo=\${store.storeNo}" style="color:black">내 상점 가기</button>
+							<button type="button"
+								class="list-group-item list-group-item-action"><a href="/board/getBoardInquiryList" style="color:black">1:1
+								문의내역</button>
+						</div>
+
+                         
+                            
+                        `;
+                     });
+                     
+                     
+                     $(".getStoreNo").html(getStoreNoHtmlBody);
+                     //$(".userlisthead").html(blacklistHtmlBody);
+                  
+               }, "json");
+
+         }   
+     
+</script>
 
 </body>
 

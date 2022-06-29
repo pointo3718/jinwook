@@ -107,6 +107,7 @@
                            </div>
                         </c:if>
                         <c:if test="${sessionScope.user.role == '사장님'}">
+                        <c:if test="${sessionScope.user.storeYn == true}">
                            <input type="hidden" name="userId" id="userId"
                               value=${sessionScope.user.userId }>
                            <div class="dropdown">
@@ -117,30 +118,35 @@
                                  class="fa fa-thumbs-o-up" aria-hidden="true"></i>${sessionScope.user.userName }
                                  사장님</a>
 
-                              <tbody class="getStoreNo">
+                              <div class="getStoreNoNo" name="getStoreNoNo" id="getStoreNoNo">
 
-                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item"
-                                       href="/store/addStoreProduct?storeNo=10000">사장님페이지</a> <a
-                                       class="dropdown-item" href="/orders/getOrdersList">주문내역</a> <a
-                                       class="dropdown-item"
-                                       href="/store/updateStore?storeNo=10000">상점정보수정</a> <a
-                                       class="dropdown-item" href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보수정</a> <a
-                                       class="dropdown-item"
-                                       href="/store/addStoreProduct?storeNo=10000">상품등록</a> <a
-                                       class="dropdown-item" href="#">광고등록</a> <a
-                                       class="dropdown-item" href="#">내가 한 요청</a> <a
-                                       class="dropdown-item"
-                                       href="/store/getStoreWallet?storeNo=10000">지갑</a> <a
-                                       class="dropdown-item" href="/board/getBoardInquiryList">1:1
-                                       문의</a> <a class="dropdown-item" href="#"></a> <a
-                                       class="dropdown-item" href="/user/logout">로그아웃</a>
-                                 </div>
-
-
-                              </tbody>
+                              </div>
                            </div>
                         </c:if>
+                        
+                        <c:if test="${sessionScope.user.storeYn == false}">
+                        
+                         <div class="dropdown">
+                              <a href="/admin/blog"
+                                 style="word-break: break-all; margin-right: 20px;"
+                                 class="dropdown-toggle" role="button" id="dropdownMenuLink"
+                                 data-toggle="dropdown" aria-expanded="false"><i
+                                 class="fa fa-heart" aria-hidden="true"></i>${sessionScope.user.userName }
+                                 사장님</a>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                 <a class="dropdown-item" href="/store/storeNo">사장님페이지</a>
+                                 <a class="dropdown-item" href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보수정</a>
+                                 <a class="dropdown-item" href="/board/getBoardInquiryList">1:1 문의내역</a>
+                              </div>
+                           </div>
+                           </c:if>
+                           
+                           </c:if>
+                        
+                        
+                        
+                        
+                        
                         <c:if test="${sessionScope.user.role == '관리자'}">
                            <div class="dropdown">
                               <a href="/admin/blog"
@@ -303,41 +309,59 @@
 
 
    <script type="text/javascript">
-/*   
+   
       $(function() {
             getStoreNo();
          });
-       
+      
 
          function getStoreNo() {
                  
                var userId = $("#userId").val();
             
-               var uri = "/store/getStoreNo/userId"
+               var uri = "/store/getStoreNo/"+userId
+               
 
                $.get(uri, function(response) { 
                   
-                     var getStoreNoHtmlBody = "";
+                     var getStoreNoNoHtmlBody = "";
                      
                      $(response.getStoreNo).each(function(idx,store) {              
 
-                        getStoreNoHtmlBody += `
-                        
+                        getStoreNoNoHtmlBody += `
+ 
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item"
+                               href="/store/addStoreProduct?storeNo=\${store.storeNo}">사장님페이지</a> <a
+                               class="dropdown-item" href="/orders/getOrdersList">주문내역</a> <a
+                               class="dropdown-item"
+                               href="/store/updateStore?storeNo=\${store.storeNo}">상점정보수정</a> <a
+                               class="dropdown-item" href="/user/confirmPasswordView?userId=${sessionScope.user.userId}">개인정보수정</a> <a
+                               class="dropdown-item"
+                               href="/store/addStoreProduct?storeNo=\${store.storeNo}">상품등록</a> <a
+                               class="dropdown-item" href="/request/addRequestAd?storeNo=\${store.storeNo}">광고등록</a> <a
+                               class="dropdown-item" href="/request/getRequestAdStoreList?storeNo=\${store.storeNo}&userId=${sessionScope.user.userId}">내가 한 요청</a> <a
+                               class="dropdown-item"
+                               href="/store/getStoreWallet?storeNo=\${store.storeNo}">지갑</a> <a
+                               class="dropdown-item" href="/board/getBoardInquiryList">1:1
+                               문의</a> <a class="dropdown-item" href="#"></a> <a
+                               class="dropdown-item" href="/user/logout">로그아웃</a>
+                         </div>
 
                          
                             
                         `;
+                        
                      });
                      
                      
-                     $(".getStoreNo").html(getStoreNoHtmlBody);
-                     //$(".userlisthead").html(blacklistHtmlBody);
+                     $(".getStoreNoNo").html(getStoreNoNoHtmlBody);
                   
                }, "json");
 
          }   
    
-*/   
+  
 
 
 
