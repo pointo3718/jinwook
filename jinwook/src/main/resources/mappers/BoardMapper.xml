@@ -317,6 +317,7 @@
 			board_code = 0
 		AND
 			(board_inq_status = false OR board_inq_status = true)
+		AND user_id = #{user.userId}	
 		ORDER BY
 			board_no DESC
 		 LIMIT

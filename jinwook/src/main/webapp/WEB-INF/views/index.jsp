@@ -20,6 +20,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">	
 
 
 <!-- Css Styles -->
@@ -396,7 +397,7 @@ console.log(storeList);
 											
 											<div class="featured__item__text" style="margin-right: 40px;">
 												<span style="font-size: 10px;">
-													조회수 &nbsp;\${recipe.rcpHits}
+												<strong><i class="bi bi-eye"></i> &nbsp;\${recipe.rcpHits}</strong>
 												</span>
 												<a href="/board/getRecipe?rcpNo=\${recipe.rcpNo}"><h5>\${recipe.rcpTitle}</h5><a>
 											</div>

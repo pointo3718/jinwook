@@ -269,12 +269,12 @@ public class BoardController {
 		
 	//1:1문의 목록 조회
 	@GetMapping(value = "getBoardInquiryList")
-	public String getBoardInquiryList(@ModelAttribute("board") Board board, Model model) throws Exception {
+	public String getBoardInquiryList(@ModelAttribute("board") Board board, HttpSession session, Model model) throws Exception {
 	
-//		String userId = ((User) session.getAttribute("user")).getUserId();
-//		User user = new User();
-//		user.setUserId(userId);
-//		board.setUser(user);
+		String userId = ((User) session.getAttribute("user")).getUserId();
+		User user = new User();
+		user.setUserId(userId);
+		board.setUser(user);
 		
 		List<Board> getBoardInquiryList = boardService.getBoardInquiryList(board);
 		model.addAttribute("getBoardInquiryList", getBoardInquiryList);//jsp foreach items

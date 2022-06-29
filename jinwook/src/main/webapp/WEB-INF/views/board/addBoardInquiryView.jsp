@@ -150,7 +150,7 @@ function fn_addFile() {
 				<!-- 상점 정보 수정 -->
 				<div>
 					<h4 class="text-left">
-						<strong><i class="bi bi-question-lg"></i>&nbsp; 1:1문의 정보 등록</strong>
+						<strong><i class="bi bi-telegram"></i>&nbsp; 1:1문의 정보 등록</strong>
 						<hr size="10px">
 					</h4>
 
