@@ -726,7 +726,7 @@ $(function() {
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">아이디</label>
                            <div class="col-sm-6">
-                              <input type="text" name="userId"
+                              <input type="text" name="userId" style="background-color:white;"
                                  class="form-control form-control" id="userId"
                                  value="${user.userId}" readonly oninput="this.value=this.value.replace(' ','');">
                            </div>
@@ -774,7 +774,7 @@ $(function() {
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">이름</label>
                            <div class="col-sm-6">
-                              <input type="text" name="userName"
+                              <input type="text" name="userName" style="background-color:white;"
                                  class="form-control form-control" id="userName"
                                  value="${user.userName}" readonly oninput="this.value=this.value.replace(' ','');">
                            </div>
@@ -866,7 +866,7 @@ $(function() {
                               class="col-sm-3 col-form-label col-form-label">휴대폰 번호</label>
                            <div class="col-sm-6">
                               <input type="text" name="phone"
-                                 class="form-control form-control" id="phone1"
+                                 class="form-control form-control" id="phone1" style="background-color:white;"
                                  value="${user.phone}" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" readonly>
                            </div>
                             <div class="col-sm-3">
@@ -908,7 +908,7 @@ $(function() {
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">추천인 아이디</label>
                            <div class="col-sm-6">
-                              <input type="text" name="rpId"
+                              <input type="text" name="rpId" style="background-color:white;"
                                  class="form-control form-control" id="rpId"
                                  value="${user.rpId}" placeholder="x" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" readonly>
                            </div>

@@ -601,7 +601,7 @@
 		<hr><br>
 		    <label for="userId" class=" col-sm-3 control-label" >아 이 디</label>
 		    <div class="col-sm-6" >
-		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요" autocomplete="username" required onkeyup="this.value=this.value.replace(' ','');" oninput="idCheck()" onclick="idCheck1()">
+		      <input type="text" maxlength='50' class="userId" id="userId" name="userId" placeholder="중복확인하세요." autocomplete="username" required onkeyup="this.value=this.value.replace(' ','');" oninput="idCheck()" onclick="idCheck1()">
 				 <div class="" style="">
 				 <div class="id_ok " id="id" >8자 이상의 영문 소문자/영문과 숫자를 조합</div>
 				 </div>
@@ -615,7 +615,7 @@
 		  <div class="form-group">
 		    <label for="password" class=" col-sm-3 control-label"><a>비밀번호</a></label>
 		    <div class="col-sm-6" >
-		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
+		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호를 입력하세요." onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
 		    	<div class="" style="">
 				 <div class="pw_ok " id="pw" >8자 이상의 영문/숫자/특수문자 조합</div>
 				 </div>
@@ -625,7 +625,7 @@
 		  <div class="form-group">
 		    <label for="password2" class="col-sm-offset-0 col-sm-3 control-label"><a>비밀번호 확인</a></label>
 		    <div class="col-sm-6">
-		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" onkeyup="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
+		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호를 다시 입력하세요." onkeyup="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
 		    <div class="" style="">
 		    <div class="pw2_ok" id="id">동일한 비밀번호를 입력해주세요.</div>
 		    </div>
@@ -635,7 +635,7 @@
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-0 col-sm-3 control-label"><a>이름</a></label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='10' class="userName" id="userName" name="userName" placeholder="회원이름" oninput="this.value=this.value.replace(' ','');">
+		      <input type="text" maxlength='10' class="userName" id="userName" name="userName" placeholder="이름을 입력하세요." oninput="this.value=this.value.replace(' ','');">
 		    </div>
 		  </div>
 		  
@@ -650,7 +650,7 @@
 		  <div class="form-group">
 		    <label for="nickName" class="col-sm-offset-0 col-sm-3 control-label"><a>닉네임</a></label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='20' class="nickName" id="nickName" name="nickName" placeholder="닉네임" style=" display:inline-block" oninput="this.value=this.value.replace(' ','');">
+		      <input type="text" maxlength='20' class="nickName" id="nickName" name="nickName" placeholder="중복확인하세요." style=" display:inline-block" oninput="this.value=this.value.replace(' ','');">
 		    </div>  
 		    <div class="">
 		      <button class="nickNameChk site-btn" type="button" id="nickNameChk " onclick="checkNickName()" value="N" style="border-radius:4px; margin-right:50px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button>
@@ -686,7 +686,7 @@
 		  <div class="form-group" >
 		    <label for="phone" class="col-sm-offset-0 col-sm-3 control-label"><a>휴대폰번호</a></label>
 		     <div class="col-sm-6">
-		      <input type="text" class="phone" id="phone" name="phone" placeholder="휴대폰번호" style=" display:inline-block" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+		      <input type="text" class="phone" id="phone" name="phone" placeholder="숫자만 입력하세요." style=" display:inline-block" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 		    </div>
 		    <div class="">
 		      <button class="phoneChk site-btn" type="button" id="phoneChk " onclick="checkPhone()" value="N" style="margin-right:50px; height:48px; width:113.52px; padding-left:10px;
@@ -697,7 +697,7 @@
 		    <label for="" class="col-sm-offset-0 col-sm-3 control-label"><a></a></label>
 		  <div class="adad col-sm-6" style="font-size:15px;">
 			<input type="hidden" id="phoneDoubleChk"/>
-			<input type="text" id="authNo1" class="authNo" placeholder="인증 번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+			<input type="text" id="authNo1" class="authNo" placeholder="인증번호를 입력하세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 			</div>
 		<div>
 			<button class="send_btn site-btn" type="button" id="sned" style="width:113.52; border-radius:4px; margin-right:48px; height:44; width:113.52px; padding-left:10px; padding-right:10px; color: #7fad39; background-color:white; border: 1px solid #7fad39;" >인증번호 확인</button>
@@ -749,7 +749,7 @@
 		   <div class="form-group">
 		    <label for="email" class=" col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="이메일" onkeyup="this.value=this.value.replace(' ','');" >
+		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="예 : jinwook@gmail.com" onkeyup="this.value=this.value.replace(' ','');" >
 		    </div>
 		    <div>
 		      <button class="emailChk site-btn" type="button" id="emailChk" onclick="checkEmail()" value="N" style="border-radius:4px;  margin-right:50px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button> 
@@ -791,7 +791,7 @@
 		 <div class="form-group">
 		    <label for="password" class=" col-sm-3 control-label"><a>비밀번호</a></label>
 		    <div class="col-sm-6" >
-		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호" onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
+		      <input type="password" maxlength='50' class="password" id="password" name="password" placeholder="비밀번호를 입력하세요." onkeyup="this.value=this.value.replace(' ','');" oninput="pwCheck()" onclick="pwCheck1()">
 		    	<div class="" style="">
 				 <div class="pw_ok " id="pw" >8자 이상의 영문/숫자/특수문자 조합</div>
 				 </div>
@@ -801,7 +801,7 @@
 		  <div class="form-group">
 		    <label for="password2" class="col-sm-offset-0 col-sm-3 control-label"><a>비밀번호 확인</a></label>
 		    <div class="col-sm-6">
-		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호 확인" onkeyup="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
+		      <input type="password" maxlength='50' class="password2" id="password2" name="password2" placeholder="비밀번호를 다시 입력하세요." onkeyup="this.value=this.value.replace(' ','');" oninput="pw1Check()" onclick="pw1Check1()">
 		    <div class="" style="">
 		    <div class="pw2_ok" id="id">동일한 비밀번호를 입력해주세요.</div>
 		    </div>
@@ -811,7 +811,7 @@
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-0 col-sm-3 control-label"><a>이름</a></label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='10' class="userName" id="userName" name="userName" placeholder="회원이름" oninput="this.value=this.value.replace(' ','');">
+		      <input type="text" maxlength='10' class="userName" id="userName" name="userName" placeholder="이름을 입력하세요." oninput="this.value=this.value.replace(' ','');">
 		    </div>
 		  </div>
 		  <%-- 
@@ -854,7 +854,7 @@
 		  <div class="form-group" >
 		    <label for="phone" class="col-sm-offset-0 col-sm-3 control-label"><a>휴대폰번호</a></label>
 		     <div class="col-sm-6">
-		      <input type="text" class="phone" id="phone" name="phone" placeholder="휴대폰번호" style=" display:inline-block" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+		      <input type="text" class="phone" id="phone" name="phone" placeholder="숫자만 입력하세요." style=" display:inline-block" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 		    </div>
 		    <div class="">
 		      <button class="phoneChk site-btn" type="button" id="phoneChk " onclick="checkPhone()" value="N" style="margin-right:50px; height:48px; width:113.52px; padding-left:10px;
@@ -865,7 +865,7 @@
 		    <label for="" class="col-sm-offset-0 col-sm-3 control-label"><a></a></label>
 		  <div class="adad col-sm-6" style="font-size:15px;">
 			<input type="hidden" id="phoneDoubleChk"/>
-			<input type="text" id="authNo1" class="authNo" placeholder="인증 번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+			<input type="text" id="authNo1" class="authNo" placeholder="인증번호를 입력하세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 			</div>
 		<div>
 			<button class="send_btn site-btn" type="button" id="sned" style="width:113.52; border-radius:4px; margin-right:48px; height:44; width:113.52px; padding-left:10px; padding-right:10px; color: #7fad39; background-color:white; border: 1px solid #7fad39;" >인증번호 확인</button>
@@ -904,7 +904,7 @@
 		   <div class="form-group">
 		    <label for="email" class=" col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-6">
-		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="이메일" oninput="this.value=this.value.replace(' ','');">
+		      <input type="text" maxlength='50' class="email" id="email" name="email" placeholder="예 : jinwook@gmail.com" oninput="this.value=this.value.replace(' ','');">
 		    </div>
 		    <div>
 		      <button class="emailChk site-btn" type="button" id="emailChk" onclick="checkEmail()" value="N" style="border-radius:4px;  margin-right:50px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">중복확인</button> 
@@ -914,7 +914,7 @@
 		  <div class="form-group">
           <label for="businessNo" class=" col-sm-3 control-label">사업자등록번호</label>
           <div class="col-sm-6">
-            <input readonly class="businessNo" id="businessNo" name="businessNo" placeholder="진위 확인을 통해 입력 가능합니다." value="">
+            <input readonly class="businessNo" id="businessNo" name="businessNo" placeholder="진위확인해 주세요." value="">
           </div>
           <div>
             <button class="rpIdChk site-btn" type="button" data-toggle="modal" data-target="#checkBno" style="margin-right:50px; border-radius:4px; color: #7fad39; background-color:white; border: 1px solid #7fad39;">진위확인</button> 

@@ -169,32 +169,32 @@ $('#myModal').on('shown.bs.modal', function () {
 
 <!-- 상품 리뷰 등록 -->
 $(function() {
-	$("button.btn.btn-success").on("click", function() {
-		fncAddReview();
-	});
+   $("button.btn.btn-success").on("click", function() {
+      fncAddReview();
+   });
 });
 
 $(function() {
-	$("a[href='#' ]").on("click", function() {
-		$("form")[0].reset();
-	});
+   $("a[href='#' ]").on("click", function() {
+      $("form")[0].reset();
+   });
 });
 
 function fncAddReview() {
-	$('input[name=orderNo]').attr('value', ORDERNO);
-	$("#reviewForm").attr("method", "POST").attr("action", "/board/addReview").submit();
+   $('input[name=orderNo]').attr('value', ORDERNO);
+   $("#reviewForm").attr("method", "POST").attr("action", "/board/addReview").submit();
 }
 
 var ORDERNO;
 $(document).ready(function() {     
 
-	   $('#reviewModal').on('show.bs.modal', function(event) {          
-	      ORDERNO = $(event.relatedTarget).data('orderno');
+      $('#reviewModal').on('show.bs.modal', function(event) {          
+         ORDERNO = $(event.relatedTarget).data('orderno');
 
-	    });
-	});
-<!-- 상품 리뷰 등록 -->	
-	
+       });
+   });
+<!-- 상품 리뷰 등록 -->   
+   
 
 </script>
 
@@ -348,16 +348,16 @@ $(document).ready(function() {
      outline:none;
      
    /* Chrome, Safari, Edge, Opera */
-	/* input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-	  -webkit-appearance: none;
-	  margin: 0;
-	}
-	input::-webkit-inner-spin-button {
-	  appearance: none;
-	  -moz-appearance: none;
-	  -webkit-appearance: none;
-	} */
+   /* input::-webkit-outer-spin-button,
+   input::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+   }
+   input::-webkit-inner-spin-button {
+     appearance: none;
+     -moz-appearance: none;
+     -webkit-appearance: none;
+   } */
   }
 </style>
 
@@ -404,67 +404,67 @@ $(document).ready(function() {
                </div>
             </div>
             <div class="modal fade" id="addPwModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLabel">진욱페이 결제비밀번호 등록</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-				      <div class="modal-body">
-				        <form>
-				          <div class="form-group">
-				            <label for="recipient-name" class="col-form-label">새 결제비밀번호</label>
-				            <input type="text" class="form-control" maxlength="6" placeholder="비밀번호 6자리 입력바랍니다." id="newJpPassword" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-				          </div>
-				          <div class="form-group">
-				            <label for="message-text" class="col-form-label">새 결제비밀번호 확인</label>
-				            <input type="text" class="form-control" maxlength="6" placeholder="비밀번호 6자리 입력바랍니다." id="newJpPasswordCk" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-				          </div>
-				        </form>
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-				        <button type="button" class="btn btn-primary" onclick="AddJpPassword(this)">비밀번호 등록하기</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">진욱페이 결제비밀번호 등록</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">새 결제비밀번호</label>
+                        <input type="text" class="form-control" maxlength="6" placeholder="비밀번호 6자리 입력바랍니다." id="newJpPassword" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                      </div>
+                      <div class="form-group">
+                        <label for="message-text" class="col-form-label">새 결제비밀번호 확인</label>
+                        <input type="text" class="form-control" maxlength="6" placeholder="비밀번호 6자리 입력바랍니다." id="newJpPasswordCk" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-primary" onclick="AddJpPassword(this)">비밀번호 등록하기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div>
             
             <script type="text/javascript">
             
             function AddJpPassword(e) {
-            	 const jpPassword = $("#newJpPassword").val();
-            	 const jpPasswordCk = $("#newJpPasswordCk").val();
-            	
-            	 if(jpPassword == null || jpPassword.length <5){
-            		 swal("진욱이네","결제비밀번호는 6자리 반드시 입력하셔야 합니다.");
-     				return;
-     			}
-     			if(jpPasswordCk == null || jpPasswordCk.length <5){
-     				swal("진욱이네","결제비밀번호는 확인은 6자리 반드시 입력하셔야 합니다.");
-     				return;
-     			}
-     			console.log(jpPassword)
-     			console.log(jpPasswordCk)
-            	 if(jpPassword == jpPasswordCk){
-            		 $.ajax({
-						 url : "/orders/addOrdersJpayPassword",   
+                const jpPassword = $("#newJpPassword").val();
+                const jpPasswordCk = $("#newJpPasswordCk").val();
+               
+                if(jpPassword == null || jpPassword.length <5){
+                   swal("진욱이네","결제비밀번호는 6자리 반드시 입력하셔야 합니다.");
+                 return;
+              }
+              if(jpPasswordCk == null || jpPasswordCk.length <5){
+                 swal("진욱이네","결제비밀번호는 확인은 6자리 반드시 입력하셔야 합니다.");
+                 return;
+              }
+              console.log(jpPassword)
+              console.log(jpPasswordCk)
+                if(jpPassword == jpPasswordCk){
+                   $.ajax({
+                   url : "/orders/addOrdersJpayPassword",   
                          type : "post",
                          dataType : "json",
                          async: false,
                          data : {"jpPassword" : jpPassword },
                          success : function(result){
-                        	 alert(jpPassword)
-                         	self.location="";
-                         	/* $("#updateepoint").load("/user/myPage #updatepoint"); */
-                        	}
+                            alert(jpPassword)
+                            self.location="";
+                            /* $("#updateepoint").load("/user/myPage #updatepoint"); */
+                           }
                         });
-     			}else{
-     				swal("진욱이네","비빌번호가 일치하지 않습니다. 다시입력해주세요","warning")
-     			}
+              }else{
+                 swal("진욱이네","비빌번호가 일치하지 않습니다. 다시입력해주세요","warning")
+              }
             }
             
             </script>
@@ -598,8 +598,8 @@ $(document).ready(function() {
                 const cash = $(pw).data('won');
                 var jpBalance = "${sessionScope.user.jpBalance}";
                 var userName = "${sessionScope.user.userName}";
-                var email	= "${sessionScope.user.email}";
-                var phone	= "${sessionScope.user.phone}";
+                var email   = "${sessionScope.user.email}";
+                var phone   = "${sessionScope.user.phone}";
                 _this.pwStr = pw.toString(); // 문자, 숫자열을 모두 허용하기 위해 무조건 한가지 타입으로 맞춤
                 _this.password = []; // 지정된 패스워드
                 _this.passwordNumber = []; // 입력할 패스워드
@@ -664,7 +664,7 @@ $(document).ready(function() {
                        async: false,
                         data : {"jpPassword" : _this.passwordNumber},
                         success : function(result){
-                        	compare = result;
+                           compare = result;
                        }
                     });
                   console.log(compare)
@@ -675,7 +675,7 @@ $(document).ready(function() {
                     if(_this.handleCheckPw() === 1) {
                        /*  _this.parent.classList.add('confirm');
                         _this.compChk = true; */
-                    	 //가맹점 식별코드
+                        //가맹점 식별코드
                         IMP.init('imp94304882'); // 콘솔에서 확인
                         IMP.request_pay({
                             pg : 'kcp',
@@ -692,18 +692,18 @@ $(document).ready(function() {
                            console.log(rsp);
                             if ( rsp.success ) {
                               alert(rsp.success)
-                            	var msg = '결제가 완료되었습니다.';
+                               var msg = '결제가 완료되었습니다.';
                               $.ajax({
-								url : "/orders/importJpayCharge",   
+                        url : "/orders/importJpayCharge",   
                                 type : "post",
                                 dataType : "json",
                                 async: false,
                                 data : {"jpBalance" : jpBalance },
                                 success : function(result){
-                                	alert(result)
-                                	self.location="";
-                                	/* $("#updateepoint").load("/user/myPage #updatepoint"); */
-                               	}
+                                   alert(result)
+                                   self.location="";
+                                   /* $("#updateepoint").load("/user/myPage #updatepoint"); */
+                                  }
                                });
                               self.location="";
                                 /* msg += '고유ID : ' + rsp.imp_uid;
@@ -801,7 +801,7 @@ $(document).ready(function() {
                   주문 내역을 조회할 수 있습니다
                   </p>                  
                   <!-- Button trigger modal -->
-				
+            
                   <hr size="10px">
                </h4>
             
@@ -829,7 +829,7 @@ $(document).ready(function() {
         <c:set var="i" value="0" />
         <c:forEach var="orders" items="${getOrdersList}">
          <c:set var="i" value="${ i+1 }" />
-         <tr>
+         <tr >
            <td align="center" value="${orders.orderNo}">${orders.orderNo}</td>
            <td align="left">${orders.product.prodName}</td>
            <td align="left">${orders.orderPrice}</td>
@@ -846,8 +846,8 @@ $(document).ready(function() {
            <td><a href="/orders/getOrders?orderNo=${orders.orderNo}" class="bi bi-caret-right"style="font-size :18px; text-decoration:none; color: #7fad39;"></a></td>
            <td>
                 <button type="button" class="site-btn" data-toggle="modal" data-target="#reviewModal" data-orderno="${orders.orderNo}" style="padding-left: 10px; padding-right: 10px; padding-bottom: 8px; padding-top: 8px;" >
-  					후기 등록
-				</button> 
+                 후기 등록
+            </button> 
     
          </td>
          </tr>
@@ -882,47 +882,47 @@ $(document).ready(function() {
       <div class="modal-body">
       <form id="reviewForm" action="addReview" method="post">
       <input type="hidden" id="orderNo" name="orderNo" value=""/>
-				<!-- <div>
-					<div style="text-align:left;">
-						<label for="reviewTitle">제목</label>
-					</div>
-					<div>
-						 <input type="text"
-							class="form-control" id="reviewTitle" name="reviewTitle">
-					</div>
-				</div> -->
-				
-				<div>
-					<div style="text-align:left;">
-						<label for="reviewWriter"><i class="bi bi-pencil-fill"></i> 작성자</label> 
-					</div>
-					<div>
-						<input type="text" style="width:100px;"
-							class="form-control" id="reviewWriter" name="reviewWriter" value="${user.userId}" placeholder="${user.userId}" readonly="readonly">
-					</div>
-				</div>
-				
-				<div>
-					<div style="text-align:left;">
-						<label for="reviewStar"><i class="bi bi-star"></i> 별점</label> 
-					</div>
-					<div>
-						<input type="number" style="width:100px;" min="1" max="5" step="0.5"
-							class="form-control" id="reviewStar" name="reviewStar">
-					</div>
-				</div>
-				
-				<div>
-					<div style="text-align:left;">
-						<label for="reviewContent"><i class="bi bi-card-text"></i> 후기 내용</label> 
-					</div>
-					<div>
-						<textarea class="form-control" id="reviewContent"
-							name="reviewContent" rows="3"></textarea>
-					</div>
-				</div>
+            <!-- <div>
+               <div style="text-align:left;">
+                  <label for="reviewTitle">제목</label>
+               </div>
+               <div>
+                   <input type="text"
+                     class="form-control" id="reviewTitle" name="reviewTitle">
+               </div>
+            </div> -->
+            
+            <div>
+               <div style="text-align:left;">
+                  <label for="reviewWriter"><i class="bi bi-pencil-fill"></i> 작성자</label> 
+               </div>
+               <div>
+                  <input type="text" style="width:100px;"
+                     class="form-control" id="reviewWriter" name="reviewWriter" value="${user.userId}" placeholder="${user.userId}" readonly="readonly">
+               </div>
+            </div>
+            
+            <div>
+               <div style="text-align:left;">
+                  <label for="reviewStar"><i class="bi bi-star"></i> 별점</label> 
+               </div>
+               <div>
+                  <input type="number" style="width:100px;" min="1" max="5" step="0.5"
+                     class="form-control" id="reviewStar" name="reviewStar">
+               </div>
+            </div>
+            
+            <div>
+               <div style="text-align:left;">
+                  <label for="reviewContent"><i class="bi bi-card-text"></i> 후기 내용</label> 
+               </div>
+               <div>
+                  <textarea class="form-control" id="reviewContent"
+                     name="reviewContent" rows="3"></textarea>
+               </div>
+            </div>
 
-		</div><!-- Modal body 끝 -->
+      </div><!-- Modal body 끝 -->
       
       <div class="modal-footer">
       
@@ -933,7 +933,7 @@ $(document).ready(function() {
       
     </div>
   </div>
-</div>		
+</div>      
    
                <!-- 쿠폰 Modal 시작  -->
             <div class="modal fade" id="staticBackdrop" data-backdrop="static"
@@ -970,15 +970,15 @@ $(document).ready(function() {
 
                                     <tr>
                                        <th scope="row">${i}</th>
-			                                       <td><c:if test="${coupon.couponType==1}">
-			                              고객님의 회원가입을 축하합니다. (회원가입 쿠폰)
-			                           </c:if> <c:if test="${coupon.couponType==2}">
-			                              고객님의 첫 구매를 축하합니다. (첫구매 쿠폰)
-			                           </c:if> <c:if test="${coupon.couponType==3}">
-			                             고객님의 생일을 축하합니다. (생일축하 쿠폰)
-			                           </c:if> <c:if test="${coupon.couponType==4}">
-			                             고객님께 소중한 쿠폰 배달왔습니다. (추천인 쿠폰)
-			                           </c:if></td>
+                                                <td><c:if test="${coupon.couponType==1}">
+                                       고객님의 회원가입을 축하합니다. (회원가입 쿠폰)
+                                    </c:if> <c:if test="${coupon.couponType==2}">
+                                       고객님의 첫 구매를 축하합니다. (첫구매 쿠폰)
+                                    </c:if> <c:if test="${coupon.couponType==3}">
+                                      고객님의 생일을 축하합니다. (생일축하 쿠폰)
+                                    </c:if> <c:if test="${coupon.couponType==4}">
+                                      고객님께 소중한 쿠폰 배달왔습니다. (추천인 쿠폰)
+                                    </c:if></td>
                                        <td style="padding-left: 35px;"><fmt:formatNumber value="${coupon.couponDc*100}" />%</td>
                                        <td>${coupon.couponValidDate}</td>
                                     </tr>

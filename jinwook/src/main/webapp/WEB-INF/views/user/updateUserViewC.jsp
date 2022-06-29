@@ -335,6 +335,7 @@ $("input[name='email']").on("change" , function() {
 ////////////////////////////////수정 시작///////////////////////////////////////
 function fncUpdateUser() {
    var id=$("input[name='userId']").val();
+	var pw1=$("input[name='password1']").val();
 	var pw=$("input[name='password']").val();
 	var pw2=$("input[name='password3']").val();
 	var pw_confirm=$("input[name='password3']").val();
@@ -430,9 +431,8 @@ function fncUpdateUser() {
 		}
 		
 	} */
-	function checkPassword(){
 		
-	}
+	
 	
 	
 	if (password == id) {
@@ -505,6 +505,8 @@ function fncUpdateUser() {
 	
 //============비밀번호 중복 확인 ==============
 	function checkPassword(){
+		var pw=$("input[name='password']").val();
+		var pw2=$("input[name='password3']").val();
 	$.ajax({
 		url : "/user/checkPassword",
 		type : "post",
@@ -744,7 +746,7 @@ $(function() {
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">아이디</label>
                            <div class="col-sm-6">
-                              <input type="text" name="userId"
+                              <input type="text" name="userId" style="background-color:white;"
                                  class="form-control form-control" id="userId"
                                  value="${user.userId}" readonly oninput="this.value=this.value.replace(' ','');">
                            </div>
@@ -793,7 +795,7 @@ $(function() {
                               class="col-sm-3 col-form-label col-form-label">이름</label>
                            <div class="col-sm-6">
                               <input type="text" name="userName"
-                                 class="form-control form-control" id="userName"
+                                 class="form-control form-control" id="userName" style="background-color:white;"
                                  value="${user.userName}" readonly oninput="this.value=this.value.replace(' ','');">
                            </div>
                             <div class="col-sm-3"></div>
@@ -869,7 +871,7 @@ $(function() {
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">휴대폰 번호</label>
                            <div class="col-sm-6">
-                              <input type="text" name="phone"
+                              <input type="text" name="phone"style="background-color:white;"
                                  class="form-control form-control" id="phone1"
                                  value="${user.phone}" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" readonly>
                            </div>
@@ -912,7 +914,7 @@ $(function() {
                            <label for="colFormLabel"
                               class="col-sm-3 col-form-label col-form-label">사업자등록번호</label>
                            <div class="col-sm-6">
-                              <input type="text" name="businessNo"
+                              <input type="text" name="businessNo" style="background-color:white;"
                                  class="form-control form-control" id="businessNo"
                                  value="${user.businessNo}"  readonly>
                            </div>
