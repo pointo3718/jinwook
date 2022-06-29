@@ -44,7 +44,15 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<style>
+.swal-button{
+	background-color: #7fad39;
+	font-size: 12px;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+</style>
 
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script>	
 
 //////////////// 모달창 열기 ////////////////////
@@ -56,8 +64,7 @@ $(document).ready(function() {
 	$('#exampleModal').on('show.bs.modal', function(event) {          
 		NOTIFYID = $(event.relatedTarget).data('notifyid');
 	    COMPLAINNO = $(event.relatedTarget).data('complainno');
-	    alert(NOTIFYID);
-	    alert(COMPLAINNO);
+
 	 });
 });
 ///////////////////////////////////////////////	
@@ -72,7 +79,6 @@ $(function() {
 		var BLACKPERIOD = $(".form-check-input:checked").val();
 	
 		var uri = "/admin/updateBlacklist/" + NOTIFYID+ "/" +BLACKPERIOD+ "/" +COMPLAINNO;
-		alert(uri);
 		var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "PATCH"};
 	
 		$.ajax({
@@ -83,10 +89,10 @@ $(function() {
 			
 			success: function(response) {
 				if (response.result == false) {
-					alert("블랙리스트 등록에 실패하였습니다.");
+					swal("블랙리스트 등록에 실패하였습니다.");
 					return false;
 				}
-				alert(NOTIFYID+"님을 블랙리스트로 등록했습니다.");
+				swal(NOTIFYID+"님을 블랙리스트로 등록했습니다.");
 				  location.reload();
 				  modal("hide");
 			},

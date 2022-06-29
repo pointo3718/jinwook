@@ -202,11 +202,7 @@
 			
 					<jsp:include page="map.jsp" />
 					
-		</div>
-
 		
-
-
 	</section>
 
 	<!-- Featured Section Begin -->
