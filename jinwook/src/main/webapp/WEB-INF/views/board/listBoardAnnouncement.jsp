@@ -58,6 +58,7 @@
 }
 </style>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	/*<![CDATA[*/
@@ -83,7 +84,7 @@ function fncDeleteAnnouncement(e) {
 			dataType : "json",
 			success : function(result){
 				if(result != null){
-					alert("삭제완료");
+					swal("진욱이네", "공지사항 삭제완료!");
 					self.location = "/board/getBoardAnnouncementList";
 				}
 			}
@@ -524,63 +525,11 @@ color: #7fad39;
 	<!-- Blog Section Begin -->
 	<section class="blog spad">
 		<div class="container">
-			<div class="row" style="justify-content: space-around;">
-				<div class="col-xs-4 col-xs-5"
-					style="width: 200px; margin-right: 30px;">
-					<div class="blog__sidebar" style="width: 200px;">
-
-						<div class="blog__sidebar__item">
-
-							<h5 class="text-center" style="margin-bottom: 0px;">
-								<strong>관리자 페이지</strong>
-							</h5>
-
-							</br>
-
-							<div class="list-group text-center" style="font-size: 15px;">
-								<button type="button"
-									class="list-group-item list-group-item-action"
-									aria-current="true">회원 목록</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">상점 목록</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">신고 접수 목록</button>
-								<button type="button"
-									class="list-group-item list-group-item-action"><span class="addStore">상점 등록 요청</span>
-									 </button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="deleteStore">상점 삭제 요청 
-									</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="refundStore">
-									환급 요청
-									</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="adStore">
-									광고 등록 요청
-									</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-								1:1 문의내역
-								</button>
-							</div>
-
-						</div>
-
-
-					</div>
-				</div>
 
 				<!-- UserList Table Start -->
-				<div>
+				<div style="margin-left:200px;">
 					<h4 class="text-left">
-						<strong>공지사항 목록</strong>
+						<i class="bi bi-megaphone-fill"></i> <strong>공지사항 목록</strong>
 						<c:if test="${sessionScope.user.role == '관리자'}">
 							<div><button type="submit" class="site-btn" id="addAnnouncementButton" style="margin-top:20px;">공지사항 등록 </button></div>
 						</c:if>
@@ -644,12 +593,10 @@ color: #7fad39;
 				<div class="text-center">
 					<!-- PageNavigation Start... -->
 					<div class="col-lg-12"style="left:120px; margin-top:70px; top:70px;">
-
-
 <c:set var="params" value="${board}"/>
 
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
-      <div class="product__pagination blog__pagination" style="padding-top: 0px; bottom: 100px;">
+      <div class="product__pagination blog__pagination" style="padding-top: 0px; bottom: 100px; float:left; margin-left:240px;">
             <!--  <<== ÁÂÃø nav -->
             <a   
                href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(1)}');"
@@ -715,6 +662,7 @@ color: #7fad39;
 </div>
 					<!-- PageNavigation End... -->
 				</div>
+				
 			</div>
 		</div>
 	</section>

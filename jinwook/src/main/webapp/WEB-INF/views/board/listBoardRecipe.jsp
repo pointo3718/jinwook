@@ -110,7 +110,7 @@ function fncDeleteRecipe(e) {
 			dataType : "json",
 			success : function(result){
 				if(result != null){
-					alert("삭제완료");
+					swal("진욱이네", "레시피 댓글 삭제완료!");
 					self.location = "/board/getRecipeList";
 				}
 			}

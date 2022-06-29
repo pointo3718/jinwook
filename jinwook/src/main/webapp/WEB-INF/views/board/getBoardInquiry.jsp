@@ -170,7 +170,7 @@ function movePage(uri, queryString) {
             
                 <div class="col-lg-12" style="background-color: #F2F2F2;">
                     <div class="contact__form__title">
-                        <h2 style="margin-top:20px;"><i class="bi bi-telegram"></i></i>&nbsp;1:1문의</h2>
+                        <h2 style="margin-top:20px;"><i class="bi bi-telegram"></i>&nbsp;1:1문의</h2>
                     </div>
                 </div>
             </div>
