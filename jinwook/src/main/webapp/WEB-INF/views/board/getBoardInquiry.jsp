@@ -12,7 +12,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>1:1문의 상세</title>
+    <title>문의 상세</title>
 
     <!-- Google Font -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -170,7 +170,7 @@ function movePage(uri, queryString) {
             
                 <div class="col-lg-12" style="background-color: #F2F2F2;">
                     <div class="contact__form__title">
-                        <h2 style="margin-top:20px;"><i class="bi bi-telegram"></i>&nbsp;1:1문의</h2>
+                        <h2 style="margin-top:20px;"><i class="bi bi-telegram"></i>&nbsp;문의</h2>
                     </div>
                 </div>
             </div>
@@ -209,7 +209,7 @@ function movePage(uri, queryString) {
 					<div class="card mb-2" style="margin-left:20px;">
 						<!-- 댓글 헤더 -->
 						<div class="card-header bg-light" style="font-weight:bold;">
-							<i class="fa fa-comment fa"></i> 1:1문의 답변
+							<i class="fa fa-comment fa"></i> 문의 답변
 						</div>
 					<form name="replyForm" method="post" action="addInquiryComment">
 						<div class="card-body">

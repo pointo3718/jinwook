@@ -69,8 +69,10 @@ public interface BoardMapper {
 	//조인 필요: board, comment 공지사항 상세 조회
 	public Board getBoardAnnouncement(Integer boardNo);
 	
-	//1:1문의 목록 조회
+	//1:1문의 유저 목록 조회
 	public List<Board> getBoardInquiryList(Board board);
+	//1:1문의 관리자 목록 조회
+	public List<Board> getBoardAdminInquiryList(Board board);
 	//공지사항 목록 조회
 	public List<Board> getBoardAnnouncementList(Board board);
 	public List<Recipe> getRecipeList(Recipe rcp);
@@ -179,6 +181,7 @@ public interface BoardMapper {
 
 	// 목록 개수
 	public int getBoardInquiryTotalCount(Board board);
+	public int getBoardAdminInquiryTotalCount(Board board);
 	public int getBoardAnnouncementTotalCount(Board board);
 	public int getRecipeTotalCount(Recipe rcp);
 	public int getReviewTotalCount(Orders orders);

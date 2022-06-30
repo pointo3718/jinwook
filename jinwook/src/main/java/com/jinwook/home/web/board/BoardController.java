@@ -267,7 +267,7 @@ public class BoardController {
 			return "redirect:/board/getBoardAnnouncementList";
 		}
 		
-	//1:1문의 목록 조회
+	//1:1문의 목록 관리자 조회
 	@GetMapping(value = "getBoardInquiryList")
 	public String getBoardInquiryList(@ModelAttribute("board") Board board, HttpSession session, Model model) throws Exception {
 	
@@ -281,6 +281,23 @@ public class BoardController {
 		
 		System.out.println("------------------------------------------------"+getBoardInquiryList);
 		return "board/listBoardInquiry";
+	}
+
+	//1:1문의 목록 조회
+	@GetMapping(value = "getBoardAdminInquiryList")
+	public String getBoardAdminInquiryList(@ModelAttribute("board") Board board, HttpSession session, Model model) throws Exception {
+		
+		String userId = ((User) session.getAttribute("user")).getUserId();
+		User user = new User();
+		user.setUserId(userId);
+		board.setUser(user);
+		
+		List<Board> getBoardAdminInquiryList = boardService.getBoardAdminInquiryList(board);
+		model.addAttribute("getBoardAdminInquiryList", getBoardAdminInquiryList);//jsp foreach items
+		model.addAttribute("user", user);//jsp foreach items
+		
+		System.out.println("------------------------------------------------"+getBoardAdminInquiryList);
+		return "board/listBoardAdminInquiry";
 	}
 	
 	//공지사항 목록 조회

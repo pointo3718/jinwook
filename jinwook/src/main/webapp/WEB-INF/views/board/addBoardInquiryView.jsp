@@ -11,7 +11,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>1:1문의 등록</title>
+<title>문의 등록</title>
 
 <!-- Google Font -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -150,22 +150,22 @@ function fn_addFile() {
 				<!-- 상점 정보 수정 -->
 				<div>
 					<h4 class="text-left">
-						<strong><i class="bi bi-telegram"></i>&nbsp; 1:1문의 정보 등록</strong>
+						<strong><i class="bi bi-telegram"></i>&nbsp; 문의 정보 등록</strong>
 						<hr size="10px">
 					</h4>
 
 	<form name=addBoardInquiryForm method="post" action="addBoardInquiry" enctype="multipart/form-data">
 	
 	<div class="form-group">
-    <label for="boardTitle">1:1문의 제목</label>
+    <label for="boardTitle">문의 제목</label>
     <input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력해주세요">
   </div>
   <div class="form-group">
-    <label for="boardContent">1:1문의 내용</label>
+    <label for="boardContent">문의 내용</label>
     <textarea class="form-control" id="boardContent" name="boardContent" rows="3" placeholder="문의내용을 입력해주세요"></textarea>
   </div>
   <div class="form-group">
-    <label for="file">1:1문의 사진 업로드</label>
+    <label for="file">문의 사진 업로드</label>
     <input type="file" class="form-control" id="file" name="file">
   </div>
   <div class="form-group">
