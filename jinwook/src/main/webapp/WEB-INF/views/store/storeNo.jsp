@@ -223,7 +223,7 @@ label {
 								</button>
 								<button type="button"
 									class="list-group-item list-group-item-action" class="addStore">
-									<span class="addStore"><a href="/user/confirmPasswordView?userId=${sessionScope.user.userId}" style="color:black">개인 정보 수정</span>
+									<span class="addStore"><a href="/user/confirmPasswordViewC?userId=${sessionScope.user.userId}" style="color:black">개인 정보 수정</span>
 								</button>
 								<button type="button"
 									class="list-group-item list-group-item-action"><a href="/board/getBoardInquiryList" style="color:black">1:1

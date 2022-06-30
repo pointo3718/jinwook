@@ -223,16 +223,16 @@
 				data : {"userId" : $("#userId").val()},
 				success : function(data){
 					if(id.length < 1 || id == ""){
-						alert("아이디를 입력해주세요.");
+						swal("진욱이네", "아이디를 입력해주세요.");
 					}else if(data == 0){
 					/*  $("#idChk").attr("value", "Y"); */
-						alert("사용가능한 아이디입니다."); 
+						swal("진욱이네", "사용가능한 아이디입니다."); 
 						$('.id_already').css("color", "#7fad39");
 					/* 	$('.id_ok').css("display","inline-block"); 
 		                $('.id_already').css("display", "none"); */
 						
 					}else {
-						alert("중복된 아이디입니다."); 
+						swal("진욱이네", "중복된 아이디입니다."); 
 						/* $('.id_already').css("display","inline-block");
 	                    $('.id_ok').css("display", "none"); */
 					}
@@ -258,12 +258,12 @@
 				data : {"nickName" : $("#nickName").val()},
 				success : function(data){
 					if($("#nickName").val().length <1){
-						alert("닉네임을 입력해주세요.")
+						swal("닉네임을 입력해주세요.")
 					}else if(data == 1){
-						alert("중복된 닉네임입니다.");
+						swal("중복된 닉네임입니다.");
 					}else if(data == 0){
 						$("#nickNameChk").attr("value", "Y");
-						alert("사용가능한 닉네임입니다.");
+						swal("사용가능한 닉네임입니다.");
 					}
 				}
 			});
@@ -280,15 +280,15 @@
 				data : {"email" : $("#email").val()},
 				success : function(data){
 					if($("#email").val() != "" && ($("#email").val().indexOf('@') < 1 || $("#email").val().indexOf('.') == -1) ){
-						alert("이메일 형식이 아닙니다.");
+						swal("진욱이네", "이메일 형식이 아닙니다.");
 					}
 					else if($("#email").val().length <1){
-						alert("이메일을 입력해주세요.")
+						swal("진욱이네", "이메일을 입력해주세요.")
 					}else if(data == 1){
-						alert("중복된 이메일입니다.");
+						swal("진욱이네", "중복된 이메일입니다.");
 					}else if(data == 0){
 						$("#emailChk").attr("value", "Y");
-						alert("사용가능한 이메일입니다.");
+						swal("진욱이네", "사용가능한 이메일입니다.");
 					}
 				}
 			});
@@ -297,6 +297,7 @@
 		
 		//============ 추천인 아이디 중복 확인 ==============
 		function checkRpId(){
+			var	regexId = /^[a-zA-Z0-9]{6,20}$/;
 			$.ajax({
 				url : "/user/checkId",
 				type : "post",
@@ -307,13 +308,13 @@
 						swal("진욱이네", "추천인 아이디를 입력해주세요..");
 						$("#rpId").focus();
 						return;
+					}else if(data == 1){
+						swal("확인되었습니다.");
 					}else if(!regexId.test(rpId)){
 						swal("진욱이네", "추천인 아이디를 다시 확인해주세요.");
-					}else if(data != 1){
-						alert("사용가능한 아이디입니다.");
 						
 					}else {
-						alert("중복된 아이디입니다.");
+						swal("다른 추천인 아이디를 입력해 주세요.");
 					}
 				},
 				 error:function(){
@@ -332,7 +333,6 @@
 			        url:"authNoSend?phone=" + phone,
 			        cache : false,
 			        success:function(data){
-			        	alert("인증번호 : "+data.authNumber);
 			        	if(data.authNumber == 0){
 							swal("진욱이네", "이미 등록된 휴대폰 번호 입니다.");
 			        		
@@ -383,20 +383,20 @@
 			var regexPhone = /^[0-9+]{6,12}$/; // 휴대폰 번호 숫자만
 			
 			if(id == null || id.length <1){
-				alert("아이디는 반드시 입력하셔야 합니다.");
+				swal("진욱이네", "아이디는 반드시 입력하셔야 합니다.");
 				return;
 			}
 			if(pw == null || pw.length <1){
-				alert("패스워드는  반드시 입력하셔야 합니다.");
+				swal("진욱이네", "패스워드는  반드시 입력하셔야 합니다.");
 				return;
 			}
 			if(pw_confirm == null || pw_confirm.length <1){
-				alert("패스워드 확인은  반드시 입력하셔야 합니다.");
+				swal("진욱이네", "패스워드 확인은  반드시 입력하셔야 합니다.");
 				return;
 			}
 			
 			if(name == null || name.length <1){
-				alert("이름은  반드시 입력하셔야 합니다.");
+				swal("진욱이네", "이름은  반드시 입력하셔야 합니다.");
 				return;
 			}
 			
@@ -463,7 +463,7 @@
 			}
 			
 			if ($("input[name=gender]:radio:checked").length < 1) {
-	            alert("성별을 반드시 선택해주세요");
+	            swal("진욱이네","성별을 반드시 선택해주세요");
 	            return;
 	          }
 			

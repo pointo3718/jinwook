@@ -113,8 +113,6 @@
         url:"findIdPhoneSend?phone=" + phone+"&userName="+userName,
         cache : false,
         success:function(data){
-        	alert("asdas"+data.authNumber);
-        	alert("asdas"+data.regDate);
         	if(data == "error"){
 				swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
         		
@@ -164,7 +162,7 @@ $(document).ready(function() {
 	   		   $("#poem").show().html();
 	        }
 	        else {
-	           alert("실패");
+	           swal("실패");
 	        }    
 	    }
 	        
@@ -185,7 +183,6 @@ $(document).ready(function() {
 				swal("이메일을 정확히 입력해주세요");
 				return;
 			} */
-	 		alert(email);
 			if(email == "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1 )|| (userName == "" && userName.length() < 1)) {
 		swal("진욱이네", "다시 확인해주세요.");
 				return;
@@ -197,7 +194,7 @@ $(document).ready(function() {
 				data: {email: email,
 						userName : userName},
 				success : function(){
-				swal("진욱이네", "이메일로 전송되었습니다.");
+				alert("진욱이네", "이메일로 전송되었습니다.");
 				
 				},
 				error : function(){

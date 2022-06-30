@@ -162,8 +162,6 @@ public class UserServiceImpl implements UserService{
 	         String content= " ";
 	         content = "<html><body><div class='text-center'>"+user.getUserName()+"님 안녕하세요! 진심을 담은 진욱이네입니다.\n \r</div></body></html>  ";
 	         content += "<br><br> ";
-	         content += "<img src=\'${path}/resources/static/img/logo.png\'> ";
-	         content += "<br><br>";
 	        content += "요청하신 아이디를 안내드립니다.\n ";
 	        content += "<br><br> ";
 	        content += user.getUserId();
@@ -271,8 +269,8 @@ public class UserServiceImpl implements UserService{
 	
 	//coolSMS 문자 전송
 	public void certifiedPhoneNumber(String userPhoneNumber, int randomNumber) {
-		String api_key = "NCSSFG2Q5MODW2A2";
-	    String api_secret = "HHYIQMHQW3JGYVN9HIDMKA70H32RYZYM";
+		String api_key = "NCS87JA0BTTN1MRQ";
+	    String api_secret = "EBUZN3IA9R8VWORF1YIUUM3METWNMPWM";
 	    Message coolsms = new Message(api_key, api_secret);
 	    if(randomNumber == 0) {
 	    	System.out.println("return=====");
@@ -282,11 +280,11 @@ public class UserServiceImpl implements UserService{
 	    // 4 params(to, from, type, text) are mandatory. must be filled
 	    HashMap<String, String> params = new HashMap<String, String>();
 	    params.put("to", userPhoneNumber);    // 수신전화번호
-	    params.put("from", "01082582676");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+	    params.put("from", "01024863718");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
 	    params.put("type", "SMS");
 	    params.put("text", "인증번호는" + "["+randomNumber+"]" + "입니다."); // 문자 내용 입력
 	    params.put("app_version", "[진욱이네]"); // application name and version
-
+	    System.out.println("문자 전송2222222222");
 	    try {
 	        JSONObject obj = (JSONObject) coolsms.send(params);
 	        System.out.println(obj.toString());

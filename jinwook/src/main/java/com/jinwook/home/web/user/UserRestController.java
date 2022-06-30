@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -13,11 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -175,18 +171,18 @@ public class UserRestController {
 			
 			user.setUserName(userName);
 			user.setPhone(phone);
-			
+			System.out.println(userName);
+			System.out.println(phone+"asddasadsadsadsads");
 			User dbUser = userService.findIdPhone(user);
-			
-			if(dbUser.getUserName()== userName && dbUser.getPhone()==phone) {
-				
-				userService.certifiedPhoneNumber(phone,randomNumber);
-			}
 			user = dbUser;
+				
+				System.out.println("-------------"+randomNumber+"------------");
+				userService.certifiedPhoneNumber(phone,randomNumber);
+				
+				user.setAuthNumber(randomNumber);
 			
 			System.out.println("-------------"+randomNumber+"------------");
 			
-			user.setAuthNumber(randomNumber);
 			
 			System.out.println("===================아이디 찾기 문자 보내기 성공===================");
 			
@@ -205,11 +201,9 @@ public class UserRestController {
 			
 			User dbUser = userService.findPasswordPhone(user);
 			
-			if(dbUser.getUserId()== userId && dbUser.getPhone()==phone) {
 				
 				userService.certifiedPhoneNumber(phone,randomNumber);
-			}
-			user = dbUser;
+ 			user = dbUser;
 			user.setAuthNumber(randomNumber);
 			
 			System.out.println(user);
@@ -252,9 +246,9 @@ public class UserRestController {
 			System.out.println(result);
 			if(result !=1) {
 				user.setAuthNumber(randomNumber);
+				userService.certifiedPhoneNumber(phone,randomNumber);
 				return user;
 			}
-			userService.certifiedPhoneNumber(phone,randomNumber);
 			System.out.println(user.getAuthNumber());
 			System.out.println("인증완료? ");
 			return user;

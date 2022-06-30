@@ -477,7 +477,7 @@ public class UserController {
          user.setRole("사용자");
          user.setPhone(phone);
          user.setRegDate(date);
-         user.setGender("남");
+         user.setGender("없음");
          user.setGrade("일반");
          userService.addUser(user);
 //         while(userService.checkPhone(phone)==0) {
