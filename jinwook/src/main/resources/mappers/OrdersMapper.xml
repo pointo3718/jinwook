@@ -108,20 +108,26 @@
    <select id="getOrdersList" parameterType="orders" resultMap="ordersSelectMap">
 	SELECT o.user_id,o.order_no,o.order_price,o.order_status,o.pickup_time,o.order_date,p.prod_name
       FROM orders o ,cart c, product p
-      WHERE o.order_no = c.order_no
+      WHERE c.prod_no = p.prod_no
       AND o.store_no = p.store_no
-      AND c.prod_no = p.prod_no
+      <if test='user.role=="사용자"'>
+      AND o.order_no = c.order_no
       AND o.user_id = #{user.userId}
+      </if>
+      <if test='user.role=="사장님"'>
+      AND o.store_no = #{storeNo}
+      </if>
       GROUP BY o.order_no
       ORDER BY o.order_no DESC
       LIMIT
          #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
    </select>
    
-   <select id="getOrdersTotalCount" resultType="int">
+   <select id="getOrdersTotalCount" parameterType="orders" resultType="int">
       SELECT COUNT(*)
       FROM orders
-      WHERE user_id =#{user.userId}
+      WHERE <if test='user.role=="사용자"'>user_id = #{user.userId} </if>
+      <if test='user.role=="사장님"'>store_no = #{store.storeNo} </if>
    </select>
    
    <insert id="addOrdersCart" useGeneratedKeys="true" keyProperty="cartNo">
@@ -358,7 +364,7 @@
 			order_status = 1
 		</if>
 		</set>
-		WHERE user_id = #{user.userId}
+		WHERE order_no = #{orderNo}
 	</update>
 
 </mapper>
