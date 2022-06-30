@@ -220,6 +220,7 @@ $(document).ready(function() {
 		        		$("#phone").attr("readonly",true);
 		        		code2 = data; */
 		        		swal("진욱이네","전송 완료");
+		        		
 		        		$("#snedE").hide();
 		        		$("#authNo").show();
 		        		$("#phoneDoubleChk").val(data.authNumber); 
