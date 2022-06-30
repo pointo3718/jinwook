@@ -11,7 +11,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>1:1문의 목록</title>
+<title>문의 목록</title>
 
     <!-- Google Font -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -516,26 +516,14 @@ color: #7fad39;
 				<!-- UserList Table Start -->
 				<div style="margin-right: 180px;">
 					<h4 class="text-left">
-						<i class="bi bi-telegram"></i><strong> 1:1문의사항 목록</strong>
+						<i class="bi bi-telegram"></i><strong> 문의내역 목록</strong>
 						<p class="text-muted" style="display: inline; font-size: 12px;">
 						</p>
-						<!-- <div class="btn-group btn-group-toggle" data-toggle="buttons" style="left:300px;">
 							
-							<label class="btn btn-light active" style="font-size: 13px;"> 
-							<input type="radio" name="options" id="option1" checked>
-							 &nbsp; &nbsp; &nbsp; 일반 &nbsp; &nbsp; &nbsp;    
-							</label> 
-							
-							<label class="btn btn-light" style="font-size: 13px;" >
-							 <input type="radio" name="options" id="option3">
-							  블랙리스트
-							</label>
-							
-						</div> -->
+						</div>
 						<hr size="10px">
 					</h4>
-
-
+					
 					<table class="table table-hover"
 						style="width: 730px; heigh: 300px;">
 						

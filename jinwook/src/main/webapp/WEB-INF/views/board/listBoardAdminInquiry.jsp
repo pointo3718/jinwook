@@ -11,12 +11,12 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>공지사항 목록</title>
+<title>1:1문의 목록</title>
 
-<!-- Google Font -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">   
+    <!-- Google Font -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <!-- Css Styles -->
 <link rel="stylesheet"
@@ -40,24 +40,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<style>
-*{font-family: 'Noto Sans KR', sans-serif;}
-
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  z-index: 10;
-}
-
-.row {
-   display: flex;
-   justify-content: center;
-   align-items: flex-start;
-}
-</style>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"> 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -69,23 +52,21 @@
 
 	/*]]>*/
 	
-	
-	
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
-function fncDeleteAnnouncement(e) {
-	if (!confirm('게시글을 삭제하시겠어요?')) {
+function fncDeleteInquiry(e) {
+	if (!confirm('상품을 삭제하시겠어요?')) {
 		return false;
 	}
 	
 	console.log(e);
 	const no = $(e).data("value");
 	 $.ajax({
-			url : "/board/deleteBoardAnnouncement/"+no,
+			url : "/board/deleteBoardInquiry/"+no,
 			dataType : "json",
 			success : function(result){
 				if(result != null){
-					swal("진욱이네", "공지사항 삭제완료!");
-					self.location = "/board/getBoardAnnouncementList";
+					alert("삭제완료");
+					self.location = "/board/getBoardInquiryList";
 				}
 			}
 		
@@ -98,7 +79,7 @@ function fncDeleteAnnouncement(e) {
 
       //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
       $("td:nth-child(2)").on("click", function() {
-         self.location = "/board/getBoardAnnouncement?boardNo="+$(this).data("param");
+         self.location = "/board/getBoardInquiry?boardNo="+$(this).data("param");
       });
 
    });
@@ -385,15 +366,12 @@ $(function() {
 })
 //////////////// 일반 유저 목록 REST 끝 /////////////////
 
-$(function(){
-	$("#addAnnouncementButton").on("click", function() {
-		self.location = "/board/addBoardAnnouncementView"
-	});
-});
-
 </script>
 
 <style>
+
+*{font-family: 'Noto Sans KR', sans-serif;}
+
 .sticky {
   position: -webkit-sticky;
   position: sticky;
@@ -402,10 +380,10 @@ $(function(){
   z-index: 10;
 }
 
-.row{
-	display: flex;
- 	justify-content: center;
-	align-items: flex-start;
+.row {
+   display: flex;
+   justify-content: center;
+   align-items: flex-start;
 }
 
 .mytop01 {
@@ -525,63 +503,56 @@ color: #7fad39;
 	<!-- Blog Section Begin -->
 	<section class="blog spad">
 		<div class="container">
+			<div class="row" style="justify-content: space-around;">
+				<div class="col-xs-4 col-xs-5"
+					style="width: 200px; margin-right: 30px;">
+					<div class="blog__sidebar" style="width: 200px;">
+
+
+
+					</div>
+				</div>
 
 				<!-- UserList Table Start -->
-				<div style="margin-left:200px;">
+				<div style="margin-right: 180px;">
 					<h4 class="text-left">
-						<i class="bi bi-megaphone-fill"></i> <strong>공지사항 목록</strong>
-						<c:if test="${sessionScope.user.role == '관리자'}">
-							<div><button type="submit" class="site-btn" id="addAnnouncementButton" style="margin-top:20px; margin-left:550px;">공지사항 등록 </button></div>
-						</c:if>
+						<i class="bi bi-telegram"></i><strong> 1:1문의사항 목록</strong>
 						<p class="text-muted" style="display: inline; font-size: 12px;">
 						</p>
-						<!-- <div class="btn-group btn-group-toggle" data-toggle="buttons" style="left:300px;">
 							
-							<label class="btn btn-light active" style="font-size: 13px;"> 
-							<input type="radio" name="options" id="option1" checked>
-							 &nbsp; &nbsp; &nbsp; 일반 &nbsp; &nbsp; &nbsp;    
-							</label> 
-							
-							<label class="btn btn-light" style="font-size: 13px;" >
-							 <input type="radio" name="options" id="option3">
-							  블랙리스트
-							</label>
-							
-						</div> -->
+						</div>
 						<hr size="10px">
 					</h4>
-
-
+					
 					<table class="table table-hover"
 						style="width: 730px; heigh: 300px;">
 						
 						<thead class="boardlisthead">
 							<tr class="boardinfohead">
 								<th scope="col">No</th>							
-								<th scope="col">공지사항 제목</th>
+								<th scope="col">문의 제목</th>
 								<th scope="col">작성일</th>
-								<th scope="col">조회수</th>
-								<c:if test="${sessionScope.user.role == '관리자'}">
+								<th scope="col">답변상태</th>
 								<th scope="col">삭제</th>
-								</c:if>
 							</tr>
 						</thead>
 
 						<tbody class="boardlistbody">	
 							<tr class="boardinfobody">
 							<c:set var="i" value="0" />
-							<c:forEach var="board" items="${getBoardAnnouncementList}">
+							<c:forEach var="board" items="${getBoardAdminInquiryList}">
 								<c:set var="board" value="${board}" />
 								<c:set var="i" value="${ i+1 }" />
 								<tr>
 									<td align="left" data-value="${board.boardNo}">${i}</td>									
 									<td align="left" data-param="${board.boardNo}">${board.boardTitle}</td>
 									<td align="left">${board.writeDate}</td>
-									<td align="left">${board.boardHits}</td>
-									<c:if test="${sessionScope.user.role == '관리자'}">
-									<td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="site-btn" onClick="fncDeleteAnnouncement(this)" style="padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px;">
-										X</button></td>
-									</c:if>
+									<td align="left">
+										<c:if test="${board.boardInqStatus == false}">답변대기중</c:if>
+										<c:if test="${board.boardInqStatus == true}">답변완료</c:if>
+									</td>
+									<td align="left"><button data-value="${board.boardNo}" id="buttons" type="button" class="site-btn" onClick="fncDeleteInquiry(this)" style="padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px;">X
+									</button></td>
 								</tr>
 							</c:forEach>
 							</tr>
@@ -590,13 +561,16 @@ color: #7fad39;
 						
 					</table>
 				</div>
+				<br/><br/><br/>
 				<div class="text-center">
 					<!-- PageNavigation Start... -->
-					<div class="col-lg-12"style="left:120px; margin-top:70px; top:70px;">
+					<div class="col-lg-12" style="left:120px; margin-top:70px; top:70px;">
+
+
 <c:set var="params" value="${board}"/>
 
    <c:if test="${params != null and params.paginationInfo.totalRecordCount>0}">
-      <div class="product__pagination blog__pagination" style="padding-top: 0px; bottom: 100px; float:left; margin-left:240px;">
+      <div class="product__pagination blog__pagination" style="padding-top: 0px; bottom: 100px; right:100px">
             <!--  <<== ÁÂÃø nav -->
             <a   
                href="javascript:movePage('${requestScope['javax.servlet.forward.request_uri']}', '${params.makeQueryString(1)}');"
@@ -662,7 +636,6 @@ color: #7fad39;
 </div>
 					<!-- PageNavigation End... -->
 				</div>
-				
 			</div>
 		</div>
 	</section>

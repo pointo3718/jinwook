@@ -68,6 +68,8 @@ public interface BoardService {
 	
 	//1:1문의 목록 조회v
 	public List<Board> getBoardInquiryList(Board board);
+	//1:1문의 목록 조회v
+	public List<Board> getBoardAdminInquiryList(Board board);
 	//공지사항 목록 조회v
 	public List<Board> getBoardAnnouncementList(Board board);
 	//레시피 목록 조회v

@@ -421,9 +421,7 @@ var rcpNo = ${recipe.rcpNo};
  						&nbsp;<a href="#" onclick="clip(); return false;"><i class="bi bi-share-fill"></i></a>
  						<br/>
  						<br/>
- 						<c:if test="${sessionScope.user.userId}">
  						<a type="button" class="badge badge-danger" data-toggle="modal" data-target="#complainModal" style="font-size:15px;">신고하기</a> 
- 						</c:if>
                     </div>
                    
  					
@@ -438,12 +436,8 @@ var rcpNo = ${recipe.rcpNo};
                     
                     <div class="col-lg-12 text-center" style="margin-bottom:30px;">
                         <textarea readonly="readonly">${recipe.rcpContent}</textarea>
-                        <c:if test="${sessionScope.user.userId}">
                         	<button type="button" class="btn btn-success" id="updateButton" >수 정</button>&nbsp;
-                        </c:if>
-                        <c:if test="${sessionScope.user.userId}">
                         	<button data-value="${recipe.rcpNo}" id="buttons" type="button" class="btn btn-danger" onClick="fncDeleteRecipe(this)">삭 제</button>
-                        </c:if>
                     </div>
 					<br/><br/>
 					<!-- 댓글 작성폼 start -->
@@ -459,7 +453,7 @@ var rcpNo = ${recipe.rcpNo};
 									<input type="hidden" id="rcpNo" name="rcpNo" value="${recipe.rcpNo}"/>
 									<div class="form-inline mb-2">
 										<label for="commentWriter"><i class="fa fa-user-circle-o fa-2x"></i></label> 
-										<input type="text" class="form-control ml-2" id="commentWriter" name="commentWriter" placeholder="${user.userId}" readonly="readonly"> 
+										<input type="text" class="form-control ml-2" id="commentWriter" name="commentWriter"> 
 									</div> 
 									<textarea class="form-control" id="commentContent" name="commentContent" rows="3"></textarea>
 									<button type="submit" class="btn btn-dark mt-3" id="replyWriteBtn">댓글 작성</button>

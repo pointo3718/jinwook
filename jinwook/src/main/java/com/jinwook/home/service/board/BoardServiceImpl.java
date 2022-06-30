@@ -487,5 +487,25 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.updateReview(orders);
 	}
 
+	//1:1문의 관리자 조회
+	@Override
+	public List<Board> getBoardAdminInquiryList(Board board) {
+		 List<Board> boardList = Collections.emptyList();
+
+	      int boardTotalCount = boardMapper.getBoardAdminInquiryTotalCount(board);
+	      
+	      PaginationInfo paginationInfo = new PaginationInfo(board);
+	      paginationInfo.setTotalRecordCount(boardTotalCount);
+
+	      board.setPaginationInfo(paginationInfo);
+
+	      if (boardTotalCount > 0) {
+	         boardList = boardMapper.getBoardAdminInquiryList(board);
+	      }
+
+	      return boardList;
+	}
+	
+
 	
 }
