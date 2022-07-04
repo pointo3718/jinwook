@@ -349,7 +349,7 @@ label {
 
 
 					<form id="detailForm" name="detailForm" method="post">
-						<input type="hidden" id="userId" name="userId" value="test01" />
+						<input type="hidden" id="userId" name="userId" value="${sessionScope.user.userId}" />
 						<input type="hidden" name="storeNo" value="${param.storeNo}" />
 						<div class="container">
 							<div>
@@ -384,7 +384,7 @@ label {
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">닫기</button>
 					<button type="button" id="requestRefund"
-						onClick="addRequestRefund(userId.value, ${param.storeNo}, refundMoney.value)"
+						onClick="addRequestRefund(${param.storeNo}, refundMoney.value)"
 						class="btn btn-primary"
 						style="background-color: #7fad39; border-color: #7fad39;">요청
 						등록</button>
@@ -587,10 +587,13 @@ label {
 	<jsp:include page="../layout/footer.jsp" />
 	<!-- Footer End -->
 	<script>
+	
+	
+	
 ////////////////// 환급 요청 REST ///////////////////////
-function addRequestRefund(USERID, STORENO, REFUNDMONEY) {
+function addRequestRefund(STORENO, REFUNDMONEY) {
 
-      var uri = "../request/addRequestRefund/"+USERID+"/"+STORENO+ "/" +REFUNDMONEY;
+      var uri = "../request/addRequestRefund/" +STORENO+ "/" +REFUNDMONEY;
 
       var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
       swal

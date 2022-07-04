@@ -9,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,7 +55,7 @@ public class AdminRestController {
    
    
 	///////////////// 일반 유저목록 //////////////////
-   @GetMapping( value="/listUserAdmin" )
+   @GetMapping("/listUserAdmin")
    @ResponseBody
    public JsonObject listUserAdmin(@ModelAttribute("user") User user) throws Exception{
       

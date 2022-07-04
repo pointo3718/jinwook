@@ -42,6 +42,7 @@ $(function(){
         </div>
     </footer>
      </div>
+     </div>
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->

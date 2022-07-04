@@ -49,6 +49,7 @@ public class RequestController {
 		return "/user/myPage";
 	}
 	
+	
 	// ========== 상점 등록 요청 !!!!!!! 요청 목록 만들고 다시 !!!!!!!===========
 	@PostMapping(value = "addRequestAddStore")
 	
@@ -89,7 +90,7 @@ public class RequestController {
 		
 		///////////////////////////
 		
-		return "redirect:/request/getRequestAdStoreList";
+		return "redirect:/store/storeNo";
 	}
 
 	

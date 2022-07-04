@@ -41,7 +41,7 @@ public class RequestServiceImpl implements RequestService {
 			for(int i=0; i<size; i++){ 
 				requestMapper.insertStoreFile(list.get(i)); 
 			}
-		
+			
 
 		Store newStore = requestMapper.getNewStore();
 		int storeNo = newStore.getStoreNo(); 				// 2. 예비 등록된 storeNo
@@ -50,6 +50,7 @@ public class RequestServiceImpl implements RequestService {
 		Request request = new Request();
 		request.setStoreNo(storeNo);
 		request.setUserId(userId);
+		requestMapper.updateUserStoreYnTrue(request.getUserId()); // 3. 상점유무 상태변경 
 		requestMapper.addRequestAddStoreForAdmin(request);	// 3. storeNo + userId 포함해 요청 넣기
 	}
 
@@ -62,15 +63,14 @@ public class RequestServiceImpl implements RequestService {
 
 	
 	// ========== 상점 등록 요청 수락 ===========
-	// 1.reqStatus 변경  2.상점 등록  3.사장님의 상점유무 상태 변경
+	// 1.reqStatus 변경  2.상점 등록 
 	@Override
 	public boolean updateRequestAddStore(int reqNo) {
 		requestMapper.updateRequestStatusToAccept(reqNo); // 1. reqStatus 변경
 		
 		int queryResult = 0;
 		Request request = requestMapper.getRequestStore(reqNo); // request 상세 가져오기
-		requestMapper.updateRequestAddStore(request.getStoreNo());  // 2. 상점 등록
-		queryResult = requestMapper.updateUserStoreYnTrue(request.getUserId()); // 3. 상점유무 상태변경 
+		queryResult = requestMapper.updateRequestAddStore(request.getStoreNo());  // 2. 상점 등록
 		
 		return (queryResult == 1) ? true : false;
 	}

@@ -182,7 +182,7 @@
 				
 
 					<table class="table table-hover"
-						style="width: 730px; heigh: 300px;">
+						style="width: 730px; heigh: 300px; font-size: 15px;">
 						
 						<thead class="userlisthead">
 							<tr class="userinfohead">

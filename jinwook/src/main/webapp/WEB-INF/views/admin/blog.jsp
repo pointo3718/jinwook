@@ -227,18 +227,18 @@ $(function() {
       
          var blacklistHtmlBody = "";
 
-         $(response.blacklist).each(function(idx, user) {
+         $(response.blacklist).each(function(idx, blacklist) {
             blacklistHtmlBody += `
                <tr class="userinfobody">
                   <td align="left" id="option4">
-			        <a id="userdetail" data-toggle="modal" href="#myModal2" data-userid="\${user.userId}">\${user.userId}</a>
+			        <a id="userdetail" data-toggle="modal" href="#myModal2" data-userid="\${blacklist.userId}">\${blacklist.userId}</a>
 			      </td>
-                  <td align="left">\${user.userName}</td>
-                  <td align="left">\${user.birth}</td>
-                  <td align="left">\${user.email}</td>
-                  <td align="left">\${user.phone}</td>
-                  <td align="left">~ &nbsp;\${user.blacklistEndDate}</td>
-                  <td align="left">\${user.complainCode}</td>
+                  <td align="left">\${blacklist.userName}</td>
+                  <td align="left">\${blacklist.birth}</td>
+                  <td align="left">\${blacklist.email}</td>
+                  <td align="left">\${blacklist.phone}</td>
+                  <td align="left">~ &nbsp;\${blacklist.blacklistEndDate}</td>
+                  <td align="left">\${blacklist.complainCode}</td>
                </tr>
             `;
          });

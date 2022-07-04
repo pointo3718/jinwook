@@ -3,6 +3,8 @@ package com.jinwook.home.web.request;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,14 +96,17 @@ public class RequestRestController {
 	
 	
 	// ============ 환급 요청 등록 =============   /////// 모든 등록 이렇게 수정 (예외 적용)
-	@PostMapping(value = "addRequestRefund/{userId}/{storeNo}/{refundMoney}")
+	@PostMapping(value = "addRequestRefund/{storeNo}/{refundMoney}")
 	@ResponseBody
-	public JsonObject addRequestRefund(@PathVariable(value = "userId", required = false) String userId,
+	public JsonObject addRequestRefund(HttpSession session,
 									@PathVariable(value = "storeNo", required = false) int storeNo,
 									@PathVariable(value = "refundMoney", required = false) int refundMoney) {
 		
-		Request request = new Request();
-		request.setUserId(userId);
+		String sessionUserId = ((User) session.getAttribute("user")).getUserId();
+		Request request = new Request();	
+		
+		request.setUserId(sessionUserId);
+		
 		request.setStoreNo(storeNo);
 		request.setRefundMoney(refundMoney);
 		

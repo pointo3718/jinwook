@@ -207,7 +207,7 @@
 
 			<jsp:include page="map.jsp" />
 
-		</div>
+		
 
 
 
