@@ -39,8 +39,7 @@ import com.jinwook.home.service.request.RequestService;
 @RestController
 @RequestMapping("/admin/*")
 public class AdminRestController {
-   
-   
+	
    @Autowired
    @Qualifier("adminServiceImpl")
    private AdminService adminService;
@@ -51,8 +50,8 @@ public class AdminRestController {
    
    public AdminRestController(){
       System.out.println(this.getClass());
+      
    }
-   
    
 	///////////////// 일반 유저목록 //////////////////
    @GetMapping("/listUserAdmin")

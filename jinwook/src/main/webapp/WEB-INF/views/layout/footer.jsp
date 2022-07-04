@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+   
 <script>
 $(function(){
 	$("#addInquiryButton").on("click", function() {
-		self.location = "/board/addBoardInquiryView"
+			self.location = "/board/addBoardInquiryView"
 	});
 });
+
 $(function(){
 	$("#announcementListButton").on("click", function() {
 		self.location = "/board/getBoardAnnouncementList"
@@ -21,11 +24,13 @@ $(function(){
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.jsp"><img src="${path}/resources/static/img/footerlogo.png" alt="" style="height:120px;"></a>
+                            <a href="/"><img src="${path}/resources/static/img/footerlogo.png" alt="" style="height:120px;"></a>
                         </div>
                     </div>
                 </div>
-                <div><button type="submit" class="site-btn" id="addInquiryButton" style="margin-top:20px; margin-left:35px; float:left; display: inline-block; text-align:center;">1&nbsp;:&nbsp;1 문의 </button></div>
+                	<%-- <c:if test="${sessionScope.user.userId}"> --%>
+                	<div><button type="submit" class="site-btn" id="addInquiryButton" style="margin-top:20px; margin-left:35px; float:left; display: inline-block; text-align:center;" value="${sessionScope.user.userId}">1&nbsp;:&nbsp;1 문의 </button></div>
+                	<%-- </c:if> --%>
             <div><button type="submit" class="site-btn" id="announcementListButton" style="margin-top:20px; margin-left:35px; float:left; display: inline-block;">공지사항</button></div>
             </div>
             

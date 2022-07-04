@@ -202,20 +202,20 @@ label {
 
 	$(function() {
 		$(".list-group-item:contains('주문 내역')").on("click", function() {
-			$(self.location).attr("href", "/admin/blog");
+			$(self.location).attr("href", "/orders/getOrdersListCeo");
 		});
 	});
 
 	$(function() {
 		$(".list-group-item:contains('상점 정보 수정')").on("click", function() {
-			$(self.location).attr("href", "/store/updateStore?storeNo=10000");
+			$(self.location).attr("href", "/store/updateStore?storeNo="+storeNo);
 		});
 	});
 
 	$(function() {
 		$(".list-group-item:contains('개인 정보 수정')").on("click", function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href", "/admin/listComplainAdmin");
+			$(self.location).attr("href", "/user/confirmPasswordViewC?userId=${sessoinScope.user.userId}");
 		});
 	});
 
@@ -225,7 +225,7 @@ label {
 				function() {
 					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 					$(self.location).attr("href",
-							"/store/addStoreProduct?storeNo=10000");
+							"/store/addStoreProduct?storeNo="+storeNo);
 				});
 	});
 
@@ -245,7 +245,7 @@ label {
 				function() {
 					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 					$(self.location).attr("href",
-							"/store/getStoreWallet?storeNo=10000");
+							"/store/getStoreWallet?storeNo="+storeNo);
 				});
 	});
 
@@ -255,7 +255,7 @@ label {
 				function() {
 					//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 					$(self.location).attr("href",
-							"/request/getRequestListForAdmin?reqCode=2");
+							"/board/getBoardInquiryList");
 				});
 	});
 
@@ -546,41 +546,8 @@ label {
 							</h5>
 
 							<br />
-
-
-
-							<div class="list-group text-center" style="font-size: 15px;">
-								<button type="button"
-									class="list-group-item list-group-item-action"
-									aria-current="true">주문 내역</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">상점 정보
-									수정</button>
-								<button type="button"
-									class="list-group-item list-group-item-action" class="addStore">
-									<span class="addStore">개인 정보 수정</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="deleteStore">상품 등록</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="refundStore">광고 등록</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="adStore">내가 한 요청</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">
-									<span class="adStore">지갑</span>
-								</button>
-								<button type="button"
-									class="list-group-item list-group-item-action">1:1
-									문의내역</button>
+							<div class="getStoreNo">
 							</div>
-
 						</div>
 
 
@@ -642,9 +609,11 @@ label {
 							<div style="font-size:14px;">픽업시간 : <fmt:formatDate value="${orders.pickupTime}" type="time" timeStyle="short"/></div>						
 						</div>
 							
-						<div class="buyer col-sm-2" style="float:left; font-size:15Spx;">
-						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주문 금액<div class="text-center">${orders.orderPrice}</div>
-						<input type="hidden" value="${orders.orderStatus}" id="orderStatus" date-status="${orders.orderStatus}">
+						<div class="buyer col-sm-2" style="float:left; font-size:15Spx;" id="buyer1">
+						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주문 금액<div class="text-center">${orders.orderPrice}
+						<input type="hidden" value="${orders.orderStatus}" id="orderStatus">
+						<input type="hidden" value="${orders.orderNo}" id="orderNo"></div>
+						
 						</div>
 						<c:if test="${orders.orderStatus == '1'}">
 						<div class="buyer col-sm-3 text-right" style="float:left; font-size:15px; ">
@@ -679,7 +648,9 @@ label {
 	<script type="text/javascript">
 		function updateOrdersStatus(e){
 			
-			const orderStatus = $(e).data('status');
+			const orderStatus = $(e).parent().parent().find("#orderStatus").val();
+			const orderNo = $(e).parent().parent().find("#orderNo").val();
+			console.log(orderStatus)
 /* 			const orderStatus = ${"#orderStatus"} */
 			alert(orderStatus)
 			$.ajax({
@@ -687,7 +658,7 @@ label {
 				type : "post",
 				dataType : "json",
 				async : false,
-				data : {"orderStatus" : orderStatus},
+				data : {"orderStatus" : orderStatus, "orderNo" : orderNo},
 				success : function(result){
 					self.location="";
 				}
@@ -695,6 +666,76 @@ label {
 			
 			
 		}
+		 //======페이지 이동 상점번호 받아오기=========//
+	     $(function() {
+	            getStoreNo();
+	         });
+	      
+
+	         function getStoreNo() {
+	                 
+	               var userId = $("#userId").val();
+	            
+	               var uri = "/store/getStoreNo/"+userId
+	               
+
+	               $.get(uri, function(response) { 
+	                  
+	                     var getStoreNoHtmlBody = "";
+	                     
+	                     $(response.getStoreNo).each(function(idx,store) {              
+
+	                        getStoreNoHtmlBody += `
+	 
+	                     <div class="list-group text-center" style="font-size: 15px;">
+	                     <button type="button"
+	                        class="list-group-item list-group-item-action"
+	                        aria-current="true"><a href="/orders/getOrdersListCeo" style="color:black">주문 내역</button>
+	                     <button type="button"
+	                        class="list-group-item list-group-item-action"><a href="/store/updateStore?storeNo=\${store.storeNo}" style="color:black">상점 정보
+	                        수정</button>
+	                     <button type="button"
+	                        class="list-group-item list-group-item-action" class="addStore">
+	                        <span class="addStore"><a href="/user/confirmPasswordViewC?userId=${sessionScope.user.userId}" style="color:black">개인 정보 수정</span>
+	                     </button>
+	                     <button type="button"
+	                        class="list-group-item list-group-item-action">
+	                        <span class="deleteStore"><a href="/store/addStoreProduct?storeNo=\${store.storeNo}" style="color:black"> 상품 등록</span>
+	                     </button>
+	                     <button type="button"
+	                        class="list-group-item list-group-item-action">
+	                        <span class="refundStore"><a href="/request/addRequestAd?storeNo=\${store.storeNo}" style="color:black"> 광고 등록</span>
+	                     </button>
+	                     <button type="button"
+	                        class="list-group-item list-group-item-action">
+	                        <span class="adStore"><a href="/request/getRequestAdStoreList?storeNo=\${store.storeNo}&userId=${sessionScope.user.userId}" style="color:black"> 내가 한 요청</span>
+	                     </button>
+	                     <button type="button"
+	                        class="list-group-item list-group-item-action">
+	                        <span class="adStore"><a href="/store/getStoreWallet?storeNo=\${store.storeNo}" style="color:black"> 지갑</span>
+	                     </button>
+	                     <button type="button"
+	                        class="list-group-item list-group-item-action"><a href="/store/getStore?storeNo=\${store.storeNo}" style="color:black">내 상점 가기</button>
+	                     <button type="button"
+	                        class="list-group-item list-group-item-action"><a href="/board/getBoardInquiryList" style="color:black">1:1
+	                        문의내역</button>
+	                  </div>
+
+	                         
+	                            
+	                        `;
+	                     });
+	                     
+	                     
+	                     $(".getStoreNo").html(getStoreNoHtmlBody);
+	                     //$(".userlisthead").html(blacklistHtmlBody);
+	                  
+	               }, "json");
+
+	         }     
+	     
+	</script>
+
 	</script>
 	
 

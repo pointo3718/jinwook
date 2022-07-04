@@ -414,6 +414,7 @@ var rcpNo = ${recipe.rcpNo};
                 
                     <div class="col-sm-4 col-sm-4" style="width:100px; height:50px;">
                        <i class="bi bi-eye"></i> ${recipe.rcpHits}<br/><br/>
+<<<<<<< HEAD
                    <i class="fa fa-calendar-o"></i> <fmt:formatDate value="${recipe.rcpDate}" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                    <br/><br/>
                    ${recipe.userId}
@@ -424,6 +425,16 @@ var rcpNo = ${recipe.rcpNo};
                    <br/>
                    <br/>
                    <a type="button" class="badge badge-danger" data-toggle="modal" data-target="#complainModal" style="font-size:15px;">신고하기</a> 
+=======
+ 						<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${recipe.rcpDate}" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 						<br/><br/>
+ 						<button type="button" class="btn btn-success" id="reco_btn" 
+ 						style="width:60px; height:40px; background-color: green; font-size: 12px;" onclick="updateRecipeReco();"><i class="bi bi-hand-thumbs-up"></i>${recipe.recommendCount}</button>
+ 						&nbsp;<a href="#" onclick="clip(); return false;"><i class="bi bi-share-fill"></i></a>
+ 						<br/>
+ 						<br/>
+ 						<a type="button" class="badge badge-danger" data-toggle="modal" data-target="#complainModal" style="font-size:15px;">신고하기</a> 
+>>>>>>> refs/remotes/origin/Choi
                     </div>
                    
                 
@@ -438,9 +449,15 @@ var rcpNo = ${recipe.rcpNo};
                     
                     <div class="col-lg-12 text-center" style="margin-bottom:30px;">
                         <textarea readonly="readonly">${recipe.rcpContent}</textarea>
+<<<<<<< HEAD
                            <button type="button" class="btn btn-success" id="updateButton" >수 정</button>&nbsp;
                            <button data-value="${recipe.rcpNo}" id="buttons" type="button" class="btn btn-danger" onClick="fncDeleteRecipe(this)">삭 제</button>
+=======
+                        	<button type="button" class="btn btn-success" id="updateButton" >수 정</button>&nbsp;
+                        	<button data-value="${recipe.rcpNo}" id="buttons" type="button" class="btn btn-danger" onClick="fncDeleteRecipe(this)">삭 제</button>
+>>>>>>> refs/remotes/origin/Choi
                     </div>
+<<<<<<< HEAD
                <br/><br/>
                <!-- 댓글 작성폼 start -->
                <div class="card mb-2" style="margin-left:20px;">
@@ -486,6 +503,53 @@ var rcpNo = ${recipe.rcpNo};
                      </ul>
                </div>
                <!-- 댓글 조회 폼 end -->
+=======
+					<br/><br/>
+					<!-- 댓글 작성폼 start -->
+					<div class="card mb-2" style="margin-left:20px;">
+						<!-- 댓글 헤더 -->
+						<div class="card-header bg-light">
+							<i class="fa fa-comment fa"></i> 댓글
+						</div>
+					<form name="replyForm" method="post" action="addRecipeComment">
+						<div class="card-body">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<input type="hidden" id="rcpNo" name="rcpNo" value="${recipe.rcpNo}"/>
+									<div class="form-inline mb-2">
+										<label for="commentWriter"><i class="fa fa-user-circle-o fa-2x"></i></label> 
+										<input type="text" class="form-control ml-2" id="commentWriter" name="commentWriter"> 
+									</div> 
+									<textarea class="form-control" id="commentContent" name="commentContent" rows="3"></textarea>
+									<button type="submit" class="btn btn-dark mt-3" id="replyWriteBtn">댓글 작성</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+					</form>
+					<!-- 댓글 작성폼 end -->
+					
+					<!-- 댓글 리스트 조회 폼 start -->
+					<div class="card" style="left:20px;">
+						<div class="card-header">댓글 리스트</div>
+							<ul id="comment" class="commentList">
+								<c:forEach items="${commentList}" var="recipe">
+									<li id="comment--1" class="list-group-item d-flex justify-content-between">
+											<div class="font-itatlic">작성자 :${user.userId} | &nbsp;</div><br/>
+										<!-- 댓글 리스트 div -->
+										<div class="d-flex">
+											<div class="commentContentInfo">${recipe.comment.commentContent}</div>&nbsp;&nbsp;&nbsp;
+											
+											<%-- <button type="button" class="btn btn-outline-success" id="replyupdateBtn" data-rno="${recipe.comment.commentNo}" onclick="fncUpdateBtn();">댓글 수정</button> --%>
+											<button data-value="${recipe.comment.commentNo}" id="buttons" type="button" class="site-btn" 
+											onClick="fncDeleteRecipeComment(this)" style="padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px;">X</button>
+										</div>
+									</li>
+								</c:forEach>
+							</ul>
+					</div>
+					<!-- 댓글 조회 폼 end -->
+>>>>>>> refs/remotes/origin/Choi
 
          <!-- 댓글 수정 모달창 start -->
          <!-- 댓글 수정 모달창 end -->

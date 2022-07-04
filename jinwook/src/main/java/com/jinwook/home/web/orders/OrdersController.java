@@ -125,13 +125,13 @@ public class OrdersController {
    
    @GetMapping(value = "getOrdersList")//리뷰날짜가 null이아닐경우 후기버튼 지움
    public String getOrdersList(@ModelAttribute("orders") Orders orders,HttpSession session,Model model) throws Exception {
-     String userid = ((User) session.getAttribute("user")).getUserId();
+     User user = ((User) session.getAttribute("user"));
      
-     User user = new User();
-      user.setUserId(userid);
+//     User user = new User();
+//      user.setUserId(userid);
       orders.setUser(user);
 
-      List<Coupon> couponList = storeService.getCouponList(userid);
+      List<Coupon> couponList = storeService.getCouponList(user.getUserId());
       model.addAttribute("couponList", couponList);
       
       
@@ -146,16 +146,16 @@ public class OrdersController {
    
    @GetMapping(value = "getOrdersListCeo")//리뷰날짜가 null이아닐경우 후기버튼 지움
    public String getOrdersListCeo(@ModelAttribute("orders") Orders orders,HttpSession session,Model model) throws Exception {
-     String userid = ((User) session.getAttribute("user")).getUserId();
+     User user = ((User) session.getAttribute("user"));
      
-     User user = new User();
-      user.setUserId(userid);
+//     User user = new User();
+//      user.setUserId(userid);
       orders.setUser(user);
 
-      List<Coupon> couponList = storeService.getCouponList(userid);
+      List<Coupon> couponList = storeService.getCouponList(user.getUserId());
       model.addAttribute("couponList", couponList);
       
-      List<Store> storeInfo = storeService.getStoreInfo(userid);
+      List<Store> storeInfo = storeService.getStoreInfo(user.getUserId());
       model.addAttribute("storeInfo", storeInfo);
       
       System.out.println("/orders/getOrdersList : GET");

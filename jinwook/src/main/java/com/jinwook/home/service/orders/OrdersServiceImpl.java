@@ -28,12 +28,11 @@ public class OrdersServiceImpl implements OrdersService{
 	
 	@Override
 	public int addOrders(Orders orders) {
-		
 		ordersMapper.addOrders(orders);
 		System.out.println(orders);
 		Orders newOrders = ordersMapper.getNewOrders();
 		System.out.println("newOrders"+newOrders);
-		int orderNo= newOrders.getOrderNo();
+//		int orderNo= newOrders.getOrderNo();
 		String userId = newOrders.getUserId();
 		Cart cart = new Cart();
 		cart.setOrders(newOrders);
@@ -52,6 +51,7 @@ public class OrdersServiceImpl implements OrdersService{
 		List<Orders> ordersList = Collections.emptyList();
 
 		int OrdersTotalCount = ordersMapper.getOrdersTotalCount(orders);
+		System.out.println(OrdersTotalCount);
 		PaginationInfo paginationInfo = new PaginationInfo(orders);
 	    paginationInfo.setTotalRecordCount(OrdersTotalCount);
 

@@ -99,9 +99,7 @@
 				$(".user").css({
 					'color' : '#7fad39'	
 				});
-				setTimeout(function(){
 				    alert("일반회원가입을 진행합니다.");
-				}, 10);
 				/* $("form").attr("method" , "GET").attr("action" , "/user/addUser?role="+$("#role").val()).submit(); */
 				location.href = "/user/addUser?role="+$("#role1").val();
 			});

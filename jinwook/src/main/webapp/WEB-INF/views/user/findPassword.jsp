@@ -106,7 +106,6 @@
 	        url:"findPasswordPhoneSend?phone=" + phone+"&userId="+USERID,
 	        cache : false, // 동기 실행
 	        success:function(data){
-	        		alert(data.authNumber);
 	        	if(data.authNumber == "error"){
 					swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
 	        		
@@ -163,15 +162,15 @@ $(document).ready(function() {
 		var pw2=$("input[name='password2']").val();
 		
 		if(pw == null || pw.length <1){
-			alert("패스워드는  반드시 입력하셔야 합니다.");
+			swal("진욱이네", "패스워드는  반드시 입력하셔야 합니다.");
 			return;
 		}
 		if(pw2 == null || pw2.length <1){
-			alert("패스워드는  반드시 입력하셔야 합니다.");
+			swal("진욱이네", "패스워드는  반드시 입력하셔야 합니다.");
 			return;
 		}
 		if( pw != pw2 ) {				
-			alert("비밀번호 확인이 일치하지 않습니다.");
+			swal("진욱이네", "비밀번호 확인이 일치하지 않습니다.");
 			$("input:text[name='password2']").focus();
 			return;
 		}
@@ -194,8 +193,6 @@ $(document).ready(function() {
 				return;
 			} */
 			
-	 		alert(email);
-			alert(${authNumber});
 			if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1 )){
 		swal("진욱이네", "이메일 형식이 아닙니다.");
 				email.focus();
@@ -209,7 +206,6 @@ $(document).ready(function() {
 						userId : USERID},
 				cache : false,
 				success : function(data){
-					alert(data.authNumber);
 					if(data.authNumber == "error"){
 						swal("진욱이네", "휴대폰 번호가 올바르지 않습니다.");
 		        		
@@ -223,6 +219,8 @@ $(document).ready(function() {
 		        		$(".successPhoneChk").css("color","green");
 		        		$("#phone").attr("readonly",true);
 		        		code2 = data; */
+		        		swal("진욱이네","전송 완료");
+		        		
 		        		$("#snedE").hide();
 		        		$("#authNo").show();
 		        		$("#phoneDoubleChk").val(data.authNumber); 
@@ -320,7 +318,7 @@ $(document).ready(function() {
 			<input type="text" id="phone" class="phone" placeholder="휴대폰 번호를 입력해주세요." onKeyup="this.value=this.value.replace(' ','');">
 			</div>
 			<br>
-			<button class="send_btn site-btn" type="button" id="snedA" style="width:300px;" onclick="authNo()">인증번호 받기</button>
+			<button class="send_btn site-btn" type="button" id="snedA" style="width:300px;" >인증번호 받기</button>
 	</div>		
 	<div class="text-center" id="authNo" style="display:none;">
 		<div class="text-center " style="margin-right:240px;">
